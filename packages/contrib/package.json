@@ -17,6 +17,8 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.8"
+  },
   "license": "Apache-2.0"
 }
