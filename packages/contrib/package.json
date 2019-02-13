@@ -4,6 +4,9 @@
   "description": "Application de contributions aux données du code du travail numérique.",
   "private": true,
   "scripts": {
+    "build": "next build",
+    "dev": "node ./server.js",
+    "start": "NODE_ENV=production node ./server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
