@@ -1,0 +1,12 @@
+{
+  "name": "@socialgouv/code-du-travail-backoffice",
+  "version": "0.0.0",
+  "description": "Application de contributions aux données du code du travail numérique.",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "license": "Apache-2.0"
+}
