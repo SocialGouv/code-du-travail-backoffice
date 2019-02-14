@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "build": "lerna run build",
+    "db:migrate": "knex migrate:latest",
     "dev": "lerna run dev --parallel",
     "start": "lerna run start --parallel",
     "test": "echo \"Error: no test specified\" && exit 1"
