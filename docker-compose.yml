@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  mongo:
-    image: mongo:4-xenial
+  postgres:
+    image: postgres:11
     ports:
-      - 27017:27017
+      - 5432:5432
