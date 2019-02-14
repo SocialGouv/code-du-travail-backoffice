@@ -10,6 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "medium-draft": "^0.5.10",
     "next": "^8.0.1",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
@@ -18,6 +19,7 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
+    "react-hot-loader": "^4.6.5",
     "redux-devtools-extension": "^2.13.8"
   },
   "license": "Apache-2.0"
