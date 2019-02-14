@@ -10,6 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@zeit/next-css": "^1.0.1",
     "medium-draft": "^0.5.10",
     "next": "^8.0.1",
     "react": "^16.8.1",
