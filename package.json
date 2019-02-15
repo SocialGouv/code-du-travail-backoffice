@@ -8,7 +8,8 @@
     "db:migrate": "knex migrate:latest",
     "dev": "lerna run dev --parallel",
     "start": "lerna run start --parallel",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "lerna run test",
+    "test:watch": "lerna run test:watch --parallel"
   },
   "dependencies": {
     "knex": "^0.16.3",
