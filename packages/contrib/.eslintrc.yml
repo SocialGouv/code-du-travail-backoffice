@@ -2,6 +2,7 @@ extends:
   - "@socialgouv/eslint-config-react"
 
 rules:
+  no-console: ["error", { allow: ["info", "error", "warn"] }]
   jsx-a11y/anchor-is-valid: off
   react/prop-types: off
 
