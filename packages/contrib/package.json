@@ -16,6 +16,7 @@
     "@zeit/next-css": "^1.0.1",
     "medium-editor": "^5.23.3",
     "next": "^8.0.1",
+    "ramda": "^0.26.1",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-redux": "^6.0.0",
