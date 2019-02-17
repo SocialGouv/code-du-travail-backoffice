@@ -1,23 +1,23 @@
-const { createServer } = require('http')
-const { parse } = require('url')
-const next = require('next')
+const { createServer } = require("http");
+const next = require("next");
 
-const NODE_ENV = process.env.NODE_ENV !== undefined ? process.env.NODE_ENV : 'development'
-const PORT = process.env.PORT !== undefined ? process.env.NODE_ENV : 3000
+const routes = require("./routes");
 
-const app = next({ dev: NODE_ENV !== 'production' })
-const handle = app.getRequestHandler()
+const { NODE_ENV, PORT } = process.env;
+const environment = NODE_ENV !== undefined ? NODE_ENV : "development";
+const port = PORT !== undefined ? parseInt(PORT) : 3100;
 
-const server = createServer((req, res) => handle(req, res, parse(req.url, true)))
+const app = next({ dev: environment !== "production" });
 
 async function start() {
-  await app.prepare()
+  await app.prepare();
 
-  server.listen(PORT, err => {
-    if (err) throw err
+  const server = createServer((req, res) => routes(app, req, res));
+  server.listen(port, err => {
+    if (err) throw err;
 
-    console.log(`> Ready on http://localhost:${PORT} (${NODE_ENV})`)
-  })
+    console.info(`> Ready on http://localhost:${port} (${environment})`);
+  });
 }
 
-start()
+start();
