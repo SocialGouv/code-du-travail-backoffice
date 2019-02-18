@@ -4,11 +4,9 @@ module.exports = class AnswerController {
   }
 
   async update(data) {
-    data.id = "7c717d62-0839-4eeb-befc-33745e586f5b";
-
     try {
       const query = `
-        UPDATE answers
+        UPDATE api.answers
         SET value=$1
         WHERE id=$2
       `;
