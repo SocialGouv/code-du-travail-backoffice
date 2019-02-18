@@ -6,6 +6,7 @@
   "scripts": {
     "build": "lerna run build",
     "db:migrate": "knex migrate:latest",
+    "db:seed": "knex seed:run",
     "dev": "lerna run dev --parallel",
     "start": "lerna run start --parallel",
     "test": "lerna run test",
