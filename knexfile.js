@@ -1,7 +1,7 @@
 module.exports = {
   development: {
     client: 'postgresql',
-    connection: 'postgres://postgres:postgres@localhost:5432/cndt',
+    connection: 'postgres://postgres@localhost:5432/cndt',
     migrations: {
       tableName: 'knex_migrations'
     }
