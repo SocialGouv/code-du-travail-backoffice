@@ -3,7 +3,7 @@ require('dotenv').config()
 module.exports = {
   development: {
     client: 'postgresql',
-    connection: 'postgres://postgres@localhost:5432/cdtn',
+    connection: process.env.POSTGRE_URI,
     migrations: {
       tableName: 'knex_migrations',
     },
@@ -11,7 +11,7 @@ module.exports = {
 
   production: {
     client: 'postgresql',
-    connection: process.env.DATABASE_URL,
+    connection: process.env.POSTGRE_URI,
     migrations: {
       tableName: 'knex_migrations',
     },
