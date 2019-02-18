@@ -5,6 +5,11 @@
 
 > Ce dépôt regroupe les applications d'administration des données du [code du travail numérique][link-cdtn].
 
+### Contribuer
+
+> ### :warning: Travail en cours
+> Ce dépôt n'est pas encore fonctionnel.
+
 ### Licence
 
 Ce dépôt est licencié sous la [licence Apacha 2.0][link-license].
