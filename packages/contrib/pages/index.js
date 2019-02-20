@@ -1,8 +1,14 @@
 import axios from "axios";
+import styled from "styled-components";
 import React from "react";
+import Router from "next/router";
 
 import Main from "../src/layouts/main";
 import Login from "../src/components/login";
+
+const Row = styled.div`
+  cursor: pointer;
+`;
 
 export default class Index extends React.Component {
   constructor(props) {
@@ -24,8 +30,9 @@ export default class Index extends React.Component {
 
   componentDidUpdate() {
     if (this.isAutenticated() && this.state.isLoading) {
+      const select = "select=*,question(value),labor_agreements(name)";
       axios
-        .get("http://localhost:3200/answers")
+        .get(`http://localhost:3200/answers?${select}`)
         .then(({ data }) => {
           this.answers = data;
           this.setState({ isLoading: false });
@@ -38,6 +45,10 @@ export default class Index extends React.Component {
     const jwt = sessionStorage.getItem("jwt");
 
     return typeof jwt === "string" && jwt.length > 0;
+  }
+
+  editAnswer(answerId) {
+    Router.push(`/answer/${answerId}`);
   }
 
   getContent() {
@@ -58,7 +69,10 @@ export default class Index extends React.Component {
 
   getAnswers() {
     return this.answers.map(answer => (
-      <div key={answer.id}>{answer.value}</div>
+      <Row key={answer.id} onClick={() => this.editAnswer(answer.id)}>
+        <b>{answer.question.value}</b>
+        <pre>{answer.value}</pre>
+      </Row>
     ));
   }
 
