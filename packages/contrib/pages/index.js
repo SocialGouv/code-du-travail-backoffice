@@ -1,7 +1,5 @@
-// import axios from "axios";
+import axios from "axios";
 import React from "react";
-// import { Button as ReButton, Flex } from "rebass";
-// import styled from "styled-components";
 
 import Main from "../src/layouts/main";
 import Login from "../src/components/login";
@@ -11,14 +9,29 @@ export default class Index extends React.Component {
     super(props);
 
     this.state = {
-      isLoading: false
+      isMounted: false,
+      isLoading: true
     };
+
+    this.answers = [];
 
     this.forceUpdate = this.forceUpdate.bind(this);
   }
 
   componentDidMount() {
-    this.setState({ isLoading: true });
+    this.setState({ isMounted: true });
+  }
+
+  componentDidUpdate() {
+    if (this.isAutenticated() && this.state.isLoading) {
+      axios
+        .get("http://localhost:3200/answers")
+        .then(({ data }) => {
+          this.answers = data;
+          this.setState({ isLoading: false });
+        })
+        .catch(console.warn);
+    }
   }
 
   isAutenticated() {
@@ -27,17 +40,29 @@ export default class Index extends React.Component {
     return typeof jwt === "string" && jwt.length > 0;
   }
 
-  render() {
-    if (!this.state.isLoading) return <p>Loading...</p>;
+  getContent() {
+    switch (true) {
+      case !this.state.isMounted:
+        return <p>Loading...</p>;
 
-    return (
-      <Main>
-        {!this.isAutenticated() ? (
-          <Login onLog={() => this.forceUpdate()} />
-        ) : (
-          <p>Yo!</p>
-        )}
-      </Main>
-    );
+      case !this.isAutenticated():
+        return <Login onLog={() => this.forceUpdate()} />;
+
+      case this.state.isLoading:
+        return <p>Fetching answers...</p>;
+
+      default:
+        return this.getAnswers();
+    }
+  }
+
+  getAnswers() {
+    return this.answers.map(answer => (
+      <div key={answer.id}>{answer.value}</div>
+    ));
+  }
+
+  render() {
+    return <Main>{this.getContent()}</Main>;
   }
 }
