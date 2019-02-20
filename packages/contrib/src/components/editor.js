@@ -46,6 +46,10 @@ export default class Editor extends React.Component {
   }
 
   render() {
-    return <Container ref={el => (this.el = el)} />;
+    return (
+      <Container ref={el => (this.el = el)}>
+        {this.props.defaultValue}
+      </Container>
+    );
   }
 }
