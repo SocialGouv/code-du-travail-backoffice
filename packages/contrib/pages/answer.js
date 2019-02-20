@@ -1,3 +1,4 @@
+import axios from "axios";
 import io from "socket.io-client";
 import React from "react";
 import { Flex } from "rebass";
@@ -24,30 +25,47 @@ const SideBar = styled(Flex)`
   background-color: #253031;
 `;
 
-export default class Post extends React.Component {
+export default class extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      isLoading: true
+    };
+  }
+
+  static getInitialProps({ query: { id } }) {
+    return { id };
   }
 
   componentDidMount() {
     this.socket = io();
+
+    axios
+      .get(`http://localhost:3200/answers?id=eq.${this.props.id}`)
+      .then(({ data }) => this.setState({ isLoading: false, ...data[0] }))
+      .catch(console.warn);
   }
 
   saveContent(markdownSource) {
     this.socket.emit("saveAnswer", {
+      id: this.props.id,
       value: markdownSource
     });
   }
 
   render() {
+    if (this.state.isLoading) return <Main>Loading...</Main>;
+
     return (
       <Main>
         <Input defaultValue="Nouvelle question" />
         <Flex flexDirection="row" style={{ flexGrow: 1 }}>
           <Content p={3} width={3 / 5}>
-            <Editor onChange={this.saveContent.bind(this)} />
+            <Editor
+              defaultValue={this.state.value}
+              onChange={this.saveContent.bind(this)}
+            />
           </Content>
           <SideBar width={2 / 5} />
         </Flex>
