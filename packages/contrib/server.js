@@ -1,4 +1,4 @@
-const { createServer } = require("http");
+const Koa = require("koa");
 const next = require("next");
 
 const db = require("./db");
@@ -16,7 +16,16 @@ async function start() {
   await app.prepare();
   const pool = await db(dbUri);
 
-  const server = createServer((req, res) => routes(app, req, res));
+  const server = new Koa();
+
+  server.use(async (ctx, next) => {
+    ctx.res.statusCode = 200;
+    await next();
+  });
+
+  server.use(routes(app).routes());
+
+  // const server = createServer((req, res) => routes(app, req, res));
   // Link websocket listeners
   sockets(server, pool);
 

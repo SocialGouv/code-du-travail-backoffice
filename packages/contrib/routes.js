@@ -1,12 +1,22 @@
-const { parse } = require("url");
+const Router = require("koa-router");
 
-module.exports = function(app, req, res) {
+const router = new Router();
+
+module.exports = function(app) {
   const handle = app.getRequestHandler();
-  const parsedUrl = parse(req.url, true);
-  const { pathname } = parsedUrl;
 
-  switch (pathname) {
-    default:
-      handle(req, res, parsedUrl);
-  }
+  router.get("/answer/:id", async ctx => {
+    await app.render(ctx.req, ctx.res, "/answer", {
+      ...ctx.query,
+      ...ctx.params
+    });
+    ctx.respond = false;
+  });
+
+  router.get("*", async ctx => {
+    await handle(ctx.req, ctx.res);
+    ctx.respond = false;
+  });
+
+  return router;
 };
