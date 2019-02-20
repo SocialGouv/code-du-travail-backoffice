@@ -21,7 +21,7 @@
     "ramda": "0.26.1",
     "react": "16.8.1",
     "react-dom": "16.8.1",
-    "react-redux": "6.0.0",
+    "react-redux": "6.0.1",
     "rebass": "3.0.1",
     "redux": "4.0.1",
     "redux-thunk": "2.3.0",
