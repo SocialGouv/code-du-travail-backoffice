@@ -19,18 +19,6 @@ const Input = styled.input`
   width: 100%;
 `;
 
-const Select = styled.select`
-  border: 0;
-  color: inherit;
-  font-family: inherit;
-  font-weight: inherit;
-  font-size: 1.2rem;
-  line-height: 1.25;
-  margin: 0.5rem 0;
-  padding: 0.25rem 0.5rem;
-  width: 100%;
-`;
-
 const Button = styled(ReButton)`
   background-color: #2978a0;
   border-radius: 0;
@@ -43,8 +31,7 @@ export default class Index extends React.Component {
     super(props);
 
     this.state = {
-      email: "",
-      location: ""
+      email: ""
     };
 
     this.updateFormData = this.updateFormData.bind(this);
@@ -67,10 +54,7 @@ export default class Index extends React.Component {
 
   async submit(event) {
     if (event !== undefined) event.preventDefault();
-
-    if (this.state.email.length === 0 || this.state.location.length === 0) {
-      return;
-    }
+    if (this.state.email.length === 0) return;
 
     try {
       await this.login();
@@ -96,12 +80,6 @@ export default class Index extends React.Component {
               name="email"
               placeholder="E-mail"
             />
-            <Select onChange={this.updateFormData} name="location">
-              <option value="">Choisissez votre centre:</option>
-              <option value="fcfa979c-4025-40c3-ad7b-a22640f78235">
-                Centre A
-              </option>
-            </Select>
             <Button onClick={this.submit}>Se connecter</Button>
           </Form>
         </Flex>
