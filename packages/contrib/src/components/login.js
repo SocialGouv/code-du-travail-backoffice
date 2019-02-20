@@ -19,11 +19,16 @@ const Input = styled.input`
   width: 100%;
 `;
 
+const Error = styled.p`
+  color: red;
+  font-weight: 600;
+  height: 1rem;
+`;
+
 const Button = styled(ReButton)`
   background-color: #2978a0;
   border-radius: 0;
   cursor: pointer;
-  margin-top: 1rem;
 `;
 
 export default class Index extends React.Component {
@@ -31,7 +36,9 @@ export default class Index extends React.Component {
     super(props);
 
     this.state = {
-      email: ""
+      email: "",
+      error: null,
+      isLoading: false
     };
 
     this.updateFormData = this.updateFormData.bind(this);
@@ -54,13 +61,31 @@ export default class Index extends React.Component {
 
   async submit(event) {
     if (event !== undefined) event.preventDefault();
-    if (this.state.email.length === 0) return;
+    if (this.state.isLoading) return;
+
+    this.setState({
+      error: null,
+      isLoading: true
+    });
+
+    if (this.state.email.length === 0) {
+      this.setState({
+        error: "Vous devez renseigner votre e-mail.",
+        isLoading: false
+      });
+
+      return;
+    }
 
     try {
       await this.login();
       this.props.onLog();
     } catch (e) {
       console.warn(e);
+      this.setState({
+        error: "E-mail non reconnu.",
+        isLoading: false
+      });
     }
   }
 
@@ -76,11 +101,15 @@ export default class Index extends React.Component {
         >
           <Form onSubmit={this.submit}>
             <Input
-              onChange={this.updateFormData}
+              disabled={this.state.isLoading}
               name="email"
+              onChange={this.updateFormData}
               placeholder="E-mail"
             />
-            <Button onClick={this.submit}>Se connecter</Button>
+            <Error>{this.state.error}</Error>
+            <Button disabled={this.state.isLoading} onClick={this.submit}>
+              Se connecter
+            </Button>
           </Form>
         </Flex>
       </Flex>
