@@ -85,7 +85,7 @@ exports.up = async knex => {
         RAISE invalid_password USING MESSAGE = 'Invalid email and/or password.';
       END IF;
 
-      SELECT sign(row_to_json(r), '${process.env.POSTGREST_SECRET}') AS token
+      SELECT sign(row_to_json(r), '${process.env.PGRST_JWT_SECRET}') AS token
         FROM (
           SELECT _role AS role, login.email AS email,
             extract(epoch FROM now())::integer + 60*60 AS exp

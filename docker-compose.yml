@@ -18,6 +18,7 @@ services:
     environment:
       PGRST_DB_URI: postgres://postgres@db:5432/cdtn
       PGRST_DB_SCHEMA: api
+      PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
       # In production, this role should not be the same as the one used for the connection.
       PGRST_DB_ANON_ROLE: anonymous
     depends_on:
