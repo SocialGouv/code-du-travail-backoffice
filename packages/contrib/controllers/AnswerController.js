@@ -10,7 +10,7 @@ module.exports = class AnswerController {
         SET value=$1
         WHERE id=$2
       `;
-      const values = [data.value, data.id];
+      const values = [data.data.value, data.id];
       await this.pool.query(query, values);
     } catch (e) {
       console.error(e);
