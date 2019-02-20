@@ -45,6 +45,10 @@ export default class Index extends React.Component {
     this.submit = this.submit.bind(this);
   }
 
+  componentDidUpdate() {
+    this.$email.focus();
+  }
+
   async login() {
     const { data } = await axios.post("http://localhost:3200/rpc/login", {
       email: this.state.email,
@@ -105,6 +109,7 @@ export default class Index extends React.Component {
               name="email"
               onChange={this.updateFormData}
               placeholder="E-mail"
+              ref={ref => (this.$email = ref)}
             />
             <Error>{this.state.error}</Error>
             <Button disabled={this.state.isLoading} onClick={this.submit}>
