@@ -1,3 +1,4 @@
+const http = require("http");
 const Koa = require("koa");
 const next = require("next");
 
@@ -10,24 +11,25 @@ const environment = NODE_ENV !== undefined ? NODE_ENV : "development";
 const dbUri = require("../../knexfile")[environment].connection;
 const port = PORT !== undefined ? parseInt(PORT) : 3100;
 
-const app = next({ dev: environment !== "production" });
+const nextApp = next({ dev: environment !== "production" });
 
 async function start() {
-  await app.prepare();
-  const pool = await db(dbUri);
+  await nextApp.prepare();
+  const dbPool = await db(dbUri);
 
-  const server = new Koa();
+  const koaApp = new Koa();
+  const server = http.createServer(koaApp.callback());
 
-  server.use(async (ctx, next) => {
+  // Attach websocket listeners
+  sockets(server, dbPool);
+
+  koaApp.use(async (ctx, next) => {
     ctx.res.statusCode = 200;
     await next();
   });
 
-  server.use(routes(app).routes());
-
-  // const server = createServer((req, res) => routes(app, req, res));
-  // Link websocket listeners
-  sockets(server, pool);
+  // Attach routes
+  koaApp.use(routes(nextApp).routes());
 
   server.listen(port, err => {
     if (err) throw err;
