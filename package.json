@@ -8,6 +8,7 @@
     "db:migrate": "knex migrate:latest",
     "db:seed": "knex seed:run",
     "dev": "lerna run dev --parallel",
+    "setup": "lerna bootstrap && node ./scripts/dev/install.js && yarn db:migrate && yarn db:seed",
     "start": "lerna run start --parallel",
     "test": "lerna run test",
     "test:watch": "lerna run test:watch --parallel"
