@@ -1,6 +1,11 @@
 import Head from "next/head";
 import React from "react";
 import { Flex } from "rebass";
+import styled from "styled-components";
+
+const Body = styled(Flex)`
+  background-color: #efeff0;
+`;
 
 export default ({ children }) => (
   <Flex alignItems="stretch" style={{ height: "100vh" }}>
@@ -9,8 +14,8 @@ export default ({ children }) => (
       <link rel="stylesheet" href="/static/temp.css" />
       <link rel="stylesheet" href="/static/main.css" />
     </Head>
-    <Flex alignItems="stretch" flexDirection="column" width={1}>
+    <Body alignItems="stretch" flexDirection="column" width={1}>
       {children}
-    </Flex>
+    </Body>
   </Flex>
 );
