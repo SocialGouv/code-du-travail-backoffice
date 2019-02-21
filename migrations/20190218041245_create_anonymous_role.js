@@ -6,5 +6,8 @@ exports.up = async knex => {
 }
 
 exports.down = async knex => {
+  await knex.raw('REVOKE SELECT ON api.answers FROM anonymous')
+  await knex.raw('REVOKE SELECT ON api.questions FROM anonymous')
+  await knex.raw('REVOKE USAGE ON SCHEMA api FROM anonymous')
   await knex.raw('DROP ROLE anonymous')
 }
