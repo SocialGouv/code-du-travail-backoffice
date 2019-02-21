@@ -1,6 +1,4 @@
 exports.seed = async knex => {
-  await knex("api.labor_agreements").del();
-
   await knex("api.labor_agreements").insert([
     { idcc: '0003', name: `Convention collective nationale des ouvriers de la navigation intérieure de marchandises` },
     { idcc: '0007', name: `Convention collective départementale de l'industrie du bâtiment et des travaux publics du Rhône` },
