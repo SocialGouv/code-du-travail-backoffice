@@ -45,7 +45,8 @@
     "jest": "24.1.0",
     "prettier": "1.16.4",
     "react-testing-library": "5.8.0",
-    "redux-devtools-extension": "2.13.8"
+    "redux-devtools-extension": "2.13.8",
+    "webpack-merge": "^4.2.1"
   },
   "jest": {
     "moduleNameMapper": {
