@@ -15,6 +15,8 @@ class MainApp extends App {
   }
 
   componentDidMount() {
+    this.setState({ isMounted: true });
+
     if (this.props.router.asPath !== "/" && !this.isAutenticated()) {
       Router.push("/");
     }
