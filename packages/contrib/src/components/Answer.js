@@ -7,7 +7,7 @@ const Container = styled.div`
   background-color: white;
   border-radius: 0.4rem;
   cursor: pointer;
-  margin: 1rem;
+  margin: 1rem 1rem 0;
   padding: 0.5rem 0.5rem 0.5rem 0.75rem;
 `;
 
@@ -24,24 +24,24 @@ const Reference = styled.div`
   opacity: 0.75;
   padding: 0.25rem 0.5rem;
 
-  &:hover {
+  :hover {
     opacity: 1;
   }
 `;
 const Tooltip = styled(ReactTooltip)`
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.5rem 0.45rem;
   width: 360px;
 `;
 
-export default ({ data, onClick }) => (
+export default ({ data, label, onClick }) => (
   <Container key={data.id} onClick={onClick}>
     <Flex justifyContent="space-between">
-      <Label>Réponse à rédiger</Label>
+      <Label>{label}</Label>
       <Reference data-tip={data.labor_agreement.name}>
         {data.labor_agreement.idcc}
       </Reference>
+      <Tooltip />
     </Flex>
     {data.question.value}
-    <Tooltip />
   </Container>
 );
