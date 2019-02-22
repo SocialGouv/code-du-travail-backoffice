@@ -1,10 +1,12 @@
 import axios from "axios";
-import React from "react";
 import Router from "next/router";
+import React from "react";
+import { Flex } from "rebass";
 
 import Answer from "../src/components/Answer";
-import Main from "../src/layouts/main";
-import Login from "../src/components/login";
+import Login from "../src/components/Login";
+import Title from "../src/elements/Title";
+import Main from "../src/layouts/Main";
 
 export default class Index extends React.Component {
   constructor(props) {
@@ -27,10 +29,13 @@ export default class Index extends React.Component {
   componentDidUpdate() {
     if (this.isAutenticated() && this.state.isLoading) {
       const select = "select=*,question(value),labor_agreement(idcc,name)";
+      const filter = "labor_agreement.idcc=in.(0016,1351,1596,1597,3043)";
       axios
-        .get(`http://localhost:3200/answers?${select}&limit=10`)
+        .get(`http://localhost:3200/answers?${select}&${filter}`)
         .then(({ data }) => {
-          this.answers = data;
+          this.answers = data.filter(
+            ({ labor_agreement }) => labor_agreement !== null
+          );
           this.setState({ isLoading: false });
         })
         .catch(console.warn);
@@ -59,18 +64,29 @@ export default class Index extends React.Component {
         return <p>Fetching answers...</p>;
 
       default:
-        return this.getAnswers();
+        return (
+          <Flex flexDirection="column" width={1}>
+            <Title first>Mes réponses en cours de rédaction</Title>
+            {this.getAnswers(({ value }) => value.length > 0, true)}
+            <Title>Réponses à rédiger</Title>
+            {this.getAnswers(({ value }) => value.length === 0, false)}
+          </Flex>
+        );
     }
   }
 
-  getAnswers() {
-    return this.answers.map(answer => (
-      <Answer
-        data={answer}
-        key={answer.id}
-        onClick={() => this.editAnswer(answer.id)}
-      />
-    ));
+  getAnswers(filter, isDraft) {
+    return this.answers
+      .filter(filter)
+      .slice(0, 10)
+      .map(answer => (
+        <Answer
+          data={answer}
+          label={isDraft ? "Brouillon" : "À rédiger"}
+          key={answer.id}
+          onClick={() => this.editAnswer(answer.id)}
+        />
+      ));
   }
 
   render() {
