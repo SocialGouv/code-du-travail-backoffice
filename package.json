@@ -11,6 +11,7 @@
     "setup": "lerna bootstrap && node ./scripts/setup",
     "start": "lerna run start --parallel",
     "test": "lerna run test",
+    "test:e2e": "node ./__tests__",
     "test:watch": "lerna run test:watch --parallel"
   },
   "dependencies": {
