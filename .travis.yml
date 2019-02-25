@@ -17,6 +17,8 @@ jobs:
       name: Unit Tests
       before_script:
         - bash scripts/ci/install_docker_compose.sh
+        # We first need to stop the existing Postgre service to free 5432 port:
+        - bash scripts/ci/stop_postgre_service.sh
         - yarn setup
       script: yarn test
 
