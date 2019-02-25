@@ -15,6 +15,7 @@ jobs:
   include:
     - stage: Test
       name: Unit Tests
+      before_script: yarn run lerna bootstrap
       script: yarn test
 
     - stage: Test
