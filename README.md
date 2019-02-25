@@ -39,7 +39,7 @@ Et c'est tout! Le site devrait être accessible via http://localhost:3100.
 
 Ce dépôt est licencié sous la [licence Apacha 2.0][link-license].
 
-[img-codecov]: https://img.shields.io/codecov/gh/SocialGouv/code-du-travail-backoffice/master.svg?style=flat-square
+[img-codecov]: https://img.shields.io/codecov/c/github/SocialGouv/code-du-travail-backoffice/master.svg?style=flat-square
 [img-travis]: https://img.shields.io/travis/SocialGouv/code-du-travail-backoffice/master.svg?style=flat-square
 [link-cdtn]: https://github.com/SocialGouv/code-du-travail-numerique
 [link-codecov]: https://codecov.io/gh/SocialGouv/code-du-travail-backoffice
