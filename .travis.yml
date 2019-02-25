@@ -15,5 +15,7 @@ jobs:
   include:
     - stage: Test
       name: Unit Tests
-      before_script: yarn setup
+      before_script:
+        - bash scripts/ci/install_docker_compose.sh
+        - yarn setup
       script: yarn test
