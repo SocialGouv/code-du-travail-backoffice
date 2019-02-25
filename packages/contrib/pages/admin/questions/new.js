@@ -3,7 +3,7 @@ import React from "react";
 import { Button as ReButton } from "rebass";
 import styled from "styled-components";
 
-import Main from "../../../src/layouts/main";
+import Main from "../../../src/layouts/Main";
 
 const Form = styled.form`
   /* box-sizing: border-box;

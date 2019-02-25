@@ -3,7 +3,7 @@ import styled from "styled-components";
 import React from "react";
 import Router from "next/router";
 
-import Main from "../../../src/layouts/main";
+import Main from "../../../src/layouts/Main";
 
 const Row = styled.div`
   border: dashed 1px grey;
