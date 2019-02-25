@@ -15,12 +15,20 @@ jobs:
   include:
     - stage: Test
       name: Unit Tests
+      script: yarn test
+
+    - stage: Test
+      name: E2E Tests
       before_script:
         - bash scripts/ci/install_docker_compose.sh
         # We first need to stop the existing Postgre service to free 5432 port:
         - bash scripts/ci/stop_postgre_service.sh
+        # Generate a .env file and migrate+seed Postgre database:
         - yarn setup
-      script: yarn test
+        # Start Docker Compose & a local server instance (in the background):
+        - bash scripts/ci/run_full_server_instance.sh
+      script:
+        - yarn test:e2e
 
 cache:
   yarn: true
