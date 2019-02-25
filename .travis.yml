@@ -16,7 +16,8 @@ jobs:
     - stage: Test
       name: Unit Tests
       before_script: yarn run lerna bootstrap
-      script: yarn test
+      script: yarn test -- --stream -- --coverage
+      after_success: npx codecov
 
     - stage: Test
       name: E2E Tests
