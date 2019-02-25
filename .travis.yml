@@ -19,3 +19,8 @@ jobs:
         - bash scripts/ci/install_docker_compose.sh
         - yarn setup
       script: yarn test
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
