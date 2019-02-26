@@ -1,51 +1,35 @@
-import axios from "axios";
 import Router from "next/router";
 import React from "react";
 import { Flex } from "rebass";
 
 import Answer from "../src/components/Answer";
-import Login from "../src/components/Login";
 import Title from "../src/elements/Title";
 import Main from "../src/layouts/Main";
+import customAxios from "../src/lib/customAxios";
 
 export default class Index extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isMounted: false,
-      isLoading: true
+      answers: []
     };
-
-    this.answers = [];
-
-    this.forceUpdate = this.forceUpdate.bind(this);
   }
 
   componentDidMount() {
-    this.setState({ isMounted: true });
-  }
-
-  componentDidUpdate() {
-    if (this.isAutenticated() && this.state.isLoading) {
-      const select = "select=*,question(value),labor_agreement(idcc,name)";
-      const filter = "labor_agreement.idcc=in.(0016,1351,1596,1597,3043)";
-      axios
-        .get(`http://localhost:3200/answers?${select}&${filter}`)
-        .then(({ data }) => {
-          this.answers = data.filter(
+    const select = "select=*,question(value),labor_agreement(idcc,name)";
+    const filter = "labor_agreement.idcc=in.(0016,1351,1596,1597,3043)";
+    customAxios()
+      .get(`http://localhost:3200/answers?${select}&${filter}`)
+      .then(({ data }) => {
+        this.setState({
+          answers: data.filter(
             ({ labor_agreement }) => labor_agreement !== null
-          );
-          this.setState({ isLoading: false });
-        })
-        .catch(console.warn);
-    }
-  }
-
-  isAutenticated() {
-    const jwt = sessionStorage.getItem("jwt");
-
-    return typeof jwt === "string" && jwt.length > 0;
+          ),
+          isLoading: false
+        });
+      })
+      .catch(console.warn);
   }
 
   editAnswer(answerId) {
@@ -54,13 +38,7 @@ export default class Index extends React.Component {
 
   getContent() {
     switch (true) {
-      case !this.state.isMounted:
-        return <p>Loading...</p>;
-
-      case !this.isAutenticated():
-        return <Login onLog={() => this.forceUpdate()} />;
-
-      case this.state.isLoading:
+      case this.state.answers.length === 0:
         return <p>Fetching answers...</p>;
 
       default:
@@ -76,7 +54,7 @@ export default class Index extends React.Component {
   }
 
   getAnswers(filter, isDraft) {
-    return this.answers
+    return this.state.answers
       .filter(filter)
       .slice(0, 10)
       .map(answer => (
