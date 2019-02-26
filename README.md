@@ -26,6 +26,10 @@ yarn
 yarn setup
 ```
 
+> **Note**<br>
+> Si vous ne pouvez exécuter `docker-compose` qu'avec `sudo`, vous devez
+> remplacer `yarn setup` par `sudo yarn setup`.
+
 ### Démarrer le site localement
 
 ```bash
