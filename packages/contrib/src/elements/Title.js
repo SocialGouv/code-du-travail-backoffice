@@ -5,4 +5,5 @@ export default styled.div`
   font-size: 1.25rem;
   font-weight: 600;
   margin: 2rem 1rem 0;
+  user-select: none;
 `;
