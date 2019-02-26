@@ -89,7 +89,6 @@ export default class Index extends React.Component {
       await this.login();
       this.props.onLog();
     } catch (e) {
-      console.warn(e);
       this.setState({
         error: "E-mail non reconnu.",
         isLoading: false
