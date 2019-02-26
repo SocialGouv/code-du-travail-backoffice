@@ -1,10 +1,6 @@
+import { omit } from "ramda";
 import React from "react";
-import styled from "styled-components";
 import TurndownService from "turndown";
-
-const Container = styled.div`
-  width: 100%;
-`;
 
 /**
  * React wrapper for medium-editor plugin with convert the HTML content into
@@ -43,10 +39,12 @@ export default class Editor extends React.Component {
   }
 
   render() {
+    const props = omit(["defaultValue", "onChange"], this.props);
+
     return (
-      <Container ref={el => (this.el = el)} style={this.props.style}>
+      <div ref={el => (this.el = el)} {...props}>
         {this.props.defaultValue}
-      </Container>
+      </div>
     );
   }
 }
