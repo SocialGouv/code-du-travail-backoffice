@@ -1,5 +1,3 @@
-import axios from "axios";
-import io from "socket.io-client";
 import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
@@ -8,6 +6,8 @@ import Editor from "../src/components/Editor";
 import Tag from "../src/elements/Tag";
 import Title from "../src/elements/Title";
 import Main from "../src/layouts/Main";
+import customAxios from "../src/lib/customAxios";
+import makeApiFilter from "../src/lib/makeApiFilter";
 
 import "../node_modules/medium-editor/dist/css/medium-editor.css";
 import "../node_modules/medium-editor/dist/css/themes/beagle.css";
@@ -22,6 +22,10 @@ const Label = styled.div`
 
 const Content = styled(Flex)`
   background-color: #f3f3f3;
+`;
+const ContentEditor = styled(Editor)`
+  flex-grow: 1;
+  padding: 1rem;
 `;
 
 const SideBar = styled(Flex)`
@@ -41,20 +45,15 @@ export default class extends React.Component {
     super(props);
 
     this.state = {
-      isLoading: true,
-
-      contract_type: [],
-      distinctive_identity: [],
-      target: [],
-      theme: [],
-      work_schedule_type: [],
-      work_time: []
+      answerTags: [],
+      isLoading: true
     };
 
+    this.answerValue = "";
+    this.originalAnswer = null;
     this.tags = [];
 
-    this.updateFormData = this.updateFormData.bind(this);
-    this.updateValue = this.updateValue.bind(this);
+    this.saveAnswerValue = this.saveAnswerValue.bind(this);
   }
 
   static getInitialProps({ query: { id } }) {
@@ -62,85 +61,88 @@ export default class extends React.Component {
   }
 
   componentDidMount() {
-    this.socket = io();
+    this.axios = customAxios();
 
-    const filter = `id=eq.${this.props.id}`;
-    const select = "select=*,question(value),labor_agreement(idcc,name)";
+    const answersFilter = `id=eq.${this.props.id}`;
+    const answersSelect = "select=*,question(value),labor_agreement(idcc,name)";
+    const answersTagsFilter = `answer_id=eq.${this.props.id}`;
+    const answersTagsSelect = "select=tag_id";
 
     Promise.all([
-      axios.get(`http://localhost:3200/tags`),
-      axios.get(`http://localhost:3200/answers?${filter}&${select}`)
+      this.axios.get(`/tags`),
+      this.axios.get(`/answers?${answersFilter}&${answersSelect}`),
+      this.axios.get(`/answers_tags?${answersTagsFilter}&${answersTagsSelect}`)
     ])
-      .then(res => {
-        this.tags = res[0].data;
-        this.answer = res[1].data[0];
+      .then(([tagsRes, answersRes, answersTagsRes]) => {
+        this.originalAnswer = answersRes.data[0];
+        this.answerValue = answersRes.data[0].value;
+        this.tags = tagsRes.data;
+
         this.setState({
-          isLoading: false,
-          value: res[1].data[0].value
+          answerTags: answersTagsRes.data.map(({ tag_id }) => tag_id),
+          isLoading: false
         });
       })
       .catch(console.warn);
   }
 
-  componentDidUpdate() {
-    if (!this.state.isLoading) this.save();
-  }
-
-  updateFormData(event) {
-    const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
-
-    this.setState({ [name]: value });
-  }
-
-  toggleCheckbox(field, theme) {
-    if (this.state[field].includes(theme)) {
+  toggleTag(tagId) {
+    if (this.state.answerTags.includes(tagId)) {
+      this.deleteAnswerTag(tagId);
       this.setState({
-        [field]: [...this.state[field].filter(_theme => _theme !== theme)]
+        answerTags: [...this.state.answerTags.filter(id => id !== tagId)]
       });
 
       return;
     }
 
+    this.insertAnswerTag(tagId);
     this.setState({
-      [field]: [...this.state[field], theme]
+      answerTags: [...this.state.answerTags, tagId]
     });
   }
 
-  updateValue(markdownSource) {
-    this.value = markdownSource;
-    this.save();
+  saveAnswerValue(value) {
+    const uri = `/answers?id=eq.${this.props.id}`;
+    const data = { value };
+
+    this.axios.patch(uri, data).catch(console.warn);
   }
 
-  save() {
-    const uri = `http://localhost:3200/answers?id=eq.${this.props.id}`;
+  insertAnswerTag(tagId) {
+    const uri = `/answers_tags`;
     const data = {
-      value: this.value
-    };
-    const config = {
-      headers: { Authorization: `Bearer ${sessionStorage.getItem("jwt")}` }
+      // id: 1,
+      answer_id: this.props.id,
+      tag_id: tagId
     };
 
-    axios.patch(uri, data, config).catch(console.warn);
+    this.axios.post(uri, data).catch(console.warn);
   }
 
-  getCheckboxList(category) {
+  deleteAnswerTag(tagId) {
+    const uri = makeApiFilter("/answers_tags", {
+      answer_id: this.props.id,
+      tag_id: tagId
+    });
+
+    this.axios.delete(uri).catch(console.warn);
+  }
+
+  getTagsList(tagCategory) {
     return this.tags
-      .filter(tag => tag.category === category)
-      .map(({ value }, index) =>
-        this.getCheckboxListRow(category, value, index)
-      );
+      .filter(tag => tag.category === tagCategory)
+      .map((tag, index) => this.getTagsListRow(tag, index));
   }
 
-  getCheckboxListRow(field, value, index) {
+  getTagsListRow(tag, index) {
     return (
       <Tag
         key={String(index)}
-        onClick={() => this.toggleCheckbox(field, value)}
-        selected={this.state[field].includes(value)}
+        onClick={() => this.toggleTag(tag.id)}
+        selected={this.state.answerTags.includes(tag.id)}
       >
-        {value}
+        {tag.value}
       </Tag>
     );
   }
@@ -148,26 +150,23 @@ export default class extends React.Component {
   render() {
     if (this.state.isLoading) return <Main>Loading...</Main>;
 
-    const contractTypes = this.getCheckboxList("contract_type");
-    const distinctiveIdentities = this.getCheckboxList("distinctive_identity");
-    const targets = this.getCheckboxList("target");
-    const themes = this.getCheckboxList("theme");
-    const workScheduleTypes = this.getCheckboxList("work_schedule_type");
-    const workTimes = this.getCheckboxList("work_time");
+    const contractTypes = this.getTagsList("contract_type");
+    const distinctiveIdentities = this.getTagsList("distinctive_identity");
+    const targets = this.getTagsList("target");
+    const themes = this.getTagsList("theme");
+    const workScheduleTypes = this.getTagsList("work_schedule_type");
+    const workTimes = this.getTagsList("work_time");
 
     return (
       <Main isHorizontal>
         <Content flexDirection="column" width={3 / 5}>
           <Label>Brouillon</Label>
-          <Title style={{ marginTop: 0 }}>{this.answer.question.value}</Title>
-          <Editor
-            defaultValue={this.state.value}
-            onChange={this.updateValue}
-            style={{
-              background: "#f3f3f3",
-              flexGrow: 1,
-              padding: "1rem"
-            }}
+          <Title style={{ marginTop: 0 }}>
+            {this.originalAnswer.question.value}
+          </Title>
+          <ContentEditor
+            defaultValue={this.originalAnswer.value}
+            onChange={this.saveAnswerValue}
           />
         </Content>
         <SideBar width={2 / 5} flexDirection="column">
