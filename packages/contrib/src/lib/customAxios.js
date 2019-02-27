@@ -14,7 +14,15 @@ export default function(skipAuthCheck) {
       response => response,
       error => {
         if (error.response !== undefined && error.response.data !== undefined) {
-          if (error.response.data.message === "JWT expired") {
+          const jwt = sessionStorage.getItem("jwt");
+
+          if (
+            typeof jwt !== "string" ||
+            jwt.length === 0 ||
+            error.response.data.message === "JWT expired" ||
+            // Malformed JWT case:
+            error.response.data.message.startsWith("JWSError")
+          ) {
             Router.push("/login");
           }
         }
