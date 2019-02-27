@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Contrib] pages/<Index /> should render 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 bBIrgk"
+    style="height: 100vh;"
+  >
+    <div
+      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 eBCYWC"
+      width="1"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH Main__Header-q4q6nx-2 cYOqXJ"
+      >
+        <div
+          class="sc-bdVaJa sc-bwzfXH Main__Brand-q4q6nx-3 kDFObA"
+        >
+          <img
+            alt="Code du travail numérique"
+            class="Main__Logo-q4q6nx-4 kOvbZy"
+            src="[object Object]"
+          />
+          Code du travail numérique
+        </div>
+      </div>
+      <div
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-5 dFPYTm"
+      >
+        <p>
+          Fetching answers...
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
