@@ -1,18 +1,10 @@
 import { omit } from "ramda";
 import React from "react";
-import TurndownService from "turndown";
 
 /**
- * React wrapper for medium-editor plugin with convert the HTML content into
- * Markdown.
+ * React wrapper for medium-editor plugin.
  */
 export default class Editor extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.turndownService = new TurndownService();
-  }
-
   componentDidMount() {
     // We have to load medium-editor here because of the global `document`
     // variable check done by the original library.
@@ -33,18 +25,22 @@ export default class Editor extends React.Component {
     if (this.props.onChange === undefined) return;
 
     const htmlContent = this.medium.getContent();
-    const markdownContent = this.turndownService.turndown(htmlContent);
+    this.props.onChange(htmlContent);
+  }
 
-    this.props.onChange(markdownContent);
+  getHtmlSource() {
+    return { __html: this.props.defaultValue };
   }
 
   render() {
     const props = omit(["defaultValue", "onChange"], this.props);
 
     return (
-      <div ref={el => (this.el = el)} {...props}>
-        {this.props.defaultValue}
-      </div>
+      <div
+        dangerouslySetInnerHTML={this.getHtmlSource()}
+        ref={el => (this.el = el)}
+        {...props}
+      />
     );
   }
 }
