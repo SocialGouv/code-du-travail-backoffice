@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Answer /> should match snapshot 1`] = `
+<div>
+  <div
+    class="Answer__Container-sc-1w2h0sp-0 kPKGxi"
+  >
+    <div
+      class="sc-bdVaJa sc-bwzfXH erVoqY"
+    >
+      <div
+        class="Answer__Label-sc-1w2h0sp-1 ikeTNC"
+      >
+        A label
+      </div>
+      <div
+        class="Answer__Reference-sc-1w2h0sp-2 iCNfob"
+        currentitem="false"
+        data-tip="A Labor Agreement Name"
+      >
+        1234
+      </div>
+      <div
+        class="__react_component_tooltip place-top type-dark "
+        data-id="tooltip"
+      />
+    </div>
+    Who knows?
+  </div>
+</div>
+`;
