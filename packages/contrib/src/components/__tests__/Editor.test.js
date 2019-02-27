@@ -11,13 +11,13 @@ describe("<Editor />", () => {
 
 ### Citation
 
-> Il m'est arrivé de sentir que tout allait bien pour moi, que tout le
-> monde était gai, et aussitôt l'idée me traversait l'esprit qu'il ne se
+> Il m'est arrivé de sentir que tout allait bien pour moi, que tout le<br>
+> monde était gai, et aussitôt l'idée me traversait l'esprit qu'il ne se<br>
 > passerait plus rien et que tout était absurde.
 
 *Léon Tolstoï*
 
-<u>Ceci</u> est <u>important</u>.
+Ceci est <u>important</u>.
 
 Ceci est très **important**.
     `,

@@ -49,10 +49,7 @@ exports[`<Editor /> should match snapshot 1`] = `
       
 
       <p>
-        <u>
-          Ceci
-        </u>
-         est 
+        Ceci est 
         <u>
           important
         </u>
