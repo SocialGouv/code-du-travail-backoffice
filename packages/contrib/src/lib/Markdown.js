@@ -5,7 +5,6 @@ import sanitizeHtml from "sanitize-html";
 const converter = new showdown.Converter({
   noHeaderId: true,
   simplifiedAutoLink: true,
-  simpleLineBreaks: true,
   underline: true
 });
 
@@ -56,6 +55,10 @@ export default class Markdown {
     // This fixes strange behaviors from showdown library.
     // Handling underlines is still experimental:
     // https://github.com/showdownjs/showdown#valid-options
-    return markdownSource.replace(/<\/u>\n\n/g, "</u>").trim();
+    return markdownSource
+      .replace(/<\/u>\n\n/g, "</u>")
+      .replace(/\n>\s*\n/g, "\n")
+      .replace(/^>\s+/gm, "> ")
+      .trim();
   }
 }
