@@ -1,0 +1,208 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Editor /> should match snapshot 1`] = `
+<div>
+  <div>
+    <div
+      aria-multiline="true"
+      class="medium-editor-element"
+      contenteditable="true"
+      data-medium-editor-editor-index="1"
+      data-medium-editor-element="true"
+      data-placeholder="Commencer ici votre réponse."
+      label="A label"
+      role="textbox"
+      spellcheck="false"
+    >
+      <h2>
+        Guerre et Paix
+      </h2>
+      
+
+      <h3>
+        Citation
+      </h3>
+      
+
+      <blockquote>
+        
+  
+        <p>
+          Il m'est arrivé de sentir que tout allait bien pour moi, que tout le
+          <br />
+          
+  monde était gai, et aussitôt l'idée me traversait l'esprit qu'il ne se
+          <br />
+          
+  passerait plus rien et que tout était absurde.
+        </p>
+        
+
+      </blockquote>
+      
+
+      <p>
+        <em>
+          Léon Tolstoï
+        </em>
+      </p>
+      
+
+      <p>
+        <u>
+          Ceci
+        </u>
+         est 
+        <u>
+          important
+        </u>
+        .
+      </p>
+      
+
+      <p>
+        Ceci est très 
+        <strong>
+          important
+        </strong>
+        .
+      </p>
+    </div>
+    <div
+      class="medium-editor-anchor-preview"
+      id="medium-editor-anchor-preview-1"
+    >
+      <div
+        class="medium-editor-toolbar-anchor-preview"
+        id="medium-editor-toolbar-anchor-preview"
+      >
+            
+        <a
+          class="medium-editor-toolbar-anchor-preview-inner"
+        />
+      </div>
+    </div>
+    <div
+      class="medium-editor-toolbar static-toolbar"
+      id="medium-editor-toolbar-1"
+    >
+      <ul
+        class="medium-editor-toolbar-actions"
+        id="medium-editor-toolbar-actions1"
+        style="display: block;"
+      >
+        <li>
+          <button
+            aria-label="bold"
+            class="medium-editor-action medium-editor-action-bold medium-editor-button-first"
+            data-action="bold"
+            title="bold"
+          >
+            <b>
+              B
+            </b>
+          </button>
+        </li>
+        <li>
+          <button
+            aria-label="italic"
+            class="medium-editor-action medium-editor-action-italic"
+            data-action="italic"
+            title="italic"
+          >
+            <b>
+              <i>
+                I
+              </i>
+            </b>
+          </button>
+        </li>
+        <li>
+          <button
+            aria-label="underline"
+            class="medium-editor-action medium-editor-action-underline"
+            data-action="underline"
+            title="underline"
+          >
+            <b>
+              <u>
+                U
+              </u>
+            </b>
+          </button>
+        </li>
+        <li>
+          <button
+            aria-label="link"
+            class="medium-editor-action medium-editor-action-anchor"
+            data-action="createLink"
+            title="link"
+          >
+            <b>
+              #
+            </b>
+          </button>
+        </li>
+        <li>
+          <button
+            aria-label="header type two"
+            class="medium-editor-action medium-editor-action-h2"
+            data-action="append-h2"
+            title="header type two"
+          >
+            <b>
+              H2
+            </b>
+          </button>
+        </li>
+        <li>
+          <button
+            aria-label="header type three"
+            class="medium-editor-action medium-editor-action-h3"
+            data-action="append-h3"
+            title="header type three"
+          >
+            <b>
+              H3
+            </b>
+          </button>
+        </li>
+        <li>
+          <button
+            aria-label="blockquote"
+            class="medium-editor-action medium-editor-action-quote medium-editor-button-last"
+            data-action="append-blockquote"
+            title="blockquote"
+          >
+            <b>
+              “
+            </b>
+          </button>
+        </li>
+      </ul>
+      <div
+        class="medium-editor-toolbar-form"
+        id="medium-editor-toolbar-form-anchor-1"
+      >
+        <input
+          class="medium-editor-toolbar-input"
+          placeholder="Paste or type a link"
+          type="text"
+        />
+        <a
+          class="medium-editor-toolbar-save"
+          href="#"
+        >
+          ✓
+        </a>
+        <a
+          class="medium-editor-toolbar-close"
+          href="#"
+        >
+          ×
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
