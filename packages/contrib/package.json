@@ -58,6 +58,7 @@
       "src/**/*.js"
     ],
     "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|svg|ttf|woff|woff2)$": "<rootDir>/__mocks__/fileTransformer.js",
       "\\.css$": "identity-obj-proxy"
     }
   },
