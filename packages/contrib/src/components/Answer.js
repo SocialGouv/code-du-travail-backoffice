@@ -34,7 +34,7 @@ const Tooltip = styled(ReactTooltip)`
 `;
 
 export default ({ data, label, onClick }) => (
-  <Container key={data.id} onClick={onClick}>
+  <Container onClick={onClick}>
     <Flex justifyContent="space-between">
       <Label>{label}</Label>
       <Reference data-tip={data.labor_agreement.name}>
