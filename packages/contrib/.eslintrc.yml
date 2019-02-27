@@ -12,8 +12,8 @@ rules:
   react/prop-types: off
 
 overrides:
-  - files:
+  files:
     - "*.test.js"
 
-    env:
-      jest: true
+  env:
+    jest: true
