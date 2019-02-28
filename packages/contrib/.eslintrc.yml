@@ -17,3 +17,6 @@ overrides:
 
   env:
     jest: true
+
+  globals:
+    waitFor: true
