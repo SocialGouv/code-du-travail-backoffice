@@ -1,22 +1,24 @@
 import axios from "axios";
 import React from "react";
-import { Button as ReButton, Flex } from "rebass";
+import { Button as ReButton } from "rebass";
 import styled from "styled-components";
 
-const Form = styled.form`
-  margin: 1rem;
-`;
-
 const Input = styled.input`
-  border: 0;
+  border: solid 1px #d3d3d3;
+  border-radius: 0.25rem;
   color: inherit;
   font-family: inherit;
   font-weight: inherit;
-  font-size: 1.2rem;
+  font-size: 1rem;
   line-height: 1.25;
   margin: 0.5rem 0;
-  padding: 0.25rem 0.5rem;
+  padding: 0.5rem 0.75rem;
   width: 100%;
+
+  ::placeholder {
+    color: #bbbbbb;
+    font-style: italic;
+  }
 `;
 
 const Error = styled.p`
@@ -27,7 +29,7 @@ const Error = styled.p`
 
 const Button = styled(ReButton)`
   background-color: #2978a0;
-  border-radius: 0;
+  border-radius: 0.25rem;
   cursor: pointer;
 `;
 
@@ -98,29 +100,19 @@ export default class Index extends React.Component {
 
   render() {
     return (
-      <Flex style={{ flexGrow: 1 }}>
-        <Flex width={1 / 2} />
-        <Flex
-          flexDirection="column"
-          justifyContent="center"
-          width={1 / 2}
-          style={{ flexGrow: 1 }}
-        >
-          <Form onSubmit={this.submit}>
-            <Input
-              disabled={this.state.isLoading}
-              name="email"
-              onChange={this.updateFormData}
-              placeholder="E-mail"
-              ref={ref => (this.$email = ref)}
-            />
-            <Error>{this.state.error}</Error>
-            <Button disabled={this.state.isLoading} onClick={this.submit}>
-              Se connecter
-            </Button>
-          </Form>
-        </Flex>
-      </Flex>
+      <form onSubmit={this.submit}>
+        <Input
+          disabled={this.state.isLoading}
+          name="email"
+          onChange={this.updateFormData}
+          placeholder="contributor@example.com"
+          ref={ref => (this.$email = ref)}
+        />
+        <Error>{this.state.error}</Error>
+        <Button disabled={this.state.isLoading} onClick={this.submit}>
+          Se connecter
+        </Button>
+      </form>
     );
   }
 }
