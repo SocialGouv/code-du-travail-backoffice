@@ -1,7 +1,8 @@
 import React from "react";
-import ReactTooltip from "react-tooltip";
 import { Flex } from "rebass";
 import styled from "styled-components";
+
+import Idcc from "../elements/Idcc";
 
 const Container = styled.div`
   background-color: white;
@@ -16,31 +17,12 @@ const Label = styled.div`
   font-size: 0.8rem;
   font-weight: 600;
 `;
-const Reference = styled.div`
-  background-color: #606060;
-  color: white;
-  font-size: 0.8rem;
-  font-weight: 600;
-  opacity: 0.75;
-  padding: 0.25rem 0.5rem;
-
-  :hover {
-    opacity: 1;
-  }
-`;
-const Tooltip = styled(ReactTooltip)`
-  padding: 0.25rem 0.5rem 0.45rem;
-  width: 360px;
-`;
 
 export default ({ data, label, onClick }) => (
   <Container onClick={onClick}>
     <Flex justifyContent="space-between">
       <Label>{label}</Label>
-      <Reference data-tip={data.labor_agreement.name}>
-        {data.labor_agreement.idcc}
-      </Reference>
-      <Tooltip />
+      <Idcc data={data.labor_agreement} />
     </Flex>
     {data.question.value}
   </Container>

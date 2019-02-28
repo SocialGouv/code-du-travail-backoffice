@@ -14,16 +14,16 @@ exports[`[Contrib] blocks/<Answer /> should match snapshot 1`] = `
         A label
       </div>
       <div
-        class="Answer__Reference-aw3my4-2 kEprWu"
+        class="Idcc__Container-owzimc-0 chFYzO"
         currentitem="false"
         data-tip="A Labor Agreement Name"
       >
         1234
+        <div
+          class="__react_component_tooltip place-top type-dark "
+          data-id="tooltip"
+        />
       </div>
-      <div
-        class="__react_component_tooltip place-top type-dark "
-        data-id="tooltip"
-      />
     </div>
     Who knows?
   </div>
