@@ -2,7 +2,7 @@ import Router from "next/router";
 import React from "react";
 import { Flex } from "rebass";
 
-import Answer from "../src/components/Answer";
+import Answer from "../src/blocks/Answer";
 import Title from "../src/elements/Title";
 import Main from "../src/layouts/Main";
 import customAxios from "../src/lib/customAxios";
