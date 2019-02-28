@@ -3,7 +3,8 @@
 [![Build Status][img-travis]][link-travis]
 [![codecov][img-codecov]][link-codecov]
 
-> Ce dépôt regroupe les applications d'administration des données du [code du travail numérique][link-cdtn].
+> Ce dépôt regroupe les applications d'administration des données du [code du
+> travail numérique][link-cdtn].
 
 ## Contribuer au projet
 
@@ -45,6 +46,17 @@ yarn dev
 ```
 
 Et c'est tout! Le site devrait être accessible via http://localhost:3100.
+
+### Problèmes connus
+
+Sous Linux, si vous rencontrez l'erreur
+`Error: ENOSPC: System limit for number of file watchers reached`, la [solution
+actuelle](https://github.com/facebook/jest/issues/3254#issuecomment-297214395)
+consiste à augmenter le nombre de watchers du système de fichiers en exécutant:
+
+```
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+```
 
 ## Licence
 
