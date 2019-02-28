@@ -1,4 +1,4 @@
-import customAxios from "./customAxios";
+import axios from "axios";
 
 export default async function isAuthenticated() {
   const jwt = sessionStorage.getItem("jwt");
@@ -6,9 +6,13 @@ export default async function isAuthenticated() {
   if (typeof jwt !== "string" || jwt.length === 0) return false;
 
   // Let's try a quick API call to check is the JWT is valid
-  const axios = customAxios(true);
   try {
-    await axios.get("/answers");
+    await axios.get("/answers", {
+      baseURL: "http://localhost:3200",
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("jwt")}`
+      }
+    });
 
     return true;
   } catch (error) {
