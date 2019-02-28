@@ -1,4 +1,3 @@
-const http = require("http");
 const Koa = require("koa");
 const next = require("next");
 
@@ -14,17 +13,11 @@ async function start() {
   await nextApp.prepare();
 
   const koaApp = new Koa();
-  const server = http.createServer(koaApp.callback());
-
-  koaApp.use(async (ctx, next) => {
-    ctx.res.statusCode = 200;
-    await next();
-  });
 
   // Attach routes
-  koaApp.use(routes(nextApp).routes());
+  koaApp.use(routes(nextApp));
 
-  server.listen(port, err => {
+  koaApp.listen(port, err => {
     if (err) throw err;
 
     console.info(`> Ready on http://localhost:${port} (${environment})`);

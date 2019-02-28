@@ -18,5 +18,5 @@ module.exports = function(nextApp) {
     ctx.respond = false;
   });
 
-  return router;
+  return router.routes();
 };
