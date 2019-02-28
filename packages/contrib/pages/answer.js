@@ -3,6 +3,7 @@ import { Flex } from "rebass";
 import styled from "styled-components";
 
 import Editor from "../src/components/Editor";
+import Idcc from "../src/elements/Idcc";
 import Tag from "../src/elements/Tag";
 import Title from "../src/elements/Title";
 import Main from "../src/layouts/Main";
@@ -160,7 +161,10 @@ export default class extends React.Component {
     return (
       <Main isHorizontal>
         <Content flexDirection="column" width={3 / 5}>
-          <Label>Brouillon</Label>
+          <Flex alignItems="flex-start" justifyContent="space-between">
+            <Label>Brouillon</Label>
+            <Idcc data={this.originalAnswer.labor_agreement} />
+          </Flex>
           <Title style={{ marginTop: 0 }}>
             {this.originalAnswer.question.value}
           </Title>

@@ -5,10 +5,12 @@ import styled from "styled-components";
 const Container = styled.div`
   background-color: #606060;
   color: white;
+  cursor: help;
   font-size: 0.8rem;
   font-weight: 600;
   opacity: 0.75;
   padding: 0.25rem 0.5rem;
+  user-select: none;
 
   :hover {
     opacity: 1;
