@@ -11,21 +11,34 @@ exports[`[Contrib] pages/<Login /> should render 1`] = `
       width="1"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH Main__Header-q4q6nx-2 cYOqXJ"
+        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 kivzys"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH Main__Brand-q4q6nx-3 kDFObA"
+          class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB"
         >
           <img
             alt="Code du travail numérique"
-            class="Main__Logo-q4q6nx-4 kOvbZy"
+            class="Header__Logo-sc-7cr55z-2 kAIypM"
             src="[object Object]"
           />
-          Code du travail numérique
+          <div
+            class="sc-bdVaJa sc-bwzfXH eVPJMi"
+          >
+            <span
+              class="Header__Title-sc-7cr55z-3 jGdlvq"
+            >
+              Code du travail numérique
+            </span>
+            <span
+              class="Header__Subtitle-sc-7cr55z-4 kxPxIS"
+            >
+              Outil de contribution
+            </span>
+          </div>
         </div>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-5 dFPYTm"
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 lhyucv"
       >
         <div
           class="sc-bdVaJa sc-bwzfXH pjOvZ"

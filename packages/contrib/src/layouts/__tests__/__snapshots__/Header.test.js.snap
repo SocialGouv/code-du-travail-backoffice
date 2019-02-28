@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Contrib] layouts/<Header /> should render 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 kivzys"
+  >
+    <div
+      class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB"
+    >
+      <img
+        alt="Code du travail numérique"
+        class="Header__Logo-sc-7cr55z-2 kAIypM"
+        src="[object Object]"
+      />
+      <div
+        class="sc-bdVaJa sc-bwzfXH eVPJMi"
+      >
+        <span
+          class="Header__Title-sc-7cr55z-3 jGdlvq"
+        >
+          Code du travail numérique
+        </span>
+        <span
+          class="Header__Subtitle-sc-7cr55z-4 kxPxIS"
+        >
+          Outil de contribution
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

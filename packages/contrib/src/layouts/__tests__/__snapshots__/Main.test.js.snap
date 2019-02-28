@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] pages/<Index /> should render 1`] = `
+exports[`[Contrib] layouts/<Main /> should render 1`] = `
 <div>
   <div
     class="sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 bBIrgk"
@@ -39,11 +39,7 @@ exports[`[Contrib] pages/<Index /> should render 1`] = `
       </div>
       <div
         class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 lhyucv"
-      >
-        <p>
-          Fetching answers...
-        </p>
-      </div>
+      />
     </div>
   </div>
 </div>
