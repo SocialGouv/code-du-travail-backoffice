@@ -55,6 +55,7 @@
   },
   "jest": {
     "collectCoverageFrom": [
+      "pages/**/*.js",
       "src/**/*.js"
     ],
     "moduleNameMapper": {
