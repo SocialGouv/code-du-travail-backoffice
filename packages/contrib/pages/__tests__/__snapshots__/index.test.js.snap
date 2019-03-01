@@ -38,11 +38,18 @@ exports[`[Contrib] pages/<Index /> should render 1`] = `
         </div>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 lhyucv"
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 fIdmfv"
       >
-        <p>
-          Fetching answers...
-        </p>
+        <div
+          class="Spinner__Container-nm5wf5-0 cMcWeX"
+        >
+          <div
+            class="Spinner-nm5wf5-1 cCjJqj"
+          />
+          <div
+            class="Spinner-nm5wf5-1 Spinner__SpinnerNext-nm5wf5-2 hUyNhV"
+          />
+        </div>
       </div>
     </div>
   </div>

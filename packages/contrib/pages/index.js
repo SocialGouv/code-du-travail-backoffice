@@ -36,23 +36,6 @@ export default class Index extends React.Component {
     Router.push(`/answer/${answerId}`);
   }
 
-  getContent() {
-    switch (true) {
-      case this.state.answers.length === 0:
-        return <p>Fetching answers...</p>;
-
-      default:
-        return (
-          <Flex flexDirection="column" width={1}>
-            <Title first>Mes réponses en cours de rédaction</Title>
-            {this.getAnswers(({ value }) => value.length > 0, true)}
-            <Title>Réponses à rédiger</Title>
-            {this.getAnswers(({ value }) => value.length === 0, false)}
-          </Flex>
-        );
-    }
-  }
-
   getAnswers(filter, isDraft) {
     return this.state.answers
       .filter(filter)
@@ -68,6 +51,17 @@ export default class Index extends React.Component {
   }
 
   render() {
-    return <Main>{this.getContent()}</Main>;
+    if (this.state.answers.length === 0) return <Main isLoading />;
+
+    return (
+      <Main>
+        <Flex flexDirection="column" width={1}>
+          <Title first>Mes réponses en cours de rédaction</Title>
+          {this.getAnswers(({ value }) => value.length > 0, true)}
+          <Title>Réponses à rédiger</Title>
+          {this.getAnswers(({ value }) => value.length === 0, false)}
+        </Flex>
+      </Main>
+    );
   }
 }

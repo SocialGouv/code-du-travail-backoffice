@@ -149,7 +149,7 @@ export default class extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading) return <Main>Loading...</Main>;
+    if (this.state.isLoading) return <Main isLoading />;
 
     const contractTypes = this.getTagsList("contract_type");
     const distinctiveIdentities = this.getTagsList("distinctive_identity");
