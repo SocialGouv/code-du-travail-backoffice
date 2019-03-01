@@ -3,6 +3,7 @@ import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
+import Spinner from "../elements/Spinner";
 import Header from "./Header";
 
 const Container = styled(Flex)`
@@ -17,7 +18,7 @@ const Content = styled(Flex)`
   flex-grow: 1;
 `;
 
-export default ({ children, isHorizontal }) => (
+export default ({ children, isHorizontal, isLoading }) => (
   <Container alignItems="stretch" style={{ height: "100vh" }}>
     <Head>
       <title>Outil de contribution au code du travail numérique</title>
@@ -26,9 +27,15 @@ export default ({ children, isHorizontal }) => (
     </Head>
     <Body alignItems="stretch" flexDirection="column" width={1}>
       <Header />
-      <Content flexDirection={Boolean(isHorizontal) ? "row" : "column"}>
-        {children}
-      </Content>
+      {Boolean(isLoading) ? (
+        <Content alignItems="center" justifyContent="center">
+          <Spinner />
+        </Content>
+      ) : (
+        <Content flexDirection={Boolean(isHorizontal) ? "row" : "column"}>
+          {children}
+        </Content>
+      )}
     </Body>
   </Container>
 );
