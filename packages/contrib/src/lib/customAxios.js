@@ -12,21 +12,17 @@ export default function() {
   instance.interceptors.response.use(
     response => response,
     error => {
-      if (error.response !== undefined && error.response.data !== undefined) {
-        const jwt = sessionStorage.getItem("jwt");
+      if (
+        error.response !== undefined &&
+        error.response.status !== undefined &&
+        error.response.status === 401
+      ) {
+        Router.push("/login");
 
-        if (
-          typeof jwt !== "string" ||
-          jwt.length === 0 ||
-          error.response.data.message === "JWT expired" ||
-          // Malformed JWT case:
-          error.response.data.message.startsWith("JWSError")
-        ) {
-          Router.push("/login");
-        }
+        throw undefined;
       }
 
-      return error;
+      throw error;
     }
   );
 
