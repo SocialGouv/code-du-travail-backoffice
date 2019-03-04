@@ -1,0 +1,11 @@
+/*
+  Overrided global styles (= customized for the backoffice)
+*/
+
+body {
+  border-top: 0;
+}
+
+*:focus {
+  box-shadow: initial !important;
+}

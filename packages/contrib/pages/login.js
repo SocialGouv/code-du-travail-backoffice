@@ -7,7 +7,7 @@ import Login from "../src/components/Login";
 import Main from "../src/layouts/Main";
 import isAuthenticated from "../src/lib/isAuthenticated";
 
-const welcomeImgUri = require("../src/img/welcome.svg");
+import welcomeImgUri from "../src/images/welcome.svg";
 
 const Left = styled(Flex)`
   padding: 5rem;

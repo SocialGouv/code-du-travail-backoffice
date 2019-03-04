@@ -3,7 +3,7 @@ import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
-const marianne = require("./img/marianne.svg");
+import marianneImageUri from "../images/marianne.svg";
 
 const Container = styled(Flex)`
   background-color: white;
@@ -34,7 +34,7 @@ const Subtitle = styled.span`
 export default () => (
   <Container alignItems="center" justifyContent="space-between">
     <Brand alignItems="center" onClick={() => Router.push("/")}>
-      <Logo src={marianne} alt="Code du travail numérique" />
+      <Logo src={marianneImageUri} alt="Code du travail numérique" />
       <Flex flexDirection="column">
         <Title>Code du travail numérique</Title>
         <Subtitle>Outil de contribution</Subtitle>
