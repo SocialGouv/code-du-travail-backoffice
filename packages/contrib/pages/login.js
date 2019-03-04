@@ -48,16 +48,16 @@ export default class Index extends React.Component {
     this.forceUpdate = this.forceUpdate.bind(this);
   }
 
+  static getInitialProps({ query: { redirectTo } }) {
+    return { redirectTo };
+  }
+
   async componentDidUpdate() {
     try {
-      if (await isAuthenticated()) Router.push("/");
+      if (await isAuthenticated()) Router.push(this.props.redirectTo);
     } catch (error) {
       console.warn(error);
     }
-  }
-
-  editAnswer(answerId) {
-    Router.push(`/answer/${answerId}`);
   }
 
   render() {

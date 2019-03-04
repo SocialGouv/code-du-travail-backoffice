@@ -17,7 +17,7 @@ export default function() {
         error.response.status !== undefined &&
         error.response.status === 401
       ) {
-        Router.push("/login");
+        Router.push(`/login?redirectTo=${window.location.pathname}`);
 
         throw undefined;
       }

@@ -6,10 +6,12 @@ module.exports = function(nextApp) {
   const handle = nextApp.getRequestHandler();
 
   router.get("/answer/:id", async ctx => {
-    await nextApp.render(ctx.req, ctx.res, "/answer", {
-      ...ctx.query,
-      ...ctx.params
-    });
+    await nextApp.render(ctx.req, ctx.res, "/answer", { ...ctx.query });
+    ctx.respond = false;
+  });
+
+  router.get("/login", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/login", { ...ctx.query });
     ctx.respond = false;
   });
 
