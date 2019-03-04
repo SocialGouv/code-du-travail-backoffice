@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Contrib] elements/<SavingSpinner /> should match snapshot 1`] = `
+<div>
+  <div
+    class="SavingSpinner__Container-sc-14j744e-0 uCPxE"
+  >
+    <div
+      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__FirstSpinner-sc-14j744e-2 dPTovj"
+      color="white"
+    />
+    <div
+      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__SecondSpinner-sc-14j744e-3 pnAkn"
+      color="white"
+    />
+    <div
+      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__ThirdSpinner-sc-14j744e-4 dffYfo"
+      color="white"
+    />
+    <div
+      class="SavingSpinner__Spinner-sc-14j744e-1 evfqSa"
+      color="white"
+    />
+  </div>
+</div>
+`;
