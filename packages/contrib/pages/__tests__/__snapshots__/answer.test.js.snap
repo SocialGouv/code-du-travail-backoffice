@@ -41,13 +41,15 @@ exports[`[Contrib] pages/<Answer /> should render 1`] = `
         class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 fIdmfv"
       >
         <div
-          class="LoadingSpinner__Container-eu7nmw-0 pqfNO"
+          class="LoadingSpinner__Container-eu7nmw-0 dEMrTz"
         >
           <div
             class="LoadingSpinner__Spinner-eu7nmw-1 sHZX"
+            color="#666666"
           />
           <div
             class="LoadingSpinner__Spinner-eu7nmw-1 LoadingSpinner__SpinnerNext-eu7nmw-2 daPQQA"
+            color="#666666"
           />
         </div>
       </div>

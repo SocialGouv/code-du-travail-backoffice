@@ -29,7 +29,7 @@ export default ({ children, isHorizontal, isLoading }) => (
       <Header />
       {Boolean(isLoading) ? (
         <Content alignItems="center" justifyContent="center">
-          <LoadingSpinner />
+          <LoadingSpinner color="#666666" />
         </Content>
       ) : (
         <Content flexDirection={Boolean(isHorizontal) ? "row" : "column"}>

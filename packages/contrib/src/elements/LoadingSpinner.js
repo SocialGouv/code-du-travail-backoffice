@@ -6,8 +6,8 @@ import styled, { keyframes } from "styled-components";
 const Container = styled.div`
   display: inline-block;
   position: relative;
-  width: ${props => props.size};
-  height: ${props => props.size};
+  width: 64px;
+  height: 64px;
 `;
 
 const ripple = keyframes`
@@ -29,7 +29,7 @@ const ripple = keyframes`
 const Spinner = styled.div`
   animation: ${ripple} 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
   border-radius: 50%;
-  border: 4px solid #666666;
+  border: 4px solid ${props => props.color};
   opacity: 1;
   position: absolute;
 `;
@@ -37,9 +37,13 @@ const SpinnerNext = styled(Spinner)`
   animation-delay: -0.5s;
 `;
 
-export default ({ size }) => (
-  <Container size={size !== undefined ? size : "4rem"}>
-    <Spinner />
-    <SpinnerNext />
-  </Container>
-);
+export default ({ color }) => {
+  const _color = color !== undefined ? color : "white";
+
+  return (
+    <Container>
+      <Spinner color={_color} />
+      <SpinnerNext color={_color} />
+    </Container>
+  );
+};

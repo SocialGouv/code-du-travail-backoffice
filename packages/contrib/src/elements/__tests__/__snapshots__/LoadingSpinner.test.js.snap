@@ -3,13 +3,15 @@
 exports[`[Contrib] elements/<LoadingSpinner /> should match snapshot 1`] = `
 <div>
   <div
-    class="LoadingSpinner__Container-eu7nmw-0 bxJFNi"
+    class="LoadingSpinner__Container-eu7nmw-0 dEMrTz"
   >
     <div
-      class="LoadingSpinner__Spinner-eu7nmw-1 sHZX"
+      class="LoadingSpinner__Spinner-eu7nmw-1 itdVsg"
+      color="white"
     />
     <div
-      class="LoadingSpinner__Spinner-eu7nmw-1 LoadingSpinner__SpinnerNext-eu7nmw-2 daPQQA"
+      class="LoadingSpinner__Spinner-eu7nmw-1 LoadingSpinner__SpinnerNext-eu7nmw-2 jDhBeZ"
+      color="white"
     />
   </div>
 </div>
