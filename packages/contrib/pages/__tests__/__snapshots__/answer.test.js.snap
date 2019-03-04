@@ -44,10 +44,10 @@ exports[`[Contrib] pages/<Answer /> should render 1`] = `
           class="LoadingSpinner__Container-eu7nmw-0 pqfNO"
         >
           <div
-            class="LoadingSpinner__Spinner-eu7nmw-1 guNFsv"
+            class="LoadingSpinner__Spinner-eu7nmw-1 sHZX"
           />
           <div
-            class="LoadingSpinner__Spinner-eu7nmw-1 LoadingSpinner__SpinnerNext-eu7nmw-2 jmfYIs"
+            class="LoadingSpinner__Spinner-eu7nmw-1 LoadingSpinner__SpinnerNext-eu7nmw-2 daPQQA"
           />
         </div>
       </div>

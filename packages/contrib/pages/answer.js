@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import Editor from "../src/components/Editor";
 import Idcc from "../src/elements/Idcc";
+import SavingSpinner from "../src/elements/SavingSpinner";
 import Tag from "../src/elements/Tag";
 import Title from "../src/elements/Title";
 import Main from "../src/layouts/Main";
@@ -29,6 +30,14 @@ const ContentEditor = styled(Editor)`
   flex-grow: 1;
   padding: 1rem;
 `;
+const ContentInfo = styled(Flex)`
+  bottom: 1rem;
+  color: #888888;
+  font-size: 0.8rem;
+  position: absolute;
+  right: 1.75rem;
+  width: 15.5rem;
+`;
 
 const SideBar = styled(Flex)`
   background-color: #d7d7d7;
@@ -48,7 +57,8 @@ export default class extends React.Component {
 
     this.state = {
       answerTags: [],
-      isLoading: true
+      isLoading: true,
+      isSaving: false
     };
 
     this.answerValue = "";
@@ -105,14 +115,20 @@ export default class extends React.Component {
     });
   }
 
-  _saveAnswerValue(value) {
+  async _saveAnswerValue(value) {
+    this.setState({ isSaving: true });
+
     const uri = `/answers?id=eq.${this.props.id}`;
     const data = { value };
 
-    this.axios.patch(uri, data).catch(console.warn);
+    await this.axios.patch(uri, data).catch(console.warn);
+
+    this.setState({ isSaving: false });
   }
 
-  _insertAnswerTag(tagId) {
+  async _insertAnswerTag(tagId) {
+    this.setState({ isSaving: true });
+
     const uri = `/answers_tags`;
     const data = {
       // id: 1,
@@ -120,7 +136,9 @@ export default class extends React.Component {
       tag_id: tagId
     };
 
-    this.axios.post(uri, data).catch(console.warn);
+    await this.axios.post(uri, data).catch(console.warn);
+
+    this.setState({ isSaving: false });
   }
 
   deleteAnswerTag(tagId) {
@@ -174,6 +192,12 @@ export default class extends React.Component {
             defaultValue={this.originalAnswer.value}
             onChange={this.saveAnswerValue}
           />
+          {this.state.isSaving && (
+            <ContentInfo alignItems="center" justifyContent="space-between">
+              <SavingSpinner color="#888888" size="26" />
+              Sauvegarde automatique en cours…
+            </ContentInfo>
+          )}
         </Content>
         <SideBar width={2 / 5} flexDirection="column">
           <Flex flexDirection="column">
