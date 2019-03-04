@@ -16,20 +16,21 @@ export default class Index extends React.Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    this.axios = customAxios();
+
     const select = "select=*,question(value),labor_agreement(idcc,name)";
     const filter = "labor_agreement.idcc=in.(0016,1351,1596,1597,3043)";
-    customAxios()
-      .get(`http://localhost:3200/answers?${select}&${filter}`)
-      .then(({ data }) => {
-        this.setState({
-          answers: data.filter(
-            ({ labor_agreement }) => labor_agreement !== null
-          ),
-          isLoading: false
-        });
-      })
-      .catch(console.warn);
+
+    try {
+      const { data } = await this.axios.get(`/answers?${select}&${filter}`);
+      this.setState({
+        answers: data.filter(({ labor_agreement }) => labor_agreement !== null),
+        isLoading: false
+      });
+    } catch (err) {
+      if (err !== undefined) console.warn(err);
+    }
   }
 
   editAnswer(answerId) {
