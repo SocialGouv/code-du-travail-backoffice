@@ -15,16 +15,16 @@ import makeApiFilter from "../src/lib/makeApiFilter";
 import "../node_modules/medium-editor/dist/css/medium-editor.css";
 import "../node_modules/medium-editor/dist/css/themes/beagle.css";
 
-const Label = styled.div`
+const Content = styled(Flex)`
+  background-color: #f3f3f3;
+`;
+const ContentLabel = styled.span`
   color: #c2c2c2;
   font-size: 0.8rem;
   font-weight: 600;
   margin-left: 1rem;
   margin-top: 1rem;
-`;
-
-const Content = styled(Flex)`
-  background-color: #f3f3f3;
+  user-select: none;
 `;
 const ContentEditor = styled(Editor)`
   flex-grow: 1;
@@ -49,6 +49,7 @@ const SideBarTitle = styled.p`
   font-size: 0.8rem;
   margin: 1rem 0 0.75rem;
   text-transform: uppercase;
+  user-select: none;
 `;
 
 export default class extends React.Component {
@@ -65,8 +66,9 @@ export default class extends React.Component {
     this.originalAnswer = null;
     this.tags = [];
 
-    this.insertAnswerTag = debounce(this._insertAnswerTag.bind(this), 1000);
-    this.saveAnswerValue = debounce(this._saveAnswerValue.bind(this), 1000);
+    this.deleteAnswerTag = debounce(this._deleteAnswerTag.bind(this), 500);
+    this.insertAnswerTag = debounce(this._insertAnswerTag.bind(this), 500);
+    this.saveAnswerValue = debounce(this._saveAnswerValue.bind(this), 500);
   }
 
   static getInitialProps({ query: { id } }) {
@@ -141,13 +143,17 @@ export default class extends React.Component {
     this.setState({ isSaving: false });
   }
 
-  deleteAnswerTag(tagId) {
+  async _deleteAnswerTag(tagId) {
+    this.setState({ isSaving: true });
+
     const uri = makeApiFilter("/answers_tags", {
       answer_id: this.props.id,
       tag_id: tagId
     });
 
-    this.axios.delete(uri).catch(console.warn);
+    await this.axios.delete(uri).catch(console.warn);
+
+    this.setState({ isSaving: false });
   }
 
   getTagsList(tagCategory) {
@@ -171,18 +177,11 @@ export default class extends React.Component {
   render() {
     if (this.state.isLoading) return <Main isLoading />;
 
-    const contractTypes = this.getTagsList("contract_type");
-    const distinctiveIdentities = this.getTagsList("distinctive_identity");
-    const targets = this.getTagsList("target");
-    const themes = this.getTagsList("theme");
-    const workScheduleTypes = this.getTagsList("work_schedule_type");
-    const workTimes = this.getTagsList("work_time");
-
     return (
       <Main isHorizontal>
         <Content flexDirection="column" width={3 / 5}>
           <Flex alignItems="flex-start" justifyContent="space-between">
-            <Label>Brouillon</Label>
+            <ContentLabel>Brouillon</ContentLabel>
             <Idcc data={this.originalAnswer.labor_agreement} />
           </Flex>
           <Title style={{ marginTop: 0 }}>
@@ -202,32 +201,36 @@ export default class extends React.Component {
         <SideBar width={2 / 5} flexDirection="column">
           <Flex flexDirection="column">
             <SideBarTitle>Thèmes</SideBarTitle>
-            <Flex flexWrap="wrap">{themes}</Flex>
+            <Flex flexWrap="wrap">{this.getTagsList("theme")}</Flex>
           </Flex>
 
           <Flex flexDirection="column">
             <SideBarTitle>Type de contrat</SideBarTitle>
-            <Flex flexWrap="wrap">{contractTypes}</Flex>
+            <Flex flexWrap="wrap">{this.getTagsList("contract_type")}</Flex>
           </Flex>
 
           <Flex flexDirection="column">
             <SideBarTitle>Cible</SideBarTitle>
-            <Flex flexWrap="wrap">{targets}</Flex>
+            <Flex flexWrap="wrap">{this.getTagsList("target")}</Flex>
           </Flex>
 
           <Flex flexDirection="column">
             <SideBarTitle>Durée du travail</SideBarTitle>
-            <Flex flexWrap="wrap">{workTimes}</Flex>
+            <Flex flexWrap="wrap">{this.getTagsList("work_time")}</Flex>
           </Flex>
 
           <Flex flexDirection="column">
             <SideBarTitle>{"Type d'horaires"}</SideBarTitle>
-            <Flex flexWrap="wrap">{workScheduleTypes}</Flex>
+            <Flex flexWrap="wrap">
+              {this.getTagsList("work_schedule_type")}
+            </Flex>
           </Flex>
 
           <Flex flexDirection="column">
             <SideBarTitle>Particularismes</SideBarTitle>
-            <Flex flexWrap="wrap">{distinctiveIdentities}</Flex>
+            <Flex flexWrap="wrap">
+              {this.getTagsList("distinctive_identity")}
+            </Flex>
           </Flex>
         </SideBar>
       </Main>
