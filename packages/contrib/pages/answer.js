@@ -1,3 +1,4 @@
+import debounce from "lodash.debounce";
 import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
@@ -54,7 +55,8 @@ export default class extends React.Component {
     this.originalAnswer = null;
     this.tags = [];
 
-    this.saveAnswerValue = this.saveAnswerValue.bind(this);
+    this.insertAnswerTag = debounce(this._insertAnswerTag.bind(this), 1000);
+    this.saveAnswerValue = debounce(this._saveAnswerValue.bind(this), 1000);
   }
 
   static getInitialProps({ query: { id } }) {
@@ -103,14 +105,14 @@ export default class extends React.Component {
     });
   }
 
-  saveAnswerValue(value) {
+  _saveAnswerValue(value) {
     const uri = `/answers?id=eq.${this.props.id}`;
     const data = { value };
 
     this.axios.patch(uri, data).catch(console.warn);
   }
 
-  insertAnswerTag(tagId) {
+  _insertAnswerTag(tagId) {
     const uri = `/answers_tags`;
     const data = {
       // id: 1,
