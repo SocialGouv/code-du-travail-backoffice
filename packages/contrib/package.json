@@ -11,7 +11,7 @@
     "test:lint": "eslint .",
     "test:snap": "yarn test:unit --updateSnapshot",
     "test:unit": "jest",
-    "test:watch": "yarn test:unit --watch"
+    "test:watch": "yarn test:unit --watch --runInBand"
   },
   "dependencies": {
     "@zeit/next-css": "1.0.1",
