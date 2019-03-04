@@ -3,7 +3,7 @@ import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
-import Spinner from "../elements/Spinner";
+import LoadingSpinner from "../elements/LoadingSpinner";
 import Header from "./Header";
 
 const Container = styled(Flex)`
@@ -29,7 +29,7 @@ export default ({ children, isHorizontal, isLoading }) => (
       <Header />
       {Boolean(isLoading) ? (
         <Content alignItems="center" justifyContent="center">
-          <Spinner />
+          <LoadingSpinner />
         </Content>
       ) : (
         <Content flexDirection={Boolean(isHorizontal) ? "row" : "column"}>

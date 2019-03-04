@@ -41,13 +41,13 @@ exports[`[Contrib] pages/<Index /> should render 1`] = `
         class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 fIdmfv"
       >
         <div
-          class="Spinner__Container-nm5wf5-0 cMcWeX"
+          class="LoadingSpinner__Container-eu7nmw-0 pqfNO"
         >
           <div
-            class="Spinner-nm5wf5-1 cCjJqj"
+            class="LoadingSpinner__Spinner-eu7nmw-1 guNFsv"
           />
           <div
-            class="Spinner-nm5wf5-1 Spinner__SpinnerNext-nm5wf5-2 hUyNhV"
+            class="LoadingSpinner__Spinner-eu7nmw-1 LoadingSpinner__SpinnerNext-eu7nmw-2 jmfYIs"
           />
         </div>
       </div>

@@ -1,3 +1,5 @@
+// https://loading.io/css/
+
 import React from "react";
 import styled, { keyframes } from "styled-components";
 
@@ -10,26 +12,26 @@ const Container = styled.div`
 
 const ripple = keyframes`
   0% {
-    top: 28px;
-    left: 28px;
-    width: 0;
     height: 0;
+    left: 28px;
     opacity: 1;
+    top: 28px;
+    width: 0;
   }
   100% {
-    top: -1px;
-    left: -1px;
-    width: 58px;
     height: 58px;
+    left: -1px;
     opacity: 0;
+    top: -1px;
+    width: 58px;
   }
 `;
 const Spinner = styled.div`
-  position: absolute;
+  animation: ${ripple} 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  border-radius: 50%;
   border: 4px solid #666666;
   opacity: 1;
-  border-radius: 50%;
-  animation: ${ripple} 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  position: absolute;
 `;
 const SpinnerNext = styled(Spinner)`
   animation-delay: -0.5s;
