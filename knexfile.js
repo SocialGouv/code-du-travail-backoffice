@@ -1,19 +1,24 @@
-require('dotenv').config({ path: __dirname + '/.env' })
+require("dotenv").config({ path: `${__dirname}/.env` })
 
 module.exports = {
   development: {
-    client: 'postgresql',
+    client: "postgresql",
     connection: process.env.POSTGRE_URI,
     migrations: {
-      tableName: 'knex_migrations',
+      directory: `${__dirname}/db/migrations`,
+      tableName: "migrations"
     },
+    seeds: {
+      directory: `${__dirname}/db/seeds`
+    }
   },
 
   production: {
-    client: 'postgresql',
+    client: "postgresql",
     connection: process.env.POSTGRE_URI,
     migrations: {
-      tableName: 'knex_migrations',
-    },
-  },
-}
+      directory: `${__dirname}/db/migrations`,
+      tableName: "migrations"
+    }
+  }
+};
