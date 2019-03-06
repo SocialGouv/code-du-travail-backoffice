@@ -7,13 +7,9 @@ describe("[Contrib] blocks/<Answer />", () => {
   const props = {
     data: {
       id: "12345678-9abc-4def-0123-456789abcdef",
-      labor_agreement: {
-        idcc: "1234",
-        name: "A Labor Agreement Name"
-      },
-      question: {
-        value: "Who knows?"
-      }
+      idcc: "1234",
+      agreement: "A Labor Agreement Name",
+      question: "Who knows?"
     },
     label: "A label",
     onClick

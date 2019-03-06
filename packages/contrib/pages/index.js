@@ -19,13 +19,10 @@ export default class Index extends React.Component {
   async componentDidMount() {
     this.axios = customAxios();
 
-    const select = "select=*,question(value),labor_agreement(idcc,name)";
-    const filter = "labor_agreement.idcc=in.(0016,1351,1596,1597,3043)";
-
     try {
-      const { data } = await this.axios.get(`/answers?${select}&${filter}`);
+      const { data: answers } = await this.axios.get(`/my_answers`);
       this.setState({
-        answers: data.filter(({ labor_agreement }) => labor_agreement !== null),
+        answers,
         isLoading: false
       });
     } catch (err) {

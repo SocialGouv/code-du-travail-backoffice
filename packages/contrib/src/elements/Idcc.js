@@ -22,9 +22,9 @@ const Tooltip = styled(ReactTooltip)`
   width: 360px;
 `;
 
-export default ({ data }) => (
-  <Container data-tip={data.name}>
-    {data.idcc}
+export default ({ code, name }) => (
+  <Container data-tip={name}>
+    {code}
     <Tooltip />
   </Container>
 );

@@ -22,8 +22,8 @@ export default ({ data, label, onClick }) => (
   <Container onClick={onClick}>
     <Flex justifyContent="space-between">
       <Label>{label}</Label>
-      <Idcc data={data.labor_agreement} />
+      <Idcc code={data.idcc} name={data.agreement} />
     </Flex>
-    {data.question.value}
+    {data.question}
   </Container>
 );

@@ -78,23 +78,19 @@ export default class extends React.Component {
   componentDidMount() {
     this.axios = customAxios();
 
-    const answersFilter = `id=eq.${this.props.id}`;
-    const answersSelect = "select=*,question(value),labor_agreement(idcc,name)";
-    const answersTagsFilter = `answer_id=eq.${this.props.id}`;
-    const answersTagsSelect = "select=tag_id";
+    const myAnswersFilter = `id=eq.${this.props.id}`;
 
     Promise.all([
       this.axios.get(`/tags`),
-      this.axios.get(`/answers?${answersFilter}&${answersSelect}`),
-      this.axios.get(`/answers_tags?${answersTagsFilter}&${answersTagsSelect}`)
+      this.axios.get(`/my_answers?${myAnswersFilter}`)
     ])
-      .then(([tagsRes, answersRes, answersTagsRes]) => {
+      .then(([tagsRes, answersRes]) => {
         this.originalAnswer = answersRes.data[0];
         this.answerValue = answersRes.data[0].value;
         this.tags = tagsRes.data;
 
         this.setState({
-          answerTags: answersTagsRes.data.map(({ tag_id }) => tag_id),
+          answerTags: this.originalAnswer.tags,
           isLoading: false
         });
       })
@@ -182,10 +178,13 @@ export default class extends React.Component {
         <Content flexDirection="column" width={3 / 5}>
           <Flex alignItems="flex-start" justifyContent="space-between">
             <ContentLabel>Brouillon</ContentLabel>
-            <Idcc data={this.originalAnswer.labor_agreement} />
+            <Idcc
+              code={this.originalAnswer.idcc}
+              name={this.originalAnswer.agreement}
+            />
           </Flex>
           <Title style={{ marginTop: 0 }}>
-            {this.originalAnswer.question.value}
+            {this.originalAnswer.question}
           </Title>
           <ContentEditor
             defaultValue={this.originalAnswer.value}
