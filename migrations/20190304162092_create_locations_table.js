@@ -14,7 +14,7 @@ exports.up = async knex => {
   await knex.raw('GRANT SELECT ON api.locations TO contributor')
   await knex.raw('GRANT SELECT, INSERT, UPDATE, DELETE ON api.locations TO administrator')
 
-  await knex.schema.createTable('locations_agreements', table => {
+  await knex.schema.withSchema('api').createTable('locations_agreements', table => {
     table.increments()
 
     table.uuid('location_id')
@@ -24,17 +24,17 @@ exports.up = async knex => {
     table.foreign('agreement_id').references('id').on('api.agreements')
   })
 
-  await knex.raw('GRANT SELECT ON locations_agreements TO contributor')
-  await knex.raw('GRANT SELECT, INSERT, UPDATE, DELETE ON locations_agreements TO administrator')
-  await knex.raw('GRANT USAGE, SELECT ON SEQUENCE locations_agreements_id_seq TO administrator')
+  await knex.raw('GRANT SELECT ON api.locations_agreements TO contributor')
+  await knex.raw('GRANT SELECT, INSERT, UPDATE, DELETE ON api.locations_agreements TO administrator')
+  await knex.raw('GRANT USAGE, SELECT ON SEQUENCE api.locations_agreements_id_seq TO administrator')
 }
 
 exports.down = async knex => {
-  await knex.raw('REVOKE USAGE, SELECT ON SEQUENCE locations_agreements_id_seq FROM administrator')
-  await knex.raw('REVOKE SELECT, INSERT, UPDATE, DELETE ON locations_agreements FROM administrator')
-  await knex.raw('REVOKE SELECT ON locations_agreements FROM contributor')
+  await knex.raw('REVOKE USAGE, SELECT ON SEQUENCE api.locations_agreements_id_seq FROM administrator')
+  await knex.raw('REVOKE SELECT, INSERT, UPDATE, DELETE ON api.locations_agreements FROM administrator')
+  await knex.raw('REVOKE SELECT ON api.locations_agreements FROM contributor')
 
-  await knex.schema.dropTable('locations_agreements')
+  await knex.schema.withSchema("api").dropTable("locations_agreements");
 
   await knex.raw('REVOKE SELECT, INSERT, UPDATE, DELETE ON api.locations FROM administrator')
   await knex.raw('REVOKE SELECT ON api.locations FROM contributor')
