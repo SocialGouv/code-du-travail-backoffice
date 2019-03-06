@@ -183,9 +183,7 @@ export default class extends React.Component {
               name={this.originalAnswer.agreement}
             />
           </Flex>
-          <Title style={{ marginTop: 0 }}>
-            {this.originalAnswer.question}
-          </Title>
+          <Title isFisrt>{this.originalAnswer.question}</Title>
           <ContentEditor
             defaultValue={this.originalAnswer.value}
             onChange={this.saveAnswerValue}

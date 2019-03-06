@@ -38,19 +38,28 @@ exports[`[Contrib] pages/<Index /> should render 1`] = `
         </div>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 fIdmfv"
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 lhyucv"
       >
         <div
-          class="LoadingSpinner__Container-eu7nmw-0 dEMrTz"
+          class="sc-bdVaJa sc-bwzfXH pages__Content-sht9xz-0 iBpKAy"
+          width="1"
         >
-          <div
-            class="LoadingSpinner__Spinner-eu7nmw-1 sHZX"
-            color="#666666"
-          />
-          <div
-            class="LoadingSpinner__Spinner-eu7nmw-1 LoadingSpinner__SpinnerNext-eu7nmw-2 daPQQA"
-            color="#666666"
-          />
+          <p
+            class="Title-r6qlw8-0 gmywtA"
+          >
+            Mes réponses en cours de rédaction
+          </p>
+          <p>
+            Aucune réponse trouvée.
+          </p>
+          <p
+            class="Title-r6qlw8-0 kDtypV"
+          >
+            Réponses à rédiger
+          </p>
+          <p>
+            Aucune réponse trouvée.
+          </p>
         </div>
       </div>
     </div>

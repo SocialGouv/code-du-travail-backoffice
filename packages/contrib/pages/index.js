@@ -1,18 +1,24 @@
 import Router from "next/router";
 import React from "react";
 import { Flex } from "rebass";
+import styled from "styled-components";
 
 import Answer from "../src/blocks/Answer";
 import Title from "../src/elements/Title";
 import Main from "../src/layouts/Main";
 import customAxios from "../src/lib/customAxios";
 
+const Content = styled(Flex)`
+  padding: 1rem 1rem;
+`;
+
 export default class Index extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      answers: []
+      answers: [],
+      isLoading: true
     };
   }
 
@@ -35,30 +41,35 @@ export default class Index extends React.Component {
   }
 
   getAnswers(filter, isDraft) {
-    return this.state.answers
-      .filter(filter)
-      .slice(0, 10)
-      .map(answer => (
-        <Answer
-          data={answer}
-          label={isDraft ? "Brouillon" : "À rédiger"}
-          key={answer.id}
-          onClick={() => this.editAnswer(answer.id)}
-        />
-      ));
+    const answers = this.state.answers.filter(filter);
+
+    return answers.length === 0 ? (
+      <p>Aucune réponse trouvée.</p>
+    ) : (
+      answers
+        .slice(0, 10)
+        .map(answer => (
+          <Answer
+            data={answer}
+            label={isDraft ? "Brouillon" : "À rédiger"}
+            key={answer.id}
+            onClick={() => this.editAnswer(answer.id)}
+          />
+        ))
+    );
   }
 
   render() {
-    if (this.state.answers.length === 0) return <Main isLoading />;
+    if (this.state.isLoading === 0) return <Main isLoading />;
 
     return (
       <Main>
-        <Flex flexDirection="column" width={1}>
-          <Title first>Mes réponses en cours de rédaction</Title>
+        <Content flexDirection="column" width={1}>
+          <Title isFirst>Mes réponses en cours de rédaction</Title>
           {this.getAnswers(({ value }) => value.length > 0, true)}
           <Title>Réponses à rédiger</Title>
           {this.getAnswers(({ value }) => value.length === 0, false)}
-        </Flex>
+        </Content>
       </Main>
     );
   }
