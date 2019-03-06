@@ -1,5 +1,6 @@
 {
   "extends": [
     "github>SocialGouv/renovate-config"
-  ]
+  ],
+  "rebaseStalePrs": true
 }
