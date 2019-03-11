@@ -43,19 +43,25 @@ CREATE FUNCTION
       RAISE invalid_password USING MESSAGE = 'Invalid email and/or password.';
     END IF;
 
-    -- Select the user id & location name from the logged user and assign it to _user_id & _location_name record variables.
-    -- https://www.postgresql.org/docs/9.6/plpgsql-statements.html#PLPGSQL-STATEMENTS-SQL-ONEROW
+    -- Select the user id & location name from the logged user and assign it to
+    -- _user_id & _location_name record variables.
+    -- https://www.postgresql.org/docs/current/plpgsql-statements.html#PLPGSQL-STATEMENTS-SQL-ONEROW
     SELECT u.id, u.name, l.name INTO _user_id, _user_name, _location_name
     FROM auth.users u
     INNER JOIN api.locations l ON u.location_id = l.id
     WHERE u.email = login.email;
 
-    -- Generate the JWT token and return it as a within a stringified JSON object
-    -- with these properties: role, id, email & location_id.
+    -- Generate the JWT token and return it as a within a stringified JSON
+    -- object with these properties: role, id, email & location_id.
     SELECT sign(row_to_json(r), getJwtSecret()) AS token
     FROM (
-      SELECT _role AS role, _user_id AS id, _user_name AS name, _location_name AS location,
-      extract(epoch FROM now())::integer + 60*60 AS exp
+      SELECT
+        _role AS role,
+        _user_id AS id,
+        _user_name AS name,
+        _location_name AS location,
+        -- Set the JWT expiration date to 30 days from now:
+        extract(epoch FROM now())::integer + 2592000 AS exp
     ) r
     INTO _result;
 
