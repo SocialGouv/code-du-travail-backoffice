@@ -9,7 +9,8 @@ import Main from "../src/layouts/Main";
 import customAxios from "../src/lib/customAxios";
 
 const Content = styled(Flex)`
-  padding: 1rem 1rem;
+  overflow-y: auto;
+  padding: 0 1rem 0.5rem;
 `;
 
 export default class Index extends React.Component {
@@ -65,7 +66,7 @@ export default class Index extends React.Component {
     return (
       <Main>
         <Content flexDirection="column" width={1}>
-          <Title isFirst>Mes réponses en cours de rédaction</Title>
+          <Title>Mes réponses en cours de rédaction</Title>
           {this.getAnswers(({ value }) => value.length > 0, true)}
           <Title>Réponses à rédiger</Title>
           {this.getAnswers(({ value }) => value.length === 0, false)}
