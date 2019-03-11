@@ -1,5 +1,6 @@
 import { omit } from "ramda";
 import React from "react";
+import { Flex } from "rebass";
 
 import Markdown from "../lib/Markdown";
 
@@ -57,13 +58,13 @@ export default class Editor extends React.Component {
     const props = omit(["defaultValue", "onChange"], this.props);
 
     return (
-      <div ref={el => (this.$container = el)}>
+      <Flex ref={el => (this.$container = el)} {...props}>
         <div
           dangerouslySetInnerHTML={this.getHtmlSource()}
           ref={el => (this.$editor = el)}
-          {...props}
+          width={1}
         />
-      </div>
+      </Flex>
     );
   }
 }
