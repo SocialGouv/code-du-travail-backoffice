@@ -41,11 +41,11 @@ exports[`[Contrib] pages/<Index /> should render 1`] = `
         class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 lhyucv"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH pages__Content-sht9xz-0 iBpKAy"
+          class="sc-bdVaJa sc-bwzfXH pages__Content-sht9xz-0 xAtXf"
           width="1"
         >
           <p
-            class="Title-r6qlw8-0 gmywtA"
+            class="Title-r6qlw8-0 kDtypV"
           >
             Mes réponses en cours de rédaction
           </p>
