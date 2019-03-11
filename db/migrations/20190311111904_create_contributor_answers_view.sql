@@ -1,6 +1,10 @@
 -------------------------------------- UP --------------------------------------
 
-CREATE TYPE contributor_answers_references AS (value text, url text);
+CREATE TYPE contributor_answers_references AS (
+  category answer_reference_category,
+  value text,
+  url text
+);
 
 CREATE VIEW api.contributor_answers AS
 SELECT
@@ -12,8 +16,10 @@ SELECT
     array_remove(array_agg(tags.tag_id), NULL) AS tags,
     -- https://stackoverflow.com/a/34163623/2736233
     array_remove(
-      array_agg((refs.value, refs.url)::contributor_answers_references),
-      (NULL, NULL)::contributor_answers_references
+      array_agg(
+        (refs.category, refs.value, refs.url)::contributor_answers_references
+      ),
+      (NULL, NULL, NULL)::contributor_answers_references
     ) AS references
   FROM api.answers answers
   LEFT JOIN api.questions questions ON questions.id = answers.question_id
