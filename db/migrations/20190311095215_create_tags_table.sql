@@ -1,5 +1,13 @@
 -------------------------------------- UP --------------------------------------
 
+/*
+  - `contract_type`: Type de contrat (CDI, CDD...)
+  - `distinctive_identity`: Particularisme (Mayotte, Alsace-Moselle...)
+  - `target`: Population concernée (employés, employeurs...)
+  - `theme`: Thème général (embauche, licenciement...)
+  - `work_schedule_type`: Type d'horaires  (collectif, individuel, forfait...)
+  - `work_time`: Temps de travail (temps plein, temps partiel...)
+*/
 CREATE TYPE tag_category AS ENUM (
   'contract_type',
   'distinctive_identity',
@@ -11,8 +19,8 @@ CREATE TYPE tag_category AS ENUM (
 
 CREATE TABLE api.tags(
   id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
-  value varchar(255) UNIQUE NOT NULL,
   category tag_category NOT NULL,
+  value varchar(255) UNIQUE NOT NULL,
   created_at timestamptz NOT NULL DEFAULT NOW(),
   updated_at timestamptz NOT NULL DEFAULT NOW()
 );
