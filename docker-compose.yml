@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  postgre:
+  db:
     build: ./db
     ports:
       - 5432:5432
@@ -10,6 +10,8 @@ services:
       PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
+    volumes:
+     - postgre-data:/var/lib/postgresql/data
 
   # https://postgrest.org/en/stable/install.html#containerized-postgrest-and-db-with-docker-compose
   server:
@@ -17,11 +19,23 @@ services:
     ports:
       - 3200:3000
     links:
-      - postgre:db
+      - db:db
     environment:
       PGRST_DB_ANON_ROLE: ${PGRST_DB_ANON_ROLE}
       PGRST_DB_SCHEMA: ${PGRST_DB_SCHEMA}
       PGRST_DB_URI: postgres://postgres@db:5432/cdtn
       PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
     depends_on:
-      - postgre
+      - db
+
+  master:
+    build: .
+    environment:
+      PGRST_DB_URI: postgres://postgres@db:5432/cdtn
+    links:
+      - db:db
+    depends_on:
+      - db
+
+volumes:
+  postgre-data:
