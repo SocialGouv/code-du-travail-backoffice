@@ -26,7 +26,7 @@ export default class Index extends React.Component {
     this.axios = customAxios();
 
     try {
-      const { data: answers } = await this.axios.get(`/my_answers`);
+      const { data: answers } = await this.axios.get(`/contributor_answers`);
       this.setState({
         answers,
         isLoading: false
