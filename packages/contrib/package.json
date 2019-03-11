@@ -9,7 +9,7 @@
     "start": "NODE_ENV=production node ./server.js",
     "test": "yarn test:lint && yarn test:unit",
     "test:lint": "eslint .",
-    "test:snap": "yarn test:unit --updateSnapshot",
+    "test:update": "yarn test:unit --updateSnapshot",
     "test:unit": "jest",
     "test:watch": "yarn test:unit --watch --runInBand"
   },
