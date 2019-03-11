@@ -2,11 +2,14 @@ version: "3"
 
 services:
   postgre:
-    image: postgres:11
+    build: ./db
     ports:
       - 5432:5432
     environment:
-      POSTGRES_DB: cdtn
+      # The JWT secret is used whithin the api.login() function:
+      PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
 
   # https://postgrest.org/en/stable/install.html#containerized-postgrest-and-db-with-docker-compose
   server:
@@ -16,10 +19,9 @@ services:
     links:
       - postgre:db
     environment:
+      PGRST_DB_ANON_ROLE: ${PGRST_DB_ANON_ROLE}
+      PGRST_DB_SCHEMA: ${PGRST_DB_SCHEMA}
       PGRST_DB_URI: postgres://postgres@db:5432/cdtn
-      PGRST_DB_SCHEMA: api
       PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
-      # In production, this role should not be the same as the one used for the connection.
-      PGRST_DB_ANON_ROLE: anonymous
     depends_on:
       - postgre
