@@ -9,8 +9,14 @@ CREATE TABLE api.answers(
   parent_id uuid REFERENCES api.answers(id),
   question_id uuid NOT NULL REFERENCES api.questions(id),
   agreement_id uuid REFERENCES api.agreements(id),
-  editor_id uuid REFERENCES auth.users(id)
+  -- Contributor id (updated once a contributor starts updating an answer):
+  user_id uuid REFERENCES auth.users(id)
 );
+
+CREATE TRIGGER update_user_id
+  BEFORE UPDATE ON api.answers
+  FOR EACH ROW
+  EXECUTE PROCEDURE set_user();
 
 CREATE TRIGGER update_updated_at
   BEFORE UPDATE ON api.answers
