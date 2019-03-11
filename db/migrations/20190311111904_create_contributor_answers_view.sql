@@ -29,8 +29,8 @@ SELECT
   WHERE
     answers.agreement_id = ANY(get_current_user_agreements()::uuid[])
     AND (
-      answers.editor_id = current_setting('request.jwt.claim.id', true)::uuid
-      OR answers.editor_id IS NULL
+      answers.user_id = current_setting('request.jwt.claim.id', true)::uuid
+      OR answers.user_id IS NULL
     )
   GROUP BY
     answers.id,
