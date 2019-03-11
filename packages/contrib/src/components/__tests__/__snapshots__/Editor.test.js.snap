@@ -2,7 +2,10 @@
 
 exports[`<Editor /> should match snapshot 1`] = `
 <div>
-  <div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH pjOvZ"
+    label="A label"
+  >
     <div
       aria-multiline="true"
       class="medium-editor-element"
@@ -10,9 +13,9 @@ exports[`<Editor /> should match snapshot 1`] = `
       data-medium-editor-editor-index="1"
       data-medium-editor-element="true"
       data-placeholder="Commencer ici votre réponse."
-      label="A label"
       role="textbox"
       spellcheck="false"
+      width="1"
     >
       <h2>
         Guerre et Paix
