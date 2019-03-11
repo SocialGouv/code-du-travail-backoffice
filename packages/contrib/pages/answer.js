@@ -17,18 +17,18 @@ import "../node_modules/medium-editor/dist/css/themes/beagle.css";
 
 const Content = styled(Flex)`
   background-color: #f3f3f3;
+  padding-left: 1rem;
 `;
 const ContentLabel = styled.span`
   color: #c2c2c2;
   font-size: 0.8rem;
   font-weight: 600;
-  margin-left: 1rem;
   margin-top: 1rem;
   user-select: none;
 `;
 const ContentEditor = styled(Editor)`
   flex-grow: 1;
-  padding: 1rem;
+  padding: 0 1rem 1rem 0;
 `;
 const ContentInfo = styled(Flex)`
   bottom: 1rem;
@@ -57,6 +57,7 @@ export default class extends React.Component {
     super(props);
 
     this.state = {
+      answerReferences: [],
       answerTags: [],
       isLoading: true,
       isSaving: false
@@ -90,6 +91,7 @@ export default class extends React.Component {
         this.tags = tagsRes.data;
 
         this.setState({
+          answerReferences: this.originalAnswer.references,
           answerTags: this.originalAnswer.tags,
           isLoading: false
         });
@@ -183,7 +185,7 @@ export default class extends React.Component {
               name={this.originalAnswer.agreement}
             />
           </Flex>
-          <Title isFisrt>{this.originalAnswer.question}</Title>
+          <Title isFirst>{this.originalAnswer.question}</Title>
           <ContentEditor
             defaultValue={this.originalAnswer.value}
             onChange={this.saveAnswerValue}
