@@ -6,6 +6,7 @@
   "scripts": {
     "build": "lerna run build",
     "db:migrate": "knex migrate:latest",
+    "db:migrate:make": "node ./scripts/db/generateMigration.js",
     "db:seed": "knex seed:run",
     "dev": "lerna run dev --parallel",
     "setup": "lerna bootstrap && node ./scripts/setup",
