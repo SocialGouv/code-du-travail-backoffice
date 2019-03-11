@@ -1,7 +1,17 @@
 -------------------------------------- UP --------------------------------------
 
+/*
+  - `labor_code`: Article du Code du travail
+*/
+CREATE TYPE answer_reference_category AS ENUM (
+  'labor_code'
+);
+
 CREATE TABLE api.answers_references(
   id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+  -- Nullable since we may have all kinds of sources for a given reference that
+  -- are not listed whithin the `answer_reference_category` type:
+  category answer_reference_category,
   value text NOT NULL,
   url text,
   created_at timestamptz NOT NULL DEFAULT NOW(),
@@ -26,3 +36,5 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON api.answers_references TO administrator;
 ------------------------------------- DOWN -------------------------------------
 
 DROP TABLE api.answers_references;
+
+DROP TYPE answer_reference_category;
