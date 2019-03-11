@@ -13,6 +13,7 @@
     "start": "lerna run start --parallel",
     "test": "lerna run test",
     "test:e2e": "node ./__tests__",
+    "test:update": "lerna run test:update",
     "test:watch": "lerna run test:watch --parallel"
   },
   "dependencies": {
