@@ -82,7 +82,7 @@ export default class extends React.Component {
 
     Promise.all([
       this.axios.get(`/tags`),
-      this.axios.get(`/my_answers?${myAnswersFilter}`)
+      this.axios.get(`/contributor_answers?${myAnswersFilter}`)
     ])
       .then(([tagsRes, answersRes]) => {
         this.originalAnswer = answersRes.data[0];
