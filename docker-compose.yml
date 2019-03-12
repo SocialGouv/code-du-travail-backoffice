@@ -14,7 +14,7 @@ services:
      - postgre-data:/var/lib/postgresql/data
 
   # https://postgrest.org/en/stable/install.html#containerized-postgrest-and-db-with-docker-compose
-  server:
+  api:
     image: postgrest/postgrest
     ports:
       - 3200:3000
