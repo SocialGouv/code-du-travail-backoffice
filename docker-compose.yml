@@ -33,7 +33,7 @@ services:
     ports:
       - ${WEB_PORT}:${WEB_PORT}
     environment:
-      API_PORT: ${API_PORT}
+      API_URI: ${API_URI}
       WEB_PORT: ${WEB_PORT}
 
   master:
