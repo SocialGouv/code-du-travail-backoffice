@@ -4,7 +4,7 @@ const withCss = require("@zeit/next-css");
 module.exports = withCss({
   // https://github.com/zeit/next.js#runtime-configuration
   publicRuntimeConfig: {
-    API_URI: `http://localhost:${process.env.API_PORT}`
+    API_URI: process.env.API_URI
   },
 
   webpack: config => ({
