@@ -3,6 +3,8 @@
 CREATE TABLE api.answers(
   id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
   value text NOT NULL,
+  is_draft boolean DEFAULT TRUE,
+  is_published boolean DEFAULT FALSE,
   created_at timestamptz NOT NULL DEFAULT NOW(),
   updated_at timestamptz NOT NULL DEFAULT NOW(),
 
