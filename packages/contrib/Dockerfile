@@ -19,3 +19,4 @@ COPY ./pages /app/pages
 COPY ./src /app/src
 
 RUN yarn build
+RUN yarn start
