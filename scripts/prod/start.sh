@@ -37,7 +37,7 @@ echo "${GREEN}> Waiting for api image to start...${NC}"
 while ! lsof -Pi :$API_PORT -sTCP:LISTEN -t; do sleep 1; done > /dev/null
 
 echo "${GREEN}> Starting web image...${NC}"
-docker-compose up -d web > /dev/null
+docker-compose up --build -d web > /dev/null
 
 echo "${GREEN}> Waiting for web image to start...${NC}"
 while ! lsof -Pi :$WEB_PORT -sTCP:LISTEN -t; do sleep 1; done > /dev/null

@@ -31,7 +31,7 @@ services:
   web:
     build: ./packages/contrib
     ports:
-      - ${WEB_PORT}
+      - ${WEB_PORT}:${WEB_PORT}
     environment:
       API_PORT: ${API_PORT}
       WEB_PORT: ${WEB_PORT}
