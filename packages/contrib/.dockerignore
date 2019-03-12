@@ -1,0 +1,12 @@
+/__mocks__
+/.next
+/coverage
+/node_modules
+
+/.dockerignore
+/.eslintrc.yml
+/.gitignore
+/LICENSE
+/README.md
+
+__tests__
