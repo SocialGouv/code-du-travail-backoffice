@@ -38,7 +38,7 @@ yarn setup
 Dans 2 sessions de terminal differentes:
 
 ```bash
-docker-compose up
+docker-compose up api
 ```
 
 ```bash
