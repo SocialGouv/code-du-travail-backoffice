@@ -1,9 +1,12 @@
 import axios from "axios";
+import getConfig from "next/config";
 import Router from "next/router";
+
+const API_URI = getConfig().publicRuntimeConfig.API_URI;
 
 export default function() {
   const instance = axios.create({
-    baseURL: "http://localhost:3200",
+    baseURL: API_URI,
     headers: {
       Authorization: `Bearer ${sessionStorage.getItem("jwt")}`
     }
