@@ -51,21 +51,5 @@
     "url-loader": "^1.1.2",
     "webpack-merge": "^4.2.1"
   },
-  "jest": {
-    "collectCoverageFrom": [
-      "pages/**/*.js",
-      "src/**/*.js"
-    ],
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|svg|ttf|woff|woff2)$": "<rootDir>/__mocks__/fileTransformer.js",
-      "\\.css$": "identity-obj-proxy"
-    },
-    "modulePathIgnorePatterns": [
-      "<rootDir>/.next/",
-      "<rootDir>/node_modules/",
-      "<rootDir>/package.json",
-      "<rootDir>/yarn.lock"
-    ]
-  },
   "license": "Apache-2.0"
 }
