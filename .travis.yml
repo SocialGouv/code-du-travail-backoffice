@@ -25,8 +25,8 @@ jobs:
         - bash scripts/ci/install_docker_compose.sh
         # We first need to stop the existing Postgre service to free 5432 port:
         - bash scripts/ci/stop_postgre_service.sh
-        # Generate a .env file and migrate+seed Postgre database:
-        - yarn setup
+        # Generate the .env file:
+        - yarn setup --env-only
         # Start Docker Compose & a local server instance (in the background):
         - bash scripts/prod/start.sh
       script:
