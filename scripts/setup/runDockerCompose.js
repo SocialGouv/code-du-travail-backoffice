@@ -1,41 +1,37 @@
-const { spawn } = require('child_process')
+const { spawn } = require("child_process");
 
-module.exports = (onExit) => {
-  const isReady = {
-    postgre: false,
-    server: false,
-  }
-
-  // Attempt to run docker-compose in a child process
+module.exports = async (action, imageName, onExit) => {
   return new Promise(resolve => {
-    const cp = spawn('docker-compose', ['up'] , { cwd: process.cwd() })
+    // Attempt to run docker-compose (for api image) in a child process
+    const args = action === "up"
+      ? ["up", "--force-recreate", imageName]
+      : [action, imageName];
+    const cp = spawn("docker-compose", args, { cwd: process.cwd() });
 
-    cp.stdout.on('data', data => {
-      if (/postgre.*database system is ready to accept connections/.test(String(data))) {
-        isReady.postgre = true
+    cp.stdout.on("data", buff => {
+      const output = String(buff);
+
+      if (action === "up" && imageName === "db") {
+        if (/database system is ready to accept connections/.test(output)) {
+          resolve(cp);
+        }
+
+        if (/db_\d+ exited with code/.test(output)) {
+          cp.kill("SIGINT");
+        }
       }
-      if (/server.*Connection successful/.test(String(data))) {
-        isReady.server = true
+    });
+
+    cp.stderr.on("data", buff => {
+      // console.log(`Error: ${buff}`);
+    });
+
+    cp.on("close", code => {
+      if (code !== null && code !== 0) {
+        console.log(`Error: Docker Compose child process exited with ${code}.`);
       }
 
-      if (isReady.postgre && isReady.server) resolve(cp)
-    })
-
-    cp.stderr.on('data', data => {
-      // Remove non-error logs that are falsely triggering via `stderr`
-      if (/^Creating/.test(String(data))) return
-      if (/is up-to-date/.test(String(data))) return
-      if (/\s*/.test(String(data))) return
-
-      console.log(`Error: ${data}`)
-    })
-
-    cp.on('close', code => {
-      if (code !== 0) {
-        console.log(`Error: Docker Compose child process exited with ${code}.`)
-      }
-
-      onExit()
-    })
-  })
-}
+      if (onExit !== undefined) onExit();
+    });
+  });
+};
