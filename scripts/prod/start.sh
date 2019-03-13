@@ -25,10 +25,8 @@ while ! lsof -Pi :$DB_PORT -sTCP:LISTEN -t; do sleep 1; done > /dev/null
 echo "${GREEN}> Migrating database structure...${NC}"
 docker-compose exec master yarn db:migrate > /dev/null
 
-echo "${GREEN}> Stopping master image...${NC}"
-docker-compose stop master > /dev/null
-echo "${GREEN}> Stopping db image...${NC}"
-docker-compose stop db > /dev/null
+echo "${GREEN}> Stopping master (and db) images...${NC}"
+docker-compose stop > /dev/null
 
 echo "${GREEN}> Starting api (and db) image...${NC}"
 docker-compose up -d api > /dev/null
