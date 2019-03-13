@@ -28,7 +28,7 @@ jobs:
         # Generate a .env file and migrate+seed Postgre database:
         - yarn setup
         # Start Docker Compose & a local server instance (in the background):
-        - bash scripts/ci/run_full_server_instance.sh
+        - bash scripts/prod/start.sh
       script:
         - yarn test:e2e
 
