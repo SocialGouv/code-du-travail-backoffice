@@ -3,7 +3,7 @@ import "../../../__mocks__/sessionStorage";
 import customAxios from "../customAxios";
 
 // TODO Find a way to test the interceptor?
-describe("[Contrib] lib/customAxios()", () => {
+describe.only("[Contrib] lib/customAxios()", () => {
   let _axios;
   const token = "aFakeToken";
 
@@ -11,7 +11,7 @@ describe("[Contrib] lib/customAxios()", () => {
   it("should set the axios instance as expected with no JWT in session", async () => {
     _axios = customAxios();
 
-    expect(_axios.defaults.headers["Authorization"]).toBe("Bearer null");
+    expect(_axios.defaults.headers["Authorization"]).toBe(undefined);
     expect(_axios.defaults.baseURL).toBe("http://localhost:3200");
     expect(sessionStorage.getItem("jwt")).toBe(null);
   });
