@@ -1,0 +1,45 @@
+---
+
+image: node:10-alpine
+
+stages:
+- "Install & Build"
+- "Check Code quality"
+
+#
+#
+#
+
+#
+# Install & Build
+#
+
+Install & Build:
+  stage: "Install & Build"
+  script:
+  - yarn
+  - yarn run lerna bootstrap
+  artifacts:
+    expire_in: "1 day"
+    paths:
+    - node_modules
+    - packages/contrib/node_modules
+
+#
+#
+#
+
+#
+# Check Code quality
+#
+
+Test
+  stage: "Check Code quality"
+  script:
+  - yarn test -- --stream -- --coverage
+  after_script:
+  - npx codecov
+  
+#
+#
+#
