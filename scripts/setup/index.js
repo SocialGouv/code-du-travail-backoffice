@@ -4,7 +4,6 @@ const fs = require("fs");
 const ora = require("ora");
 const { promisify } = require("util");
 
-const isPortOpen = require("./isPortOpen");
 const migrateDb = require("./migrateDb");
 const seedDb = require("./seedDb");
 const runDockerCompose = require("./runDockerCompose");
@@ -24,15 +23,13 @@ function waitFor(timeInMs) {
 }
 
 async function install() {
-  let envConfig
-
   // Copy and fill .env file (if it doesn't already exist)
   if (!fs.existsSync(envPath)) {
     spinner.start(`Generating .env file...`);
 
     const sampleEnvBuffer = await readFileP(sampleEnvPath);
     const sampleEnvConfig = dotenv.parse(sampleEnvBuffer);
-    envConfig = {
+    const envConfig = {
       ...sampleEnvConfig,
       PGRST_JWT_SECRET: (await randomBytesP(32)).toString("base64")
     };
@@ -43,10 +40,9 @@ async function install() {
     await writeFileP(envPath, envSource);
 
     spinner.succeed(`Local .env file generated.`);
-  } else {
-    const envBuffer = await readFileP(envPath);
-    envConfig = dotenv.parse(envBuffer);
   }
+
+  if (process.argv[2] === "--env-only") return
 
   // Start Docker Compose
   spinner.start(`Starting a new "db" container...`);
