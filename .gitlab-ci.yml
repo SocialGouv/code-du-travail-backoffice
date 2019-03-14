@@ -3,43 +3,42 @@
 image: node:10-alpine
 
 stages:
-- "Install & Build"
-- "Check Code quality"
+  - Install
+  - Build
+  - Test
 
-#
-#
-#
-
-#
-# Install & Build
-#
-
-Install & Build:
-  stage: "Install & Build"
+Install:
+  stage: Install
   script:
-  - yarn
-  - yarn run lerna bootstrap
+    - yarn
+    - yarn run lerna bootstrap
   artifacts:
     expire_in: "1 day"
     paths:
-    - node_modules
-    - packages/contrib/node_modules
+      - node_modules
+      - packages/contrib/node_modules
 
-#
-#
-#
-
-#
-# Check Code quality
-#
-
-Test:
-  stage: "Check Code quality"
+Build:
+  stage: Build
   script:
-  - yarn test -- --stream -- --coverage
-  after_script:
-  - npx codecov
+    # Generate the .env file:
+    - yarn setup --env-only
+    # Start Docker Compose & a local server instance (in the background):
+    - bash scripts/prod/start.sh
+  artifacts:
+    expire_in: "1 day"
+    paths:
+      - node_modules
+      - packages/contrib/node_modules
 
-#
-#
-#
+Unit Tests:
+  stage: Test
+  script:
+    - yarn test -- --stream -- --coverage
+  after_script:
+    - npx codecov
+
+E2E Tests:
+  stage: Test
+  script:
+    - yarn test:e2e
