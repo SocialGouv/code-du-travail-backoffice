@@ -13,8 +13,8 @@ then
   export $(cat $ENV_FILE | xargs)
 fi
 
-echo "${GREEN}> Stopping all existing containers...${NC}"
-docker stop $(docker ps -a -q) > /dev/null
+echo "${GREEN}> Stopping all existing DC containers...${NC}"
+docker-compose stop > /dev/null
 
 echo "${GREEN}> Starting master (and db) image...${NC}"
 docker-compose up -d master > /dev/null
