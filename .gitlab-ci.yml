@@ -24,7 +24,10 @@ Build:
     # Generate the .env file:
     - yarn setup --env-only
     # Start Docker Compose & a local server instance (in the background):
-    - bash scripts/prod/start.sh
+    - chmod +x ./scripts/prod/start.sh
+    - ./scripts/prod/start.sh
+    # Seed database with dummy data
+    - yarn db:seed
   artifacts:
     expire_in: "1 day"
     paths:
