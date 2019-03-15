@@ -2,9 +2,7 @@ import { omit } from "ramda";
 import React from "react";
 import { Flex } from "rebass";
 
-import Markdown from "../lib/Markdown";
-
-const markdown = new Markdown();
+import markdown from "../lib/markdown";
 
 /**
  * React wrapper for medium-editor plugin converting the HTML source into
