@@ -4,7 +4,7 @@ image: node:10-alpine
 
 stages:
   - Install
-  - Build
+  # - Build
   - Test
 
 Install:
@@ -18,21 +18,21 @@ Install:
       - node_modules
       - packages/contrib/node_modules
 
-Build:
-  stage: Build
-  script:
-    # Generate the .env file:
-    - yarn setup --env-only
-    # Start Docker Compose & a local server instance (in the background):
-    - chmod +x ./scripts/prod/start.sh
-    - ./scripts/prod/start.sh
-    # Seed database with dummy data
-    - yarn db:seed
-  artifacts:
-    expire_in: "1 day"
-    paths:
-      - node_modules
-      - packages/contrib/node_modules
+# Build:
+#   stage: Build
+#   script:
+#     # Generate the .env file:
+#     - yarn setup --env-only
+#     # Start Docker Compose & a local server instance (in the background):
+#     - chmod +x ./scripts/prod/start.sh
+#     - ./scripts/prod/start.sh
+#     # Seed database with dummy data
+#     - yarn db:seed
+#   artifacts:
+#     expire_in: "1 day"
+#     paths:
+#       - node_modules
+#       - packages/contrib/node_modules
 
 Unit Tests:
   stage: Test
@@ -41,7 +41,7 @@ Unit Tests:
   after_script:
     - npx codecov
 
-E2E Tests:
-  stage: Test
-  script:
-    - yarn test:e2e
+# E2E Tests:
+#   stage: Test
+#   script:
+#     - yarn test:e2e
