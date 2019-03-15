@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "cucumber": "^5.1.0",
-    "dotenv": "6.2.0",
+    "dotenv": "7.0.0",
     "knex": "0.16.3",
     "lerna": "3.13.1",
     "moment": "^2.24.0",
