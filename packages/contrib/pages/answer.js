@@ -12,11 +12,15 @@ import Main from "../src/layouts/Main";
 import customAxios from "../src/lib/customAxios";
 import makeApiFilter from "../src/lib/makeApiFilter";
 
-import "../node_modules/medium-editor/dist/css/medium-editor.css";
-import "../node_modules/medium-editor/dist/css/themes/beagle.css";
+import "../node_modules/quill/dist/quill.snow.css";
 
-const Content = styled(Flex)`
-  background-color: #f3f3f3;
+const Container = styled(Main)`
+  overflow-x: hidden;
+`;
+
+const ContentHeader = styled(Flex)`
+  border-top: solid 1px #cbcbcb;
+  min-height: 2rem;
   padding-left: 1rem;
 `;
 const ContentLabel = styled.span`
@@ -26,10 +30,6 @@ const ContentLabel = styled.span`
   margin-top: 1rem;
   user-select: none;
 `;
-const ContentEditor = styled(Editor)`
-  flex-grow: 1;
-  padding: 0 1rem 1rem 0;
-`;
 const ContentInfo = styled(Flex)`
   bottom: 1rem;
   color: #888888;
@@ -38,13 +38,27 @@ const ContentInfo = styled(Flex)`
   right: 1.75rem;
   width: 15.5rem;
 `;
-
-const SideBar = styled(Flex)`
-  background-color: #d7d7d7;
-  color: #555555;
+const ContentTitle = styled(Title)`
   padding: 0 1rem;
 `;
-const SideBarTitle = styled.p`
+
+const ContentMain = styled(Flex)`
+  flex-grow: 1;
+`;
+const ContentEditor = styled(Editor)`
+  margin-right: ${props => (props.isOpen ? 0 : `-22rem`)};
+  transition: flex 1s ease-out;
+  width: 100%;
+`;
+const Sidebar = styled.div`
+  background-color: #d7d7d7;
+  color: #555555;
+  flex: 1 0 22rem;
+  padding: 0 1rem;
+  transform: ${props => (props.isOpen ? `translateX(0%)` : `translateX(100%)`)};
+  transition: flex 1s ease-out;
+`;
+const SidebarTitle = styled.p`
   font-weight: 600;
   font-size: 0.8rem;
   margin: 1rem 0 0.75rem;
@@ -60,12 +74,15 @@ export default class extends React.Component {
       answerReferences: [],
       answerTags: [],
       isLoading: true,
-      isSaving: false
+      isSaving: false,
+      isSidebarOpen: false
     };
 
     this.answerValue = "";
     this.originalAnswer = null;
     this.tags = [];
+
+    this.toggleSidebar = this.toggleSidebar.bind(this);
 
     this.deleteAnswerTag = debounce(this._deleteAnswerTag.bind(this), 500);
     this.insertAnswerTag = debounce(this._insertAnswerTag.bind(this), 500);
@@ -95,8 +112,16 @@ export default class extends React.Component {
           answerTags: this.originalAnswer.tags,
           isLoading: false
         });
+
+        this.toggleSidebar();
+
+        setTimeout(this.toggleSidebar, 1000);
       })
       .catch(console.warn);
+  }
+
+  toggleSidebar() {
+    this.setState({ isSidebarOpen: !this.state.isSidebarOpen });
   }
 
   toggleTag(tagId) {
@@ -176,63 +201,65 @@ export default class extends React.Component {
     if (this.state.isLoading) return <Main isLoading />;
 
     return (
-      <Main isHorizontal>
-        <Content flexDirection="column" width={3 / 5}>
-          <Flex alignItems="flex-start" justifyContent="space-between">
-            <ContentLabel>Brouillon</ContentLabel>
-            <Idcc
-              code={this.originalAnswer.idcc}
-              name={this.originalAnswer.agreement}
-            />
-          </Flex>
-          <Title isFirst>{this.originalAnswer.question}</Title>
+      <Container>
+        <ContentHeader alignItems="flex-start" justifyContent="space-between">
+          <ContentLabel>Brouillon</ContentLabel>
+          <Idcc
+            code={this.originalAnswer.idcc}
+            name={this.originalAnswer.agreement}
+          />
+        </ContentHeader>
+        <ContentTitle isFirst>{this.originalAnswer.question}</ContentTitle>
+        <ContentMain>
           <ContentEditor
             defaultValue={this.originalAnswer.value}
+            isOpen={this.state.isSidebarOpen}
             onChange={this.saveAnswerValue}
+            onTagsClicked={this.toggleSidebar}
           />
+          <Sidebar flexDirection="column" isOpen={this.state.isSidebarOpen}>
+            <Flex flexDirection="column">
+              <SidebarTitle>Thèmes</SidebarTitle>
+              <Flex flexWrap="wrap">{this.getTagsList("theme")}</Flex>
+            </Flex>
+
+            <Flex flexDirection="column">
+              <SidebarTitle>Type de contrat</SidebarTitle>
+              <Flex flexWrap="wrap">{this.getTagsList("contract_type")}</Flex>
+            </Flex>
+
+            <Flex flexDirection="column">
+              <SidebarTitle>Cible</SidebarTitle>
+              <Flex flexWrap="wrap">{this.getTagsList("target")}</Flex>
+            </Flex>
+
+            <Flex flexDirection="column">
+              <SidebarTitle>Durée du travail</SidebarTitle>
+              <Flex flexWrap="wrap">{this.getTagsList("work_time")}</Flex>
+            </Flex>
+
+            <Flex flexDirection="column">
+              <SidebarTitle>{"Type d'horaires"}</SidebarTitle>
+              <Flex flexWrap="wrap">
+                {this.getTagsList("work_schedule_type")}
+              </Flex>
+            </Flex>
+
+            <Flex flexDirection="column">
+              <SidebarTitle>Particularismes</SidebarTitle>
+              <Flex flexWrap="wrap">
+                {this.getTagsList("distinctive_identity")}
+              </Flex>
+            </Flex>
+          </Sidebar>
           {this.state.isSaving && (
             <ContentInfo alignItems="center" justifyContent="space-between">
               <SavingSpinner color="#888888" size="26" />
               Sauvegarde automatique en cours…
             </ContentInfo>
           )}
-        </Content>
-        <SideBar width={2 / 5} flexDirection="column">
-          <Flex flexDirection="column">
-            <SideBarTitle>Thèmes</SideBarTitle>
-            <Flex flexWrap="wrap">{this.getTagsList("theme")}</Flex>
-          </Flex>
-
-          <Flex flexDirection="column">
-            <SideBarTitle>Type de contrat</SideBarTitle>
-            <Flex flexWrap="wrap">{this.getTagsList("contract_type")}</Flex>
-          </Flex>
-
-          <Flex flexDirection="column">
-            <SideBarTitle>Cible</SideBarTitle>
-            <Flex flexWrap="wrap">{this.getTagsList("target")}</Flex>
-          </Flex>
-
-          <Flex flexDirection="column">
-            <SideBarTitle>Durée du travail</SideBarTitle>
-            <Flex flexWrap="wrap">{this.getTagsList("work_time")}</Flex>
-          </Flex>
-
-          <Flex flexDirection="column">
-            <SideBarTitle>{"Type d'horaires"}</SideBarTitle>
-            <Flex flexWrap="wrap">
-              {this.getTagsList("work_schedule_type")}
-            </Flex>
-          </Flex>
-
-          <Flex flexDirection="column">
-            <SideBarTitle>Particularismes</SideBarTitle>
-            <Flex flexWrap="wrap">
-              {this.getTagsList("distinctive_identity")}
-            </Flex>
-          </Flex>
-        </SideBar>
-      </Main>
+        </ContentMain>
+      </Container>
     );
   }
 }
