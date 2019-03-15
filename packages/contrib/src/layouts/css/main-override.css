@@ -4,8 +4,35 @@
 
 body {
   border-top: 0;
+  overflow-x: hidden;
 }
 
 *:focus {
   box-shadow: initial !important;
+}
+
+/* TODO Remove these dirty overrides. */
+.ql-editor p {
+  margin-top: 0 !important;
+  margin-bottom: 1.25rem !important;
+  margin-bottom: var(--spacing-medium) !important;
+}
+.ql-toolbar.ql-snow {
+  background-color: white !important;
+  border-right: 0 !important;
+  border-left: 0 !important;
+}
+.ql-toolbar.ql-snow + .ql-container.ql-snow {
+  background-color: #f3f3f3 !important;
+  border: 0 !important;
+  display: flex !important;
+  justify-content: center !important;
+  padding: 2rem !important;
+}
+.ql-editor {
+  background-color: white !important;
+  border: 1px solid #cbcbcb !important;
+  max-width: 50rem !important;
+  padding: 1rem;
+  width: 100% !important;
 }
