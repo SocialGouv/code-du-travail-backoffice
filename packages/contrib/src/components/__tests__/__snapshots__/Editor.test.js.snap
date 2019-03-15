@@ -3,204 +3,351 @@
 exports[`<Editor /> should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH pjOvZ"
+    class="sc-bdVaJa sc-bwzfXH eVPJMi"
     label="A label"
   >
     <div
-      aria-multiline="true"
-      class="medium-editor-element"
-      contenteditable="true"
-      data-medium-editor-editor-index="1"
-      data-medium-editor-element="true"
-      data-placeholder="Commencer ici votre réponse."
-      role="textbox"
-      spellcheck="false"
+      class="ql-toolbar ql-snow"
+    >
+      <span
+        class="ql-formats"
+      >
+        <button
+          class="ql-undo Editor__TextButton-sc-1s8484a-0 eNdwXj"
+          type="button"
+        >
+          Undo
+        </button>
+        <button
+          class="ql-redo Editor__TextButton-sc-1s8484a-0 eNdwXj"
+          type="button"
+        >
+          Redo
+        </button>
+      </span>
+      <span
+        class="ql-formats"
+      >
+        <button
+          class="ql-bold"
+          type="button"
+        >
+          <svg
+            viewBox="0 0 18 18"
+          >
+             
+            <path
+              class="ql-stroke"
+              d="M5,4H9.5A2.5,2.5,0,0,1,12,6.5v0A2.5,2.5,0,0,1,9.5,9H5A0,0,0,0,1,5,9V4A0,0,0,0,1,5,4Z"
+            />
+             
+            <path
+              class="ql-stroke"
+              d="M5,9h5.5A2.5,2.5,0,0,1,13,11.5v0A2.5,2.5,0,0,1,10.5,14H5a0,0,0,0,1,0,0V9A0,0,0,0,1,5,9Z"
+            />
+             
+          </svg>
+        </button>
+        <button
+          class="ql-italic"
+          type="button"
+        >
+          <svg
+            viewBox="0 0 18 18"
+          >
+             
+            <line
+              class="ql-stroke"
+              x1="7"
+              x2="13"
+              y1="4"
+              y2="4"
+            />
+             
+            <line
+              class="ql-stroke"
+              x1="5"
+              x2="11"
+              y1="14"
+              y2="14"
+            />
+             
+            <line
+              class="ql-stroke"
+              x1="8"
+              x2="10"
+              y1="14"
+              y2="4"
+            />
+             
+          </svg>
+        </button>
+        <button
+          class="ql-underline"
+          type="button"
+        >
+          <svg
+            viewBox="0 0 18 18"
+          >
+             
+            <path
+              class="ql-stroke"
+              d="M5,3V9a4.012,4.012,0,0,0,4,4H9a4.012,4.012,0,0,0,4-4V3"
+            />
+             
+            <rect
+              class="ql-fill"
+              height="1"
+              rx="0.5"
+              ry="0.5"
+              width="12"
+              x="3"
+              y="15"
+            />
+             
+          </svg>
+        </button>
+      </span>
+      <span
+        class="ql-formats"
+      >
+        <button
+          class="ql-link"
+          type="button"
+        >
+          <svg
+            viewBox="0 0 18 18"
+          >
+             
+            <line
+              class="ql-stroke"
+              x1="7"
+              x2="11"
+              y1="7"
+              y2="11"
+            />
+             
+            <path
+              class="ql-even ql-stroke"
+              d="M8.9,4.577a3.476,3.476,0,0,1,.36,4.679A3.476,3.476,0,0,1,4.577,8.9C3.185,7.5,2.035,6.4,4.217,4.217S7.5,3.185,8.9,4.577Z"
+            />
+             
+            <path
+              class="ql-even ql-stroke"
+              d="M13.423,9.1a3.476,3.476,0,0,0-4.679-.36,3.476,3.476,0,0,0,.36,4.679c1.392,1.392,2.5,2.542,4.679.36S14.815,10.5,13.423,9.1Z"
+            />
+             
+          </svg>
+        </button>
+        <button
+          class="ql-blockquote"
+          type="button"
+        >
+          <svg
+            viewBox="0 0 18 18"
+          >
+             
+            <rect
+              class="ql-fill ql-stroke"
+              height="3"
+              width="3"
+              x="4"
+              y="5"
+            />
+             
+            <rect
+              class="ql-fill ql-stroke"
+              height="3"
+              width="3"
+              x="11"
+              y="5"
+            />
+             
+            <path
+              class="ql-even ql-fill ql-stroke"
+              d="M7,8c0,4.031-3,5-3,5"
+            />
+             
+            <path
+              class="ql-even ql-fill ql-stroke"
+              d="M14,8c0,4.031-3,5-3,5"
+            />
+             
+          </svg>
+        </button>
+      </span>
+      <span
+        class="ql-formats"
+      >
+        <span
+          class="ql-header ql-picker"
+        >
+          <span
+            aria-controls="ql-picker-options-0"
+            aria-expanded="false"
+            class="ql-picker-label"
+            data-label="Normal"
+            data-value=""
+            role="button"
+            tabindex="0"
+          >
+            <svg
+              viewBox="0 0 18 18"
+            >
+               
+              <polygon
+                class="ql-stroke"
+                points="7 11 9 13 11 11 7 11"
+              />
+               
+              <polygon
+                class="ql-stroke"
+                points="7 7 9 5 11 7 7 7"
+              />
+               
+            </svg>
+          </span>
+          <span
+            aria-hidden="true"
+            class="ql-picker-options"
+            id="ql-picker-options-0"
+            tabindex="-1"
+          >
+            <span
+              class="ql-picker-item ql-selected"
+              data-label="Normal"
+              data-value=""
+              role="button"
+              tabindex="0"
+            />
+            <span
+              class="ql-picker-item"
+              data-label="Titre"
+              data-value="2"
+              role="button"
+              tabindex="0"
+            />
+            <span
+              class="ql-picker-item"
+              data-label="Sous-titre"
+              data-value="3"
+              role="button"
+              tabindex="0"
+            />
+          </span>
+        </span>
+        <select
+          class="ql-header"
+          style="display: none;"
+        >
+          <option
+            selected=""
+            value=""
+          >
+            Normal
+          </option>
+          <option
+            value="2"
+          >
+            Titre
+          </option>
+          <option
+            value="3"
+          >
+            Sous-titre
+          </option>
+        </select>
+      </span>
+      <span
+        class="ql-formats"
+      >
+        <button
+          class="ql-charter Editor__TextButton-sc-1s8484a-0 eNdwXj"
+          type="button"
+        >
+          Charte
+        </button>
+      </span>
+      <span
+        class="ql-formats"
+      >
+        <button
+          class="ql-tags Editor__TextButton-sc-1s8484a-0 eNdwXj"
+          type="button"
+        >
+          Tags
+        </button>
+      </span>
+    </div>
+    <div
+      class="ql-container ql-snow"
       width="1"
     >
-      <h2>
-        Guerre et Paix
-      </h2>
-      
-
-      <h3>
-        Citation
-      </h3>
-      
-
-      <blockquote>
-        
-  
-        <p>
+      <div
+        class="ql-editor"
+        contenteditable="true"
+        data-gramm="false"
+      >
+        <h2>
+          Guerre et Paix
+        </h2>
+        <h3>
+          Citation
+        </h3>
+        <blockquote>
           Il m'est arrivé de sentir que tout allait bien pour moi, que tout le
-          <br />
-          
-  monde était gai, et aussitôt l'idée me traversait l'esprit qu'il ne se
-          <br />
-          
-  passerait plus rien et que tout était absurde.
+        </blockquote>
+        <blockquote>
+           monde était gai, et aussitôt l'idée me traversait l'esprit qu'il ne se
+        </blockquote>
+        <blockquote>
+           passerait plus rien et que tout était absurde.
+        </blockquote>
+        <p>
+          <em>
+            Léon Tolstoï
+          </em>
         </p>
-        
-
-      </blockquote>
-      
-
-      <p>
-        <em>
-          Léon Tolstoï
-        </em>
-      </p>
-      
-
-      <p>
-        Ceci est 
-        <u>
-          important
-        </u>
-        .
-      </p>
-      
-
-      <p>
-        Ceci est très 
-        <strong>
-          important
-        </strong>
-        .
-      </p>
-    </div>
-    <div
-      class="medium-editor-anchor-preview"
-      id="medium-editor-anchor-preview-1"
-    >
-      <div
-        class="medium-editor-toolbar-anchor-preview"
-        id="medium-editor-toolbar-anchor-preview"
-      >
-            
-        <a
-          class="medium-editor-toolbar-anchor-preview-inner"
-        />
+        <p>
+          Ceci est 
+          <u>
+            important
+          </u>
+          .
+        </p>
+        <p>
+          Ceci est très 
+          <strong>
+            important
+          </strong>
+          .
+        </p>
       </div>
-    </div>
-    <div
-      class="medium-editor-toolbar static-toolbar"
-      id="medium-editor-toolbar-1"
-    >
-      <ul
-        class="medium-editor-toolbar-actions"
-        id="medium-editor-toolbar-actions1"
-        style="display: block;"
-      >
-        <li>
-          <button
-            aria-label="bold"
-            class="medium-editor-action medium-editor-action-bold medium-editor-button-first"
-            data-action="bold"
-            title="bold"
-          >
-            <b>
-              B
-            </b>
-          </button>
-        </li>
-        <li>
-          <button
-            aria-label="italic"
-            class="medium-editor-action medium-editor-action-italic"
-            data-action="italic"
-            title="italic"
-          >
-            <b>
-              <i>
-                I
-              </i>
-            </b>
-          </button>
-        </li>
-        <li>
-          <button
-            aria-label="underline"
-            class="medium-editor-action medium-editor-action-underline"
-            data-action="underline"
-            title="underline"
-          >
-            <b>
-              <u>
-                U
-              </u>
-            </b>
-          </button>
-        </li>
-        <li>
-          <button
-            aria-label="link"
-            class="medium-editor-action medium-editor-action-anchor"
-            data-action="createLink"
-            title="link"
-          >
-            <b>
-              #
-            </b>
-          </button>
-        </li>
-        <li>
-          <button
-            aria-label="header type two"
-            class="medium-editor-action medium-editor-action-h2"
-            data-action="append-h2"
-            title="header type two"
-          >
-            <b>
-              H2
-            </b>
-          </button>
-        </li>
-        <li>
-          <button
-            aria-label="header type three"
-            class="medium-editor-action medium-editor-action-h3"
-            data-action="append-h3"
-            title="header type three"
-          >
-            <b>
-              H3
-            </b>
-          </button>
-        </li>
-        <li>
-          <button
-            aria-label="blockquote"
-            class="medium-editor-action medium-editor-action-quote medium-editor-button-last"
-            data-action="append-blockquote"
-            title="blockquote"
-          >
-            <b>
-              “
-            </b>
-          </button>
-        </li>
-      </ul>
       <div
-        class="medium-editor-toolbar-form"
-        id="medium-editor-toolbar-form-anchor-1"
+        class="ql-clipboard"
+        contenteditable="true"
+        tabindex="-1"
+      />
+      <div
+        class="ql-tooltip ql-hidden"
       >
+        <a
+          class="ql-preview"
+          href="about:blank"
+          target="_blank"
+        />
         <input
-          class="medium-editor-toolbar-input"
-          placeholder="Paste or type a link"
+          data-formula="e=mc^2"
+          data-link="https://quilljs.com"
+          data-video="Embed URL"
           type="text"
         />
         <a
-          class="medium-editor-toolbar-save"
-          href="#"
-        >
-          ✓
-        </a>
+          class="ql-action"
+        />
         <a
-          class="medium-editor-toolbar-close"
-          href="#"
-        >
-          ×
-        </a>
+          class="ql-remove"
+        />
       </div>
     </div>
   </div>
