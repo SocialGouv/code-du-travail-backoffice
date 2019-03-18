@@ -49,9 +49,20 @@ Et c'est tout! Le site devrait être accessible via http://localhost:3100.
 
 ### Problèmes connus	
 
- Sous Linux, si vous rencontrez l'erreur	
-`Error: ENOSPC: System limit for number of file watchers reached`, la [solution	
-actuelle](https://github.com/facebook/jest/issues/3254#issuecomment-297214395)	
+#### Docker Compose
+
+Sous Ubuntu, si vous rencontrez l'erreur `double free or corruption (out)`, la
+[solution actuelle](https://github.com/docker/docker-credential-helpers/issues/103#issuecomment-421822269)
+consiste à forcer la désinstallation de la dépendance concernée:
+
+```bash
+dpkg -r --force-depends golang-docker-credential-helpers
+```
+
+#### Jest Watch
+
+Sous Linux, si vous rencontrez l'erreur	`Error: ENOSPC: System limit for number
+of file watchers reached`, la [solution	actuelle](https://github.com/facebook/jest/issues/3254#issuecomment-297214395)	
 consiste à augmenter le nombre de watchers du système de fichiers en exécutant:	
 
 ```bash
