@@ -9,8 +9,8 @@ import SavingSpinner from "../src/elements/SavingSpinner";
 import Tag from "../src/elements/Tag";
 import Title from "../src/elements/Title";
 import Main from "../src/layouts/Main";
-import customAxios from "../src/lib/customAxios";
-import makeApiFilter from "../src/lib/makeApiFilter";
+import customAxios from "../src/libs/customAxios";
+import makeApiFilter from "../src/libs/makeApiFilter";
 
 import "../node_modules/quill/dist/quill.snow.css";
 

@@ -3,7 +3,7 @@ import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
-import markdown from "../lib/markdown";
+import markdown from "../libs/markdown";
 
 const TextButton = styled.button`
   color: #444444;
