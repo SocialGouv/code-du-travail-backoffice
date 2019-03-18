@@ -53,7 +53,7 @@ CREATE FUNCTION
 
     -- Generate the JWT token and return it as a within a stringified JSON
     -- object with these properties: role, id, email & location_id.
-    SELECT sign(row_to_json(r), getJwtSecret()) AS token
+    SELECT sign(row_to_json(r), current_setting('app.jwt_secret')) AS token
     FROM (
       SELECT
         _role AS role,
