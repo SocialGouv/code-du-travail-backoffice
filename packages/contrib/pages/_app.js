@@ -2,10 +2,10 @@ import App, { Container } from "next/app";
 import React from "react";
 import { Provider } from "react-redux";
 
-import withReduxStore from "../src/lib/withReduxStore";
+import withReduxStore from "../src/libs/withReduxStore";
 
 import Main from "../src/layouts/Main";
-import isAuthenticated from "../src/lib/isAuthenticated";
+import isAuthenticated from "../src/libs/isAuthenticated";
 
 class MainApp extends App {
   constructor(props) {
