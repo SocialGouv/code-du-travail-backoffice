@@ -3,7 +3,7 @@ import "../../../__mocks__/sessionStorage";
 import customAxios from "../customAxios";
 
 // TODO Find a way to test the interceptor?
-describe.only("[Contrib] lib/customAxios()", () => {
+describe.skip("[Contrib] lib/customAxios()", () => {
   let _axios;
   const token = "aFakeToken";
 
