@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import Login from "../src/components/Login";
 import Main from "../src/layouts/Main";
-import isAuthenticated from "../src/lib/isAuthenticated";
+import isAuthenticated from "../src/libs/isAuthenticated";
 
 import welcomeImgUri from "../src/images/welcome.svg";
 

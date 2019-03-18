@@ -6,7 +6,7 @@ import styled from "styled-components";
 import Answer from "../src/blocks/Answer";
 import Title from "../src/elements/Title";
 import Main from "../src/layouts/Main";
-import customAxios from "../src/lib/customAxios";
+import customAxios from "../src/libs/customAxios";
 
 const Content = styled(Flex)`
   overflow-y: auto;
