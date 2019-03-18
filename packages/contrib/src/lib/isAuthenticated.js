@@ -1,23 +1,18 @@
 import axios from "axios";
+import getConfig from "next/config";
+
+const API_URI = getConfig().publicRuntimeConfig.API_URI;
 
 export default async function isAuthenticated() {
-  const jwt = sessionStorage.getItem("jwt");
+  const token = sessionStorage.getItem("jwt");
 
-  if (typeof jwt !== "string" || jwt.length === 0) return false;
+  if (typeof token !== "string" || token.length === 0) return false;
 
-  // Let's try a quick API call to check is the JWT is valid
   try {
-    await axios.get("/answers", {
-      baseURL: "http://localhost:3200",
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem("jwt")}`
-      }
-    });
+    const { data } = await axios.post(`${API_URI}/rpc/login_check`, { token });
 
-    return true;
+    return data[0].valid;
   } catch (error) {
-    console.warn(error);
-
     return false;
   }
 }
