@@ -1,7 +1,7 @@
 import React from "react";
 
 import Main from "../../src/layouts/Main";
-import customAxios from "../../src/lib/customAxios";
+import customAxios from "../../src/libs/customAxios";
 
 export default class Index extends React.Component {
   constructor(props) {
