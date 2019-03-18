@@ -8,6 +8,10 @@ import { setConfig } from "next/config";
 import nextConfig from "../__mocks__/next.config";
 setConfig(nextConfig);
 
+// Mock next/router
+// https://gist.github.com/novascreen/f1c44ead31e5a494556793be2c408840
+import "../__mocks__/next.router";
+
 // Polyfill for document.getSelection()
 // https://gist.github.com/yckart/6435861
 Object.defineProperty(document, "getSelection", {
