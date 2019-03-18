@@ -2,6 +2,9 @@ import React from "react";
 import { fireEvent, render } from "react-testing-library";
 import Answer from "../Answer";
 
+// Ignore styled-wrapped ReactTooltip className prop warning
+console.warn = jest.fn();
+
 describe("[Contrib] blocks/<Answer />", () => {
   const onClick = jest.fn();
   const props = {
