@@ -2,6 +2,11 @@ import React from "react";
 import { render } from "react-testing-library";
 import Editor from "../Editor";
 
+// Let's ignore the error `quill:toolbar ignoring attaching to nonexistent
+// format tags HTMLButtonElement` for now.
+// TODO Handle this error.
+console.warn = jest.fn();
+
 // TODO Is it possible to simulate a content edition (input/change event)?
 describe("<Editor />", () => {
   const onChange = jest.fn();
