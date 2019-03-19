@@ -31,7 +31,7 @@ export default function() {
     if (instance.defaults.headers["Authorization"] !== authorization) {
       instance.defaults.headers["Authorization"] = authorization;
     }
-  } else {
+  } else if (!window.location.pathname.startsWith("/login")) {
     Router.push(`/login?redirectTo=${window.location.pathname}`);
 
     throw undefined;
