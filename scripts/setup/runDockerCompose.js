@@ -8,12 +8,21 @@ module.exports = async (action, imageName, onExit) => {
       : [action, imageName];
     const cp = spawn("docker-compose", args, { cwd: process.cwd() });
 
+    let waitForRestart = false;
     cp.stdout.on("data", buff => {
       const output = String(buff);
 
       if (action === "up" && imageName === "db") {
+        if (/The files belonging to this database system will be owned by user "postgres"/.test(output)) {
+          waitForRestart = true;
+        }
+
         if (/database system is ready to accept connections/.test(output)) {
-          resolve(cp);
+          if (waitForRestart) {
+            waitForRestart = false;
+          } else {
+            resolve(cp);
+          }
         }
 
         if (/db_\d+ exited with code/.test(output)) {
