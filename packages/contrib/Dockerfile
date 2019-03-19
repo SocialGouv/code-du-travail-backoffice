@@ -14,7 +14,6 @@ WORKDIR /app
 
 RUN yarn --frozen-lockfile && yarn cache clean
 
-COPY ./store.js /app/store.js
 COPY ./src /app/src
 COPY ./pages /app/pages
 
