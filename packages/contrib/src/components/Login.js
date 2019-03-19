@@ -1,4 +1,4 @@
-import axios from "axios";
+import customAxios from "../libs/customAxios";
 import React from "react";
 import { Button as ReButton } from "rebass";
 import styled from "styled-components";
@@ -33,7 +33,7 @@ const Button = styled(ReButton)`
   cursor: pointer;
 `;
 
-export default class Index extends React.Component {
+export default class Login extends React.Component {
   constructor(props) {
     super(props);
 
@@ -49,6 +49,8 @@ export default class Index extends React.Component {
 
   componentDidMount() {
     this.$email.focus();
+
+    this.axios = customAxios();
   }
 
   componentDidUpdate() {
@@ -56,13 +58,16 @@ export default class Index extends React.Component {
   }
 
   async login() {
-    const { data } = await axios.post("http://localhost:3200/rpc/login", {
+    const res1 = await this.axios.post("/rpc/login", {
       email: this.state.email,
       password: "Azerty123"
     });
+    const token = res1.data[0].token;
+    const res2 = await this.axios.post("/rpc/login_check", { token });
 
-    // JSON Web Token
-    sessionStorage.setItem("jwt", data[0].token);
+    // Store JSON Web Token & user public data in session
+    sessionStorage.setItem("jwt", token);
+    sessionStorage.setItem("me", JSON.stringify(res2.data[0]));
   }
 
   updateFormData(event) {
