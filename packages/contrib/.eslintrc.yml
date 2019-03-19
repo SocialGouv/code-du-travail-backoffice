@@ -13,6 +13,7 @@ rules:
 
 overrides:
   files:
+    - "jest.setup.js"
     - "*.test.js"
 
   env:
