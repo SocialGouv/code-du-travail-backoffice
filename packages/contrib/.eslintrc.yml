@@ -13,6 +13,7 @@ rules:
 
 overrides:
   files:
+    - "__mocks__/*"
     - "jest.setup.js"
     - "*.test.js"
 
