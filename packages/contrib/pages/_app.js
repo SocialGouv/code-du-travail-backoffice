@@ -28,14 +28,16 @@ class MainApp extends App {
   }
 
   render() {
-    if (!this.state.isMountedAndAllowed) return <Main isLoading />;
-
     const { Component, pageProps, reduxStore } = this.props;
 
     return (
       <Container>
         <Provider store={reduxStore}>
-          <Component {...pageProps} />
+          {!this.state.isMountedAndAllowed ? (
+            <Main isLoading />
+          ) : (
+            <Component {...pageProps} />
+          )}
         </Provider>
       </Container>
     );
