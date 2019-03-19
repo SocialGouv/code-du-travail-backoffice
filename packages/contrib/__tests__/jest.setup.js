@@ -1,12 +1,22 @@
+// import jest from "jest";
+
 // MutationObserver polyfill
 // https://github.com/megawac/MutationObserver.js
 import "mutationobserver-shim";
 
-// https://github.com/zeit/next.js/issues/4024#issuecomment-386016077
 // TODO Wait for release of: https://github.com/zeit/next.js/pull/6458.
-import { setConfig } from "next/config";
-import nextConfig from "../__mocks__/next.config";
-setConfig(nextConfig);
+// https://github.com/zeit/next.js/issues/4024#issuecomment-423843420
+jest.mock("next/config", () => () => ({
+  publicRuntimeConfig: {
+    API_URI: "http://localhost:3200"
+  }
+}));
+// https://github.com/zeit/next.js/issues/4024#issuecomment-469204986
+jest.mock("next-server/config", () => () => ({
+  publicRuntimeConfig: {
+    API_URI: "http://localhost:3200"
+  }
+}));
 
 // Mock next/router
 import "../__mocks__/nextRouter";
