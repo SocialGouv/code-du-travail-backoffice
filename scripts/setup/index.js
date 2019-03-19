@@ -39,9 +39,12 @@ async function install() {
     const API_URI = process.env.API_URI !== undefined
       ? process.env.API_URI
       : "http://localhost:3200";
-    const POSTGRES_DB = (await generateRandomHexString(10, true)).toLowerCase();
-    const POSTGRES_USER = (await generateRandomHexString(18, true)).toLowerCase();
-    const POSTGRES_PASSWORD = await generateRandomHexString(32);
+    const POSTGRES_DB = (await generateRandomHexString(10, true))
+      .toLowerCase();
+    const POSTGRES_USER = (await generateRandomHexString(18, true))
+      .toLowerCase();
+    const POSTGRES_PASSWORD = (await generateRandomHexString(32))
+      .replace(/[^0-9a-z]/gi, "");
     const PGRST_DB_URI =
       `postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${sampleEnvConfig.DB_PORT}/${POSTGRES_DB}`;
 
@@ -69,19 +72,21 @@ async function install() {
 
   // Start Docker Compose
   spinner.start(`Starting a new "db" container...`);
-  const dockerCp2 = await runDockerCompose("up", "db", () => {
+  await runDockerCompose("up", "db", () => {
     spinner.succeed(`The "db" container is stopped.`);
 
     process.exit(0);
   });
   spinner.succeed(`The "db" container is up and runnning.`);
 
-  // Migrate Postgre structure
+  await waitFor(1000);
+
+  // Migrate PostgreSQL structure
   spinner.start(`Migrating PostgreSQL structure...`);
   await migrateDb(ROOT);
   spinner.succeed(`PostgreSQL structure migrated.`);
 
-  // Seed Postgre database
+  // Seed PostgreSQL database
   spinner.start(`Seeding PostgreSQL database...`);
   await seedDb(ROOT);
   spinner.succeed(`PostgreSQL database seeded.`);
