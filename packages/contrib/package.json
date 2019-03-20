@@ -26,6 +26,7 @@
     "react": "16.8.4",
     "react-dom": "16.8.4",
     "react-redux": "6.0.0",
+    "react-table": "^6.9.2",
     "react-tooltip": "^3.10.0",
     "rebass": "3.0.1",
     "redux": "4.0.1",
