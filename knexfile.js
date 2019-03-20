@@ -9,7 +9,7 @@ module.exports = {
       tableName: "migrations"
     },
     seeds: {
-      directory: `${__dirname}/db/seeds`
+      directory: `${__dirname}/db/seeds/dev`
     }
   },
 
@@ -19,6 +19,9 @@ module.exports = {
     migrations: {
       directory: `${__dirname}/db/migrations/knex`,
       tableName: "migrations"
+    },
+    seeds: {
+      directory: `${__dirname}/db/seeds/prod`
     }
   }
 };
