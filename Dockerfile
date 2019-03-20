@@ -10,4 +10,6 @@ WORKDIR /app
 RUN yarn --frozen-lockfile && yarn cache clean
 
 COPY ./knexfile.js /app/knexfile.js
+# These scripts are required to run the migrations:
+COPY ./scripts/db /app/scripts/db
 COPY ./db /app/db
