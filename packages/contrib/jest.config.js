@@ -10,6 +10,8 @@ module.exports = {
     "<rootDir>/.next/",
     "<rootDir>/node_modules/",
     "<rootDir>/package.json",
+    // Page components should be tested in e2e:
+    "<rootDir>/pages",
     "<rootDir>/yarn.lock"
   ],
   setupFiles: ["<rootDir>/__tests__/jest.setup.js"]
