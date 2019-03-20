@@ -1,7 +1,4 @@
-import "../../../__mocks__/sessionStorage";
-
 import axios from "axios";
-jest.mock("axios");
 
 import isAuthenticated from "../isAuthenticated";
 
