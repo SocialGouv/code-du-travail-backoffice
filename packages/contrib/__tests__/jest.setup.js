@@ -10,6 +10,9 @@ Object.defineProperty(document, "getSelection", {
   }
 });
 
+// Mock "sessionStorage"
+import "../__mocks__/sessionStorage";
+
 // Mock "next/router"
 import "../__mocks__/nextRouter";
 
@@ -30,3 +33,6 @@ jest.mock("next-server/config", () => () => ({
 
 // Mock "axios"
 import "../__mocks__/axios";
+
+// Mock "../src/libs/customAxios"
+import "../__mocks__/customAxios";
