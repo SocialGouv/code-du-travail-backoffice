@@ -218,10 +218,10 @@ export default class extends React.Component {
             onTagsClicked={this.toggleSidebar}
           />
           <Sidebar flexDirection="column" isOpen={this.state.isSidebarOpen}>
-            <Flex flexDirection="column">
+            {/* <Flex flexDirection="column">
               <SidebarTitle>Thèmes</SidebarTitle>
               <Flex flexWrap="wrap">{this.getTagsList("theme")}</Flex>
-            </Flex>
+            </Flex> */}
 
             <Flex flexDirection="column">
               <SidebarTitle>Type de contrat</SidebarTitle>
@@ -234,7 +234,7 @@ export default class extends React.Component {
             </Flex>
 
             <Flex flexDirection="column">
-              <SidebarTitle>Durée du travail</SidebarTitle>
+              <SidebarTitle>Durée de travail</SidebarTitle>
               <Flex flexWrap="wrap">{this.getTagsList("work_time")}</Flex>
             </Flex>
 
