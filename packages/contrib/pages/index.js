@@ -37,8 +37,14 @@ export default class Index extends React.Component {
     }
   }
 
-  editAnswer(answerId) {
-    Router.push(`/answer/${answerId}`);
+  editAnswer(id) {
+    Router.push(
+      {
+        pathname: "/answer",
+        query: { id }
+      },
+      `/answer/${id}`
+    );
   }
 
   getAnswers(filter, isDraft) {
