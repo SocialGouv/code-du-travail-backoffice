@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Contrib] layouts/<AdminMenu /> should render 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 bIKtVb"
+  >
+    <div
+      class="AdminMenu__Link-t0dk93-1 hHiQqs"
+    >
+      Tableau de bord
+    </div>
+    <div
+      class="AdminMenu__Link-t0dk93-1 hHiQqs"
+    >
+      Conventions
+    </div>
+    <div
+      class="AdminMenu__Link-t0dk93-1 hHiQqs"
+    >
+      Étiquettes
+    </div>
+    <div
+      class="AdminMenu__Link-t0dk93-1 hHiQqs"
+    >
+      Questions
+    </div>
+    <div
+      class="AdminMenu__Link-t0dk93-1 hHiQqs"
+    >
+      Réponses
+    </div>
+    <div
+      class="AdminMenu__Link-t0dk93-1 hHiQqs"
+    >
+      Unités
+    </div>
+    <div
+      class="AdminMenu__Link-t0dk93-1 hHiQqs"
+    >
+      Utilisateurs
+    </div>
+  </div>
+</div>
+`;
