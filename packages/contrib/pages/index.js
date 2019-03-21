@@ -61,7 +61,7 @@ export default class Index extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading === 0) return <Main isLoading />;
+    if (this.state.isLoading) return <Main isLoading />;
 
     return (
       <Main>
