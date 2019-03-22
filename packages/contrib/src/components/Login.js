@@ -43,6 +43,7 @@ export default class Login extends React.Component {
     this.state = {
       email: "",
       emailError: null,
+      error: null,
       isLoading: false,
       password: "",
       passwordError: null
@@ -86,6 +87,7 @@ export default class Login extends React.Component {
 
     this.setState({
       emailError: null,
+      error: null,
       isLoading: true,
       passwordError: null
     });
@@ -113,7 +115,7 @@ export default class Login extends React.Component {
       this.props.onLog();
     } catch (e) {
       this.setState({
-        passwordError: "E-mail et/ou mot de passe non reconnu(s).",
+        error: "E-mail et/ou mot de passe non reconnu(s).",
         isLoading: false
       });
     }
@@ -125,19 +127,23 @@ export default class Login extends React.Component {
         <Field flexDirection="column">
           <Input
             disabled={this.state.isLoading}
-            hasError={this.state.emailError !== null}
+            hasError={
+              this.state.error !== null || this.state.emailError !== null
+            }
             name="email"
             onChange={this.updateFormData}
             placeholder="E-mail"
             ref={ref => (this.$email = ref)}
             type="email"
           />
-          <Error>{this.state.emailError}</Error>
+          <Error>{this.state.error || this.state.emailError}</Error>
         </Field>
         <Field flexDirection="column">
           <Input
             disabled={this.state.isLoading}
-            hasError={this.state.passwordError !== null}
+            hasError={
+              this.state.error !== null || this.state.passwordError !== null
+            }
             name="password"
             onChange={this.updateFormData}
             placeholder="Mot de passe"
