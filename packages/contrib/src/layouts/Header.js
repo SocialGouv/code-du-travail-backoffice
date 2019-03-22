@@ -63,6 +63,14 @@ export default class Header extends React.Component {
     this.setState({ me: JSON.parse(sessionStorage.getItem("me")) });
   }
 
+  goToHome() {
+    const homePath = window.location.pathname.startsWith("/admin")
+      ? "/admin"
+      : "/";
+
+    Router.push(homePath);
+  }
+
   logOut() {
     sessionStorage.removeItem("jwt");
     sessionStorage.removeItem("me");
@@ -72,7 +80,7 @@ export default class Header extends React.Component {
   render() {
     return (
       <Container alignItems="center" justifyContent="space-between">
-        <Brand alignItems="center" onClick={() => Router.push("/")}>
+        <Brand alignItems="center" onClick={this.goToHome}>
           <Logo src={marianneImageUri} alt="Code du travail numérique" />
           <Flex flexDirection="column">
             <Title>Code du travail numérique</Title>
