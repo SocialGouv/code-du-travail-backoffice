@@ -5,10 +5,21 @@ import styled from "styled-components";
 
 import markdown from "../libs/markdown";
 
+// import bookImageUri from "../images/book.svg";
+import filePdfImageUri from "../images/file-pdf.svg";
+import redoImageUri from "../images/redo.svg";
+import tagsImageUri from "../images/tags.svg";
+import undoImageUri from "../images/undo.svg";
+
 const TextButton = styled.button`
   color: #444444;
   font-size: 0.875rem;
   width: auto !important;
+`;
+const TextButtonIcon = styled.img`
+  height: 0.75rem;
+  margin: ${props => (props.withText ? "2px 7px 0 2px" : "2px 2px 0")};
+  width: 0.75rem;
 `;
 
 /**
@@ -84,10 +95,10 @@ export default class Editor extends React.Component {
         <div className="ql-toolbar ql-snow" ref={el => (this.$toolbar = el)}>
           <span className="ql-formats">
             <TextButton type="button" className="ql-undo">
-              Undo
+              <TextButtonIcon src={undoImageUri} />
             </TextButton>
             <TextButton type="button" className="ql-redo">
-              Redo
+              <TextButtonIcon src={redoImageUri} />
             </TextButton>
           </span>
           <span className="ql-formats">
@@ -106,14 +117,22 @@ export default class Editor extends React.Component {
               <option value="3">Sous-titre</option>
             </select>
           </span>
+          {/* <span className="ql-formats">
+            <TextButton type="button" className="ql-tags">
+              <TextButtonIcon src={bookImageUri} withText />
+              Références juridiques
+            </TextButton>
+          </span> */}
           <span className="ql-formats">
-            <TextButton type="button" className="ql-charter">
-              Charte
+            <TextButton type="button" className="ql-tags">
+              <TextButtonIcon src={tagsImageUri} withText />
+              Étiquettes
             </TextButton>
           </span>
           <span className="ql-formats">
-            <TextButton type="button" className="ql-tags">
-              Tags
+            <TextButton type="button" className="ql-charter">
+              <TextButtonIcon src={filePdfImageUri} withText />
+              Charte
             </TextButton>
           </span>
         </div>
