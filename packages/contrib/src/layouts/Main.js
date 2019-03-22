@@ -6,8 +6,11 @@ import styled from "styled-components";
 import LoadingSpinner from "../elements/LoadingSpinner";
 import Header from "./Header";
 
-import mainStylesheet from "./css/main.css";
-import mainStylesheetOverride from "./css/main-override.css";
+// TODO Find a clean way to import these stylesheets.
+import quillSheet from "../../node_modules/quill/dist/quill.snow.css";
+import reactTableSheet from "../../node_modules/react-table/react-table.css";
+import mainSheet from "./css/main.css";
+import mainSheetOverride from "./css/main-override.css";
 
 const Container = styled(Flex)`
   height: 100vh;
@@ -26,10 +29,16 @@ export default ({ children, isHorizontal, isLoading }) => (
     <Head>
       <title>Outil de contribution au code du travail numérique</title>
       <style jsx global>
-        {mainStylesheet}
+        {mainSheet}
       </style>
       <style jsx global>
-        {mainStylesheetOverride}
+        {mainSheetOverride}
+      </style>
+      <style jsx global>
+        {quillSheet}
+      </style>
+      <style jsx global>
+        {reactTableSheet}
       </style>
     </Head>
     <Body alignItems="stretch" flexDirection="column" width={1}>

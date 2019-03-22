@@ -12,8 +12,6 @@ import Main from "../src/layouts/Main";
 import customAxios from "../src/libs/customAxios";
 import makeApiFilter from "../src/libs/makeApiFilter";
 
-import "../node_modules/quill/dist/quill.snow.css";
-
 const Container = styled(Main)`
   overflow-x: hidden;
 `;
