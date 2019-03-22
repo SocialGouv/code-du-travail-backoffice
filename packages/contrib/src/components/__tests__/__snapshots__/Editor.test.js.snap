@@ -16,13 +16,19 @@ exports[`<Editor /> should match snapshot 1`] = `
           class="ql-undo Editor__TextButton-sc-1s8484a-0 eNdwXj"
           type="button"
         >
-          Undo
+          <img
+            class="Editor__TextButtonIcon-sc-1s8484a-1 ggdiNE"
+            src="[object Object]"
+          />
         </button>
         <button
           class="ql-redo Editor__TextButton-sc-1s8484a-0 eNdwXj"
           type="button"
         >
-          Redo
+          <img
+            class="Editor__TextButtonIcon-sc-1s8484a-1 ggdiNE"
+            src="[object Object]"
+          />
         </button>
       </span>
       <span
@@ -262,20 +268,28 @@ exports[`<Editor /> should match snapshot 1`] = `
         class="ql-formats"
       >
         <button
-          class="ql-charter Editor__TextButton-sc-1s8484a-0 eNdwXj"
+          class="ql-tags Editor__TextButton-sc-1s8484a-0 eNdwXj"
           type="button"
         >
-          Charte
+          <img
+            class="Editor__TextButtonIcon-sc-1s8484a-1 liXAUY"
+            src="[object Object]"
+          />
+          Étiquettes
         </button>
       </span>
       <span
         class="ql-formats"
       >
         <button
-          class="ql-tags Editor__TextButton-sc-1s8484a-0 eNdwXj"
+          class="ql-charter Editor__TextButton-sc-1s8484a-0 eNdwXj"
           type="button"
         >
-          Tags
+          <img
+            class="Editor__TextButtonIcon-sc-1s8484a-1 liXAUY"
+            src="[object Object]"
+          />
+          Charte
         </button>
       </span>
     </div>
