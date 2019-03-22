@@ -33,7 +33,6 @@ export default class AdminMenu extends React.PureComponent {
         <Link onClick={() => this.goTo("/agreements")}>Conventions</Link>
         <Link onClick={() => this.goTo("/tags")}>Étiquettes</Link>
         <Link onClick={() => this.goTo("/questions")}>Questions</Link>
-        <Link onClick={() => this.goTo("/answers")}>Réponses</Link>
         <Link onClick={() => this.goTo("/locations")}>Unités</Link>
         <Link onClick={() => this.goTo("/users")}>Utilisateurs</Link>
       </Container>
