@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import markdown from "../libs/markdown";
 
-// import bookImageUri from "../images/book.svg";
+import bookImageUri from "../images/book.svg";
 import filePdfImageUri from "../images/file-pdf.svg";
 import redoImageUri from "../images/redo.svg";
 import tagsImageUri from "../images/tags.svg";
@@ -51,6 +51,7 @@ export default class Editor extends React.Component {
             charter: () =>
               window.open("/static/docs/Charte-Redactionnelle-v1.0.pdf"),
             redo: () => this.quill.history.redo(),
+            refs: this.props.onReferencesClicked,
             tags: this.props.onTagsClicked,
             undo: () => this.quill.history.undo()
           }
@@ -82,7 +83,7 @@ export default class Editor extends React.Component {
 
   render() {
     const props = omit(
-      ["defaultValue", "onChange", "onTagsClicked"],
+      ["defaultValue", "onChange", "onReferencesClicked", "onTagsClicked"],
       this.props
     );
 
@@ -117,12 +118,12 @@ export default class Editor extends React.Component {
               <option value="3">Sous-titre</option>
             </select>
           </span>
-          {/* <span className="ql-formats">
-            <TextButton type="button" className="ql-tags">
+          <span className="ql-formats">
+            <TextButton type="button" className="ql-refs">
               <TextButtonIcon src={bookImageUri} withText />
               Références juridiques
             </TextButton>
-          </span> */}
+          </span>
           <span className="ql-formats">
             <TextButton type="button" className="ql-tags">
               <TextButtonIcon src={tagsImageUri} withText />
