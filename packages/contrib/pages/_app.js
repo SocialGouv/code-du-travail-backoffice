@@ -17,29 +17,32 @@ class MainApp extends App {
   }
 
   async componentDidMount() {
-    if (
-      !window.location.pathname.startsWith("/login") &&
-      !(await isAuthenticated())
-    ) {
-      window.location.href = `/login?redirectTo=${window.location.pathname}`;
-    } else {
-      const role = JSON.parse(sessionStorage.getItem("me")).payload.role;
+    if (!window.location.pathname.startsWith("/login")) {
+      if (!(await isAuthenticated())) {
+        window.location.href = `/login?redirectTo=${window.location.pathname}`;
+      } else {
+        const role = JSON.parse(sessionStorage.getItem("me")).payload.role;
 
-      switch (true) {
-        case role === "administrator" &&
-          !window.location.pathname.startsWith("/admin"):
-          window.location.href = `/admin`;
-          break;
+        switch (true) {
+          case role === "administrator" &&
+            !window.location.pathname.startsWith("/admin"):
+            window.location.href = `/admin`;
+            break;
 
-        case role === "contributor" &&
-          window.location.pathname.startsWith("/admin"):
-          window.location.href = `/`;
-          break;
+          case role === "contributor" &&
+            window.location.pathname.startsWith("/admin"):
+            window.location.href = `/`;
+            break;
 
-        default:
-          this.setState({ isMountedAndAllowed: true });
+          default:
+            this.setState({ isMountedAndAllowed: true });
+        }
       }
+
+      return;
     }
+
+    this.setState({ isMountedAndAllowed: true });
   }
 
   render() {
