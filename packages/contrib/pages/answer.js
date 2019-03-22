@@ -110,10 +110,6 @@ export default class extends React.Component {
           answerTags: this.originalAnswer.tags,
           isLoading: false
         });
-
-        this.toggleSidebar();
-
-        setTimeout(this.toggleSidebar, 1000);
       })
       .catch(console.warn);
   }
