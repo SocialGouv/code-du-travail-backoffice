@@ -66,11 +66,6 @@ exports[`[Contrib] layouts/<AdminMain /> should render 1`] = `
           <div
             class="AdminMenu__Link-t0dk93-1 hHiQqs"
           >
-            Réponses
-          </div>
-          <div
-            class="AdminMenu__Link-t0dk93-1 hHiQqs"
-          >
             Unités
           </div>
           <div
