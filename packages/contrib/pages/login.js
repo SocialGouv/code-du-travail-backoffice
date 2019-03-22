@@ -54,7 +54,19 @@ export default class Index extends React.Component {
 
   async componentDidUpdate() {
     try {
-      if (await isAuthenticated()) Router.push(this.props.redirectTo);
+      if (await isAuthenticated()) {
+        const role = JSON.parse(sessionStorage.getItem("me")).payload.role;
+
+        switch (true) {
+          case role === "administrator":
+            Router.push("/admin");
+            break;
+
+          case role === "contributor":
+            Router.push("/");
+            break;
+        }
+      }
     } catch (error) {
       console.warn(error);
     }
@@ -78,7 +90,7 @@ export default class Index extends React.Component {
             <RightTitle>
               Identifiez-vous pour accéder à votre compte:
             </RightTitle>
-            <Login onLog={() => this.forceUpdate()} />
+            <Login onLog={this.forceUpdate} />
             <HelpText>
               <a href="mailto:contact@code-du-travail.beta.gouv.fr">
                 Une question? Un problème pour vous connecter?
