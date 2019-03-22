@@ -23,7 +23,22 @@ class MainApp extends App {
     ) {
       window.location.href = `/login?redirectTo=${window.location.pathname}`;
     } else {
-      this.setState({ isMountedAndAllowed: true });
+      const role = JSON.parse(sessionStorage.getItem("me")).payload.role;
+
+      switch (true) {
+        case role === "administrator" &&
+          !window.location.pathname.startsWith("/admin"):
+          window.location.href = `/admin`;
+          break;
+
+        case role === "contributor" &&
+          window.location.pathname.startsWith("/admin"):
+          window.location.href = `/`;
+          break;
+
+        default:
+          this.setState({ isMountedAndAllowed: true });
+      }
     }
   }
 
