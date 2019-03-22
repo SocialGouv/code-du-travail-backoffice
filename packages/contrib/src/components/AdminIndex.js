@@ -12,8 +12,6 @@ import Title from "../elements/Title";
 import AdminMain from "../layouts/AdminMain";
 import customAxios from "../libs/customAxios";
 
-import "../../node_modules/react-table/react-table.css";
-
 import deleteImageUri from "../images/delete.svg";
 import editImageUri from "../images/edit.svg";
 
