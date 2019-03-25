@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 module.exports = {
   collectCoverageFrom: ["<rootDir>/pages/**/*.js", "<rootDir>/src/**/*.js"],
   moduleNameMapper: {
@@ -14,5 +16,6 @@ module.exports = {
     "<rootDir>/pages",
     "<rootDir>/yarn.lock"
   ],
-  setupFiles: ["<rootDir>/__tests__/jest.setup.js"]
+  // https://github.com/facebook/create-react-app/issues/2007#issuecomment-296694661
+  setupFilesAfterEnv: ["<rootDir>/__tests__/jest.setup.js"]
 };
