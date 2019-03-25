@@ -51,6 +51,7 @@
     "prettier": "1.16.4",
     "react-testing-library": "6.0.0",
     "redux-devtools-extension": "2.13.8",
+    "snapshot-diff": "^0.5.1",
     "svg-inline-loader": "^0.8.0",
     "url-loader": "^1.1.2",
     "webpack-merge": "^4.2.1"
