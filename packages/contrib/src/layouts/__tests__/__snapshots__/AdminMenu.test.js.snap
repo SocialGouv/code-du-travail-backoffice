@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] layouts/<AdminMenu /> should render 1`] = `
+exports[`[Contrib] layouts/<AdminMenu /> should match snapshot 1`] = `
 <div>
   <div
     class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 bIKtVb"
