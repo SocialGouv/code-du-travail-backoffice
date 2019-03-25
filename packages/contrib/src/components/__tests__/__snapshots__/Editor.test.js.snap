@@ -17,7 +17,7 @@ exports[`<Editor /> should match snapshot 1`] = `
           type="button"
         >
           <img
-            class="Editor__TextButtonIcon-sc-1s8484a-1 ggdiNE"
+            class="Editor__TextButtonIcon-sc-1s8484a-1 nERRq"
             src="[object Object]"
           />
         </button>
@@ -26,7 +26,7 @@ exports[`<Editor /> should match snapshot 1`] = `
           type="button"
         >
           <img
-            class="Editor__TextButtonIcon-sc-1s8484a-1 ggdiNE"
+            class="Editor__TextButtonIcon-sc-1s8484a-1 nERRq"
             src="[object Object]"
           />
         </button>
@@ -268,25 +268,11 @@ exports[`<Editor /> should match snapshot 1`] = `
         class="ql-formats"
       >
         <button
-          class="ql-refs Editor__TextButton-sc-1s8484a-0 eNdwXj"
-          type="button"
-        >
-          <img
-            class="Editor__TextButtonIcon-sc-1s8484a-1 liXAUY"
-            src="[object Object]"
-          />
-          Références juridiques
-        </button>
-      </span>
-      <span
-        class="ql-formats"
-      >
-        <button
           class="ql-tags Editor__TextButton-sc-1s8484a-0 eNdwXj"
           type="button"
         >
           <img
-            class="Editor__TextButtonIcon-sc-1s8484a-1 liXAUY"
+            class="Editor__TextButtonIcon-sc-1s8484a-1 fLzNLm"
             src="[object Object]"
           />
           Étiquettes
@@ -300,7 +286,7 @@ exports[`<Editor /> should match snapshot 1`] = `
           type="button"
         >
           <img
-            class="Editor__TextButtonIcon-sc-1s8484a-1 liXAUY"
+            class="Editor__TextButtonIcon-sc-1s8484a-1 fLzNLm"
             src="[object Object]"
           />
           Charte
