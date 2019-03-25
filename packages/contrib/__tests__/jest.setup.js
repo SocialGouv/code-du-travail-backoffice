@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 // Polyfill "MutationObserver"
 // https://github.com/megawac/MutationObserver.js
 import "mutationobserver-shim";
@@ -9,6 +11,13 @@ Object.defineProperty(document, "getSelection", {
     return document.selection && document.selection.createRange().text;
   }
 });
+
+// Jest "snapshot-diff" extension
+// https://github.com/jest-community/snapshot-diff#with-custom-matcher
+// https://github.com/facebook/create-react-app/issues/2007#issuecomment-296250751
+import expect from "expect";
+import { toMatchDiffSnapshot } from "snapshot-diff";
+expect.extend({ toMatchDiffSnapshot });
 
 // Mock "sessionStorage"
 import "../__mocks__/sessionStorage";
