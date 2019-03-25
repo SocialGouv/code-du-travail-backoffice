@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Contrib] blocks/AnswerEditionHead/<Top /> should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH eVPJMi"
+  >
+    <div
+      class="sc-bdVaJa sc-bwzfXH Top__Container-nem2md-0 ijPYtP"
+    >
+      <span
+        class="Top__Label-nem2md-1 jMhvMr"
+      >
+        Brouillon
+      </span>
+      <div
+        class="Idcc__Container-owzimc-0 dbOONK"
+        currentitem="false"
+        data-tip="An agreement title"
+      >
+        0123
+        <div
+          class="__react_component_tooltip place-top type-dark "
+          data-id="tooltip"
+        />
+      </div>
+    </div>
+    <p
+      class="Title-r6qlw8-0 AnswerEditionHead__Title-sc-1nqi9lw-0 jmGktd"
+    />
+    <div
+      class="sc-bdVaJa sc-bwzfXH Menu__Container-sc-1ce2alp-0 kLuIQb"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH Menu__Tab-sc-1ce2alp-1 dPBUtl"
+      >
+        <img
+          class="Menu__TabIcon-sc-1ce2alp-2 cccbHe"
+          src="[object Object]"
+        />
+        Édition du contenu
+      </div>
+      <div
+        class="sc-bdVaJa sc-bwzfXH Menu__Tab-sc-1ce2alp-1 dPBUtl"
+      >
+        <img
+          class="Menu__TabIcon-sc-1ce2alp-2 cccbHe"
+          src="[object Object]"
+        />
+        Références juridiques
+      </div>
+    </div>
+  </div>
+</div>
+`;

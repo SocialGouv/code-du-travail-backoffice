@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Contrib] blocks/AnswerEditionHead/<Menu /> should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH Menu__Container-sc-1ce2alp-0 kLuIQb"
+  >
+    <div
+      class="sc-bdVaJa sc-bwzfXH Menu__Tab-sc-1ce2alp-1 jDPQbt"
+    >
+      <img
+        class="Menu__TabIcon-sc-1ce2alp-2 cccbHe"
+        src="[object Object]"
+      />
+      Édition du contenu
+    </div>
+    <div
+      class="sc-bdVaJa sc-bwzfXH Menu__Tab-sc-1ce2alp-1 dPBUtl"
+    >
+      <img
+        class="Menu__TabIcon-sc-1ce2alp-2 cccbHe"
+        src="[object Object]"
+      />
+      Références juridiques
+    </div>
+  </div>
+</div>
+`;
