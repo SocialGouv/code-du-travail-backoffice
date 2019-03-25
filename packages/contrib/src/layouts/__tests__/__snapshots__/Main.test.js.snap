@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] layouts/<Main /> should render 1`] = `
+exports[`[Contrib] layouts/<Main /> should match snapshot 1`] = `
 <div>
   <div
     class="sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 bBIrgk"
@@ -43,4 +43,36 @@ exports[`[Contrib] layouts/<Main /> should render 1`] = `
     </div>
   </div>
 </div>
+`;
+
+exports[`[Contrib] layouts/<Main /> should show the loading spinner 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -33,10 +33,23 @@
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+-         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 lhyucv\\"
++         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 fIdmfv\\"
++       >
++         <div
++           class=\\"LoadingSpinner__Container-eu7nmw-0 dEMrTz\\"
++         >
++           <div
++             class=\\"LoadingSpinner__Spinner-eu7nmw-1 sHZX\\"
++             color=\\"#666666\\"
++           />
++           <div
++             class=\\"LoadingSpinner__Spinner-eu7nmw-1 LoadingSpinner__SpinnerNext-eu7nmw-2 daPQQA\\"
++             color=\\"#666666\\"
+            />
++         </div>
++       </div>
+      </div>
+    </div>
+  </DocumentFragment>"
 `;
