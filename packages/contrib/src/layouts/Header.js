@@ -74,14 +74,20 @@ export default class Header extends React.Component {
   logOut() {
     sessionStorage.removeItem("jwt");
     sessionStorage.removeItem("me");
-    window.location.reload();
+
+    Router.push("/login");
   }
 
   render() {
     return (
       <Container alignItems="center" justifyContent="space-between">
-        <Brand alignItems="center" onClick={this.goToHome}>
-          <Logo src={marianneImageUri} alt="Code du travail numérique" />
+        <Brand alignItems="center">
+          <Logo
+            alt="Code du travail numérique"
+            aria-label="Bouton de retour au tableau de bord"
+            onClick={this.goToHome}
+            src={marianneImageUri}
+          />
           <Flex flexDirection="column">
             <Title>Code du travail numérique</Title>
             <Subtitle>Outil de contribution</Subtitle>
@@ -93,7 +99,11 @@ export default class Header extends React.Component {
               <UserName>{this.state.me.payload.name}</UserName>
               <UserLocation>{this.state.me.payload.location}</UserLocation>
             </UserInfo>
-            <UserLogoutIcon onClick={this.logOut} src={logoutImageUri} />
+            <UserLogoutIcon
+              alt="Bouton de déconnexion"
+              onClick={this.logOut}
+              src={logoutImageUri}
+            />
           </Flex>
         )}
       </Container>
