@@ -18,6 +18,7 @@ exports[`[Contrib] layouts/<AdminMain /> should render 1`] = `
         >
           <img
             alt="Code du travail numérique"
+            aria-label="Bouton de retour au tableau de bord"
             class="Header__Logo-sc-7cr55z-2 kAIypM"
             src="[object Object]"
           />
