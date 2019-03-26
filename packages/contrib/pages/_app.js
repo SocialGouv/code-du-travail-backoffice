@@ -2,12 +2,10 @@ import App, { Container } from "next/app";
 import React from "react";
 import { Provider } from "react-redux";
 
-import withReduxStore from "../src/libs/withReduxStore";
-
 import Main from "../src/layouts/Main";
 import isAuthenticated from "../src/libs/isAuthenticated";
 
-class MainApp extends App {
+export default class MainApp extends App {
   constructor(props) {
     super(props);
 
@@ -61,5 +59,3 @@ class MainApp extends App {
     );
   }
 }
-
-export default withReduxStore(MainApp);
