@@ -1,6 +1,5 @@
 import App, { Container } from "next/app";
 import React from "react";
-import { Provider } from "react-redux";
 
 import Main from "../src/layouts/Main";
 import isAuthenticated from "../src/libs/isAuthenticated";
@@ -44,17 +43,15 @@ export default class MainApp extends App {
   }
 
   render() {
-    const { Component, pageProps, reduxStore } = this.props;
+    const { Component, pageProps } = this.props;
 
     return (
       <Container>
-        <Provider store={reduxStore}>
-          {!this.state.isMountedAndAllowed ? (
-            <Main isLoading />
-          ) : (
-            <Component {...pageProps} />
-          )}
-        </Provider>
+        {!this.state.isMountedAndAllowed ? (
+          <Main isLoading />
+        ) : (
+          <Component {...pageProps} />
+        )}
       </Container>
     );
   }
