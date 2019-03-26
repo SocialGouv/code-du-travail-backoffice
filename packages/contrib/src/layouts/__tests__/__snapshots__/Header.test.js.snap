@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] layouts/<Header /> should render 1`] = `
+exports[`[Contrib] layouts/<Header /> [Anonymous User] should match snapshot 1`] = `
 <div>
   <div
     class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 kivzys"
@@ -10,6 +10,7 @@ exports[`[Contrib] layouts/<Header /> should render 1`] = `
     >
       <img
         alt="Code du travail numérique"
+        aria-label="Bouton de retour au tableau de bord"
         class="Header__Logo-sc-7cr55z-2 kAIypM"
         src="[object Object]"
       />
@@ -27,6 +28,62 @@ exports[`[Contrib] layouts/<Header /> should render 1`] = `
           Outil de contribution
         </span>
       </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`[Contrib] layouts/<Header /> [Authenticated User] should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 kivzys"
+  >
+    <div
+      class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB"
+    >
+      <img
+        alt="Code du travail numérique"
+        aria-label="Bouton de retour au tableau de bord"
+        class="Header__Logo-sc-7cr55z-2 kAIypM"
+        src="[object Object]"
+      />
+      <div
+        class="sc-bdVaJa sc-bwzfXH eVPJMi"
+      >
+        <span
+          class="Header__Title-sc-7cr55z-3 jGdlvq"
+        >
+          Code du travail numérique
+        </span>
+        <span
+          class="Header__Subtitle-sc-7cr55z-4 kxPxIS"
+        >
+          Outil de contribution
+        </span>
+      </div>
+    </div>
+    <div
+      class="sc-bdVaJa sc-bwzfXH jruoDg"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH Header__UserInfo-sc-7cr55z-5 GhERN"
+      >
+        <span
+          class="Header__UserName-sc-7cr55z-6 gZRogt"
+        >
+          A Name
+        </span>
+        <span
+          class="Header__UserLocation-sc-7cr55z-7 ldDWsh"
+        >
+          A Location
+        </span>
+      </div>
+      <img
+        alt="Bouton de déconnexion"
+        class="Header__UserLogoutIcon-sc-7cr55z-8 keAli"
+        src="[object Object]"
+      />
     </div>
   </div>
 </div>
