@@ -2,12 +2,6 @@ import "axios";
 
 jest.mock("axios", () => {
   const axios = {
-    interceptors: {
-      response: {
-        use: () => void 0
-      }
-    },
-
     delete: async () => void 0,
     get: async () => void 0,
     patch: async () => void 0,
