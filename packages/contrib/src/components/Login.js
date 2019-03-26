@@ -82,7 +82,7 @@ export default class Login extends React.Component {
   }
 
   async submit(event) {
-    if (event !== undefined) event.preventDefault();
+    event.preventDefault();
     if (this.state.isLoading) return;
 
     this.setState({
@@ -123,7 +123,8 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.submit}>
+      // eslint-disable-next-line jsx-a11y/no-redundant-roles
+      <form onSubmit={this.submit} role="form">
         <Field flexDirection="column">
           <Input
             disabled={this.state.isLoading}

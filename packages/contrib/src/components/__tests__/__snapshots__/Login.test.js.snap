@@ -2,7 +2,9 @@
 
 exports[`[Contrib] components/<Login /> should match snapshot 1`] = `
 <div>
-  <form>
+  <form
+    role="form"
+  >
     <div
       class="sc-bdVaJa sc-bwzfXH Login__Field-sc-1q7hacd-0 kOzXqK"
     >
