@@ -4,7 +4,6 @@ jest.mock("../src/libs/customAxios", () => () => {
   const customAxios = {
     delete: async () => void 0,
     get: async () => void 0,
-    options: async () => void 0,
     patch: async () => void 0,
     post: async () => void 0,
     put: async () => void 0
