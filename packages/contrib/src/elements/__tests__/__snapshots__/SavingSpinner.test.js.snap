@@ -3,23 +3,88 @@
 exports[`[Contrib] elements/<SavingSpinner /> should match snapshot 1`] = `
 <div>
   <div
-    class="SavingSpinner__Container-sc-14j744e-0 uCPxE"
+    class="SavingSpinner__Container-sc-14j744e-0 fmakGk"
+    size="64"
   >
     <div
-      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__FirstSpinner-sc-14j744e-2 dPTovj"
+      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__FirstSpinner-sc-14j744e-2 hhrNYz"
       color="white"
+      size="64"
     />
     <div
-      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__SecondSpinner-sc-14j744e-3 pnAkn"
+      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__SecondSpinner-sc-14j744e-3 fKsSQB"
       color="white"
+      size="64"
     />
     <div
-      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__ThirdSpinner-sc-14j744e-4 dffYfo"
+      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__ThirdSpinner-sc-14j744e-4 deTZhs"
       color="white"
+      size="64"
     />
     <div
-      class="SavingSpinner__Spinner-sc-14j744e-1 evfqSa"
+      class="SavingSpinner__Spinner-sc-14j744e-1 iwQIXv"
       color="white"
+      size="64"
+    />
+  </div>
+</div>
+`;
+
+exports[`[Contrib] elements/<SavingSpinner /> should match snapshot 2`] = `
+<div>
+  <div
+    class="SavingSpinner__Container-sc-14j744e-0 fmakGk"
+    size="64"
+  >
+    <div
+      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__FirstSpinner-sc-14j744e-2 kkdtbe"
+      color="red"
+      size="64"
+    />
+    <div
+      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__SecondSpinner-sc-14j744e-3 gIHSzm"
+      color="red"
+      size="64"
+    />
+    <div
+      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__ThirdSpinner-sc-14j744e-4 ehfGEs"
+      color="red"
+      size="64"
+    />
+    <div
+      class="SavingSpinner__Spinner-sc-14j744e-1 idnQnD"
+      color="red"
+      size="64"
+    />
+  </div>
+</div>
+`;
+
+exports[`[Contrib] elements/<SavingSpinner /> should match snapshot 3`] = `
+<div>
+  <div
+    class="SavingSpinner__Container-sc-14j744e-0 hIouue"
+    size="32"
+  >
+    <div
+      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__FirstSpinner-sc-14j744e-2 enkCUK"
+      color="white"
+      size="32"
+    />
+    <div
+      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__SecondSpinner-sc-14j744e-3 fJKTfQ"
+      color="white"
+      size="32"
+    />
+    <div
+      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__ThirdSpinner-sc-14j744e-4 ikgKqF"
+      color="white"
+      size="32"
+    />
+    <div
+      class="SavingSpinner__Spinner-sc-14j744e-1 jpGwIN"
+      color="white"
+      size="32"
     />
   </div>
 </div>
