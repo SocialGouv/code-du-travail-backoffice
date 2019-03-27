@@ -123,7 +123,6 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      // eslint-disable-next-line jsx-a11y/no-redundant-roles
       <form onSubmit={this.submit} role="form">
         <Field flexDirection="column">
           <Input
