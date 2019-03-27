@@ -1,0 +1,259 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Contrib] blocks/<AnswerEditionReferences /> should add the expected Labor Code reference 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -27,10 +27,20 @@
+            alt=\\"Bouton supprimant la référence juridique A Labor Code Reference\\"
+            class=\\"Label__Button-r6rm3e-1 hEjVFb\\"
+            src=\\"[object Object]\\"
+          />
+        </div>
++       <div
++         class=\\"sc-bdVaJa sc-bwzfXH Label__Container-r6rm3e-0 fKaGun\\"
++       >
++         A New Labor Code Reference
++         <img
++           alt=\\"Bouton supprimant la référence juridique A New Labor Code Reference\\"
++           class=\\"Label__Button-r6rm3e-1 hEjVFb\\"
++           src=\\"[object Object]\\"
++         />
++       </div>
+      </div>
+      <p
+        class=\\"AnswerEditionReferences__Title-sc-1inz7ja-1 bfOFGH\\"
+      >
+        Autre (décret, règlementation, circulaire, jurisprudence)"
+`;
+
+exports[`[Contrib] blocks/<AnswerEditionReferences /> should add the expected uncategorized reference 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -27,11 +27,21 @@
+            alt=\\"Bouton supprimant la référence juridique A Labor Code Reference\\"
+            class=\\"Label__Button-r6rm3e-1 hEjVFb\\"
+            src=\\"[object Object]\\"
+          />
+        </div>
++       <div
++         class=\\"sc-bdVaJa sc-bwzfXH Label__Container-r6rm3e-0 fKaGun\\"
++       >
++         A New Labor Code Reference
++         <img
++           alt=\\"Bouton supprimant la référence juridique A New Labor Code Reference\\"
++           class=\\"Label__Button-r6rm3e-1 hEjVFb\\"
++           src=\\"[object Object]\\"
++         />
+        </div>
++     </div>
+      <p
+        class=\\"AnswerEditionReferences__Title-sc-1inz7ja-1 bfOFGH\\"
+      >
+        Autre (décret, règlementation, circulaire, jurisprudence)
+      </p>
+@@ -63,10 +73,25 @@
+            class=\\"Label__Button-r6rm3e-1 hEjVFb\\"
+            src=\\"[object Object]\\"
+          />
+          <img
+            alt=\\"Bouton supprimant la référence juridique An Uncategorized Reference\\"
++           class=\\"Label__Button-r6rm3e-1 hEjVFb\\"
++           src=\\"[object Object]\\"
++         />
++       </div>
++       <div
++         class=\\"sc-bdVaJa sc-bwzfXH Label__Container-r6rm3e-0 fKaGun\\"
++       >
++         A New Uncategorized Reference
++         <img
++           alt=\\"Bouton ouvrant l'url de la référence juridique A New Uncategorized Reference\\"
++           class=\\"Label__Button-r6rm3e-1 hEjVFb\\"
++           src=\\"[object Object]\\"
++         />
++         <img
++           alt=\\"Bouton supprimant la référence juridique A New Uncategorized Reference\\"
+            class=\\"Label__Button-r6rm3e-1 hEjVFb\\"
+            src=\\"[object Object]\\"
+          />
+        </div>
+      </div>"
+`;
+
+exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH AnswerEditionReferences__Container-sc-1inz7ja-0 egLjmL"
+  >
+    <p
+      class="AnswerEditionReferences__Title-sc-1inz7ja-1 bfOFGH"
+    >
+      Articles du Code du travail
+    </p>
+    <form
+      role="form"
+    >
+      <input
+        class="AnswerEditionReferences__Input-sc-1inz7ja-2 goIllR"
+        name="laborCodeReference"
+        placeholder="Référence (ex: L. 1234-5)"
+      />
+    </form>
+    <div
+      class="sc-bdVaJa sc-bwzfXH AnswerEditionReferences__List-sc-1inz7ja-4 vdEr"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH Label__Container-r6rm3e-0 fKaGun"
+      >
+        A Labor Code Reference
+        <img
+          alt="Bouton supprimant la référence juridique A Labor Code Reference"
+          class="Label__Button-r6rm3e-1 hEjVFb"
+          src="[object Object]"
+        />
+      </div>
+    </div>
+    <p
+      class="AnswerEditionReferences__Title-sc-1inz7ja-1 bfOFGH"
+    >
+      Autre (décret, règlementation, circulaire, jurisprudence)
+    </p>
+    <form
+      role="form"
+    >
+      <input
+        class="AnswerEditionReferences__Input-sc-1inz7ja-2 goIllR"
+        placeholder="Référence (ex: Décret n° 1 du 1er janvier 2019)"
+      />
+      <input
+        class="AnswerEditionReferences__Input-sc-1inz7ja-2 goIllR"
+        placeholder="Lien (ex: https://...)"
+      />
+      <button
+        class="AnswerEditionReferences__Submit-sc-1inz7ja-3 ceRJqu"
+        type="submit"
+      />
+    </form>
+    <div
+      class="sc-bdVaJa sc-bwzfXH AnswerEditionReferences__List-sc-1inz7ja-4 vdEr"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH Label__Container-r6rm3e-0 fKaGun"
+      >
+        An Uncategorized Reference
+        <img
+          alt="Bouton ouvrant l'url de la référence juridique An Uncategorized Reference"
+          class="Label__Button-r6rm3e-1 hEjVFb"
+          src="[object Object]"
+        />
+        <img
+          alt="Bouton supprimant la référence juridique An Uncategorized Reference"
+          class="Label__Button-r6rm3e-1 hEjVFb"
+          src="[object Object]"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`[Contrib] blocks/<AnswerEditionReferences /> should not duplicate an existing reference value 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -20,13 +20,13 @@
+        class=\\"sc-bdVaJa sc-bwzfXH AnswerEditionReferences__List-sc-1inz7ja-4 vdEr\\"
+      >
+        <div
+          class=\\"sc-bdVaJa sc-bwzfXH Label__Container-r6rm3e-0 fKaGun\\"
+        >
+-         A Labor Code Reference
++         A New Labor Code Reference
+          <img
+-           alt=\\"Bouton supprimant la référence juridique A Labor Code Reference\\"
++           alt=\\"Bouton supprimant la référence juridique A New Labor Code Reference\\"
+            class=\\"Label__Button-r6rm3e-1 hEjVFb\\"
+            src=\\"[object Object]\\"
+          />
+        </div>
+      </div>
+@@ -63,10 +63,25 @@
+            class=\\"Label__Button-r6rm3e-1 hEjVFb\\"
+            src=\\"[object Object]\\"
+          />
+          <img
+            alt=\\"Bouton supprimant la référence juridique An Uncategorized Reference\\"
++           class=\\"Label__Button-r6rm3e-1 hEjVFb\\"
++           src=\\"[object Object]\\"
++         />
++       </div>
++       <div
++         class=\\"sc-bdVaJa sc-bwzfXH Label__Container-r6rm3e-0 fKaGun\\"
++       >
++         A New Uncategorized Reference
++         <img
++           alt=\\"Bouton ouvrant l'url de la référence juridique A New Uncategorized Reference\\"
++           class=\\"Label__Button-r6rm3e-1 hEjVFb\\"
++           src=\\"[object Object]\\"
++         />
++         <img
++           alt=\\"Bouton supprimant la référence juridique A New Uncategorized Reference\\"
+            class=\\"Label__Button-r6rm3e-1 hEjVFb\\"
+            src=\\"[object Object]\\"
+          />
+        </div>
+      </div>"
+`;
+
+exports[`[Contrib] blocks/<AnswerEditionReferences /> should remove the expected reference 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -20,13 +20,13 @@
+        class=\\"sc-bdVaJa sc-bwzfXH AnswerEditionReferences__List-sc-1inz7ja-4 vdEr\\"
+      >
+        <div
+          class=\\"sc-bdVaJa sc-bwzfXH Label__Container-r6rm3e-0 fKaGun\\"
+        >
+-         A Labor Code Reference
++         A New Labor Code Reference
+          <img
+-           alt=\\"Bouton supprimant la référence juridique A Labor Code Reference\\"
++           alt=\\"Bouton supprimant la référence juridique A New Labor Code Reference\\"
+            class=\\"Label__Button-r6rm3e-1 hEjVFb\\"
+            src=\\"[object Object]\\"
+          />
+        </div>
+      </div>
+@@ -63,10 +63,25 @@
+            class=\\"Label__Button-r6rm3e-1 hEjVFb\\"
+            src=\\"[object Object]\\"
+          />
+          <img
+            alt=\\"Bouton supprimant la référence juridique An Uncategorized Reference\\"
++           class=\\"Label__Button-r6rm3e-1 hEjVFb\\"
++           src=\\"[object Object]\\"
++         />
++       </div>
++       <div
++         class=\\"sc-bdVaJa sc-bwzfXH Label__Container-r6rm3e-0 fKaGun\\"
++       >
++         A New Uncategorized Reference
++         <img
++           alt=\\"Bouton ouvrant l'url de la référence juridique A New Uncategorized Reference\\"
++           class=\\"Label__Button-r6rm3e-1 hEjVFb\\"
++           src=\\"[object Object]\\"
++         />
++         <img
++           alt=\\"Bouton supprimant la référence juridique A New Uncategorized Reference\\"
+            class=\\"Label__Button-r6rm3e-1 hEjVFb\\"
+            src=\\"[object Object]\\"
+          />
+        </div>
+      </div>"
+`;
