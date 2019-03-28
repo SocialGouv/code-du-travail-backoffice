@@ -61,7 +61,7 @@ CREATE FUNCTION
     END IF;
 
     IF NOT (_agreement_id = ANY(get_current_user_agreements())) THEN
-      -- https://postgrest.org/en/v4.1/html#http-status-codes
+      -- http://postgrest.org/en/v5.2/api.html#http-status-codes
       -- https://www.postgresql.org/docs/current/errcodes-appendix.html
       RAISE insufficient_privilege
       USING MESSAGE = 'User "' || user_id || '" is not allowed to update answer "' || _answer_id || '".';
