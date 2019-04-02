@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Contrib] elements/<Button /> should match snapshot 1`] = `
+<div>
+  <button
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 iDhkoI"
+    color="var(--color-lapis-lazuli)"
+    font-size="inherit"
+    font-weight="bold"
+  />
+</div>
+`;
+
+exports[`[Contrib] elements/<Button /> should match snapshot 2`] = `
+<div>
+  <button
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 bSSmqr"
+    color="var(--color-periwinkle)"
+    font-size="inherit"
+    font-weight="bold"
+  />
+</div>
+`;
+
+exports[`[Contrib] elements/<Button /> should match snapshot 3`] = `
+<div>
+  <button
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 kTjDPw"
+    color="var(--color-lapis-lazuli)"
+    font-size="inherit"
+    font-weight="bold"
+  />
+</div>
+`;
