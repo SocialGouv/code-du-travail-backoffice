@@ -3,7 +3,7 @@
 exports[`[Contrib] elements/<Select /> should match snapshot 1`] = `
 <div>
   <select
-    class="Select-gjmg2q-0 fWWCnV"
+    class="Select-gjmg2q-0 ivoiOs"
   />
 </div>
 `;

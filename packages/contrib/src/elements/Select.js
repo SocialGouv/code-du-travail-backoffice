@@ -5,7 +5,7 @@ export default styled.select`
   background-color: transparent;
   border: solid 1px lightgray;
   border-radius: 0;
-  color: black;
+  color: inherit;
   flex-grow: 1;
   font-family: inherit;
   font-weight: inherit;
