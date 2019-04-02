@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const Container = styled(Flex)`
   background-color: #315659;
-  /* padding: 1rem; */
+  min-width: 12rem;
   width: 12rem;
 `;
 
