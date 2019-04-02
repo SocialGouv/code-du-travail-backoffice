@@ -51,17 +51,4 @@ describe("[Contrib] libs/customAxios()", () => {
       "function"
     );
   });
-
-  // eslint-disable-next-line max-len
-  it.skip(`should intercept requests as expected with a JWT in session`, async () => {
-    jest.unmock("axios");
-    const customAxios = require("../customAxios").default;
-
-    const token = "aFakeToken";
-    sessionStorage.setItem("jwt", token);
-    const _axios = customAxios();
-
-    const { status } = await _axios.get("https://httpstat.us/200");
-    expect(status).toBe(200);
-  });
 });
