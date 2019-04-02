@@ -1,0 +1,261 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Contrib] components/<Tags /> should add the expected tag 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -35,8 +35,22 @@
+            alt=\\"Bouton supprimant le tag Another Tag\\"
+            class=\\"Tag__Button-lc1n3o-2 jbGhej\\"
+            src=\\"[object Object]\\"
+          />
+        </div>
++       <div
++         class=\\"sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb\\"
++       >
++         <span
++           class=\\"Tag__Text-lc1n3o-1 dtXAeC\\"
++         >
++           Yet Another Tag
++         </span>
++         <img
++           alt=\\"Bouton supprimant le tag Yet Another Tag\\"
++           class=\\"Tag__Button-lc1n3o-2 jbGhej\\"
++           src=\\"[object Object]\\"
++         />
++       </div>
+      </div>
+    </div>
+  </DocumentFragment>"
+`;
+
+exports[`[Contrib] components/<Tags /> should hide the suggestion when the input is emptied 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -13,28 +13,28 @@
+          class=\\"sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb\\"
+        >
+          <span
+            class=\\"Tag__Text-lc1n3o-1 dtXAeC\\"
+          >
+-           A Tag
++           Another Tag
+          </span>
+          <img
+-           alt=\\"Bouton supprimant le tag A Tag\\"
++           alt=\\"Bouton supprimant le tag Another Tag\\"
+            class=\\"Tag__Button-lc1n3o-2 jbGhej\\"
+            src=\\"[object Object]\\"
+          />
+        </div>
+        <div
+          class=\\"sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb\\"
+        >
+          <span
+            class=\\"Tag__Text-lc1n3o-1 dtXAeC\\"
+          >
+-           Another Tag
++           Yet Another Tag
+          </span>
+          <img
+-           alt=\\"Bouton supprimant le tag Another Tag\\"
++           alt=\\"Bouton supprimant le tag Yet Another Tag\\"
+            class=\\"Tag__Button-lc1n3o-2 jbGhej\\"
+            src=\\"[object Object]\\"
+          />
+        </div>
+      </div>"
+`;
+
+exports[`[Contrib] components/<Tags /> should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
+  >
+    <input
+      class="Input-l1y0rz-0 kKQySM"
+      placeholder="Commencez à taper le nom du tag"
+    />
+    <div
+      class="sc-bdVaJa sc-bwzfXH Tags__SelectedTags-sc-9wg2t-1 gNdWxU"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb"
+      >
+        <span
+          class="Tag__Text-lc1n3o-1 dtXAeC"
+        >
+          A Tag
+        </span>
+        <img
+          alt="Bouton supprimant le tag A Tag"
+          class="Tag__Button-lc1n3o-2 jbGhej"
+          src="[object Object]"
+        />
+      </div>
+      <div
+        class="sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb"
+      >
+        <span
+          class="Tag__Text-lc1n3o-1 dtXAeC"
+        >
+          Another Tag
+        </span>
+        <img
+          alt="Bouton supprimant le tag Another Tag"
+          class="Tag__Button-lc1n3o-2 jbGhej"
+          src="[object Object]"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`[Contrib] components/<Tags /> should remove the expected tag 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -13,28 +13,28 @@
+          class=\\"sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb\\"
+        >
+          <span
+            class=\\"Tag__Text-lc1n3o-1 dtXAeC\\"
+          >
+-           A Tag
++           Another Tag
+          </span>
+          <img
+-           alt=\\"Bouton supprimant le tag A Tag\\"
++           alt=\\"Bouton supprimant le tag Another Tag\\"
+            class=\\"Tag__Button-lc1n3o-2 jbGhej\\"
+            src=\\"[object Object]\\"
+          />
+        </div>
+        <div
+          class=\\"sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb\\"
+        >
+          <span
+            class=\\"Tag__Text-lc1n3o-1 dtXAeC\\"
+          >
+-           Another Tag
++           Yet Another Tag
+          </span>
+          <img
+-           alt=\\"Bouton supprimant le tag Another Tag\\"
++           alt=\\"Bouton supprimant le tag Yet Another Tag\\"
+            class=\\"Tag__Button-lc1n3o-2 jbGhej\\"
+            src=\\"[object Object]\\"
+          />
+        </div>
+      </div>"
+`;
+
+exports[`[Contrib] components/<Tags /> should show the expected suggestion 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -5,10 +5,19 @@
+      <input
+        class=\\"Input-l1y0rz-0 kKQySM\\"
+        placeholder=\\"Commencez à taper le nom du tag\\"
+      />
+      <div
++       class=\\"sc-bdVaJa sc-bwzfXH Tags__SuggestedTags-sc-9wg2t-2 dTgBzl\\"
++     >
++       <div
++         class=\\"Tags__SuggestedTagsRow-sc-9wg2t-3 cIyIVc\\"
++       >
++         Yet Another Tag
++       </div>
++     </div>
++     <div
+        class=\\"sc-bdVaJa sc-bwzfXH Tags__SelectedTags-sc-9wg2t-1 gNdWxU\\"
+      >
+        <div
+          class=\\"sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb\\"
+        >"
+`;
+
+exports[`[Contrib] components/<Tags /> should show the expected suggestions 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -5,36 +5,45 @@
+      <input
+        class=\\"Input-l1y0rz-0 kKQySM\\"
+        placeholder=\\"Commencez à taper le nom du tag\\"
+      />
+      <div
++       class=\\"sc-bdVaJa sc-bwzfXH Tags__SuggestedTags-sc-9wg2t-2 dTgBzl\\"
++     >
++       <div
++         class=\\"Tags__SuggestedTagsRow-sc-9wg2t-3 cIyIVc\\"
++       >
++         A Tag
++       </div>
++     </div>
++     <div
+        class=\\"sc-bdVaJa sc-bwzfXH Tags__SelectedTags-sc-9wg2t-1 gNdWxU\\"
+      >
+        <div
+          class=\\"sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb\\"
+        >
+          <span
+            class=\\"Tag__Text-lc1n3o-1 dtXAeC\\"
+          >
+-           A Tag
++           Another Tag
+          </span>
+          <img
+-           alt=\\"Bouton supprimant le tag A Tag\\"
++           alt=\\"Bouton supprimant le tag Another Tag\\"
+            class=\\"Tag__Button-lc1n3o-2 jbGhej\\"
+            src=\\"[object Object]\\"
+          />
+        </div>
+        <div
+          class=\\"sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb\\"
+        >
+          <span
+            class=\\"Tag__Text-lc1n3o-1 dtXAeC\\"
+          >
+-           Another Tag
++           Yet Another Tag
+          </span>
+          <img
+-           alt=\\"Bouton supprimant le tag Another Tag\\"
++           alt=\\"Bouton supprimant le tag Yet Another Tag\\"
+            class=\\"Tag__Button-lc1n3o-2 jbGhej\\"
+            src=\\"[object Object]\\"
+          />
+        </div>
+      </div>"
+`;
+
+exports[`[Contrib] components/<Tags /> without optional props should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
+  >
+    <input
+      class="Input-l1y0rz-0 kKQySM"
+      placeholder="Commencez à taper le nom de l'étiquette"
+    />
+    <div
+      class="sc-bdVaJa sc-bwzfXH Tags__SelectedTags-sc-9wg2t-1 gNdWxU"
+    />
+  </div>
+</div>
+`;
+
+exports[`[Contrib] components/<Tags /> without optional props should ot show any suggestion 1`] = `
+"Snapshot Diff:
+  Comparing two different types of values. Expected object but received null."
+`;
