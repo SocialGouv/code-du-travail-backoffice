@@ -2,8 +2,33 @@
   Overrided global styles (= customized for the backoffice)
 */
 
+/* https://coolors.co/253031-315659-2978a0-bcab79-c6e0ff */
+:root {
+  /* Original shades */
+  --color-black-leather-jacket: #253031;
+  --color-dark-slate-gray: #315659;
+  --color-lapis-lazuli: #2978A0;
+  --color-misty-moss: #BCAB79;
+  --color-periwinkle: #C6E0FF;
+
+  /* Light shades */
+  --color-mummy-tomb: #888E8E;
+  --color-silver-sand: #B4C1C2;
+  --color-light-steel-blue: #B1CDDC;
+  --color-pearl: #E6E0CE;
+  --color-alice-blue: #EAF3FF;
+
+  /* Dark shades */
+  --color-eerie-black: #151B1B;
+  --color-japenese-indigo: #243F41;
+  --color-blue-sapphire: #1E5875;
+  --color-shadow: #897D59;
+  --color-cadet-grey: #91A3BA;
+}
+
 body {
   border-top: 0;
+  color: var(--color-black-leather-jacket);
   overflow-x: hidden;
 }
 
