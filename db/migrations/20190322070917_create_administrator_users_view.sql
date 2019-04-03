@@ -13,6 +13,8 @@ SELECT
     users.email,
     users.name,
     users.role,
+    users.created_at,
+    users.updated_at,
     locations.id AS location_id,
     locations.name AS location_name,
     array_remove(
