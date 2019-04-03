@@ -21,6 +21,7 @@ const SuggestedTags = styled(Flex)`
   max-width: 32rem;
   position: absolute;
   user-select: none;
+  z-index: 1;
 `;
 const SuggestedTagsRow = styled.div`
   border-bottom: solid 1px var(--color-misty-moss);
