@@ -166,7 +166,7 @@ exports[`[Contrib] components/<Tags /> should show the expected suggestion 1`] =
         placeholder=\\"Commencez à taper le nom du tag\\"
       />
       <div
-+       class=\\"sc-bdVaJa sc-bwzfXH Tags__SuggestedTags-sc-9wg2t-2 dTgBzl\\"
++       class=\\"sc-bdVaJa sc-bwzfXH Tags__SuggestedTags-sc-9wg2t-2 bGEYen\\"
 +     >
 +       <div
 +         class=\\"Tags__SuggestedTagsRow-sc-9wg2t-3 cIyIVc\\"
@@ -193,7 +193,7 @@ exports[`[Contrib] components/<Tags /> should show the expected suggestions 1`] 
         placeholder=\\"Commencez à taper le nom du tag\\"
       />
       <div
-+       class=\\"sc-bdVaJa sc-bwzfXH Tags__SuggestedTags-sc-9wg2t-2 dTgBzl\\"
++       class=\\"sc-bdVaJa sc-bwzfXH Tags__SuggestedTags-sc-9wg2t-2 bGEYen\\"
 +     >
 +       <div
 +         class=\\"Tags__SuggestedTagsRow-sc-9wg2t-3 cIyIVc\\"
