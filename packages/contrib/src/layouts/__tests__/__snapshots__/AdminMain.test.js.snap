@@ -42,35 +42,35 @@ exports[`[Contrib] layouts/<AdminMain /> should render 1`] = `
         class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 cOkOOn"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 eCSATZ"
+          class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"
         >
           <div
-            class="AdminMenu__Link-t0dk93-1 hHiQqs"
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
           >
             Tableau de bord
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 hHiQqs"
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
           >
             Conventions
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 hHiQqs"
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
           >
             Étiquettes
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 hHiQqs"
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
           >
             Questions
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 hHiQqs"
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
           >
             Unités
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 hHiQqs"
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
           >
             Utilisateurs
           </div>
