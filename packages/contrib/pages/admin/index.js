@@ -12,9 +12,6 @@ import "../../node_modules/react-table/react-table.css";
 const Container = styled(Flex)`
   margin: 0 1rem 1rem;
 `;
-const Subtitle = styled(Title)`
-  font-size: 1.1rem;
-`;
 const HeadCell = styled.th`
   border-bottom: solid 1px lightgray;
   border-top: solid 1px lightgray;
@@ -25,6 +22,7 @@ const Cell = styled.td`
   border-bottom: solid 1px lightgray;
   padding: 0.25rem 0.5rem;
   vertical-align: top;
+  width: ${props => (props.width !== undefined ? `${props.width}px` : "auto")};
 `;
 
 export default class Index extends React.Component {
@@ -39,7 +37,8 @@ export default class Index extends React.Component {
   async componentDidMount() {
     this.axios = customAxios();
 
-    const select = "select=id,question(value),agreement(idcc),updated_at";
+    const select =
+      "select=id,question(value),agreement(idcc),updated_at,user(name)";
     const filter = "user_id=not.is.null&order=updated_at.desc&limit=10";
 
     try {
@@ -58,9 +57,10 @@ export default class Index extends React.Component {
       <tr key={answer.id}>
         <Cell>{answer.agreement.idcc}</Cell>
         <Cell>{answer.question.value}</Cell>
-        <Cell style={{ whiteSpace: "nowrap" }}>
+        <Cell width="160">
           {moment(answer.updated_at).format("DD/MM/YY HH:mm")}
         </Cell>
+        <Cell width="240">{answer.user.name}</Cell>
       </tr>
     ));
   }
@@ -70,13 +70,16 @@ export default class Index extends React.Component {
       <AdminMain>
         <Container flexDirection="column">
           <Title>Tableau de bord</Title>
-          <Subtitle isFirst>Dernières réponses modifiées:</Subtitle>
+          <Title isFirst isSecondary>
+            Dernières réponses modifiées
+          </Title>
           <table>
             <thead>
               <tr>
                 <HeadCell>IDCC</HeadCell>
                 <HeadCell>Question</HeadCell>
                 <HeadCell>Modifiée le</HeadCell>
+                <HeadCell>Par</HeadCell>
               </tr>
             </thead>
             <tbody>{this.getAnswers()}</tbody>
