@@ -19,7 +19,19 @@ const COLUMNS = [
 
 export default () => (
   <AdminIndex
-    apiUri="/agreements"
+    apiPath="/agreements"
+    ariaLabels={{
+      cancelDeletionButton: `Bouton annulant la suppression de cette convention
+                            de la base de données`,
+      deleteButton: `Bouton confirmant la suppression de cette convention de la
+                    base de données`,
+      editButton: `Bouton redirigeant vers le formulaire d'édition des données
+                  de cette convention`,
+      newButton: `Bouton redirigeant vers le formulaire de création d'une nouvel
+                 nouvelle convetion`,
+      removeButton: `Bouton supprimant cette convention de la base de données
+                    après confirmation`
+    }}
     columns={COLUMNS}
     slug="agreement"
     title="Conventions"
