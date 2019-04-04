@@ -1,0 +1,1343 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 bBIrgk"
+    style="height: 100vh;"
+  >
+    <div
+      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 eBCYWC"
+      width="1"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 kivzys"
+      >
+        <div
+          class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB"
+        >
+          <img
+            alt="Code du travail numérique"
+            aria-label="Bouton de retour au tableau de bord"
+            class="Header__Logo-sc-7cr55z-2 kAIypM"
+            src="[object Object]"
+          />
+          <div
+            class="sc-bdVaJa sc-bwzfXH eVPJMi"
+          >
+            <span
+              class="Header__Title-sc-7cr55z-3 jGdlvq"
+            >
+              Code du travail numérique
+            </span>
+            <span
+              class="Header__Subtitle-sc-7cr55z-4 kxPxIS"
+            >
+              Outil de contribution
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 cOkOOn"
+      >
+        <div
+          class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"
+        >
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Tableau de bord
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Conventions
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Étiquettes
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Questions
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Unités
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Utilisateurs
+          </div>
+        </div>
+        <div
+          class="AdminMain__Content-lizrru-0 gDBNFq"
+        >
+          <form
+            class="AdminForm__Form-scluvj-0 dGqbeT"
+            role="form"
+          >
+            <p
+              class="Title-r6qlw8-0 gmywtA"
+            >
+              Edit Item
+            </p>
+            <div
+              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+            >
+              <label
+                class="AdminForm__Label-scluvj-1 jCpDRz"
+                for="defaultInput"
+                id="label_defaultInput"
+              >
+                A Default Input
+              </label>
+              <input
+                class="Input-l1y0rz-0 kKQySM"
+                id="defaultInput"
+                name="defaultInput"
+                type="number"
+                value=""
+              />
+            </div>
+            <div
+              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+            >
+              <label
+                class="AdminForm__Label-scluvj-1 jCpDRz"
+              />
+              <div>
+                <div
+                  class="AdminForm__Error-scluvj-2 cshRmY"
+                />
+                <div
+                  class="sc-bdVaJa sc-bwzfXH pjOvZ"
+                >
+                  <button
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 exNuds"
+                    color="var(--color-periwinkle)"
+                    font-size="inherit"
+                    font-weight="bold"
+                    title="An aria label for the cancel button"
+                    type="button"
+                  >
+                    Annuler
+                  </button>
+                  <button
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 iDhkoI"
+                    color="var(--color-lapis-lazuli)"
+                    font-size="inherit"
+                    font-weight="bold"
+                    title="An aria label for the creation button"
+                    type="submit"
+                  >
+                    Créer
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should submit the expected data 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -116,20 +116,22 @@
+                    class=\\"sc-bdVaJa sc-bwzfXH pjOvZ\\"
+                  >
+                    <button
+                      class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 exNuds\\"
+                      color=\\"var(--color-periwinkle)\\"
++                     disabled=\\"\\"
+                      font-size=\\"inherit\\"
+                      font-weight=\\"bold\\"
+                      title=\\"An aria label for the cancel button\\"
+                      type=\\"button\\"
+                    >
+                      Annuler
+                    </button>
+                    <button
+                      class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 iDhkoI\\"
+                      color=\\"var(--color-lapis-lazuli)\\"
++                     disabled=\\"\\"
+                      font-size=\\"inherit\\"
+                      font-weight=\\"bold\\"
+                      title=\\"An aria label for the creation button\\"
+                      type=\\"submit\\"
+                    >"
+`;
+
+exports[`[Contrib] components/<AdminForm /> (create) should add a tag accordingly 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -118,11 +118,11 @@
+                  <input
+                    class=\\"Input-l1y0rz-0 kKQySM\\"
+                    id=\\"inputWithButton\\"
+                    name=\\"inputWithButton\\"
+                    type=\\"text\\"
+-                   value=\\"\\"
++                   value=\\"an input with value button that has been transformed\\"
+                  />
+                  <button
+                    class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ecLjBX\\"
+                    color=\\"white\\"
+                    font-size=\\"inherit\\"
+@@ -196,11 +196,26 @@
+                    class=\\"Input-l1y0rz-0 kKQySM\\"
+                    placeholder=\\"Commencez à taper le nom du tag\\"
+                  />
+                  <div
+                    class=\\"sc-bdVaJa sc-bwzfXH Tags__SelectedTags-sc-9wg2t-1 gNdWxU\\"
++                 >
++                   <div
++                     class=\\"sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb\\"
++                   >
++                     <span
++                       class=\\"Tag__Text-lc1n3o-1 dtXAeC\\"
++                     >
++                       First A Tag
++                     </span>
++                     <img
++                       alt=\\"Bouton supprimant le tag First A Tag\\"
++                       class=\\"Tag__Button-lc1n3o-2 jbGhej\\"
++                       src=\\"[object Object]\\"
+                      />
++                   </div>
++                 </div>
+                </div>
+              </div>
+              <div
+                class=\\"sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE\\"
+              >"
+`;
+
+exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 bBIrgk"
+    style="height: 100vh;"
+  >
+    <div
+      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 eBCYWC"
+      width="1"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 kivzys"
+      >
+        <div
+          class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB"
+        >
+          <img
+            alt="Code du travail numérique"
+            aria-label="Bouton de retour au tableau de bord"
+            class="Header__Logo-sc-7cr55z-2 kAIypM"
+            src="[object Object]"
+          />
+          <div
+            class="sc-bdVaJa sc-bwzfXH eVPJMi"
+          >
+            <span
+              class="Header__Title-sc-7cr55z-3 jGdlvq"
+            >
+              Code du travail numérique
+            </span>
+            <span
+              class="Header__Subtitle-sc-7cr55z-4 kxPxIS"
+            >
+              Outil de contribution
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 cOkOOn"
+      >
+        <div
+          class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"
+        >
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Tableau de bord
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Conventions
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Étiquettes
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Questions
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Unités
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Utilisateurs
+          </div>
+        </div>
+        <div
+          class="AdminMain__Content-lizrru-0 gDBNFq"
+        >
+          <form
+            class="AdminForm__Form-scluvj-0 dGqbeT"
+            role="form"
+          >
+            <p
+              class="Title-r6qlw8-0 gmywtA"
+            >
+              New Item
+            </p>
+            <div
+              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+            >
+              <label
+                class="AdminForm__Label-scluvj-1 jCpDRz"
+                for="defaultInput"
+                id="label_defaultInput"
+              >
+                A Default Input
+              </label>
+              <input
+                class="Input-l1y0rz-0 kKQySM"
+                id="defaultInput"
+                name="defaultInput"
+                type="text"
+                value=""
+              />
+            </div>
+            <div
+              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+            >
+              <label
+                class="AdminForm__Label-scluvj-1 jCpDRz"
+                for="inputWithButton"
+                id="label_inputWithButton"
+              >
+                An Input With Button
+              </label>
+              <div
+                class="sc-bdVaJa sc-bwzfXH pjOvZ"
+              >
+                <input
+                  class="Input-l1y0rz-0 kKQySM"
+                  id="inputWithButton"
+                  name="inputWithButton"
+                  type="text"
+                  value=""
+                />
+                <button
+                  class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ecLjBX"
+                  color="white"
+                  font-size="inherit"
+                  font-weight="bold"
+                  title="An Input Button"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="svg-inline--fa fa-sync fa-w-16 fa-1x "
+                    color="var(--color-lapis-lazuli)"
+                    data-icon="sync"
+                    data-prefix="fas"
+                    focusable="false"
+                    role="img"
+                    viewBox="0 0 512 512"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M440.65 12.57l4 82.77A247.16 247.16 0 0 0 255.83 8C134.73 8 33.91 94.92 12.29 209.82A12 12 0 0 0 24.09 224h49.05a12 12 0 0 0 11.67-9.26 175.91 175.91 0 0 1 317-56.94l-101.46-4.86a12 12 0 0 0-12.57 12v47.41a12 12 0 0 0 12 12H500a12 12 0 0 0 12-12V12a12 12 0 0 0-12-12h-47.37a12 12 0 0 0-11.98 12.57zM255.83 432a175.61 175.61 0 0 1-146-77.8l101.8 4.87a12 12 0 0 0 12.57-12v-47.4a12 12 0 0 0-12-12H12a12 12 0 0 0-12 12V500a12 12 0 0 0 12 12h47.35a12 12 0 0 0 12-12.6l-4.15-82.57A247.17 247.17 0 0 0 255.83 504c121.11 0 221.93-86.92 243.55-201.82a12 12 0 0 0-11.8-14.18h-49.05a12 12 0 0 0-11.67 9.26A175.86 175.86 0 0 1 255.83 432z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div
+              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+            >
+              <label
+                class="AdminForm__Label-scluvj-1 jCpDRz"
+                for="defaultSelect"
+                id="label_defaultSelect"
+              >
+                A Default Select
+              </label>
+              <select
+                class="Select-gjmg2q-0 ivoiOs"
+                id="defaultSelect"
+                name="defaultSelect"
+              >
+                <option
+                  selected=""
+                />
+                <option
+                  value="first_option"
+                >
+                  First Option
+                </option>
+                <option
+                  value="second_option"
+                >
+                  Second Option
+                </option>
+              </select>
+            </div>
+            <div
+              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+            >
+              <label
+                class="AdminForm__Label-scluvj-1 jCpDRz"
+                for="defaultTags"
+                id="label_defaultTags"
+              >
+                A Default Tags
+              </label>
+              <div
+                class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
+              >
+                <input
+                  class="Input-l1y0rz-0 kKQySM"
+                  placeholder="Commencez à taper le nom du tag"
+                />
+                <div
+                  class="sc-bdVaJa sc-bwzfXH Tags__SelectedTags-sc-9wg2t-1 gNdWxU"
+                />
+              </div>
+            </div>
+            <div
+              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+            >
+              <label
+                class="AdminForm__Label-scluvj-1 jCpDRz"
+                for="defaultText"
+                id="label_defaultText"
+              >
+                A Default Textarea
+              </label>
+              <textarea
+                class="Textarea-sc-1raibsp-0 fTuSLk"
+                id="defaultText"
+                name="defaultText"
+                rows="3"
+              />
+            </div>
+            <div
+              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+            >
+              <label
+                class="AdminForm__Label-scluvj-1 jCpDRz"
+                for="tagsWithCustomApiPath"
+                id="label_tagsWithCustomApiPath"
+              >
+                A Tags With Custom API Path
+              </label>
+              <div
+                class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
+              >
+                <input
+                  class="Input-l1y0rz-0 kKQySM"
+                  placeholder="Commencez à taper le nom de la collection"
+                />
+                <div
+                  class="sc-bdVaJa sc-bwzfXH Tags__SelectedTags-sc-9wg2t-1 gNdWxU"
+                />
+              </div>
+            </div>
+            <div
+              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+            >
+              <label
+                class="AdminForm__Label-scluvj-1 jCpDRz"
+              />
+              <div>
+                <div
+                  class="AdminForm__Error-scluvj-2 cshRmY"
+                />
+                <div
+                  class="sc-bdVaJa sc-bwzfXH pjOvZ"
+                >
+                  <button
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 exNuds"
+                    color="var(--color-periwinkle)"
+                    font-size="inherit"
+                    font-weight="bold"
+                    title="An aria label for the cancel button"
+                    type="button"
+                  >
+                    Annuler
+                  </button>
+                  <button
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 iDhkoI"
+                    color="var(--color-lapis-lazuli)"
+                    font-size="inherit"
+                    font-weight="bold"
+                    title="An aria label for the create button"
+                    type="submit"
+                  >
+                    Créer
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`[Contrib] components/<AdminForm /> (create) should remove a tag accordingly 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -118,11 +118,11 @@
+                  <input
+                    class=\\"Input-l1y0rz-0 kKQySM\\"
+                    id=\\"inputWithButton\\"
+                    name=\\"inputWithButton\\"
+                    type=\\"text\\"
+-                   value=\\"\\"
++                   value=\\"an input with value button that has been transformed\\"
+                  />
+                  <button
+                    class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ecLjBX\\"
+                    color=\\"white\\"
+                    font-size=\\"inherit\\""
+`;
+
+exports[`[Contrib] components/<AdminForm /> (create) should submit the expected data 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -118,11 +118,11 @@
+                  <input
+                    class=\\"Input-l1y0rz-0 kKQySM\\"
+                    id=\\"inputWithButton\\"
+                    name=\\"inputWithButton\\"
+                    type=\\"text\\"
+-                   value=\\"\\"
++                   value=\\"an input with value button that has been transformed\\"
+                  />
+                  <button
+                    class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ecLjBX\\"
+                    color=\\"white\\"
+                    font-size=\\"inherit\\"
+@@ -235,13 +235,42 @@
+                    class=\\"Input-l1y0rz-0 kKQySM\\"
+                    placeholder=\\"Commencez à taper le nom de la collection\\"
+                  />
+                  <div
+                    class=\\"sc-bdVaJa sc-bwzfXH Tags__SelectedTags-sc-9wg2t-1 gNdWxU\\"
++                 >
++                   <div
++                     class=\\"sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb\\"
++                   >
++                     <span
++                       class=\\"Tag__Text-lc1n3o-1 dtXAeC\\"
++                     >
++                       Second B Tag
++                     </span>
++                     <img
++                       alt=\\"Bouton supprimant la collection Second B Tag\\"
++                       class=\\"Tag__Button-lc1n3o-2 jbGhej\\"
++                       src=\\"[object Object]\\"
+                      />
+                    </div>
++                   <div
++                     class=\\"sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb\\"
++                   >
++                     <span
++                       class=\\"Tag__Text-lc1n3o-1 dtXAeC\\"
++                     >
++                       Third B Tag
++                     </span>
++                     <img
++                       alt=\\"Bouton supprimant la collection Third B Tag\\"
++                       class=\\"Tag__Button-lc1n3o-2 jbGhej\\"
++                       src=\\"[object Object]\\"
++                     />
++                   </div>
+                  </div>
++               </div>
++             </div>
+              <div
+                class=\\"sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE\\"
+              >
+                <label
+                  class=\\"AdminForm__Label-scluvj-1 jCpDRz\\"
+@@ -254,20 +283,22 @@
+                    class=\\"sc-bdVaJa sc-bwzfXH pjOvZ\\"
+                  >
+                    <button
+                      class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 exNuds\\"
+                      color=\\"var(--color-periwinkle)\\"
++                     disabled=\\"\\"
+                      font-size=\\"inherit\\"
+                      font-weight=\\"bold\\"
+                      title=\\"An aria label for the cancel button\\"
+                      type=\\"button\\"
+                    >
+                      Annuler
+                    </button>
+                    <button
+                      class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 iDhkoI\\"
+                      color=\\"var(--color-lapis-lazuli)\\"
++                     disabled=\\"\\"
+                      font-size=\\"inherit\\"
+                      font-weight=\\"bold\\"
+                      title=\\"An aria label for the create button\\"
+                      type=\\"submit\\"
+                    >"
+`;
+
+exports[`[Contrib] components/<AdminForm /> (create) should the expected error 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -118,11 +118,11 @@
+                  <input
+                    class=\\"Input-l1y0rz-0 kKQySM\\"
+                    id=\\"inputWithButton\\"
+                    name=\\"inputWithButton\\"
+                    type=\\"text\\"
+-                   value=\\"\\"
++                   value=\\"an input with value button that has been transformed\\"
+                  />
+                  <button
+                    class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ecLjBX\\"
+                    color=\\"white\\"
+                    font-size=\\"inherit\\"
+@@ -247,11 +247,13 @@
+                  class=\\"AdminForm__Label-scluvj-1 jCpDRz\\"
+                />
+                <div>
+                  <div
+                    class=\\"AdminForm__Error-scluvj-2 cshRmY\\"
+-                 />
++                 >
++                   Erreur: An error.
++                 </div>
+                  <div
+                    class=\\"sc-bdVaJa sc-bwzfXH pjOvZ\\"
+                  >
+                    <button
+                      class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 exNuds\\""
+`;
+
+exports[`[Contrib] components/<AdminForm /> (create) should transform the input with button value as expected 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -118,11 +118,11 @@
+                  <input
+                    class=\\"Input-l1y0rz-0 kKQySM\\"
+                    id=\\"inputWithButton\\"
+                    name=\\"inputWithButton\\"
+                    type=\\"text\\"
+-                   value=\\"\\"
++                   value=\\"an input with value button that has been transformed\\"
+                  />
+                  <button
+                    class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ecLjBX\\"
+                    color=\\"white\\"
+                    font-size=\\"inherit\\""
+`;
+
+exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 bBIrgk"
+    style="height: 100vh;"
+  >
+    <div
+      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 eBCYWC"
+      width="1"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 kivzys"
+      >
+        <div
+          class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB"
+        >
+          <img
+            alt="Code du travail numérique"
+            aria-label="Bouton de retour au tableau de bord"
+            class="Header__Logo-sc-7cr55z-2 kAIypM"
+            src="[object Object]"
+          />
+          <div
+            class="sc-bdVaJa sc-bwzfXH eVPJMi"
+          >
+            <span
+              class="Header__Title-sc-7cr55z-3 jGdlvq"
+            >
+              Code du travail numérique
+            </span>
+            <span
+              class="Header__Subtitle-sc-7cr55z-4 kxPxIS"
+            >
+              Outil de contribution
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 cOkOOn"
+      >
+        <div
+          class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"
+        >
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Tableau de bord
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Conventions
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Étiquettes
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Questions
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Unités
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Utilisateurs
+          </div>
+        </div>
+        <div
+          class="AdminMain__Content-lizrru-0 gDBNFq"
+        >
+          <form
+            class="AdminForm__Form-scluvj-0 dGqbeT"
+            role="form"
+          >
+            <p
+              class="Title-r6qlw8-0 gmywtA"
+            >
+              Edit Item
+            </p>
+            <div
+              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+            >
+              <label
+                class="AdminForm__Label-scluvj-1 jCpDRz"
+                for="defaultInput"
+                id="label_defaultInput"
+              >
+                A Default Input
+              </label>
+              <input
+                class="Input-l1y0rz-0 kKQySM"
+                id="defaultInput"
+                name="defaultInput"
+                type="number"
+                value="123"
+              />
+            </div>
+            <div
+              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+            >
+              <label
+                class="AdminForm__Label-scluvj-1 jCpDRz"
+              />
+              <div>
+                <div
+                  class="AdminForm__Error-scluvj-2 cshRmY"
+                />
+                <div
+                  class="sc-bdVaJa sc-bwzfXH pjOvZ"
+                >
+                  <button
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 exNuds"
+                    color="var(--color-periwinkle)"
+                    font-size="inherit"
+                    font-weight="bold"
+                    title="An aria label for the cancel button"
+                    type="button"
+                  >
+                    Annuler
+                  </button>
+                  <button
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 iDhkoI"
+                    color="var(--color-lapis-lazuli)"
+                    font-size="inherit"
+                    font-weight="bold"
+                    title="An aria label for the edit button"
+                    type="submit"
+                  >
+                    Mettre à jour
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should submit the expected data 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -116,20 +116,22 @@
+                    class=\\"sc-bdVaJa sc-bwzfXH pjOvZ\\"
+                  >
+                    <button
+                      class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 exNuds\\"
+                      color=\\"var(--color-periwinkle)\\"
++                     disabled=\\"\\"
+                      font-size=\\"inherit\\"
+                      font-weight=\\"bold\\"
+                      title=\\"An aria label for the cancel button\\"
+                      type=\\"button\\"
+                    >
+                      Annuler
+                    </button>
+                    <button
+                      class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 iDhkoI\\"
+                      color=\\"var(--color-lapis-lazuli)\\"
++                     disabled=\\"\\"
+                      font-size=\\"inherit\\"
+                      font-weight=\\"bold\\"
+                      title=\\"An aria label for the edit button\\"
+                      type=\\"submit\\"
+                    >"
+`;
+
+exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 bBIrgk"
+    style="height: 100vh;"
+  >
+    <div
+      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 eBCYWC"
+      width="1"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 kivzys"
+      >
+        <div
+          class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB"
+        >
+          <img
+            alt="Code du travail numérique"
+            aria-label="Bouton de retour au tableau de bord"
+            class="Header__Logo-sc-7cr55z-2 kAIypM"
+            src="[object Object]"
+          />
+          <div
+            class="sc-bdVaJa sc-bwzfXH eVPJMi"
+          >
+            <span
+              class="Header__Title-sc-7cr55z-3 jGdlvq"
+            >
+              Code du travail numérique
+            </span>
+            <span
+              class="Header__Subtitle-sc-7cr55z-4 kxPxIS"
+            >
+              Outil de contribution
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 cOkOOn"
+      >
+        <div
+          class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"
+        >
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Tableau de bord
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Conventions
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Étiquettes
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Questions
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Unités
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Utilisateurs
+          </div>
+        </div>
+        <div
+          class="AdminMain__Content-lizrru-0 gDBNFq"
+        >
+          <form
+            class="AdminForm__Form-scluvj-0 dGqbeT"
+            role="form"
+          >
+            <p
+              class="Title-r6qlw8-0 gmywtA"
+            >
+              Edit Item
+            </p>
+            <div
+              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+            >
+              <label
+                class="AdminForm__Label-scluvj-1 jCpDRz"
+                for="defaultInput"
+                id="label_defaultInput"
+              >
+                A Default Input
+              </label>
+              <input
+                class="Input-l1y0rz-0 kKQySM"
+                id="defaultInput"
+                name="defaultInput"
+                type="number"
+                value="123"
+              />
+            </div>
+            <div
+              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+            >
+              <label
+                class="AdminForm__Label-scluvj-1 jCpDRz"
+              />
+              <div>
+                <div
+                  class="AdminForm__Error-scluvj-2 cshRmY"
+                />
+                <div
+                  class="sc-bdVaJa sc-bwzfXH pjOvZ"
+                >
+                  <button
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 exNuds"
+                    color="var(--color-periwinkle)"
+                    font-size="inherit"
+                    font-weight="bold"
+                    title="An aria label for the cancel button"
+                    type="button"
+                  >
+                    Annuler
+                  </button>
+                  <button
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 iDhkoI"
+                    color="var(--color-lapis-lazuli)"
+                    font-size="inherit"
+                    font-weight="bold"
+                    title="An aria label for the edit button"
+                    type="submit"
+                  >
+                    Mettre à jour
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should submit the expected data 1`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 bBIrgk"
+    style="height: 100vh;"
+  >
+    <div
+      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 eBCYWC"
+      width="1"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 kivzys"
+      >
+        <div
+          class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB"
+        >
+          <img
+            alt="Code du travail numérique"
+            aria-label="Bouton de retour au tableau de bord"
+            class="Header__Logo-sc-7cr55z-2 kAIypM"
+            src="[object Object]"
+          />
+          <div
+            class="sc-bdVaJa sc-bwzfXH eVPJMi"
+          >
+            <span
+              class="Header__Title-sc-7cr55z-3 jGdlvq"
+            >
+              Code du travail numérique
+            </span>
+            <span
+              class="Header__Subtitle-sc-7cr55z-4 kxPxIS"
+            >
+              Outil de contribution
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 cOkOOn"
+      >
+        <div
+          class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"
+        >
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Tableau de bord
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Conventions
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Étiquettes
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Questions
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Unités
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-1 jAbipT"
+          >
+            Utilisateurs
+          </div>
+        </div>
+        <div
+          class="AdminMain__Content-lizrru-0 gDBNFq"
+        >
+          <form
+            class="AdminForm__Form-scluvj-0 dGqbeT"
+            role="form"
+          >
+            <p
+              class="Title-r6qlw8-0 gmywtA"
+            >
+              Edit Item
+            </p>
+            <div
+              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+            >
+              <label
+                class="AdminForm__Label-scluvj-1 jCpDRz"
+                for="defaultInput"
+                id="label_defaultInput"
+              >
+                A Default Input
+              </label>
+              <input
+                class="Input-l1y0rz-0 kKQySM"
+                id="defaultInput"
+                name="defaultInput"
+                type="text"
+                value="the original default input value"
+              />
+            </div>
+            <div
+              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+            >
+              <label
+                class="AdminForm__Label-scluvj-1 jCpDRz"
+                for="inputWithButton"
+                id="label_inputWithButton"
+              >
+                An Input With Button
+              </label>
+              <div
+                class="sc-bdVaJa sc-bwzfXH pjOvZ"
+              >
+                <input
+                  class="Input-l1y0rz-0 kKQySM"
+                  id="inputWithButton"
+                  name="inputWithButton"
+                  type="text"
+                  value="the original input button value"
+                />
+                <button
+                  class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ecLjBX"
+                  color="white"
+                  font-size="inherit"
+                  font-weight="bold"
+                  title="An Input Button"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="svg-inline--fa fa-sync fa-w-16 fa-1x "
+                    color="var(--color-lapis-lazuli)"
+                    data-icon="sync"
+                    data-prefix="fas"
+                    focusable="false"
+                    role="img"
+                    viewBox="0 0 512 512"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M440.65 12.57l4 82.77A247.16 247.16 0 0 0 255.83 8C134.73 8 33.91 94.92 12.29 209.82A12 12 0 0 0 24.09 224h49.05a12 12 0 0 0 11.67-9.26 175.91 175.91 0 0 1 317-56.94l-101.46-4.86a12 12 0 0 0-12.57 12v47.41a12 12 0 0 0 12 12H500a12 12 0 0 0 12-12V12a12 12 0 0 0-12-12h-47.37a12 12 0 0 0-11.98 12.57zM255.83 432a175.61 175.61 0 0 1-146-77.8l101.8 4.87a12 12 0 0 0 12.57-12v-47.4a12 12 0 0 0-12-12H12a12 12 0 0 0-12 12V500a12 12 0 0 0 12 12h47.35a12 12 0 0 0 12-12.6l-4.15-82.57A247.17 247.17 0 0 0 255.83 504c121.11 0 221.93-86.92 243.55-201.82a12 12 0 0 0-11.8-14.18h-49.05a12 12 0 0 0-11.67 9.26A175.86 175.86 0 0 1 255.83 432z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div
+              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+            >
+              <label
+                class="AdminForm__Label-scluvj-1 jCpDRz"
+                for="defaultSelect"
+                id="label_defaultSelect"
+              >
+                A Default Select
+              </label>
+              <select
+                class="Select-gjmg2q-0 ivoiOs"
+                id="defaultSelect"
+                name="defaultSelect"
+              >
+                <option />
+                <option
+                  value="first_option"
+                >
+                  First Option
+                </option>
+                <option
+                  selected=""
+                  value="second_option"
+                >
+                  Second Option
+                </option>
+              </select>
+            </div>
+            <div
+              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+            >
+              <label
+                class="AdminForm__Label-scluvj-1 jCpDRz"
+                for="defaultTags"
+                id="label_defaultTags"
+              >
+                A Default Tags
+              </label>
+              <div
+                class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
+              >
+                <input
+                  class="Input-l1y0rz-0 kKQySM"
+                  placeholder="Commencez à taper le nom du tag"
+                />
+                <div
+                  class="sc-bdVaJa sc-bwzfXH Tags__SelectedTags-sc-9wg2t-1 gNdWxU"
+                >
+                  <div
+                    class="sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb"
+                  >
+                    <span
+                      class="Tag__Text-lc1n3o-1 dtXAeC"
+                    >
+                      First A Tag
+                    </span>
+                    <img
+                      alt="Bouton supprimant le tag First A Tag"
+                      class="Tag__Button-lc1n3o-2 jbGhej"
+                      src="[object Object]"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+            >
+              <label
+                class="AdminForm__Label-scluvj-1 jCpDRz"
+                for="defaultText"
+                id="label_defaultText"
+              >
+                A Default Textarea
+              </label>
+              <textarea
+                class="Textarea-sc-1raibsp-0 fTuSLk"
+                id="defaultText"
+                name="defaultText"
+                rows="3"
+              />
+            </div>
+            <div
+              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+            >
+              <label
+                class="AdminForm__Label-scluvj-1 jCpDRz"
+                for="tagsWithCustomApiPath"
+                id="label_tagsWithCustomApiPath"
+              >
+                A Tags With Custom API Path
+              </label>
+              <div
+                class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
+              >
+                <input
+                  class="Input-l1y0rz-0 kKQySM"
+                  placeholder="Commencez à taper le nom de la collection"
+                />
+                <div
+                  class="sc-bdVaJa sc-bwzfXH Tags__SelectedTags-sc-9wg2t-1 gNdWxU"
+                >
+                  <div
+                    class="sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb"
+                  >
+                    <span
+                      class="Tag__Text-lc1n3o-1 dtXAeC"
+                    >
+                      Second B Tag
+                    </span>
+                    <img
+                      alt="Bouton supprimant la collection Second B Tag"
+                      class="Tag__Button-lc1n3o-2 jbGhej"
+                      src="[object Object]"
+                    />
+                  </div>
+                  <div
+                    class="sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb"
+                  >
+                    <span
+                      class="Tag__Text-lc1n3o-1 dtXAeC"
+                    >
+                      Third B Tag
+                    </span>
+                    <img
+                      alt="Bouton supprimant la collection Third B Tag"
+                      class="Tag__Button-lc1n3o-2 jbGhej"
+                      src="[object Object]"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+            >
+              <label
+                class="AdminForm__Label-scluvj-1 jCpDRz"
+              />
+              <div>
+                <div
+                  class="AdminForm__Error-scluvj-2 cshRmY"
+                />
+                <div
+                  class="sc-bdVaJa sc-bwzfXH pjOvZ"
+                >
+                  <button
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 exNuds"
+                    color="var(--color-periwinkle)"
+                    font-size="inherit"
+                    font-weight="bold"
+                    title="An aria label for the cancel button"
+                    type="button"
+                  >
+                    Annuler
+                  </button>
+                  <button
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 iDhkoI"
+                    color="var(--color-lapis-lazuli)"
+                    font-size="inherit"
+                    font-weight="bold"
+                    title="An aria label for the edit button"
+                    type="submit"
+                  >
+                    Mettre à jour
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`[Contrib] components/<AdminForm /> (edit) should submit the expected data 1`] = `
+"Snapshot Diff:
+  Comparing two different types of values. Expected object but received null."
+`;
