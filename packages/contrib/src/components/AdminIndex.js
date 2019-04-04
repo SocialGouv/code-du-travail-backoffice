@@ -1,51 +1,29 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-
-import moment from "moment";
+import moment from "moment-timezone";
 import Router from "next/router";
 import React from "react";
 import ReactTable from "react-table";
-import { Button as ReButton, Flex } from "rebass";
+import { Flex } from "rebass";
 import styled from "styled-components";
 
+import Button from "../elements/Button";
 import Title from "../elements/Title";
 import AdminMain from "../layouts/AdminMain";
 import customAxios from "../libs/customAxios";
-
-import deleteImageUri from "../images/delete.svg";
-import editImageUri from "../images/edit.svg";
+import stringFrIncludes from "../libs/stringFrIncludes";
+import unspace from "../libs/unspace";
 
 const Container = styled(Flex)`
   margin: 0 1rem 1rem;
 `;
-const Button = styled(ReButton)`
-  background-color: #2978a0;
-  border-radius: 0;
-  cursor: pointer;
-  font-size: 0.825rem;
-  height: auto;
-  margin-bottom: 0.5rem;
-  margin-left: 1rem;
+const Head = styled(Flex)`
+  margin-bottom: 1rem;
 `;
 const Confirmation = styled.div`
-  background-color: red;
+  background-color: var(--color-cadet-grey);
   color: white;
   font-weight: 600;
-  margin: 1rem 0;
+  margin-bottom: 1rem;
   padding: 0.75rem 1rem;
-`;
-const ConfirmationButton = styled(ReButton)`
-  background-color: ${props => (Boolean(props.isMain) ? "black" : "darkred")};
-  border-radius: 0;
-  cursor: pointer;
-  font-size: 0.825rem;
-  height: auto;
-  margin: 1rem 0 0 1rem;
-`;
-const TableButton = styled.img`
-  cursor: pointer;
-  height: 1rem;
-  width: 1rem;
 `;
 
 export default class AdminIndex extends React.Component {
@@ -60,36 +38,42 @@ export default class AdminIndex extends React.Component {
       selectedId: ""
     };
 
+    this.apiGetPath =
+      props.apiGetPath !== undefined ? props.apiGetPath : props.apiPath;
+    this.apiDeletePath =
+      props.apiDeletePath !== undefined ? props.apiDeletePath : props.apiPath;
+
     this.columns = [
-      // {
-      //   Header: "ID",
-      //   accessor: "id",
-      //   width: 136
-      // },
       ...this.props.columns,
       {
         Header: "Créé le",
-        accessor: data => moment(data.created_at).format("DD/MM/YY HH:mm"),
+        accessor: data =>
+          moment(data.created_at)
+            .tz("Europe/Paris")
+            .format("YYYY-MM-DD HH:mm"),
         filterable: false,
         id: "createdAt",
         style: { textAlign: "center" },
-        width: 136
+        width: 160
       },
       {
         Header: "Modifié le",
-        accessor: data => moment(data.updated_at).format("DD/MM/YY HH:mm"),
+        accessor: data =>
+          moment(data.updated_at)
+            .tz("Europe/Paris")
+            .format("YYYY-MM-DD HH:mm"),
         filterable: false,
         id: "updatedAt",
         style: { textAlign: "center" },
-        width: 136
+        width: 160
       },
       {
-        // Header: "Catégorie",
         Cell: ({ value }) => (
-          <TableButton
-            alt=""
+          <Button
+            icon="edit"
+            isSmall
             onClick={() => this.edit(value)}
-            src={editImageUri}
+            title={unspace(this.props.ariaLabels.editButton)}
           />
         ),
         accessor: "id",
@@ -99,12 +83,12 @@ export default class AdminIndex extends React.Component {
         width: 40
       },
       {
-        // Header: "Catégorie",
         Cell: ({ value }) => (
-          <TableButton
-            alt=""
+          <Button
+            icon="trash"
+            isSmall
             onClick={() => this.confirmDeletion(value)}
-            src={deleteImageUri}
+            title={unspace(this.props.ariaLabels.removeButton)}
           />
         ),
         accessor: "id",
@@ -125,7 +109,8 @@ export default class AdminIndex extends React.Component {
     this.setState({ isFetching: true });
 
     try {
-      const { data } = await this.axios.get(this.props.apiUri);
+      const uri = `${this.apiGetPath}?order=updated_at.desc`;
+      const { data } = await this.axios.get(uri);
       this.setState({
         data,
         isLoading: false
@@ -138,13 +123,13 @@ export default class AdminIndex extends React.Component {
   }
 
   new() {
-    Router.push(`${window.window.location.pathname}/new`);
+    Router.push(`${window.location.pathname}/new`);
   }
 
   edit(id) {
     Router.push(
       {
-        pathname: window.location.pathname,
+        pathname: `${window.location.pathname}/edit`,
         query: { id }
       },
       `${window.location.pathname}/${id}`
@@ -169,9 +154,17 @@ export default class AdminIndex extends React.Component {
     this.setState({ isFetching: true });
 
     try {
-      await this.axios.delete(
-        `${this.props.apiUri}?id=eq.${this.state.selectedId}`
-      );
+      // If the `apiDeletePath` prop is defined, this means the deletion is done
+      // via a PostgREST RPC function, which must be called via a POST:
+      if (this.props.apiDeletePath !== undefined) {
+        await this.axios.post(this.apiDeletePath, {
+          id: this.state.selectedId
+        });
+      } else {
+        await this.axios.delete(
+          `${this.apiDeletePath}?id=eq.${this.state.selectedId}`
+        );
+      }
       await this.fetchData();
     } catch (err) {
       if (err !== undefined) console.warn(err);
@@ -184,20 +177,18 @@ export default class AdminIndex extends React.Component {
     });
   }
 
-  // https://github.com/tannerlinsley/react-table/tree/v6#props
+  /**
+   * Replace the default filter by a custom French-aware one for string values.
+   *
+   * @see https://github.com/tannerlinsley/react-table/tree/v6#props
+   */
   customFilter(filter, row) {
-    const id = filter.pivotId || filter.id;
-
-    const filterValue = filter.value
-      .replace(/(\W)/g, "\\$1")
-      .replace("a", "[aáâàä]")
-      .replace("e", "[eéêèë]")
-      .replace("i", "[iíîìï]")
-      .replace("o", "[oóôòö]")
-      .replace("u", "[uúûùü]");
-
-    return row[id] !== undefined
-      ? new RegExp(filterValue, "i").test(String(row[id]))
+    // It is impossible to unit-test this part since it's injected in
+    // react-table and the generated filter inputs are not query-able.
+    // This will eventually be checked whithin e2e tests.
+    /* istanbul ignore next */
+    return typeof row[filter.id] === "string"
+      ? stringFrIncludes(filter.value, row[filter.id])
       : true;
   }
 
@@ -207,22 +198,36 @@ export default class AdminIndex extends React.Component {
     return (
       <AdminMain>
         <Container flexDirection="column">
-          <Flex alignItems="flex-end" justifyContent="space-between">
+          <Head alignItems="flex-end" justifyContent="space-between">
             <Title>{this.props.title}</Title>
-            <Button onClick={this.new}>Nouveau</Button>
-          </Flex>
+            <Button
+              onClick={this.new}
+              title={unspace(this.props.ariaLabels.newButton)}
+            >
+              Nouveau
+            </Button>
+          </Head>
           {this.state.confirmDeletion && (
             <Confirmation>
               <div>
                 Êtes-vous sûr de vouloir supprimer {this.state.selectedId} ?
               </div>
               <Flex justifyContent="flex-end">
-                <ConfirmationButton isMain onClick={() => this.delete()}>
-                  OUI
-                </ConfirmationButton>
-                <ConfirmationButton onClick={() => this.cancelDeletion()}>
-                  NON
-                </ConfirmationButton>
+                <Button
+                  color="danger"
+                  hasGroup
+                  onClick={() => this.delete()}
+                  title={unspace(this.props.ariaLabels.deleteButton)}
+                >
+                  Supprimer
+                </Button>
+                <Button
+                  color="secondary"
+                  onClick={() => this.cancelDeletion()}
+                  title={unspace(this.props.ariaLabels.cancelDeletionButton)}
+                >
+                  Annuler
+                </Button>
               </Flex>
             </Confirmation>
           )}
@@ -230,11 +235,12 @@ export default class AdminIndex extends React.Component {
             data={this.state.data}
             defaultFilterMethod={this.customFilter}
             defaultPageSize={10}
+            defaultSorted={[{ id: "updated_at", desc: false }]}
             columns={this.columns}
             filterable={true}
+            multiSort={false}
             resizable={false}
             showPageSizeOptions={false}
-            sorted={[{ id: "updated_at", desc: true }]}
           />
         </Container>
       </AdminMain>
