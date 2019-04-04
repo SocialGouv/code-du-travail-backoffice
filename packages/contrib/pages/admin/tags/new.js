@@ -23,12 +23,25 @@ const FIELDS = [
   }
 ];
 
-export default class extends React.Component {
+export default class AdminTagsNewPage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      fields: FIELDS
+    };
+  }
+
   render() {
     return (
       <AdminForm
         apiPath="/tags"
-        fields={FIELDS}
+        ariaLabels={{
+          cancelButton: `Bouton redirigeant vers la liste des étiquettes`,
+          createOrEditButton: `Bouton créant une nouvelle étiquette dans la base
+                              de données à partir des données du formulaire`
+        }}
+        fields={this.state.fields}
         indexPath="/tags"
         title="Nouvelle étiquette"
       />
