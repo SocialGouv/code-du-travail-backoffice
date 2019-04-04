@@ -27,5 +27,22 @@ const COLUMNS = [
 ];
 
 export default () => (
-  <AdminIndex apiUri="/tags" columns={COLUMNS} slug="tag" title="Étiquettes" />
+  <AdminIndex
+    apiPath="/tags"
+    ariaLabels={{
+      cancelDeletionButton: `Bouton annulant la suppression de cette étiquette
+                            de la base de données`,
+      deleteButton: `Bouton confirmant la suppression de cette étiquette de la
+                    base de données`,
+      editButton: `Bouton redirigeant vers le formulaire d'édition des données
+                  de cette étiquette`,
+      newButton: `Bouton redirigeant vers le formulaire de création d'une
+                 nouvelle étiquette`,
+      removeButton: `Bouton supprimant cette étiquette de la base de données
+                    après confirmation`
+    }}
+    columns={COLUMNS}
+    slug="tag"
+    title="Étiquettes"
+  />
 );
