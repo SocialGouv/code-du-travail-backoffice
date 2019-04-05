@@ -14,6 +14,7 @@ exports[`<Editor /> should match snapshot 1`] = `
       >
         <button
           class="ql-undo Editor__TextButton-sc-1s8484a-0 eNdwXj"
+          title="Bouton annulant la dernière modification effectuée"
           type="button"
         >
           <img
@@ -23,6 +24,7 @@ exports[`<Editor /> should match snapshot 1`] = `
         </button>
         <button
           class="ql-redo Editor__TextButton-sc-1s8484a-0 eNdwXj"
+          title="Bouton réappliquant la dernière modification annulée"
           type="button"
         >
           <img
@@ -36,6 +38,7 @@ exports[`<Editor /> should match snapshot 1`] = `
       >
         <button
           class="ql-bold"
+          title="Bouton formattant le texte sélectionné en gras"
           type="button"
         >
           <svg
@@ -56,6 +59,7 @@ exports[`<Editor /> should match snapshot 1`] = `
         </button>
         <button
           class="ql-italic"
+          title="Bouton formattant le texte sélectionné en italique"
           type="button"
         >
           <svg
@@ -90,6 +94,7 @@ exports[`<Editor /> should match snapshot 1`] = `
         </button>
         <button
           class="ql-underline"
+          title="Bouton formattant le texte sélectionné en souligné"
           type="button"
         >
           <svg
@@ -119,6 +124,7 @@ exports[`<Editor /> should match snapshot 1`] = `
       >
         <button
           class="ql-link"
+          title="Bouton créant un lien à partir du text sélectionné"
           type="button"
         >
           <svg
@@ -147,6 +153,7 @@ exports[`<Editor /> should match snapshot 1`] = `
         </button>
         <button
           class="ql-blockquote"
+          title="Bouton formattant le paragraphe sélectionné au format citation"
           type="button"
         >
           <svg
@@ -269,6 +276,7 @@ exports[`<Editor /> should match snapshot 1`] = `
       >
         <button
           class="ql-tags Editor__TextButton-sc-1s8484a-0 eNdwXj"
+          title="Bouton ouvrant ou fermant la barre latérale des étiquettes"
           type="button"
         >
           <img
@@ -283,6 +291,7 @@ exports[`<Editor /> should match snapshot 1`] = `
       >
         <button
           class="ql-charter Editor__TextButton-sc-1s8484a-0 eNdwXj"
+          title="Bouton ouvrant la charte rédactionnelle dans un nouvel onglet"
           type="button"
         >
           <img
