@@ -182,11 +182,11 @@ export default class AdminIndex extends React.Component {
    *
    * @see https://github.com/tannerlinsley/react-table/tree/v6#props
    */
+  // It is impossible to unit-test this part since it's injected in
+  // react-table and the generated filter inputs are not query-able.
+  // This will eventually be checked whithin e2e tests.
+  /* istanbul ignore next */
   customFilter(filter, row) {
-    // It is impossible to unit-test this part since it's injected in
-    // react-table and the generated filter inputs are not query-able.
-    // This will eventually be checked whithin e2e tests.
-    /* istanbul ignore next */
     return typeof row[filter.id] === "string"
       ? stringFrIncludes(filter.value, row[filter.id])
       : true;
