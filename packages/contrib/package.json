@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.4.0",
-    "@socialgouv/eslint-config-react": "0.5.2",
+    "@socialgouv/eslint-config-react": "0.6.0",
     "babel-eslint": "10.0.1",
     "babel-jest": "24.5.0",
     "babel-plugin-styled-components": "1.10.0",

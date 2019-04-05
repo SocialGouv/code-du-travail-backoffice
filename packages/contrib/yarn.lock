@@ -1036,20 +1036,21 @@
   resolved "https://registry.yarnpkg.com/@sheerun/mutationobserver-shim/-/mutationobserver-shim-0.3.2.tgz#8013f2af54a2b7d735f71560ff360d3a8176a87b"
   integrity sha512-vTCdPp/T/Q3oSqwHmZ5Kpa9oI7iLtGl3RQaA/NyLHikvcrPxACkkKVr/XzkSPJWXHRhKGzVvb0urJsbMlRxi1Q==
 
-"@socialgouv/eslint-config-react@0.5.2":
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/@socialgouv/eslint-config-react/-/eslint-config-react-0.5.2.tgz#e71d205da6e58d30373bd078abc21e45ab4fa922"
-  integrity sha512-T+WXUNO2wqD7D+T3iwdiBAIHq6eNhwi77s9Fxua+A85YkysQnbKOpw4ktJKBrKI/NU3o/CqrnJquB/H2o4sfnA==
+"@socialgouv/eslint-config-react@0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@socialgouv/eslint-config-react/-/eslint-config-react-0.6.0.tgz#ba0cb5cf3850ab0f4789e50babad4e83bab2e26f"
+  integrity sha512-5yx2hrtzqTGuTs12+UrwMXsKLKOrPcaFpANm5IPSxkF4a7/L2d/Z3hpYs5GQLAfgRSj16pDdVP1HF54i8NOhkw==
   dependencies:
-    "@socialgouv/eslint-config-recommended" "^0.5.2"
+    "@socialgouv/eslint-config-recommended" "^0.6.0"
     babel-eslint "^10.0.1"
     eslint-plugin-jsx-a11y "~6.2.1"
     eslint-plugin-react "~7.12.4"
+    eslint-plugin-react-hooks "~1.6.0"
 
-"@socialgouv/eslint-config-recommended@^0.5.2":
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/@socialgouv/eslint-config-recommended/-/eslint-config-recommended-0.5.2.tgz#4eec3a8a546d1bd52208c84cfed3b67e6664448e"
-  integrity sha512-fhJrrA3aVumzjPptGiKaVUwxr8Wc6HitX8bu4Pbv7vUFn3sSdUY04UVxVD41YzhjCD/j+t21C7cGGdocDeSesA==
+"@socialgouv/eslint-config-recommended@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@socialgouv/eslint-config-recommended/-/eslint-config-recommended-0.6.0.tgz#1cea028431dfb26d2f05abe6b3d2ad00928d209b"
+  integrity sha512-cwr01te9DMI08q2gWnB9tj4wqtcJ4MlbVsnp2tyI8Rs/HG1HuHXhMb4tb1rcmAzwDd5KArZ1sCHZro97aYhToQ==
   dependencies:
     eslint-config-prettier "~4.1.0"
     eslint-plugin-import "~2.16.0"
@@ -2929,6 +2930,11 @@ eslint-plugin-prettier@~3.0.1:
   integrity sha512-/PMttrarPAY78PLvV3xfWibMOdMDl57hmlQ2XqFeA37wd+CJ7WSxV7txqjVPHi/AAFKd2lX0ZqfsOc/i5yFCSQ==
   dependencies:
     prettier-linter-helpers "^1.0.0"
+
+eslint-plugin-react-hooks@~1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-1.6.0.tgz#348efcda8fb426399ac7b8609607c7b4025a6f5f"
+  integrity sha512-lHBVRIaz5ibnIgNG07JNiAuBUeKhEf8l4etNx5vfAEwqQ5tcuK3jV9yjmopPgQDagQb7HwIuQVsE3IVcGrRnag==
 
 eslint-plugin-react@~7.12.4:
   version "7.12.4"
