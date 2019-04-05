@@ -31,6 +31,9 @@ const TextButtonIcon = styled.img`
  * @see https://quilljs.com/docs/delta/
  */
 export default class Editor extends React.Component {
+  // Quill can't be tested sicnce it's not React-aware.
+  // It will be tested via e2e tests.
+  /* istanbul ignore next */
   componentDidMount() {
     const quillOptions = {
       theme: "snow",
@@ -67,6 +70,9 @@ export default class Editor extends React.Component {
     this.quill.focus();
   }
 
+  // Quill can't be tested in unit tests sicnce it's not React-aware.
+  // It will be tested via e2e tests.
+  /* istanbul ignore next */
   onChange() {
     if (this.props.onChange === undefined) return;
 
@@ -94,21 +100,50 @@ export default class Editor extends React.Component {
       >
         <div className="ql-toolbar ql-snow" ref={el => (this.$toolbar = el)}>
           <span className="ql-formats">
-            <TextButton type="button" className="ql-undo">
+            <TextButton
+              className="ql-undo"
+              title="Bouton annulant la dernière modification effectuée"
+              type="button"
+            >
               <TextButtonIcon src={undoImageUri} />
             </TextButton>
-            <TextButton type="button" className="ql-redo">
+            <TextButton
+              className="ql-redo"
+              title="Bouton réappliquant la dernière modification annulée"
+              type="button"
+            >
               <TextButtonIcon src={redoImageUri} />
             </TextButton>
           </span>
           <span className="ql-formats">
-            <button type="button" className="ql-bold" />
-            <button type="button" className="ql-italic" />
-            <button type="button" className="ql-underline" />
+            <button
+              className="ql-bold"
+              title="Bouton formattant le texte sélectionné en gras"
+              type="button"
+            />
+            <button
+              className="ql-italic"
+              title="Bouton formattant le texte sélectionné en italique"
+              type="button"
+            />
+            <button
+              className="ql-underline"
+              title="Bouton formattant le texte sélectionné en souligné"
+              type="button"
+            />
           </span>
           <span className="ql-formats">
-            <button type="button" className="ql-link" />
-            <button type="button" className="ql-blockquote" />
+            <button
+              className="ql-link"
+              title="Bouton créant un lien à partir du text sélectionné"
+              type="button"
+            />
+            <button
+              className="ql-blockquote"
+              // eslint-disable-next-line max-len
+              title="Bouton formattant le paragraphe sélectionné au format citation"
+              type="button"
+            />
           </span>
           <span className="ql-formats">
             <select className="ql-header" defaultValue="">
@@ -118,13 +153,22 @@ export default class Editor extends React.Component {
             </select>
           </span>
           <span className="ql-formats">
-            <TextButton type="button" className="ql-tags">
+            <TextButton
+              className="ql-tags"
+              title="Bouton ouvrant ou fermant la barre latérale des étiquettes"
+              type="button"
+            >
               <TextButtonIcon src={tagsImageUri} withText />
               Étiquettes
             </TextButton>
           </span>
           <span className="ql-formats">
-            <TextButton type="button" className="ql-charter">
+            <TextButton
+              className="ql-charter"
+              // eslint-disable-next-line max-len
+              title="Bouton ouvrant la charte rédactionnelle dans un nouvel onglet"
+              type="button"
+            >
               <TextButtonIcon src={filePdfImageUri} withText />
               Charte
             </TextButton>
