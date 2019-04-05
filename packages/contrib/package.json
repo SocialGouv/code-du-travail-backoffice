@@ -42,7 +42,7 @@
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
-    "@babel/core": "7.4.0",
+    "@babel/core": "7.4.3",
     "@socialgouv/eslint-config-react": "0.6.0",
     "babel-eslint": "10.0.1",
     "babel-jest": "24.5.0",
