@@ -1,5 +1,3 @@
-# TODO Use env vars for ports instead of hard-written values.
-
 ENV_FILE="$PWD/.env"
 BLUE="\033[0;34m"
 GREEN="\033[0;32m"
@@ -23,7 +21,9 @@ echo "${GREEN}> Waiting for db image to start...${NC}"
 while ! lsof -Pi :$DB_PORT -sTCP:LISTEN -t; do sleep 1; done > /dev/null
 
 echo "${GREEN}> Migrating database structure...${NC}"
-docker-compose exec master yarn db:migrate > /dev/null
+# -T option disable pseudo-tty allocation
+# https://docs.docker.com/compose/reference/exec/
+docker-compose exec -T master yarn db:migrate > /dev/null
 
 echo "${GREEN}> Stopping master (and db) images...${NC}"
 docker-compose stop > /dev/null
