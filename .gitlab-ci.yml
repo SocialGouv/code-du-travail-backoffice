@@ -44,13 +44,15 @@ E2E Tests:
   before_script:
     # Install Node and npm (which is not installed by default with nodejs)
     # https://superuser.com/a/1187246/441835
-    - apk add --update nodejs nodejs-npm
+    - apk add --update nodejs nodejs-npm sed
     # Install Yarn
     - npm i -g yarn
     # Re-install packages correctly for this distribution
     - yarn
     # Generate the .env file:
     - yarn setup --env-only
+      # Replace API_URI value in .env file by the correct DC service name
+    - sed -i 's/API_URI=http:\/\/localhost/API_URI=http:\/\/api/' .env
     # Start DC images to run a local server instance (in the background):
     - chmod +x ./scripts/prod/start.sh
     - ./scripts/prod/start.sh
