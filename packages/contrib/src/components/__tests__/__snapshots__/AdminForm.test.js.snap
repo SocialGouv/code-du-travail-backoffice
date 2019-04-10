@@ -82,11 +82,11 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should matc
             class="AdminForm__Form-scluvj-0 dGqbeT"
             role="form"
           >
-            <p
+            <h1
               class="Title-r6qlw8-0 gmywtA"
             >
               Edit Item
-            </p>
+            </h1>
             <div
               class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
             >
@@ -308,11 +308,11 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
             class="AdminForm__Form-scluvj-0 dGqbeT"
             role="form"
           >
-            <p
+            <h1
               class="Title-r6qlw8-0 gmywtA"
             >
               New Item
-            </p>
+            </h1>
             <div
               class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
             >
@@ -756,11 +756,11 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match 
             class="AdminForm__Form-scluvj-0 dGqbeT"
             role="form"
           >
-            <p
+            <h1
               class="Title-r6qlw8-0 gmywtA"
             >
               Edit Item
-            </p>
+            </h1>
             <div
               class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
             >
@@ -935,11 +935,11 @@ exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match 
             class="AdminForm__Form-scluvj-0 dGqbeT"
             role="form"
           >
-            <p
+            <h1
               class="Title-r6qlw8-0 gmywtA"
             >
               Edit Item
-            </p>
+            </h1>
             <div
               class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
             >
@@ -1089,11 +1089,11 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
             class="AdminForm__Form-scluvj-0 dGqbeT"
             role="form"
           >
-            <p
+            <h1
               class="Title-r6qlw8-0 gmywtA"
             >
               Edit Item
-            </p>
+            </h1>
             <div
               class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
             >

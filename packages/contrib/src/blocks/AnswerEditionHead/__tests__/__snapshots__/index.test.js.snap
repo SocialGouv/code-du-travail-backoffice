@@ -25,11 +25,11 @@ exports[`[Contrib] blocks/<AnswerEditionHead /> should match snapshot 1`] = `
         />
       </div>
     </div>
-    <p
+    <h1
       class="Title-r6qlw8-0 AnswerEditionHead__Title-sc-1nqi9lw-0 jmGktd"
     >
       A question title
-    </p>
+    </h1>
     <div
       class="sc-bdVaJa sc-bwzfXH Menu__Container-sc-1ce2alp-0 kLuIQb"
     >

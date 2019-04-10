@@ -25,7 +25,7 @@ exports[`[Contrib] blocks/AnswerEditionHead/<Top /> should match snapshot 1`] = 
         />
       </div>
     </div>
-    <p
+    <h1
       class="Title-r6qlw8-0 AnswerEditionHead__Title-sc-1nqi9lw-0 jmGktd"
     />
     <div

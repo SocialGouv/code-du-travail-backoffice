@@ -4,7 +4,7 @@ import { Flex } from "rebass";
 import styled from "styled-components";
 
 import Answer from "../src/blocks/Answer";
-import Title from "../src/elements/Title";
+import Subtitle from "../src/elements/Subtitle";
 import Main from "../src/layouts/Main";
 import customAxios from "../src/libs/customAxios";
 
@@ -72,9 +72,9 @@ export default class Index extends React.Component {
     return (
       <Main>
         <Content flexDirection="column" width={1}>
-          <Title>Mes réponses en cours de rédaction</Title>
+          <Subtitle>Mes réponses en cours de rédaction</Subtitle>
           {this.getAnswers(({ value }) => value.length > 0, true)}
-          <Title>Réponses à rédiger</Title>
+          <Subtitle>Réponses à rédiger</Subtitle>
           {this.getAnswers(({ value }) => value.length === 0, false)}
         </Content>
       </Main>
