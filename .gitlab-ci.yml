@@ -42,22 +42,25 @@ E2E Tests:
   variables:
     DOCKER_HOST: tcp://localhost:2375
   before_script:
-    # Install Node and npm (which is not installed by default with nodejs)
+    # Install Node and npm (which is not installed by default with nodejs):
     # https://superuser.com/a/1187246/441835
     - apk add --update nodejs nodejs-npm sed
-    # Install Yarn
+    # Install Yarn:
     - npm i -g yarn
-    # Re-install packages correctly for this distribution
+    # Re-install packages correctly for this distribution:
     - yarn
     # Generate the .env file:
     - yarn setup --env-only
-      # Replace API_URI value in .env file by the correct DC service name
-    - sed -i 's/API_URI=http:\/\/localhost/API_URI=http:\/\/api/' .env
+    # Replace API_URI value in .env by the correct DC service name and port
+    # because we don't have access to a shared localhost within the "test"
+    # container:
+    - sed -i 's/API_URI=http:\/\/localhost:3200/API_URI=http:\/\/api:3000/' .env
     # Start DC images to run a local server instance (in the background):
     - chmod +x ./scripts/prod/start.sh
     - ./scripts/prod/start.sh
-    # Seed database with dummy data
+    # Seed database with dummy data:
     - yarn db:seed
+    # Build the "test" container:
     - docker-compose build test
   script:
     - docker-compose up --exit-code-from test test
