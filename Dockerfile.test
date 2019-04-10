@@ -68,3 +68,5 @@ COPY ./yarn.lock /app/yarn.lock
 WORKDIR /app
 
 RUN yarn --frozen-lockfile && yarn cache clean
+
+ENTRYPOINT ["yarn", "test:e2e"]
