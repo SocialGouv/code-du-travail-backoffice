@@ -14,10 +14,4 @@ describe("[Contrib] elements/<Title />", () => {
 
     expect(container).toMatchSnapshot();
   });
-
-  it("should match snapshot with `isSecondary` prop", () => {
-    const { container } = render(<Title isSecondary />);
-
-    expect(container).toMatchSnapshot();
-  });
 });

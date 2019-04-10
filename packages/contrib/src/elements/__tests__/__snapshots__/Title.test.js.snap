@@ -2,7 +2,7 @@
 
 exports[`[Contrib] elements/<Title /> should match snapshot 1`] = `
 <div>
-  <p
+  <h1
     class="Title-r6qlw8-0 kDtypV"
   />
 </div>
@@ -10,16 +10,8 @@ exports[`[Contrib] elements/<Title /> should match snapshot 1`] = `
 
 exports[`[Contrib] elements/<Title /> should match snapshot with \`isFirst\` prop 1`] = `
 <div>
-  <p
+  <h1
     class="Title-r6qlw8-0 gmywtA"
-  />
-</div>
-`;
-
-exports[`[Contrib] elements/<Title /> should match snapshot with \`isSecondary\` prop 1`] = `
-<div>
-  <p
-    class="Title-r6qlw8-0 kppepz"
   />
 </div>
 `;
