@@ -12,7 +12,7 @@
     "setup": "lerna bootstrap && node ./scripts/setup",
     "start": "lerna run start --parallel",
     "test": "lerna run test",
-    "test:e2e": "node ./__tests__",
+    "test:e2e": "cucumber-js",
     "test:unit": "lerna run test:unit",
     "test:update": "lerna run test:update",
     "test:watch": "lerna run test:watch --parallel"

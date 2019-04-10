@@ -61,7 +61,7 @@ RUN sudo curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - \
 
 RUN npm i -g yarn
 
-COPY ./__tests__ /app/__tests__
+COPY ./features /app/features
 COPY ./package.json /app/package.json
 COPY ./yarn.lock /app/yarn.lock
 
