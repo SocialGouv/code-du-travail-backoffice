@@ -3,6 +3,7 @@ import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
+import Subtitle from "../../src/elements/Subtitle";
 import Title from "../../src/elements/Title";
 import AdminMain from "../../src/layouts/AdminMain";
 import customAxios from "../../src/libs/customAxios";
@@ -70,9 +71,7 @@ export default class Index extends React.Component {
       <AdminMain>
         <Container flexDirection="column">
           <Title>Tableau de bord</Title>
-          <Title isFirst isSecondary>
-            Dernières réponses modifiées
-          </Title>
+          <Subtitle isFirst>Dernières réponses modifiées</Subtitle>
           <table>
             <thead>
               <tr>
