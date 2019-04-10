@@ -52,9 +52,6 @@ services:
       dockerfile: Dockerfile.test
     environment:
       WEB_URI: http://web:${WEB_PORT}
-    depends_on:
-      - web
-    command: yarn test:e2e
 
 volumes:
   postgre-data:
