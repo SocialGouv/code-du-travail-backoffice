@@ -20,6 +20,9 @@ docker-compose up -d master > /dev/null
 echo "${GREEN}> Waiting for db image to start...${NC}"
 while ! lsof -Pi :$DB_PORT -sTCP:LISTEN -t; do sleep 1; done > /dev/null
 
+# TODO Find a better way to check that the db image is ready.
+sleep 60s
+
 echo "${GREEN}> Migrating database structure...${NC}"
 # -T option disable pseudo-tty allocation
 # https://docs.docker.com/compose/reference/exec/
