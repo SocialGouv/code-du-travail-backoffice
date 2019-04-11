@@ -12,6 +12,16 @@ const Content = styled(Flex)`
   overflow-y: auto;
   padding: 0 1rem 0.5rem;
 `;
+const InfoText = styled.p`
+  color: var(--color-dark-slate-gray);
+  margin-bottom: 0.5rem;
+`;
+const HelpText = styled.p`
+  color: var(--color-shadow);
+  font-size: 0.875rem;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+`;
 
 export default class Index extends React.Component {
   constructor(props) {
@@ -47,23 +57,45 @@ export default class Index extends React.Component {
     );
   }
 
-  getAnswers(filter, isDraft) {
+  getAnswers(isDraft = false) {
+    const filter = isDraft
+      ? ({ value }) => value.length > 0
+      : ({ value }) => value.length === 0;
     const answers = this.state.answers.filter(filter);
 
-    return answers.length === 0 ? (
-      <p>Aucune réponse trouvée.</p>
-    ) : (
+    if (answers.length === 0) {
+      return isDraft ? (
+        <InfoText>
+          {`Vous n'avez pas encore commencé à rédiger de réponses.`}
+        </InfoText>
+      ) : (
+        <InfoText>
+          {`Il n'y a pour l'instant (plus) auncune réponse à rédiger.`}
+        </InfoText>
+      );
+    }
+
+    return [
+      isDraft ? (
+        <HelpText key="help">
+          Sélectionnez une réponse pour la modifier:
+        </HelpText>
+      ) : (
+        <HelpText key="help">
+          Sélectionnez une question pour commencer à rédiger une réponse:
+        </HelpText>
+      ),
       answers
         .slice(0, 10)
-        .map(answer => (
+        .map(answer => [
           <Answer
             data={answer}
             label={isDraft ? "Brouillon" : "À rédiger"}
             key={answer.id}
             onClick={() => this.editAnswer(answer.id)}
           />
-        ))
-    );
+        ])
+    ];
   }
 
   render() {
@@ -73,9 +105,9 @@ export default class Index extends React.Component {
       <Main>
         <Content flexDirection="column" width={1}>
           <Subtitle>Mes réponses en cours de rédaction</Subtitle>
-          {this.getAnswers(({ value }) => value.length > 0, true)}
+          {this.getAnswers(true)}
           <Subtitle>Réponses à rédiger</Subtitle>
-          {this.getAnswers(({ value }) => value.length === 0, false)}
+          {this.getAnswers()}
         </Content>
       </Main>
     );
