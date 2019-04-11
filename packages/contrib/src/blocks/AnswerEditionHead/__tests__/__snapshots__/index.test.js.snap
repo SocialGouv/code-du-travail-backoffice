@@ -18,6 +18,7 @@ exports[`[Contrib] blocks/<AnswerEditionHead /> should match snapshot 1`] = `
         currentitem="false"
         data-tip="An agreement title"
       >
+        CCN: 
         0123
         <div
           class="__react_component_tooltip place-top type-dark "

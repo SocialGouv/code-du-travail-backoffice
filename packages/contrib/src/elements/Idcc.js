@@ -24,7 +24,7 @@ const Tooltip = styled(ReactTooltip)`
 
 export default ({ code, name }) => (
   <Container data-tip={name}>
-    {code}
+    CCN: {code}
     <Tooltip />
   </Container>
 );
