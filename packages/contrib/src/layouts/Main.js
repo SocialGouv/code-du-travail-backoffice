@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import LoadingSpinner from "../elements/LoadingSpinner";
 import Header from "./Header";
+import Menu from "./Menu";
 
 // TODO Find a clean way to import these stylesheets.
 import quillSheet from "../../node_modules/quill/dist/quill.snow.css";
@@ -24,7 +25,7 @@ const Content = styled(Flex)`
   flex-grow: 1;
 `;
 
-export default ({ children, isHorizontal, isLoading }) => (
+export default ({ children, isAdmin = false, isHorizontal, isLoading }) => (
   <Container alignItems="stretch" style={{ height: "100vh" }}>
     <Head>
       <title>Outil de contribution au code du travail numérique</title>
@@ -43,6 +44,7 @@ export default ({ children, isHorizontal, isLoading }) => (
     </Head>
     <Body alignItems="stretch" flexDirection="column" width={1}>
       <Header />
+      {!isAdmin && !isLoading && <Menu />}
       {Boolean(isLoading) ? (
         <Content alignItems="center" justifyContent="center">
           <LoadingSpinner color="#666666" />
