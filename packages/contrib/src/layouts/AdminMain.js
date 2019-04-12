@@ -9,7 +9,7 @@ const Content = styled.div`
 `;
 
 export default ({ children, isLoading }) => (
-  <Main isHorizontal isLoading={isLoading}>
+  <Main isAdmin isHorizontal isLoading={isLoading}>
     <AdminMenu />
     <Content>{children}</Content>
   </Main>
