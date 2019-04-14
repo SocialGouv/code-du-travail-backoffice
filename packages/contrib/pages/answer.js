@@ -1,4 +1,5 @@
 import debounce from "lodash.debounce";
+import Router from "next/router";
 import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
@@ -10,7 +11,7 @@ import Main from "../src/layouts/Main";
 import SavingSpinner from "../src/elements/SavingSpinner";
 import customAxios from "../src/libs/customAxios";
 import makeApiFilter from "../src/libs/makeApiFilter";
-import { TABS } from "../src/blocks/AnswerEditionHead/Menu";
+import { TABS } from "../src/blocks/AnswerEditionHead/Tabs";
 
 const Container = styled(Main)`
   overflow-x: hidden;
@@ -75,6 +76,17 @@ export default class extends React.Component {
     } else {
       this.deleteTag(id);
     }
+  }
+
+  async cancel() {
+    this.setState({ isSaving: true });
+
+    const uri = `/answers?id=eq.${this.props.id}`;
+    const data = { user_id: null, value: "" };
+
+    await this.axios.patch(uri, data).catch(console.warn);
+
+    Router.push("/");
   }
 
   async _saveAnswerValue(value) {
@@ -178,6 +190,7 @@ export default class extends React.Component {
           agreement={this.originalAnswer.agreement}
           currentTab={this.state.currentTab}
           idcc={this.originalAnswer.idcc}
+          onCancel={() => this.cancel()}
           onTabChange={currentTab => this.setState({ currentTab })}
           title={this.originalAnswer.question}
         />
