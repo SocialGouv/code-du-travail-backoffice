@@ -5,7 +5,6 @@ import styled from "styled-components";
 import Idcc from "../../elements/Idcc";
 
 const Container = styled(Flex)`
-  border-top: solid 1px #cbcbcb;
   min-height: 2rem;
   padding-left: 1rem;
 `;

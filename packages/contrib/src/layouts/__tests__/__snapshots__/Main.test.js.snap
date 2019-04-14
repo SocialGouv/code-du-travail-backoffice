@@ -39,6 +39,20 @@ exports[`[Contrib] layouts/<Main /> should match snapshot 1`] = `
         </div>
       </div>
       <div
+        class="sc-bdVaJa sc-bwzfXH Menu__Container-sc-1tufs3d-0 jlBedE"
+      >
+        <div
+          class="Menu__Link-sc-1tufs3d-1 EiNjX"
+        >
+          Liste des réponses
+        </div>
+        <div
+          class="Menu__Link-sc-1tufs3d-1 fKGjkf"
+        >
+          Charte rédactionnelle
+        </div>
+      </div>
+      <div
         class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 lhyucv"
       />
     </div>
@@ -51,23 +65,32 @@ exports[`[Contrib] layouts/<Main /> should show the loading spinner 1`] = `
 - First value
 + Second value
 
-@@ -34,10 +34,23 @@
+@@ -34,24 +34,23 @@
               </span>
             </div>
           </div>
         </div>
         <div
--         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 lhyucv\\"
+-         class=\\"sc-bdVaJa sc-bwzfXH Menu__Container-sc-1tufs3d-0 jlBedE\\"
 +         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 fIdmfv\\"
-+       >
-+         <div
+        >
+          <div
+-           class=\\"Menu__Link-sc-1tufs3d-1 EiNjX\\"
 +           class=\\"LoadingSpinner__Container-eu7nmw-0 dEMrTz\\"
-+         >
-+           <div
+          >
+-           Liste des réponses
+-         </div>
+            <div
+-           class=\\"Menu__Link-sc-1tufs3d-1 fKGjkf\\"
+-         >
+-           Charte rédactionnelle
+-         </div>
+-       </div>
 +             class=\\"LoadingSpinner__Spinner-eu7nmw-1 sHZX\\"
 +             color=\\"#666666\\"
 +           />
-+           <div
+            <div
+-         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 lhyucv\\"
 +             class=\\"LoadingSpinner__Spinner-eu7nmw-1 LoadingSpinner__SpinnerNext-eu7nmw-2 daPQQA\\"
 +             color=\\"#666666\\"
             />

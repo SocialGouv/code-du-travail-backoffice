@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Contrib] layouts/<Menu /> should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH Menu__Container-sc-1tufs3d-0 jlBedE"
+  >
+    <div
+      class="Menu__Link-sc-1tufs3d-1 EiNjX"
+    >
+      Liste des réponses
+    </div>
+    <div
+      class="Menu__Link-sc-1tufs3d-1 fKGjkf"
+    >
+      Charte rédactionnelle
+    </div>
+  </div>
+</div>
+`;
+
+exports[`[Contrib] layouts/<Menu /> should match snapshot diff when the path has changed 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+  <DocumentFragment>
+    <div
+      class=\\"sc-bdVaJa sc-bwzfXH Menu__Container-sc-1tufs3d-0 jlBedE\\"
+    >
+      <div
+-       class=\\"Menu__Link-sc-1tufs3d-1 EiNjX\\"
++       class=\\"Menu__Link-sc-1tufs3d-1 fKGjkf\\"
+      >
+        Liste des réponses
+      </div>
+      <div
+-       class=\\"Menu__Link-sc-1tufs3d-1 fKGjkf\\"
++       class=\\"Menu__Link-sc-1tufs3d-1 EiNjX\\"
+      >
+        Charte rédactionnelle
+      </div>
+    </div>
+  </DocumentFragment>"
+`;

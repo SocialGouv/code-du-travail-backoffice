@@ -6,7 +6,7 @@ exports[`[Contrib] blocks/AnswerEditionHead/<Top /> should match snapshot 1`] = 
     class="sc-bdVaJa sc-bwzfXH eVPJMi"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Top__Container-nem2md-0 ijPYtP"
+      class="sc-bdVaJa sc-bwzfXH Top__Container-nem2md-0 bfDZxj"
     >
       <span
         class="Top__Label-nem2md-1 jMhvMr"
@@ -18,6 +18,7 @@ exports[`[Contrib] blocks/AnswerEditionHead/<Top /> should match snapshot 1`] = 
         currentitem="false"
         data-tip="An agreement title"
       >
+        CCN: 
         0123
         <div
           class="__react_component_tooltip place-top type-dark "
