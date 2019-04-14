@@ -19,8 +19,6 @@ services:
     image: postgrest/postgrest
     ports:
       - ${API_PORT}:3000
-    links:
-      - db:db
     environment:
       PGRST_DB_ANON_ROLE: ${PGRST_DB_ANON_ROLE}
       PGRST_DB_SCHEMA: ${PGRST_DB_SCHEMA}
@@ -36,17 +34,24 @@ services:
     environment:
       API_URI: ${API_URI}
       WEB_PORT: ${WEB_PORT}
+    depends_on:
+      - api
 
   master:
     build: .
     environment:
       PGRST_DB_URI: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:${DB_PORT}/${POSTGRES_DB}
-    links:
-      - db:db
     depends_on:
       - db
     # https://github.com/docker/compose/issues/1926#issuecomment-135068628
     command: tail -f /dev/null
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    environment:
+      WEB_URI: http://web:${WEB_PORT}
 
 volumes:
   postgre-data:

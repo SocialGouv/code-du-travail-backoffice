@@ -60,7 +60,7 @@ exports[`[Contrib] components/<AdminIndex /> should behave as expected when aski
 -             color=\\"#666666\\"
 +               class=\\"sc-bdVaJa sc-bwzfXH AdminIndex__Head-sc-18cav7a-1 cSynZz\\"
 +             >
-+               <p
++               <h1
 +                 class=\\"Title-r6qlw8-0 kDtypV\\"
                 />
 +               <button
