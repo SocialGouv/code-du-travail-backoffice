@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "react-testing-library";
 
 import AnswerEditionHead from "..";
-import { TABS } from "../Menu";
+import { TABS } from "../Tabs";
 
 describe("[Contrib] blocks/<AnswerEditionHead />", () => {
   // Ignore styled-wrapped ReactTooltip className prop warning
