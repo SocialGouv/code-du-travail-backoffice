@@ -44,7 +44,9 @@ export default ({ children, isAdmin = false, isHorizontal, isLoading }) => (
     </Head>
     <Body alignItems="stretch" flexDirection="column" width={1}>
       <Header />
-      {!isAdmin && !isLoading && <Menu />}
+      {!isAdmin &&
+        !isLoading &&
+        !window.location.pathname.startsWith("/login") && <Menu />}
       {Boolean(isLoading) ? (
         <Content alignItems="center" justifyContent="center">
           <LoadingSpinner color="#666666" />
