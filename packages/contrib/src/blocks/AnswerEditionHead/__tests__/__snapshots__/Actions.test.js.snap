@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Contrib] blocks/AnswerEditionHead/<Actions /> should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH Actions__Container-oc6s7v-0 ePawST"
+  >
+    <button
+      class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 bSSmqr"
+      color="var(--color-periwinkle)"
+      font-size="inherit"
+      font-weight="bold"
+    >
+      Annuler le brouillon
+    </button>
+  </div>
+</div>
+`;
