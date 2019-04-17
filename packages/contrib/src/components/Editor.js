@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 import markdown from "../libs/markdown";
 
-import filePdfImageUri from "../images/file-pdf.svg";
 import redoImageUri from "../images/redo.svg";
 import tagsImageUri from "../images/tags.svg";
 import undoImageUri from "../images/undo.svg";
@@ -51,8 +50,6 @@ export default class Editor extends React.Component {
         toolbar: {
           container: this.$toolbar,
           handlers: {
-            charter: () =>
-              window.open("/static/docs/Charte-Redactionnelle-v1.0.pdf"),
             redo: () => this.quill.history.redo(),
             tags: this.props.onTagsClicked,
             undo: () => this.quill.history.undo()
@@ -160,17 +157,6 @@ export default class Editor extends React.Component {
             >
               <TextButtonIcon src={tagsImageUri} withText />
               Étiquettes
-            </TextButton>
-          </span>
-          <span className="ql-formats">
-            <TextButton
-              className="ql-charter"
-              // eslint-disable-next-line max-len
-              title="Bouton ouvrant la charte rédactionnelle dans un nouvel onglet"
-              type="button"
-            >
-              <TextButtonIcon src={filePdfImageUri} withText />
-              Charte
             </TextButton>
           </span>
         </div>

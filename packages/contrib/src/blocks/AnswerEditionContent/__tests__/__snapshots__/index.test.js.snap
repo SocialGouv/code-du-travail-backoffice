@@ -293,21 +293,6 @@ exports[`[Contrib] blocks/<AnswerEditionContent /> should match snapshot 1`] = `
             Étiquettes
           </button>
         </span>
-        <span
-          class="ql-formats"
-        >
-          <button
-            class="ql-charter Editor__TextButton-sc-1s8484a-0 eNdwXj"
-            title="Bouton ouvrant la charte rédactionnelle dans un nouvel onglet"
-            type="button"
-          >
-            <img
-              class="Editor__TextButtonIcon-sc-1s8484a-1 fLzNLm"
-              src="[object Object]"
-            />
-            Charte
-          </button>
-        </span>
       </div>
       <div
         class="ql-container ql-snow"
@@ -359,7 +344,7 @@ exports[`[Contrib] blocks/<AnswerEditionContent /> should show the <TagsBar /> 1
 - First value
 + Second value
 
-@@ -340,7 +340,83 @@
+@@ -325,7 +325,83 @@
               class=\\"ql-remove\\"
             />
           </div>
