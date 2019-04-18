@@ -1,3 +1,4 @@
+import axios from "axios";
 import debounce from "lodash.debounce";
 import Router from "next/router";
 import React from "react";
@@ -59,10 +60,12 @@ export default class extends React.Component {
 
     Promise.all([
       this.axios.get(`/tags`),
-      this.axios.get(`/contributor_answers?${myAnswersFilter}`)
+      this.axios.get(`/contributor_answers?${myAnswersFilter}`),
+      axios.get(`/static/data/labor-law-references.json`)
     ])
-      .then(([tagsRes, answersRes]) => {
+      .then(([tagsRes, answersRes, laborCodeReferencesRes]) => {
         this.allTags = tagsRes.data;
+        this.laborCodeReferences = laborCodeReferencesRes.data;
         this.originalAnswer = answersRes.data[0];
 
         this.setState({ isLoading: false });
@@ -161,6 +164,7 @@ export default class extends React.Component {
       case TABS.REFERENCES:
         return (
           <AnswerEditionReferences
+            laborCodeReferences={this.laborCodeReferences}
             onAdd={this.insertReference.bind(this)}
             onRemove={this.deleteReference.bind(this)}
             references={this.originalAnswer.references}
