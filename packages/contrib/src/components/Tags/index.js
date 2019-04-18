@@ -134,6 +134,7 @@ export default class Tags extends React.PureComponent {
         ariaName={this.ariaName}
         key={index}
         onRemove={this.removeTag.bind(this)}
+        url={tag.url}
         value={tag.value}
       />
     ));
