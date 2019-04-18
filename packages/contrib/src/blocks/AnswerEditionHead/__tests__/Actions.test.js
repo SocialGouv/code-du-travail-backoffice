@@ -15,7 +15,7 @@ describe("[Contrib] blocks/AnswerEditionHead/<Actions />", () => {
   });
 
   it("should trigger onCancel()", () => {
-    fireEvent.click(getByText(/Annuler le brouillon/));
+    fireEvent.click(getByText(/Annuler ma réponse/));
 
     expect(props.onCancel).toHaveBeenCalled();
   });

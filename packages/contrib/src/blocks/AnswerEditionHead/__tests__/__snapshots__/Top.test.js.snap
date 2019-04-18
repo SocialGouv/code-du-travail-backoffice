@@ -87,7 +87,7 @@ exports[`[Contrib] blocks/AnswerEditionHead/<Top /> should match snapshot 1`] = 
           font-size="inherit"
           font-weight="bold"
         >
-          Annuler le brouillon
+          Annuler ma réponse
         </button>
       </div>
     </div>
