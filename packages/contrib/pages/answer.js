@@ -81,13 +81,21 @@ export default class extends React.Component {
     }
   }
 
-  async cancel() {
+  async cancelAnswer() {
     this.setState({ isSaving: true });
 
-    const uri = `/answers?id=eq.${this.props.id}`;
-    const data = { user_id: null, value: "" };
+    const answersUri = `/answers?id=eq.${this.props.id}`;
+    const answersData = { user_id: null, value: "" };
+    const answersTagsUri = makeApiFilter("/answers_tags", {
+      answer_id: this.props.id
+    });
+    const answersReferencesUri = makeApiFilter("/answers_references", {
+      answer_id: this.props.id
+    });
 
-    await this.axios.patch(uri, data).catch(console.warn);
+    await this.axios.delete(answersReferencesUri).catch(console.warn);
+    await this.axios.delete(answersTagsUri).catch(console.warn);
+    await this.axios.patch(answersUri, answersData).catch(console.warn);
 
     Router.push("/");
   }
@@ -200,7 +208,7 @@ export default class extends React.Component {
           agreement={this.originalAnswer.agreement}
           currentTab={this.state.currentTab}
           idcc={this.originalAnswer.idcc}
-          onCancel={() => this.cancel()}
+          onCancel={() => this.cancelAnswer()}
           onTabChange={currentTab => this.setState({ currentTab })}
           title={this.originalAnswer.question}
         />
