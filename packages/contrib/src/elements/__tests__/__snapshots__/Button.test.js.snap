@@ -3,7 +3,7 @@
 exports[`[Contrib] elements/<Button /> should match snapshot 1`] = `
 <div>
   <button
-    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 iDhkoI"
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU"
     color="var(--color-lapis-lazuli)"
     font-size="inherit"
     font-weight="bold"
@@ -14,7 +14,7 @@ exports[`[Contrib] elements/<Button /> should match snapshot 1`] = `
 exports[`[Contrib] elements/<Button /> should match snapshot with \`hasGroup\` prop 1`] = `
 <div>
   <button
-    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 kTjDPw"
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 eEnMvG"
     color="var(--color-lapis-lazuli)"
     font-size="inherit"
     font-weight="bold"
@@ -25,7 +25,7 @@ exports[`[Contrib] elements/<Button /> should match snapshot with \`hasGroup\` p
 exports[`[Contrib] elements/<Button /> should match snapshot with a custom \`color\` prop 1`] = `
 <div>
   <button
-    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 bSSmqr"
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ebKstd"
     color="var(--color-periwinkle)"
     font-size="inherit"
     font-weight="bold"
@@ -36,7 +36,7 @@ exports[`[Contrib] elements/<Button /> should match snapshot with a custom \`col
 exports[`[Contrib] elements/<Button /> should match snapshot with a set \`icon\` prop 1`] = `
 <div>
   <button
-    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ecLjBX"
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf"
     color="white"
     font-size="inherit"
     font-weight="bold"

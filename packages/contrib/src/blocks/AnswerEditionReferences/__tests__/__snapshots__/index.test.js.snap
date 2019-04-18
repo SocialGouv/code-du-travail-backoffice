@@ -152,7 +152,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
         class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
       >
         <button
-          class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 iDhkoI"
+          class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU"
           color="var(--color-lapis-lazuli)"
           font-size="inherit"
           font-weight="bold"
