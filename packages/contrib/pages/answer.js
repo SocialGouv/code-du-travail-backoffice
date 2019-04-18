@@ -104,7 +104,8 @@ export default class extends React.Component {
     this.setState({ isSaving: true });
 
     const uri = `/answers?id=eq.${this.props.id}`;
-    const data = { value };
+    // An answer can't have a value and be generic at the same time:
+    const data = { generic_reference: null, value };
 
     await this.axios.patch(uri, data).catch(console.warn);
 
