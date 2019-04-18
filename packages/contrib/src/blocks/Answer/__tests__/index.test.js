@@ -1,6 +1,7 @@
 import React from "react";
 import { fireEvent, render } from "react-testing-library";
-import Answer from "../Answer";
+
+import Answer from "..";
 
 // Ignore styled-wrapped ReactTooltip className prop warning
 console.warn = jest.fn();

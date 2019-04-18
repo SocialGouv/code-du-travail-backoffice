@@ -2,7 +2,7 @@ import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
-import Idcc from "../elements/Idcc";
+import Idcc from "../../elements/Idcc";
 
 const Container = styled.div`
   background-color: white;

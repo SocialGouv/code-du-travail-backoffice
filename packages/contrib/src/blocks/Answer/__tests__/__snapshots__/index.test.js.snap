@@ -3,13 +3,13 @@
 exports[`[Contrib] blocks/<Answer /> should match snapshot 1`] = `
 <div>
   <div
-    class="Answer__Container-aw3my4-0 diWHeF"
+    class="Answer__Container-sc-1ccgtmi-0 jOaTp"
   >
     <div
       class="sc-bdVaJa sc-bwzfXH erVoqY"
     >
       <div
-        class="Answer__Label-aw3my4-1 gtjdxc"
+        class="Answer__Label-sc-1ccgtmi-1 emarue"
       >
         A label
       </div>
