@@ -3,49 +3,16 @@ import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
-import Label from "./Label";
+import Tags from "../../components/Tags";
+import Field from "../../elements/Field";
+import Input from "../../elements/Input";
+import Subtitle from "../../elements/Subtitle";
+import Button from "../../elements/Button";
 
 const Container = styled(Flex)`
   background-color: white;
-  color: black;
-  padding: 0 1rem;
+  padding: 1rem 1rem 0;
   width: 100%;
-`;
-
-const Title = styled.p`
-  font-weight: 600;
-  font-size: 0.8rem;
-  margin: 1rem 0 0.75rem;
-  text-transform: uppercase;
-  user-select: none;
-`;
-const Input = styled.input`
-  border: solid 1px #d3d3d3;
-  border-radius: 0.25rem;
-  color: inherit;
-  font-family: inherit;
-  font-weight: inherit;
-  font-size: 1rem;
-  line-height: 1.25;
-  padding: 0.5rem 0.75rem;
-  margin-bottom: 0.1rem;
-  width: 100%;
-
-  ::placeholder {
-    color: #bbbbbb;
-    font-style: italic;
-  }
-`;
-const Submit = styled.button`
-  -webkit-appearance: none;
-  border: 0;
-  height: 0;
-  padding: 0;
-  width: 0;
-`;
-
-const List = styled(Flex)`
-  flex-wrap: wrap;
 `;
 
 export default class extends React.PureComponent {
@@ -53,25 +20,30 @@ export default class extends React.PureComponent {
     super(props);
 
     this.state = {
+      laborCodeReferences: props.laborCodeReferences.map(
+        laborCodeReference => ({
+          value: laborCodeReference
+        })
+      ),
+      selectedLaborCodeReferences: props.references
+        .filter(({ category }) => category === "labor_code")
+        .map(({ value }) => ({ value })),
       references: props.references
     };
   }
 
-  addReference(event, category) {
+  addReference(event) {
     event.preventDefault();
 
-    const value =
-      category === null
-        ? this.$referenceTitle.value
-        : this.$laborCodeReference.value;
+    const value = this.$referenceTitle.value;
 
     if (find(propEq("value", value), this.state.references) !== undefined) {
       return;
     }
 
     const reference = {
-      category,
-      url: category === null ? this.$referenceUrl.value : null,
+      category: null,
+      url: this.$referenceUrl.value,
       value
     };
 
@@ -82,7 +54,21 @@ export default class extends React.PureComponent {
     this.props.onAdd(reference);
   }
 
-  removeReference(_value) {
+  addLaborCodeReference({ value }) {
+    const reference = {
+      category: "labor_code",
+      url: null,
+      value
+    };
+
+    this.setState({
+      references: [...this.state.references, reference]
+    });
+
+    this.props.onAdd(reference);
+  }
+
+  removeReference({ value: _value }) {
     this.setState({
       references: this.state.references.filter(({ value }) => value !== _value)
     });
@@ -90,45 +76,60 @@ export default class extends React.PureComponent {
     this.props.onRemove(_value);
   }
 
-  getLabels(_category) {
-    return this.state.references
-      .filter(({ category }) => category === _category)
-      .map(({ url, value }, index) => (
-        <Label
-          key={index}
-          onRemove={this.removeReference.bind(this)}
-          value={value}
-          url={url}
-        />
-      ));
+  removeLaborCodeReference({ value: _value }) {
+    this.setState({
+      references: this.state.references.filter(
+        ({ category, value }) => value !== _value && category !== "labor_code"
+      )
+    });
+
+    this.props.onRemove(_value);
   }
 
   render() {
     return (
       <Container flexDirection="column">
-        <Title>Articles du Code du travail</Title>
-        <form onSubmit={e => this.addReference(e, "labor_code")} role="form">
-          <Input
-            name="laborCodeReference"
-            placeholder="Référence (ex: L. 1234-5)"
-            ref={node => (this.$laborCodeReference = node)}
+        <Subtitle isFirst>Articles du Code du travail:</Subtitle>
+        <div>
+          <Tags
+            ariaName="la référence Code du Travail"
+            isEditable
+            onAdd={this.addLaborCodeReference.bind(this)}
+            onRemove={this.removeLaborCodeReference.bind(this)}
+            selectedTags={this.state.selectedLaborCodeReferences}
+            tags={this.state.laborCodeReferences}
           />
-        </form>
-        <List>{this.getLabels("labor_code")}</List>
+        </div>
 
-        <Title>Autre (décret, règlementation, circulaire, jurisprudence)</Title>
-        <form onSubmit={e => this.addReference(e, null)} role="form">
-          <Input
-            placeholder="Référence (ex: Décret n° 1 du 1er janvier 2019)"
-            ref={node => (this.$referenceTitle = node)}
-          />
-          <Input
-            placeholder="Lien (ex: https://...)"
-            ref={node => (this.$referenceUrl = node)}
-          />
-          <Submit type="submit" />
+        <Subtitle>
+          Autre (décret, règlementation, circulaire, jurisprudence):
+        </Subtitle>
+        <form onSubmit={this.addReference.bind(this)} role="form">
+          <Field>
+            <Input
+              placeholder="Référence (ex: Décret n°82-447 du 28 mai 1982...)"
+              ref={node => (this.$referenceTitle = node)}
+            />
+          </Field>
+          <Field>
+            <Input
+              placeholder="URL (ex: https://www.legifrance.gouv.fr/...)"
+              ref={node => (this.$referenceUrl = node)}
+            />
+          </Field>
+          <Field>
+            <Button title="Ajouter la référence juridique" type="submit">
+              Ajouter
+            </Button>
+          </Field>
         </form>
-        <List>{this.getLabels(null)}</List>
+        <Tags
+          ariaName="la référence juridique"
+          onRemove={this.removeReference.bind(this)}
+          selectedTags={this.state.references.filter(
+            ({ category }) => category === null
+          )}
+        />
       </Container>
     );
   }

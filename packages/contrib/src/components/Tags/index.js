@@ -125,11 +125,16 @@ export default class Tags extends React.PureComponent {
   }
 
   getSelectedTags() {
-    return this.state.selectedTags.map((tag, index) => (
+    const selectedTags = Boolean(this.props.isEditable)
+      ? this.state.selectedTags
+      : this.props.selectedTags;
+
+    return selectedTags.map((tag, index) => (
       <Tag
         ariaName={this.ariaName}
         key={index}
         onRemove={this.removeTag.bind(this)}
+        url={tag.url}
         value={tag.value}
       />
     ));

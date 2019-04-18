@@ -286,21 +286,6 @@ exports[`<Editor /> should match snapshot 1`] = `
           Étiquettes
         </button>
       </span>
-      <span
-        class="ql-formats"
-      >
-        <button
-          class="ql-charter Editor__TextButton-sc-1s8484a-0 eNdwXj"
-          title="Bouton ouvrant la charte rédactionnelle dans un nouvel onglet"
-          type="button"
-        >
-          <img
-            class="Editor__TextButtonIcon-sc-1s8484a-1 fLzNLm"
-            src="[object Object]"
-          />
-          Charte
-        </button>
-      </span>
     </div>
     <div
       class="ql-container ql-snow"

@@ -1,3 +1,4 @@
+import axios from "axios";
 import debounce from "lodash.debounce";
 import Router from "next/router";
 import React from "react";
@@ -59,10 +60,12 @@ export default class extends React.Component {
 
     Promise.all([
       this.axios.get(`/tags`),
-      this.axios.get(`/contributor_answers?${myAnswersFilter}`)
+      this.axios.get(`/contributor_answers?${myAnswersFilter}`),
+      axios.get(`/static/data/labor-law-references.json`)
     ])
-      .then(([tagsRes, answersRes]) => {
+      .then(([tagsRes, answersRes, laborCodeReferencesRes]) => {
         this.allTags = tagsRes.data;
+        this.laborCodeReferences = laborCodeReferencesRes.data;
         this.originalAnswer = answersRes.data[0];
 
         this.setState({ isLoading: false });
@@ -97,6 +100,7 @@ export default class extends React.Component {
 
     await this.axios.patch(uri, data).catch(console.warn);
 
+    this.originalAnswer.value = value;
     this.setState({ isSaving: false });
   }
 
@@ -127,32 +131,37 @@ export default class extends React.Component {
     this.setState({ isSaving: false });
   }
 
-  async _insertReference({ category, url, value }) {
+  async _insertReference(reference) {
     this.setState({ isSaving: true });
 
     const uri = `/answers_references`;
     const data = {
       answer_id: this.props.id,
-      category,
-      url,
-      value
+      ...reference
     };
 
     await this.axios.post(uri, data).catch(console.warn);
 
+    this.originalAnswer.references = [
+      ...this.originalAnswer.references,
+      reference
+    ];
     this.setState({ isSaving: false });
   }
 
-  async _deleteReference(value) {
+  async _deleteReference(_value) {
     this.setState({ isSaving: true });
 
     const uri = makeApiFilter("/answers_references", {
       answer_id: this.props.id,
-      value
+      value: _value
     });
 
     await this.axios.delete(uri).catch(console.warn);
 
+    this.originalAnswer.references = this.originalAnswer.references.filter(
+      ({ value }) => value !== _value
+    );
     this.setState({ isSaving: false });
   }
 
@@ -161,6 +170,7 @@ export default class extends React.Component {
       case TABS.REFERENCES:
         return (
           <AnswerEditionReferences
+            laborCodeReferences={this.laborCodeReferences}
             onAdd={this.insertReference.bind(this)}
             onRemove={this.deleteReference.bind(this)}
             references={this.originalAnswer.references}
