@@ -36,7 +36,8 @@ export default class extends React.Component {
     this.state = {
       currentTab: TABS.EDITOR,
       isLoading: true,
-      isSaving: false
+      isSaving: false,
+      lastAnswerValue: ""
     };
 
     this.allTags = [];
@@ -68,7 +69,10 @@ export default class extends React.Component {
         this.laborCodeReferences = laborCodeReferencesRes.data;
         this.originalAnswer = answersRes.data[0];
 
-        this.setState({ isLoading: false });
+        this.setState({
+          isLoading: false,
+          lastAnswerValue: this.originalAnswer.value
+        });
       })
       .catch(console.warn);
   }
@@ -174,6 +178,15 @@ export default class extends React.Component {
     this.setState({ isSaving: false });
   }
 
+  switchTab(nextTab) {
+    if (nextTab === this.state.currentTab) return;
+
+    this.setState({
+      currentTab: nextTab,
+      lastAnswerValue: this.originalAnswer.value
+    });
+  }
+
   getTabContent() {
     switch (this.state.currentTab) {
       case TABS.REFERENCES:
@@ -190,7 +203,7 @@ export default class extends React.Component {
       default:
         return (
           <AnswerEditionContent
-            defaultValue={this.originalAnswer.value}
+            defaultValue={this.state.lastAnswerValue}
             onChange={this.saveAnswerValue}
             onToggleTag={this.toggleTag.bind(this)}
             selectedTags={this.originalAnswer.tags}
@@ -210,7 +223,7 @@ export default class extends React.Component {
           currentTab={this.state.currentTab}
           idcc={this.originalAnswer.idcc}
           onCancel={() => this.cancelAnswer()}
-          onTabChange={currentTab => this.setState({ currentTab })}
+          onTabChange={this.switchTab.bind(this)}
           title={this.originalAnswer.question}
         />
         <Content>
