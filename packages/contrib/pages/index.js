@@ -125,29 +125,18 @@ export default class Index extends React.Component {
       );
     }
 
-    return [
-      isDraft ? (
-        <HelpText key="help">
-          Sélectionnez une réponse pour la modifier:
-        </HelpText>
-      ) : (
-        <HelpText key="help">
-          Sélectionnez une question pour commencer à rédiger une réponse:
-        </HelpText>
-      ),
-      answers
-        .slice(0, 10)
-        .map(answer => [
-          <Answer
-            data={answer}
-            isDraft={isDraft}
-            key={answer.id}
-            onCancel={this.cancelAnswer.bind(this)}
-            onClick={this.editAnswer.bind(this)}
-            onFallback={this.fallbackAnswer.bind(this)}
-          />
-        ])
-    ];
+    return answers
+      .slice(0, 10)
+      .map(answer => [
+        <Answer
+          data={answer}
+          isDraft={isDraft}
+          key={answer.id}
+          onCancel={this.cancelAnswer.bind(this)}
+          onClick={this.editAnswer.bind(this)}
+          onFallback={this.fallbackAnswer.bind(this)}
+        />
+      ]);
   }
 
   render() {
@@ -157,9 +146,16 @@ export default class Index extends React.Component {
       <Main>
         <Content flexDirection="column" width={1}>
           <Subtitle>Mes réponses en cours de rédaction</Subtitle>
-          {this.getAnswers(true)}
+          <HelpText key="help">
+            Sélectionnez une réponse pour la modifier:
+          </HelpText>
+          <div>{this.getAnswers(true)}</div>
+
           <Subtitle>Réponses à rédiger</Subtitle>
-          {this.getAnswers()}
+          <HelpText key="help">
+            Sélectionnez une question pour commencer à rédiger une réponse:
+          </HelpText>
+          <div>{this.getAnswers()}</div>
         </Content>
       </Main>
     );
