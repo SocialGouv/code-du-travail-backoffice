@@ -10,18 +10,20 @@ const Button = styled(_Button)`
     !hasText ? "transparent" : color};
   border-radius: 0;
   color: ${({ isLight }) => (isLight ? "var(--color-eerie-black)" : "white")};
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   display: flex;
+  font-size: inherit;
   line-height: 1.5;
   margin-right: ${({ hasGroup }) => (hasGroup ? "1rem" : 0)};
   min-height: 1.25rem;
   min-width: 1.25rem;
-  opacity: 0.75;
+  opacity: ${({ disabled }) => (disabled ? 0.25 : 0.75)};
   padding: ${({ isSmall }) =>
     isSmall ? "0.125rem 0.25rem" : "0.25rem 0.5rem"};
+  white-space: nowrap;
 
   :hover {
-    opacity: 1;
+    opacity: ${({ disabled }) => (disabled ? 0.25 : 1)};
   }
 `;
 
@@ -36,6 +38,7 @@ const COLOR = {
 export default ({
   children,
   color = "primary",
+  disabled = false,
   hasGroup = false,
   icon,
   isSmall = false,
@@ -45,6 +48,7 @@ export default ({
     return (
       <Button
         color={COLOR[color].value}
+        disabled={disabled}
         hasGroup={hasGroup}
         hasText
         isLight={COLOR[color].isLight}
@@ -61,6 +65,7 @@ export default ({
 
   return (
     <Button
+      disabled={disabled}
       hasGroup={hasGroup}
       hasText={hasText}
       isLight={COLOR[color].isLight}

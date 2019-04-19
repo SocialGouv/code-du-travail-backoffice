@@ -1,0 +1,162 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH Answer__Container-sc-1ccgtmi-0 icBtyh"
+    width="1"
+  >
+    <div
+      class="sc-bdVaJa sc-bwzfXH Answer__Content-sc-1ccgtmi-1 iaKzmY"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH erVoqY"
+      >
+        <div
+          class="Answer__ContentLabel-sc-1ccgtmi-2 hWIEiX"
+        >
+          Brouillon
+        </div>
+        <div
+          class="Idcc__Container-owzimc-0 dbOONK"
+          currentitem="false"
+          data-tip="A Labor Agreement Name"
+        >
+          CCN: 
+          1234
+          <div
+            class="__react_component_tooltip place-top type-dark "
+            data-id="tooltip"
+          />
+        </div>
+      </div>
+      <div
+        class="Answer__ContentQuestion-sc-1ccgtmi-3 byDouZ"
+      >
+        Who knows?
+      </div>
+      <div
+        class="Answer__ContentExtract-sc-1ccgtmi-4 geXDRE"
+      >
+        A strange answer....
+      </div>
+    </div>
+    <div
+      class="sc-bdVaJa sc-bwzfXH Answer__Menu-sc-1ccgtmi-5 blzSQl"
+    >
+      <button
+        class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 gcWLCP"
+        color="var(--color-lapis-lazuli)"
+        font-size="inherit"
+        font-weight="bold"
+      >
+        Annuler ma réponse
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot diff with a Labor Code generic reference 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -32,11 +32,13 @@
+          Who knows?
+        </div>
+        <div
+          class=\\"Answer__ContentExtract-sc-1ccgtmi-4 geXDRE\\"
+        >
+-         A strange answer....
++         <strong>
++           Renvoyé au Code du travail.
++         </strong>
+        </div>
+      </div>
+      <div
+        class=\\"sc-bdVaJa sc-bwzfXH Answer__Menu-sc-1ccgtmi-5 blzSQl\\"
+      >"
+`;
+
+exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot diff with a National Agreement generic reference 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -32,11 +32,13 @@
+          Who knows?
+        </div>
+        <div
+          class=\\"Answer__ContentExtract-sc-1ccgtmi-4 geXDRE\\"
+        >
+-         A strange answer....
++         <strong>
++           Renvoyé à la convention collective nationale.
++         </strong>
+        </div>
+      </div>
+      <div
+        class=\\"sc-bdVaJa sc-bwzfXH Answer__Menu-sc-1ccgtmi-5 blzSQl\\"
+      >"
+`;
+
+exports[`[Contrib] blocks/<Answer /> (Undraft) should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH Answer__Container-sc-1ccgtmi-0 icBtyh"
+    width="1"
+  >
+    <div
+      class="sc-bdVaJa sc-bwzfXH Answer__Content-sc-1ccgtmi-1 iaKzmY"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH erVoqY"
+      >
+        <div
+          class="Answer__ContentLabel-sc-1ccgtmi-2 hWIEiX"
+        >
+          À rédiger
+        </div>
+        <div
+          class="Idcc__Container-owzimc-0 dbOONK"
+          currentitem="false"
+          data-tip="A Labor Agreement Name"
+        >
+          CCN: 
+          1234
+          <div
+            class="__react_component_tooltip place-top type-dark "
+            data-id="tooltip"
+          />
+        </div>
+      </div>
+      <div
+        class="Answer__ContentQuestion-sc-1ccgtmi-3 byDouZ"
+      >
+        Who knows?
+      </div>
+    </div>
+    <div
+      class="sc-bdVaJa sc-bwzfXH Answer__Menu-sc-1ccgtmi-5 blzSQl"
+    >
+      <button
+        class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 gcWLCP"
+        color="var(--color-lapis-lazuli)"
+        font-size="inherit"
+        font-weight="bold"
+      >
+        Renvoi au Code du travail
+      </button>
+      <button
+        class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 gcWLCP"
+        color="var(--color-lapis-lazuli)"
+        font-size="inherit"
+        font-weight="bold"
+      >
+        Renvoi à la CC nationale
+      </button>
+    </div>
+  </div>
+</div>
+`;

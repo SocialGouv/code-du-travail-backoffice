@@ -119,7 +119,7 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should matc
                   class="sc-bdVaJa sc-bwzfXH pjOvZ"
                 >
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 exNuds"
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 dRhkhb"
                     color="var(--color-periwinkle)"
                     font-size="inherit"
                     font-weight="bold"
@@ -129,7 +129,7 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should matc
                     Annuler
                   </button>
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 iDhkoI"
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU"
                     color="var(--color-lapis-lazuli)"
                     font-size="inherit"
                     font-weight="bold"
@@ -154,11 +154,14 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should subm
 - First value
 + Second value
 
-@@ -116,20 +116,22 @@
+@@ -114,22 +114,24 @@
+                  />
+                  <div
                     class=\\"sc-bdVaJa sc-bwzfXH pjOvZ\\"
                   >
                     <button
-                      class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 exNuds\\"
+-                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 dRhkhb\\"
++                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 bLVaba\\"
                       color=\\"var(--color-periwinkle)\\"
 +                     disabled=\\"\\"
                       font-size=\\"inherit\\"
@@ -169,7 +172,8 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should subm
                       Annuler
                     </button>
                     <button
-                      class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 iDhkoI\\"
+-                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU\\"
++                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 lpiHpV\\"
                       color=\\"var(--color-lapis-lazuli)\\"
 +                     disabled=\\"\\"
                       font-size=\\"inherit\\"
@@ -194,7 +198,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should add a tag accordingl
 +                   value=\\"an input with value button that has been transformed\\"
                   />
                   <button
-                    class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ecLjBX\\"
+                    class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
                     color=\\"white\\"
                     font-size=\\"inherit\\"
 @@ -196,11 +196,26 @@
@@ -352,7 +356,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                   value=""
                 />
                 <button
-                  class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ecLjBX"
+                  class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf"
                   color="white"
                   font-size="inherit"
                   font-weight="bold"
@@ -483,7 +487,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                   class="sc-bdVaJa sc-bwzfXH pjOvZ"
                 >
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 exNuds"
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 dRhkhb"
                     color="var(--color-periwinkle)"
                     font-size="inherit"
                     font-weight="bold"
@@ -493,7 +497,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                     Annuler
                   </button>
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 iDhkoI"
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU"
                     color="var(--color-lapis-lazuli)"
                     font-size="inherit"
                     font-weight="bold"
@@ -528,7 +532,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should remove a tag accordi
 +                   value=\\"an input with value button that has been transformed\\"
                   />
                   <button
-                    class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ecLjBX\\"
+                    class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
                     color=\\"white\\"
                     font-size=\\"inherit\\""
 `;
@@ -548,7 +552,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should submit the expected 
 +                   value=\\"an input with value button that has been transformed\\"
                   />
                   <button
-                    class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ecLjBX\\"
+                    class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
                     color=\\"white\\"
                     font-size=\\"inherit\\"
 @@ -235,13 +235,42 @@
@@ -594,11 +598,14 @@ exports[`[Contrib] components/<AdminForm /> (create) should submit the expected 
               >
                 <label
                   class=\\"AdminForm__Label-scluvj-1 jCpDRz\\"
-@@ -254,20 +283,22 @@
+@@ -252,22 +281,24 @@
+                  />
+                  <div
                     class=\\"sc-bdVaJa sc-bwzfXH pjOvZ\\"
                   >
                     <button
-                      class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 exNuds\\"
+-                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 dRhkhb\\"
++                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 bLVaba\\"
                       color=\\"var(--color-periwinkle)\\"
 +                     disabled=\\"\\"
                       font-size=\\"inherit\\"
@@ -609,7 +616,8 @@ exports[`[Contrib] components/<AdminForm /> (create) should submit the expected 
                       Annuler
                     </button>
                     <button
-                      class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 iDhkoI\\"
+-                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU\\"
++                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 lpiHpV\\"
                       color=\\"var(--color-lapis-lazuli)\\"
 +                     disabled=\\"\\"
                       font-size=\\"inherit\\"
@@ -634,7 +642,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should the expected error 1
 +                   value=\\"an input with value button that has been transformed\\"
                   />
                   <button
-                    class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ecLjBX\\"
+                    class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
                     color=\\"white\\"
                     font-size=\\"inherit\\"
 @@ -247,11 +247,13 @@
@@ -651,7 +659,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should the expected error 1
                     class=\\"sc-bdVaJa sc-bwzfXH pjOvZ\\"
                   >
                     <button
-                      class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 exNuds\\""
+                      class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 dRhkhb\\""
 `;
 
 exports[`[Contrib] components/<AdminForm /> (create) should transform the input with button value as expected 1`] = `
@@ -669,7 +677,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should transform the input 
 +                   value=\\"an input with value button that has been transformed\\"
                   />
                   <button
-                    class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ecLjBX\\"
+                    class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
                     color=\\"white\\"
                     font-size=\\"inherit\\""
 `;
@@ -793,7 +801,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match 
                   class="sc-bdVaJa sc-bwzfXH pjOvZ"
                 >
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 exNuds"
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 dRhkhb"
                     color="var(--color-periwinkle)"
                     font-size="inherit"
                     font-weight="bold"
@@ -803,7 +811,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match 
                     Annuler
                   </button>
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 iDhkoI"
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU"
                     color="var(--color-lapis-lazuli)"
                     font-size="inherit"
                     font-weight="bold"
@@ -828,11 +836,14 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should submit
 - First value
 + Second value
 
-@@ -116,20 +116,22 @@
+@@ -114,22 +114,24 @@
+                  />
+                  <div
                     class=\\"sc-bdVaJa sc-bwzfXH pjOvZ\\"
                   >
                     <button
-                      class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 exNuds\\"
+-                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 dRhkhb\\"
++                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 bLVaba\\"
                       color=\\"var(--color-periwinkle)\\"
 +                     disabled=\\"\\"
                       font-size=\\"inherit\\"
@@ -843,7 +854,8 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should submit
                       Annuler
                     </button>
                     <button
-                      class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 iDhkoI\\"
+-                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU\\"
++                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 lpiHpV\\"
                       color=\\"var(--color-lapis-lazuli)\\"
 +                     disabled=\\"\\"
                       font-size=\\"inherit\\"
@@ -972,7 +984,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match 
                   class="sc-bdVaJa sc-bwzfXH pjOvZ"
                 >
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 exNuds"
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 dRhkhb"
                     color="var(--color-periwinkle)"
                     font-size="inherit"
                     font-weight="bold"
@@ -982,7 +994,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match 
                     Annuler
                   </button>
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 iDhkoI"
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU"
                     color="var(--color-lapis-lazuli)"
                     font-size="inherit"
                     font-weight="bold"
@@ -1133,7 +1145,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                   value="the original input button value"
                 />
                 <button
-                  class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ecLjBX"
+                  class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf"
                   color="white"
                   font-size="inherit"
                   font-weight="bold"
@@ -1307,7 +1319,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                   class="sc-bdVaJa sc-bwzfXH pjOvZ"
                 >
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 exNuds"
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 dRhkhb"
                     color="var(--color-periwinkle)"
                     font-size="inherit"
                     font-weight="bold"
@@ -1317,7 +1329,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                     Annuler
                   </button>
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 iDhkoI"
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU"
                     color="var(--color-lapis-lazuli)"
                     font-size="inherit"
                     font-weight="bold"

@@ -11,7 +11,7 @@ const Container = styled(Flex)`
 export default ({ onCancel }) => (
   <Container>
     <Button color="secondary" onClick={onCancel}>
-      Annuler le brouillon
+      Annuler ma réponse
     </Button>
   </Container>
 );
