@@ -89,7 +89,12 @@ export default class extends React.Component {
     this.setState({ isSaving: true });
 
     const answersUri = `/answers?id=eq.${this.props.id}`;
-    const answersData = { user_id: null, value: "" };
+    const answersData = {
+      generic_reference: null,
+      state: "todo",
+      user_id: null,
+      value: ""
+    };
     const answersTagsUri = makeApiFilter("/answers_tags", {
       answer_id: this.props.id
     });
@@ -109,7 +114,7 @@ export default class extends React.Component {
 
     const uri = `/answers?id=eq.${this.props.id}`;
     // An answer can't have a value and be generic at the same time:
-    const data = { generic_reference: null, value };
+    const data = { generic_reference: null, state: "draft", value };
 
     await this.axios.patch(uri, data).catch(console.warn);
 
@@ -120,13 +125,20 @@ export default class extends React.Component {
   async _insertTag(tagId) {
     this.setState({ isSaving: true });
 
-    const uri = `/answers_tags`;
-    const data = {
+    const answersUri = `/answers?id=eq.${this.props.id}`;
+    // An answer can't have a custom tag and be generic at the same time:
+    const answersData = {
+      generic_reference: null,
+      state: "draft"
+    };
+    const answersTagsUri = `/answers_tags`;
+    const answersTagsData = {
       answer_id: this.props.id,
       tag_id: tagId
     };
 
-    await this.axios.post(uri, data).catch(console.warn);
+    await this.axios.patch(answersUri, answersData).catch(console.warn);
+    await this.axios.post(answersTagsUri, answersTagsData).catch(console.warn);
 
     this.setState({ isSaving: false });
   }
@@ -147,13 +159,22 @@ export default class extends React.Component {
   async _insertReference(reference) {
     this.setState({ isSaving: true });
 
-    const uri = `/answers_references`;
-    const data = {
+    const answersUri = `/answers?id=eq.${this.props.id}`;
+    // An answer can't have a reference and be generic at the same time:
+    const answersData = {
+      generic_reference: null,
+      state: "draft"
+    };
+    const answersReferencesUri = `/answers_references`;
+    const answersReferencesData = {
       answer_id: this.props.id,
       ...reference
     };
 
-    await this.axios.post(uri, data).catch(console.warn);
+    await this.axios.patch(answersUri, answersData).catch(console.warn);
+    await this.axios
+      .post(answersReferencesUri, answersReferencesData)
+      .catch(console.warn);
 
     this.originalAnswer.references = [
       ...this.originalAnswer.references,
