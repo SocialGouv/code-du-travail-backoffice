@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "node ./server.js",
-    "start": "NODE_ENV=production node ./server.js",
+    "dev": "node ./server",
+    "start": "NODE_ENV=production node ./server",
     "test": "yarn test:lint && yarn test:unit",
     "test:lint": "eslint .",
     "test:update": "yarn test:unit --updateSnapshot",
