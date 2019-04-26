@@ -1,5 +1,7 @@
 -------------------------------------- UP --------------------------------------
 
+DROP VIEW api.contributor_answers;
+
 ALTER TABLE api.agreements
   ADD COLUMN parent_id uuid REFERENCES api.agreements(id) ON DELETE SET NULL;
 
@@ -14,8 +16,6 @@ CREATE TYPE answer_generic_reference AS ENUM (
 
 ALTER TABLE api.answers
   ADD COLUMN generic_reference answer_generic_reference;
-
-DROP VIEW api.contributor_answers;
 
 CREATE VIEW api.contributor_answers AS
 SELECT
