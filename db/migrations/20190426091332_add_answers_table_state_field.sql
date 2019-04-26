@@ -2,20 +2,18 @@
 
 DROP VIEW api.contributor_answers;
 
-ALTER TABLE api.agreements
-  ADD COLUMN parent_id uuid REFERENCES api.agreements(id) ON DELETE SET NULL;
+ALTER TABLE api.answers
+  DROP COLUMN is_draft;
 
-/*
-  - `labor_code`: Generic answer falling back to the Labor Code
-  - `national_agreement`: Generic answer falling back to the national agreement
-*/
-CREATE TYPE answer_generic_reference AS ENUM (
-  'labor_code',
-  'national_agreement'
+CREATE TYPE answer_state AS ENUM (
+  'todo',
+  'draft',
+  'pending_review',
+  'validated'
 );
 
 ALTER TABLE api.answers
-  ADD COLUMN generic_reference answer_generic_reference;
+  ADD COLUMN state answer_state DEFAULT 'todo';
 
 CREATE VIEW api.contributor_answers AS
 SELECT
@@ -56,12 +54,12 @@ GRANT SELECT ON api.contributor_answers TO contributor;
 DROP VIEW api.contributor_answers;
 
 ALTER TABLE api.answers
-  DROP COLUMN generic_reference;
+  DROP COLUMN state;
 
-DROP TYPE answer_generic_reference;
+DROP TYPE answer_state;
 
-ALTER TABLE api.agreements
-  DROP COLUMN parent_id;
+ALTER TABLE api.answers
+  ADD COLUMN is_draft boolean DEFAULT TRUE;
 
 CREATE VIEW api.contributor_answers AS
 SELECT
@@ -94,3 +92,5 @@ SELECT
     questions.value,
     agreements.name,
     agreements.idcc;
+
+GRANT SELECT ON api.contributor_answers TO contributor;
