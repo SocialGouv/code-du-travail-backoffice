@@ -14,6 +14,7 @@ module.exports = {
     "<rootDir>/package.json",
     // Page components should be tested in e2e:
     "<rootDir>/pages",
+    "<rootDir>/server",
     "<rootDir>/yarn.lock"
   ],
   // https://github.com/facebook/create-react-app/issues/2007#issuecomment-296694661
