@@ -1,10 +1,12 @@
 const Koa = require("koa");
 const next = require("next");
 
+const isInternetExplorer = require("./middlewares/isInternetExplorer");
+
 // If we are in a non-production environment, we want to load the env vars via
 // the monorepo global .env file.
 if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config({ path: `${__dirname}/../../.env` });
+  require("dotenv").config({ path: `${__dirname}/../../../.env` });
 }
 
 const routes = require("./routes");
@@ -18,6 +20,9 @@ async function start() {
   await nextApp.prepare();
 
   const koaApp = new Koa();
+
+  // Show a page advising the user to use Chrome if the current browser is IE:
+  koaApp.use(isInternetExplorer);
 
   // Attach routes
   koaApp.use(routes(nextApp));

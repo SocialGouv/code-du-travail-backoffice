@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "node ./server.js",
-    "start": "NODE_ENV=production node ./server.js",
+    "dev": "node ./server",
+    "start": "NODE_ENV=production node ./server",
     "test": "yarn test:lint && yarn test:unit",
     "test:lint": "eslint .",
     "test:update": "yarn test:unit --updateSnapshot",
@@ -40,6 +40,7 @@
     "sanitize-html": "^1.20.1",
     "showdown": "^1.9.0",
     "styled-components": "4.2.0",
+    "ua-parser-js": "^0.7.19",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
