@@ -21,12 +21,12 @@ const Content = styled(Flex)`
   flex-grow: 1;
 `;
 const ContentInfo = styled(Flex)`
-  bottom: 1rem;
-  color: #888888;
-  font-size: 0.8rem;
+  color: var(--color-black-leather-jacket);
+  font-size: 1rem;
+  margin-top: 0.5rem;
   position: absolute;
-  right: 1.75rem;
-  width: 15.5rem;
+  right: 1rem;
+  width: 13rem;
 `;
 
 export default class extends React.Component {
@@ -248,14 +248,17 @@ export default class extends React.Component {
           title={this.originalAnswer.question}
         />
         <Content>
-          {this.getTabContent()}
-
-          {this.state.isSaving && (
+          {this.state.currentTab === TABS.EDITOR && this.state.isSaving && (
             <ContentInfo alignItems="center" justifyContent="space-between">
-              <SavingSpinner color="#888888" size="26" />
-              Sauvegarde automatique en cours…
+              <SavingSpinner
+                color="var(--color-black-leather-jacket)"
+                size="26"
+              />
+              Sauvegarde en cours…
             </ContentInfo>
           )}
+
+          {this.getTabContent()}
         </Content>
       </Container>
     );
