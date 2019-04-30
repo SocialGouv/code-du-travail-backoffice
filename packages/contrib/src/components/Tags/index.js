@@ -87,12 +87,13 @@ export default class Tags extends React.PureComponent {
     this.props.onAdd(tag);
   }
 
-  removeTag(_value) {
-    const tag = this.getTagByValue(_value, this.state.selectedTags);
+  removeTag(value) {
+    const foundTag = this.getTagByValue(value, this.state.selectedTags);
+    const tag = foundTag !== undefined ? foundTag : { value };
 
     this.setState({
       selectedTags: this.state.selectedTags.filter(
-        ({ value }) => value !== _value
+        ({ value: _value }) => _value !== value
       ),
       tags: this.sortByValue([...this.state.tags, tag])
     });
