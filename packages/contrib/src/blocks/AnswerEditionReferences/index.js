@@ -36,6 +36,7 @@ export default class extends React.PureComponent {
     event.preventDefault();
 
     const value = this.$referenceTitle.value;
+    if (value.trim().length === 0) return;
 
     if (find(propEq("value", value), this.state.references) !== undefined) {
       return;
