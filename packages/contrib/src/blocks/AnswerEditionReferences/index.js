@@ -42,9 +42,10 @@ export default class extends React.PureComponent {
       return;
     }
 
+    const url = this.$referenceUrl.value;
     const reference = {
       category: null,
-      url: this.$referenceUrl.value,
+      url: url.trim().length !== 0 ? url : null,
       value
     };
 
