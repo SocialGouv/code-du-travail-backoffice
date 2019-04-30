@@ -36,14 +36,16 @@ export default class extends React.PureComponent {
     event.preventDefault();
 
     const value = this.$referenceTitle.value;
+    if (value.trim().length === 0) return;
 
     if (find(propEq("value", value), this.state.references) !== undefined) {
       return;
     }
 
+    const url = this.$referenceUrl.value;
     const reference = {
       category: null,
-      url: this.$referenceUrl.value,
+      url: url.trim().length !== 0 ? url : null,
       value
     };
 
