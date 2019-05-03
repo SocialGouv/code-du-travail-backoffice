@@ -4,7 +4,7 @@ exports[`[Contrib] elements/<Icon /> should match snapshot 1`] = `
 <div>
   <svg
     aria-hidden="true"
-    class="svg-inline--fa fa-book fa-w-14 fa-1x "
+    class="svg-inline--fa fa-book fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz"
     color="var(--color-black-leather-jacket)"
     data-icon="book"
     data-prefix="fas"
@@ -30,7 +30,7 @@ exports[`[Contrib] elements/<Icon /> should match snapshot with \`color\` prop 1
   <DocumentFragment>
     <svg
       aria-hidden=\\"true\\"
-      class=\\"svg-inline--fa fa-book fa-w-14 fa-1x \\"
+      class=\\"svg-inline--fa fa-book fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
 -     color=\\"var(--color-black-leather-jacket)\\"
 +     color=\\"red\\"
       data-icon=\\"book\\"
@@ -49,8 +49,8 @@ exports[`[Contrib] elements/<Icon /> should match snapshot with a custom \`isSma
   <DocumentFragment>
     <svg
       aria-hidden=\\"true\\"
--     class=\\"svg-inline--fa fa-book fa-w-14 fa-1x \\"
-+     class=\\"svg-inline--fa fa-book fa-w-14 fa-sm \\"
+-     class=\\"svg-inline--fa fa-book fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
++     class=\\"svg-inline--fa fa-book fa-w-14 fa-sm Icon-sc-4jlog9-0 kEhyQg\\"
       color=\\"var(--color-black-leather-jacket)\\"
       data-icon=\\"book\\"
       data-prefix=\\"fas\\"

@@ -10,7 +10,7 @@ exports[`[Contrib] blocks/AnswerEditionHead/<Tabs /> should match snapshot 1`] =
     >
       <svg
         aria-hidden="true"
-        class="svg-inline--fa fa-pen fa-w-16 fa-sm Tab__Icon-sc-9u46t0-1 gKyINd"
+        class="svg-inline--fa fa-pen fa-w-16 fa-sm Tab__Icon-sc-9u46t0-1 gKyINd Icon-sc-4jlog9-0 kEhyQg"
         color="var(--color-black-leather-jacket)"
         data-icon="pen"
         data-prefix="fas"
@@ -31,7 +31,7 @@ exports[`[Contrib] blocks/AnswerEditionHead/<Tabs /> should match snapshot 1`] =
     >
       <svg
         aria-hidden="true"
-        class="svg-inline--fa fa-book fa-w-14 fa-sm Tab__Icon-sc-9u46t0-1 gKyINd"
+        class="svg-inline--fa fa-book fa-w-14 fa-sm Tab__Icon-sc-9u46t0-1 gKyINd Icon-sc-4jlog9-0 kEhyQg"
         color="var(--color-black-leather-jacket)"
         data-icon="book"
         data-prefix="fas"
