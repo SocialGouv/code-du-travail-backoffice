@@ -8,4 +8,10 @@ describe("[Contrib] elements/<Input />", () => {
 
     expect(container).toMatchSnapshot();
   });
+
+  it("should match snapshot with a custom `icon` prop", () => {
+    const { container } = render(<Input icon="search" />);
+
+    expect(container).toMatchSnapshot();
+  });
 });
