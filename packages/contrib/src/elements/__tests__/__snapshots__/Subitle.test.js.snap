@@ -3,7 +3,7 @@
 exports[`[Contrib] elements/<Subtitle /> should match snapshot 1`] = `
 <div>
   <h2
-    class="Subtitle-sc-17ig8qv-0 cPKaSn"
+    class="Subtitle-sc-17ig8qv-0 hSClQd"
   />
 </div>
 `;
@@ -11,7 +11,7 @@ exports[`[Contrib] elements/<Subtitle /> should match snapshot 1`] = `
 exports[`[Contrib] elements/<Subtitle /> should match snapshot with \`isFirst\` prop 1`] = `
 <div>
   <h2
-    class="Subtitle-sc-17ig8qv-0 cIGDXh"
+    class="Subtitle-sc-17ig8qv-0 gsnyDG"
   />
 </div>
 `;
