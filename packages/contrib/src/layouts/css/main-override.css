@@ -24,6 +24,21 @@
   --color-blue-sapphire: #1E5875;
   --color-shadow: #897D59;
   --color-cadet-grey: #91A3BA;
+
+  /* Transition design colors */
+  --color-black-leather-jacket: #000000;
+  --color-background: #f9f9fc;
+  --color-border: #c9d3df;
+  --color-label-background: #eeeeef;
+  --color-text-gray: #929292;
+  --color-text-blue: #2f80ed;
+  --color-text-red: #c3622a;
+  --color-placeholder: var(--color-text-gray);
+}
+
+html, body {
+  background-color: white;
+  overflow: hidden;
 }
 
 body {
