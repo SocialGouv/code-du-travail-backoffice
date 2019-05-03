@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import Icon from "./Icon";
 
-const Input = styled.input`
+const _Input = styled.input`
   -webkit-appearance: none;
   background-color: transparent;
   border: solid 1px var(--color-border);
@@ -31,15 +31,18 @@ const InputIcon = styled(Icon)`
   color: var(--color-placeholder);
 `;
 
-export default ({ icon, ...props }) => {
-  if (icon === undefined) return <Input {...props} />;
+const Input = ({ icon, ...props }, ref) => {
+  if (icon === undefined) return <_Input ref={ref} {...props} />;
 
   return (
     <div>
       <InputIconContainer>
         <InputIcon icon={icon} />
       </InputIconContainer>
-      <Input hasIcon {...props} />
+      <_Input hasIcon ref={ref} {...props} />
     </div>
   );
 };
+
+// https://reactjs.org/docs/forwarding-refs.html
+export default React.forwardRef(Input);
