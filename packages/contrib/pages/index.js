@@ -14,21 +14,23 @@ import stringFrIncludes from "../src/libs/stringFrIncludes";
 
 const Content = styled(Flex)`
   overflow-y: auto;
-  padding: 0 1rem 0.5rem;
+  padding: 0 1rem 1rem;
 `;
 const InfoText = styled.p`
   color: var(--color-dark-slate-gray);
   margin-bottom: 0.5rem;
 `;
 const HelpText = styled.p`
-  color: var(--color-shadow);
   font-size: 0.875rem;
-  font-style: italic;
   margin-bottom: 0.5rem;
 `;
+
+const FilterInputContainer = styled.div`
+  margin-right: 13rem;
+`;
 const FilterInput = styled(Input)`
-  margin-top: 1rem;
-  max-width: 20rem;
+  border-radius: 0.4rem;
+  margin: 0.5rem 0;
 `;
 
 const ANSWERS_PER_PAGE = 10;
@@ -128,7 +130,7 @@ export default class Index extends React.Component {
       : ({ state }) => state === "todo";
 
     const queryFilter =
-      this.state.query.length !== 0
+      !isDraft && this.state.query.length !== 0
         ? ({ agreement, idcc, question }) =>
             stringFrIncludes(this.state.query, agreement) ||
             idcc.includes(this.state.query) ||
@@ -197,24 +199,26 @@ export default class Index extends React.Component {
     return (
       <Main>
         <Content flexDirection="column" width={1}>
-          <Subtitle>Mes réponses en cours de rédaction</Subtitle>
+          <Subtitle>Mes brouillons</Subtitle>
           {draftAnswers.length !== 0 && (
-            <HelpText>Sélectionnez une réponse pour la modifier:</HelpText>
+            <HelpText>Cliquez sur un brouillon pour le modifier :</HelpText>
           )}
           {this.getAnswersList(draftAnswers, true)}
 
-          <Flex alignItems="center" justifyContent="space-between">
-            <Subtitle>Réponses à rédiger</Subtitle>
+          <Subtitle>Réponses à rédiger</Subtitle>
+          {newAnswers.length !== 0 && (
+            <HelpText>
+              {`Sélectionnez une question et commencez à rédiger une réponse
+              pour vous l'attribuer :`}
+            </HelpText>
+          )}
+          <FilterInputContainer>
             <FilterInput
+              icon="search"
               onChange={this.filterAnswers.bind(this)}
               placeholder="Rechercher par intitulé ou CCN..."
             />
-          </Flex>
-          {newAnswers.length !== 0 && (
-            <HelpText>
-              Sélectionnez une question pour commencer à rédiger une réponse:
-            </HelpText>
-          )}
+          </FilterInputContainer>
           {this.getAnswersList(newAnswersChunk)}
           {pageCount !== 0 && (
             <Pagination
