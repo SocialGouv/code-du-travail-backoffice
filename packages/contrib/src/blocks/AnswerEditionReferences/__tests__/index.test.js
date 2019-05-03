@@ -52,7 +52,7 @@ describe("[Contrib] blocks/<AnswerEditionReferences />", () => {
 
     fireEvent.input(
       getByPlaceholderText(
-        "Commencez à taper le nom de la référence Code du Travail"
+        "Commencez à taper le nom de la référence au Code du travail"
       ),
       {
         target: { value: newReference.value }
@@ -69,8 +69,8 @@ describe("[Contrib] blocks/<AnswerEditionReferences />", () => {
 
   it("should remove the expected Labor Code reference", async () => {
     fireEvent.click(
-      getByAltText(
-        `Bouton supprimant la référence Code du Travail ${
+      getByTitle(
+        `Bouton supprimant la référence au Code du travail : ${
           props.references[0].value
         }`
       )
@@ -90,14 +90,14 @@ describe("[Contrib] blocks/<AnswerEditionReferences />", () => {
     };
 
     fireEvent.input(
-      getByPlaceholderText("Référence (ex: Décret n°82-447 du 28 mai 1982...)"),
+      getByPlaceholderText("Référence (ex: Décret n°82-447 du 28 mai 1982…)"),
       {
         target: { value: newReference.value }
       }
     );
     await waitFor(0);
     fireEvent.input(
-      getByPlaceholderText("URL (ex: https://www.legifrance.gouv.fr/...)"),
+      getByPlaceholderText("URL (ex: https://www.legifrance.gouv.fr/…)"),
       {
         target: { value: newReference.url }
       }
@@ -113,8 +113,10 @@ describe("[Contrib] blocks/<AnswerEditionReferences />", () => {
 
   it("should remove the expected uncategorized reference", async () => {
     fireEvent.click(
-      getByAltText(
-        `Bouton supprimant la référence juridique ${props.references[1].value}`
+      getByTitle(
+        `Bouton supprimant la référence juridique : ${
+          props.references[1].value
+        }`
       )
     );
     await waitFor(0);
@@ -130,7 +132,7 @@ describe("[Contrib] blocks/<AnswerEditionReferences />", () => {
     expect(queryAllByText(duplicateReferenceValue).length).toBe(1);
 
     fireEvent.input(
-      getByPlaceholderText("Référence (ex: Décret n°82-447 du 28 mai 1982...)"),
+      getByPlaceholderText("Référence (ex: Décret n°82-447 du 28 mai 1982…)"),
       {
         target: { value: duplicateReferenceValue }
       }

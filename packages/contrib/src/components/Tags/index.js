@@ -161,7 +161,9 @@ export default class Tags extends React.PureComponent {
               {this.getSuggestedTags()}
             </SuggestedTags>
           )}
-        <SelectedTags>{this.getSelectedTags()}</SelectedTags>
+        {!Boolean(this.props.hideTags) && (
+          <SelectedTags>{this.getSelectedTags()}</SelectedTags>
+        )}
       </Container>
     );
   }

@@ -8,11 +8,16 @@ import Field from "../../elements/Field";
 import Input from "../../elements/Input";
 import Subtitle from "../../elements/Subtitle";
 import Button from "../../elements/Button";
+import List from "./List";
 
 const Container = styled(Flex)`
   background-color: white;
-  padding: 1rem 1rem 0;
   width: 100%;
+`;
+const Part = styled(Flex)`
+  border: dashed 1px var(--color-light-steel-blue);
+  margin: 0.5rem;
+  padding: 0.5rem;
 `;
 
 export default class extends React.PureComponent {
@@ -70,68 +75,90 @@ export default class extends React.PureComponent {
     this.props.onAdd(reference);
   }
 
-  removeReference({ value: _value }) {
-    this.setState({
-      references: this.state.references.filter(({ value }) => value !== _value)
-    });
-
-    this.props.onRemove(_value);
-  }
-
-  removeLaborCodeReference({ value: _value }) {
+  removeReference(value) {
     this.setState({
       references: this.state.references.filter(
-        ({ category, value }) => value !== _value && category !== "labor_code"
+        ({ value: _value }) => _value !== value
       )
     });
 
-    this.props.onRemove(_value);
+    this.props.onRemove(value);
+  }
+
+  removeLaborCodeReference(value) {
+    this.setState({
+      references: this.state.references.filter(
+        ({ value: _value }) => _value !== value
+      )
+    });
+
+    this.props.onRemove(value);
   }
 
   render() {
+    const laborCodeReferences = this.state.references.filter(
+      ({ category }) => category === "labor_code"
+    );
+    const otherReferences = this.state.references.filter(
+      ({ category }) => category === null
+    );
+
     return (
       <Container flexDirection="column">
-        <Subtitle isFirst>Articles du Code du travail:</Subtitle>
-        <div>
-          <Tags
-            ariaName="la référence Code du Travail"
-            isEditable
-            onAdd={this.addLaborCodeReference.bind(this)}
+        <Part>
+          <Flex flexDirection="column" width={0.5}>
+            <Subtitle isFirst>Articles du Code du travail:</Subtitle>
+            <div>
+              <Tags
+                ariaName="la référence au Code du travail"
+                hideTags
+                isEditable
+                onAdd={this.addLaborCodeReference.bind(this)}
+                onRemove={this.removeLaborCodeReference.bind(this)}
+                selectedTags={this.state.selectedLaborCodeReferences}
+                tags={this.state.laborCodeReferences}
+              />
+            </div>
+          </Flex>
+          <List
+            ariaName="la référence au Code du travail"
             onRemove={this.removeLaborCodeReference.bind(this)}
-            selectedTags={this.state.selectedLaborCodeReferences}
-            tags={this.state.laborCodeReferences}
+            references={laborCodeReferences}
+            width={0.5}
           />
-        </div>
-
-        <Subtitle>
-          Autre (décret, règlementation, circulaire, jurisprudence):
-        </Subtitle>
-        <form onSubmit={this.addReference.bind(this)} role="form">
-          <Field>
-            <Input
-              placeholder="Référence (ex: Décret n°82-447 du 28 mai 1982...)"
-              ref={node => (this.$referenceTitle = node)}
-            />
-          </Field>
-          <Field>
-            <Input
-              placeholder="URL (ex: https://www.legifrance.gouv.fr/...)"
-              ref={node => (this.$referenceUrl = node)}
-            />
-          </Field>
-          <Field>
-            <Button title="Ajouter la référence juridique" type="submit">
-              Ajouter
-            </Button>
-          </Field>
-        </form>
-        <Tags
-          ariaName="la référence juridique"
-          onRemove={this.removeReference.bind(this)}
-          selectedTags={this.state.references.filter(
-            ({ category }) => category === null
-          )}
-        />
+        </Part>
+        <Part>
+          <Flex flexDirection="column" width={0.5}>
+            <Subtitle isFirst>
+              Autre (décret, règlementation, circulaire, jurisprudence):
+            </Subtitle>
+            <form onSubmit={this.addReference.bind(this)} role="form">
+              <Field>
+                <Input
+                  placeholder="Référence (ex: Décret n°82-447 du 28 mai 1982…)"
+                  ref={node => (this.$referenceTitle = node)}
+                />
+              </Field>
+              <Field>
+                <Input
+                  placeholder="URL (ex: https://www.legifrance.gouv.fr/…)"
+                  ref={node => (this.$referenceUrl = node)}
+                />
+              </Field>
+              <Field>
+                <Button title="Ajouter la référence juridique" type="submit">
+                  Ajouter
+                </Button>
+              </Field>
+            </form>
+          </Flex>
+          <List
+            ariaName="la référence juridique"
+            onRemove={this.removeReference.bind(this)}
+            references={otherReferences}
+            width={0.5}
+          />
+        </Part>
       </Container>
     );
   }
