@@ -7,7 +7,7 @@ exports[`[Contrib] layouts/<Main /> should match snapshot 1`] = `
     style="height: 100vh;"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 eBCYWC"
+      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 ipFTgV"
       width="1"
     >
       <div
@@ -53,7 +53,7 @@ exports[`[Contrib] layouts/<Main /> should match snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 lhyucv"
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 brMLFO"
       />
     </div>
   </div>
@@ -72,7 +72,7 @@ exports[`[Contrib] layouts/<Main /> should show the loading spinner 1`] = `
         </div>
         <div
 -         class=\\"sc-bdVaJa sc-bwzfXH Menu__Container-sc-1tufs3d-0 jlBedE\\"
-+         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 fIdmfv\\"
++         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 iaRbTA\\"
         >
           <div
 -           class=\\"Menu__Link-sc-1tufs3d-1 EiNjX\\"
@@ -90,7 +90,7 @@ exports[`[Contrib] layouts/<Main /> should show the loading spinner 1`] = `
 +             color=\\"#666666\\"
 +           />
             <div
--         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 lhyucv\\"
+-         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 brMLFO\\"
 +             class=\\"LoadingSpinner__Spinner-eu7nmw-1 LoadingSpinner__SpinnerNext-eu7nmw-2 daPQQA\\"
 +             color=\\"#666666\\"
             />

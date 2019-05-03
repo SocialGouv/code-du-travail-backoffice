@@ -19,6 +19,7 @@ const Container = styled(Main)`
 `;
 const Content = styled(Flex)`
   flex-grow: 1;
+  overflow-y: auto;
 `;
 const ContentInfo = styled(Flex)`
   color: var(--color-black-leather-jacket);

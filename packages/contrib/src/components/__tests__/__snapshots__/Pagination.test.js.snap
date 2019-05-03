@@ -3,7 +3,7 @@
 exports[`[Contrib] components/<Pagination /> should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH Pagination__Container-sc-56xi-0 fXjSuk"
+    class="sc-bdVaJa sc-bwzfXH Pagination__Container-sc-56xi-0 deNjEk"
   >
     <ul>
       <li
@@ -14,7 +14,7 @@ exports[`[Contrib] components/<Pagination /> should match snapshot 1`] = `
           role="button"
           tabindex="0"
         >
-          Page précédente
+          &lt; Précédent
         </a>
       </li>
       <li>
@@ -101,7 +101,7 @@ exports[`[Contrib] components/<Pagination /> should match snapshot 1`] = `
           role="button"
           tabindex="0"
         >
-          Page suivante
+          Suivant &gt;
         </a>
       </li>
     </ul>

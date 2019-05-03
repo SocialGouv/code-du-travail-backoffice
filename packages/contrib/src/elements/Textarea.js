@@ -3,7 +3,7 @@ import styled from "styled-components";
 export default styled.textarea`
   -webkit-appearance: none;
   background-color: transparent;
-  border: solid 1px lightgray;
+  border: solid 1px var(--color-border);
   color: inherit;
   flex-grow: 1;
   font-family: inherit;

@@ -192,7 +192,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
         width="0.5"
       >
         <h2
-          class="Subtitle-sc-17ig8qv-0 cIGDXh"
+          class="Subtitle-sc-17ig8qv-0 gsnyDG"
         >
           Articles du Code du travail :
         </h2>
@@ -201,7 +201,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
           >
             <input
-              class="Input-l1y0rz-0 kKQySM"
+              class="Input___Input-l1y0rz-0 QumVf"
               placeholder="Commencez à taper le nom de la référence au Code du travail"
             />
           </div>
@@ -269,7 +269,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
         width="0.5"
       >
         <h2
-          class="Subtitle-sc-17ig8qv-0 cIGDXh"
+          class="Subtitle-sc-17ig8qv-0 gsnyDG"
         >
           Articles de convention collective :
         </h2>
@@ -280,7 +280,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
           >
             <input
-              class="Input-l1y0rz-0 kKQySM"
+              class="Input___Input-l1y0rz-0 QumVf"
               placeholder="Ex: Article 7, Texte sur les salaires de 1984…"
             />
           </div>
@@ -312,7 +312,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
         width="0.5"
       >
         <h2
-          class="Subtitle-sc-17ig8qv-0 cIGDXh"
+          class="Subtitle-sc-17ig8qv-0 gsnyDG"
         >
           Autre référence juridique (décret, règlementation, circulaire, jurisprudence) :
         </h2>
@@ -323,7 +323,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
           >
             <input
-              class="Input-l1y0rz-0 kKQySM"
+              class="Input___Input-l1y0rz-0 QumVf"
               placeholder="Référence (ex: Décret n°82-447 du 28 mai 1982…)"
             />
           </div>
@@ -331,7 +331,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
           >
             <input
-              class="Input-l1y0rz-0 kKQySM"
+              class="Input___Input-l1y0rz-0 QumVf"
               placeholder="URL (ex: https://www.legifrance.gouv.fr/…)"
             />
           </div>

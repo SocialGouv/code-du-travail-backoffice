@@ -7,7 +7,7 @@ exports[`[Contrib] layouts/<AdminMain /> should render 1`] = `
     style="height: 100vh;"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 eBCYWC"
+      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 ipFTgV"
       width="1"
     >
       <div
@@ -39,7 +39,7 @@ exports[`[Contrib] layouts/<AdminMain /> should render 1`] = `
         </div>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 cOkOOn"
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 iRsxhy"
       >
         <div
           class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"

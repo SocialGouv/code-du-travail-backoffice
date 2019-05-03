@@ -14,7 +14,7 @@ exports[`[Contrib] blocks/AnswerEditionHead/<Top /> should match snapshot 1`] = 
         Brouillon
       </span>
       <div
-        class="Idcc__Container-owzimc-0 dbOONK"
+        class="Idcc__Container-owzimc-0 fWXTkt"
         currentitem="false"
         data-tip="An agreement title"
       >
@@ -27,7 +27,7 @@ exports[`[Contrib] blocks/AnswerEditionHead/<Top /> should match snapshot 1`] = 
       </div>
     </div>
     <h1
-      class="Title-r6qlw8-0 AnswerEditionHead__Title-sc-1nqi9lw-0 jmGktd"
+      class="Title-r6qlw8-0 AnswerEditionHead__Title-sc-1nqi9lw-0 ksIvPW"
     />
     <div
       class="sc-bdVaJa sc-bwzfXH erVoqY"

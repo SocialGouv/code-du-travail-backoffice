@@ -18,11 +18,12 @@ const Container = styled(Flex)`
 `;
 
 const Body = styled(Flex)`
-  background-color: #efeff0;
+  background-color: var(--color-background);
 `;
 
 const Content = styled(Flex)`
   flex-grow: 1;
+  overflow: hidden;
 `;
 
 export default ({ children, isAdmin = false, isHorizontal, isLoading }) => (
