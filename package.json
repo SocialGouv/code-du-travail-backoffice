@@ -20,7 +20,7 @@
   "dependencies": {
     "chai": "^4.2.0",
     "cucumber": "^5.1.0",
-    "dotenv": "7.0.0",
+    "dotenv": "8.0.0",
     "knex": "0.16.5",
     "lerna": "3.13.4",
     "moment": "^2.24.0",
