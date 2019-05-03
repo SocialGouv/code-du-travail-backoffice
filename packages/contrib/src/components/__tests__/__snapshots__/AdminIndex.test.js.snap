@@ -11,8 +11,8 @@ exports[`[Contrib] components/<AdminIndex /> should behave as expected when aski
           </div>
         </div>
         <div
--         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 fIdmfv\\"
-+         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 cOkOOn\\"
+-         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 iaRbTA\\"
++         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 iRsxhy\\"
 +       >
 +         <div
 +           class=\\"sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ\\"
@@ -61,7 +61,7 @@ exports[`[Contrib] components/<AdminIndex /> should behave as expected when aski
 +               class=\\"sc-bdVaJa sc-bwzfXH AdminIndex__Head-sc-18cav7a-1 cSynZz\\"
 +             >
 +               <h1
-+                 class=\\"Title-r6qlw8-0 kDtypV\\"
++                 class=\\"Title-r6qlw8-0 liGbOI\\"
                 />
 +               <button
 +                 class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU\\"
@@ -1050,7 +1050,7 @@ exports[`[Contrib] components/<AdminIndex /> should match snapshot 1`] = `
     style="height: 100vh;"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 eBCYWC"
+      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 ipFTgV"
       width="1"
     >
       <div
@@ -1082,7 +1082,7 @@ exports[`[Contrib] components/<AdminIndex /> should match snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 fIdmfv"
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 iaRbTA"
       >
         <div
           class="LoadingSpinner__Container-eu7nmw-0 dEMrTz"

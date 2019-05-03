@@ -3,7 +3,7 @@
 exports[`[Contrib] elements/<Input /> should match snapshot 1`] = `
 <div>
   <input
-    class="Input___Input-l1y0rz-0 ktnwWD"
+    class="Input___Input-l1y0rz-0 QumVf"
   />
 </div>
 `;
@@ -32,7 +32,7 @@ exports[`[Contrib] elements/<Input /> should match snapshot with a custom \`icon
       </svg>
     </span>
     <input
-      class="Input___Input-l1y0rz-0 eABDLI"
+      class="Input___Input-l1y0rz-0 krDBEM"
     />
   </div>
 </div>

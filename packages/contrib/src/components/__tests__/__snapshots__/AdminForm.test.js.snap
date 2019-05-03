@@ -7,7 +7,7 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should matc
     style="height: 100vh;"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 eBCYWC"
+      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 ipFTgV"
       width="1"
     >
       <div
@@ -39,7 +39,7 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should matc
         </div>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 cOkOOn"
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 iRsxhy"
       >
         <div
           class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"
@@ -83,7 +83,7 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should matc
             role="form"
           >
             <h1
-              class="Title-r6qlw8-0 gmywtA"
+              class="Title-r6qlw8-0 gPMqTc"
             >
               Edit Item
             </h1>
@@ -98,7 +98,7 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should matc
                 A Default Input
               </label>
               <input
-                class="Input-l1y0rz-0 kKQySM"
+                class="Input___Input-l1y0rz-0 QumVf"
                 id="defaultInput"
                 name="defaultInput"
                 type="number"
@@ -190,7 +190,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should add a tag accordingl
 
 @@ -118,11 +118,11 @@
                   <input
-                    class=\\"Input-l1y0rz-0 kKQySM\\"
+                    class=\\"Input___Input-l1y0rz-0 QumVf\\"
                     id=\\"inputWithButton\\"
                     name=\\"inputWithButton\\"
                     type=\\"text\\"
@@ -202,7 +202,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should add a tag accordingl
                     color=\\"white\\"
                     font-size=\\"inherit\\"
 @@ -196,11 +196,26 @@
-                    class=\\"Input-l1y0rz-0 kKQySM\\"
+                    class=\\"Input___Input-l1y0rz-0 QumVf\\"
                     placeholder=\\"Commencez à taper le nom du tag\\"
                   />
                   <div
@@ -237,7 +237,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
     style="height: 100vh;"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 eBCYWC"
+      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 ipFTgV"
       width="1"
     >
       <div
@@ -269,7 +269,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
         </div>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 cOkOOn"
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 iRsxhy"
       >
         <div
           class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"
@@ -313,7 +313,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
             role="form"
           >
             <h1
-              class="Title-r6qlw8-0 gmywtA"
+              class="Title-r6qlw8-0 gPMqTc"
             >
               New Item
             </h1>
@@ -328,7 +328,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                 A Default Input
               </label>
               <input
-                class="Input-l1y0rz-0 kKQySM"
+                class="Input___Input-l1y0rz-0 QumVf"
                 id="defaultInput"
                 name="defaultInput"
                 type="text"
@@ -349,7 +349,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                 class="sc-bdVaJa sc-bwzfXH pjOvZ"
               >
                 <input
-                  class="Input-l1y0rz-0 kKQySM"
+                  class="Input___Input-l1y0rz-0 QumVf"
                   id="inputWithButton"
                   name="inputWithButton"
                   type="text"
@@ -393,7 +393,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                 A Default Select
               </label>
               <select
-                class="Select-gjmg2q-0 ivoiOs"
+                class="Select-gjmg2q-0 gdnbrp"
                 id="defaultSelect"
                 name="defaultSelect"
               >
@@ -426,7 +426,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                 class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
               >
                 <input
-                  class="Input-l1y0rz-0 kKQySM"
+                  class="Input___Input-l1y0rz-0 QumVf"
                   placeholder="Commencez à taper le nom du tag"
                 />
                 <div
@@ -445,7 +445,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                 A Default Textarea
               </label>
               <textarea
-                class="Textarea-sc-1raibsp-0 fTuSLk"
+                class="Textarea-sc-1raibsp-0 SZVUP"
                 id="defaultText"
                 name="defaultText"
                 rows="3"
@@ -465,7 +465,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                 class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
               >
                 <input
-                  class="Input-l1y0rz-0 kKQySM"
+                  class="Input___Input-l1y0rz-0 QumVf"
                   placeholder="Commencez à taper le nom de la collection"
                 />
                 <div
@@ -524,7 +524,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should remove a tag accordi
 
 @@ -118,11 +118,11 @@
                   <input
-                    class=\\"Input-l1y0rz-0 kKQySM\\"
+                    class=\\"Input___Input-l1y0rz-0 QumVf\\"
                     id=\\"inputWithButton\\"
                     name=\\"inputWithButton\\"
                     type=\\"text\\"
@@ -544,7 +544,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should submit the expected 
 
 @@ -118,11 +118,11 @@
                   <input
-                    class=\\"Input-l1y0rz-0 kKQySM\\"
+                    class=\\"Input___Input-l1y0rz-0 QumVf\\"
                     id=\\"inputWithButton\\"
                     name=\\"inputWithButton\\"
                     type=\\"text\\"
@@ -556,7 +556,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should submit the expected 
                     color=\\"white\\"
                     font-size=\\"inherit\\"
 @@ -235,13 +235,42 @@
-                    class=\\"Input-l1y0rz-0 kKQySM\\"
+                    class=\\"Input___Input-l1y0rz-0 QumVf\\"
                     placeholder=\\"Commencez à taper le nom de la collection\\"
                   />
                   <div
@@ -634,7 +634,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should the expected error 1
 
 @@ -118,11 +118,11 @@
                   <input
-                    class=\\"Input-l1y0rz-0 kKQySM\\"
+                    class=\\"Input___Input-l1y0rz-0 QumVf\\"
                     id=\\"inputWithButton\\"
                     name=\\"inputWithButton\\"
                     type=\\"text\\"
@@ -669,7 +669,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should transform the input 
 
 @@ -118,11 +118,11 @@
                   <input
-                    class=\\"Input-l1y0rz-0 kKQySM\\"
+                    class=\\"Input___Input-l1y0rz-0 QumVf\\"
                     id=\\"inputWithButton\\"
                     name=\\"inputWithButton\\"
                     type=\\"text\\"
@@ -689,7 +689,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match 
     style="height: 100vh;"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 eBCYWC"
+      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 ipFTgV"
       width="1"
     >
       <div
@@ -721,7 +721,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match 
         </div>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 cOkOOn"
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 iRsxhy"
       >
         <div
           class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"
@@ -765,7 +765,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match 
             role="form"
           >
             <h1
-              class="Title-r6qlw8-0 gmywtA"
+              class="Title-r6qlw8-0 gPMqTc"
             >
               Edit Item
             </h1>
@@ -780,7 +780,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match 
                 A Default Input
               </label>
               <input
-                class="Input-l1y0rz-0 kKQySM"
+                class="Input___Input-l1y0rz-0 QumVf"
                 id="defaultInput"
                 name="defaultInput"
                 type="number"
@@ -872,7 +872,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match 
     style="height: 100vh;"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 eBCYWC"
+      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 ipFTgV"
       width="1"
     >
       <div
@@ -904,7 +904,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match 
         </div>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 cOkOOn"
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 iRsxhy"
       >
         <div
           class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"
@@ -948,7 +948,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match 
             role="form"
           >
             <h1
-              class="Title-r6qlw8-0 gmywtA"
+              class="Title-r6qlw8-0 gPMqTc"
             >
               Edit Item
             </h1>
@@ -963,7 +963,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match 
                 A Default Input
               </label>
               <input
-                class="Input-l1y0rz-0 kKQySM"
+                class="Input___Input-l1y0rz-0 QumVf"
                 id="defaultInput"
                 name="defaultInput"
                 type="number"
@@ -1026,7 +1026,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
     style="height: 100vh;"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 eBCYWC"
+      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 ipFTgV"
       width="1"
     >
       <div
@@ -1058,7 +1058,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 cOkOOn"
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 iRsxhy"
       >
         <div
           class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"
@@ -1102,7 +1102,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
             role="form"
           >
             <h1
-              class="Title-r6qlw8-0 gmywtA"
+              class="Title-r6qlw8-0 gPMqTc"
             >
               Edit Item
             </h1>
@@ -1117,7 +1117,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                 A Default Input
               </label>
               <input
-                class="Input-l1y0rz-0 kKQySM"
+                class="Input___Input-l1y0rz-0 QumVf"
                 id="defaultInput"
                 name="defaultInput"
                 type="text"
@@ -1138,7 +1138,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                 class="sc-bdVaJa sc-bwzfXH pjOvZ"
               >
                 <input
-                  class="Input-l1y0rz-0 kKQySM"
+                  class="Input___Input-l1y0rz-0 QumVf"
                   id="inputWithButton"
                   name="inputWithButton"
                   type="text"
@@ -1182,7 +1182,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                 A Default Select
               </label>
               <select
-                class="Select-gjmg2q-0 ivoiOs"
+                class="Select-gjmg2q-0 gdnbrp"
                 id="defaultSelect"
                 name="defaultSelect"
               >
@@ -1214,7 +1214,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                 class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
               >
                 <input
-                  class="Input-l1y0rz-0 kKQySM"
+                  class="Input___Input-l1y0rz-0 QumVf"
                   placeholder="Commencez à taper le nom du tag"
                 />
                 <div
@@ -1248,7 +1248,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                 A Default Textarea
               </label>
               <textarea
-                class="Textarea-sc-1raibsp-0 fTuSLk"
+                class="Textarea-sc-1raibsp-0 SZVUP"
                 id="defaultText"
                 name="defaultText"
                 rows="3"
@@ -1268,7 +1268,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                 class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
               >
                 <input
-                  class="Input-l1y0rz-0 kKQySM"
+                  class="Input___Input-l1y0rz-0 QumVf"
                   placeholder="Commencez à taper le nom de la collection"
                 />
                 <div

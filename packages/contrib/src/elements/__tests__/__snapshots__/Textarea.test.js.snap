@@ -3,7 +3,7 @@
 exports[`[Contrib] elements/<Textarea /> should match snapshot 1`] = `
 <div>
   <textarea
-    class="Textarea-sc-1raibsp-0 fTuSLk"
+    class="Textarea-sc-1raibsp-0 SZVUP"
   />
 </div>
 `;
