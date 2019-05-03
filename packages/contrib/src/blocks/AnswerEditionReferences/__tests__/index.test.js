@@ -29,7 +29,6 @@ describe("[Contrib] blocks/<AnswerEditionReferences />", () => {
   const {
     asFragment,
     container,
-    getByAltText,
     getByTitle,
     getByPlaceholderText,
     queryAllByText,
