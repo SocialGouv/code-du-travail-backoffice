@@ -2,8 +2,8 @@ import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
-import Button from "../../elements/Button";
 import Idcc from "../../elements/Idcc";
+import Link from "../../elements/Link";
 
 const Container = styled(Flex)`
   /* flex-grow: 1; */
@@ -11,54 +11,50 @@ const Container = styled(Flex)`
 
 const Content = styled(Flex)`
   background-color: white;
+  border: solid 1px var(--color-border);
   border-radius: 0.4rem;
   cursor: pointer;
   flex-grow: 1;
   margin: 0.5rem 0;
-  padding: 0.5rem 0.5rem 0.5rem 0.75rem;
-`;
-const ContentLabel = styled.div`
-  color: var(--color-silver-sand);
-  font-size: 0.8rem;
-  font-weight: 600;
+  padding: 0.75rem 0.5rem 0.75rem 0.75rem;
 `;
 const ContentQuestion = styled.div`
   color: black;
   font-weight: 600;
 `;
 const ContentExtract = styled.div`
-  color: var(--color-mummy-tomb);
-  font-family: monospace;
+  color: var(--color-text-gray);
   font-size: 0.875rem;
-  font-style: italic;
   margin-top: 0.5rem;
+`;
+const ContentExtractRed = styled(ContentExtract)`
+  color: var(--color-text-red);
+  font-weight: 700;
 `;
 
 const Menu = styled(Flex)`
-  font-size: 0.875rem;
   font-weight: 600;
-  padding-left: 1rem;
+  padding-left: 1.5rem;
   min-width: 13rem;
 `;
 
 export default ({ data, isDraft, onCancel, onClick, onFallback }) => (
   <Container width={1}>
     <Content flexDirection="column" onClick={() => onClick(data.id)}>
-      <Flex justifyContent="space-between">
-        <ContentLabel>{isDraft ? "Brouillon" : "À rédiger"}</ContentLabel>
+      <Flex alignItems="baseline">
         <Idcc code={data.idcc} name={data.agreement} />
+        <ContentQuestion>{data.question}</ContentQuestion>
       </Flex>
-      <ContentQuestion>{data.question}</ContentQuestion>
-      {isDraft && (
-        <ContentExtract>
-          {data.generic_reference === null && `${data.value.substr(0, 100)}...`}
-          {data.generic_reference === "labor_code" && (
-            <strong>Renvoyé au Code du travail.</strong>
-          )}
-          {data.generic_reference === "national_agreement" && (
-            <strong>Renvoyé à la convention collective nationale.</strong>
-          )}
-        </ContentExtract>
+      {isDraft && data.generic_reference === null && (
+        <ContentExtract>{data.value.substr(0, 100)}…</ContentExtract>
+      )}
+      {isDraft && data.generic_reference === "labor_code" && (
+        <ContentExtractRed>Renvoyé au Code du travail.</ContentExtractRed>
+      )}
+      {isDraft && data.generic_reference === "national_agreement" && (
+        <ContentExtractRed>
+          Renvoyé à la convention collective nationale.
+        </ContentExtractRed>
       )}
     </Content>
     <Menu
@@ -68,27 +64,27 @@ export default ({ data, isDraft, onCancel, onClick, onFallback }) => (
     >
       {!isDraft ? (
         [
-          <Button
+          <Link
             disabled={data.generic_reference === "labor_code"}
             key="0"
             isSmall
             onClick={() => onFallback(data.id, "labor_code")}
           >
             Renvoi au Code du travail
-          </Button>,
-          <Button
+          </Link>,
+          <Link
             disabled={data.generic_reference === "national_agreement"}
             key="1"
             isSmall
             onClick={() => onFallback(data.id, "national_agreement")}
           >
             Renvoi à la CC nationale
-          </Button>
+          </Link>
         ]
       ) : (
-        <Button isSmall onClick={() => onCancel(data.id)}>
+        <Link isSmall onClick={() => onCancel(data.id)}>
           Annuler ma réponse
-        </Button>
+        </Link>
       )}
     </Menu>
   </Container>
