@@ -93,7 +93,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should add the expected un
                 aria-hidden=\\"true\\"
                 class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x \\"
                 color=\\"var(--color-lapis-lazuli)\\"
-@@ -181,10 +181,83 @@
+@@ -224,10 +224,83 @@
               class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
               color=\\"white\\"
               font-size=\\"inherit\\"
@@ -194,7 +194,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
         <h2
           class="Subtitle-sc-17ig8qv-0 cIGDXh"
         >
-          Articles du Code du travail:
+          Articles du Code du travail :
         </h2>
         <div>
           <div
@@ -271,7 +271,50 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
         <h2
           class="Subtitle-sc-17ig8qv-0 cIGDXh"
         >
-          Autre (décret, règlementation, circulaire, jurisprudence):
+          Articles de convention collective :
+        </h2>
+        <form
+          role="form"
+        >
+          <div
+            class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+          >
+            <input
+              class="Input-l1y0rz-0 kKQySM"
+              placeholder="Ex: Article 7, Texte sur les salaires de 1984…"
+            />
+          </div>
+          <div
+            class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+          >
+            <button
+              class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU"
+              color="var(--color-lapis-lazuli)"
+              font-size="inherit"
+              font-weight="bold"
+              title="Ajouter la référence à la convention collective"
+              type="submit"
+            >
+              Ajouter la référence Convention Collective
+            </button>
+          </div>
+        </form>
+      </div>
+      <div
+        class="sc-bdVaJa sc-bwzfXH List__Container-sc-1pm6mpm-0 euOFDR"
+      />
+    </div>
+    <div
+      class="sc-bdVaJa sc-bwzfXH AnswerEditionReferences__Part-sc-1inz7ja-1 cfZMGB"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH dicanr"
+        width="0.5"
+      >
+        <h2
+          class="Subtitle-sc-17ig8qv-0 cIGDXh"
+        >
+          Autre référence juridique (décret, règlementation, circulaire, jurisprudence) :
         </h2>
         <form
           role="form"
@@ -303,7 +346,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
               title="Ajouter la référence juridique"
               type="submit"
             >
-              Ajouter
+              Ajouter la référence juridique
             </button>
           </div>
         </form>
@@ -416,7 +459,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should not duplicate an ex
                 aria-hidden=\\"true\\"
                 class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x \\"
                 color=\\"var(--color-lapis-lazuli)\\"
-@@ -149,18 +149,18 @@
+@@ -192,18 +192,18 @@
               />
             </svg>
             <span
@@ -437,7 +480,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should not duplicate an ex
                 aria-hidden=\\"true\\"
                 class=\\"svg-inline--fa fa-link fa-w-16 fa-1x \\"
                 color=\\"var(--color-lapis-lazuli)\\"
-@@ -180,11 +180,11 @@
+@@ -223,11 +223,11 @@
             <button
               class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
               color=\\"white\\"
@@ -506,7 +549,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should remove the expected
                 aria-hidden=\\"true\\"
                 class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x \\"
                 color=\\"var(--color-lapis-lazuli)\\"
-@@ -149,18 +149,18 @@
+@@ -192,18 +192,18 @@
               />
             </svg>
             <span
@@ -527,7 +570,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should remove the expected
                 aria-hidden=\\"true\\"
                 class=\\"svg-inline--fa fa-link fa-w-16 fa-1x \\"
                 color=\\"var(--color-lapis-lazuli)\\"
-@@ -180,11 +180,11 @@
+@@ -223,11 +223,11 @@
             <button
               class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
               color=\\"white\\"

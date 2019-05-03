@@ -37,6 +37,63 @@ export default class extends React.PureComponent {
     };
   }
 
+  addLaborCodeReference({ value }) {
+    const reference = {
+      category: "labor_code",
+      url: null,
+      value
+    };
+
+    this.setState({
+      references: [...this.state.references, reference]
+    });
+
+    this.props.onAdd(reference);
+  }
+
+  removeLaborCodeReference(value) {
+    this.setState({
+      references: this.state.references.filter(
+        ({ value: _value }) => _value !== value
+      )
+    });
+
+    this.props.onRemove(value);
+  }
+
+  addAgreementReference(event) {
+    event.preventDefault();
+
+    const value = this.$agreementReferenceTitle.value;
+    if (value.trim().length === 0) return;
+
+    if (find(propEq("value", value), this.state.references) !== undefined) {
+      return;
+    }
+
+    const reference = {
+      category: "agreement",
+      url: null,
+      value
+    };
+
+    this.setState({
+      references: [...this.state.references, reference]
+    });
+
+    this.props.onAdd(reference);
+  }
+
+  removeAgreementReference(value) {
+    this.setState({
+      references: this.state.references.filter(
+        ({ value: _value }) => _value !== value
+      )
+    });
+
+    this.props.onRemove(value);
+  }
+
   addReference(event) {
     event.preventDefault();
 
@@ -61,20 +118,6 @@ export default class extends React.PureComponent {
     this.props.onAdd(reference);
   }
 
-  addLaborCodeReference({ value }) {
-    const reference = {
-      category: "labor_code",
-      url: null,
-      value
-    };
-
-    this.setState({
-      references: [...this.state.references, reference]
-    });
-
-    this.props.onAdd(reference);
-  }
-
   removeReference(value) {
     this.setState({
       references: this.state.references.filter(
@@ -85,17 +128,10 @@ export default class extends React.PureComponent {
     this.props.onRemove(value);
   }
 
-  removeLaborCodeReference(value) {
-    this.setState({
-      references: this.state.references.filter(
-        ({ value: _value }) => _value !== value
-      )
-    });
-
-    this.props.onRemove(value);
-  }
-
   render() {
+    const agreementReferences = this.state.references.filter(
+      ({ category }) => category === "agreement"
+    );
     const laborCodeReferences = this.state.references.filter(
       ({ category }) => category === "labor_code"
     );
@@ -107,7 +143,7 @@ export default class extends React.PureComponent {
       <Container flexDirection="column">
         <Part>
           <Flex flexDirection="column" width={0.5}>
-            <Subtitle isFirst>Articles du Code du travail:</Subtitle>
+            <Subtitle isFirst>Articles du Code du travail :</Subtitle>
             <div>
               <Tags
                 ariaName="la référence au Code du travail"
@@ -129,8 +165,36 @@ export default class extends React.PureComponent {
         </Part>
         <Part>
           <Flex flexDirection="column" width={0.5}>
+            <Subtitle isFirst>Articles de convention collective :</Subtitle>
+            <form onSubmit={this.addAgreementReference.bind(this)} role="form">
+              <Field>
+                <Input
+                  placeholder="Ex: Article 7, Texte sur les salaires de 1984…"
+                  ref={node => (this.$agreementReferenceTitle = node)}
+                />
+              </Field>
+              <Field>
+                <Button
+                  title="Ajouter la référence à la convention collective"
+                  type="submit"
+                >
+                  Ajouter la référence Convention Collective
+                </Button>
+              </Field>
+            </form>
+          </Flex>
+          <List
+            ariaName="la référence à la convention collective"
+            onRemove={this.removeAgreementReference.bind(this)}
+            references={agreementReferences}
+            width={0.5}
+          />
+        </Part>
+        <Part>
+          <Flex flexDirection="column" width={0.5}>
             <Subtitle isFirst>
-              Autre (décret, règlementation, circulaire, jurisprudence):
+              Autre référence juridique (décret, règlementation, circulaire,
+              jurisprudence) :
             </Subtitle>
             <form onSubmit={this.addReference.bind(this)} role="form">
               <Field>
@@ -147,7 +211,7 @@ export default class extends React.PureComponent {
               </Field>
               <Field>
                 <Button title="Ajouter la référence juridique" type="submit">
-                  Ajouter
+                  Ajouter la référence juridique
                 </Button>
               </Field>
             </form>
