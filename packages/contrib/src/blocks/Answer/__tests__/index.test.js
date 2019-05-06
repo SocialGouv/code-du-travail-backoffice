@@ -6,7 +6,7 @@ import Answer from "..";
 // Ignore styled-wrapped ReactTooltip className prop warning
 console.warn = jest.fn();
 
-describe("[Contrib] blocks/<Answer /> (Undraft)", () => {
+describe.skip("[Contrib] blocks/<Answer /> (Undraft)", () => {
   const props = {
     data: {
       id: "12345678-9abc-4def-0123-456789abcdef",

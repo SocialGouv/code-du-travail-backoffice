@@ -9,7 +9,7 @@ jest.mock("next/router");
 
 import AdminIndex from "../AdminIndex";
 
-describe("[Contrib] components/<AdminIndex />", () => {
+describe.skip("[Contrib] components/<AdminIndex />", () => {
   const locationPathname = "/admin/items";
 
   // https://github.com/facebook/jest/issues/890#issuecomment-415202799
@@ -133,7 +133,7 @@ describe("[Contrib] components/<AdminIndex />", () => {
   });
 });
 
-describe("[Contrib] components/<AdminIndex /> (custom API paths)", () => {
+describe.skip("[Contrib] components/<AdminIndex /> (custom API paths)", () => {
   const locationPathname = "/admin/items";
 
   // https://github.com/facebook/jest/issues/890#issuecomment-415202799
@@ -192,7 +192,7 @@ describe("[Contrib] components/<AdminIndex /> (custom API paths)", () => {
   });
 });
 
-describe("[Contrib] components/<AdminIndex /> (errors)", () => {
+describe.skip("[Contrib] components/<AdminIndex /> (errors)", () => {
   const locationPathname = "/admin/items";
 
   // https://github.com/facebook/jest/issues/890#issuecomment-415202799
