@@ -1,11 +1,11 @@
 import Head from "next/head";
+import { withRouter } from "next/router";
 import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
 import LoadingSpinner from "../elements/LoadingSpinner";
 import Header from "./Header";
-import Menu from "./Menu";
 
 // TODO Find a clean way to import these stylesheets.
 import quillSheet from "../../node_modules/quill/dist/quill.snow.css";
@@ -26,7 +26,13 @@ const Content = styled(Flex)`
   overflow: hidden;
 `;
 
-export default ({ children, isAdmin = false, isHorizontal, isLoading }) => (
+const Main = ({
+  children,
+  isAdmin = false,
+  isHorizontal,
+  isLoading,
+  router
+}) => (
   <Container alignItems="stretch" style={{ height: "100vh" }}>
     <Head>
       <title>Outil de contribution au code du travail numérique</title>
@@ -44,10 +50,11 @@ export default ({ children, isAdmin = false, isHorizontal, isLoading }) => (
       </style>
     </Head>
     <Body alignItems="stretch" flexDirection="column" width={1}>
-      <Header />
-      {!isAdmin &&
-        !isLoading &&
-        !window.location.pathname.startsWith("/login") && <Menu />}
+      <Header
+        hasContribMenu={!router.pathname.startsWith("/login")}
+        isAdmin={isAdmin}
+        router={router}
+      />
       {Boolean(isLoading) ? (
         <Content alignItems="center" justifyContent="center">
           <LoadingSpinner color="#666666" />
@@ -60,3 +67,5 @@ export default ({ children, isAdmin = false, isHorizontal, isLoading }) => (
     </Body>
   </Container>
 );
+
+export default withRouter(Main);
