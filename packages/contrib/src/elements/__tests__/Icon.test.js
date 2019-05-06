@@ -25,4 +25,10 @@ describe("[Contrib] elements/<Icon />", () => {
 
     expect(firstRender).toMatchDiffSnapshot(asFragment());
   });
+
+  it("should match snapshot with a dashed icon name", () => {
+    const { container } = render(<Icon icon="caret-down" />);
+
+    expect(container).toMatchSnapshot();
+  });
 });

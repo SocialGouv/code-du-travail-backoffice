@@ -29,7 +29,6 @@ const FilterInputContainer = styled.div`
   margin-right: 13rem;
 `;
 const FilterInput = styled(Input)`
-  border-radius: 0.4rem;
   margin: 0.5rem 0;
 `;
 

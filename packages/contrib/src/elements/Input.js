@@ -1,7 +1,12 @@
+import { omit } from "ramda";
 import React from "react";
 import styled from "styled-components";
 
 import Icon from "./Icon";
+
+const InputWithIconWrapper = styled.div`
+  margin-top: -1.375rem;
+`;
 
 const _Input = styled.input`
   -webkit-appearance: none;
@@ -23,9 +28,9 @@ const _Input = styled.input`
   }
 `;
 const InputIconContainer = styled.span`
-  margin-left: 0.625rem;
-  margin-top: 0.75rem;
-  position: absolute;
+  left: 0.625rem;
+  top: 1.675rem;
+  position: relative;
 `;
 const InputIcon = styled(Icon)`
   color: var(--color-placeholder);
@@ -34,12 +39,17 @@ const InputIcon = styled(Icon)`
 const Input = ({ icon, ...props }, ref) => {
   if (icon === undefined) return <_Input ref={ref} {...props} />;
 
+  const { className, style } = props;
+  const inputProps = omit(["className", "style"], props);
+
   return (
-    <div>
-      <InputIconContainer>
-        <InputIcon icon={icon} />
-      </InputIconContainer>
-      <_Input hasIcon ref={ref} {...props} />
+    <div className={className} style={style}>
+      <InputWithIconWrapper>
+        <InputIconContainer>
+          <InputIcon icon={icon} />
+        </InputIconContainer>
+        <_Input hasIcon ref={ref} {...inputProps} />
+      </InputWithIconWrapper>
     </div>
   );
 };

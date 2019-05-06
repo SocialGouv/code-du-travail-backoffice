@@ -3,14 +3,17 @@ import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
+import Menu from "./Menu";
+
 import marianneImageUri from "../images/marianne.svg";
-import logoutImageUri from "../images/logout.svg";
 
 const Container = styled(Flex)`
   background-color: white;
   border-top: solid 0.3rem black;
+  box-shadow: 0 0 0.125rem lightgray;
   min-height: 6rem;
   padding: 1rem;
+  user-select: none;
 `;
 
 const Brand = styled(Flex)`
@@ -33,23 +36,6 @@ const Subtitle = styled.span`
   line-height: 1.5;
 `;
 
-const UserInfo = styled(Flex)`
-  margin-right: 1rem;
-`;
-const UserName = styled.span`
-  font-weight: 600;
-  width: auto;
-`;
-const UserLocation = styled.span`
-  color: lightgray;
-  width: auto;
-`;
-const UserLogoutIcon = styled.img`
-  cursor: pointer;
-  height: 1rem;
-  width: 1rem;
-`;
-
 export default class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -64,28 +50,16 @@ export default class Header extends React.Component {
   }
 
   goToHome() {
-    const homePath = window.location.pathname.startsWith("/admin")
-      ? "/admin"
-      : "/";
-
-    Router.push(homePath);
-  }
-
-  logOut() {
-    sessionStorage.removeItem("jwt");
-    sessionStorage.removeItem("me");
-
-    Router.push("/login");
+    Router.push(this.props.isAdmin ? "/admin" : "/");
   }
 
   render() {
     return (
       <Container alignItems="center" justifyContent="space-between">
-        <Brand alignItems="center">
+        <Brand alignItems="center" onClick={() => this.goToHome()}>
           <Logo
             alt="Code du travail numérique"
             aria-label="Bouton de retour au tableau de bord"
-            onClick={this.goToHome}
             src={marianneImageUri}
           />
           <Flex flexDirection="column">
@@ -95,7 +69,14 @@ export default class Header extends React.Component {
         </Brand>
         {this.state.me !== null && (
           <Flex alignItems="center">
-            <UserInfo alignItems="flex-end" flexDirection="column">
+            {this.props.hasContribMenu && (
+              <Menu
+                isAdmin={this.props.isAdmin}
+                me={this.state.me}
+                router={this.props.router}
+              />
+            )}
+            {/* <UserInfo alignItems="flex-end" flexDirection="column">
               <UserName>{this.state.me.payload.name}</UserName>
               <UserLocation>{this.state.me.payload.location}</UserLocation>
             </UserInfo>
@@ -103,7 +84,7 @@ export default class Header extends React.Component {
               alt="Bouton de déconnexion"
               onClick={this.logOut}
               src={logoutImageUri}
-            />
+            /> */}
           </Flex>
         )}
       </Container>
