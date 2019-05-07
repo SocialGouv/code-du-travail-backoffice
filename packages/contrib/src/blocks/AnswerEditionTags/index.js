@@ -2,19 +2,17 @@ import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
+import _Subtitle from "../../elements/Subtitle";
 import Tag from "../../elements/Tag";
 
 const Container = styled(Flex)`
-  background-color: #d7d7d7;
   color: #555555;
-  padding: 0 1rem;
+  flex-grow: 1;
+  padding: 1rem;
 `;
-const Title = styled.p`
-  font-weight: 600;
-  font-size: 0.8rem;
-  margin: 1rem 0 0.75rem;
-  text-transform: uppercase;
-  user-select: none;
+const Subtitle = styled(_Subtitle)`
+  font-size: 0.875rem;
+  font-weight: 700;
 `;
 
 export default class extends React.PureComponent {
@@ -31,13 +29,13 @@ export default class extends React.PureComponent {
       this.setState({
         selectedTags: this.state.selectedTags.filter(_id => _id !== id)
       });
-      this.props.onToggleTag(id, false);
+      this.props.onToggle(id, false);
 
       return;
     }
 
     this.setState({ selectedTags: [...this.state.selectedTags, id] });
-    this.props.onToggleTag(id, true);
+    this.props.onToggle(id, true);
   }
 
   getTags(category) {
@@ -57,28 +55,34 @@ export default class extends React.PureComponent {
   render() {
     return (
       <Container className={this.props.className} flexDirection="column">
+        <_Subtitle isFirst>Étiquettes</_Subtitle>
+        <p>
+          Sélectionnez les étiquettes correspondant à la réponse que vous
+          rédigez afin de nous aider à classifier le contenu:
+        </p>
+
         <Flex flexDirection="column">
-          <Title>Type de contrat</Title>
+          <Subtitle isFirst>Type de contrat</Subtitle>
           <Flex flexWrap="wrap">{this.getTags("contract_type")}</Flex>
         </Flex>
 
         <Flex flexDirection="column">
-          <Title>Cible</Title>
+          <Subtitle>Cible</Subtitle>
           <Flex flexWrap="wrap">{this.getTags("target")}</Flex>
         </Flex>
 
         <Flex flexDirection="column">
-          <Title>Durée de travail</Title>
+          <Subtitle>Durée de travail</Subtitle>
           <Flex flexWrap="wrap">{this.getTags("work_time")}</Flex>
         </Flex>
 
         <Flex flexDirection="column">
-          <Title>{"Type d'horaires"}</Title>
+          <Subtitle>{"Type d'horaires"}</Subtitle>
           <Flex flexWrap="wrap">{this.getTags("work_schedule_type")}</Flex>
         </Flex>
 
         <Flex flexDirection="column">
-          <Title>Particularismes</Title>
+          <Subtitle>Particularismes</Subtitle>
           <Flex flexWrap="wrap">{this.getTags("distinctive_identity")}</Flex>
         </Flex>
       </Container>

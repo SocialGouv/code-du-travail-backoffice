@@ -63,7 +63,7 @@ describe("[Contrib] components/<Login />", () => {
     fireEvent.submit($form);
     await waitFor(0);
 
-    expect(global.axios.post).toBeCalledWith("/rpc/login", { email, password });
+    expect(global.axios.post).toHaveBeenCalledWith("/rpc/login", { email, password });
     expect(
       queryByText(/E-mail et\/ou mot de passe non reconnu\(s\)\./)
     ).toBeInTheDocument();
@@ -76,8 +76,8 @@ describe("[Contrib] components/<Login />", () => {
     fireEvent.submit($form);
     await waitFor(0);
 
-    expect(global.axios.post).toBeCalledWith("/rpc/login", { email, password });
-    expect(global.axios.post).toBeCalledWith("/rpc/login_check", { token });
+    expect(global.axios.post).toHaveBeenCalledWith("/rpc/login", { email, password });
+    expect(global.axios.post).toHaveBeenCalledWith("/rpc/login_check", { token });
     expect(
       queryByText(/E-mail et\/ou mot de passe non reconnu\(s\)./)
     ).toBeInTheDocument();
@@ -90,8 +90,8 @@ describe("[Contrib] components/<Login />", () => {
     fireEvent.submit($form);
     await waitFor(0);
 
-    expect(global.axios.post).toBeCalledWith("/rpc/login", { email, password });
-    expect(global.axios.post).toBeCalledWith("/rpc/login_check", { token });
+    expect(global.axios.post).toHaveBeenCalledWith("/rpc/login", { email, password });
+    expect(global.axios.post).toHaveBeenCalledWith("/rpc/login_check", { token });
     expect(sessionStorage.getItem("jwt")).toBe(token);
     expect(sessionStorage.getItem("me")).toBe(
       JSON.stringify({ name, location })

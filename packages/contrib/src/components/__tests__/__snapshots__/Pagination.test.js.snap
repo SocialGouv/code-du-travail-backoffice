@@ -3,7 +3,7 @@
 exports[`[Contrib] components/<Pagination /> should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH Pagination__Container-sc-56xi-0 deNjEk"
+    class="sc-bdVaJa sc-bwzfXH Pagination__Container-sc-56xi-0 hpLHjK"
   >
     <ul>
       <li

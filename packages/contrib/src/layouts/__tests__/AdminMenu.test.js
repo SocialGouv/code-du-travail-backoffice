@@ -20,37 +20,37 @@ describe("[Contrib] layouts/<AdminMenu />", () => {
   it("should redirect to the expected path", () => {
     fireEvent.click(getByText(/Tableau de bord/));
 
-    expect(Router.push).toBeCalledWith("/admin");
+    expect(Router.push).toHaveBeenCalledWith("/admin");
   });
 
   it("should redirect to the expected path", () => {
     fireEvent.click(getByText(/Conventions/));
 
-    expect(Router.push).toBeCalledWith("/admin/agreements");
+    expect(Router.push).toHaveBeenCalledWith("/admin/agreements");
   });
 
   it("should redirect to the expected path", () => {
     fireEvent.click(getByText(/Étiquettes/));
 
-    expect(Router.push).toBeCalledWith("/admin/tags");
+    expect(Router.push).toHaveBeenCalledWith("/admin/tags");
   });
 
   it("should redirect to the expected path", () => {
     fireEvent.click(getByText(/Questions/));
 
-    expect(Router.push).toBeCalledWith("/admin/questions");
+    expect(Router.push).toHaveBeenCalledWith("/admin/questions");
   });
 
   it("should redirect to the expected path", () => {
     fireEvent.click(getByText(/Unités/));
 
-    expect(Router.push).toBeCalledWith("/admin/locations");
+    expect(Router.push).toHaveBeenCalledWith("/admin/locations");
   });
 
   it("should redirect to the expected path", () => {
     fireEvent.click(getByText(/Utilisateurs/));
 
-    expect(Router.push).toBeCalledWith("/admin/users");
+    expect(Router.push).toHaveBeenCalledWith("/admin/users");
   });
 
   it("should match snapshot diff when the path has changed", () => {

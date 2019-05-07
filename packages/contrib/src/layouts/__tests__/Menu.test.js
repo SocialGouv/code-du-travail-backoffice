@@ -22,13 +22,13 @@ describe("[Contrib] layouts/<Menu />", () => {
   it("should redirect to the expected path", () => {
     fireEvent.click(getByText(/Liste des réponses/));
 
-    expect(Router.push).toBeCalledWith("/");
+    expect(Router.push).toHaveBeenCalledWith("/");
   });
 
   it.skip("should open the expected document", () => {
     fireEvent.click(getByText(/Charte rédactionnelle/));
 
-    expect(Router.push).toBeCalledWith("/");
+    expect(Router.push).toHaveBeenCalledWith("/");
   });
 
   it("should match snapshot diff when the path has changed", () => {

@@ -111,7 +111,7 @@ describe.skip("[Contrib] components/<AdminForm /> (create)", () => {
   it("should redirect to the index path", async () => {
     fireEvent.click(getByTitle(props.ariaLabels.cancelButton));
 
-    expect(Router.push).toBeCalledWith(`/admin${props.indexPath}`);
+    expect(Router.push).toHaveBeenCalledWith(`/admin${props.indexPath}`);
   });
 
   it("should transform the input with button value as expected", async () => {
@@ -241,7 +241,7 @@ describe.skip("[Contrib] components/<AdminForm /> (create)", () => {
       [props.apiPath, expectedData],
       [props.fields[5].apiPath, expectedCustomData]
     ]);
-    expect(Router.push).toBeCalledWith(`/admin${props.indexPath}`);
+    expect(Router.push).toHaveBeenCalledWith(`/admin${props.indexPath}`);
   });
 });
 
@@ -372,7 +372,7 @@ describe.skip("[Contrib] components/<AdminForm /> (edit)", () => {
       props.fields[5].apiPath,
       expectedCustomData
     );
-    expect(Router.push).toBeCalledWith(`/admin${props.indexPath}`);
+    expect(Router.push).toHaveBeenCalledWith(`/admin${props.indexPath}`);
   });
 });
 
@@ -432,8 +432,8 @@ describe.skip("[Contrib] components/<AdminForm /> (create / NO custom API)", () 
 
     expect(firstRender).toMatchDiffSnapshot(asFragment());
     expect(global.axios.post).toHaveBeenCalledTimes(1);
-    expect(global.axios.post).toBeCalledWith(props.apiPath, expectedData);
-    expect(Router.push).toBeCalledWith(`/admin${props.indexPath}`);
+    expect(global.axios.post).toHaveBeenCalledWith(props.apiPath, expectedData);
+    expect(Router.push).toHaveBeenCalledWith(`/admin${props.indexPath}`);
   });
 
   it("should not resubmit the form", async () => {
@@ -497,11 +497,11 @@ describe.skip("[Contrib] components/<AdminForm /> (edit / NO custom API)", () =>
 
     expect(firstRender).toMatchDiffSnapshot(asFragment());
     expect(global.axios.patch).toHaveBeenCalledTimes(1);
-    expect(global.axios.patch).toBeCalledWith(
+    expect(global.axios.patch).toHaveBeenCalledWith(
       `${props.apiPath}?id=eq.${props.id}`,
       expectedData
     );
-    expect(Router.push).toBeCalledWith(`/admin${props.indexPath}`);
+    expect(Router.push).toHaveBeenCalledWith(`/admin${props.indexPath}`);
   });
 });
 
@@ -558,7 +558,7 @@ describe.skip("[Contrib] components/<AdminForm /> (edit / isApiFunction)", () =>
 
     expect(firstRender).toMatchDiffSnapshot(asFragment());
     expect(global.axios.post).toHaveBeenCalledTimes(1);
-    expect(global.axios.post).toBeCalledWith(props.apiPath, expectedData);
-    expect(Router.push).toBeCalledWith(`/admin${props.indexPath}`);
+    expect(global.axios.post).toHaveBeenCalledWith(props.apiPath, expectedData);
+    expect(Router.push).toHaveBeenCalledWith(`/admin${props.indexPath}`);
   });
 });

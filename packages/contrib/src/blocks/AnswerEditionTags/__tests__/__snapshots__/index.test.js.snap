@@ -1,23 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] blocks/AnswerEditionContent/<TagsBar /> should match snapshot 1`] = `
+exports[`[Contrib] blocks/<AnswerEditionTags /> should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH TagsBar__Container-sc-1lrdtxx-0 cEsfMC"
+    class="sc-bdVaJa sc-bwzfXH AnswerEditionTags__Container-ycvsa3-0 kGjiFp"
   >
+    <h2
+      class="Subtitle-sc-17ig8qv-0 gsnyDG"
+    >
+      Étiquettes
+    </h2>
+    <p>
+      Sélectionnez les étiquettes correspondant à la réponse que vous rédigez afin de nous aider à classifier le contenu:
+    </p>
     <div
       class="sc-bdVaJa sc-bwzfXH eVPJMi"
     >
-      <p
-        class="TagsBar__Title-sc-1lrdtxx-1 jrzJtQ"
+      <h2
+        class="Subtitle-sc-17ig8qv-0 AnswerEditionTags__Subtitle-ycvsa3-1 cVqAlR"
       >
         Type de contrat
-      </p>
+      </h2>
       <div
         class="sc-bdVaJa sc-bwzfXH hbZeap"
       >
         <span
-          class="Tag-sc-16selk6-0 gFNzpE"
+          class="Tag-sc-16selk6-0 dtzlAs"
         >
           A Tag
         </span>
@@ -26,16 +34,16 @@ exports[`[Contrib] blocks/AnswerEditionContent/<TagsBar /> should match snapshot
     <div
       class="sc-bdVaJa sc-bwzfXH eVPJMi"
     >
-      <p
-        class="TagsBar__Title-sc-1lrdtxx-1 jrzJtQ"
+      <h2
+        class="Subtitle-sc-17ig8qv-0 AnswerEditionTags__Subtitle-ycvsa3-1 eQbvOl"
       >
         Cible
-      </p>
+      </h2>
       <div
         class="sc-bdVaJa sc-bwzfXH hbZeap"
       >
         <span
-          class="Tag-sc-16selk6-0 vTDzf"
+          class="Tag-sc-16selk6-0 hoDWTY"
         >
           Another Tag
         </span>
@@ -44,11 +52,11 @@ exports[`[Contrib] blocks/AnswerEditionContent/<TagsBar /> should match snapshot
     <div
       class="sc-bdVaJa sc-bwzfXH eVPJMi"
     >
-      <p
-        class="TagsBar__Title-sc-1lrdtxx-1 jrzJtQ"
+      <h2
+        class="Subtitle-sc-17ig8qv-0 AnswerEditionTags__Subtitle-ycvsa3-1 eQbvOl"
       >
         Durée de travail
-      </p>
+      </h2>
       <div
         class="sc-bdVaJa sc-bwzfXH hbZeap"
       />
@@ -56,11 +64,11 @@ exports[`[Contrib] blocks/AnswerEditionContent/<TagsBar /> should match snapshot
     <div
       class="sc-bdVaJa sc-bwzfXH eVPJMi"
     >
-      <p
-        class="TagsBar__Title-sc-1lrdtxx-1 jrzJtQ"
+      <h2
+        class="Subtitle-sc-17ig8qv-0 AnswerEditionTags__Subtitle-ycvsa3-1 eQbvOl"
       >
         Type d'horaires
-      </p>
+      </h2>
       <div
         class="sc-bdVaJa sc-bwzfXH hbZeap"
       />
@@ -68,11 +76,11 @@ exports[`[Contrib] blocks/AnswerEditionContent/<TagsBar /> should match snapshot
     <div
       class="sc-bdVaJa sc-bwzfXH eVPJMi"
     >
-      <p
-        class="TagsBar__Title-sc-1lrdtxx-1 jrzJtQ"
+      <h2
+        class="Subtitle-sc-17ig8qv-0 AnswerEditionTags__Subtitle-ycvsa3-1 eQbvOl"
       >
         Particularismes
-      </p>
+      </h2>
       <div
         class="sc-bdVaJa sc-bwzfXH hbZeap"
       />

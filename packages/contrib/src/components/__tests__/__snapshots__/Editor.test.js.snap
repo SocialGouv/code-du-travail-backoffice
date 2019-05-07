@@ -271,21 +271,6 @@ exports[`<Editor /> should match snapshot 1`] = `
           </option>
         </select>
       </span>
-      <span
-        class="ql-formats"
-      >
-        <button
-          class="ql-tags Editor__TextButton-sc-1s8484a-0 eNdwXj"
-          title="Bouton ouvrant ou fermant la barre latérale des étiquettes"
-          type="button"
-        >
-          <img
-            class="Editor__TextButtonIcon-sc-1s8484a-1 fLzNLm"
-            src="[object Object]"
-          />
-          Étiquettes
-        </button>
-      </span>
     </div>
     <div
       class="ql-container ql-snow"

@@ -11,11 +11,10 @@ import Button from "../../elements/Button";
 import List from "./List";
 
 const Container = styled(Flex)`
-  background-color: white;
-  width: 100%;
+  flex-grow: 1;
 `;
 const Part = styled(Flex)`
-  border: dashed 1px var(--color-light-steel-blue);
+  border-bottom: dashed 1px var(--color-light-steel-blue);
   margin: 0.5rem;
   padding: 0.5rem;
 `;
@@ -25,6 +24,7 @@ export default class extends React.PureComponent {
     super(props);
 
     this.state = {
+      agreementReferenceFormKey: 0,
       laborCodeReferences: props.laborCodeReferences.map(
         laborCodeReference => ({
           value: laborCodeReference
@@ -33,6 +33,7 @@ export default class extends React.PureComponent {
       selectedLaborCodeReferences: props.references
         .filter(({ category }) => category === "labor_code")
         .map(({ value }) => ({ value })),
+      referenceFormKey: 0,
       references: props.references
     };
   }
@@ -78,6 +79,7 @@ export default class extends React.PureComponent {
     };
 
     this.setState({
+      agreementReferenceFormKey: this.state.agreementReferenceFormKey + 1,
       references: [...this.state.references, reference]
     });
 
@@ -112,6 +114,7 @@ export default class extends React.PureComponent {
     };
 
     this.setState({
+      referenceFormKey: this.state.referenceFormKey + 1,
       references: [...this.state.references, reference]
     });
 
@@ -166,7 +169,11 @@ export default class extends React.PureComponent {
         <Part>
           <Flex flexDirection="column" width={0.5}>
             <Subtitle isFirst>Articles de convention collective :</Subtitle>
-            <form onSubmit={this.addAgreementReference.bind(this)} role="form">
+            <form
+              key={this.state.agreementReferenceFormKey}
+              onSubmit={this.addAgreementReference.bind(this)}
+              role="form"
+            >
               <Field>
                 <Input
                   placeholder="Ex: Article 7, Texte sur les salaires de 1984…"
@@ -196,7 +203,11 @@ export default class extends React.PureComponent {
               Autre référence juridique (décret, règlementation, circulaire,
               jurisprudence) :
             </Subtitle>
-            <form onSubmit={this.addReference.bind(this)} role="form">
+            <form
+              key={this.state.referenceFormKey}
+              onSubmit={this.addReference.bind(this)}
+              role="form"
+            >
               <Field>
                 <Input
                   placeholder="Référence (ex: Décret n°82-447 du 28 mai 1982…)"

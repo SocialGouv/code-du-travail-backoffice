@@ -13,7 +13,9 @@ const Container = styled(Flex)`
   box-shadow: 0 0 0.125rem lightgray;
   min-height: 6rem;
   padding: 1rem;
+  position: relative;
   user-select: none;
+  z-index: 1;
 `;
 
 const Brand = styled(Flex)`

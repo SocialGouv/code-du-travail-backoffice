@@ -36,12 +36,6 @@ const Container = styled(Flex)`
         cursor: default;
         font-weight: 600;
         text-decoration: none;
-
-        :hover {
-          background-color: var(--color-blue-sapphire);
-          border: solid 1px var(--color-blue-sapphire);
-          color: white;
-        }
       }
     }
   }

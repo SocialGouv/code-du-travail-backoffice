@@ -76,14 +76,14 @@ describe.skip("[Contrib] components/<AdminIndex />", () => {
   it("should redirect to the creation path", async () => {
     fireEvent.click(getByTitle(props.ariaLabels.newButton));
 
-    expect(Router.push).toBeCalledWith(`${locationPathname}/new`);
+    expect(Router.push).toHaveBeenCalledWith(`${locationPathname}/new`);
   });
 
   it("should redirect to the edition path", async () => {
     fireEvent.click(getByTitle(props.ariaLabels.editButton));
     await waitFor(0);
 
-    expect(Router.push).toBeCalledWith(
+    expect(Router.push).toHaveBeenCalledWith(
       {
         pathname: `${locationPathname}/edit`,
         query: { id: data[0].id }

@@ -10,24 +10,29 @@ const Container = styled(Flex)`
 
 export const TABS = {
   EDITOR: 0,
-  REFERENCES: 1
+  REFERENCES: 1,
+  TAGS: 2
 };
 
-export default ({ currentTab, onChange }) => (
+export default ({ currentTab, onChange, referencesCount, tagsCount }) => (
   <Container>
     <Tab
-      icon="pen"
       isActive={currentTab === TABS.EDITOR}
       onClick={() => onChange(TABS.EDITOR)}
     >
-      Édition du contenu
+      Édition
     </Tab>
     <Tab
-      icon="book"
       isActive={currentTab === TABS.REFERENCES}
       onClick={() => onChange(TABS.REFERENCES)}
     >
-      Références juridiques
+      {`Références juridiques (${referencesCount})`}
+    </Tab>
+    <Tab
+      isActive={currentTab === TABS.TAGS}
+      onClick={() => onChange(TABS.TAGS)}
+    >
+      {`Étiquettes (${tagsCount})`}
     </Tab>
   </Container>
 );
