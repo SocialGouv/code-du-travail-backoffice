@@ -8,6 +8,7 @@ import styled from "styled-components";
 import AnswerEditionContent from "../src/blocks/AnswerEditionContent";
 import AnswerEditionHead from "../src/blocks/AnswerEditionHead";
 import AnswerEditionReferences from "../src/blocks/AnswerEditionReferences";
+import AnswerEditionTags from "../src/blocks/AnswerEditionTags";
 import Main from "../src/layouts/Main";
 import SavingSpinner from "../src/elements/SavingSpinner";
 import customAxios from "../src/libs/customAxios";
@@ -89,23 +90,27 @@ export default class extends React.Component {
   async cancelAnswer() {
     this.setState({ isSaving: true });
 
-    const answersUri = `/answers?id=eq.${this.props.id}`;
-    const answersData = {
-      generic_reference: null,
-      state: "todo",
-      user_id: null,
-      value: ""
-    };
-    const answersTagsUri = makeApiFilter("/answers_tags", {
-      answer_id: this.props.id
-    });
-    const answersReferencesUri = makeApiFilter("/answers_references", {
-      answer_id: this.props.id
-    });
+    try {
+      const answersUri = `/answers?id=eq.${this.props.id}`;
+      const answersData = {
+        generic_reference: null,
+        state: "todo",
+        user_id: null,
+        value: ""
+      };
+      const answersTagsUri = makeApiFilter("/answers_tags", {
+        answer_id: this.props.id
+      });
+      const answersReferencesUri = makeApiFilter("/answers_references", {
+        answer_id: this.props.id
+      });
 
-    await this.axios.delete(answersReferencesUri).catch(console.warn);
-    await this.axios.delete(answersTagsUri).catch(console.warn);
-    await this.axios.patch(answersUri, answersData).catch(console.warn);
+      await this.axios.delete(answersReferencesUri);
+      await this.axios.delete(answersTagsUri);
+      await this.axios.patch(answersUri, answersData);
+    } catch (err) {
+      console.warn(err);
+    }
 
     Router.push("/");
   }
@@ -113,33 +118,44 @@ export default class extends React.Component {
   async _saveAnswerValue(value) {
     this.setState({ isSaving: true });
 
-    const uri = `/answers?id=eq.${this.props.id}`;
-    // An answer can't have a value and be generic at the same time:
-    const data = { generic_reference: null, state: "draft", value };
+    try {
+      const uri = `/answers?id=eq.${this.props.id}`;
+      // An answer can't have a value and be generic at the same time:
+      const data = { generic_reference: null, state: "draft", value };
 
-    await this.axios.patch(uri, data).catch(console.warn);
+      await this.axios.patch(uri, data);
+    } catch (err) {
+      console.warn(err);
+    }
 
     this.originalAnswer.value = value;
+
     this.setState({ isSaving: false });
   }
 
   async _insertTag(tagId) {
     this.setState({ isSaving: true });
 
-    const answersUri = `/answers?id=eq.${this.props.id}`;
-    // An answer can't have a custom tag and be generic at the same time:
-    const answersData = {
-      generic_reference: null,
-      state: "draft"
-    };
-    const answersTagsUri = `/answers_tags`;
-    const answersTagsData = {
-      answer_id: this.props.id,
-      tag_id: tagId
-    };
+    try {
+      const answersUri = `/answers?id=eq.${this.props.id}`;
+      // An answer can't have a custom tag and be generic at the same time:
+      const answersData = {
+        generic_reference: null,
+        state: "draft"
+      };
+      const answersTagsUri = `/answers_tags`;
+      const answersTagsData = {
+        answer_id: this.props.id,
+        tag_id: tagId
+      };
 
-    await this.axios.patch(answersUri, answersData).catch(console.warn);
-    await this.axios.post(answersTagsUri, answersTagsData).catch(console.warn);
+      await this.axios.patch(answersUri, answersData);
+      await this.axios.post(answersTagsUri, answersTagsData);
+    } catch (err) {
+      console.warn(err);
+    }
+
+    this.originalAnswer.tags = [...this.originalAnswer.tags, tagId];
 
     this.setState({ isSaving: false });
   }
@@ -147,12 +163,20 @@ export default class extends React.Component {
   async _deleteTag(tagId) {
     this.setState({ isSaving: true });
 
-    const uri = makeApiFilter("/answers_tags", {
-      answer_id: this.props.id,
-      tag_id: tagId
-    });
+    try {
+      const uri = makeApiFilter("/answers_tags", {
+        answer_id: this.props.id,
+        tag_id: tagId
+      });
 
-    await this.axios.delete(uri).catch(console.warn);
+      await this.axios.delete(uri);
+    } catch (err) {
+      console.warn(err);
+    }
+
+    this.originalAnswer.tags = this.originalAnswer.tags.filter(
+      id => id !== tagId
+    );
 
     this.setState({ isSaving: false });
   }
@@ -160,43 +184,51 @@ export default class extends React.Component {
   async _insertReference(reference) {
     this.setState({ isSaving: true });
 
-    const answersUri = `/answers?id=eq.${this.props.id}`;
-    // An answer can't have a reference and be generic at the same time:
-    const answersData = {
-      generic_reference: null,
-      state: "draft"
-    };
-    const answersReferencesUri = `/answers_references`;
-    const answersReferencesData = {
-      answer_id: this.props.id,
-      ...reference
-    };
+    try {
+      const answersUri = `/answers?id=eq.${this.props.id}`;
+      // An answer can't have a reference and be generic at the same time:
+      const answersData = {
+        generic_reference: null,
+        state: "draft"
+      };
+      const answersReferencesUri = `/answers_references`;
+      const answersReferencesData = {
+        answer_id: this.props.id,
+        ...reference
+      };
 
-    await this.axios.patch(answersUri, answersData).catch(console.warn);
-    await this.axios
-      .post(answersReferencesUri, answersReferencesData)
-      .catch(console.warn);
+      await this.axios.patch(answersUri, answersData);
+      await this.axios.post(answersReferencesUri, answersReferencesData);
+    } catch (err) {
+      console.warn(err);
+    }
 
     this.originalAnswer.references = [
       ...this.originalAnswer.references,
       reference
     ];
+
     this.setState({ isSaving: false });
   }
 
   async _deleteReference(_value) {
     this.setState({ isSaving: true });
 
-    const uri = makeApiFilter("/answers_references", {
-      answer_id: this.props.id,
-      value: _value
-    });
+    try {
+      const uri = makeApiFilter("/answers_references", {
+        answer_id: this.props.id,
+        value: _value
+      });
 
-    await this.axios.delete(uri).catch(console.warn);
+      await this.axios.delete(uri);
+    } catch (err) {
+      console.warn(err);
+    }
 
     this.originalAnswer.references = this.originalAnswer.references.filter(
       ({ value }) => value !== _value
     );
+
     this.setState({ isSaving: false });
   }
 
@@ -218,6 +250,15 @@ export default class extends React.Component {
             onAdd={this.insertReference.bind(this)}
             onRemove={this.deleteReference.bind(this)}
             references={this.originalAnswer.references}
+          />
+        );
+
+      case TABS.TAGS:
+        return (
+          <AnswerEditionTags
+            onToggle={this.toggleTag.bind(this)}
+            selectedTags={this.originalAnswer.tags}
+            tags={this.allTags}
           />
         );
 
@@ -245,7 +286,10 @@ export default class extends React.Component {
           currentTab={this.state.currentTab}
           idcc={this.originalAnswer.idcc}
           onCancel={() => this.cancelAnswer()}
+          onSubmit={() => void 0}
           onTabChange={this.switchTab.bind(this)}
+          referencesCount={this.originalAnswer.references.length}
+          tagsCount={this.originalAnswer.tags.length}
           title={this.originalAnswer.question}
         />
         <Content>
