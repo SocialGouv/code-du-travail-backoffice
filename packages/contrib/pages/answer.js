@@ -295,6 +295,7 @@ export default class extends React.Component {
           agreement={this.originalAnswer.agreement}
           currentTab={this.state.currentTab}
           idcc={this.originalAnswer.idcc}
+          index={this.originalAnswer.index}
           onCancel={() => this.cancelAnswer()}
           onSubmit={() => void 0}
           onTabChange={this.switchTab.bind(this)}
