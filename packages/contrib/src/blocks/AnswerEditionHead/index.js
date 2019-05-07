@@ -2,13 +2,19 @@ import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
-import _Title from "../../elements/Title";
+import _Idcc from "../../elements/Idcc";
+import Title from "../../elements/Title";
 import Actions from "./Actions";
 import Tabs from "./Tabs";
-import Top from "./Top";
 
-const Title = styled(_Title)`
-  padding: 0 1rem;
+const Container = styled(Flex)`
+  background-color: white;
+  box-shadow: 0 0 0.125rem lightgray;
+  padding: 1rem 1rem 0;
+  user-select: none;
+`;
+const Idcc = styled(_Idcc)`
+  /* margin-top: 0.375rem; */
 `;
 
 export default ({
@@ -16,15 +22,25 @@ export default ({
   currentTab,
   idcc,
   onCancel,
+  onSubmit,
   onTabChange,
+  referencesCount,
+  tagsCount,
   title
 }) => (
-  <Flex flexDirection="column">
-    <Top agreement={agreement} idcc={idcc} />
-    <Title isFirst>{title}</Title>
-    <Flex justifyContent="space-between">
-      <Tabs currentTab={currentTab} onChange={onTabChange} />
-      <Actions onCancel={onCancel} />
+  <Container justifyContent="space-between">
+    <Flex flexDirection="column">
+      <Flex alignItems="baseline">
+        <Idcc code={idcc} name={agreement} />
+        <Title isFirst>{title}</Title>
+      </Flex>
+      <Tabs
+        currentTab={currentTab}
+        onChange={onTabChange}
+        referencesCount={referencesCount}
+        tagsCount={tagsCount}
+      />
     </Flex>
-  </Flex>
+    <Actions onCancel={onCancel} onSubmit={onSubmit} />
+  </Container>
 );
