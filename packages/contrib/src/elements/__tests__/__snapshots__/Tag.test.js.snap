@@ -3,7 +3,7 @@
 exports[`[Contrib] elements/<Tag /> should match snapshot 1`] = `
 <div>
   <span
-    class="Tag-sc-16selk6-0 vTDzf"
+    class="Tag-sc-16selk6-0 hoDWTY"
   />
 </div>
 `;
