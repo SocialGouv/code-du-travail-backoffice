@@ -56,6 +56,11 @@ export default class extends React.PureComponent {
     return (
       <Container className={this.props.className} flexDirection="column">
         <_Subtitle isFirst>Étiquettes</_Subtitle>
+        <p>
+          Sélectionnez les étiquettes correspondant à la réponse que vous
+          rédigez afin de nous aider à classifier le contenu:
+        </p>
+
         <Flex flexDirection="column">
           <Subtitle isFirst>Type de contrat</Subtitle>
           <Flex flexWrap="wrap">{this.getTags("contract_type")}</Flex>

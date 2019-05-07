@@ -10,6 +10,9 @@ exports[`[Contrib] blocks/<AnswerEditionTags /> should match snapshot 1`] = `
     >
       Étiquettes
     </h2>
+    <p>
+      Sélectionnez les étiquettes correspondant à la réponse que vous rédigez afin de nous aider à classifier le contenu:
+    </p>
     <div
       class="sc-bdVaJa sc-bwzfXH eVPJMi"
     >
