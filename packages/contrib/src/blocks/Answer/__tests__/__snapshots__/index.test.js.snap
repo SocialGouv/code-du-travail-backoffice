@@ -3,11 +3,11 @@
 exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH Answer__Container-sc-1ccgtmi-0 icBtyh"
+    class="sc-bdVaJa sc-bwzfXH fFgWKo"
     width="1"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Answer__Content-sc-1ccgtmi-1 jMhdKY"
+      class="sc-bdVaJa sc-bwzfXH Answer__Content-sc-1ccgtmi-0 iAohlA"
     >
       <div
         class="sc-bdVaJa sc-bwzfXH dntGME"
@@ -25,20 +25,20 @@ exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot 1`] = `
           />
         </div>
         <div
-          class="Answer__ContentQuestion-sc-1ccgtmi-2 cEQXYX"
+          class="Answer__ContentQuestion-sc-1ccgtmi-1 dbxdoF"
         >
-          Who knows?
+          undefined) Who knows?
         </div>
       </div>
       <div
-        class="Answer__ContentExtract-sc-1ccgtmi-3 eZWZuU"
+        class="Answer__ContentExtract-sc-1ccgtmi-2 kDLowz"
       >
         A strange answer.
         …
       </div>
     </div>
     <div
-      class="sc-bdVaJa sc-bwzfXH Answer__Menu-sc-1ccgtmi-5 jsrShP"
+      class="sc-bdVaJa sc-bwzfXH Answer__Menu-sc-1ccgtmi-4 jsjXxT"
     >
       <button
         class="Link-c1jwt7-0 cIzIlt"
@@ -57,19 +57,19 @@ exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot diff with a L
 
 @@ -25,13 +25,13 @@
           >
-            Who knows?
+            undefined) Who knows?
           </div>
         </div>
         <div
--         class=\\"Answer__ContentExtract-sc-1ccgtmi-3 eZWZuU\\"
-+         class=\\"Answer__ContentExtract-sc-1ccgtmi-3 Answer__ContentExtractRed-sc-1ccgtmi-4 gYBcgX\\"
+-         class=\\"Answer__ContentExtract-sc-1ccgtmi-2 kDLowz\\"
++         class=\\"Answer__ContentExtract-sc-1ccgtmi-2 Answer__ContentExtractRed-sc-1ccgtmi-3 kIVUGn\\"
         >
 -         A strange answer.…
 +         Renvoyé au Code du travail.
         </div>
       </div>
       <div
-        class=\\"sc-bdVaJa sc-bwzfXH Answer__Menu-sc-1ccgtmi-5 jsrShP\\"
+        class=\\"sc-bdVaJa sc-bwzfXH Answer__Menu-sc-1ccgtmi-4 jsjXxT\\"
       >"
 `;
 
@@ -80,19 +80,19 @@ exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot diff with a N
 
 @@ -25,13 +25,13 @@
           >
-            Who knows?
+            undefined) Who knows?
           </div>
         </div>
         <div
--         class=\\"Answer__ContentExtract-sc-1ccgtmi-3 eZWZuU\\"
-+         class=\\"Answer__ContentExtract-sc-1ccgtmi-3 Answer__ContentExtractRed-sc-1ccgtmi-4 gYBcgX\\"
+-         class=\\"Answer__ContentExtract-sc-1ccgtmi-2 kDLowz\\"
++         class=\\"Answer__ContentExtract-sc-1ccgtmi-2 Answer__ContentExtractRed-sc-1ccgtmi-3 kIVUGn\\"
         >
 -         A strange answer.…
 +         Renvoyé à la convention collective nationale.
         </div>
       </div>
       <div
-        class=\\"sc-bdVaJa sc-bwzfXH Answer__Menu-sc-1ccgtmi-5 jsrShP\\"
+        class=\\"sc-bdVaJa sc-bwzfXH Answer__Menu-sc-1ccgtmi-4 jsjXxT\\"
       >"
 `;
 
