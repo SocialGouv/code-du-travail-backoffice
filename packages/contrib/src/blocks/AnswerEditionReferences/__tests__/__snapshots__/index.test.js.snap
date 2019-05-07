@@ -36,7 +36,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should add the expected La
 +             L1234-6
 +           </span>
 +           <button
-+             class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
++             class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 beokMz\\"
 +             color=\\"white\\"
 +             font-size=\\"inherit\\"
 +             font-weight=\\"bold\\"
@@ -63,7 +63,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should add the expected La
         </div>
       </div>
       <div
-        class=\\"sc-bdVaJa sc-bwzfXH AnswerEditionReferences__Part-sc-1inz7ja-1 cfZMGB\\"
+        class=\\"sc-bdVaJa sc-bwzfXH AnswerEditionReferences__Part-sc-1inz7ja-1 fTJpKI\\"
       >"
 `;
 
@@ -82,7 +82,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should add the expected un
 +             L1234-6
             </span>
             <button
-              class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
+              class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 beokMz\\"
               color=\\"white\\"
               font-size=\\"inherit\\"
               font-weight=\\"bold\\"
@@ -94,7 +94,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should add the expected un
                 class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x \\"
                 color=\\"var(--color-lapis-lazuli)\\"
 @@ -224,10 +224,83 @@
-              class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
+              class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 beokMz\\"
               color=\\"white\\"
               font-size=\\"inherit\\"
               font-weight=\\"bold\\"
@@ -143,7 +143,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should add the expected un
 +             A New Uncategorized Reference
 +           </span>
 +           <button
-+             class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
++             class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 beokMz\\"
 +             color=\\"white\\"
 +             font-size=\\"inherit\\"
 +             font-weight=\\"bold\\"
@@ -167,7 +167,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should add the expected un
 +             </svg>
 +           </button>
 +           <button
-+             class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
++             class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 beokMz\\"
 +             color=\\"white\\"
 +             font-size=\\"inherit\\"
 +             font-weight=\\"bold\\"
@@ -182,10 +182,10 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should add the expected un
 exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH AnswerEditionReferences__Container-sc-1inz7ja-0 kFgKbQ"
+    class="sc-bdVaJa sc-bwzfXH AnswerEditionReferences__Container-sc-1inz7ja-0 ehkkGP"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH AnswerEditionReferences__Part-sc-1inz7ja-1 cfZMGB"
+      class="sc-bdVaJa sc-bwzfXH AnswerEditionReferences__Part-sc-1inz7ja-1 fTJpKI"
     >
       <div
         class="sc-bdVaJa sc-bwzfXH dicanr"
@@ -235,7 +235,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             L1234-5
           </span>
           <button
-            class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf"
+            class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 beokMz"
             color="white"
             font-size="inherit"
             font-weight="bold"
@@ -262,7 +262,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
       </div>
     </div>
     <div
-      class="sc-bdVaJa sc-bwzfXH AnswerEditionReferences__Part-sc-1inz7ja-1 cfZMGB"
+      class="sc-bdVaJa sc-bwzfXH AnswerEditionReferences__Part-sc-1inz7ja-1 fTJpKI"
     >
       <div
         class="sc-bdVaJa sc-bwzfXH dicanr"
@@ -288,7 +288,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
           >
             <button
-              class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU"
+              class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 YXZtc"
               color="var(--color-lapis-lazuli)"
               font-size="inherit"
               font-weight="bold"
@@ -305,7 +305,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
       />
     </div>
     <div
-      class="sc-bdVaJa sc-bwzfXH AnswerEditionReferences__Part-sc-1inz7ja-1 cfZMGB"
+      class="sc-bdVaJa sc-bwzfXH AnswerEditionReferences__Part-sc-1inz7ja-1 fTJpKI"
     >
       <div
         class="sc-bdVaJa sc-bwzfXH dicanr"
@@ -339,7 +339,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
           >
             <button
-              class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU"
+              class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 YXZtc"
               color="var(--color-lapis-lazuli)"
               font-size="inherit"
               font-weight="bold"
@@ -379,7 +379,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             An Uncategorized Reference
           </span>
           <button
-            class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf"
+            class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 beokMz"
             color="white"
             font-size="inherit"
             font-weight="bold"
@@ -403,7 +403,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             </svg>
           </button>
           <button
-            class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf"
+            class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 beokMz"
             color="white"
             font-size="inherit"
             font-weight="bold"
@@ -448,7 +448,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should not duplicate an ex
 +             L1234-6
             </span>
             <button
-              class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
+              class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 beokMz\\"
               color=\\"white\\"
               font-size=\\"inherit\\"
               font-weight=\\"bold\\"
@@ -469,7 +469,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should not duplicate an ex
 +             A New Uncategorized Reference
             </span>
             <button
-              class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
+              class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 beokMz\\"
               color=\\"white\\"
               font-size=\\"inherit\\"
               font-weight=\\"bold\\"
@@ -482,7 +482,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should not duplicate an ex
                 color=\\"var(--color-lapis-lazuli)\\"
 @@ -223,11 +223,11 @@
             <button
-              class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
+              class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 beokMz\\"
               color=\\"white\\"
               font-size=\\"inherit\\"
               font-weight=\\"bold\\"
@@ -510,7 +510,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should remove the expected
 +             L1234-6
             </span>
             <button
-              class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
+              class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 beokMz\\"
               color=\\"white\\"
               font-size=\\"inherit\\"
               font-weight=\\"bold\\"
@@ -538,7 +538,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should remove the expected
 +             L1234-6
             </span>
             <button
-              class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
+              class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 beokMz\\"
               color=\\"white\\"
               font-size=\\"inherit\\"
               font-weight=\\"bold\\"
@@ -559,7 +559,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should remove the expected
 +             A New Uncategorized Reference
             </span>
             <button
-              class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
+              class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 beokMz\\"
               color=\\"white\\"
               font-size=\\"inherit\\"
               font-weight=\\"bold\\"
@@ -572,7 +572,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should remove the expected
                 color=\\"var(--color-lapis-lazuli)\\"
 @@ -223,11 +223,11 @@
             <button
-              class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
+              class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 beokMz\\"
               color=\\"white\\"
               font-size=\\"inherit\\"
               font-weight=\\"bold\\"
