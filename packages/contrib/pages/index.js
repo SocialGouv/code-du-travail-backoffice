@@ -43,12 +43,15 @@ export default class Index extends React.Component {
       currentPage: 0,
       isLoading: true,
       isSaving: false,
+      me: null,
       query: "",
       paginationKey: 0
     };
   }
 
   async componentDidMount() {
+    this.setState({ me: JSON.parse(sessionStorage.getItem("me")) });
+
     this.axios = customAxios();
 
     await this.loadAnswers();
@@ -74,23 +77,27 @@ export default class Index extends React.Component {
   async cancelAnswer(id) {
     this.setState({ isLoading: true });
 
-    const answersUri = `/answers?id=eq.${id}`;
-    const answersData = {
-      generic_reference: null,
-      state: "todo",
-      user_id: null,
-      value: ""
-    };
-    const answersTagsUri = makeApiFilter("/answers_tags", {
-      answer_id: id
-    });
-    const answersReferencesUri = makeApiFilter("/answers_references", {
-      answer_id: id
-    });
+    try {
+      const answersUri = `/answers?id=eq.${id}`;
+      const answersData = {
+        generic_reference: null,
+        state: "todo",
+        user_id: null,
+        value: ""
+      };
+      const answersTagsUri = makeApiFilter("/answers_tags", {
+        answer_id: id
+      });
+      const answersReferencesUri = makeApiFilter("/answers_references", {
+        answer_id: id
+      });
 
-    await this.axios.delete(answersReferencesUri).catch(console.warn);
-    await this.axios.delete(answersTagsUri).catch(console.warn);
-    await this.axios.patch(answersUri, answersData).catch(console.warn);
+      await this.axios.delete(answersReferencesUri);
+      await this.axios.delete(answersTagsUri);
+      await this.axios.patch(answersUri, answersData);
+    } catch (err) {
+      console.warn(err);
+    }
 
     await this.loadAnswers();
   }
@@ -105,10 +112,19 @@ export default class Index extends React.Component {
   async fallAnswerBack(id, generic_reference) {
     this.setState({ isLoading: true });
 
-    const uri = `/answers?id=eq.${id}`;
-    const data = { generic_reference, state: "draft", value: "" };
+    try {
+      const uri = `/answers?id=eq.${id}`;
+      const data = {
+        generic_reference,
+        state: "draft",
+        user_id: this.state.me.payload.id,
+        value: ""
+      };
 
-    await this.axios.patch(uri, data).catch(console.warn);
+      await this.axios.patch(uri, data);
+    } catch (err) {
+      console.warn(err);
+    }
 
     await this.loadAnswers();
   }
