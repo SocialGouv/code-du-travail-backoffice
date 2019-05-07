@@ -8,18 +8,18 @@ import styled from "styled-components";
 const Button = styled(_Button)`
   background-color: ${({ color, hasText }) =>
     !hasText ? "transparent" : color};
-  border-radius: 0;
+  border-radius: 0.125rem;
   color: ${({ isLight }) => (isLight ? "var(--color-eerie-black)" : "white")};
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   display: flex;
-  font-size: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
   line-height: 1.5;
   margin-right: ${({ hasGroup }) => (hasGroup ? "1rem" : 0)};
   min-height: 1.25rem;
   min-width: 1.25rem;
-  opacity: ${({ disabled }) => (disabled ? 0.25 : 0.75)};
-  padding: ${({ isSmall }) =>
-    isSmall ? "0.125rem 0.25rem" : "0.25rem 0.5rem"};
+  opacity: ${({ disabled }) => (disabled ? 0.25 : 1)};
+  padding: ${({ isSmall }) => (isSmall ? "0.125rem 0.5rem" : "0.25rem 1rem")};
   white-space: nowrap;
 
   :hover {
