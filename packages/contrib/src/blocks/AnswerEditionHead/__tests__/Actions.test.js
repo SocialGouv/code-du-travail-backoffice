@@ -5,7 +5,8 @@ import Actions from "../Actions";
 
 describe("[Contrib] blocks/AnswerEditionHead/<Actions />", () => {
   const props = {
-    onCancel: jest.fn()
+    onCancel: jest.fn(),
+    onSubmit: jest.fn()
   };
 
   const { container, getByText } = render(<Actions {...props} />);
@@ -15,8 +16,8 @@ describe("[Contrib] blocks/AnswerEditionHead/<Actions />", () => {
   });
 
   it("should trigger onCancel()", () => {
-    fireEvent.click(getByText(/Annuler ma réponse/));
+    fireEvent.click(getByText("Demander la validation"));
 
-    expect(props.onCancel).toHaveBeenCalled();
+    expect(props.onSubmit).toHaveBeenCalled();
   });
 });
