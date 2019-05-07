@@ -39,7 +39,7 @@ Ceci est **très important**.`;
     });
   });
 
-  describe("#fromHtml()", () => {
+  describe("#toHtml()", () => {
     it("should return the expected Markdown string", () => {
       expect(markdown.toHtml(markdownSource)).toBe(htmlSource);
     });
