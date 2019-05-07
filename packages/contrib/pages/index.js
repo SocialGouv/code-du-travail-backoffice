@@ -146,9 +146,10 @@ export default class Index extends React.Component {
 
     const queryFilter =
       !isDraft && this.state.query.length !== 0
-        ? ({ agreement, idcc, question }) =>
+        ? ({ agreement, idcc, index, question }) =>
             stringFrIncludes(this.state.query, agreement) ||
             idcc.includes(this.state.query) ||
+            index === Number(this.state.query) ||
             stringFrIncludes(this.state.query, question)
         : () => true;
 
