@@ -6,7 +6,6 @@ import styled from "styled-components";
 import markdown from "../libs/markdown";
 
 import redoImageUri from "../images/redo.svg";
-import tagsImageUri from "../images/tags.svg";
 import undoImageUri from "../images/undo.svg";
 
 const TextButton = styled.button`
@@ -51,7 +50,6 @@ export default class Editor extends React.Component {
           container: this.$toolbar,
           handlers: {
             redo: () => this.quill.history.redo(),
-            tags: this.props.onTagsClicked,
             undo: () => this.quill.history.undo()
           }
         }
@@ -148,16 +146,6 @@ export default class Editor extends React.Component {
               <option value="2">Titre</option>
               <option value="3">Sous-titre</option>
             </select>
-          </span>
-          <span className="ql-formats">
-            <TextButton
-              className="ql-tags"
-              title="Bouton ouvrant ou fermant la barre latérale des étiquettes"
-              type="button"
-            >
-              <TextButtonIcon src={tagsImageUri} withText />
-              Étiquettes
-            </TextButton>
           </span>
         </div>
         <div
