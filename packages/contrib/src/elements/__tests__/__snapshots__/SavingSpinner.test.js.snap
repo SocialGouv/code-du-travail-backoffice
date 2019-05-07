@@ -30,7 +30,7 @@ exports[`[Contrib] elements/<SavingSpinner /> should match snapshot 1`] = `
 </div>
 `;
 
-exports[`[Contrib] elements/<SavingSpinner /> should match snapshot 2`] = `
+exports[`[Contrib] elements/<SavingSpinner /> should match snapshot with a custom \`color\` prop 1`] = `
 <div>
   <div
     class="SavingSpinner__Container-sc-14j744e-0 fmakGk"
@@ -60,7 +60,7 @@ exports[`[Contrib] elements/<SavingSpinner /> should match snapshot 2`] = `
 </div>
 `;
 
-exports[`[Contrib] elements/<SavingSpinner /> should match snapshot 3`] = `
+exports[`[Contrib] elements/<SavingSpinner /> should match snapshot with a custom \`size\` prop 1`] = `
 <div>
   <div
     class="SavingSpinner__Container-sc-14j744e-0 hIouue"

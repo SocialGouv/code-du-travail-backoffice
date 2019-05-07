@@ -31,13 +31,13 @@ describe.skip("[Contrib] blocks/<Answer /> (Undraft)", () => {
     expect(props.onClick).toHaveBeenCalledWith(props.data.id);
   });
 
-  it("should have called onFallback() with the expected params", () => {
+  it("should have called onFallback() with the expected params (CDT)", () => {
     fireEvent.click(getByText(/Renvoi au Code du travail/));
 
     expect(props.onFallback).toHaveBeenCalledWith(props.data.id, "labor_code");
   });
 
-  it("should have called onFallback() with the expected params", () => {
+  it("should have called onFallback() with the expected params (CCN)", () => {
     fireEvent.click(getByText(/Renvoi à la CC nationale/));
 
     expect(props.onFallback).toHaveBeenCalledWith(

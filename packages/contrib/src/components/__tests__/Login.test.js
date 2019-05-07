@@ -56,28 +56,36 @@ describe("[Contrib] components/<Login />", () => {
     ).toBeInTheDocument();
   });
 
-  it("should show the expected login error", async () => {
+  it("should show the expected login error (rejected login)", async () => {
     global.axios.post.mockRejectedValueOnce();
 
     fireEvent.input($passwordInput, { target: { value: password } });
     fireEvent.submit($form);
     await waitFor(0);
 
-    expect(global.axios.post).toHaveBeenCalledWith("/rpc/login", { email, password });
+    expect(global.axios.post).toHaveBeenCalledWith("/rpc/login", {
+      email,
+      password
+    });
     expect(
       queryByText(/E-mail et\/ou mot de passe non reconnu\(s\)\./)
     ).toBeInTheDocument();
   });
 
-  it("should show the expected login error", async () => {
+  it("should show the expected login error (rejected JWT)", async () => {
     global.axios.post.mockResolvedValueOnce({ data: [{ token }] });
     global.axios.post.mockRejectedValueOnce();
 
     fireEvent.submit($form);
     await waitFor(0);
 
-    expect(global.axios.post).toHaveBeenCalledWith("/rpc/login", { email, password });
-    expect(global.axios.post).toHaveBeenCalledWith("/rpc/login_check", { token });
+    expect(global.axios.post).toHaveBeenCalledWith("/rpc/login", {
+      email,
+      password
+    });
+    expect(global.axios.post).toHaveBeenCalledWith("/rpc/login_check", {
+      token
+    });
     expect(
       queryByText(/E-mail et\/ou mot de passe non reconnu\(s\)./)
     ).toBeInTheDocument();
@@ -90,8 +98,13 @@ describe("[Contrib] components/<Login />", () => {
     fireEvent.submit($form);
     await waitFor(0);
 
-    expect(global.axios.post).toHaveBeenCalledWith("/rpc/login", { email, password });
-    expect(global.axios.post).toHaveBeenCalledWith("/rpc/login_check", { token });
+    expect(global.axios.post).toHaveBeenCalledWith("/rpc/login", {
+      email,
+      password
+    });
+    expect(global.axios.post).toHaveBeenCalledWith("/rpc/login_check", {
+      token
+    });
     expect(sessionStorage.getItem("jwt")).toBe(token);
     expect(sessionStorage.getItem("me")).toBe(
       JSON.stringify({ name, location })

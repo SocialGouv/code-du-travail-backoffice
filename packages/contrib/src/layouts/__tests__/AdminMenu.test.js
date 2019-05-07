@@ -23,31 +23,31 @@ describe("[Contrib] layouts/<AdminMenu />", () => {
     expect(Router.push).toHaveBeenCalledWith("/admin");
   });
 
-  it("should redirect to the expected path", () => {
+  it("should redirect to the agreements path", () => {
     fireEvent.click(getByText(/Conventions/));
 
     expect(Router.push).toHaveBeenCalledWith("/admin/agreements");
   });
 
-  it("should redirect to the expected path", () => {
+  it("should redirect to the tags path", () => {
     fireEvent.click(getByText(/Étiquettes/));
 
     expect(Router.push).toHaveBeenCalledWith("/admin/tags");
   });
 
-  it("should redirect to the expected path", () => {
+  it("should redirect to the questions path", () => {
     fireEvent.click(getByText(/Questions/));
 
     expect(Router.push).toHaveBeenCalledWith("/admin/questions");
   });
 
-  it("should redirect to the expected path", () => {
+  it("should redirect to the locations path", () => {
     fireEvent.click(getByText(/Unités/));
 
     expect(Router.push).toHaveBeenCalledWith("/admin/locations");
   });
 
-  it("should redirect to the expected path", () => {
+  it("should redirect to the users path", () => {
     fireEvent.click(getByText(/Utilisateurs/));
 
     expect(Router.push).toHaveBeenCalledWith("/admin/users");
