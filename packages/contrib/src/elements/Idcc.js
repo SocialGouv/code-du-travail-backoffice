@@ -26,8 +26,8 @@ const Tooltip = styled(ReactTooltip)`
   white-space: normal;
 `;
 
-export default ({ code, name }) => (
-  <Container data-tip={name}>
+export default ({ className, code, name, style }) => (
+  <Container className={className} data-tip={name} style={style}>
     CCN: {code}
     <Tooltip />
   </Container>
