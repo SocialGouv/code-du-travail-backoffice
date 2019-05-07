@@ -39,7 +39,8 @@ export default class extends React.Component {
       currentTab: TABS.EDITOR,
       isLoading: true,
       isSaving: false,
-      lastAnswerValue: ""
+      lastAnswerValue: "",
+      me: null
     };
 
     this.allTags = [];
@@ -57,6 +58,8 @@ export default class extends React.Component {
   }
 
   componentDidMount() {
+    this.setState({ me: JSON.parse(sessionStorage.getItem("me")) });
+
     this.axios = customAxios();
 
     const myAnswersFilter = `id=eq.${this.props.id}`;
@@ -121,7 +124,12 @@ export default class extends React.Component {
     try {
       const uri = `/answers?id=eq.${this.props.id}`;
       // An answer can't have a value and be generic at the same time:
-      const data = { generic_reference: null, state: "draft", value };
+      const data = {
+        generic_reference: null,
+        state: "draft",
+        user_id: this.state.me.payload.id,
+        value
+      };
 
       await this.axios.patch(uri, data);
     } catch (err) {
@@ -141,7 +149,8 @@ export default class extends React.Component {
       // An answer can't have a custom tag and be generic at the same time:
       const answersData = {
         generic_reference: null,
-        state: "draft"
+        state: "draft",
+        user_id: this.state.me.payload.id
       };
       const answersTagsUri = `/answers_tags`;
       const answersTagsData = {
@@ -189,7 +198,8 @@ export default class extends React.Component {
       // An answer can't have a reference and be generic at the same time:
       const answersData = {
         generic_reference: null,
-        state: "draft"
+        state: "draft",
+        user_id: this.state.me.payload.id
       };
       const answersReferencesUri = `/answers_references`;
       const answersReferencesData = {
