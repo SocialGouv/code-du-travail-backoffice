@@ -9,13 +9,13 @@ describe("[Contrib] elements/<SavingSpinner />", () => {
     expect(container).toMatchSnapshot();
   });
 
-  it("should match snapshot", () => {
+  it("should match snapshot with a custom `color` prop", () => {
     const { container } = render(<SavingSpinner color="red" />);
 
     expect(container).toMatchSnapshot();
   });
 
-  it("should match snapshot", () => {
+  it("should match snapshot with a custom `size` prop", () => {
     const { container } = render(<SavingSpinner size="32" />);
 
     expect(container).toMatchSnapshot();
