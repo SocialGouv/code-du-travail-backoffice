@@ -14,6 +14,7 @@ describe("[Contrib] blocks/<AnswerEditionHead />", () => {
     agreement: "An agreement title",
     currentTab: TABS.EDITOR,
     idcc: "0123",
+    index: 12,
     onTabChange,
     title: "A question title"
   };

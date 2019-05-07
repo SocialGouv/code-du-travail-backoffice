@@ -26,7 +26,7 @@ exports[`[Contrib] blocks/<AnswerEditionHead /> should match snapshot 1`] = `
         <h1
           class="Title-r6qlw8-0 gPMqTc"
         >
-          A question title
+          12) A question title
         </h1>
       </div>
       <div
