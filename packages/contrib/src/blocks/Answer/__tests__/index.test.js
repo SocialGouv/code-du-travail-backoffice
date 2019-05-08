@@ -11,6 +11,7 @@ describe.skip("[Contrib] blocks/<Answer /> (Undraft)", () => {
     data: {
       id: "12345678-9abc-4def-0123-456789abcdef",
       idcc: "1234",
+      index: 12,
       agreement: "A Labor Agreement Name",
       question: "Who knows?"
     },

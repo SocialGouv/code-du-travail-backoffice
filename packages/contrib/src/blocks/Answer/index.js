@@ -5,10 +5,6 @@ import styled from "styled-components";
 import Idcc from "../../elements/Idcc";
 import Link from "../../elements/Link";
 
-const Container = styled(Flex)`
-  /* flex-grow: 1; */
-`;
-
 const Content = styled(Flex)`
   background-color: white;
   border: solid 1px var(--color-border);
@@ -39,11 +35,11 @@ const Menu = styled(Flex)`
 `;
 
 export default ({ data, isDraft, onCancel, onClick, onFallback }) => (
-  <Container width={1}>
+  <Flex width={1}>
     <Content flexDirection="column" onClick={() => onClick(data.id)}>
       <Flex alignItems="baseline">
         <Idcc code={data.idcc} name={data.agreement} />
-        <ContentQuestion>{data.question}</ContentQuestion>
+        <ContentQuestion>{`${data.index}) ${data.question}`}</ContentQuestion>
       </Flex>
       {isDraft && data.generic_reference === null && (
         <ContentExtract>{data.value.substr(0, 100)}…</ContentExtract>
@@ -87,5 +83,5 @@ export default ({ data, isDraft, onCancel, onClick, onFallback }) => (
         </Link>
       )}
     </Menu>
-  </Container>
+  </Flex>
 );

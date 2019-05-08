@@ -21,6 +21,7 @@ export default ({
   agreement,
   currentTab,
   idcc,
+  index,
   onCancel,
   onSubmit,
   onTabChange,
@@ -32,7 +33,7 @@ export default ({
     <Flex flexDirection="column">
       <Flex alignItems="baseline">
         <Idcc code={idcc} name={agreement} />
-        <Title isFirst>{title}</Title>
+        <Title isFirst>{`${index}) ${title}`}</Title>
       </Flex>
       <Tabs
         currentTab={currentTab}
