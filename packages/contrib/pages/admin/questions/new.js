@@ -6,6 +6,12 @@ import customAxios from "../../../src/libs/customAxios";
 
 const FIELDS = [
   {
+    type: "input",
+    name: "index",
+    label: "Index",
+    inputType: "number"
+  },
+  {
     type: "text",
     name: "value",
     label: "Intitulé"
