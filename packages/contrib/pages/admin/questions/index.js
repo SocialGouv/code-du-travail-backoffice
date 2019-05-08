@@ -6,6 +6,10 @@ import "../../../node_modules/react-table/react-table.css";
 
 const COLUMNS = [
   {
+    Header: "Index",
+    accessor: "index"
+  },
+  {
     Header: "Intitulé",
     accessor: "value"
   }
