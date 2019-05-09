@@ -14,12 +14,12 @@ const Button = styled(_Button)`
   display: flex;
   font-size: 0.9375rem;
   font-weight: 600;
-  line-height: 1.5;
   margin-right: ${({ hasGroup }) => (hasGroup ? "1rem" : 0)};
   min-height: 1.25rem;
   min-width: 1.25rem;
   opacity: ${({ disabled }) => (disabled ? 0.25 : 1)};
-  padding: ${({ isSmall }) => (isSmall ? "0.125rem 0.5rem" : "0.25rem 1rem")};
+  padding: ${({ isSmall }) =>
+    isSmall ? "0.1rem 0.5rem 0.15rem" : "0.2rem 1rem 0.3rem"};
   white-space: nowrap;
 
   :hover {
