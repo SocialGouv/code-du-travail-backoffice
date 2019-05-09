@@ -23,12 +23,12 @@ const Content = styled(Flex)`
   overflow-y: auto;
 `;
 const ContentInfo = styled(Flex)`
-  color: var(--color-black-leather-jacket);
+  color: var(--color-shadow);
   font-size: 1rem;
   margin-top: 0.5rem;
   position: absolute;
   right: 1rem;
-  width: 13rem;
+  width: 12.5rem;
 `;
 
 export default class extends React.Component {
@@ -37,10 +37,12 @@ export default class extends React.Component {
 
     this.state = {
       currentTab: TABS.EDITOR,
+      hasSavingSpinner: false,
       isLoading: true,
       isSaving: false,
       lastAnswerValue: "",
-      me: null
+      me: null,
+      savingSpinnerTimeout: 0
     };
 
     this.allTags = [];
@@ -142,6 +144,7 @@ export default class extends React.Component {
 
   async _saveAnswerValue(value) {
     this.setState({ isSaving: true });
+    this.showSavingSpinner();
 
     try {
       const uri = `/answers?id=eq.${this.props.id}`;
@@ -154,11 +157,11 @@ export default class extends React.Component {
       };
 
       await this.axios.patch(uri, data);
+
+      this.originalAnswer.value = value;
     } catch (err) {
       console.warn(err);
     }
-
-    this.originalAnswer.value = value;
 
     this.setState({ isSaving: false });
   }
@@ -264,6 +267,24 @@ export default class extends React.Component {
     this.setState({ isSaving: false });
   }
 
+  showSavingSpinner() {
+    if (this.state.hasSavingSpinner) {
+      clearTimeout(this.state.savingSpinnerTimeout);
+    }
+
+    this.setState({
+      hasSavingSpinner: true,
+      savingSpinnerTimeout: setTimeout(
+        () =>
+          this.setState({
+            hasSavingSpinner: false,
+            savingSpinnerTimeout: 0
+          }),
+        2000
+      )
+    });
+  }
+
   switchTab(nextTab) {
     if (nextTab === this.state.currentTab) return;
 
@@ -326,12 +347,9 @@ export default class extends React.Component {
           title={this.originalAnswer.question}
         />
         <Content>
-          {this.state.currentTab === TABS.EDITOR && this.state.isSaving && (
+          {this.state.hasSavingSpinner && (
             <ContentInfo alignItems="center" justifyContent="space-between">
-              <SavingSpinner
-                color="var(--color-black-leather-jacket)"
-                size="26"
-              />
+              <SavingSpinner color="var(--color-shadow)" size="26" />
               Sauvegarde en cours…
             </ContentInfo>
           )}
