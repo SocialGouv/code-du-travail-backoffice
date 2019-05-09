@@ -2,7 +2,7 @@ exports.seed = async knex => {
   global.spinner.start(`Generating questions...`)
 
   const questions = [
-    { index: 1, value: `Si un poste se libère ou est créé dans mon entreprise, mon employeur devra-t-il m’en informer voire me le proposer en priorité?` },
+    { index: 1, value: `Si un poste se libère ou est créé dans mon entreprise, mon employeur devra-t-il m’en informer voire me le proposer en priorité ?` },
     { index: 2, value: `Ma convention collective prévoit-elle des mesures spécifiques sur l’égalité professionnelle femmes-hommes ?` },
     { index: 3, value: `Quelle est la durée de ma période d’essai ?` },
     { index: 4, value: `Ma période d’essai peut-elle être renouvelée ?` },
