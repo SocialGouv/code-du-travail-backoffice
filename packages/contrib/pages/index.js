@@ -16,6 +16,9 @@ const Content = styled(Flex)`
   overflow-y: auto;
   padding: 0 1rem 1rem;
 `;
+const SubtitleNote = styled.span`
+  color: var(--color-shadow);
+`;
 const InfoText = styled.p`
   color: var(--color-dark-slate-gray);
   margin-bottom: 0.5rem;
@@ -139,13 +142,11 @@ export default class Index extends React.Component {
     );
   }
 
-  fetchAnswers(isDraft = false) {
-    const stateFilter = isDraft
-      ? ({ state }) => state === "draft"
-      : ({ state }) => state === "todo";
+  fetchAnswers(states) {
+    const stateFilter = ({ state }) => states.includes(state);
 
     const queryFilter =
-      !isDraft && this.state.query.length !== 0
+      states === ["todo"] && this.state.query.length !== 0
         ? ({ agreement, idcc, index, question }) =>
             stringFrIncludes(this.state.query, agreement) ||
             idcc.includes(this.state.query) ||
@@ -204,8 +205,12 @@ export default class Index extends React.Component {
   render() {
     if (this.state.isLoading) return <Main isLoading />;
 
-    const draftAnswers = this.fetchAnswers(true);
-    const newAnswers = this.fetchAnswers();
+    const submittedAnswersCount = this.fetchAnswers([
+      "pending_review",
+      "validation"
+    ]).length;
+    const draftAnswers = this.fetchAnswers(["draft"]);
+    const newAnswers = this.fetchAnswers(["todo"]);
     const newAnswersChunk = newAnswers.slice(
       this.state.currentPage * ANSWERS_PER_PAGE,
       (this.state.currentPage + 1) * ANSWERS_PER_PAGE
@@ -215,7 +220,17 @@ export default class Index extends React.Component {
     return (
       <Main>
         <Content flexDirection="column" width={1}>
-          <Subtitle>Mes brouillons</Subtitle>
+          <Flex alignItems="baseline" justifyContent="space-between">
+            <Subtitle>Mes brouillons</Subtitle>
+            <SubtitleNote>
+              {submittedAnswersCount === 0 &&
+                `(Aucune réponse envoyée en validation)`}
+              {submittedAnswersCount === 1 &&
+                `(1 réponse envoyée en validation)`}
+              {submittedAnswersCount > 1 &&
+                `(${submittedAnswersCount} réponses envoyées en validation)`}
+            </SubtitleNote>
+          </Flex>
           {draftAnswers.length !== 0 && (
             <HelpText>Cliquez sur un brouillon pour le modifier :</HelpText>
           )}

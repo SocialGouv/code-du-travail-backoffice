@@ -57,29 +57,31 @@ export default class extends React.Component {
     return { id };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.setState({ me: JSON.parse(sessionStorage.getItem("me")) });
 
     this.axios = customAxios();
 
-    const myAnswersFilter = `id=eq.${this.props.id}`;
+    try {
+      const tags = await this.axios.get(`/tags`);
+      const answers = await this.axios.get(
+        `/contributor_answers?id=eq.${this.props.id}`
+      );
+      const laborCodeReferences = await axios.get(
+        `/static/data/labor-law-references.json`
+      );
 
-    Promise.all([
-      this.axios.get(`/tags`),
-      this.axios.get(`/contributor_answers?${myAnswersFilter}`),
-      axios.get(`/static/data/labor-law-references.json`)
-    ])
-      .then(([tagsRes, answersRes, laborCodeReferencesRes]) => {
-        this.allTags = tagsRes.data;
-        this.laborCodeReferences = laborCodeReferencesRes.data;
-        this.originalAnswer = answersRes.data[0];
+      this.allTags = tags.data;
+      this.laborCodeReferences = laborCodeReferences.data;
+      this.originalAnswer = answers.data[0];
 
-        this.setState({
-          isLoading: false,
-          lastAnswerValue: this.originalAnswer.value
-        });
-      })
-      .catch(console.warn);
+      this.setState({
+        isLoading: false,
+        lastAnswerValue: this.originalAnswer.value
+      });
+    } catch (err) {
+      console.warn(err);
+    }
   }
 
   toggleTag(id, isAdded) {
@@ -91,6 +93,7 @@ export default class extends React.Component {
   }
 
   async cancelAnswer() {
+    if (this.state.isSaving) return;
     this.setState({ isSaving: true });
 
     try {
@@ -111,11 +114,30 @@ export default class extends React.Component {
       await this.axios.delete(answersReferencesUri);
       await this.axios.delete(answersTagsUri);
       await this.axios.patch(answersUri, answersData);
+
+      Router.push("/");
     } catch (err) {
       console.warn(err);
     }
+  }
 
-    Router.push("/");
+  async requestForAnswerValidation() {
+    if (this.state.isSaving) return;
+    this.setState({ isSaving: true });
+
+    try {
+      const uri = `/answers?id=eq.${this.props.id}`;
+      const data = {
+        state: "pending_review",
+        user_id: this.state.me.payload.id
+      };
+
+      await this.axios.patch(uri, data);
+
+      Router.push("/");
+    } catch (err) {
+      console.warn(err);
+    }
   }
 
   async _saveAnswerValue(value) {
@@ -297,7 +319,7 @@ export default class extends React.Component {
           idcc={this.originalAnswer.idcc}
           index={this.originalAnswer.index}
           onCancel={() => this.cancelAnswer()}
-          onSubmit={() => void 0}
+          onSubmit={() => this.requestForAnswerValidation()}
           onTabChange={this.switchTab.bind(this)}
           referencesCount={this.originalAnswer.references.length}
           tagsCount={this.originalAnswer.tags.length}
