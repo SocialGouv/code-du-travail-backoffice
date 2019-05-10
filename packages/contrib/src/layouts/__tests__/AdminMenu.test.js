@@ -53,6 +53,12 @@ describe("[Contrib] layouts/<AdminMenu />", () => {
     expect(Router.push).toHaveBeenCalledWith("/admin/users");
   });
 
+  it("should redirect to the migrations path", () => {
+    fireEvent.click(getByText(/Migrations/));
+
+    expect(Router.push).toHaveBeenCalledWith("/admin/migrations");
+  });
+
   it("should match snapshot diff when the path has changed", () => {
     window.history.pushState({}, "", "/admin/agreements");
 

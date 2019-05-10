@@ -3,10 +3,16 @@ import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
+import _Subtitle from "../elements/Subtitle";
+
 const Container = styled(Flex)`
   background-color: var(--color-dark-slate-gray);
   min-width: 12rem;
   width: 12rem;
+`;
+const Subtitle = styled(_Subtitle)`
+  color: white;
+  padding: 0 0.5rem;
 `;
 
 const Link = styled.div`
@@ -71,6 +77,14 @@ export default class AdminMenu extends React.PureComponent {
           onClick={() => this.goTo("/users")}
         >
           Utilisateurs
+        </Link>
+
+        <Subtitle>Maintenance</Subtitle>
+        <Link
+          isCurrent={this.isCurrent("/migrations")}
+          onClick={() => this.goTo("/migrations")}
+        >
+          Migrations
         </Link>
       </Container>
     );
