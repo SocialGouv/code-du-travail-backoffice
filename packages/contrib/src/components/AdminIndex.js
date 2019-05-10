@@ -117,7 +117,9 @@ export default class AdminIndex extends React.Component {
     this.setState({ isFetching: true });
 
     try {
-      const uri = `${this.apiGetPath}?order=updated_at.desc`;
+      const uri = Boolean(this.props.noTimestamps)
+        ? this.apiGetPath
+        : `${this.apiGetPath}?order=updated_at.desc`;
       const { data } = await this.axios.get(uri);
       this.setState({
         data,
