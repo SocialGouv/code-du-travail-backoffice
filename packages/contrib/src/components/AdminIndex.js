@@ -43,9 +43,10 @@ export default class AdminIndex extends React.Component {
     this.apiDeletePath =
       props.apiDeletePath !== undefined ? props.apiDeletePath : props.apiPath;
 
-    this.columns = [
-      ...this.props.columns,
-      {
+    this.columns = [...this.props.columns];
+
+    if (!Boolean(this.props.noTimestamps)) {
+      this.columns.push({
         Header: "Créé le",
         accessor: data =>
           moment(data.created_at)
@@ -55,8 +56,9 @@ export default class AdminIndex extends React.Component {
         id: "createdAt",
         style: { textAlign: "center" },
         width: 160
-      },
-      {
+      });
+
+      this.columns.push({
         Header: "Modifié le",
         accessor: data =>
           moment(data.updated_at)
@@ -66,8 +68,11 @@ export default class AdminIndex extends React.Component {
         id: "updatedAt",
         style: { textAlign: "center" },
         width: 160
-      },
-      {
+      });
+    }
+
+    if (!Boolean(this.props.noEdit)) {
+      this.columns.push({
         Cell: ({ value }) => (
           <Button
             icon="edit"
@@ -81,8 +86,11 @@ export default class AdminIndex extends React.Component {
         headerStyle: { maxWidth: "2rem" },
         style: { textAlign: "center" },
         width: 40
-      },
-      {
+      });
+    }
+
+    if (!Boolean(this.props.noDelete)) {
+      this.columns.push({
         Cell: ({ value }) => (
           <Button
             icon="trash"
@@ -95,8 +103,8 @@ export default class AdminIndex extends React.Component {
         filterable: false,
         style: { textAlign: "center" },
         width: 40
-      }
-    ];
+      });
+    }
   }
 
   async componentDidMount() {
@@ -200,12 +208,14 @@ export default class AdminIndex extends React.Component {
         <Container flexDirection="column">
           <Head alignItems="flex-end" justifyContent="space-between">
             <Title>{this.props.title}</Title>
-            <Button
-              onClick={this.new}
-              title={unspace(this.props.ariaLabels.newButton)}
-            >
-              Nouveau
-            </Button>
+            {!Boolean(this.props.noCreate) && (
+              <Button
+                onClick={this.new}
+                title={unspace(this.props.ariaLabels.newButton)}
+              >
+                Nouveau
+              </Button>
+            )}
           </Head>
           {this.state.confirmDeletion && (
             <Confirmation>
