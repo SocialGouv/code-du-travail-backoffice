@@ -63,6 +63,13 @@ module.exports = function(nextApp) {
     ctx.respond = false;
   });
 
+  router.get("/admin/migrations/:id", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/admin/migrations/edit", {
+      ...ctx.params
+    });
+    ctx.respond = false;
+  });
+
   router.get("/admin/tags/new", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/tags/new", {});
     ctx.respond = false;
