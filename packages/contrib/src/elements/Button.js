@@ -1,9 +1,8 @@
-import * as Icons from "@fortawesome/free-solid-svg-icons";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Button as _Button } from "rebass";
 import styled from "styled-components";
+
+import Icon from "./Icon";
 
 const Button = styled(_Button)`
   background-color: ${({ color, hasText }) =>
@@ -59,8 +58,6 @@ export default ({
       </Button>
     );
 
-  // eslint-disable-next-line import/namespace
-  library.add(Icons[`fa${icon[0].toUpperCase()}${icon.substr(1)}`]);
   const hasText = children !== undefined;
 
   return (
@@ -72,11 +69,7 @@ export default ({
       isSmall={isSmall}
       {...props}
     >
-      <FontAwesomeIcon
-        icon={icon}
-        color={COLOR[color].value}
-        size={isSmall ? "sm" : "1x"}
-      />
+      <Icon icon={icon} color={COLOR[color].value} />
       {children}
     </Button>
   );
