@@ -24,4 +24,5 @@ overrides:
     jest: true
 
   globals:
+    generateTestId: true
     waitFor: true
