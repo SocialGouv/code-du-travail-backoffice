@@ -41,6 +41,12 @@ describe("[Contrib] layouts/<AdminMenu />", () => {
     expect(Router.push).toHaveBeenCalledWith("/admin/questions");
   });
 
+  it("should redirect to the answers path", () => {
+    fireEvent.click(getByText(/Réponses/));
+
+    expect(Router.push).toHaveBeenCalledWith("/admin/answers");
+  });
+
   it("should redirect to the locations path", () => {
     fireEvent.click(getByText(/Unités/));
 
