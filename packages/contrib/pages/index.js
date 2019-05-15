@@ -12,6 +12,8 @@ import customAxios from "../src/libs/customAxios";
 import makeApiFilter from "../src/libs/makeApiFilter";
 import stringFrIncludes from "../src/libs/stringFrIncludes";
 
+import { ANSWER_STATE } from "../src/constants";
+
 const Content = styled(Flex)`
   overflow-y: auto;
   padding: 0 1rem 1rem;
@@ -84,7 +86,7 @@ export default class Index extends React.Component {
       const answersUri = `/answers?id=eq.${id}`;
       const answersData = {
         generic_reference: null,
-        state: "todo",
+        state: ANSWER_STATE.TODO,
         user_id: null,
         value: ""
       };
@@ -119,7 +121,7 @@ export default class Index extends React.Component {
       const uri = `/answers?id=eq.${id}`;
       const data = {
         generic_reference,
-        state: "draft",
+        state: ANSWER_STATE.DRAFT,
         user_id: this.state.me.payload.id,
         value: ""
       };
@@ -145,14 +147,13 @@ export default class Index extends React.Component {
   fetchAnswers(states) {
     const stateFilter = ({ state }) => states.includes(state);
 
-    const queryFilter =
-      states === ["todo"] && this.state.query.length !== 0
-        ? ({ agreement, idcc, index, question }) =>
-            stringFrIncludes(this.state.query, agreement) ||
-            idcc.includes(this.state.query) ||
-            index === Number(this.state.query) ||
-            stringFrIncludes(this.state.query, question)
-        : () => true;
+    const queryFilter = ({ agreement, idcc, index, question, state }) =>
+      state === ANSWER_STATE.TODO && this.state.query.length !== 0
+        ? stringFrIncludes(this.state.query, agreement) ||
+          idcc.includes(this.state.query) ||
+          index === Number(this.state.query) ||
+          stringFrIncludes(this.state.query, question)
+        : true;
 
     return this.state.answers.filter(stateFilter).filter(queryFilter);
   }
@@ -206,11 +207,11 @@ export default class Index extends React.Component {
     if (this.state.isLoading) return <Main isLoading />;
 
     const submittedAnswersCount = this.fetchAnswers([
-      "pending_review",
-      "validation"
+      ANSWER_STATE.PENDING_REVIEW,
+      ANSWER_STATE.VALIDATED
     ]).length;
-    const draftAnswers = this.fetchAnswers(["draft"]);
-    const newAnswers = this.fetchAnswers(["todo"]);
+    const draftAnswers = this.fetchAnswers([ANSWER_STATE.DRAFT]);
+    const newAnswers = this.fetchAnswers([ANSWER_STATE.TODO]);
     const newAnswersChunk = newAnswers.slice(
       this.state.currentPage * ANSWERS_PER_PAGE,
       (this.state.currentPage + 1) * ANSWERS_PER_PAGE
