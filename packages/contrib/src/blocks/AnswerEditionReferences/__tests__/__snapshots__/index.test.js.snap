@@ -44,7 +44,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should add the expected La
 +           >
 +             <svg
 +               aria-hidden=\\"true\\"
-+               class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x \\"
++               class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
 +               color=\\"var(--color-lapis-lazuli)\\"
 +               data-icon=\\"trash\\"
 +               data-prefix=\\"fas\\"
@@ -91,7 +91,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should add the expected un
             >
               <svg
                 aria-hidden=\\"true\\"
-                class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x \\"
+                class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
                 color=\\"var(--color-lapis-lazuli)\\"
 @@ -224,10 +224,83 @@
               class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 loLOpV\\"
@@ -102,7 +102,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should add the expected un
 +           >
 +             <svg
 +               aria-hidden=\\"true\\"
-+               class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x \\"
++               class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
 +               color=\\"var(--color-lapis-lazuli)\\"
 +               data-icon=\\"trash\\"
 +               data-prefix=\\"fas\\"
@@ -151,7 +151,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should add the expected un
 +           >
 +             <svg
 +               aria-hidden=\\"true\\"
-+               class=\\"svg-inline--fa fa-link fa-w-16 fa-1x \\"
++               class=\\"svg-inline--fa fa-link fa-w-16 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
 +               color=\\"var(--color-lapis-lazuli)\\"
 +               data-icon=\\"link\\"
 +               data-prefix=\\"fas\\"
@@ -175,7 +175,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should add the expected un
             >
               <svg
                 aria-hidden=\\"true\\"
-                class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x \\"
+                class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
                 color=\\"var(--color-lapis-lazuli)\\""
 `;
 
@@ -243,7 +243,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
           >
             <svg
               aria-hidden="true"
-              class="svg-inline--fa fa-trash fa-w-14 fa-1x "
+              class="svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz"
               color="var(--color-lapis-lazuli)"
               data-icon="trash"
               data-prefix="fas"
@@ -387,7 +387,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
           >
             <svg
               aria-hidden="true"
-              class="svg-inline--fa fa-link fa-w-16 fa-1x "
+              class="svg-inline--fa fa-link fa-w-16 fa-1x Icon-sc-4jlog9-0 bEnrPz"
               color="var(--color-lapis-lazuli)"
               data-icon="link"
               data-prefix="fas"
@@ -411,7 +411,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
           >
             <svg
               aria-hidden="true"
-              class="svg-inline--fa fa-trash fa-w-14 fa-1x "
+              class="svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz"
               color="var(--color-lapis-lazuli)"
               data-icon="trash"
               data-prefix="fas"
@@ -457,7 +457,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should not duplicate an ex
             >
               <svg
                 aria-hidden=\\"true\\"
-                class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x \\"
+                class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
                 color=\\"var(--color-lapis-lazuli)\\"
 @@ -192,18 +192,18 @@
               />
@@ -478,7 +478,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should not duplicate an ex
             >
               <svg
                 aria-hidden=\\"true\\"
-                class=\\"svg-inline--fa fa-link fa-w-16 fa-1x \\"
+                class=\\"svg-inline--fa fa-link fa-w-16 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
                 color=\\"var(--color-lapis-lazuli)\\"
 @@ -223,11 +223,11 @@
             <button
@@ -491,7 +491,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should not duplicate an ex
             >
               <svg
                 aria-hidden=\\"true\\"
-                class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x \\"
+                class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
                 color=\\"var(--color-lapis-lazuli)\\""
 `;
 
@@ -519,7 +519,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should remove the expected
             >
               <svg
                 aria-hidden=\\"true\\"
-                class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x \\"
+                class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
                 color=\\"var(--color-lapis-lazuli)\\""
 `;
 
@@ -547,7 +547,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should remove the expected
             >
               <svg
                 aria-hidden=\\"true\\"
-                class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x \\"
+                class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
                 color=\\"var(--color-lapis-lazuli)\\"
 @@ -192,18 +192,18 @@
               />
@@ -568,7 +568,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should remove the expected
             >
               <svg
                 aria-hidden=\\"true\\"
-                class=\\"svg-inline--fa fa-link fa-w-16 fa-1x \\"
+                class=\\"svg-inline--fa fa-link fa-w-16 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
                 color=\\"var(--color-lapis-lazuli)\\"
 @@ -223,11 +223,11 @@
             <button
@@ -581,6 +581,6 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should remove the expected
             >
               <svg
                 aria-hidden=\\"true\\"
-                class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x \\"
+                class=\\"svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
                 color=\\"var(--color-lapis-lazuli)\\""
 `;

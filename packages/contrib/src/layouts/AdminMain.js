@@ -6,6 +6,7 @@ import Main from "./Main";
 
 const Content = styled.div`
   flex-grow: 1;
+  overflow-y: scroll;
 `;
 
 export default ({ children, isLoading }) => (

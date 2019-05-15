@@ -49,3 +49,6 @@ import "../__mocks__/axios";
 
 // Mock "../src/libs/customAxios"
 import "../__mocks__/customAxios";
+
+// Globalize generateTestId() helper
+import "../__mocks__/generateTestId";
