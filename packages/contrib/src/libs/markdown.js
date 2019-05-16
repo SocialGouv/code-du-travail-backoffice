@@ -21,9 +21,12 @@ const ALLOWED_TAGS = [
   "h2",
   "h3",
   "i",
+  "li",
+  "ol",
   "p",
   "strong",
-  "u"
+  "u",
+  "ul"
 ];
 
 /**
@@ -59,6 +62,8 @@ class Markdown {
       .replace(/<\/u>\n\n/g, "</u>")
       .replace(/\n>\s*\n/g, "\n")
       .replace(/^>\s+/gm, "> ")
+      .replace(/<!-- -->\n\n/g, "")
+      .replace(/<br>\n\n\s/g, "<br>\n")
       .trim();
   }
 }

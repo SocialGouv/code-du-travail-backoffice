@@ -4,6 +4,7 @@ import { Flex } from "rebass";
 import styled from "styled-components";
 
 import markdown from "../libs/markdown";
+import unspace from "../libs/unspace";
 
 import redoImageUri from "../images/redo.svg";
 import undoImageUri from "../images/undo.svg";
@@ -135,9 +136,23 @@ export default class Editor extends React.Component {
             />
             <button
               className="ql-blockquote"
-              // eslint-disable-next-line max-len
-              title="Bouton formattant le paragraphe sélectionné au format citation"
+              title={unspace(`Bouton formattant le paragraphe sélectionné au
+                             format citation`)}
               type="button"
+            />
+          </span>
+          <span className="ql-formats">
+            <button
+              className="ql-list"
+              title={unspace(`Bouton formattant le paragraphe sélectionné au
+                             format liste ordonnée`)}
+              value="ordered"
+            />
+            <button
+              className="ql-list"
+              title={unspace(`Bouton formattant le paragraphe sélectionné au
+                             format liste numérotée`)}
+              value="bullet"
             />
           </span>
           <span className="ql-formats">
