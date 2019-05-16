@@ -15,7 +15,7 @@ echo "${GREEN}> Stopping all existing DC containers...${NC}"
 docker-compose stop > /dev/null
 
 echo "${GREEN}> Starting master (and db) image...${NC}"
-docker-compose up -d master > /dev/null
+docker-compose up -d --build master > /dev/null
 
 echo "${GREEN}> Waiting for db image to start...${NC}"
 while ! lsof -Pi :$DB_PORT -sTCP:LISTEN -t; do sleep 1; done > /dev/null
