@@ -6,32 +6,50 @@ describe("lib/Markdown", () => {
     expect(markdown.constructor.name).toBe("Markdown");
   });
 
-  const htmlSource = `<h2>Guerre et Paix</h2>
-<h3>Citation</h3>
+  const htmlSource = `<h2>Ceci est un titre</h2>
+<h3>Ceci est un sous-titre</h3>
+<p>Ceci est un paragraphe<br />
+sur plusieurs<br />
+lignes</p>
 <blockquote>
-  <p>Il m'est arrivé de sentir que tout allait bien pour moi, que tout le<br />
-  monde était gai, et aussitôt l'idée me traversait l'esprit qu'il ne se<br />
-  passerait plus rien et que tout était absurde.</p>
+  <p>Ceci est une citation.</p>
 </blockquote>
-<p><em>Léon Tolstoï</em></p>
-<p>Ceci est <u>important</u>.</p>
-<p>Ceci est <strong>très important</strong>.</p>`;
+<p>Ceci est <em>un texte en italique</em>.</p>
+<p>Ceci est <u>un texte souligné</u>.</p>
+<p>Ceci est <strong>un texte en gras</strong>.</p>
+<p>Ceci est <a href="https://www.example.com">un lien</a>.</p>
+<ul>
+<li>Ceci est une</li>
+<li>Liste ordonnée</li>
+</ul>
+<ol>
+<li>Ceci est une</li>
+<li>Liste numérotée</li>
+</ol>`;
 
-  // Be careful here! There are 2 spaces ending each of the 2 first lines within
-  // the quote block to indicate a line break (<br>).
-  const markdownSource = `## Guerre et Paix
+  const markdownSource = `## Ceci est un titre
 
-### Citation
+### Ceci est un sous-titre
 
-> Il m'est arrivé de sentir que tout allait bien pour moi, que tout le<br>
-> monde était gai, et aussitôt l'idée me traversait l'esprit qu'il ne se<br>
-> passerait plus rien et que tout était absurde.
+Ceci est un paragraphe<br>
+sur plusieurs<br>
+lignes
 
-*Léon Tolstoï*
+> Ceci est une citation.
 
-Ceci est <u>important</u>.
+Ceci est *un texte en italique*.
 
-Ceci est **très important**.`;
+Ceci est <u>un texte souligné</u>.
+
+Ceci est **un texte en gras**.
+
+Ceci est [un lien](<https://www.example.com>).
+
+- Ceci est une
+- Liste ordonnée
+
+1. Ceci est une
+2. Liste numérotée`;
 
   describe("#fromHtml()", () => {
     it("should return the expected Markdown string", () => {
