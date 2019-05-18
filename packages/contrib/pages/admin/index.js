@@ -27,7 +27,7 @@ export default class Index extends React.Component {
     this.axios = customAxios();
 
     const select =
-      "select=id,question(value),agreement(idcc,name),updated_at,user(name)";
+      "select=*,question(index,value),agreement(idcc,name),user(name)";
     const filter = "user_id=not.is.null&order=updated_at.desc&limit=10";
 
     try {
