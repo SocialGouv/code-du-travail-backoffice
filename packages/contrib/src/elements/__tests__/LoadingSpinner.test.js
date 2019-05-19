@@ -8,4 +8,10 @@ describe("[Contrib] elements/<LoadingSpinner />", () => {
 
     expect(container).toMatchSnapshot();
   });
+
+  it("should match snapshot with a custom `color` prop", () => {
+    const { container } = render(<LoadingSpinner color="blue" />);
+
+    expect(container).toMatchSnapshot();
+  });
 });
