@@ -34,6 +34,17 @@ exports[`[Contrib] elements/<Button /> should match snapshot with \`hasGroup\` p
 </div>
 `;
 
+exports[`[Contrib] elements/<Button /> should match snapshot with \`isSmall\` prop 1`] = `
+<div>
+  <button
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 cLSEHM"
+    color="var(--color-lapis-lazuli)"
+    font-size="inherit"
+    font-weight="bold"
+  />
+</div>
+`;
+
 exports[`[Contrib] elements/<Button /> should match snapshot with a custom \`color\` prop 1`] = `
 <div>
   <button
