@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Contrib] layouts/<Main /> (administrator) should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 bBIrgk"
+    style="height: 100vh;"
+  >
+    <div
+      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 ipFTgV"
+      width="1"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 cBdCZD"
+      >
+        <div
+          class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB"
+        >
+          <img
+            alt="Code du travail numérique"
+            aria-label="Bouton de retour au tableau de bord"
+            class="Header__Logo-sc-7cr55z-2 kAIypM"
+            src="[object Object]"
+          />
+          <div
+            class="sc-bdVaJa sc-bwzfXH eVPJMi"
+          >
+            <span
+              class="Header__Title-sc-7cr55z-3 jGdlvq"
+            >
+              Code du travail numérique
+            </span>
+            <span
+              class="Header__Subtitle-sc-7cr55z-4 kxPxIS"
+            >
+              Outil de contribution
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 brMLFO"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`[Contrib] layouts/<Main /> (contributor) should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 bBIrgk"
+    style="height: 100vh;"
+  >
+    <div
+      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 ipFTgV"
+      width="1"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 cBdCZD"
+      >
+        <div
+          class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB"
+        >
+          <img
+            alt="Code du travail numérique"
+            aria-label="Bouton de retour au tableau de bord"
+            class="Header__Logo-sc-7cr55z-2 kAIypM"
+            src="[object Object]"
+          />
+          <div
+            class="sc-bdVaJa sc-bwzfXH eVPJMi"
+          >
+            <span
+              class="Header__Title-sc-7cr55z-3 jGdlvq"
+            >
+              Code du travail numérique
+            </span>
+            <span
+              class="Header__Subtitle-sc-7cr55z-4 kxPxIS"
+            >
+              Outil de contribution
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 brMLFO"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`[Contrib] layouts/<Main /> (contributor) should match snapshot with \`isHorizontal\` prop 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -34,10 +34,10 @@
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+-         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 brMLFO\\"
++         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 iRsxhy\\"
+        />
+      </div>
+    </div>
+  </DocumentFragment>"
+`;
+
+exports[`[Contrib] layouts/<Main /> (contributor) should match snapshot with \`isLoading\` prop 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -34,10 +34,23 @@
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+-         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 brMLFO\\"
++         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 iaRbTA\\"
++       >
++         <div
++           class=\\"LoadingSpinner__Container-eu7nmw-0 dEMrTz\\"
++         >
++           <div
++             class=\\"LoadingSpinner__Spinner-eu7nmw-1 sHZX\\"
++             color=\\"#666666\\"
++           />
++           <div
++             class=\\"LoadingSpinner__Spinner-eu7nmw-1 LoadingSpinner__SpinnerNext-eu7nmw-2 daPQQA\\"
++             color=\\"#666666\\"
+            />
++         </div>
++       </div>
+      </div>
+    </div>
+  </DocumentFragment>"
+`;
