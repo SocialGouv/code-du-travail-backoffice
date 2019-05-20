@@ -29,8 +29,8 @@ const Content = styled(Flex)`
 const Main = ({
   children,
   isAdmin = false,
-  isHorizontal,
-  isLoading,
+  isHorizontal = false,
+  isLoading = false,
   router
 }) => (
   <Container alignItems="stretch" style={{ height: "100vh" }}>
@@ -55,12 +55,12 @@ const Main = ({
         isAdmin={isAdmin}
         router={router}
       />
-      {Boolean(isLoading) ? (
+      {isLoading ? (
         <Content alignItems="center" justifyContent="center">
           <LoadingSpinner color="#666666" />
         </Content>
       ) : (
-        <Content flexDirection={Boolean(isHorizontal) ? "row" : "column"}>
+        <Content flexDirection={isHorizontal ? "row" : "column"}>
           {children}
         </Content>
       )}
