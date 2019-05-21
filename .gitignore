@@ -2,3 +2,6 @@
 
 /.env
 /lerna-debug.log
+
+# Docker shared volume
+/backups
