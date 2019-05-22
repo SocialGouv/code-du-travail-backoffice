@@ -33,10 +33,20 @@ export default class AdminAgreementsNewPage extends React.Component {
     this.axios = customAxios();
 
     try {
+      const { data: agreements } = await this.axios.get("/agreements");
       const { data: zones } = await this.axios.get("/zones");
 
       const fields = [
         ...FIELDS,
+        {
+          type: "select",
+          name: "parent_id",
+          label: "Convention parente",
+          options: agreements.map(({ id, idcc, name }) => ({
+            name: `${idcc} - ${name}`,
+            value: id
+          }))
+        },
         {
           type: "tags",
           name: "zones",
