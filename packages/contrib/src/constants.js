@@ -10,3 +10,10 @@ export const ANSWER_STATE_LABEL = {
   pending_review: "En attente de validation",
   validated: "Validée"
 };
+
+export const ZONE_CATEGORY_LABEL = {
+  department: "Département",
+  overseas_collectivity: "Collectivité d'Outre-Mer",
+  region: "Région",
+  sui_generis_collectivity: "Collectivité Sui Generis"
+};

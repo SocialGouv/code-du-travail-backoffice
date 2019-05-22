@@ -13,7 +13,9 @@ exports.seed = async knex => {
   await knex('auth.users').del()
   await knex('api.locations_agreements').del()
   await knex('api.locations').del()
+  await knex('api.agreements_zones').del()
   await knex('api.agreements').del()
+  await knex('api.zones').del()
 
   global.spinner.succeed(`Tables emptied.`)
 }

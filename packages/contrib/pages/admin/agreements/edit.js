@@ -2,8 +2,9 @@ import React from "react";
 
 import AdminForm from "../../../src/components/AdminForm";
 import AdminMain from "../../../src/layouts/AdminMain";
-import customAxios from "../../../src/libs/customAxios";
 import AdminAgreementsNewPage from "./new";
+
+import { ZONE_CATEGORY_LABEL } from "../../../src/constants";
 
 export default class AdminAgreementsEditPage extends AdminAgreementsNewPage {
   constructor(props) {
@@ -12,7 +13,7 @@ export default class AdminAgreementsEditPage extends AdminAgreementsNewPage {
     this.state = {
       ...this.state,
       data: {},
-      isLoading: true
+      isLoadingOverwrite: true
     };
   }
 
@@ -21,16 +22,29 @@ export default class AdminAgreementsEditPage extends AdminAgreementsNewPage {
   }
 
   async componentDidMount() {
-    const axios = customAxios();
+    await super.componentDidMount();
 
     try {
-      const uri = `/agreements?id=eq.${this.props.id}`;
+      const agreementsUri = `/agreements?id=eq.${this.props.id}`;
 
-      const { data: agreements } = await axios.get(uri);
+      const zonesSelect = `select=zone(category,code,id,name)`;
+      const zonesWhere = `agreement_id=eq.${this.props.id}`;
+      const zonesUri = `/agreements_zones?${zonesSelect}&${zonesWhere}`;
+
+      const { data: agreements } = await this.axios.get(agreementsUri);
+      const { data: agreementsZones } = await this.axios.get(zonesUri);
 
       this.setState({
-        data: agreements[0],
-        isLoading: false
+        data: {
+          ...agreements[0],
+          zones: agreementsZones.map(({ zone }) => ({
+            id: zone.id,
+            value: `${zone.name} [${ZONE_CATEGORY_LABEL[zone.category]} - ${
+              zone.code
+            }]`
+          }))
+        },
+        isLoadingOverwrite: false
       });
     } catch (err) {
       if (err !== undefined) console.warn(err);
@@ -38,7 +52,7 @@ export default class AdminAgreementsEditPage extends AdminAgreementsNewPage {
   }
 
   render() {
-    if (this.state.isLoading) return <AdminMain isLoading />;
+    if (this.state.isLoadingOverwrite) return <AdminMain isLoading />;
 
     const { name } = this.state.data;
 
@@ -55,6 +69,7 @@ export default class AdminAgreementsEditPage extends AdminAgreementsNewPage {
         fields={this.state.fields}
         id={this.props.id}
         indexPath="/agreements"
+        name="agreement"
         title={`Modifier la convention « ${name} »`}
       />
     );

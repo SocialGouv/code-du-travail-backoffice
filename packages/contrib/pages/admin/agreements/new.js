@@ -1,6 +1,10 @@
 import React from "react";
 
 import AdminForm from "../../../src/components/AdminForm";
+import AdminMain from "../../../src/layouts/AdminMain";
+import customAxios from "../../../src/libs/customAxios";
+
+import { ZONE_CATEGORY_LABEL } from "../../../src/constants";
 
 const FIELDS = [
   {
@@ -20,11 +24,45 @@ export default class AdminAgreementsNewPage extends React.Component {
     super(props);
 
     this.state = {
-      fields: FIELDS
+      fields: FIELDS,
+      isLoading: true
     };
   }
 
+  async componentDidMount() {
+    this.axios = customAxios();
+
+    try {
+      const { data: zones } = await this.axios.get("/zones");
+
+      const fields = [
+        ...FIELDS,
+        {
+          type: "tags",
+          name: "zones",
+          label: "Zones",
+          tags: zones.map(({ category, code, id, name }) => ({
+            id,
+            value: `${name} [${ZONE_CATEGORY_LABEL[category]} - ${code}]`
+          })),
+          ariaName: "la zone",
+          apiPath: "/agreements_zones",
+          singleName: "zone"
+        }
+      ];
+
+      this.setState({
+        fields,
+        isLoading: false
+      });
+    } catch (err) {
+      if (err !== undefined) console.warn(err);
+    }
+  }
+
   render() {
+    if (this.state.isLoading) return <AdminMain isLoading />;
+
     return (
       <AdminForm
         apiPath="/agreements"
@@ -36,6 +74,7 @@ export default class AdminAgreementsNewPage extends React.Component {
         }}
         fields={this.state.fields}
         indexPath="/agreements"
+        name="agreement"
         title="Nouvelle convention"
       />
     );

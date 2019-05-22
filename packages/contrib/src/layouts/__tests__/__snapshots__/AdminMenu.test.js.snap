@@ -40,6 +40,11 @@ exports[`[Contrib] layouts/<AdminMenu /> should match snapshot 1`] = `
     >
       Utilisateurs
     </div>
+    <div
+      class="AdminMenu__Link-t0dk93-2 kospmv"
+    >
+      Zones
+    </div>
     <h2
       class="Subtitle-sc-17ig8qv-0 AdminMenu__Subtitle-t0dk93-1 vshUS"
     >
