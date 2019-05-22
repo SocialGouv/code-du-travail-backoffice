@@ -94,6 +94,18 @@ module.exports = function(nextApp) {
     ctx.respond = false;
   });
 
+  router.get("/admin/zones/new", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/admin/zones/new", {});
+    ctx.respond = false;
+  });
+
+  router.get("/admin/zones/:id", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/admin/zones/edit", {
+      ...ctx.params
+    });
+    ctx.respond = false;
+  });
+
   router.get("*", async ctx => {
     await handle(ctx.req, ctx.res);
     ctx.respond = false;
