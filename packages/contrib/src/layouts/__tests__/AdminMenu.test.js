@@ -59,6 +59,12 @@ describe("[Contrib] layouts/<AdminMenu />", () => {
     expect(Router.push).toHaveBeenCalledWith("/admin/users");
   });
 
+  it("should redirect to the zones path", () => {
+    fireEvent.click(getByText(/Zones/));
+
+    expect(Router.push).toHaveBeenCalledWith("/admin/zones");
+  });
+
   it("should redirect to the migrations path", () => {
     fireEvent.click(getByText(/Migrations/));
 

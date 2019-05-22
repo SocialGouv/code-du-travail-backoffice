@@ -84,6 +84,12 @@ export default class AdminMenu extends React.PureComponent {
         >
           Utilisateurs
         </Link>
+        <Link
+          isCurrent={this.isCurrent("/zones")}
+          onClick={() => this.goTo("/zones")}
+        >
+          Zones
+        </Link>
 
         <Subtitle>Maintenance</Subtitle>
         <Link
