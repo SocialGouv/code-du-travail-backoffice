@@ -54,7 +54,7 @@
     "file-loader": "^3.0.1",
     "identity-obj-proxy": "3.0.0",
     "jest": "24.8.0",
-    "jest-dom": "^3.2.2",
+    "jest-dom": "^3.3.0",
     "mutationobserver-shim": "^0.3.3",
     "prettier": "1.17.1",
     "react-testing-library": "7.0.1",
