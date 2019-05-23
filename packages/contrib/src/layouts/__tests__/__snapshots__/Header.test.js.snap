@@ -9,28 +9,85 @@ exports[`[Contrib] layouts/<Header /> [Administrator] should match snapshot 1`] 
 - <div>
 + <DocumentFragment>
     <div
-      class=\\"sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 lpffNp\\"
+      class=\\"sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 cBdCZD\\"
     >
       <div
         class=\\"sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB\\"
-@@ -24,7 +24,10 @@
+@@ -21,10 +21,68 @@
+          </span>
+          <span
+            class=\\"Header__Subtitle-sc-7cr55z-4 kxPxIS\\"
           >
             Outil de contribution
-          </span>
-        </div>
-      </div>
++         </span>
++       </div>
++     </div>
 +     <div
 +       class=\\"sc-bdVaJa sc-bwzfXH jruoDg\\"
-+     />
-    </div>
-- </div>
++     >
++       <div
++         class=\\"sc-bdVaJa sc-bwzfXH Menu__Container-sc-1tufs3d-0 fftBWu\\"
++       >
++         <div
++           class=\\"Menu__Dropdown-sc-1tufs3d-3 loMVOU\\"
++         >
++           <svg
++             aria-hidden=\\"true\\"
++             class=\\"svg-inline--fa fa-caret-down fa-w-10 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
++             color=\\"var(--color-black-leather-jacket)\\"
++             data-icon=\\"caret-down\\"
++             data-prefix=\\"fas\\"
++             focusable=\\"false\\"
++             role=\\"img\\"
++             viewBox=\\"0 0 320 512\\"
++             xmlns=\\"http://www.w3.org/2000/svg\\"
++           >
++             <path
++               d=\\"M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z\\"
++               fill=\\"currentColor\\"
++             />
++           </svg>
++           <span
++             class=\\"Menu__DropdownText-sc-1tufs3d-4 gxLpxC\\"
++           >
++             A Name
+            </span>
++           <div
++             class=\\"sc-bdVaJa sc-bwzfXH Menu__DropdownMenu-sc-1tufs3d-5 dAypUM\\"
++           >
++             <span
++               class=\\"Menu__BaseLink-sc-1tufs3d-1 Menu__TopLink-sc-1tufs3d-2 Menu__DropdownLink-sc-1tufs3d-6 jmXsXQ\\"
++             >
++               <svg
++                 aria-hidden=\\"true\\"
++                 class=\\"svg-inline--fa fa-sign-out-alt fa-w-16 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
++                 color=\\"var(--color-black-leather-jacket)\\"
++                 data-icon=\\"sign-out-alt\\"
++                 data-prefix=\\"fas\\"
++                 focusable=\\"false\\"
++                 role=\\"img\\"
++                 viewBox=\\"0 0 512 512\\"
++                 xmlns=\\"http://www.w3.org/2000/svg\\"
++               >
++                 <path
++                   d=\\"M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z\\"
++                   fill=\\"currentColor\\"
++                 />
++               </svg>
++               Se déconnecter
++             </span>
+            </div>
+          </div>
+        </div>
+      </div>
++   </div>
 + </DocumentFragment>"
 `;
 
 exports[`[Contrib] layouts/<Header /> [Anonymous] should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 lpffNp"
+    class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 cBdCZD"
   >
     <div
       class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB"
@@ -69,11 +126,11 @@ exports[`[Contrib] layouts/<Header /> [Contributor] should match snapshot diff 1
 - <div>
 + <DocumentFragment>
     <div
-      class=\\"sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 lpffNp\\"
+      class=\\"sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 cBdCZD\\"
     >
       <div
         class=\\"sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB\\"
-@@ -24,7 +24,10 @@
+@@ -24,7 +24,120 @@
           >
             Outil de contribution
           </span>
@@ -81,8 +138,117 @@ exports[`[Contrib] layouts/<Header /> [Contributor] should match snapshot diff 1
       </div>
 +     <div
 +       class=\\"sc-bdVaJa sc-bwzfXH jruoDg\\"
-+     />
-    </div>
-- </div>
++     >
++       <div
++         class=\\"sc-bdVaJa sc-bwzfXH Menu__Container-sc-1tufs3d-0 fftBWu\\"
++       >
++         <span
++           class=\\"Menu__BaseLink-sc-1tufs3d-1 Menu__TopLink-sc-1tufs3d-2 eCRsrl\\"
++         >
++           Liste des réponses
++         </span>
++         <div
++           class=\\"Menu__Dropdown-sc-1tufs3d-3 loMVOU\\"
++         >
++           <svg
++             aria-hidden=\\"true\\"
++             class=\\"svg-inline--fa fa-caret-down fa-w-10 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
++             color=\\"var(--color-black-leather-jacket)\\"
++             data-icon=\\"caret-down\\"
++             data-prefix=\\"fas\\"
++             focusable=\\"false\\"
++             role=\\"img\\"
++             viewBox=\\"0 0 320 512\\"
++             xmlns=\\"http://www.w3.org/2000/svg\\"
++           >
++             <path
++               d=\\"M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z\\"
++               fill=\\"currentColor\\"
++             />
++           </svg>
++           <span
++             class=\\"Menu__DropdownText-sc-1tufs3d-4 gxLpxC\\"
++           >
++             Aide
++           </span>
++           <div
++             class=\\"sc-bdVaJa sc-bwzfXH Menu__DropdownMenu-sc-1tufs3d-5 dAypUM\\"
++           >
++             <span
++               class=\\"Menu__BaseLink-sc-1tufs3d-1 Menu__TopLink-sc-1tufs3d-2 Menu__DropdownLink-sc-1tufs3d-6 jmXsXQ\\"
++             >
++               <svg
++                 aria-hidden=\\"true\\"
++                 class=\\"svg-inline--fa fa-tasks fa-w-16 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
++                 color=\\"var(--color-black-leather-jacket)\\"
++                 data-icon=\\"tasks\\"
++                 data-prefix=\\"fas\\"
++                 focusable=\\"false\\"
++                 role=\\"img\\"
++                 viewBox=\\"0 0 512 512\\"
++                 xmlns=\\"http://www.w3.org/2000/svg\\"
++               >
++                 <path
++                   d=\\"M208 132h288c8.8 0 16-7.2 16-16V76c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16v40c0 8.8 7.2 16 16 16zm0 160h288c8.8 0 16-7.2 16-16v-40c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16v40c0 8.8 7.2 16 16 16zm0 160h288c8.8 0 16-7.2 16-16v-40c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16v40c0 8.8 7.2 16 16 16zM64 368c-26.5 0-48.6 21.5-48.6 48s22.1 48 48.6 48 48-21.5 48-48-21.5-48-48-48zm92.5-299l-72.2 72.2-15.6 15.6c-4.7 4.7-12.9 4.7-17.6 0L3.5 109.4c-4.7-4.7-4.7-12.3 0-17l15.7-15.7c4.7-4.7 12.3-4.7 17 0l22.7 22.1 63.7-63.3c4.7-4.7 12.3-4.7 17 0l17 16.5c4.6 4.7 4.6 12.3-.1 17zm0 159.6l-72.2 72.2-15.7 15.7c-4.7 4.7-12.9 4.7-17.6 0L3.5 269c-4.7-4.7-4.7-12.3 0-17l15.7-15.7c4.7-4.7 12.3-4.7 17 0l22.7 22.1 63.7-63.7c4.7-4.7 12.3-4.7 17 0l17 17c4.6 4.6 4.6 12.2-.1 16.9z\\"
++                   fill=\\"currentColor\\"
++                 />
++               </svg>
++               Charte rédactionnelle
++             </span>
+            </div>
+          </div>
++         <div
++           class=\\"Menu__Dropdown-sc-1tufs3d-3 loMVOU\\"
++         >
++           <svg
++             aria-hidden=\\"true\\"
++             class=\\"svg-inline--fa fa-caret-down fa-w-10 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
++             color=\\"var(--color-black-leather-jacket)\\"
++             data-icon=\\"caret-down\\"
++             data-prefix=\\"fas\\"
++             focusable=\\"false\\"
++             role=\\"img\\"
++             viewBox=\\"0 0 320 512\\"
++             xmlns=\\"http://www.w3.org/2000/svg\\"
++           >
++             <path
++               d=\\"M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z\\"
++               fill=\\"currentColor\\"
++             />
++           </svg>
++           <span
++             class=\\"Menu__DropdownText-sc-1tufs3d-4 gxLpxC\\"
++           >
++             A Name
++           </span>
++           <div
++             class=\\"sc-bdVaJa sc-bwzfXH Menu__DropdownMenu-sc-1tufs3d-5 dAypUM\\"
++           >
++             <span
++               class=\\"Menu__BaseLink-sc-1tufs3d-1 Menu__TopLink-sc-1tufs3d-2 Menu__DropdownLink-sc-1tufs3d-6 jmXsXQ\\"
++             >
++               <svg
++                 aria-hidden=\\"true\\"
++                 class=\\"svg-inline--fa fa-sign-out-alt fa-w-16 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
++                 color=\\"var(--color-black-leather-jacket)\\"
++                 data-icon=\\"sign-out-alt\\"
++                 data-prefix=\\"fas\\"
++                 focusable=\\"false\\"
++                 role=\\"img\\"
++                 viewBox=\\"0 0 512 512\\"
++                 xmlns=\\"http://www.w3.org/2000/svg\\"
++               >
++                 <path
++                   d=\\"M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z\\"
++                   fill=\\"currentColor\\"
++                 />
++               </svg>
++               Se déconnecter
++             </span>
++           </div>
++         </div>
++       </div>
++     </div>
++   </div>
 + </DocumentFragment>"
 `;
