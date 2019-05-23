@@ -1,12 +1,12 @@
 import React from "react";
-import { fireEvent, render } from "react-testing-library";
+import { cleanup, fireEvent, render } from "react-testing-library";
 
 import Answer from "..";
 
 // Ignore styled-wrapped ReactTooltip className prop warning
 console.warn = jest.fn();
 
-describe.skip("[Contrib] blocks/<Answer /> (Undraft)", () => {
+describe("[Contrib] blocks/<Answer /> (Undraft)", () => {
   const props = {
     data: {
       id: "12345678-9abc-4def-0123-456789abcdef",
@@ -20,26 +20,27 @@ describe.skip("[Contrib] blocks/<Answer /> (Undraft)", () => {
     onClick: jest.fn(),
     onFallback: jest.fn()
   };
-  const { container, getByText } = render(<Answer {...props} />);
+
+  const γ = render(<Answer {...props} />);
 
   it("should match snapshot", () => {
-    expect(container).toMatchSnapshot();
+    expect(γ.container).toMatchSnapshot();
   });
 
   it("should have called onClick() with the expected param", () => {
-    fireEvent.click(getByText(/Who knows/));
+    fireEvent.click(γ.getByText(/Who knows/));
 
     expect(props.onClick).toHaveBeenCalledWith(props.data.id);
   });
 
   it("should have called onFallback() with the expected params (CDT)", () => {
-    fireEvent.click(getByText(/Renvoi au Code du travail/));
+    fireEvent.click(γ.getByText(/Renvoi au Code du travail/));
 
     expect(props.onFallback).toHaveBeenCalledWith(props.data.id, "labor_code");
   });
 
   it("should have called onFallback() with the expected params (CCN)", () => {
-    fireEvent.click(getByText(/Renvoi à la CC nationale/));
+    fireEvent.click(γ.getByText(/Renvoi à la CC nationale/));
 
     expect(props.onFallback).toHaveBeenCalledWith(
       props.data.id,
@@ -63,20 +64,25 @@ describe("[Contrib] blocks/<Answer /> (Draft)", () => {
     onCancel: jest.fn()
   };
 
-  const { asFragment, container, getByText } = render(<Answer {...props} />);
-  const firstRender = asFragment();
+  let γ;
 
   it("should match snapshot", () => {
-    expect(container).toMatchSnapshot();
+    cleanup();
+
+    γ = render(<Answer {...props} />);
+
+    expect(γ.container).toMatchSnapshot();
   });
 
   it("should have called onCancel() with the expected param", () => {
-    fireEvent.click(getByText(/Annuler ma réponse/));
+    fireEvent.click(γ.getByText(/Annuler ma réponse/));
 
     expect(props.onCancel).toHaveBeenCalledWith(props.data.id);
   });
 
   it("should match snapshot diff with a Labor Code generic reference", () => {
+    cleanup();
+
     const newProps = {
       ...props,
       data: {
@@ -86,9 +92,9 @@ describe("[Contrib] blocks/<Answer /> (Draft)", () => {
       }
     };
 
-    const { asFragment } = render(<Answer {...newProps} />);
+    const γ = render(<Answer {...newProps} />);
 
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
+    expect(γ.container).toMatchSnapshot();
   });
 
   // eslint-disable-next-line max-len
@@ -102,8 +108,10 @@ describe("[Contrib] blocks/<Answer /> (Draft)", () => {
       }
     };
 
-    const { asFragment } = render(<Answer {...newProps} />);
+    cleanup();
 
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
+    const γ = render(<Answer {...newProps} />);
+
+    expect(γ.container).toMatchSnapshot();
   });
 });
