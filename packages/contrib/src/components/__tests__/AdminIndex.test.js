@@ -5,24 +5,56 @@ import "../../../__mocks__/console";
 import "../../../__mocks__/waitFor";
 
 import Router from "next/router";
-jest.mock("next/router");
+jest.mock("next/router", () => ({
+  push: jest.fn(),
+  withRouter: component => {
+    component.defaultProps = {
+      ...component.defaultProps,
+      router: {
+        pathname: "/"
+      }
+    };
+
+    return component;
+  }
+}));
 
 import AdminIndex from "../AdminIndex";
 
-describe.skip("[Contrib] components/<AdminIndex />", () => {
+const DATA = [
+  {
+    id: "b864ea83-cdbd-45f5-bca4-75efbb6b8954",
+    aDataProp: "First Data Prop Value",
+    anotherDataProp: "First Other Data Prop Value",
+    updated_at: 0,
+    created_at: 0
+  }
+];
+const PROPS = {
+  apiPath: "/an-api-get-uri",
+  ariaLabels: {
+    cancelDeletionButton: `An aria label for the cancel deletion button`,
+    deleteButton: `An aria label for the delete button`,
+    editButton: `An aria label for the edit button`,
+    newButton: `An aria label for the new button`,
+    removeButton: `An aria label for the remove button`
+  },
+  columns: [
+    {
+      Header: "A Default Column",
+      accessor: "aDataProp"
+    }
+  ]
+};
+
+describe("[Contrib] components/<AdminIndex />", () => {
   const locationPathname = "/admin/items";
 
   // https://github.com/facebook/jest/issues/890#issuecomment-415202799
   window.history.pushState({}, "", locationPathname);
 
   const data = [
-    {
-      id: "b864ea83-cdbd-45f5-bca4-75efbb6b8954",
-      aDataProp: "First Data Prop Value",
-      anotherDataProp: "First Other Data Prop Value",
-      updated_at: 0,
-      created_at: 0
-    },
+    ...DATA,
     {
       id: "631e6a28-2c7d-4bb5-983a-16962caae1e4",
       aDataProp: "Second Data Prop Value",
@@ -33,19 +65,9 @@ describe.skip("[Contrib] components/<AdminIndex />", () => {
   ];
 
   const props = {
-    apiPath: "/an-api-get-uri",
-    ariaLabels: {
-      cancelDeletionButton: `An aria label for the cancel deletion button`,
-      deleteButton: `An aria label for the delete button`,
-      editButton: `An aria label for the edit button`,
-      newButton: `An aria label for the new button`,
-      removeButton: `An aria label for the remove button`
-    },
+    ...PROPS,
     columns: [
-      {
-        Header: "A Default Column",
-        accessor: "aDataProp"
-      },
+      ...PROPS.columns,
       {
         Header: "A Custom Accessor Column",
         accessor: jest.fn(item => item.anotherDataProp),
@@ -54,33 +76,27 @@ describe.skip("[Contrib] components/<AdminIndex />", () => {
     ]
   };
 
-  let asFragment, container, getByTitle, queryByTitle;
-  let firstRender;
+  let γ;
 
   it("should match snapshot", () => {
     global.axios.get.mockResolvedValueOnce({ data });
 
-    const r = render(<AdminIndex {...props} />);
-    asFragment = r.asFragment;
-    container = r.container;
-    getByTitle = r.getByTitle;
-    queryByTitle = r.queryByTitle;
-    firstRender = asFragment();
+    γ = render(<AdminIndex {...props} />);
 
-    expect(container).toMatchSnapshot();
+    expect(γ.container).toMatchSnapshot();
     expect(global.axios.get).toHaveBeenCalledWith(
       `${props.apiPath}?order=updated_at.desc`
     );
   });
 
   it("should redirect to the creation path", async () => {
-    fireEvent.click(getByTitle(props.ariaLabels.newButton));
+    fireEvent.click(γ.getAllByTitle(props.ariaLabels.newButton)[0]);
 
     expect(Router.push).toHaveBeenCalledWith(`${locationPathname}/new`);
   });
 
   it("should redirect to the edition path", async () => {
-    fireEvent.click(getByTitle(props.ariaLabels.editButton));
+    fireEvent.click(γ.getAllByTitle(props.ariaLabels.editButton)[0]);
     await waitFor(0);
 
     expect(Router.push).toHaveBeenCalledWith(
@@ -93,37 +109,38 @@ describe.skip("[Contrib] components/<AdminIndex />", () => {
   });
 
   it("should behave as expected when asking for deletion", async () => {
-    fireEvent.click(getByTitle(props.ariaLabels.removeButton));
+    fireEvent.click(γ.getAllByTitle(props.ariaLabels.removeButton)[0]);
     await waitFor(0);
 
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
     expect(
-      queryByTitle(props.ariaLabels.cancelDeletionButton)
+      γ.getAllByTitle(props.ariaLabels.cancelDeletionButton)[0]
     ).toBeInTheDocument();
-    expect(queryByTitle(props.ariaLabels.deleteButton)).toBeInTheDocument();
+    expect(
+      γ.getAllByTitle(props.ariaLabels.deleteButton)[0]
+    ).toBeInTheDocument();
   });
 
   it("should behave as expected when cancelling deletion", async () => {
-    fireEvent.click(getByTitle(props.ariaLabels.cancelDeletionButton));
+    fireEvent.click(γ.getAllByTitle(props.ariaLabels.cancelDeletionButton)[0]);
     await waitFor(0);
 
-    expect(firstRender).toMatchDiffSnapshot(null);
     expect(
-      queryByTitle(props.ariaLabels.cancelDeletionButton)
+      γ.queryByTitle(props.ariaLabels.cancelDeletionButton)
     ).not.toBeInTheDocument();
-    expect(queryByTitle(props.ariaLabels.deleteButton)).not.toBeInTheDocument();
+    expect(
+      γ.queryByTitle(props.ariaLabels.deleteButton)
+    ).not.toBeInTheDocument();
   });
 
   it("should behave as expected when confirming deletion", async () => {
     global.axios.get.mockReset();
     global.axios.get.mockResolvedValueOnce({ data });
 
-    fireEvent.click(getByTitle(props.ariaLabels.removeButton));
+    fireEvent.click(γ.getAllByTitle(props.ariaLabels.removeButton)[0]);
     await waitFor(0);
-    fireEvent.click(getByTitle(props.ariaLabels.deleteButton));
+    fireEvent.click(γ.getAllByTitle(props.ariaLabels.deleteButton)[0]);
     await waitFor(0);
 
-    expect(firstRender).toMatchDiffSnapshot(null);
     expect(global.axios.delete).toHaveBeenCalledWith(
       `${props.apiPath}?id=eq.${data[0].id}`
     );
@@ -133,21 +150,11 @@ describe.skip("[Contrib] components/<AdminIndex />", () => {
   });
 });
 
-describe.skip("[Contrib] components/<AdminIndex /> (custom API paths)", () => {
+describe("[Contrib] components/<AdminIndex /> (custom API paths)", () => {
   const locationPathname = "/admin/items";
 
   // https://github.com/facebook/jest/issues/890#issuecomment-415202799
   window.history.pushState({}, "", locationPathname);
-
-  const data = [
-    {
-      id: "b864ea83-cdbd-45f5-bca4-75efbb6b8954",
-      aDataProp: "First Data Prop Value",
-      anotherDataProp: "First Other Data Prop Value",
-      updated_at: 0,
-      created_at: 0
-    }
-  ];
 
   const props = {
     apiDeletePath: "/an-api-delete-uri",
@@ -170,13 +177,13 @@ describe.skip("[Contrib] components/<AdminIndex /> (custom API paths)", () => {
   it("should behave as expected when confirming deletion", async () => {
     cleanup();
     global.axios.get.mockReset();
-    global.axios.get.mockResolvedValueOnce({ data });
+    global.axios.get.mockResolvedValueOnce({ data: DATA });
     global.axios.post.mockReset();
 
     const { getByTitle } = render(<AdminIndex {...props} />);
     await waitFor(0);
 
-    global.axios.get.mockResolvedValueOnce({ data });
+    global.axios.get.mockResolvedValueOnce({ data: DATA });
 
     fireEvent.click(getByTitle(props.ariaLabels.removeButton));
     await waitFor(0);
@@ -184,7 +191,7 @@ describe.skip("[Contrib] components/<AdminIndex /> (custom API paths)", () => {
     await waitFor(0);
 
     expect(global.axios.post).toHaveBeenCalledWith(props.apiDeletePath, {
-      id: data[0].id
+      id: DATA[0].id
     });
     expect(global.axios.get).toHaveBeenCalledWith(
       `${props.apiGetPath}?order=updated_at.desc`
@@ -192,31 +199,86 @@ describe.skip("[Contrib] components/<AdminIndex /> (custom API paths)", () => {
   });
 });
 
-describe.skip("[Contrib] components/<AdminIndex /> (errors)", () => {
+describe("[Contrib] components/<AdminIndex /> (noTimestamps)", () => {
   const locationPathname = "/admin/items";
 
   // https://github.com/facebook/jest/issues/890#issuecomment-415202799
   window.history.pushState({}, "", locationPathname);
 
-  const data = [
-    {
-      id: "b864ea83-cdbd-45f5-bca4-75efbb6b8954",
-      aDataProp: "First Data Prop Value",
-      anotherDataProp: "First Other Data Prop Value",
-      updated_at: 0,
-      created_at: 0
-    }
-  ];
+  const props = {
+    ...PROPS,
+    noTimestamps: true
+  };
+
+  it("should call the expected URI after rendering", async () => {
+    cleanup();
+    global.axios.get.mockReset();
+    global.axios.get.mockResolvedValueOnce({ data: DATA });
+
+    render(<AdminIndex {...props} />);
+
+    await waitFor(0);
+
+    expect(global.axios.get).toHaveBeenCalledWith(props.apiPath);
+  });
+});
+
+describe("[Contrib] components/<AdminIndex /> (noEdit)", () => {
+  const locationPathname = "/admin/items";
+
+  // https://github.com/facebook/jest/issues/890#issuecomment-415202799
+  window.history.pushState({}, "", locationPathname);
 
   const props = {
-    apiPath: "/an-api-get-uri",
-    ariaLabels: {
-      cancelDeletionButton: `An aria label for the cancel deletion button`,
-      deleteButton: `An aria label for the delete button`,
-      editButton: `An aria label for the edit button`,
-      newButton: `An aria label for the new button`,
-      removeButton: `An aria label for the remove button`
-    },
+    ...PROPS,
+    noEdit: true
+  };
+
+  it("should not show the remove button", async () => {
+    cleanup();
+    global.axios.get.mockReset();
+    global.axios.get.mockResolvedValueOnce({ data: DATA });
+
+    const { queryByTitle } = render(<AdminIndex {...props} />);
+
+    await waitFor(0);
+
+    expect(queryByTitle(props.ariaLabels.editButton)).not.toBeInTheDocument();
+  });
+});
+
+describe("[Contrib] components/<AdminIndex /> (noDelete)", () => {
+  const locationPathname = "/admin/items";
+
+  // https://github.com/facebook/jest/issues/890#issuecomment-415202799
+  window.history.pushState({}, "", locationPathname);
+
+  const props = {
+    ...PROPS,
+    noDelete: true
+  };
+
+  it("should not show the remove button", async () => {
+    cleanup();
+    global.axios.get.mockReset();
+    global.axios.get.mockResolvedValueOnce({ data: DATA });
+
+    const { queryByTitle } = render(<AdminIndex {...props} />);
+
+    await waitFor(0);
+
+    expect(queryByTitle(props.ariaLabels.removeButton)).not.toBeInTheDocument();
+  });
+});
+
+describe("[Contrib] components/<AdminIndex /> (errors)", () => {
+  const locationPathname = "/admin/items";
+
+  // https://github.com/facebook/jest/issues/890#issuecomment-415202799
+  window.history.pushState({}, "", locationPathname);
+
+  const props = {
+    ...PROPS,
     columns: []
   };
 
@@ -228,7 +290,7 @@ describe.skip("[Contrib] components/<AdminIndex /> (errors)", () => {
     global.axios.get.mockReset();
     global.console.warn.mockReset();
 
-    global.axios.get.mockResolvedValueOnce({ data });
+    global.axios.get.mockResolvedValueOnce({ data: DATA });
     global.axios.delete.mockRejectedValueOnce();
 
     const { getByTitle } = render(<AdminIndex {...props} />);
