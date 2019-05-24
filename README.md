@@ -73,8 +73,8 @@ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo s
 
 Ce dépôt est licencié sous la [licence Apacha 2.0][link-license].
 
-[img-codecov]: https://img.shields.io/codecov/c/github/SocialGouv/code-du-travail-backoffice/master.svg?style=flat-square
-[img-gitlab]: https://gitlab.factory.social.gouv.fr/SocialGouv/code-du-travail-backoffice/badges/master/pipeline.svg?style=flat-square
+[img-codecov]: https://img.shields.io/codecov/c/github/SocialGouv/code-du-travail-backoffice/dev.svg?style=flat-square
+[img-gitlab]: https://gitlab.factory.social.gouv.fr/SocialGouv/code-du-travail-backoffice/badges/dev/pipeline.svg?style=flat-square
 [link-cdtn]: https://github.com/SocialGouv/code-du-travail-numerique
 [link-codecov]: https://codecov.io/gh/SocialGouv/code-du-travail-backoffice
 [link-license]: https://github.com/SocialGouv/code-du-travail-backoffice/blob/master/LICENSE
