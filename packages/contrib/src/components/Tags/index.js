@@ -88,8 +88,7 @@ export default class Tags extends React.PureComponent {
   }
 
   removeTag(value) {
-    const foundTag = this.getTagByValue(value, this.state.selectedTags);
-    const tag = foundTag !== undefined ? foundTag : { value };
+    const tag = this.getTagByValue(value, this.state.selectedTags);
 
     this.setState({
       selectedTags: this.state.selectedTags.filter(
@@ -102,8 +101,6 @@ export default class Tags extends React.PureComponent {
   }
 
   refreshSuggestedTags() {
-    if (this.state.tags.length === 0) return;
-
     if (this.$input.value.length === 0) {
       this.setState({ suggestedTags: [] });
 
