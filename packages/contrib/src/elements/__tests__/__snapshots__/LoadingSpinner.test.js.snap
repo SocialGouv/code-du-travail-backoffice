@@ -16,3 +16,20 @@ exports[`[Contrib] elements/<LoadingSpinner /> should match snapshot 1`] = `
   </div>
 </div>
 `;
+
+exports[`[Contrib] elements/<LoadingSpinner /> should match snapshot with a custom \`color\` prop 1`] = `
+<div>
+  <div
+    class="LoadingSpinner__Container-eu7nmw-0 dEMrTz"
+  >
+    <div
+      class="LoadingSpinner__Spinner-eu7nmw-1 gQPKdr"
+      color="blue"
+    />
+    <div
+      class="LoadingSpinner__Spinner-eu7nmw-1 LoadingSpinner__SpinnerNext-eu7nmw-2 eIQNlQ"
+      color="blue"
+    />
+  </div>
+</div>
+`;

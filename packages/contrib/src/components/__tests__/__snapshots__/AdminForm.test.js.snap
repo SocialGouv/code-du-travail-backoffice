@@ -11,7 +11,7 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should matc
       width="1"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 kivzys"
+        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 cBdCZD"
       >
         <div
           class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB"
@@ -45,38 +45,58 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should matc
           class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"
         >
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Tableau de bord
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Conventions
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Étiquettes
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Questions
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
+          >
+            Réponses
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Unités
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Utilisateurs
           </div>
+          <div
+            class="AdminMenu__Link-t0dk93-2 kospmv"
+          >
+            Zones
+          </div>
+          <h2
+            class="Subtitle-sc-17ig8qv-0 AdminMenu__Subtitle-t0dk93-1 vshUS"
+          >
+            Maintenance
+          </h2>
+          <div
+            class="AdminMenu__Link-t0dk93-2 kospmv"
+          >
+            Migrations
+          </div>
         </div>
         <div
-          class="AdminMain__Content-lizrru-0 gDBNFq"
+          class="AdminMain__Content-lizrru-0 dcXFX"
         >
           <form
             class="AdminForm__Form-scluvj-0 dGqbeT"
@@ -98,7 +118,7 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should matc
                 A Default Input
               </label>
               <input
-                class="Input___Input-l1y0rz-0 QumVf"
+                class="Input___Input-l1y0rz-1 didSAw"
                 id="defaultInput"
                 name="defaultInput"
                 type="number"
@@ -119,7 +139,7 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should matc
                   class="sc-bdVaJa sc-bwzfXH pjOvZ"
                 >
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 dRhkhb"
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 gubaLU"
                     color="var(--color-periwinkle)"
                     font-size="inherit"
                     font-weight="bold"
@@ -129,7 +149,7 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should matc
                     Annuler
                   </button>
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU"
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jmYpts"
                     color="var(--color-lapis-lazuli)"
                     font-size="inherit"
                     font-weight="bold"
@@ -149,87 +169,6 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should matc
 </div>
 `;
 
-exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should submit the expected data 1`] = `
-"Snapshot Diff:
-- First value
-+ Second value
-
-@@ -114,22 +114,24 @@
-                  />
-                  <div
-                    class=\\"sc-bdVaJa sc-bwzfXH pjOvZ\\"
-                  >
-                    <button
--                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 dRhkhb\\"
-+                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 bLVaba\\"
-                      color=\\"var(--color-periwinkle)\\"
-+                     disabled=\\"\\"
-                      font-size=\\"inherit\\"
-                      font-weight=\\"bold\\"
-                      title=\\"An aria label for the cancel button\\"
-                      type=\\"button\\"
-                    >
-                      Annuler
-                    </button>
-                    <button
--                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU\\"
-+                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 lpiHpV\\"
-                      color=\\"var(--color-lapis-lazuli)\\"
-+                     disabled=\\"\\"
-                      font-size=\\"inherit\\"
-                      font-weight=\\"bold\\"
-                      title=\\"An aria label for the creation button\\"
-                      type=\\"submit\\"
-                    >"
-`;
-
-exports[`[Contrib] components/<AdminForm /> (create) should add a tag accordingly 1`] = `
-"Snapshot Diff:
-- First value
-+ Second value
-
-@@ -118,11 +118,11 @@
-                  <input
-                    class=\\"Input___Input-l1y0rz-0 QumVf\\"
-                    id=\\"inputWithButton\\"
-                    name=\\"inputWithButton\\"
-                    type=\\"text\\"
--                   value=\\"\\"
-+                   value=\\"an input with value button that has been transformed\\"
-                  />
-                  <button
-                    class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
-                    color=\\"white\\"
-                    font-size=\\"inherit\\"
-@@ -196,11 +196,26 @@
-                    class=\\"Input___Input-l1y0rz-0 QumVf\\"
-                    placeholder=\\"Commencez à taper le nom du tag\\"
-                  />
-                  <div
-                    class=\\"sc-bdVaJa sc-bwzfXH Tags__SelectedTags-sc-9wg2t-1 gNdWxU\\"
-+                 >
-+                   <div
-+                     class=\\"sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb\\"
-+                   >
-+                     <span
-+                       class=\\"Tag__Text-lc1n3o-1 dtXAeC\\"
-+                     >
-+                       First A Tag
-+                     </span>
-+                     <img
-+                       alt=\\"Bouton supprimant le tag First A Tag\\"
-+                       class=\\"Tag__Button-lc1n3o-2 jbGhej\\"
-+                       src=\\"[object Object]\\"
-                      />
-+                   </div>
-+                 </div>
-                </div>
-              </div>
-              <div
-                class=\\"sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE\\"
-              >"
-`;
-
 exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] = `
 <div>
   <div
@@ -241,7 +180,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
       width="1"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 kivzys"
+        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 cBdCZD"
       >
         <div
           class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB"
@@ -275,38 +214,58 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
           class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"
         >
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Tableau de bord
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Conventions
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Étiquettes
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Questions
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
+          >
+            Réponses
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Unités
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Utilisateurs
           </div>
+          <div
+            class="AdminMenu__Link-t0dk93-2 kospmv"
+          >
+            Zones
+          </div>
+          <h2
+            class="Subtitle-sc-17ig8qv-0 AdminMenu__Subtitle-t0dk93-1 vshUS"
+          >
+            Maintenance
+          </h2>
+          <div
+            class="AdminMenu__Link-t0dk93-2 kospmv"
+          >
+            Migrations
+          </div>
         </div>
         <div
-          class="AdminMain__Content-lizrru-0 gDBNFq"
+          class="AdminMain__Content-lizrru-0 dcXFX"
         >
           <form
             class="AdminForm__Form-scluvj-0 dGqbeT"
@@ -328,7 +287,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                 A Default Input
               </label>
               <input
-                class="Input___Input-l1y0rz-0 QumVf"
+                class="Input___Input-l1y0rz-1 didSAw"
                 id="defaultInput"
                 name="defaultInput"
                 type="text"
@@ -349,14 +308,14 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                 class="sc-bdVaJa sc-bwzfXH pjOvZ"
               >
                 <input
-                  class="Input___Input-l1y0rz-0 QumVf"
+                  class="Input___Input-l1y0rz-1 didSAw"
                   id="inputWithButton"
                   name="inputWithButton"
                   type="text"
                   value=""
                 />
                 <button
-                  class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf"
+                  class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 loLOpV"
                   color="white"
                   font-size="inherit"
                   font-weight="bold"
@@ -365,7 +324,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                 >
                   <svg
                     aria-hidden="true"
-                    class="svg-inline--fa fa-sync fa-w-16 fa-1x "
+                    class="svg-inline--fa fa-sync fa-w-16 fa-1x Icon-sc-4jlog9-0 bEnrPz"
                     color="var(--color-lapis-lazuli)"
                     data-icon="sync"
                     data-prefix="fas"
@@ -426,7 +385,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                 class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
               >
                 <input
-                  class="Input___Input-l1y0rz-0 QumVf"
+                  class="Input___Input-l1y0rz-1 didSAw"
                   placeholder="Commencez à taper le nom du tag"
                 />
                 <div
@@ -465,7 +424,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                 class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
               >
                 <input
-                  class="Input___Input-l1y0rz-0 QumVf"
+                  class="Input___Input-l1y0rz-1 didSAw"
                   placeholder="Commencez à taper le nom de la collection"
                 />
                 <div
@@ -487,7 +446,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                   class="sc-bdVaJa sc-bwzfXH pjOvZ"
                 >
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 dRhkhb"
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 gubaLU"
                     color="var(--color-periwinkle)"
                     font-size="inherit"
                     font-weight="bold"
@@ -497,7 +456,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                     Annuler
                   </button>
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU"
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jmYpts"
                     color="var(--color-lapis-lazuli)"
                     font-size="inherit"
                     font-weight="bold"
@@ -517,171 +476,6 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
 </div>
 `;
 
-exports[`[Contrib] components/<AdminForm /> (create) should remove a tag accordingly 1`] = `
-"Snapshot Diff:
-- First value
-+ Second value
-
-@@ -118,11 +118,11 @@
-                  <input
-                    class=\\"Input___Input-l1y0rz-0 QumVf\\"
-                    id=\\"inputWithButton\\"
-                    name=\\"inputWithButton\\"
-                    type=\\"text\\"
--                   value=\\"\\"
-+                   value=\\"an input with value button that has been transformed\\"
-                  />
-                  <button
-                    class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
-                    color=\\"white\\"
-                    font-size=\\"inherit\\""
-`;
-
-exports[`[Contrib] components/<AdminForm /> (create) should submit the expected data 1`] = `
-"Snapshot Diff:
-- First value
-+ Second value
-
-@@ -118,11 +118,11 @@
-                  <input
-                    class=\\"Input___Input-l1y0rz-0 QumVf\\"
-                    id=\\"inputWithButton\\"
-                    name=\\"inputWithButton\\"
-                    type=\\"text\\"
--                   value=\\"\\"
-+                   value=\\"an input with value button that has been transformed\\"
-                  />
-                  <button
-                    class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
-                    color=\\"white\\"
-                    font-size=\\"inherit\\"
-@@ -235,13 +235,42 @@
-                    class=\\"Input___Input-l1y0rz-0 QumVf\\"
-                    placeholder=\\"Commencez à taper le nom de la collection\\"
-                  />
-                  <div
-                    class=\\"sc-bdVaJa sc-bwzfXH Tags__SelectedTags-sc-9wg2t-1 gNdWxU\\"
-+                 >
-+                   <div
-+                     class=\\"sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb\\"
-+                   >
-+                     <span
-+                       class=\\"Tag__Text-lc1n3o-1 dtXAeC\\"
-+                     >
-+                       Second B Tag
-+                     </span>
-+                     <img
-+                       alt=\\"Bouton supprimant la collection Second B Tag\\"
-+                       class=\\"Tag__Button-lc1n3o-2 jbGhej\\"
-+                       src=\\"[object Object]\\"
-                      />
-                    </div>
-+                   <div
-+                     class=\\"sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb\\"
-+                   >
-+                     <span
-+                       class=\\"Tag__Text-lc1n3o-1 dtXAeC\\"
-+                     >
-+                       Third B Tag
-+                     </span>
-+                     <img
-+                       alt=\\"Bouton supprimant la collection Third B Tag\\"
-+                       class=\\"Tag__Button-lc1n3o-2 jbGhej\\"
-+                       src=\\"[object Object]\\"
-+                     />
-+                   </div>
-                  </div>
-+               </div>
-+             </div>
-              <div
-                class=\\"sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE\\"
-              >
-                <label
-                  class=\\"AdminForm__Label-scluvj-1 jCpDRz\\"
-@@ -252,22 +281,24 @@
-                  />
-                  <div
-                    class=\\"sc-bdVaJa sc-bwzfXH pjOvZ\\"
-                  >
-                    <button
--                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 dRhkhb\\"
-+                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 bLVaba\\"
-                      color=\\"var(--color-periwinkle)\\"
-+                     disabled=\\"\\"
-                      font-size=\\"inherit\\"
-                      font-weight=\\"bold\\"
-                      title=\\"An aria label for the cancel button\\"
-                      type=\\"button\\"
-                    >
-                      Annuler
-                    </button>
-                    <button
--                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU\\"
-+                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 lpiHpV\\"
-                      color=\\"var(--color-lapis-lazuli)\\"
-+                     disabled=\\"\\"
-                      font-size=\\"inherit\\"
-                      font-weight=\\"bold\\"
-                      title=\\"An aria label for the create button\\"
-                      type=\\"submit\\"
-                    >"
-`;
-
-exports[`[Contrib] components/<AdminForm /> (create) should the expected error 1`] = `
-"Snapshot Diff:
-- First value
-+ Second value
-
-@@ -118,11 +118,11 @@
-                  <input
-                    class=\\"Input___Input-l1y0rz-0 QumVf\\"
-                    id=\\"inputWithButton\\"
-                    name=\\"inputWithButton\\"
-                    type=\\"text\\"
--                   value=\\"\\"
-+                   value=\\"an input with value button that has been transformed\\"
-                  />
-                  <button
-                    class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
-                    color=\\"white\\"
-                    font-size=\\"inherit\\"
-@@ -247,11 +247,13 @@
-                  class=\\"AdminForm__Label-scluvj-1 jCpDRz\\"
-                />
-                <div>
-                  <div
-                    class=\\"AdminForm__Error-scluvj-2 cshRmY\\"
--                 />
-+                 >
-+                   Erreur: An error.
-+                 </div>
-                  <div
-                    class=\\"sc-bdVaJa sc-bwzfXH pjOvZ\\"
-                  >
-                    <button
-                      class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 dRhkhb\\""
-`;
-
-exports[`[Contrib] components/<AdminForm /> (create) should transform the input with button value as expected 1`] = `
-"Snapshot Diff:
-- First value
-+ Second value
-
-@@ -118,11 +118,11 @@
-                  <input
-                    class=\\"Input___Input-l1y0rz-0 QumVf\\"
-                    id=\\"inputWithButton\\"
-                    name=\\"inputWithButton\\"
-                    type=\\"text\\"
--                   value=\\"\\"
-+                   value=\\"an input with value button that has been transformed\\"
-                  />
-                  <button
-                    class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf\\"
-                    color=\\"white\\"
-                    font-size=\\"inherit\\""
-`;
-
 exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match snapshot 1`] = `
 <div>
   <div
@@ -693,7 +487,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match 
       width="1"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 kivzys"
+        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 cBdCZD"
       >
         <div
           class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB"
@@ -727,38 +521,58 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match 
           class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"
         >
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Tableau de bord
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Conventions
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Étiquettes
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Questions
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
+          >
+            Réponses
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Unités
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Utilisateurs
           </div>
+          <div
+            class="AdminMenu__Link-t0dk93-2 kospmv"
+          >
+            Zones
+          </div>
+          <h2
+            class="Subtitle-sc-17ig8qv-0 AdminMenu__Subtitle-t0dk93-1 vshUS"
+          >
+            Maintenance
+          </h2>
+          <div
+            class="AdminMenu__Link-t0dk93-2 kospmv"
+          >
+            Migrations
+          </div>
         </div>
         <div
-          class="AdminMain__Content-lizrru-0 gDBNFq"
+          class="AdminMain__Content-lizrru-0 dcXFX"
         >
           <form
             class="AdminForm__Form-scluvj-0 dGqbeT"
@@ -780,7 +594,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match 
                 A Default Input
               </label>
               <input
-                class="Input___Input-l1y0rz-0 QumVf"
+                class="Input___Input-l1y0rz-1 didSAw"
                 id="defaultInput"
                 name="defaultInput"
                 type="number"
@@ -801,7 +615,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match 
                   class="sc-bdVaJa sc-bwzfXH pjOvZ"
                 >
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 dRhkhb"
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 gubaLU"
                     color="var(--color-periwinkle)"
                     font-size="inherit"
                     font-weight="bold"
@@ -811,7 +625,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match 
                     Annuler
                   </button>
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU"
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jmYpts"
                     color="var(--color-lapis-lazuli)"
                     font-size="inherit"
                     font-weight="bold"
@@ -829,40 +643,6 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match 
     </div>
   </div>
 </div>
-`;
-
-exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should submit the expected data 1`] = `
-"Snapshot Diff:
-- First value
-+ Second value
-
-@@ -114,22 +114,24 @@
-                  />
-                  <div
-                    class=\\"sc-bdVaJa sc-bwzfXH pjOvZ\\"
-                  >
-                    <button
--                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 dRhkhb\\"
-+                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 bLVaba\\"
-                      color=\\"var(--color-periwinkle)\\"
-+                     disabled=\\"\\"
-                      font-size=\\"inherit\\"
-                      font-weight=\\"bold\\"
-                      title=\\"An aria label for the cancel button\\"
-                      type=\\"button\\"
-                    >
-                      Annuler
-                    </button>
-                    <button
--                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU\\"
-+                     class=\\"sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 lpiHpV\\"
-                      color=\\"var(--color-lapis-lazuli)\\"
-+                     disabled=\\"\\"
-                      font-size=\\"inherit\\"
-                      font-weight=\\"bold\\"
-                      title=\\"An aria label for the edit button\\"
-                      type=\\"submit\\"
-                    >"
 `;
 
 exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match snapshot 1`] = `
@@ -876,7 +656,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match 
       width="1"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 kivzys"
+        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 cBdCZD"
       >
         <div
           class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB"
@@ -910,38 +690,58 @@ exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match 
           class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"
         >
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Tableau de bord
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Conventions
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Étiquettes
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Questions
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
+          >
+            Réponses
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Unités
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Utilisateurs
           </div>
+          <div
+            class="AdminMenu__Link-t0dk93-2 kospmv"
+          >
+            Zones
+          </div>
+          <h2
+            class="Subtitle-sc-17ig8qv-0 AdminMenu__Subtitle-t0dk93-1 vshUS"
+          >
+            Maintenance
+          </h2>
+          <div
+            class="AdminMenu__Link-t0dk93-2 kospmv"
+          >
+            Migrations
+          </div>
         </div>
         <div
-          class="AdminMain__Content-lizrru-0 gDBNFq"
+          class="AdminMain__Content-lizrru-0 dcXFX"
         >
           <form
             class="AdminForm__Form-scluvj-0 dGqbeT"
@@ -963,7 +763,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match 
                 A Default Input
               </label>
               <input
-                class="Input___Input-l1y0rz-0 QumVf"
+                class="Input___Input-l1y0rz-1 didSAw"
                 id="defaultInput"
                 name="defaultInput"
                 type="number"
@@ -984,7 +784,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match 
                   class="sc-bdVaJa sc-bwzfXH pjOvZ"
                 >
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 dRhkhb"
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 gubaLU"
                     color="var(--color-periwinkle)"
                     font-size="inherit"
                     font-weight="bold"
@@ -994,7 +794,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match 
                     Annuler
                   </button>
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU"
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jmYpts"
                     color="var(--color-lapis-lazuli)"
                     font-size="inherit"
                     font-weight="bold"
@@ -1014,11 +814,6 @@ exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match 
 </div>
 `;
 
-exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should submit the expected data 1`] = `
-"Snapshot Diff:
-Compared values have no visual difference."
-`;
-
 exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
 <div>
   <div
@@ -1030,7 +825,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
       width="1"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 kivzys"
+        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 cBdCZD"
       >
         <div
           class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB"
@@ -1064,38 +859,58 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
           class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"
         >
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Tableau de bord
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Conventions
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Étiquettes
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Questions
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
+          >
+            Réponses
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Unités
           </div>
           <div
-            class="AdminMenu__Link-t0dk93-1 jAbipT"
+            class="AdminMenu__Link-t0dk93-2 kospmv"
           >
             Utilisateurs
           </div>
+          <div
+            class="AdminMenu__Link-t0dk93-2 kospmv"
+          >
+            Zones
+          </div>
+          <h2
+            class="Subtitle-sc-17ig8qv-0 AdminMenu__Subtitle-t0dk93-1 vshUS"
+          >
+            Maintenance
+          </h2>
+          <div
+            class="AdminMenu__Link-t0dk93-2 kospmv"
+          >
+            Migrations
+          </div>
         </div>
         <div
-          class="AdminMain__Content-lizrru-0 gDBNFq"
+          class="AdminMain__Content-lizrru-0 dcXFX"
         >
           <form
             class="AdminForm__Form-scluvj-0 dGqbeT"
@@ -1117,7 +932,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                 A Default Input
               </label>
               <input
-                class="Input___Input-l1y0rz-0 QumVf"
+                class="Input___Input-l1y0rz-1 didSAw"
                 id="defaultInput"
                 name="defaultInput"
                 type="text"
@@ -1138,14 +953,14 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                 class="sc-bdVaJa sc-bwzfXH pjOvZ"
               >
                 <input
-                  class="Input___Input-l1y0rz-0 QumVf"
+                  class="Input___Input-l1y0rz-1 didSAw"
                   id="inputWithButton"
                   name="inputWithButton"
                   type="text"
                   value="the original input button value"
                 />
                 <button
-                  class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 fphurf"
+                  class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 loLOpV"
                   color="white"
                   font-size="inherit"
                   font-weight="bold"
@@ -1154,7 +969,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    class="svg-inline--fa fa-sync fa-w-16 fa-1x "
+                    class="svg-inline--fa fa-sync fa-w-16 fa-1x Icon-sc-4jlog9-0 bEnrPz"
                     color="var(--color-lapis-lazuli)"
                     data-icon="sync"
                     data-prefix="fas"
@@ -1214,7 +1029,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                 class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
               >
                 <input
-                  class="Input___Input-l1y0rz-0 QumVf"
+                  class="Input___Input-l1y0rz-1 didSAw"
                   placeholder="Commencez à taper le nom du tag"
                 />
                 <div
@@ -1268,7 +1083,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                 class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
               >
                 <input
-                  class="Input___Input-l1y0rz-0 QumVf"
+                  class="Input___Input-l1y0rz-1 didSAw"
                   placeholder="Commencez à taper le nom de la collection"
                 />
                 <div
@@ -1319,7 +1134,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                   class="sc-bdVaJa sc-bwzfXH pjOvZ"
                 >
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 dRhkhb"
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 gubaLU"
                     color="var(--color-periwinkle)"
                     font-size="inherit"
                     font-weight="bold"
@@ -1329,7 +1144,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                     Annuler
                   </button>
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jTceSU"
+                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jmYpts"
                     color="var(--color-lapis-lazuli)"
                     font-size="inherit"
                     font-weight="bold"
@@ -1347,9 +1162,4 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
     </div>
   </div>
 </div>
-`;
-
-exports[`[Contrib] components/<AdminForm /> (edit) should submit the expected data 1`] = `
-"Snapshot Diff:
-  Comparing two different types of values. Expected object but received null."
 `;

@@ -78,15 +78,6 @@ export default class Header extends React.Component {
                 router={this.props.router}
               />
             )}
-            {/* <UserInfo alignItems="flex-end" flexDirection="column">
-              <UserName>{this.state.me.payload.name}</UserName>
-              <UserLocation>{this.state.me.payload.location}</UserLocation>
-            </UserInfo>
-            <UserLogoutIcon
-              alt="Bouton de déconnexion"
-              onClick={this.logOut}
-              src={logoutImageUri}
-            /> */}
           </Flex>
         )}
       </Container>

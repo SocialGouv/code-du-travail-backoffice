@@ -9,37 +9,53 @@ import Header from "../Header";
 const JWT = "aFakeJWT";
 const ME = { payload: { name: "A Name" } };
 
-describe.skip("[Contrib] layouts/<Header />", () => {
-  const α = render(<Header />);
-  const firstRender = α.container;
+describe("[Contrib] layouts/<Header />", () => {
+  const props = {
+    router: {
+      pathname: "/"
+    }
+  };
+
+  const γ = render(<Header {...props} />);
+  const firstRender = γ.container;
 
   it("[Anonymous] should match snapshot", () => {
-    expect(α.container).toMatchSnapshot();
+    expect(γ.container).toMatchSnapshot();
   });
 
   it("[Contributor] should match snapshot diff", () => {
     sessionStorage.setItem("me", JSON.stringify(ME));
     sessionStorage.setItem("jwt", JWT);
 
-    const { asFragment } = render(<Header isAdmin={false} />);
+    const newProps = {
+      ...props,
+      hasContribMenu: true
+    };
 
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
-  });
+    const Γ = render(<Header {...newProps} />);
 
-  it("[Contributor] should attempt to redirect to /", () => {
-    fireEvent.click(α.getByText("Code du travail numérique"));
+    expect(firstRender).toMatchDiffSnapshot(Γ.asFragment());
+
+    fireEvent.click(Γ.getAllByAltText(/Code du travail numérique/)[1]);
 
     expect(Router.push).toHaveBeenCalledWith("/");
   });
 
   it("[Administrator] should match snapshot", () => {
-    const { asFragment } = render(<Header isAdmin={false} />);
+    sessionStorage.setItem("me", JSON.stringify(ME));
+    sessionStorage.setItem("jwt", JWT);
 
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
-  });
+    const newProps = {
+      ...props,
+      hasContribMenu: true,
+      isAdmin: true
+    };
 
-  it("[Administrator] should attempt to redirect to /admin", () => {
-    fireEvent.click(α.getByText("Code du travail numérique"));
+    const Γ = render(<Header {...newProps} />);
+
+    expect(firstRender).toMatchDiffSnapshot(Γ.asFragment());
+
+    fireEvent.click(Γ.getAllByAltText(/Code du travail numérique/)[2]);
 
     expect(Router.push).toHaveBeenCalledWith("/admin");
   });

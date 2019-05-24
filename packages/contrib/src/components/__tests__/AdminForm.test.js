@@ -5,11 +5,23 @@ import "../../../__mocks__/console";
 import "../../../__mocks__/waitFor";
 
 import Router from "next/router";
-jest.mock("next/router");
+jest.mock("next/router", () => ({
+  push: jest.fn(),
+  withRouter: component => {
+    component.defaultProps = {
+      ...component.defaultProps,
+      router: {
+        pathname: "/"
+      }
+    };
+
+    return component;
+  }
+}));
 
 import AdminForm from "../AdminForm";
 
-describe.skip("[Contrib] components/<AdminForm /> (create)", () => {
+describe("[Contrib] components/<AdminForm /> (create)", () => {
   const props = {
     apiPath: "/an-api-path",
     ariaLabels: {
@@ -83,33 +95,16 @@ describe.skip("[Contrib] components/<AdminForm /> (create)", () => {
     [props.fields[4].name]: ""
   };
 
-  let asFragment,
-    container,
-    getByAltText,
-    getByLabelText,
-    getByPlaceholderText,
-    getByText,
-    getByTitle,
-    queryByText;
-  let firstRender;
+  let γ;
 
   it("should match snapshot", () => {
-    const r = render(<AdminForm {...props} />);
-    asFragment = r.asFragment;
-    container = r.container;
-    getByAltText = r.getByAltText;
-    getByLabelText = r.getByLabelText;
-    getByPlaceholderText = r.getByPlaceholderText;
-    getByText = r.getByText;
-    getByTitle = r.getByTitle;
-    queryByText = r.queryByText;
-    firstRender = asFragment();
+    γ = render(<AdminForm {...props} />);
 
-    expect(container).toMatchSnapshot();
+    expect(γ.container).toMatchSnapshot();
   });
 
   it("should redirect to the index path", async () => {
-    fireEvent.click(getByTitle(props.ariaLabels.cancelButton));
+    fireEvent.click(γ.getByTitle(props.ariaLabels.cancelButton));
 
     expect(Router.push).toHaveBeenCalledWith(`/admin${props.indexPath}`);
   });
@@ -119,11 +114,10 @@ describe.skip("[Contrib] components/<AdminForm /> (create)", () => {
     const value = "an input with value button";
     expectedData[field.name] = value + " that has been transformed";
 
-    fireEvent.input(getByLabelText(field.label), { target: { value } });
-    fireEvent.click(getByTitle(field.button.ariaLabel));
+    fireEvent.input(γ.getByLabelText(field.label), { target: { value } });
+    fireEvent.click(γ.getByTitle(field.button.ariaLabel));
 
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
-    expect(getByLabelText(field.label).value).toBe(expectedData[field.name]);
+    expect(γ.getByLabelText(field.label).value).toBe(expectedData[field.name]);
   });
 
   it("should add a tag accordingly", async () => {
@@ -132,15 +126,14 @@ describe.skip("[Contrib] components/<AdminForm /> (create)", () => {
     const field = props.fields[3];
     expectedData[field.name].push(field.tags[0].id);
 
-    fireEvent.input(getByPlaceholderText(`Commencez à taper le nom du tag`), {
+    fireEvent.input(γ.getByPlaceholderText(`Commencez à taper le nom du tag`), {
       target: { value: field.tags[0].value }
     });
-    fireEvent.click(getByText(field.tags[0].value));
+    fireEvent.click(γ.getByText(field.tags[0].value));
     await waitFor(0);
-    fireEvent.click(getByTitle(props.ariaLabels.createOrEditButton));
+    fireEvent.click(γ.getByTitle(props.ariaLabels.createOrEditButton));
     await waitFor(0);
 
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
     expect(global.axios.post).toHaveBeenCalledWith(props.apiPath, expectedData);
     expect(global.console.warn).toHaveBeenCalledWith({ response: {} });
   });
@@ -152,13 +145,14 @@ describe.skip("[Contrib] components/<AdminForm /> (create)", () => {
     expectedData[field.name] = [];
 
     fireEvent.click(
-      getByAltText(`Bouton supprimant ${field.ariaName} ${field.tags[0].value}`)
+      γ.getByAltText(
+        `Bouton supprimant ${field.ariaName} ${field.tags[0].value}`
+      )
     );
     await waitFor(0);
-    fireEvent.click(getByTitle(props.ariaLabels.createOrEditButton));
+    fireEvent.click(γ.getByTitle(props.ariaLabels.createOrEditButton));
     await waitFor(0);
 
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
     expect(global.axios.post).toHaveBeenCalledWith(props.apiPath, expectedData);
   });
 
@@ -171,11 +165,10 @@ describe.skip("[Contrib] components/<AdminForm /> (create)", () => {
       }
     });
 
-    fireEvent.click(getByTitle(props.ariaLabels.createOrEditButton));
+    fireEvent.click(γ.getByTitle(props.ariaLabels.createOrEditButton));
     await waitFor(0);
 
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
-    expect(queryByText("Erreur: An error.")).toBeInTheDocument();
+    expect(γ.queryByText("Erreur: An error.")).toBeInTheDocument();
   });
 
   it("should submit the expected data", async () => {
@@ -193,13 +186,13 @@ describe.skip("[Contrib] components/<AdminForm /> (create)", () => {
     expectedData[props.fields[2].name] = "second_option";
     expectedData[props.fields[4].name] = "a default textarea value";
 
-    fireEvent.input(getByLabelText(props.fields[0].label), {
+    fireEvent.input(γ.getByLabelText(props.fields[0].label), {
       target: { value: expectedData[props.fields[0].name] }
     });
-    fireEvent.change(getByLabelText(props.fields[2].label), {
+    fireEvent.change(γ.getByLabelText(props.fields[2].label), {
       target: { value: "second_option" }
     });
-    fireEvent.input(getByLabelText(props.fields[4].label), {
+    fireEvent.input(γ.getByLabelText(props.fields[4].label), {
       target: { value: expectedData[props.fields[4].name] }
     });
 
@@ -215,26 +208,25 @@ describe.skip("[Contrib] components/<AdminForm /> (create)", () => {
       }
     ];
     fireEvent.input(
-      getByPlaceholderText(`Commencez à taper le nom de la collection`),
+      γ.getByPlaceholderText(`Commencez à taper le nom de la collection`),
       {
         target: { value: field5.tags[1].value }
       }
     );
-    fireEvent.click(getByText(field5.tags[1].value));
+    fireEvent.click(γ.getByText(field5.tags[1].value));
     await waitFor(0);
     fireEvent.input(
-      getByPlaceholderText(`Commencez à taper le nom de la collection`),
+      γ.getByPlaceholderText(`Commencez à taper le nom de la collection`),
       {
         target: { value: field5.tags[2].value }
       }
     );
-    fireEvent.click(getByText(field5.tags[2].value));
+    fireEvent.click(γ.getByText(field5.tags[2].value));
     await waitFor(0);
 
-    fireEvent.click(getByTitle(props.ariaLabels.createOrEditButton));
+    fireEvent.click(γ.getByTitle(props.ariaLabels.createOrEditButton));
     await waitFor(0);
 
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
     expect(global.axios.post).toHaveBeenCalledTimes(2);
     // https://stackoverflow.com/a/48078859/2736233
     expect(global.axios.post.mock.calls).toEqual([
@@ -245,7 +237,7 @@ describe.skip("[Contrib] components/<AdminForm /> (create)", () => {
   });
 });
 
-describe.skip("[Contrib] components/<AdminForm /> (edit)", () => {
+describe("[Contrib] components/<AdminForm /> (edit)", () => {
   const props = {
     apiPath: "/an-api-path",
     ariaLabels: {
@@ -338,18 +330,13 @@ describe.skip("[Contrib] components/<AdminForm /> (edit)", () => {
     [props.fields[5].name]: [props.fields[5].tags[1], props.fields[5].tags[2]]
   };
 
-  let asFragment, container, getByTitle;
-  let firstRender;
+  let γ;
 
   it("should match snapshot", () => {
     cleanup();
-    const r = render(<AdminForm {...props} />);
-    asFragment = r.asFragment;
-    container = r.container;
-    getByTitle = r.getByTitle;
-    firstRender = asFragment();
+    γ = render(<AdminForm {...props} />);
 
-    expect(container).toMatchSnapshot();
+    expect(γ.container).toMatchSnapshot();
   });
 
   it("should submit the expected data", async () => {
@@ -357,10 +344,9 @@ describe.skip("[Contrib] components/<AdminForm /> (edit)", () => {
     global.axios.delete.mockResolvedValueOnce();
     global.axios.post.mockResolvedValueOnce();
 
-    fireEvent.click(getByTitle(props.ariaLabels.createOrEditButton));
+    fireEvent.click(γ.getByTitle(props.ariaLabels.createOrEditButton));
     await waitFor(0);
 
-    expect(firstRender).toMatchDiffSnapshot(null);
     expect(global.axios.patch).toHaveBeenCalledWith(
       `${props.apiPath}?id=eq.${props.id}`,
       expectedData
@@ -377,7 +363,7 @@ describe.skip("[Contrib] components/<AdminForm /> (edit)", () => {
 });
 
 // eslint-disable-next-line max-len
-describe.skip("[Contrib] components/<AdminForm /> (create / NO custom API)", () => {
+describe("[Contrib] components/<AdminForm /> (create / NO custom API)", () => {
   const props = {
     apiPath: "/an-api-path",
     ariaLabels: {
@@ -401,19 +387,13 @@ describe.skip("[Contrib] components/<AdminForm /> (create / NO custom API)", () 
     [props.fields[0].name]: ""
   };
 
-  let asFragment, container, getByRole, getByTitle;
-  let firstRender;
+  let γ;
 
   it("should match snapshot", () => {
     cleanup();
-    const r = render(<AdminForm {...props} />);
-    asFragment = r.asFragment;
-    container = r.container;
-    getByRole = r.getByRole;
-    getByTitle = r.getByTitle;
-    firstRender = asFragment();
+    γ = render(<AdminForm {...props} />);
 
-    expect(container).toMatchSnapshot();
+    expect(γ.container).toMatchSnapshot();
   });
 
   it("should submit the expected data", async () => {
@@ -427,10 +407,9 @@ describe.skip("[Contrib] components/<AdminForm /> (create / NO custom API)", () 
     });
     global.axios.post.mockResolvedValueOnce();
 
-    fireEvent.click(getByTitle(props.ariaLabels.createOrEditButton));
+    fireEvent.click(γ.getByTitle(props.ariaLabels.createOrEditButton));
     await waitFor(0);
 
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
     expect(global.axios.post).toHaveBeenCalledTimes(1);
     expect(global.axios.post).toHaveBeenCalledWith(props.apiPath, expectedData);
     expect(Router.push).toHaveBeenCalledWith(`/admin${props.indexPath}`);
@@ -439,15 +418,14 @@ describe.skip("[Contrib] components/<AdminForm /> (create / NO custom API)", () 
   it("should not resubmit the form", async () => {
     global.axios.post.mockReset();
 
-    fireEvent.submit(getByRole("form"));
+    fireEvent.submit(γ.getByRole("form"));
     await waitFor(0);
 
     expect(global.axios.post).toHaveBeenCalledTimes(0);
   });
 });
 
-// eslint-disable-next-line max-len
-describe.skip("[Contrib] components/<AdminForm /> (edit / NO custom API)", () => {
+describe("[Contrib] components/<AdminForm /> (edit / NO custom API)", () => {
   const props = {
     apiPath: "/an-api-path",
     ariaLabels: {
@@ -474,28 +452,22 @@ describe.skip("[Contrib] components/<AdminForm /> (edit / NO custom API)", () =>
 
   props.defaultData = { ...expectedData };
 
-  let asFragment, container, getByTitle;
-  let firstRender;
+  let γ;
 
   it("should match snapshot", () => {
     cleanup();
-    const r = render(<AdminForm {...props} />);
-    asFragment = r.asFragment;
-    container = r.container;
-    getByTitle = r.getByTitle;
-    firstRender = asFragment();
+    γ = render(<AdminForm {...props} />);
 
-    expect(container).toMatchSnapshot();
+    expect(γ.container).toMatchSnapshot();
   });
 
   it("should submit the expected data", async () => {
     global.axios.patch.mockReset();
     global.axios.patch.mockResolvedValueOnce();
 
-    fireEvent.click(getByTitle(props.ariaLabels.createOrEditButton));
+    fireEvent.click(γ.getByTitle(props.ariaLabels.createOrEditButton));
     await waitFor(0);
 
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
     expect(global.axios.patch).toHaveBeenCalledTimes(1);
     expect(global.axios.patch).toHaveBeenCalledWith(
       `${props.apiPath}?id=eq.${props.id}`,
@@ -505,8 +477,7 @@ describe.skip("[Contrib] components/<AdminForm /> (edit / NO custom API)", () =>
   });
 });
 
-// eslint-disable-next-line max-len
-describe.skip("[Contrib] components/<AdminForm /> (edit / isApiFunction)", () => {
+describe("[Contrib] components/<AdminForm /> (edit / isApiFunction)", () => {
   const props = {
     apiPath: "/an-api-path",
     ariaLabels: {
@@ -535,28 +506,22 @@ describe.skip("[Contrib] components/<AdminForm /> (edit / isApiFunction)", () =>
 
   props.defaultData = { ...expectedData };
 
-  let asFragment, container, getByTitle;
-  let firstRender;
+  let γ;
 
   it("should match snapshot", () => {
     cleanup();
-    const r = render(<AdminForm {...props} />);
-    asFragment = r.asFragment;
-    container = r.container;
-    getByTitle = r.getByTitle;
-    firstRender = asFragment();
+    γ = render(<AdminForm {...props} />);
 
-    expect(container).toMatchSnapshot();
+    expect(γ.container).toMatchSnapshot();
   });
 
   it("should submit the expected data", async () => {
     global.axios.post.mockReset();
     global.axios.post.mockResolvedValueOnce();
 
-    fireEvent.click(getByTitle(props.ariaLabels.createOrEditButton));
+    fireEvent.click(γ.getByTitle(props.ariaLabels.createOrEditButton));
     await waitFor(0);
 
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
     expect(global.axios.post).toHaveBeenCalledTimes(1);
     expect(global.axios.post).toHaveBeenCalledWith(props.apiPath, expectedData);
     expect(Router.push).toHaveBeenCalledWith(`/admin${props.indexPath}`);

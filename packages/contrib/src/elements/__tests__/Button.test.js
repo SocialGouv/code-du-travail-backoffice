@@ -15,6 +15,12 @@ describe("[Contrib] elements/<Button />", () => {
     expect(container).toMatchSnapshot();
   });
 
+  it("should match snapshot with `disabled` prop", () => {
+    const { container } = render(<Button disabled />);
+
+    expect(container).toMatchSnapshot();
+  });
+
   it("should match snapshot with `hasGroup` prop", () => {
     const { container } = render(<Button hasGroup />);
 
@@ -27,8 +33,8 @@ describe("[Contrib] elements/<Button />", () => {
     expect(container).toMatchSnapshot();
   });
 
-  it("should match snapshot with `disabled` prop", () => {
-    const { container } = render(<Button disabled />);
+  it("should match snapshot with `isSmall` prop", () => {
+    const { container } = render(<Button isSmall />);
 
     expect(container).toMatchSnapshot();
   });

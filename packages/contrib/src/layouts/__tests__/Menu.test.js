@@ -6,29 +6,49 @@ jest.mock("next/router");
 
 import Menu from "../Menu";
 
-describe("[Contrib] layouts/<Menu />", () => {
+describe("[Contrib] layouts/<Menu /> (Contributor)", () => {
   const props = {
     me: { payload: { name: "John Doe" } },
     router: { pathname: "/" }
   };
 
-  const { asFragment, container, getByText } = render(<Menu {...props} />);
-  const firstRender = asFragment();
+  const JWT = "A Fake Token";
+  const ME = JSON.stringify(props.me);
+
+  const γ = render(<Menu {...props} />);
+  const firstRender = γ.asFragment();
 
   it("should match snapshot", () => {
-    expect(container).toMatchSnapshot();
+    sessionStorage.setItem("jwt", JWT);
+    sessionStorage.setItem("me", ME);
+
+    expect(sessionStorage.getItem("jwt")).toBe(JWT);
+    expect(sessionStorage.getItem("me")).toBe(ME);
+    expect(γ.container).toMatchSnapshot();
   });
 
-  it("should redirect to the expected path", () => {
-    fireEvent.click(getByText(/Liste des réponses/));
+  it("should redirect to the answers index path", () => {
+    fireEvent.click(γ.getByText("Liste des réponses"));
 
+    expect(sessionStorage.getItem("jwt")).toBe(JWT);
+    expect(sessionStorage.getItem("me")).toBe(ME);
     expect(Router.push).toHaveBeenCalledWith("/");
   });
 
-  it.skip("should open the expected document", () => {
-    fireEvent.click(getByText(/Charte rédactionnelle/));
+  it("should redirect to the chart path", () => {
+    fireEvent.click(γ.getByText("Charte rédactionnelle"));
 
-    expect(Router.push).toHaveBeenCalledWith("/");
+    expect(sessionStorage.getItem("jwt")).toBe(JWT);
+    expect(sessionStorage.getItem("me")).toBe(ME);
+    expect(Router.push).toHaveBeenCalledWith("/chart");
+  });
+
+  it("should empty session and redirect to login path", () => {
+    fireEvent.click(γ.getAllByText("Se déconnecter")[0]);
+
+    expect(sessionStorage.getItem("jwt")).toBe(null);
+    expect(sessionStorage.getItem("me")).toBe(null);
+    expect(Router.push).toHaveBeenCalledWith("/login");
   });
 
   it("should match snapshot diff when the path has changed", () => {
@@ -40,5 +60,35 @@ describe("[Contrib] layouts/<Menu />", () => {
     const { asFragment } = render(<Menu {...newProps} />);
 
     expect(firstRender).toMatchDiffSnapshot(asFragment());
+  });
+});
+
+describe("[Contrib] layouts/<Menu /> (Admin)", () => {
+  const props = {
+    isAdmin: true,
+    me: { payload: { name: "John Doe" } },
+    router: { pathname: "/" }
+  };
+
+  const JWT = "A Fake Token";
+  const ME = JSON.stringify(props.me);
+
+  const γ = render(<Menu {...props} />);
+
+  it("should match snapshot", () => {
+    sessionStorage.setItem("jwt", JWT);
+    sessionStorage.setItem("me", ME);
+
+    expect(sessionStorage.getItem("jwt")).toBe(JWT);
+    expect(sessionStorage.getItem("me")).toBe(ME);
+    expect(γ.container).toMatchSnapshot();
+  });
+
+  it("should empty session and redirect to login path", () => {
+    fireEvent.click(γ.getAllByText("Se déconnecter")[1]);
+
+    expect(sessionStorage.getItem("jwt")).toBe(null);
+    expect(sessionStorage.getItem("me")).toBe(null);
+    expect(Router.push).toHaveBeenCalledWith("/login");
   });
 });

@@ -25,15 +25,15 @@ Ceci est très **important**.
     onTagsClicked: jest.fn()
   };
 
-  const { container } = render(<Editor {...props} />);
+  const γ = render(<Editor {...props} />);
 
   it("should match snapshot", () => {
     // We need to disable this attribute since it's automatically generated and
     // we can't have any control over it:
     // eslint-disable-next-line prettier/prettier
-    container.innerHTML = container.innerHTML
+    γ.container.innerHTML = γ.container.innerHTML
       .replace(/ medium-editor-index="[^"]{36}"/, "");
 
-    expect(container).toMatchSnapshot();
+    expect(γ.container).toMatchSnapshot();
   });
 });

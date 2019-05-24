@@ -1,19 +1,59 @@
 import React from "react";
 import { render } from "react-testing-library";
 
+jest.mock("next/router", () => ({
+  withRouter: component => {
+    component.defaultProps = {
+      ...component.defaultProps,
+      router: {
+        pathname: "/"
+      }
+    };
+
+    return component;
+  }
+}));
+
 import Main from "../Main";
 
-describe.skip("[Contrib] layouts/<Main />", () => {
-  const { asFragment, container } = render(<Main />);
-  const firstRender = asFragment();
+describe("[Contrib] layouts/<Main /> (contributor)", () => {
+  const γ = render(<Main />);
+  const firstRender = γ.asFragment();
 
   it("should match snapshot", () => {
-    expect(container).toMatchSnapshot();
+    expect(γ.container).toMatchSnapshot();
   });
 
-  it("should show the loading spinner", () => {
+  it("should match snapshot with `isHorizontal` prop", () => {
+    const { asFragment } = render(<Main isHorizontal />);
+
+    expect(firstRender).toMatchDiffSnapshot(asFragment());
+  });
+
+  it("should match snapshot with `isLoading` prop", () => {
     const { asFragment } = render(<Main isLoading />);
 
     expect(firstRender).toMatchDiffSnapshot(asFragment());
+  });
+});
+
+describe("[Contrib] layouts/<Main /> (administrator)", () => {
+  it("should match snapshot", () => {
+    jest.mock("next/router", () => ({
+      withRouter: component => {
+        component.defaultProps = {
+          ...component.defaultProps,
+          router: {
+            pathname: "/admin"
+          }
+        };
+
+        return component;
+      }
+    }));
+
+    const γ = render(<Main isAdmin />);
+
+    expect(γ.container).toMatchSnapshot();
   });
 });

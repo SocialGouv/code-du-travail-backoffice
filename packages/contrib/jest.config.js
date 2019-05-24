@@ -1,7 +1,8 @@
 /* eslint-disable max-len */
 
 module.exports = {
-  collectCoverageFrom: ["<rootDir>/pages/**/*.js", "<rootDir>/src/**/*.js"],
+  collectCoverage: true,
+  collectCoverageFrom: ["<rootDir>/src/**/*.js"],
   moduleNameMapper: {
     "\\.(jpg|jpeg|png|gif|eot|svg|ttf|woff|woff2)$":
       "<rootDir>/__mocks__/fileTransformer.js",
