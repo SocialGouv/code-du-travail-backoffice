@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render } from "react-testing-library";
+import { cleanup, fireEvent, render } from "react-testing-library";
 
 import "../../../../__mocks__/waitFor";
 
@@ -19,45 +19,35 @@ describe("[Contrib] components/<Tags />", () => {
     ]
   };
 
-  const {
-    asFragment,
-    container,
-    getByAltText,
-    getByPlaceholderText,
-    queryByAltText,
-    queryByText
-  } = render(<Tags {...props} />);
-  const firstRender = asFragment();
+  const γ = render(<Tags {...props} />);
 
   it("should match snapshot", () => {
-    expect(container).toMatchSnapshot();
-    expect(queryByText(props.tags[0].value)).toBeInTheDocument();
-    expect(queryByText(props.tags[1].value)).toBeInTheDocument();
-    expect(queryByText(props.tags[2].value)).not.toBeInTheDocument();
+    expect(γ.container).toMatchSnapshot();
+    expect(γ.queryByText(props.tags[0].value)).toBeInTheDocument();
+    expect(γ.queryByText(props.tags[1].value)).toBeInTheDocument();
+    expect(γ.queryByText(props.tags[2].value)).not.toBeInTheDocument();
   });
 
   it("should show the expected suggestion", () => {
-    fireEvent.input(getByPlaceholderText(`Commencez à taper le nom du tag`), {
+    fireEvent.input(γ.getByPlaceholderText(`Commencez à taper le nom du tag`), {
       target: { value: "yet" }
     });
 
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
-    expect(queryByText(props.tags[2].value)).toBeInTheDocument();
+    expect(γ.queryByText(props.tags[2].value)).toBeInTheDocument();
   });
 
   it("should add the expected tag", async () => {
-    fireEvent.click(queryByText(props.tags[2].value));
+    fireEvent.click(γ.queryByText(props.tags[2].value));
 
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
     expect(props.onAdd).toHaveBeenCalledWith(props.tags[2]);
-    expect(getByPlaceholderText(`Commencez à taper le nom du tag`).value).toBe(
-      ""
-    );
-    expect(queryByText(props.tags[0].value)).toBeInTheDocument();
-    expect(queryByText(props.tags[1].value)).toBeInTheDocument();
-    expect(queryByText(props.tags[2].value)).toBeInTheDocument();
     expect(
-      queryByAltText(
+      γ.getByPlaceholderText(`Commencez à taper le nom du tag`).value
+    ).toBe("");
+    expect(γ.queryByText(props.tags[0].value)).toBeInTheDocument();
+    expect(γ.queryByText(props.tags[1].value)).toBeInTheDocument();
+    expect(γ.queryByText(props.tags[2].value)).toBeInTheDocument();
+    expect(
+      γ.queryByAltText(
         `Bouton supprimant ${props.ariaName} ${props.tags[2].value}`
       )
     ).toBeInTheDocument();
@@ -65,38 +55,37 @@ describe("[Contrib] components/<Tags />", () => {
 
   it("should remove the expected tag", async () => {
     fireEvent.click(
-      getByAltText(`Bouton supprimant ${props.ariaName} ${props.tags[0].value}`)
+      γ.getByAltText(
+        `Bouton supprimant ${props.ariaName} ${props.tags[0].value}`
+      )
     );
 
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
     expect(props.onRemove).toHaveBeenCalledWith(props.tags[0]);
-    expect(queryByText(props.tags[0].value)).not.toBeInTheDocument();
-    expect(queryByText(props.tags[1].value)).toBeInTheDocument();
-    expect(queryByText(props.tags[2].value)).toBeInTheDocument();
+    expect(γ.queryByText(props.tags[0].value)).not.toBeInTheDocument();
+    expect(γ.queryByText(props.tags[1].value)).toBeInTheDocument();
+    expect(γ.queryByText(props.tags[2].value)).toBeInTheDocument();
   });
 
   it("should show the expected suggestions", () => {
-    fireEvent.input(getByPlaceholderText(`Commencez à taper le nom du tag`), {
+    fireEvent.input(γ.getByPlaceholderText(`Commencez à taper le nom du tag`), {
       target: { value: "a" }
     });
 
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
-    expect(getByPlaceholderText(`Commencez à taper le nom du tag`).value).toBe(
-      "a"
-    );
-    expect(queryByText(props.tags[0].value)).toBeInTheDocument();
+    expect(
+      γ.getByPlaceholderText(`Commencez à taper le nom du tag`).value
+    ).toBe("a");
+    expect(γ.queryByText(props.tags[0].value)).toBeInTheDocument();
   });
 
   it("should hide the suggestion when the input is emptied", () => {
-    fireEvent.input(getByPlaceholderText(`Commencez à taper le nom du tag`), {
+    fireEvent.input(γ.getByPlaceholderText(`Commencez à taper le nom du tag`), {
       target: { value: "" }
     });
 
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
-    expect(getByPlaceholderText(`Commencez à taper le nom du tag`).value).toBe(
-      ""
-    );
-    expect(queryByText(props.tags[0].value)).not.toBeInTheDocument();
+    expect(
+      γ.getByPlaceholderText(`Commencez à taper le nom du tag`).value
+    ).toBe("");
+    expect(γ.queryByText(props.tags[0].value)).not.toBeInTheDocument();
   });
 });
 
@@ -107,23 +96,45 @@ describe("[Contrib] components/<Tags /> without optional props", () => {
     onRemove: jest.fn()
   };
 
-  const { asFragment, container, getByPlaceholderText } = render(
-    <Tags {...props} />
-  );
-  const firstRender = asFragment();
+  let γ;
 
   it("should match snapshot", () => {
-    expect(container).toMatchSnapshot();
+    cleanup();
+
+    γ = render(<Tags {...props} />);
+
+    expect(γ.container).toMatchSnapshot();
   });
 
-  it("should ot show any suggestion", () => {
-    fireEvent.input(
-      getByPlaceholderText(`Commencez à taper le nom de l'étiquette`),
-      {
-        target: { value: "a" }
-      }
-    );
+  // it("should ot show any suggestion", () => {
+  //   fireEvent.input(
+  //     γ.getByPlaceholderText(`Commencez à taper le nom de l'étiquette`),
+  //     {
+  //       target: { value: "a" }
+  //     }
+  //   );
+  // });
+});
 
-    expect(firstRender).toMatchDiffSnapshot(null);
+describe("[Contrib] components/<Tags /> without `isEditable`", () => {
+  const props = {
+    onAdd: jest.fn(),
+    onRemove: jest.fn(),
+    selectedTags: [{ value: "A Tag" }, { value: "Another Tag" }],
+    tags: [
+      { value: "A Tag" },
+      { value: "Another Tag" },
+      { value: "Yet Another Tag" }
+    ]
+  };
+
+  let γ;
+
+  it("should match snapshot", () => {
+    cleanup();
+
+    γ = render(<Tags {...props} />);
+
+    expect(γ.container).toMatchSnapshot();
   });
 });
