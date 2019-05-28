@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "build": "lerna run build",
+    "db:import": "node ./scripts/db/importGoogleFormData.js",
     "db:migrate": "knex migrate:latest",
     "db:migrate:make": "node ./scripts/db/generateMigration.js",
     "db:seed": "knex seed:run",
