@@ -5,3 +5,7 @@
 
 # Docker shared volume
 /backups
+
+# Manual data imports
+/*.csv
+/*.sql

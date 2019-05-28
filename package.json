@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "build": "lerna run build",
+    "db:import": "node ./scripts/db/importGoogleFormData.js",
     "db:migrate": "knex migrate:latest",
     "db:migrate:make": "node ./scripts/db/generateMigration.js",
     "db:seed": "knex seed:run",
@@ -19,6 +20,7 @@
   },
   "dependencies": {
     "chai": "^4.2.0",
+    "csv-parse": "^4.4.1",
     "cucumber": "^5.1.0",
     "dotenv": "8.0.0",
     "knex": "0.16.6-oracle-fix",
