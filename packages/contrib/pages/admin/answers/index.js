@@ -13,6 +13,7 @@ import customAxios from "../../../src/libs/customAxios";
 import stringFrIncludes from "../../../src/libs/stringFrIncludes";
 
 import { ANSWER_STATE, ANSWER_STATE_LABEL } from "../../../src/constants";
+import T from "../../../src/texts";
 
 const Container = styled(Flex)`
   margin: 0 1rem 1rem;
@@ -229,7 +230,7 @@ export default class AdminAnswersIndexPage extends React.Component {
               icon="search"
               key={`filterInput-${this.state.filterInputKey}`}
               onChange={this.updateQueryFilter.bind(this)}
-              placeholder="Rechercher par question, utilisateur ou convention…"
+              placeholder={T.ADMIN_ANSWERS_SEARCH_PLACEHOLDER}
             />
             <Flex>
               <Button
