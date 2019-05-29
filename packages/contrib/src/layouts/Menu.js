@@ -68,6 +68,10 @@ const DropdownLink = styled(TopLink)`
 `;
 
 export default class Menu extends React.PureComponent {
+  openGuide(path) {
+    window.open(`https://jean-rene-duscher.gitbook.io${path}`, "_blank");
+  }
+
   logOut() {
     sessionStorage.removeItem("jwt");
     sessionStorage.removeItem("me");
@@ -109,9 +113,23 @@ export default class Menu extends React.PureComponent {
           <DropdownMenu flexDirection="column">
             <DropdownLink
               isActive={this.isActive("/chart")}
-              onClick={() => Router.push("/chart")}
+              onClick={() => this.openGuide("/code-du-travail-numerique/")}
+            >
+              <Icon icon="book" />
+              Guide : Outil de contribution
+            </DropdownLink>
+            {/* <DropdownLink
+              isActive={this.isActive("/chart")}
+              onClick={() => this.openGuide("__TO_BE_DEFINED__")}
             >
               <Icon icon="tasks" />
+              Guide : Campagne de contribution
+            </DropdownLink> */}
+            <DropdownLink
+              isActive={this.isActive("/chart")}
+              onClick={() => Router.push("/chart")}
+            >
+              <Icon icon="feather-alt" />
               Charte rédactionnelle
             </DropdownLink>
           </DropdownMenu>
