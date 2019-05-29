@@ -148,12 +148,12 @@ export default class AdminAnswersIndexPage extends React.Component {
   filterAnswers() {
     const queryFilter =
       this.state.query.length !== 0
-        ? ({ agreements, questions, users }) =>
-            stringFrIncludes(this.state.query, agreements.name) ||
-            agreements.idcc.includes(this.state.query) ||
-            questions.index === Number(this.state.query) ||
-            stringFrIncludes(this.state.query, questions.value) ||
-            stringFrIncludes(this.state.query, users.name)
+        ? ({ agreement, question, user }) =>
+            stringFrIncludes(this.state.query, agreement.name) ||
+            agreement.idcc.includes(this.state.query) ||
+            question.index === Number(this.state.query) ||
+            stringFrIncludes(this.state.query, question.value) ||
+            stringFrIncludes(this.state.query, user.name)
         : () => true;
 
     return this.state.answers.filter(queryFilter);
