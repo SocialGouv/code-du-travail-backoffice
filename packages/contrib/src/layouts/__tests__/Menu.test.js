@@ -4,6 +4,8 @@ import { fireEvent, render } from "react-testing-library";
 import Router from "next/router";
 jest.mock("next/router");
 
+global.open = jest.fn();
+
 import Menu from "../Menu";
 
 describe("[Contrib] layouts/<Menu /> (Contributor)", () => {
@@ -33,6 +35,17 @@ describe("[Contrib] layouts/<Menu /> (Contributor)", () => {
     expect(sessionStorage.getItem("jwt")).toBe(JWT);
     expect(sessionStorage.getItem("me")).toBe(ME);
     expect(Router.push).toHaveBeenCalledWith("/");
+  });
+
+  it("should open the contribution guide URL", () => {
+    fireEvent.click(γ.getByText("Guide : Outil de contribution"));
+
+    expect(sessionStorage.getItem("jwt")).toBe(JWT);
+    expect(sessionStorage.getItem("me")).toBe(ME);
+    expect(global.open).toHaveBeenCalledWith(
+      "https://jean-rene-duscher.gitbook.io/code-du-travail-numerique/",
+      "_blank"
+    );
   });
 
   it("should redirect to the chart path", () => {
