@@ -65,8 +65,10 @@ export default class Index extends React.Component {
   async loadAnswers() {
     this.setState({ isLoading: true });
 
+    const uri = `/contributor_answers?order=index.asc,idcc.asc`;
+
     try {
-      const { data: answers } = await this.axios.get(`/contributor_answers`);
+      const { data: answers } = await this.axios.get(uri);
       this.setState({
         answers,
         isLoading: false
