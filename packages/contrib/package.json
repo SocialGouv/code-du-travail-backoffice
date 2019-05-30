@@ -57,7 +57,7 @@
     "jest-dom": "^3.4.0",
     "mutationobserver-shim": "^0.3.3",
     "prettier": "1.17.1",
-    "react-testing-library": "7.0.1",
+    "react-testing-library": "8.0.1",
     "redux-devtools-extension": "2.13.8",
     "snapshot-diff": "^0.5.1",
     "svg-inline-loader": "^0.8.0",
