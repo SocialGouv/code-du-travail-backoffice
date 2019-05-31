@@ -2914,10 +2914,10 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
   integrity sha512-s5kLOcnH0XqDO+FvuaLX8DDjZ18CGFk7VygH40QoKPUQhW4e2rvM0rwUq0t8IQDOwYSeLK01U90OjzBTme2QqA==
 
-knex@0.17.0:
-  version "0.17.0"
-  resolved "https://registry.yarnpkg.com/knex/-/knex-0.17.0.tgz#ac0de21eb8088284ba9343baf9d68e329f8a2d96"
-  integrity sha512-+jGBkpkgDpTEVtuF3FdWfIkjbYY/mdG4UOT6dU+Jq1ioBo43dtEs31IUXKnppKr3QN8jzPM9+5QbEZ628ssT5w==
+knex@0.17.1:
+  version "0.17.1"
+  resolved "https://registry.yarnpkg.com/knex/-/knex-0.17.1.tgz#0c14bba053428811b857c8ef427ce7fa46d5c4ad"
+  integrity sha512-6EEFLp1TJTFVJYao4ZtQ41oET2fXz1v14UnZZq6qDSz+Mqm3ZN11ekLDb3VvpbNVe1ROs77+iYOcoJMmXntrpg==
   dependencies:
     "@babel/polyfill" "^7.4.4"
     "@types/bluebird" "^3.5.27"
