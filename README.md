@@ -2,6 +2,7 @@
 
 [![Pipeline Status][img-gitlab]][link-gitlab]
 [![Code Coverage][img-codecov]][link-codecov]
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FSocialGouv%2Fcode-du-travail-backoffice.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FSocialGouv%2Fcode-du-travail-backoffice?ref=badge_shield)
 
 > Ce dépôt regroupe les applications d'administration des données du [code du
 > travail numérique][link-cdtn].
@@ -79,3 +80,6 @@ Ce dépôt est licencié sous la [licence Apacha 2.0][link-license].
 [link-codecov]: https://codecov.io/gh/SocialGouv/code-du-travail-backoffice
 [link-license]: https://github.com/SocialGouv/code-du-travail-backoffice/blob/master/LICENSE
 [link-gitlab]: https://gitlab.factory.social.gouv.fr/SocialGouv/code-du-travail-backoffice/pipelines
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FSocialGouv%2Fcode-du-travail-backoffice.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FSocialGouv%2Fcode-du-travail-backoffice?ref=badge_large)
