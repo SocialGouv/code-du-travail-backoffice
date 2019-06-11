@@ -39,7 +39,7 @@
     "redux-thunk": "2.3.0",
     "sanitize-html": "^1.20.1",
     "showdown": "^1.9.0",
-    "styled-components": "4.2.1",
+    "styled-components": "4.3.1",
     "ua-parser-js": "^0.7.19",
     "zxcvbn": "^4.4.2"
   },
