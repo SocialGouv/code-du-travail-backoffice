@@ -1,6 +1,6 @@
 import moment from "moment-timezone";
 import React from "react";
-import { fireEvent, render } from "react-testing-library";
+import { fireEvent, render } from "@testing-library/react";
 
 import AdminAnswer from "..";
 

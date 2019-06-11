@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "react-testing-library";
+import { render } from "@testing-library/react";
 import SavingSpinner from "../SavingSpinner";
 
 describe("[Contrib] elements/<SavingSpinner />", () => {

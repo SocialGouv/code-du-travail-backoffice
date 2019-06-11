@@ -122,7 +122,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE + CHECKED) should match
     class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 fAszZA"
   >
     <button
-      class="sc-bdVaJa sc-EHOje Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 loLOpV"
+      class="sc-bdVaJa sc-EHOje Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 ciREbs"
       color="white"
       font-size="inherit"
       font-weight="bold"
@@ -206,7 +206,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE + UNCHECKED) should mat
     class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 fAszZA"
   >
     <button
-      class="sc-bdVaJa sc-EHOje Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 loLOpV"
+      class="sc-bdVaJa sc-EHOje Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 ciREbs"
       color="white"
       font-size="inherit"
       font-weight="bold"
