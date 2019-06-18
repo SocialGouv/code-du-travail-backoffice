@@ -3,7 +3,7 @@
 exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + LC REF) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 fAszZA"
+    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
   >
     <div
       class="sc-bdVaJa sc-bwzfXH eTLtBf"
@@ -24,7 +24,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + LC REF) should match snapshot
         </span>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 PWfPy"
+        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
       >
         <div
           class="sc-bdVaJa sc-bwzfXH dntGME"
@@ -61,7 +61,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + LC REF) should match snapshot
 exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + NA REF) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 fAszZA"
+    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
   >
     <div
       class="sc-bdVaJa sc-bwzfXH eTLtBf"
@@ -82,7 +82,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + NA REF) should match snapshot
         </span>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 PWfPy"
+        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
       >
         <div
           class="sc-bdVaJa sc-bwzfXH dntGME"
@@ -119,7 +119,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + NA REF) should match snapshot
 exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE + CHECKED) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 fAszZA"
+    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
   >
     <button
       class="sc-bdVaJa sc-EHOje Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 ciREbs"
@@ -130,7 +130,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE + CHECKED) should match
     >
       <svg
         aria-hidden="true"
-        class="svg-inline--fa fa-check-square fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz"
+        class="svg-inline--fa fa-check-square fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx"
         color="var(--color-lapis-lazuli)"
         data-icon="check-square"
         data-prefix="fas"
@@ -164,7 +164,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE + CHECKED) should match
         </span>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 PWfPy"
+        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
       >
         <div
           class="sc-bdVaJa sc-bwzfXH dntGME"
@@ -203,7 +203,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE + CHECKED) should match
 exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE + UNCHECKED) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 fAszZA"
+    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
   >
     <button
       class="sc-bdVaJa sc-EHOje Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 ciREbs"
@@ -214,7 +214,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE + UNCHECKED) should mat
     >
       <svg
         aria-hidden="true"
-        class="svg-inline--fa fa-square fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz"
+        class="svg-inline--fa fa-square fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx"
         color="var(--color-lapis-lazuli)"
         data-icon="square"
         data-prefix="fas"
@@ -248,7 +248,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE + UNCHECKED) should mat
         </span>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 PWfPy"
+        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
       >
         <div
           class="sc-bdVaJa sc-bwzfXH dntGME"
@@ -287,7 +287,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE + UNCHECKED) should mat
 exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 fAszZA"
+    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
   >
     <div
       class="sc-bdVaJa sc-bwzfXH eTLtBf"
@@ -308,7 +308,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE) should match snapshot 
         </span>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 PWfPy"
+        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
       >
         <div
           class="sc-bdVaJa sc-bwzfXH dntGME"

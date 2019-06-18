@@ -20,9 +20,12 @@ export default class List extends React.PureComponent {
   }
 
   render() {
+    const { ariaName, onRemove, references } = this.props;
+    const urlButtonTitle = `Bouton ouvrant le lien associé à ${ariaName}`;
+
     return (
       <Container flexDirection="column">
-        {this.props.references.map(({ url, value }, index) => (
+        {references.map(({ url, value }, index) => (
           <Flex alignItems="center" key={index}>
             <Icon color="black" icon="circle" isSmall />
             <Text>{value}</Text>
@@ -30,15 +33,13 @@ export default class List extends React.PureComponent {
               <Button
                 icon="link"
                 onClick={() => this.openUrl(url)}
-                title={`Bouton ouvrant le lien associé à ${
-                  this.props.ariaName
-                } : ${value}`}
+                title={`${urlButtonTitle} "${value}"`}
               />
             )}
             <Button
               icon="trash"
-              onClick={() => this.props.onRemove(value)}
-              title={`Bouton supprimant ${this.props.ariaName} : ${value}`}
+              onClick={() => onRemove(value)}
+              title={`Bouton supprimant ${ariaName} "${value}"`}
             />
           </Flex>
         ))}

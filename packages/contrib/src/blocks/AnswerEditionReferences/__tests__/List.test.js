@@ -42,7 +42,7 @@ describe("[Contrib] blocks/AnswerEditionReferences/<List />", () => {
   it("should call `onRemove()` prop with the expected param", async () => {
     fireEvent.click(
       γ.getByTitle(
-        `Bouton supprimant ${props.ariaName} : ${props.references[0].value}`
+        `Bouton supprimant ${props.ariaName} "${props.references[0].value}"`
       )
     );
 
@@ -52,9 +52,8 @@ describe("[Contrib] blocks/AnswerEditionReferences/<List />", () => {
   it("should call `window.open()` with the expected params", async () => {
     fireEvent.click(
       γ.getByTitle(
-        `Bouton ouvrant le lien associé à ${props.ariaName} : ${
-          props.references[1].value
-        }`
+        `Bouton ouvrant le lien associé à ${props.ariaName} ` +
+          `"${props.references[1].value}"`
       )
     );
 

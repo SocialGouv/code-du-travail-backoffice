@@ -22,7 +22,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
           >
             <input
-              class="Input___Input-l1y0rz-1 didSAw"
+              class="Input___Input-l1y0rz-1 bLtEdt"
               placeholder="Commencez à taper le nom de la référence au Code du travail"
             />
           </div>
@@ -36,7 +36,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
         >
           <svg
             aria-hidden="true"
-            class="svg-inline--fa fa-circle fa-w-16 fa-sm Icon-sc-4jlog9-0 kEhyQg"
+            class="svg-inline--fa fa-circle fa-w-16 fa-sm Icon-sc-4jlog9-0 gomlef"
             color="black"
             data-icon="circle"
             data-prefix="fas"
@@ -60,11 +60,11 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             color="white"
             font-size="inherit"
             font-weight="bold"
-            title="Bouton supprimant la référence au Code du travail : L1234-5"
+            title="Bouton supprimant la référence au Code du travail \\"L1234-5\\""
           >
             <svg
               aria-hidden="true"
-              class="svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz"
+              class="svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx"
               color="var(--color-lapis-lazuli)"
               data-icon="trash"
               data-prefix="fas"
@@ -101,7 +101,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
           >
             <input
-              class="Input___Input-l1y0rz-1 didSAw"
+              class="Input___Input-l1y0rz-1 bLtEdt"
               placeholder="Ex: Article 7, Texte sur les salaires de 1984…"
             />
           </div>
@@ -129,7 +129,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
         >
           <svg
             aria-hidden="true"
-            class="svg-inline--fa fa-circle fa-w-16 fa-sm Icon-sc-4jlog9-0 kEhyQg"
+            class="svg-inline--fa fa-circle fa-w-16 fa-sm Icon-sc-4jlog9-0 gomlef"
             color="black"
             data-icon="circle"
             data-prefix="fas"
@@ -153,11 +153,11 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             color="white"
             font-size="inherit"
             font-weight="bold"
-            title="Bouton supprimant la référence à la convention collective : An Agreement Reference"
+            title="Bouton supprimant la référence à la convention collective \\"An Agreement Reference\\""
           >
             <svg
               aria-hidden="true"
-              class="svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz"
+              class="svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx"
               color="var(--color-lapis-lazuli)"
               data-icon="trash"
               data-prefix="fas"
@@ -194,7 +194,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
           >
             <input
-              class="Input___Input-l1y0rz-1 didSAw"
+              class="Input___Input-l1y0rz-1 bLtEdt"
               placeholder="Référence (ex: Décret n°82-447 du 28 mai 1982…)"
             />
           </div>
@@ -202,7 +202,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
           >
             <input
-              class="Input___Input-l1y0rz-1 didSAw"
+              class="Input___Input-l1y0rz-1 bLtEdt"
               placeholder="URL (ex: https://www.legifrance.gouv.fr/…)"
             />
           </div>
@@ -230,7 +230,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
         >
           <svg
             aria-hidden="true"
-            class="svg-inline--fa fa-circle fa-w-16 fa-sm Icon-sc-4jlog9-0 kEhyQg"
+            class="svg-inline--fa fa-circle fa-w-16 fa-sm Icon-sc-4jlog9-0 gomlef"
             color="black"
             data-icon="circle"
             data-prefix="fas"
@@ -254,11 +254,11 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             color="white"
             font-size="inherit"
             font-weight="bold"
-            title="Bouton ouvrant le lien associé à la référence juridique : An Uncategorized Reference"
+            title="Bouton ouvrant le lien associé à la référence juridique \\"An Uncategorized Reference\\""
           >
             <svg
               aria-hidden="true"
-              class="svg-inline--fa fa-link fa-w-16 fa-1x Icon-sc-4jlog9-0 bEnrPz"
+              class="svg-inline--fa fa-link fa-w-16 fa-1x Icon-sc-4jlog9-0 hXLKsx"
               color="var(--color-lapis-lazuli)"
               data-icon="link"
               data-prefix="fas"
@@ -278,11 +278,11 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             color="white"
             font-size="inherit"
             font-weight="bold"
-            title="Bouton supprimant la référence juridique : An Uncategorized Reference"
+            title="Bouton supprimant la référence juridique \\"An Uncategorized Reference\\""
           >
             <svg
               aria-hidden="true"
-              class="svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz"
+              class="svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx"
               color="var(--color-lapis-lazuli)"
               data-icon="trash"
               data-prefix="fas"

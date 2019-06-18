@@ -19,6 +19,7 @@ const _Input = styled.input`
   font-size: 0.875rem;
   height: 2rem;
   line-height: 1;
+  opacity: ${({ disabled }) => (Boolean(disabled) ? 0.25 : 1)};
   padding: 0.5rem 0.6rem 0.55rem
     ${({ hasIcon }) => (Boolean(hasIcon) ? "2rem" : "0.6rem")};
   width: 100%;

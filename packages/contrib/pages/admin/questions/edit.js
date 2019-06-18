@@ -25,9 +25,10 @@ export default class AdminQuestionsEditPage extends AdminQuestionsNewPage {
 
     try {
       const questionsUri = `/questions?id=eq.${this.props.id}`;
-      const tagsUri = `/questions_tags?select=tags(id,value)&question_id=eq.${
-        this.props.id
-      }`;
+      const tagsSelect = `select=tags(id,value)`;
+      const tagsWhere = `select=tags(id,value)`;
+      const tagsUri = `/questions_tags?${tagsSelect}&${tagsWhere}`;
+
       const { data: questions } = await this.axios.get(questionsUri);
       const { data: questionsTags } = await this.axios.get(tagsUri);
 
