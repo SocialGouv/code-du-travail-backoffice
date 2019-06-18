@@ -5,6 +5,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Icon = styled(FontAwesomeIcon)`
+  cursor: ${({ role }) => (role === "button" ? "pointer" : "default")};
   width: ${({ size }) => (size === "sm" ? "0.5rem" : "1rem")} !important;
 `;
 
@@ -24,6 +25,6 @@ export default ({
   library.add(Icons[convertFaSlugToFaProp(icon)]);
 
   return (
-    <Icon icon={icon} color={color} size={isSmall ? "sm" : "1x"} {...props} />
+    <Icon color={color} icon={icon} size={isSmall ? "sm" : "1x"} {...props} />
   );
 };

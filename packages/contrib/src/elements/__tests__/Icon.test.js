@@ -26,6 +26,12 @@ describe("[Contrib] elements/<Icon />", () => {
     expect(firstRender).toMatchDiffSnapshot(asFragment());
   });
 
+  it("should match snapshot with a `role` prop set to 'button'", () => {
+    const { container } = render(<Icon {...props} role="button" />);
+
+    expect(container).toMatchSnapshot();
+  });
+
   it("should match snapshot with a dashed icon name", () => {
     const { container } = render(<Icon icon="caret-down" />);
 
