@@ -66,8 +66,8 @@ describe("[Contrib] blocks/<AnswerEditionReferences />", () => {
   it("should remove the expected Labor Code reference", async () => {
     fireEvent.click(
       γ.getByTitle(
-        `Bouton supprimant la référence au Code du travail : ` +
-          props.references[0].value
+        `Bouton supprimant la référence au Code du travail ` +
+          `"${props.references[0].value}"`
       )
     );
     await waitFor(0);
@@ -102,8 +102,8 @@ describe("[Contrib] blocks/<AnswerEditionReferences />", () => {
   it("should remove the expected Agreement reference", async () => {
     fireEvent.click(
       γ.getByTitle(
-        `Bouton supprimant la référence à la convention collective : ` +
-          props.references[2].value
+        `Bouton supprimant la référence à la convention collective ` +
+          `"${props.references[2].value}"`
       )
     );
     await waitFor(0);
@@ -181,8 +181,8 @@ describe("[Contrib] blocks/<AnswerEditionReferences />", () => {
   it("should remove the expected uncategorized reference", async () => {
     fireEvent.click(
       γ.getByTitle(
-        `Bouton supprimant la référence juridique : ` +
-          props.references[1].value
+        `Bouton supprimant la référence juridique ` +
+          `"${props.references[1].value}"`
       )
     );
     await waitFor(0);

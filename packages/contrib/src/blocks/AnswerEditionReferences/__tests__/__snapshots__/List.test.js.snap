@@ -10,7 +10,7 @@ exports[`[Contrib] blocks/AnswerEditionReferences/<List /> should match snapshot
     >
       <svg
         aria-hidden="true"
-        class="svg-inline--fa fa-circle fa-w-16 fa-sm Icon-sc-4jlog9-0 kEhyQg"
+        class="svg-inline--fa fa-circle fa-w-16 fa-sm Icon-sc-4jlog9-0 gomlef"
         color="black"
         data-icon="circle"
         data-prefix="fas"
@@ -34,11 +34,11 @@ exports[`[Contrib] blocks/AnswerEditionReferences/<List /> should match snapshot
         color="white"
         font-size="inherit"
         font-weight="bold"
-        title="Bouton supprimant A Reference Type : L1234-5"
+        title="Bouton supprimant A Reference Type \\"L1234-5\\""
       >
         <svg
           aria-hidden="true"
-          class="svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz"
+          class="svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx"
           color="var(--color-lapis-lazuli)"
           data-icon="trash"
           data-prefix="fas"
@@ -59,7 +59,7 @@ exports[`[Contrib] blocks/AnswerEditionReferences/<List /> should match snapshot
     >
       <svg
         aria-hidden="true"
-        class="svg-inline--fa fa-circle fa-w-16 fa-sm Icon-sc-4jlog9-0 kEhyQg"
+        class="svg-inline--fa fa-circle fa-w-16 fa-sm Icon-sc-4jlog9-0 gomlef"
         color="black"
         data-icon="circle"
         data-prefix="fas"
@@ -83,11 +83,11 @@ exports[`[Contrib] blocks/AnswerEditionReferences/<List /> should match snapshot
         color="white"
         font-size="inherit"
         font-weight="bold"
-        title="Bouton ouvrant le lien associé à A Reference Type : An Uncategorized Reference"
+        title="Bouton ouvrant le lien associé à A Reference Type \\"An Uncategorized Reference\\""
       >
         <svg
           aria-hidden="true"
-          class="svg-inline--fa fa-link fa-w-16 fa-1x Icon-sc-4jlog9-0 bEnrPz"
+          class="svg-inline--fa fa-link fa-w-16 fa-1x Icon-sc-4jlog9-0 hXLKsx"
           color="var(--color-lapis-lazuli)"
           data-icon="link"
           data-prefix="fas"
@@ -107,11 +107,11 @@ exports[`[Contrib] blocks/AnswerEditionReferences/<List /> should match snapshot
         color="white"
         font-size="inherit"
         font-weight="bold"
-        title="Bouton supprimant A Reference Type : An Uncategorized Reference"
+        title="Bouton supprimant A Reference Type \\"An Uncategorized Reference\\""
       >
         <svg
           aria-hidden="true"
-          class="svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz"
+          class="svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx"
           color="var(--color-lapis-lazuli)"
           data-icon="trash"
           data-prefix="fas"
@@ -132,7 +132,7 @@ exports[`[Contrib] blocks/AnswerEditionReferences/<List /> should match snapshot
     >
       <svg
         aria-hidden="true"
-        class="svg-inline--fa fa-circle fa-w-16 fa-sm Icon-sc-4jlog9-0 kEhyQg"
+        class="svg-inline--fa fa-circle fa-w-16 fa-sm Icon-sc-4jlog9-0 gomlef"
         color="black"
         data-icon="circle"
         data-prefix="fas"
@@ -156,11 +156,11 @@ exports[`[Contrib] blocks/AnswerEditionReferences/<List /> should match snapshot
         color="white"
         font-size="inherit"
         font-weight="bold"
-        title="Bouton supprimant A Reference Type : An Agreement Reference"
+        title="Bouton supprimant A Reference Type \\"An Agreement Reference\\""
       >
         <svg
           aria-hidden="true"
-          class="svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz"
+          class="svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx"
           color="var(--color-lapis-lazuli)"
           data-icon="trash"
           data-prefix="fas"
