@@ -3,7 +3,16 @@
 exports[`[Contrib] elements/<Input /> should match snapshot 1`] = `
 <div>
   <input
-    class="Input___Input-l1y0rz-1 didSAw"
+    class="Input___Input-l1y0rz-1 bLtEdt"
+  />
+</div>
+`;
+
+exports[`[Contrib] elements/<Input /> should match snapshot with \`disabled\` prop 1`] = `
+<div>
+  <input
+    class="Input___Input-l1y0rz-1 jHgeEG"
+    disabled=""
   />
 </div>
 `;
@@ -19,7 +28,7 @@ exports[`[Contrib] elements/<Input /> should match snapshot with a custom \`icon
       >
         <svg
           aria-hidden="true"
-          class="svg-inline--fa fa-search fa-w-16 fa-1x Input__InputIcon-l1y0rz-3 eiJHjO Icon-sc-4jlog9-0 bEnrPz"
+          class="svg-inline--fa fa-search fa-w-16 fa-1x Input__InputIcon-l1y0rz-3 eiJHjO Icon-sc-4jlog9-0 hXLKsx"
           color="var(--color-black-leather-jacket)"
           data-icon="search"
           data-prefix="fas"
@@ -35,7 +44,7 @@ exports[`[Contrib] elements/<Input /> should match snapshot with a custom \`icon
         </svg>
       </span>
       <input
-        class="Input___Input-l1y0rz-1 fHkOXj"
+        class="Input___Input-l1y0rz-1 eMUdic"
       />
     </div>
   </div>
