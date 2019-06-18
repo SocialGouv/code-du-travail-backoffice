@@ -1,3 +1,4 @@
+import Router from "next/router";
 import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
@@ -174,6 +175,16 @@ export default class AdminAnswersIndexPage extends React.Component {
     });
   }
 
+  editAnswer(id) {
+    Router.push(
+      {
+        pathname: `${window.location.pathname}/edit`,
+        query: { id }
+      },
+      `${window.location.pathname}/${id}`
+    );
+  }
+
   getAnswersList(answers) {
     if (answers.length === 0) {
       if (this.state.query.length !== 0) {
@@ -195,6 +206,7 @@ export default class AdminAnswersIndexPage extends React.Component {
         isChecked={this.state.checkedAnswers.includes(answer.id)}
         key={answer.id}
         onCheck={this.checkAnswer.bind(this)}
+        onClick={this.editAnswer.bind(this)}
       />
     ));
   }
