@@ -52,9 +52,8 @@ describe("[Contrib] blocks/AnswerEditionReferences/<List />", () => {
   it("should call `window.open()` with the expected params", async () => {
     fireEvent.click(
       γ.getByTitle(
-        `Bouton ouvrant le lien associé à ${props.ariaName} : ${
+        `Bouton ouvrant le lien associé à ${props.ariaName} : ` +
           props.references[1].value
-        }`
       )
     );
 
