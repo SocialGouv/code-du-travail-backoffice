@@ -3,7 +3,15 @@
 exports[`[Contrib] elements/<Tag /> should match snapshot 1`] = `
 <div>
   <span
-    class="Tag-sc-16selk6-0 hoDWTY"
+    class="Tag-sc-16selk6-0 fPHNXI"
+  />
+</div>
+`;
+
+exports[`[Contrib] elements/<Tag /> should match snapshot with \`isDisabled\` prop 1`] = `
+<div>
+  <span
+    class="Tag-sc-16selk6-0 vdIgt"
   />
 </div>
 `;
