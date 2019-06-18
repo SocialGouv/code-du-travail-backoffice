@@ -6604,6 +6604,11 @@ react-table@^6.10.0:
   dependencies:
     classnames "^2.2.5"
 
+react-tag-autocomplete@^5.11.1:
+  version "5.11.1"
+  resolved "https://registry.yarnpkg.com/react-tag-autocomplete/-/react-tag-autocomplete-5.11.1.tgz#ee09dccc065c50fd41c31bed8e9129a1a911f4b0"
+  integrity sha512-oniQEAC8OJFh/h9TnTHIWYhp9bCbBlr+UlayhG+/QJZguBjJe18Ay0POe91J9DE9v1ZxUUzMQWEerZ3uOENGCg==
+
 react-tooltip@^3.10.0:
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/react-tooltip/-/react-tooltip-3.10.0.tgz#268b5ef519fd8a1369288d1f086f42c90d5da7ef"
