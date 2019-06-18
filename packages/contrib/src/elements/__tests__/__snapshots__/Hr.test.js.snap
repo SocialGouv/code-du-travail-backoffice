@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Contrib] elements/<Hr /> should match snapshot 1`] = `
+<div>
+  <hr
+    class="Hr-zpmpsi-0 hnUWRB"
+  />
+</div>
+`;
