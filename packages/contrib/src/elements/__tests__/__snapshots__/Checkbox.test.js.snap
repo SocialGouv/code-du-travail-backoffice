@@ -11,7 +11,7 @@ exports[`[Contrib] elements/<Checkbox /> should match snapshot 1`] = `
   >
     <svg
       aria-hidden="true"
-      class="svg-inline--fa fa-square fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz"
+      class="svg-inline--fa fa-square fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx"
       color="var(--color-lapis-lazuli)"
       data-icon="square"
       data-prefix="fas"
@@ -40,7 +40,7 @@ exports[`[Contrib] elements/<Checkbox /> should match snapshot with \`isChecked\
   >
     <svg
       aria-hidden="true"
-      class="svg-inline--fa fa-check-square fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz"
+      class="svg-inline--fa fa-check-square fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx"
       color="var(--color-lapis-lazuli)"
       data-icon="check-square"
       data-prefix="fas"
@@ -69,7 +69,7 @@ exports[`[Contrib] elements/<Checkbox /> should match snapshot with a custom \`c
   >
     <svg
       aria-hidden="true"
-      class="svg-inline--fa fa-square fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz"
+      class="svg-inline--fa fa-square fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx"
       color="var(--color-periwinkle)"
       data-icon="square"
       data-prefix="fas"

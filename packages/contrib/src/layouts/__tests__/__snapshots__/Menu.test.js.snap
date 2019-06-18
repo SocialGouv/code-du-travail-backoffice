@@ -10,7 +10,7 @@ exports[`[Contrib] layouts/<Menu /> (Admin) should match snapshot 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="svg-inline--fa fa-caret-down fa-w-10 fa-1x Icon-sc-4jlog9-0 bEnrPz"
+        class="svg-inline--fa fa-caret-down fa-w-10 fa-1x Icon-sc-4jlog9-0 hXLKsx"
         color="var(--color-black-leather-jacket)"
         data-icon="caret-down"
         data-prefix="fas"
@@ -37,7 +37,7 @@ exports[`[Contrib] layouts/<Menu /> (Admin) should match snapshot 1`] = `
         >
           <svg
             aria-hidden="true"
-            class="svg-inline--fa fa-sign-out-alt fa-w-16 fa-1x Icon-sc-4jlog9-0 bEnrPz"
+            class="svg-inline--fa fa-sign-out-alt fa-w-16 fa-1x Icon-sc-4jlog9-0 hXLKsx"
             color="var(--color-black-leather-jacket)"
             data-icon="sign-out-alt"
             data-prefix="fas"
@@ -74,7 +74,7 @@ exports[`[Contrib] layouts/<Menu /> (Contributor) should match snapshot 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="svg-inline--fa fa-caret-down fa-w-10 fa-1x Icon-sc-4jlog9-0 bEnrPz"
+        class="svg-inline--fa fa-caret-down fa-w-10 fa-1x Icon-sc-4jlog9-0 hXLKsx"
         color="var(--color-black-leather-jacket)"
         data-icon="caret-down"
         data-prefix="fas"
@@ -101,7 +101,7 @@ exports[`[Contrib] layouts/<Menu /> (Contributor) should match snapshot 1`] = `
         >
           <svg
             aria-hidden="true"
-            class="svg-inline--fa fa-book fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz"
+            class="svg-inline--fa fa-book fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx"
             color="var(--color-black-leather-jacket)"
             data-icon="book"
             data-prefix="fas"
@@ -122,7 +122,7 @@ exports[`[Contrib] layouts/<Menu /> (Contributor) should match snapshot 1`] = `
         >
           <svg
             aria-hidden="true"
-            class="svg-inline--fa fa-feather-alt fa-w-16 fa-1x Icon-sc-4jlog9-0 bEnrPz"
+            class="svg-inline--fa fa-feather-alt fa-w-16 fa-1x Icon-sc-4jlog9-0 hXLKsx"
             color="var(--color-black-leather-jacket)"
             data-icon="feather-alt"
             data-prefix="fas"
@@ -145,7 +145,7 @@ exports[`[Contrib] layouts/<Menu /> (Contributor) should match snapshot 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="svg-inline--fa fa-caret-down fa-w-10 fa-1x Icon-sc-4jlog9-0 bEnrPz"
+        class="svg-inline--fa fa-caret-down fa-w-10 fa-1x Icon-sc-4jlog9-0 hXLKsx"
         color="var(--color-black-leather-jacket)"
         data-icon="caret-down"
         data-prefix="fas"
@@ -172,7 +172,7 @@ exports[`[Contrib] layouts/<Menu /> (Contributor) should match snapshot 1`] = `
         >
           <svg
             aria-hidden="true"
-            class="svg-inline--fa fa-sign-out-alt fa-w-16 fa-1x Icon-sc-4jlog9-0 bEnrPz"
+            class="svg-inline--fa fa-sign-out-alt fa-w-16 fa-1x Icon-sc-4jlog9-0 hXLKsx"
             color="var(--color-black-leather-jacket)"
             data-icon="sign-out-alt"
             data-prefix="fas"
@@ -223,7 +223,7 @@ exports[`[Contrib] layouts/<Menu /> (Contributor) should match snapshot diff whe
           >
             <svg
               aria-hidden=\\"true\\"
-              class=\\"svg-inline--fa fa-book fa-w-14 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
+              class=\\"svg-inline--fa fa-book fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx\\"
               color=\\"var(--color-black-leather-jacket)\\"
 @@ -54,11 +54,11 @@
               />
@@ -236,6 +236,6 @@ exports[`[Contrib] layouts/<Menu /> (Contributor) should match snapshot diff whe
           >
             <svg
               aria-hidden=\\"true\\"
-              class=\\"svg-inline--fa fa-feather-alt fa-w-16 fa-1x Icon-sc-4jlog9-0 bEnrPz\\"
+              class=\\"svg-inline--fa fa-feather-alt fa-w-16 fa-1x Icon-sc-4jlog9-0 hXLKsx\\"
               color=\\"var(--color-black-leather-jacket)\\""
 `;

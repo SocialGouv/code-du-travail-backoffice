@@ -25,7 +25,7 @@ exports[`[Contrib] blocks/<AnswerEditionTags /> should match snapshot 1`] = `
         class="sc-bdVaJa sc-bwzfXH hbZeap"
       >
         <span
-          class="Tag-sc-16selk6-0 dtzlAs"
+          class="Tag-sc-16selk6-0 lnmabc"
         >
           A Tag
         </span>
@@ -43,7 +43,7 @@ exports[`[Contrib] blocks/<AnswerEditionTags /> should match snapshot 1`] = `
         class="sc-bdVaJa sc-bwzfXH hbZeap"
       >
         <span
-          class="Tag-sc-16selk6-0 hoDWTY"
+          class="Tag-sc-16selk6-0 fPHNXI"
         >
           Another Tag
         </span>
