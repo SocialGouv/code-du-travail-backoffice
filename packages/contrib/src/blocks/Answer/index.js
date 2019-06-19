@@ -42,7 +42,7 @@ export default ({ data, isDraft, onCancel, onClick, onFallback }) => (
         <ContentQuestion>{`${data.index}) ${data.question}`}</ContentQuestion>
       </Flex>
       {isDraft && data.generic_reference === null && (
-        <ContentExtract>{data.value.substr(0, 100)}…</ContentExtract>
+        <ContentExtract>{data.prevalue.substr(0, 100)}…</ContentExtract>
       )}
       {isDraft && data.generic_reference === "labor_code" && (
         <ContentExtractRed>Renvoyé au Code du travail.</ContentExtractRed>
