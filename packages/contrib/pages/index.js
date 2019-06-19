@@ -196,7 +196,6 @@ export default class Index extends React.Component {
     return answers.map(answer => [
       <Answer
         data={answer}
-        isDraft={isDraft}
         key={answer.id}
         onCancel={this.cancelAnswer.bind(this)}
         onClick={this.editAnswer.bind(this)}

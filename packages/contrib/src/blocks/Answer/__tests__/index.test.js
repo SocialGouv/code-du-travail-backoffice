@@ -3,19 +3,21 @@ import { cleanup, fireEvent, render } from "@testing-library/react";
 
 import Answer from "..";
 
+import { ANSWER_STATE } from "../../../constants";
+
 // Ignore styled-wrapped ReactTooltip className prop warning
 console.warn = jest.fn();
 
-describe("[Contrib] blocks/<Answer /> (Undraft)", () => {
+describe("[Contrib] blocks/<Answer /> (Todo)", () => {
   const props = {
     data: {
       id: "12345678-9abc-4def-0123-456789abcdef",
       idcc: "1234",
       index: 12,
       agreement: "A Labor Agreement Name",
-      question: "Who knows?"
+      question: "Who knows?",
+      state: ANSWER_STATE.TODO
     },
-    isDraft: false,
     label: "A label",
     onClick: jest.fn(),
     onFallback: jest.fn()
@@ -57,9 +59,10 @@ describe("[Contrib] blocks/<Answer /> (Draft)", () => {
       agreement: "A Labor Agreement Name",
       question: "Who knows?",
       generic_reference: null,
-      value: "A strange answer."
+      prevalue: "A prevalue",
+      state: ANSWER_STATE.DRAFT,
+      value: "A value"
     },
-    isDraft: true,
     label: "A label",
     onCancel: jest.fn()
   };

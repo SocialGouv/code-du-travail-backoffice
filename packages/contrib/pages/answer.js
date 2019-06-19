@@ -40,7 +40,7 @@ export default class extends React.Component {
       hasSavingSpinner: false,
       isLoading: true,
       isSaving: false,
-      lastAnswerValue: "",
+      lastAnswerPrevalue: "",
       me: null,
       savingSpinnerTimeout: 0
     };
@@ -52,7 +52,10 @@ export default class extends React.Component {
     this.insertReference = debounce(this._insertReference.bind(this), 500);
     this.deleteTag = debounce(this._deleteTag.bind(this), 500);
     this.insertTag = debounce(this._insertTag.bind(this), 500);
-    this.saveAnswerValue = debounce(this._saveAnswerValue.bind(this), 500);
+    this.saveAnswerPrevalue = debounce(
+      this._saveAnswerPrevalue.bind(this),
+      500
+    );
   }
 
   static getInitialProps({ query: { id } }) {
@@ -79,7 +82,7 @@ export default class extends React.Component {
 
       this.setState({
         isLoading: false,
-        lastAnswerValue: this.originalAnswer.value
+        lastAnswerPrevalue: this.originalAnswer.prevalue
       });
     } catch (err) {
       console.warn(err);
@@ -104,7 +107,7 @@ export default class extends React.Component {
         generic_reference: null,
         state: "todo",
         user_id: null,
-        value: ""
+        prevalue: ""
       };
       const answersTagsUri = makeApiFilter("/answers_tags", {
         answer_id: this.props.id
@@ -142,7 +145,7 @@ export default class extends React.Component {
     }
   }
 
-  async _saveAnswerValue(value) {
+  async _saveAnswerPrevalue(value) {
     this.setState({ isSaving: true });
     this.showSavingSpinner();
 
@@ -151,14 +154,14 @@ export default class extends React.Component {
       // An answer can't have a value and be generic at the same time:
       const data = {
         generic_reference: null,
+        prevalue: value,
         state: "draft",
-        user_id: this.state.me.payload.id,
-        value
+        user_id: this.state.me.payload.id
       };
 
       await this.axios.patch(uri, data);
 
-      this.originalAnswer.value = value;
+      this.originalAnswer.prevalue = value;
     } catch (err) {
       console.warn(err);
     }
@@ -290,7 +293,7 @@ export default class extends React.Component {
 
     this.setState({
       currentTab: nextTab,
-      lastAnswerValue: this.originalAnswer.value
+      lastAnswerPrevalue: this.originalAnswer.prevalue
     });
   }
 
@@ -319,8 +322,8 @@ export default class extends React.Component {
       default:
         return (
           <AnswerEditionContent
-            defaultValue={this.state.lastAnswerValue}
-            onChange={this.saveAnswerValue}
+            defaultValue={this.state.lastAnswerPrevalue}
+            onChange={this.saveAnswerPrevalue}
             onToggleTag={this.toggleTag.bind(this)}
             selectedTags={this.originalAnswer.tags}
             tags={this.allTags}
