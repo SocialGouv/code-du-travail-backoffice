@@ -4,6 +4,8 @@ global.spinner = ora()
 exports.seed = async knex => {
   global.spinner.start(`Emptying tables...`)
 
+  await knex('api.answers_comments').del()
+  await knex('api.answers_references').del()
   await knex('api.answers_tags').del()
   await knex('api.questions_tags').del()
   await knex('api.tags').del()
