@@ -40,6 +40,7 @@
     "redux-thunk": "2.3.0",
     "sanitize-html": "^1.20.1",
     "showdown": "^1.9.0",
+    "simplemde": "^1.11.2",
     "styled-components": "4.3.2",
     "ua-parser-js": "^0.7.20",
     "zxcvbn": "^4.4.2"
