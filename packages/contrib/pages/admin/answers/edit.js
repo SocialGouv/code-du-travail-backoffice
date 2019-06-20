@@ -22,6 +22,8 @@ import makeApiFilter from "../../../src/libs/makeApiFilter";
 
 import { ANSWER_STATE } from "../../../src/constants";
 
+import "../../../node_modules/simplemde/dist/simplemde.min.css";
+
 const Container = styled(Flex)`
   height: 100%;
 `;
@@ -125,6 +127,47 @@ export default class AdminAnwsersEditPage extends React.Component {
   componentDidUpdate() {
     if (!this.state.isLoading) {
       this.$commentsContainer.scrollTo(0, this.$commentsContainer.scrollHeight);
+
+      if (this.answerValueEditor === undefined) {
+        // We have to load Quill here because of the global `navigator` variable
+        // check done by the original library.
+        const SimpleMDE = require("simplemde");
+
+        const config = {
+          spellChecker: false,
+          status: false
+        };
+
+        this.answerPrevalueEditor = new SimpleMDE({
+          ...config,
+          element: this.$answerPrevalue,
+          toolbar: ["preview"]
+        });
+
+        this.answerValueEditor = new SimpleMDE({
+          ...config,
+          element: this.$answerValue,
+          toolbar: [
+            "bold",
+            "italic",
+            "|",
+            "unordered-list",
+            "ordered-list",
+            "quote",
+            "|",
+            "preview",
+            "side-by-side",
+            "fullscreen",
+            "|",
+            "guide"
+          ]
+        });
+
+        this.answerValueEditor.codemirror.on(
+          "change",
+          this.updateAnswerValue.bind(this)
+        );
+      }
     }
   }
 
@@ -203,12 +246,12 @@ export default class AdminAnwsersEditPage extends React.Component {
       // An answer can't have a value and be generic at the same time:
       const data = {
         generic_reference: null,
-        value: this.$answerTextarea.value
+        value: this.answerValueEditor.value()
       };
 
       await this.axios.patch(uri, data);
 
-      this.answer.value = this.$answerTextarea.value;
+      this.answer.value = this.$answerValue.value;
     } catch (err) {
       console.warn(err);
     }
@@ -432,7 +475,11 @@ export default class AdminAnwsersEditPage extends React.Component {
             <Hr />
             <Subtitle isFirst>Réponse proposée</Subtitle>
 
-            <AnswerEditor defaultValue={this.answer.prevalue} disabled />
+            <AnswerEditor
+              defaultValue={this.answer.prevalue}
+              disabled
+              ref={node => (this.$answerPrevalue = node)}
+            />
 
             <Hr />
             <Subtitle isFirst>Réponse corrigée</Subtitle>
@@ -440,7 +487,7 @@ export default class AdminAnwsersEditPage extends React.Component {
             <AnswerEditor
               defaultValue={this.answer.value}
               onChange={this.updateAnswerValue}
-              ref={node => (this.$answerTextarea = node)}
+              ref={node => (this.$answerValue = node)}
             />
 
             <Hr />
