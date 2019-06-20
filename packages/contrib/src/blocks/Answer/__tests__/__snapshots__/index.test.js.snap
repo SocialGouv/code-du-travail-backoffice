@@ -33,7 +33,7 @@ exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot 1`] = `
       <div
         class="Answer__ContentExtract-sc-1ccgtmi-2 kDLowz"
       >
-        A strange answer.
+        A prevalue
         …
       </div>
     </div>
@@ -148,7 +148,7 @@ exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot diff with a N
 </div>
 `;
 
-exports[`[Contrib] blocks/<Answer /> (Undraft) should match snapshot 1`] = `
+exports[`[Contrib] blocks/<Answer /> (Todo) should match snapshot 1`] = `
 <div>
   <div
     class="sc-bdVaJa sc-bwzfXH fFgWKo"

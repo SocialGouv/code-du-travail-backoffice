@@ -430,7 +430,12 @@ export default class AdminAnwsersEditPage extends React.Component {
             </Flex>
 
             <Hr />
-            <Subtitle isFirst>Réponse</Subtitle>
+            <Subtitle isFirst>Réponse proposée</Subtitle>
+
+            <AnswerEditor defaultValue={this.answer.prevalue} disabled />
+
+            <Hr />
+            <Subtitle isFirst>Réponse corrigée</Subtitle>
 
             <AnswerEditor
               defaultValue={this.answer.value}

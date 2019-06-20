@@ -4,6 +4,8 @@ import { fireEvent, render } from "@testing-library/react";
 
 import AdminAnswer from "..";
 
+import { ANSWER_STATE } from "../../../constants";
+
 // Ignore styled-wrapped ReactTooltip className prop warning
 console.warn = jest.fn();
 
@@ -11,11 +13,11 @@ const PROPS = {
   data: {
     id: "12345678-9abc-4def-0123-456789abcdef",
     generic_reference: null,
-    state: "draft",
+    state: ANSWER_STATE.DRAFT,
     updated_at: moment()
       .subtract(2, "hours")
       .tz("Europe/Paris"),
-    value: `Il m'est arrivé de sentir que tout allait bien pour moi, que<br>
+    prevalue: `Il m'est arrivé de sentir que tout allait bien pour moi, que<br>
             tout le monde était gai, et aussitôt l'idée me traversait<br>
             l'esprit qu'il ne se passerait plus rien et que tout était<br>
             absurde.`,
@@ -34,7 +36,7 @@ const PROPS = {
   onCheck: jest.fn()
 };
 
-describe("[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE)", () => {
+describe("[Contrib] blocks/<AdminAnswer /> (Draft)", () => {
   const props = { ...PROPS };
   const λ = render(<AdminAnswer {...props} />);
 
@@ -49,7 +51,7 @@ describe("[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE)", () => {
   });
 });
 
-describe("[Contrib] blocks/<AdminAnswer /> (DRAFT + LC REF)", () => {
+describe("[Contrib] blocks/<AdminAnswer /> (Draft falling back to LC)", () => {
   const props = {
     ...PROPS,
     data: {
@@ -65,7 +67,7 @@ describe("[Contrib] blocks/<AdminAnswer /> (DRAFT + LC REF)", () => {
   });
 });
 
-describe("[Contrib] blocks/<AdminAnswer /> (DRAFT + NA REF)", () => {
+describe("[Contrib] blocks/<AdminAnswer /> (Draft falling back to NA)", () => {
   const props = {
     ...PROPS,
     data: {
@@ -81,7 +83,7 @@ describe("[Contrib] blocks/<AdminAnswer /> (DRAFT + NA REF)", () => {
   });
 });
 
-describe("[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE + CHECKED)", () => {
+describe("[Contrib] blocks/<AdminAnswer /> (Checked draft)", () => {
   const props = {
     ...PROPS,
     isChecked: true
@@ -93,7 +95,7 @@ describe("[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE + CHECKED)", () => {
   });
 });
 
-describe("[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE + UNCHECKED)", () => {
+describe("[Contrib] blocks/<AdminAnswer /> (Unchecked draft)", () => {
   const props = {
     ...PROPS,
     isChecked: false

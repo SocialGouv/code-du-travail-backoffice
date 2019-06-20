@@ -1,122 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + LC REF) should match snapshot 1`] = `
-<div>
-  <div
-    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
-  >
-    <div
-      class="sc-bdVaJa sc-bwzfXH eTLtBf"
-      width="1"
-    >
-      <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Top-sc-1257a91-1 dgddaa"
-      >
-        <span
-          class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
-        >
-          Brouillon
-        </span>
-        <span
-          class="AdminAnswer__TopAuthor-sc-1257a91-3 ecauMH"
-        >
-          Proposé par : A User Name, il y a 2 heures
-        </span>
-      </div>
-      <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
-      >
-        <div
-          class="sc-bdVaJa sc-bwzfXH dntGME"
-        >
-          <div
-            class="Idcc__Container-owzimc-0 fWXTkt"
-            currentitem="false"
-            data-tip="An Agreement Name"
-          >
-            CCN: 
-            1234
-            <div
-              class="__react_component_tooltip place-top type-dark "
-              data-id="tooltip"
-            />
-          </div>
-          <div
-            class="AdminAnswer__ContentQuestion-sc-1257a91-5 bTdchR"
-          >
-            12) A Question Value
-          </div>
-        </div>
-        <div
-          class="AdminAnswer__ContentExtract-sc-1257a91-6 AdminAnswer__ContentExtractRed-sc-1257a91-7 hHWLgm"
-        >
-          Renvoyé au Code du travail.
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + NA REF) should match snapshot 1`] = `
-<div>
-  <div
-    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
-  >
-    <div
-      class="sc-bdVaJa sc-bwzfXH eTLtBf"
-      width="1"
-    >
-      <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Top-sc-1257a91-1 dgddaa"
-      >
-        <span
-          class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
-        >
-          Brouillon
-        </span>
-        <span
-          class="AdminAnswer__TopAuthor-sc-1257a91-3 ecauMH"
-        >
-          Proposé par : A User Name, il y a 2 heures
-        </span>
-      </div>
-      <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
-      >
-        <div
-          class="sc-bdVaJa sc-bwzfXH dntGME"
-        >
-          <div
-            class="Idcc__Container-owzimc-0 fWXTkt"
-            currentitem="false"
-            data-tip="An Agreement Name"
-          >
-            CCN: 
-            1234
-            <div
-              class="__react_component_tooltip place-top type-dark "
-              data-id="tooltip"
-            />
-          </div>
-          <div
-            class="AdminAnswer__ContentQuestion-sc-1257a91-5 bTdchR"
-          >
-            12) A Question Value
-          </div>
-        </div>
-        <div
-          class="AdminAnswer__ContentExtract-sc-1257a91-6 AdminAnswer__ContentExtractRed-sc-1257a91-7 hHWLgm"
-        >
-          Renvoyé à la convention collective nationale.
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE + CHECKED) should match snapshot 1`] = `
+exports[`[Contrib] blocks/<AdminAnswer /> (Checked draft) should match snapshot 1`] = `
 <div>
   <div
     class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
@@ -200,35 +84,127 @@ exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE + CHECKED) should match
 </div>
 `;
 
-exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE + UNCHECKED) should match snapshot 1`] = `
+exports[`[Contrib] blocks/<AdminAnswer /> (Draft falling back to LC) should match snapshot 1`] = `
 <div>
   <div
     class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
   >
-    <button
-      class="sc-bdVaJa sc-EHOje Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 ciREbs"
-      color="white"
-      font-size="inherit"
-      font-weight="bold"
-      role="checkbox"
+    <div
+      class="sc-bdVaJa sc-bwzfXH eTLtBf"
+      width="1"
     >
-      <svg
-        aria-hidden="true"
-        class="svg-inline--fa fa-square fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx"
-        color="var(--color-lapis-lazuli)"
-        data-icon="square"
-        data-prefix="fas"
-        focusable="false"
-        role="img"
-        viewBox="0 0 448 512"
-        xmlns="http://www.w3.org/2000/svg"
+      <div
+        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Top-sc-1257a91-1 dgddaa"
       >
-        <path
-          d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48z"
-          fill="currentColor"
-        />
-      </svg>
-    </button>
+        <span
+          class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
+        >
+          Brouillon
+        </span>
+        <span
+          class="AdminAnswer__TopAuthor-sc-1257a91-3 ecauMH"
+        >
+          Proposé par : A User Name, il y a 2 heures
+        </span>
+      </div>
+      <div
+        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
+      >
+        <div
+          class="sc-bdVaJa sc-bwzfXH dntGME"
+        >
+          <div
+            class="Idcc__Container-owzimc-0 fWXTkt"
+            currentitem="false"
+            data-tip="An Agreement Name"
+          >
+            CCN: 
+            1234
+            <div
+              class="__react_component_tooltip place-top type-dark "
+              data-id="tooltip"
+            />
+          </div>
+          <div
+            class="AdminAnswer__ContentQuestion-sc-1257a91-5 bTdchR"
+          >
+            12) A Question Value
+          </div>
+        </div>
+        <div
+          class="AdminAnswer__ContentExtract-sc-1257a91-6 AdminAnswer__ContentExtractRed-sc-1257a91-7 hHWLgm"
+        >
+          Renvoyé au Code du travail.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`[Contrib] blocks/<AdminAnswer /> (Draft falling back to NA) should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
+  >
+    <div
+      class="sc-bdVaJa sc-bwzfXH eTLtBf"
+      width="1"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Top-sc-1257a91-1 dgddaa"
+      >
+        <span
+          class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
+        >
+          Brouillon
+        </span>
+        <span
+          class="AdminAnswer__TopAuthor-sc-1257a91-3 ecauMH"
+        >
+          Proposé par : A User Name, il y a 2 heures
+        </span>
+      </div>
+      <div
+        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
+      >
+        <div
+          class="sc-bdVaJa sc-bwzfXH dntGME"
+        >
+          <div
+            class="Idcc__Container-owzimc-0 fWXTkt"
+            currentitem="false"
+            data-tip="An Agreement Name"
+          >
+            CCN: 
+            1234
+            <div
+              class="__react_component_tooltip place-top type-dark "
+              data-id="tooltip"
+            />
+          </div>
+          <div
+            class="AdminAnswer__ContentQuestion-sc-1257a91-5 bTdchR"
+          >
+            12) A Question Value
+          </div>
+        </div>
+        <div
+          class="AdminAnswer__ContentExtract-sc-1257a91-6 AdminAnswer__ContentExtractRed-sc-1257a91-7 hHWLgm"
+        >
+          Renvoyé à la convention collective nationale.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`[Contrib] blocks/<AdminAnswer /> (Draft) should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
+  >
     <div
       class="sc-bdVaJa sc-bwzfXH eTLtBf"
       width="1"
@@ -284,11 +260,35 @@ exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE + UNCHECKED) should mat
 </div>
 `;
 
-exports[`[Contrib] blocks/<AdminAnswer /> (DRAFT + VALUE) should match snapshot 1`] = `
+exports[`[Contrib] blocks/<AdminAnswer /> (Unchecked draft) should match snapshot 1`] = `
 <div>
   <div
     class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
   >
+    <button
+      class="sc-bdVaJa sc-EHOje Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 ciREbs"
+      color="white"
+      font-size="inherit"
+      font-weight="bold"
+      role="checkbox"
+    >
+      <svg
+        aria-hidden="true"
+        class="svg-inline--fa fa-square fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx"
+        color="var(--color-lapis-lazuli)"
+        data-icon="square"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        viewBox="0 0 448 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48z"
+          fill="currentColor"
+        />
+      </svg>
+    </button>
     <div
       class="sc-bdVaJa sc-bwzfXH eTLtBf"
       width="1"
