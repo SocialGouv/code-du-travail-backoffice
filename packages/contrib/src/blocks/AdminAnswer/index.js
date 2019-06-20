@@ -73,6 +73,8 @@ const EDITABLE_STATES = [ANSWER_STATE.DRAFT, ANSWER_STATE.PENDING_REVIEW];
 
 export default ({ data, isChecked, onCheck, onClick }) => {
   const isEditable = EDITABLE_STATES.includes(data.state);
+  const isTodo = data.state === ANSWER_STATE.TODO;
+  const value = data.state === ANSWER_STATE.DRAFT ? data.prevalue : data.value;
 
   return (
     <Container>
@@ -104,20 +106,17 @@ export default ({ data, isChecked, onCheck, onClick }) => {
               {`${data.question.index}) ${data.question.value}`}
             </ContentQuestion>
           </Flex>
-          {data.state !== ANSWER_STATE.TODO &&
-            data.generic_reference === null && (
-              <ContentExtract>{data.value.substr(0, 100)}…</ContentExtract>
-            )}
-          {data.state !== ANSWER_STATE.TODO &&
-            data.generic_reference === "labor_code" && (
-              <ContentExtractRed>Renvoyé au Code du travail.</ContentExtractRed>
-            )}
-          {data.state !== ANSWER_STATE.TODO &&
-            data.generic_reference === "national_agreement" && (
-              <ContentExtractRed>
-                Renvoyé à la convention collective nationale.
-              </ContentExtractRed>
-            )}
+          {!isTodo && data.generic_reference === null && (
+            <ContentExtract>{value.substr(0, 100)}…</ContentExtract>
+          )}
+          {!isTodo && data.generic_reference === "labor_code" && (
+            <ContentExtractRed>Renvoyé au Code du travail.</ContentExtractRed>
+          )}
+          {!isTodo && data.generic_reference === "national_agreement" && (
+            <ContentExtractRed>
+              Renvoyé à la convention collective nationale.
+            </ContentExtractRed>
+          )}
         </Content>
       </Flex>
     </Container>
