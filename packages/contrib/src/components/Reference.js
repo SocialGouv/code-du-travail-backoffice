@@ -12,7 +12,6 @@ const Container = styled(Flex)`
   margin: 0.5rem 0.5rem 0 0;
   max-width: 32rem;
   padding: 0.2rem 0.4rem;
-  user-select: none;
 `;
 const Text = styled.span`
   color: var(--color-black-leather-jacket);
