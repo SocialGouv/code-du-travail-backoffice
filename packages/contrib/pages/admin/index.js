@@ -1,3 +1,4 @@
+import Router from "next/router";
 import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
@@ -41,6 +42,16 @@ export default class Index extends React.Component {
     }
   }
 
+  editAnswer(id) {
+    Router.push(
+      {
+        pathname: `/admin/answers/edit`,
+        query: { id }
+      },
+      `/admin/answers/${id}`
+    );
+  }
+
   render() {
     return (
       <AdminMain>
@@ -48,7 +59,11 @@ export default class Index extends React.Component {
           <Title>Tableau de bord</Title>
           <Subtitle isFirst>Dernières réponses modifiées</Subtitle>
           {this.state.lastAnswers.map((answer, index) => (
-            <AdminAnswer data={answer} key={index} />
+            <AdminAnswer
+              data={answer}
+              key={index}
+              onClick={this.editAnswer.bind(this)}
+            />
           ))}
         </Container>
       </AdminMain>
