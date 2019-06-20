@@ -11,6 +11,5 @@ export default styled.span`
   margin: 0 0.5rem 0.5rem 0;
   opacity: ${({ isDisabled }) => (Boolean(isDisabled) ? 0.25 : 1)};
   padding: 0.25rem 0.75rem;
-  user-select: none;
   white-space: nowrap;
 `;
