@@ -153,7 +153,7 @@ class Script {
               })
             )[0];
 
-            const value = record[3]
+            const prevalue = record[3]
               .trim()
               .replace(/\n[-—‣•)[\n\s\t]*/g, "\n_LI_")
               .replace(/\s*\n{2,}/g, "_P_")
@@ -166,8 +166,9 @@ class Script {
             ;
 
             const newAnswer = {
+              prevalue,
               state: "draft",
-              value,
+              value: "",
               user_id: user.id
             };
 
