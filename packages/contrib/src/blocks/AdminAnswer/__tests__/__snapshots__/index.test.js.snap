@@ -6,7 +6,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Checked draft) should match snapshot 
     class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
   >
     <button
-      class="sc-bdVaJa sc-EHOje Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 ciREbs"
+      class="sc-bdVaJa sc-EHOje Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 wNuyp"
       color="white"
       font-size="inherit"
       font-weight="bold"
@@ -266,7 +266,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Unchecked draft) should match snapsho
     class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
   >
     <button
-      class="sc-bdVaJa sc-EHOje Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 ciREbs"
+      class="sc-bdVaJa sc-EHOje Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 wNuyp"
       color="white"
       font-size="inherit"
       font-weight="bold"
