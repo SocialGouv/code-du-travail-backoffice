@@ -24,6 +24,10 @@ const Button = styled(_Button)`
   :hover {
     opacity: ${({ disabled }) => (disabled ? 0.25 : 1)};
   }
+
+  svg {
+    cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  }
 `;
 
 const COLOR = {
