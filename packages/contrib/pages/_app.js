@@ -16,6 +16,7 @@ export default class MainApp extends App {
   async componentDidMount() {
     if (!window.location.pathname.startsWith("/login")) {
       if (!(await isAuthenticated())) {
+        // eslint-disable-next-line require-atomic-updates
         window.location.href = `/login?redirectTo=${window.location.pathname}`;
       } else {
         const role = JSON.parse(sessionStorage.getItem("me")).payload.role;
@@ -23,11 +24,13 @@ export default class MainApp extends App {
         switch (true) {
           case role === "administrator" &&
             !window.location.pathname.startsWith("/admin"):
+            // eslint-disable-next-line require-atomic-updates
             window.location.href = `/admin`;
             break;
 
           case role === "contributor" &&
             window.location.pathname.startsWith("/admin"):
+            // eslint-disable-next-line require-atomic-updates
             window.location.href = `/`;
             break;
 
