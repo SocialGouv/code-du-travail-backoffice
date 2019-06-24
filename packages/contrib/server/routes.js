@@ -1,3 +1,5 @@
+/* eslint-disable require-atomic-updates */
+
 const Router = require("koa-router");
 
 const router = new Router();
