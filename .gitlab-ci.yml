@@ -35,7 +35,7 @@ Unit Tests:
 E2E Tests:
   # TODO This stage should be split in 2 parts: build + push / tests.
   stage: Install
-  image: docker/compose:1.24.0
+  image: docker/compose:1.24.1
   dependencies: []
   services:
     - docker:dind
