@@ -15,14 +15,14 @@ rules:
   react/prop-types: off
 
 overrides:
-  files:
-    - "__mocks__/*"
-    - "jest.setup.js"
-    - "*.test.js"
+  - files:
+      - "__mocks__/*"
+      - "jest.setup.js"
+      - "*.test.js"
 
-  env:
-    jest: true
+    env:
+      jest: true,
 
-  globals:
-    generateTestId: true
-    waitFor: true
+    globals:
+      generateTestId: true
+      waitFor: true
