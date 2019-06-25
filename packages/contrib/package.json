@@ -53,7 +53,7 @@
     "babel-jest": "24.8.0",
     "babel-plugin-styled-components": "1.10.2",
     "dotenv": "^8.0.0",
-    "eslint": "6.0.0",
+    "eslint": "6.0.1",
     "file-loader": "^4.0.0",
     "identity-obj-proxy": "3.0.0",
     "jest": "24.8.0",
