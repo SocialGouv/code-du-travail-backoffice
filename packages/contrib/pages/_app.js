@@ -1,16 +1,33 @@
 import App, { Container } from "next/app";
 import React from "react";
+import { Provider } from "react-redux";
+import withRedux from "next-redux-wrapper";
+import withReduxSaga from "next-redux-saga";
 
 import Main from "../src/layouts/Main";
 import isAuthenticated from "../src/libs/isAuthenticated";
+import createStore from "../src/store";
 
-export default class MainApp extends App {
+class MainApp extends App {
   constructor(props) {
     super(props);
 
     this.state = {
       isMountedAndAllowed: false
     };
+  }
+
+  static async getInitialProps({ ctx, Component, router }) {
+    let pageProps = {};
+
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps({
+        ctx,
+        query: router.query
+      });
+    }
+
+    return { pageProps };
   }
 
   async componentDidMount() {
@@ -46,16 +63,20 @@ export default class MainApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, store } = this.props;
 
     return (
       <Container>
         {!this.state.isMountedAndAllowed ? (
           <Main isLoading />
         ) : (
-          <Component {...pageProps} />
+          <Provider store={store}>
+            <Component {...pageProps} />
+          </Provider>
         )}
       </Container>
     );
   }
 }
+
+export default withRedux(createStore)(withReduxSaga(MainApp));
