@@ -130,7 +130,7 @@ exports[`[Contrib] layouts/<Header /> [Contributor] should match snapshot diff 1
     >
       <div
         class=\\"sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB\\"
-@@ -21,10 +21,144 @@
+@@ -21,10 +21,188 @@
           </span>
           <span
             class=\\"Header__Subtitle-sc-7cr55z-4 kxPxIS\\"
@@ -145,11 +145,55 @@ exports[`[Contrib] layouts/<Header /> [Contributor] should match snapshot diff 1
 +       <div
 +         class=\\"sc-bdVaJa sc-bwzfXH Menu__Container-sc-1tufs3d-0 fftBWu\\"
 +       >
-+         <span
-+           class=\\"Menu__BaseLink-sc-1tufs3d-1 Menu__TopLink-sc-1tufs3d-2 eCRsrl\\"
++         <div
++           class=\\"Menu__Dropdown-sc-1tufs3d-3 loMVOU\\"
 +         >
-+           Liste des réponses
-+         </span>
++           <svg
++             aria-hidden=\\"true\\"
++             class=\\"svg-inline--fa fa-caret-down fa-w-10 fa-1x Icon-sc-4jlog9-0 hXLKsx\\"
++             color=\\"var(--color-black-leather-jacket)\\"
++             data-icon=\\"caret-down\\"
++             data-prefix=\\"fas\\"
++             focusable=\\"false\\"
++             role=\\"img\\"
++             viewBox=\\"0 0 320 512\\"
++             xmlns=\\"http://www.w3.org/2000/svg\\"
++           >
++             <path
++               d=\\"M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z\\"
++               fill=\\"currentColor\\"
++             />
++           </svg>
++           <span
++             class=\\"Menu__DropdownText-sc-1tufs3d-4 gxLpxC\\"
++           >
++             Liste des réponses
++           </span>
++           <div
++             class=\\"sc-bdVaJa sc-bwzfXH Menu__DropdownMenu-sc-1tufs3d-5 dAypUM\\"
++           >
++             <span
++               class=\\"Menu__BaseLink-sc-1tufs3d-1 Menu__TopLink-sc-1tufs3d-2 Menu__DropdownLink-sc-1tufs3d-6 jmXsXQ\\"
++             >
++               Réponses à rédiger
++             </span>
++             <span
++               class=\\"Menu__BaseLink-sc-1tufs3d-1 Menu__TopLink-sc-1tufs3d-2 Menu__DropdownLink-sc-1tufs3d-6 jmXsXQ\\"
++             >
++               Réponses en cours de rédaction
++             </span>
++             <span
++               class=\\"Menu__BaseLink-sc-1tufs3d-1 Menu__TopLink-sc-1tufs3d-2 Menu__DropdownLink-sc-1tufs3d-6 jmXsXQ\\"
++             >
++               Réponses en cours de validation
++             </span>
++             <span
++               class=\\"Menu__BaseLink-sc-1tufs3d-1 Menu__TopLink-sc-1tufs3d-2 Menu__DropdownLink-sc-1tufs3d-6 jmXsXQ\\"
++             >
++               Réponses validées
++             </span>
++           </div>
++         </div>
 +         <div
 +           class=\\"Menu__Dropdown-sc-1tufs3d-3 loMVOU\\"
 +         >

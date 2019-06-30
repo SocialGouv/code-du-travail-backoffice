@@ -39,7 +39,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Checked draft) should match snapshot 
         <span
           class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
         >
-          Brouillon
+          en cours de rédaction
         </span>
         <span
           class="AdminAnswer__TopAuthor-sc-1257a91-3 ecauMH"
@@ -99,7 +99,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Draft falling back to LC) should matc
         <span
           class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
         >
-          Brouillon
+          en cours de rédaction
         </span>
         <span
           class="AdminAnswer__TopAuthor-sc-1257a91-3 ecauMH"
@@ -157,7 +157,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Draft falling back to NA) should matc
         <span
           class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
         >
-          Brouillon
+          en cours de rédaction
         </span>
         <span
           class="AdminAnswer__TopAuthor-sc-1257a91-3 ecauMH"
@@ -215,7 +215,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Draft) should match snapshot 1`] = `
         <span
           class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
         >
-          Brouillon
+          en cours de rédaction
         </span>
         <span
           class="AdminAnswer__TopAuthor-sc-1257a91-3 ecauMH"
@@ -299,7 +299,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Unchecked draft) should match snapsho
         <span
           class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
         >
-          Brouillon
+          en cours de rédaction
         </span>
         <span
           class="AdminAnswer__TopAuthor-sc-1257a91-3 ecauMH"
