@@ -7,6 +7,19 @@ const router = new Router();
 module.exports = function(nextApp) {
   const handle = nextApp.getRequestHandler();
 
+  router.get("/", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/answers", {
+      page: 1,
+      state: "todo"
+    });
+    ctx.respond = false;
+  });
+
+  router.get("/answers/:state/:page", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/answers", { ...ctx.params });
+    ctx.respond = false;
+  });
+
   router.get("/answer/:id", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/answer", { ...ctx.params });
     ctx.respond = false;
