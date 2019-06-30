@@ -1,3 +1,7 @@
+export const ANSWER_GENERIC_REFERENCE = {
+  LABOR_CODE: "labor_code",
+  NATIONAL_AGREEMENT: "national_agreement"
+};
 export const ANSWER_STATE = {
   TODO: "todo",
   DRAFT: "draft",
@@ -5,10 +9,10 @@ export const ANSWER_STATE = {
   VALIDATED: "validated"
 };
 export const ANSWER_STATE_LABEL = {
-  todo: "À rédiger",
-  draft: "Brouillon",
-  pending_review: "En attente de validation",
-  validated: "Validée"
+  todo: "à rédiger",
+  draft: "en cours de rédaction",
+  pending_review: "en attente de validation",
+  validated: "validée(s)"
 };
 
 export const ZONE_CATEGORY_LABEL = {
