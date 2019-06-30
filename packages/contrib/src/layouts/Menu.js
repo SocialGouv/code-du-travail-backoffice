@@ -5,6 +5,8 @@ import styled from "styled-components";
 
 import Icon from "../elements/Icon";
 
+import { ANSWER_STATE } from "../constants";
+
 const Container = styled(Flex)`
   padding-top: 0.3rem;
 `;
@@ -68,6 +70,10 @@ const DropdownLink = styled(TopLink)`
 `;
 
 export default class Menu extends React.PureComponent {
+  goToAnswers(state) {
+    Router.push(`/answers/${state}/1`);
+  }
+
   openGuide(path) {
     window.open(`https://jean-rene-duscher.gitbook.io${path}`, "_blank");
   }
@@ -77,12 +83,6 @@ export default class Menu extends React.PureComponent {
     sessionStorage.removeItem("me");
 
     Router.push("/login");
-  }
-
-  isActive(path) {
-    return path.length > 1
-      ? this.props.router.pathname.startsWith(path)
-      : this.props.router.pathname === path;
   }
 
   render() {
@@ -104,31 +104,39 @@ export default class Menu extends React.PureComponent {
 
     return (
       <Container>
-        <TopLink isActive={this.isActive("/")} onClick={() => Router.push("/")}>
-          Liste des réponses
-        </TopLink>
+        <Dropdown>
+          <Icon icon="caret-down" />
+          <DropdownText>Liste des réponses</DropdownText>
+          <DropdownMenu flexDirection="column">
+            <DropdownLink onClick={() => this.goToAnswers(ANSWER_STATE.TO_DO)}>
+              Réponses à rédiger
+            </DropdownLink>
+            <DropdownLink onClick={() => this.goToAnswers(ANSWER_STATE.DRAFT)}>
+              Réponses en cours de rédaction
+            </DropdownLink>
+            <DropdownLink
+              onClick={() => this.goToAnswers(ANSWER_STATE.PENDING_REVIEW)}
+            >
+              Réponses en cours de validation
+            </DropdownLink>
+            <DropdownLink
+              onClick={() => this.goToAnswers(ANSWER_STATE.VALIDATED)}
+            >
+              Réponses validées
+            </DropdownLink>
+          </DropdownMenu>
+        </Dropdown>
         <Dropdown>
           <Icon icon="caret-down" />
           <DropdownText>Aide</DropdownText>
           <DropdownMenu flexDirection="column">
             <DropdownLink
-              isActive={this.isActive("/chart")}
               onClick={() => this.openGuide("/code-du-travail-numerique/")}
             >
               <Icon icon="book" />
               Guide : Outil de contribution
             </DropdownLink>
-            {/* <DropdownLink
-              isActive={this.isActive("/chart")}
-              onClick={() => this.openGuide("__TO_BE_DEFINED__")}
-            >
-              <Icon icon="tasks" />
-              Guide : Campagne de contribution
-            </DropdownLink> */}
-            <DropdownLink
-              isActive={this.isActive("/chart")}
-              onClick={() => Router.push("/chart")}
-            >
+            <DropdownLink onClick={() => Router.push("/chart")}>
               <Icon icon="feather-alt" />
               Charte rédactionnelle
             </DropdownLink>
