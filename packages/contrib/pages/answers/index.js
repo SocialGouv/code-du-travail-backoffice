@@ -65,7 +65,7 @@ class Index extends React.Component {
     const state =
       maybeState !== undefined && R.values(ANSWER_STATE).includes(maybeState)
         ? maybeState
-        : ANSWER_STATE.TODO;
+        : ANSWER_STATE.TO_DO;
 
     return { pageIndex, state };
   }

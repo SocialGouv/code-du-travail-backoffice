@@ -39,7 +39,7 @@ const Menu = styled(Flex)`
 
 export default ({ data, onCancel, onClick, onFallback }) => {
   const isDraft = data.state === ANSWER_STATE.DRAFT;
-  const isTodo = data.state === ANSWER_STATE.TODO;
+  const isTodo = data.state === ANSWER_STATE.TO_DO;
   const value = isDraft ? data.prevalue : data.value;
 
   const isEditable = isTodo || isDraft;

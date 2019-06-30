@@ -3,7 +3,7 @@ export const ANSWER_GENERIC_REFERENCE = {
   NATIONAL_AGREEMENT: "national_agreement"
 };
 export const ANSWER_STATE = {
-  TODO: "todo",
+  TO_DO: "todo",
   DRAFT: "draft",
   PENDING_REVIEW: "pending_review",
   VALIDATED: "validated"

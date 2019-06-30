@@ -93,7 +93,7 @@ export default class Index extends React.Component {
 
         stats[locationId].agreements.push([
           locationAgreement.agreement,
-          answers.filter(({ state }) => state === ANSWER_STATE.TODO).length,
+          answers.filter(({ state }) => state === ANSWER_STATE.TO_DO).length,
           answers.filter(({ state }) => state === ANSWER_STATE.DRAFT).length,
           answers.filter(({ state }) => state === ANSWER_STATE.PENDING_REVIEW)
             .length,

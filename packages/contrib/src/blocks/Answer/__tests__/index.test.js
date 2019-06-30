@@ -16,7 +16,7 @@ describe("[Contrib] blocks/<Answer /> (Todo)", () => {
       index: 12,
       agreement: "A Labor Agreement Name",
       question: "Who knows?",
-      state: ANSWER_STATE.TODO
+      state: ANSWER_STATE.TO_DO
     },
     label: "A label",
     onClick: jest.fn(),

@@ -108,7 +108,7 @@ export default class Menu extends React.PureComponent {
           <Icon icon="caret-down" />
           <DropdownText>Liste des réponses</DropdownText>
           <DropdownMenu flexDirection="column">
-            <DropdownLink onClick={() => this.goToAnswers(ANSWER_STATE.TODO)}>
+            <DropdownLink onClick={() => this.goToAnswers(ANSWER_STATE.TO_DO)}>
               Réponses à rédiger
             </DropdownLink>
             <DropdownLink onClick={() => this.goToAnswers(ANSWER_STATE.DRAFT)}>

@@ -94,12 +94,12 @@ export default class AdminAnswersIndexPage extends React.Component {
     const answersIds = this.state.checkedAnswers.join(",");
 
     switch (state) {
-      case ANSWER_STATE.TODO:
+      case ANSWER_STATE.TO_DO:
         try {
           const answersUri = `/answers?id=in.(${answersIds})`;
           const answersData = {
             generic_reference: null,
-            state: ANSWER_STATE.TODO,
+            state: ANSWER_STATE.TO_DO,
             user_id: null,
             value: ""
           };
@@ -250,7 +250,9 @@ export default class AdminAnswersIndexPage extends React.Component {
                   this.state.isLoading || this.state.checkedAnswers.length === 0
                 }
                 hasGroup
-                onClick={() => this.setCheckedAnswersStateTo(ANSWER_STATE.TODO)}
+                onClick={() =>
+                  this.setCheckedAnswersStateTo(ANSWER_STATE.TO_DO)
+                }
               >
                 Ré-initialiser
               </Button>

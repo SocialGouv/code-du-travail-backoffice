@@ -73,7 +73,7 @@ const EDITABLE_STATES = [ANSWER_STATE.DRAFT, ANSWER_STATE.PENDING_REVIEW];
 
 export default ({ data, isChecked, onCheck, onClick }) => {
   const isEditable = EDITABLE_STATES.includes(data.state);
-  const isTodo = data.state === ANSWER_STATE.TODO;
+  const isTodo = data.state === ANSWER_STATE.TO_DO;
   const value = data.state === ANSWER_STATE.DRAFT ? data.prevalue : data.value;
 
   return (

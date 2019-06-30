@@ -14,7 +14,7 @@ function* cancel({ meta: { ids, next } }) {
   try {
     const data = {
       generic_reference: null,
-      state: ANSWER_STATE.TODO,
+      state: ANSWER_STATE.TO_DO,
       user_id: null,
       value: ""
     };
