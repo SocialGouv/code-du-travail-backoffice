@@ -13,5 +13,4 @@ Feature: Login
   Scenario: Successfully login as a contributor
     Given I am a registered "contributor"
     When I log into the application
-    Then I should see the subtitle "Mes brouillons"
-    And I should see the subtitle "Réponses à rédiger"
+    Then I should see the subtitle "Réponses à rédiger"
