@@ -7,7 +7,7 @@ exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot 1`] = `
     width="1"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Answer__Content-sc-1ccgtmi-0 iAohlA"
+      class="sc-bdVaJa sc-bwzfXH Answer__Content-sc-1ccgtmi-0 dImgSX"
     >
       <div
         class="sc-bdVaJa sc-bwzfXH dntGME"
@@ -57,7 +57,7 @@ exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot diff with a L
     width="1"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Answer__Content-sc-1ccgtmi-0 iAohlA"
+      class="sc-bdVaJa sc-bwzfXH Answer__Content-sc-1ccgtmi-0 dImgSX"
     >
       <div
         class="sc-bdVaJa sc-bwzfXH dntGME"
@@ -106,7 +106,7 @@ exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot diff with a N
     width="1"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Answer__Content-sc-1ccgtmi-0 iAohlA"
+      class="sc-bdVaJa sc-bwzfXH Answer__Content-sc-1ccgtmi-0 dImgSX"
     >
       <div
         class="sc-bdVaJa sc-bwzfXH dntGME"
@@ -155,7 +155,7 @@ exports[`[Contrib] blocks/<Answer /> (Todo) should match snapshot 1`] = `
     width="1"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Answer__Content-sc-1ccgtmi-0 iAohlA"
+      class="sc-bdVaJa sc-bwzfXH Answer__Content-sc-1ccgtmi-0 dImgSX"
     >
       <div
         class="sc-bdVaJa sc-bwzfXH dntGME"
