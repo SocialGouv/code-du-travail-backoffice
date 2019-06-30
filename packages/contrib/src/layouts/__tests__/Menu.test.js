@@ -29,12 +29,36 @@ describe("[Contrib] layouts/<Menu /> (Contributor)", () => {
     expect(γ.container).toMatchSnapshot();
   });
 
-  it("should redirect to the answers index path", () => {
-    fireEvent.click(γ.getByText("Liste des réponses"));
+  it("should redirect to the todo answers list", () => {
+    fireEvent.click(γ.getByText("Réponses à rédiger"));
 
     expect(sessionStorage.getItem("jwt")).toBe(JWT);
     expect(sessionStorage.getItem("me")).toBe(ME);
-    expect(Router.push).toHaveBeenCalledWith("/");
+    expect(Router.push).toHaveBeenCalledWith("/answers/todo/1");
+  });
+
+  it("should redirect to the draft answers list", () => {
+    fireEvent.click(γ.getByText("Réponses en cours de rédaction"));
+
+    expect(sessionStorage.getItem("jwt")).toBe(JWT);
+    expect(sessionStorage.getItem("me")).toBe(ME);
+    expect(Router.push).toHaveBeenCalledWith("/answers/draft/1");
+  });
+
+  it("should redirect to the pending review answers list", () => {
+    fireEvent.click(γ.getByText("Réponses en cours de validation"));
+
+    expect(sessionStorage.getItem("jwt")).toBe(JWT);
+    expect(sessionStorage.getItem("me")).toBe(ME);
+    expect(Router.push).toHaveBeenCalledWith("/answers/pending_review/1");
+  });
+
+  it("should redirect to the validated answers list", () => {
+    fireEvent.click(γ.getByText("Réponses validées"));
+
+    expect(sessionStorage.getItem("jwt")).toBe(JWT);
+    expect(sessionStorage.getItem("me")).toBe(ME);
+    expect(Router.push).toHaveBeenCalledWith("/answers/validated/1");
   });
 
   it("should open the contribution guide URL", () => {
