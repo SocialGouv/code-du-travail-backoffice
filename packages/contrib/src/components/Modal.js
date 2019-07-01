@@ -1,4 +1,5 @@
 import React from "react";
+import reactOnClickOutside from "react-onclickoutside";
 import { connect } from "react-redux";
 import { Flex } from "rebass";
 import styled from "styled-components";
@@ -23,14 +24,19 @@ const Container = styled(Flex)`
   font-weight: 600;
   max-width: 640px;
   padding: 1rem;
+  user-select: none;
 `;
 const Actions = styled(Flex)``;
 
-const Modal = ({ dispatch, isVisible, message }) => {
-  if (!isVisible) return null;
+class _Modal extends React.PureComponent {
+  handleClickOutside() {
+    this.props.dispatch(actions.modal.close());
+  }
 
-  return (
-    <Wrapper alignItems="center" justifyContent="center">
+  render() {
+    const { dispatch, message } = this.props;
+
+    return (
       <Container flexDirection="column">
         <p>{message}</p>
         <Actions justifyContent="flex-end">
@@ -46,6 +52,18 @@ const Modal = ({ dispatch, isVisible, message }) => {
           </Button>
         </Actions>
       </Container>
+    );
+  }
+}
+
+const Modal = reactOnClickOutside(_Modal);
+
+const ModalWrapper = ({ isVisible, ...props }) => {
+  if (!isVisible) return null;
+
+  return (
+    <Wrapper alignItems="center" justifyContent="center">
+      <Modal {...props} />
     </Wrapper>
   );
 };
@@ -53,4 +71,4 @@ const Modal = ({ dispatch, isVisible, message }) => {
 export default connect(({ modal: { isVisible, message } }) => ({
   isVisible,
   message
-}))(Modal);
+}))(ModalWrapper);
