@@ -53,3 +53,19 @@ export const setGenericRefenceFailure = error => ({
     message: error.message
   }
 });
+
+export const setState = (ids, state, next) => ({
+  type: actionTypes.ANSWERS_SET_STATE,
+  meta: {
+    ids,
+    next,
+    state
+  }
+});
+export const setStateFailure = error => ({
+  type: actionTypes.ANSWERS_SET_STATE_FAILURE,
+  error: true,
+  payload: {
+    message: error.message
+  }
+});

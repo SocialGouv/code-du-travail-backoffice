@@ -47,7 +47,7 @@ const FilterInput = styled(Input)`
   margin: 0.5rem 0;
 `;
 
-class Index extends React.Component {
+class AnswersIndexPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -59,24 +59,22 @@ class Index extends React.Component {
   }
 
   static getInitialProps({ query: { page: maybePage, state: maybeState } }) {
-    const pageIndex = Math.abs(
-      Math.floor(!isNaN(maybePage) ? Number(maybePage) - 1 : 0)
-    );
+    const page =
+      Math.abs(Math.floor(!isNaN(maybePage) ? Number(maybePage) - 1 : 0)) + 1;
     const state =
       maybeState !== undefined && R.values(ANSWER_STATE).includes(maybeState)
         ? maybeState
         : ANSWER_STATE.TO_DO;
 
-    return { pageIndex, state };
+    return { page, state };
   }
 
   componentDidMount() {
-    this.loadAnswers(this.props.pageIndex);
+    this.loadAnswers(this.props.page - 1);
   }
 
   componentDidUpdate() {
-    const { state } = this.props;
-    const { isLoading, pageIndex } = this.props.answers;
+    const { isLoading, pageIndex, state } = this.props;
     const page = pageIndex + 1;
 
     if (!isLoading) {
@@ -126,7 +124,10 @@ class Index extends React.Component {
 
   cancelAnswer(id) {
     this.props.dispatch(
-      actions.answers.cancel([id], this.loadAnswers.bind(this))
+      actions.modal.open(
+        `Êtes-vous sûr d'annuler cette réponse (son contenu sera supprimé) ?`,
+        () => actions.answers.cancel([id], this.loadAnswers.bind(this))
+      )
     );
   }
 
@@ -141,11 +142,11 @@ class Index extends React.Component {
   }
 
   editAnswer(id) {
-    Router.push(`/answer/${id}`);
+    Router.push(`/answers/edit/${id}`);
   }
 
   getAnswersList() {
-    const { data, error } = this.props.answers;
+    const { data, error } = this.props;
 
     if (error !== null) {
       return <ErrorText>{error}</ErrorText>;
@@ -183,7 +184,7 @@ class Index extends React.Component {
   }
 
   render() {
-    const { data, isLoading, pageIndex, pageLength } = this.props.answers;
+    const { data, isLoading, pageIndex, pageLength } = this.props;
 
     return (
       <Main isHorizontal>
@@ -228,4 +229,12 @@ class Index extends React.Component {
   }
 }
 
-export default connect(state => state)(Index);
+export default connect(
+  ({ answers: { data, error, isLoading, pageIndex, pageLength } }) => ({
+    data,
+    error,
+    isLoading,
+    pageIndex,
+    pageLength
+  })
+)(AnswersIndexPage);

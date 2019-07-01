@@ -13,6 +13,7 @@ export default (state = initialState, { payload, type }) => {
     case actionTypes.ANSWERS_CANCEL:
     case actionTypes.ANSWERS_LOAD:
     case actionTypes.ANSWERS_SET_GENERIC_REFERENCE:
+    case actionTypes.ANSWERS_SET_STATE:
       return {
         ...state,
         isLoading: true
@@ -21,6 +22,7 @@ export default (state = initialState, { payload, type }) => {
     case actionTypes.ANSWERS_CANCEL_FAILURE:
     case actionTypes.ANSWERS_LOAD_FAILURE:
     case actionTypes.ANSWERS_SET_GENERIC_REFERENCE_FAILURE:
+    case actionTypes.ANSWERS_SET_STATE_FAILURE:
       return {
         ...state,
         error: payload.message,

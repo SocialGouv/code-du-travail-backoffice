@@ -14,6 +14,7 @@ function* cancel({ meta: { ids, next } }) {
   try {
     const data = {
       generic_reference: null,
+      prevalue: "",
       state: ANSWER_STATE.TO_DO,
       user_id: null,
       value: ""
@@ -56,6 +57,7 @@ function* setGenericReference({ meta: { genericReference, ids, next } }) {
     const me = JSON.parse(sessionStorage.getItem("me"));
     const data = {
       generic_reference: genericReference,
+      prevalue: "",
       state: ANSWER_STATE.DRAFT,
       user_id: me.payload.id,
       value: ""
@@ -86,6 +88,37 @@ function* setGenericReference({ meta: { genericReference, ids, next } }) {
   }
 }
 
+function* setState({ meta: { ids, next, state } }) {
+  try {
+    const data = { state };
+
+    yield postgrest()
+      .in("id", ids, true)
+      .patch("/answers", data);
+
+    if (state === ANSWER_STATE.PENDING_REVIEW) {
+      toast.success(
+        ids.length === 1
+          ? `La réponse ${ids[0]} a été envoyée en validation.`
+          : `Les réponses ${ids.join(", ")} ont été envoyées en validation.`
+      );
+    } else if (state === ANSWER_STATE.VALIDATED) {
+      toast.success(
+        ids.length === 1
+          ? `La réponse ${ids[0]} a été validée.`
+          : `Les réponses ${ids.join(", ")} ont été validées.`
+      );
+    } else {
+      throw new Error(`Ce changement d'état est impossible.`);
+    }
+
+    next();
+  } catch (err) {
+    toast.error(err.message);
+    yield put(answers.setStateFailure({ message: null }));
+  }
+}
+
 function* load({ meta: { pageIndex, request } }) {
   const originalRequest = request.clone();
 
@@ -99,20 +132,20 @@ function* load({ meta: { pageIndex, request } }) {
     yield put(answers.loadSuccess(data, pageIndex, pageLength));
   } catch (err) {
     if (err.response.status === 416) {
-      const lastPageIndex = Math.floor(
+      const pageIndex = Math.floor(
         Number(err.response.headers["content-range"].substr(2)) / 10
       );
 
       toast.error(
         <span>
-          {`La page n° ${pageIndex + 1} est hors de portée.`}
+          {`Cette page est hors de portée.`}
           <br />
-          {`Redirection vers la page n° ${lastPageIndex + 1}…`}
+          {`Redirection vers la page n° ${pageIndex + 1}…`}
         </span>
       );
 
       return yield load({
-        meta: { pageIndex: lastPageIndex, request: originalRequest }
+        meta: { pageIndex: pageIndex, request: originalRequest }
       });
     }
 
@@ -124,5 +157,6 @@ function* load({ meta: { pageIndex, request } }) {
 export default [
   takeLatest(actionTypes.ANSWERS_CANCEL, cancel),
   takeLatest(actionTypes.ANSWERS_LOAD, load),
-  takeLatest(actionTypes.ANSWERS_SET_GENERIC_REFERENCE, setGenericReference)
+  takeLatest(actionTypes.ANSWERS_SET_GENERIC_REFERENCE, setGenericReference),
+  takeLatest(actionTypes.ANSWERS_SET_STATE, setState)
 ];

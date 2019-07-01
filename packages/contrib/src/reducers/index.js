@@ -1,3 +1,4 @@
 import answers from "./answers";
+import modal from "./modal";
 
-export { answers };
+export { answers, modal };

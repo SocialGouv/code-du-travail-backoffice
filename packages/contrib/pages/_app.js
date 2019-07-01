@@ -68,7 +68,9 @@ class MainApp extends App {
     return (
       <Container>
         {!this.state.isMountedAndAllowed ? (
-          <Main isLoading />
+          <Provider store={store}>
+            <Main isLoading />
+          </Provider>
         ) : (
           <Provider store={store}>
             <Component {...pageProps} />

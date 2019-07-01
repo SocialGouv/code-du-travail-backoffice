@@ -4,8 +4,9 @@ import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
-import LoadingSpinner from "../elements/LoadingSpinner";
 import Header from "./Header";
+import Modal from "../components/Modal";
+import LoadingSpinner from "../elements/LoadingSpinner";
 
 // TODO Find a clean way to import these stylesheets.
 import quillSheet from "../../node_modules/quill/dist/quill.snow.css";
@@ -55,6 +56,7 @@ const Main = ({
       </style>
     </Head>
     <Body alignItems="stretch" flexDirection="column" width={1}>
+      <Modal />
       <Header
         hasContribMenu={!router.pathname.startsWith("/login")}
         isAdmin={isAdmin}

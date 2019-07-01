@@ -19,6 +19,20 @@ jest.mock("next/router", () => ({
   }
 }));
 
+jest.mock("react-redux", () => ({
+  connect: () => component => {
+    component.defaultProps = {
+      ...component.defaultProps,
+      modal: {
+        isVisible: false,
+        message: ""
+      }
+    };
+
+    return component;
+  }
+}));
+
 import AdminIndex from "../AdminIndex";
 
 const DATA = [

@@ -2,18 +2,21 @@ import axios from "axios";
 import debounce from "lodash.debounce";
 import Router from "next/router";
 import React from "react";
+import { connect } from "react-redux";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
-import AnswerEditionContent from "../src/blocks/AnswerEditionContent";
-import AnswerEditionHead from "../src/blocks/AnswerEditionHead";
-import AnswerEditionReferences from "../src/blocks/AnswerEditionReferences";
-import AnswerEditionTags from "../src/blocks/AnswerEditionTags";
-import Main from "../src/layouts/Main";
-import SavingSpinner from "../src/elements/SavingSpinner";
-import customAxios from "../src/libs/customAxios";
-import makeApiFilter from "../src/libs/makeApiFilter";
-import { TABS } from "../src/blocks/AnswerEditionHead/Tabs";
+import * as actions from "../../src/actions";
+import AnswerEditionContent from "../../src/blocks/AnswerEditionContent";
+import AnswerEditionHead from "../../src/blocks/AnswerEditionHead";
+import AnswerEditionReferences from "../../src/blocks/AnswerEditionReferences";
+import AnswerEditionTags from "../../src/blocks/AnswerEditionTags";
+import Main from "../../src/layouts/Main";
+import SavingSpinner from "../../src/elements/SavingSpinner";
+import customAxios from "../../src/libs/customAxios";
+import makeApiFilter from "../../src/libs/makeApiFilter";
+import { TABS } from "../../src/blocks/AnswerEditionHead/Tabs";
+import { ANSWER_STATE } from "../../src/constants";
 
 const Container = styled(Main)`
   overflow-x: hidden;
@@ -31,7 +34,7 @@ const ContentInfo = styled(Flex)`
   width: 12.5rem;
 `;
 
-export default class extends React.Component {
+class AnswersEditPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -99,50 +102,32 @@ export default class extends React.Component {
 
   async cancelAnswer() {
     if (this.state.isSaving) return;
-    this.setState({ isSaving: true });
 
-    try {
-      const answersUri = `/answers?id=eq.${this.props.id}`;
-      const answersData = {
-        generic_reference: null,
-        state: "todo",
-        user_id: null,
-        prevalue: ""
-      };
-      const answersTagsUri = makeApiFilter("/answers_tags", {
-        answer_id: this.props.id
-      });
-      const answersReferencesUri = makeApiFilter("/answers_references", {
-        answer_id: this.props.id
-      });
-
-      await this.axios.delete(answersReferencesUri);
-      await this.axios.delete(answersTagsUri);
-      await this.axios.patch(answersUri, answersData);
-
-      Router.push("/");
-    } catch (err) {
-      console.warn(err);
-    }
+    this.props.dispatch(
+      actions.modal.open(
+        `Êtes-vous sûr d'annuler cette réponse (son contenu sera supprimé) ?`,
+        () =>
+          actions.answers.cancel([this.props.id], () =>
+            Router.push("/answers/draft/1")
+          )
+      )
+    );
   }
 
   async requestForAnswerValidation() {
     if (this.state.isSaving) return;
-    this.setState({ isSaving: true });
 
-    try {
-      const uri = `/answers?id=eq.${this.props.id}`;
-      const data = {
-        state: "pending_review",
-        user_id: this.state.me.payload.id
-      };
-
-      await this.axios.patch(uri, data);
-
-      Router.push("/");
-    } catch (err) {
-      console.warn(err);
-    }
+    this.props.dispatch(
+      actions.modal.open(
+        `Êtes-vous sûr d'envoyer cette réponse en validation ?`,
+        () =>
+          actions.answers.setState(
+            [this.props.id],
+            ANSWER_STATE.PENDING_REVIEW,
+            () => Router.push("/answers/draft/1")
+          )
+      )
+    );
   }
 
   async _saveAnswerPrevalue(value) {
@@ -363,3 +348,5 @@ export default class extends React.Component {
     );
   }
 }
+
+export default connect()(AnswersEditPage);

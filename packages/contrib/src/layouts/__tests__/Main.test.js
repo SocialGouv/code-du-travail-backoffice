@@ -14,6 +14,20 @@ jest.mock("next/router", () => ({
   }
 }));
 
+jest.mock("react-redux", () => ({
+  connect: () => component => {
+    component.defaultProps = {
+      ...component.defaultProps,
+      modal: {
+        isVisible: false,
+        message: ""
+      }
+    };
+
+    return component;
+  }
+}));
+
 import Main from "../Main";
 
 describe("[Contrib] layouts/<Main /> (contributor)", () => {
