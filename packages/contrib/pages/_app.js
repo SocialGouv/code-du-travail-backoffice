@@ -17,13 +17,13 @@ class MainApp extends App {
     };
   }
 
-  static async getInitialProps({ ctx, Component, router }) {
+  static async getInitialProps({ ctx, Component }) {
     let pageProps = {};
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps({
         ctx,
-        query: router.query
+        query: ctx.query
       });
     }
 
