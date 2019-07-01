@@ -16,6 +16,7 @@ import SavingSpinner from "../../src/elements/SavingSpinner";
 import customAxios from "../../src/libs/customAxios";
 import makeApiFilter from "../../src/libs/makeApiFilter";
 import { TABS } from "../../src/blocks/AnswerEditionHead/Tabs";
+import { ANSWER_STATE } from "../../src/constants";
 
 const Container = styled(Main)`
   overflow-x: hidden;
@@ -105,28 +106,28 @@ class AnswersEditPage extends React.Component {
     this.props.dispatch(
       actions.modal.open(
         `Êtes-vous sûr d'annuler cette réponse (son contenu sera supprimé) ?`,
-        () => actions.answers.cancel([this.props.id], () => Router.push("/"))
+        () =>
+          actions.answers.cancel([this.props.id], () =>
+            Router.push("/answers/draft/1")
+          )
       )
     );
   }
 
   async requestForAnswerValidation() {
     if (this.state.isSaving) return;
-    this.setState({ isSaving: true });
 
-    try {
-      const uri = `/answers?id=eq.${this.props.id}`;
-      const data = {
-        state: "pending_review",
-        user_id: this.state.me.payload.id
-      };
-
-      await this.axios.patch(uri, data);
-
-      Router.push("/");
-    } catch (err) {
-      console.warn(err);
-    }
+    this.props.dispatch(
+      actions.modal.open(
+        `Êtes-vous sûr d'envoyer cette réponse en validation ?`,
+        () =>
+          actions.answers.setState(
+            [this.props.id],
+            ANSWER_STATE.PENDING_REVIEW,
+            () => Router.push("/answers/draft/1")
+          )
+      )
+    );
   }
 
   async _saveAnswerPrevalue(value) {
