@@ -76,7 +76,7 @@ class Index extends React.Component {
 
   componentDidUpdate() {
     const { state } = this.props;
-    const { isLoading, pageIndex } = this.props.answers;
+    const { isLoading, pageIndex } = this.props;
     const page = pageIndex + 1;
 
     if (!isLoading) {
@@ -145,7 +145,7 @@ class Index extends React.Component {
   }
 
   getAnswersList() {
-    const { data, error } = this.props.answers;
+    const { data, error } = this.props;
 
     if (error !== null) {
       return <ErrorText>{error}</ErrorText>;
@@ -183,7 +183,7 @@ class Index extends React.Component {
   }
 
   render() {
-    const { data, isLoading, pageIndex, pageLength } = this.props.answers;
+    const { data, isLoading, pageIndex, pageLength } = this.props;
 
     return (
       <Main isHorizontal>
@@ -228,4 +228,12 @@ class Index extends React.Component {
   }
 }
 
-export default connect(state => state)(Index);
+export default connect(
+  ({ answers: { data, error, isLoading, pageIndex, pageLength } }) => ({
+    data,
+    error,
+    isLoading,
+    pageIndex,
+    pageLength
+  })
+)(Index);
