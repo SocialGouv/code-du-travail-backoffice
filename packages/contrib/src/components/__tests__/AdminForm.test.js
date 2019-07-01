@@ -19,6 +19,20 @@ jest.mock("next/router", () => ({
   }
 }));
 
+jest.mock("react-redux", () => ({
+  connect: () => component => {
+    component.defaultProps = {
+      ...component.defaultProps,
+      modal: {
+        isVisible: false,
+        message: ""
+      }
+    };
+
+    return component;
+  }
+}));
+
 import AdminForm from "../AdminForm";
 
 describe("[Contrib] components/<AdminForm /> (create)", () => {
