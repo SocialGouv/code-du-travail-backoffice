@@ -126,7 +126,10 @@ class Index extends React.Component {
 
   cancelAnswer(id) {
     this.props.dispatch(
-      actions.answers.cancel([id], this.loadAnswers.bind(this))
+      actions.modal.open(
+        `Êtes-vous sûr d'annuler cette réponse (son contenu sera supprimé) ?`,
+        () => actions.answers.cancel([id], this.loadAnswers.bind(this))
+      )
     );
   }
 
