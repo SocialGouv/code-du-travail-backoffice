@@ -5,15 +5,15 @@ import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
-import AnswerEditionContent from "../src/blocks/AnswerEditionContent";
-import AnswerEditionHead from "../src/blocks/AnswerEditionHead";
-import AnswerEditionReferences from "../src/blocks/AnswerEditionReferences";
-import AnswerEditionTags from "../src/blocks/AnswerEditionTags";
-import Main from "../src/layouts/Main";
-import SavingSpinner from "../src/elements/SavingSpinner";
-import customAxios from "../src/libs/customAxios";
-import makeApiFilter from "../src/libs/makeApiFilter";
-import { TABS } from "../src/blocks/AnswerEditionHead/Tabs";
+import AnswerEditionContent from "../../src/blocks/AnswerEditionContent";
+import AnswerEditionHead from "../../src/blocks/AnswerEditionHead";
+import AnswerEditionReferences from "../../src/blocks/AnswerEditionReferences";
+import AnswerEditionTags from "../../src/blocks/AnswerEditionTags";
+import Main from "../../src/layouts/Main";
+import SavingSpinner from "../../src/elements/SavingSpinner";
+import customAxios from "../../src/libs/customAxios";
+import makeApiFilter from "../../src/libs/makeApiFilter";
+import { TABS } from "../../src/blocks/AnswerEditionHead/Tabs";
 
 const Container = styled(Main)`
   overflow-x: hidden;

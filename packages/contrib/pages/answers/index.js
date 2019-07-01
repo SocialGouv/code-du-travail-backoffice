@@ -47,7 +47,7 @@ const FilterInput = styled(Input)`
   margin: 0.5rem 0;
 `;
 
-class Index extends React.Component {
+class AnswersIndexPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -144,7 +144,7 @@ class Index extends React.Component {
   }
 
   editAnswer(id) {
-    Router.push(`/answer/${id}`);
+    Router.push(`/answers/edit/${id}`);
   }
 
   getAnswersList() {
@@ -239,4 +239,4 @@ export default connect(
     pageIndex,
     pageLength
   })
-)(Index);
+)(AnswersIndexPage);

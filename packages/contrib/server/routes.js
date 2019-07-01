@@ -15,13 +15,13 @@ module.exports = function(nextApp) {
     ctx.respond = false;
   });
 
-  router.get("/answers/:state/:page", async ctx => {
-    await nextApp.render(ctx.req, ctx.res, "/answers", { ...ctx.params });
+  router.get("/answers/edit/:id", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/answers/edit", { ...ctx.params });
     ctx.respond = false;
   });
 
-  router.get("/answer/:id", async ctx => {
-    await nextApp.render(ctx.req, ctx.res, "/answer", { ...ctx.params });
+  router.get("/answers/:state/:page", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/answers", { ...ctx.params });
     ctx.respond = false;
   });
 
