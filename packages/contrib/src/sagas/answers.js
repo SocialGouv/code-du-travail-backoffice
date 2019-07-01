@@ -14,6 +14,7 @@ function* cancel({ meta: { ids, next } }) {
   try {
     const data = {
       generic_reference: null,
+      prevalue: "",
       state: ANSWER_STATE.TO_DO,
       user_id: null,
       value: ""
@@ -56,6 +57,7 @@ function* setGenericReference({ meta: { genericReference, ids, next } }) {
     const me = JSON.parse(sessionStorage.getItem("me"));
     const data = {
       generic_reference: genericReference,
+      prevalue: "",
       state: ANSWER_STATE.DRAFT,
       user_id: me.payload.id,
       value: ""
