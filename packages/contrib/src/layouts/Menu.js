@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Icon from "../elements/Icon";
 
 import { ANSWER_STATE } from "../constants";
+import T from "../texts";
 
 const Container = styled(Flex)`
   padding-top: 0.3rem;
@@ -109,20 +110,25 @@ export default class Menu extends React.PureComponent {
           <DropdownText>Liste des réponses</DropdownText>
           <DropdownMenu flexDirection="column">
             <DropdownLink onClick={() => this.goToAnswers(ANSWER_STATE.TO_DO)}>
-              Réponses à rédiger
+              {T.ANSWERS_INDEX_TITLE(ANSWER_STATE.TO_DO)}
             </DropdownLink>
             <DropdownLink onClick={() => this.goToAnswers(ANSWER_STATE.DRAFT)}>
-              Réponses en cours de rédaction
+              {T.ANSWERS_INDEX_TITLE(ANSWER_STATE.DRAFT)}
             </DropdownLink>
             <DropdownLink
               onClick={() => this.goToAnswers(ANSWER_STATE.PENDING_REVIEW)}
             >
-              Réponses en cours de validation
+              {T.ANSWERS_INDEX_TITLE(ANSWER_STATE.PENDING_REVIEW)}
+            </DropdownLink>
+            <DropdownLink
+              onClick={() => this.goToAnswers(ANSWER_STATE.UNDER_REVIEW)}
+            >
+              {T.ANSWERS_INDEX_TITLE(ANSWER_STATE.UNDER_REVIEW)}
             </DropdownLink>
             <DropdownLink
               onClick={() => this.goToAnswers(ANSWER_STATE.VALIDATED)}
             >
-              Réponses validées
+              {T.ANSWERS_INDEX_TITLE(ANSWER_STATE.VALIDATED)}
             </DropdownLink>
           </DropdownMenu>
         </Dropdown>
