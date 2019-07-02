@@ -14,7 +14,8 @@ import Subtitle from "../../src/elements/Subtitle";
 import Main from "../../src/layouts/Main";
 import postgrest from "../../src/libs/postgrest";
 
-import { ANSWER_STATE, ANSWER_STATE_LABEL } from "../../src/constants";
+import { ANSWER_STATE } from "../../src/constants";
+import T from "../../src/texts";
 
 const Content = styled(Flex)`
   flex-grow: 1;
@@ -48,6 +49,12 @@ const FilterInput = styled(Input)`
 `;
 
 class AnswersIndexPage extends React.Component {
+  get query() {
+    return this.$query !== undefined && this.$query !== null
+      ? this.$query.value
+      : "";
+  }
+
   constructor(props) {
     super(props);
 
@@ -103,10 +110,7 @@ class AnswersIndexPage extends React.Component {
   _loadAnswers(pageIndex = 0) {
     const { state } = this.props;
 
-    const query =
-      this.$query !== undefined && this.$query !== null
-        ? this.$query.value
-        : "";
+    const query = this.query;
     const request = postgrest().eq("state", state);
 
     const finalRequest =
@@ -123,11 +127,11 @@ class AnswersIndexPage extends React.Component {
   }
 
   cancelAnswer(id) {
+    const action = () =>
+      actions.answers.cancel([id], this.loadAnswers.bind(this));
+
     this.props.dispatch(
-      actions.modal.open(
-        `Êtes-vous sûr d'annuler cette réponse (son contenu sera supprimé) ?`,
-        () => actions.answers.cancel([id], this.loadAnswers.bind(this))
-      )
+      actions.modal.open(T.ANSWERS_INDEX_MODAL_CANCEL, action)
     );
   }
 
@@ -146,30 +150,18 @@ class AnswersIndexPage extends React.Component {
   }
 
   getAnswersList() {
-    const { data, error } = this.props;
+    const { data, error, state } = this.props;
 
     if (error !== null) {
       return <ErrorText>{error}</ErrorText>;
     }
 
     if (data.length === 0) {
-      if (
-        this.$query !== undefined &&
-        this.$query !== null &&
-        this.$query.value.length !== 0
-      ) {
-        return (
-          <InfoText>{`Cette recherche ne retourne aucun résultat.`}</InfoText>
-        );
+      if (this.query.length !== 0) {
+        return <InfoText>{T.ANSWERS_INDEX_INFO_NO_SEARCH_RESULT}</InfoText>;
       }
 
-      return (
-        <InfoText>
-          {`Il n'y a pour l'instant (plus) aucune réponse ${ANSWER_STATE_LABEL[
-            this.props.state
-          ].toLowerCase()}.`}
-        </InfoText>
-      );
+      return <InfoText>{T.ANSWERS_INDEX_INFO_NO_DATA(state)}</InfoText>;
     }
 
     return data.map(answer => [
@@ -184,19 +176,17 @@ class AnswersIndexPage extends React.Component {
   }
 
   render() {
-    const { data, isLoading, pageIndex, pageLength } = this.props;
+    const { data, isLoading, pageIndex, pageLength, state } = this.props;
 
     return (
       <Main isHorizontal>
         <Content flexDirection="column">
-          <Subtitle>
-            {`Réponses ${ANSWER_STATE_LABEL[this.props.state].toLowerCase()}`}
-          </Subtitle>
+          <Subtitle>{T.ANSWERS_INDEX_TITLE(state)}</Subtitle>
           <FilterInputContainer>
             <FilterInput
               icon="search"
               onChange={() => this.loadAnswers()}
-              placeholder="Rechercher par intitulé de question ou IDCC…"
+              placeholder={T.ANSWERS_INDEX_SEARCH_PLACEHOLDER}
               ref={node => (this.$query = node)}
             />
           </FilterInputContainer>
@@ -207,11 +197,8 @@ class AnswersIndexPage extends React.Component {
           )}
           {!isLoading && (
             <List flexDirection="column">
-              {data.length !== 0 && (
-                <HelpText>
-                  {`Sélectionnez une question et commencez à rédiger une réponse
-                  pour vous l'attribuer :`}
-                </HelpText>
+              {state === ANSWER_STATE.TO_DO && data.length !== 0 && (
+                <HelpText>{T.ANSWERS_INDEX_HELP_TO_DO}</HelpText>
               )}
               {this.getAnswersList()}
             </List>

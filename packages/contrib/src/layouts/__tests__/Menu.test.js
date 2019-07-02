@@ -8,6 +8,9 @@ global.open = jest.fn();
 
 import Menu from "../Menu";
 
+import { ANSWER_STATE } from "../../constants";
+import T from "../../texts";
+
 describe("[Contrib] layouts/<Menu /> (Contributor)", () => {
   const props = {
     me: { payload: { name: "John Doe" } },
@@ -30,7 +33,7 @@ describe("[Contrib] layouts/<Menu /> (Contributor)", () => {
   });
 
   it("should redirect to the todo answers list", () => {
-    fireEvent.click(γ.getByText("Réponses à rédiger"));
+    fireEvent.click(γ.getByText(T.ANSWERS_INDEX_TITLE(ANSWER_STATE.TO_DO)));
 
     expect(sessionStorage.getItem("jwt")).toBe(JWT);
     expect(sessionStorage.getItem("me")).toBe(ME);
@@ -38,7 +41,7 @@ describe("[Contrib] layouts/<Menu /> (Contributor)", () => {
   });
 
   it("should redirect to the draft answers list", () => {
-    fireEvent.click(γ.getByText("Réponses en cours de rédaction"));
+    fireEvent.click(γ.getByText(T.ANSWERS_INDEX_TITLE(ANSWER_STATE.DRAFT)));
 
     expect(sessionStorage.getItem("jwt")).toBe(JWT);
     expect(sessionStorage.getItem("me")).toBe(ME);
@@ -46,15 +49,27 @@ describe("[Contrib] layouts/<Menu /> (Contributor)", () => {
   });
 
   it("should redirect to the pending review answers list", () => {
-    fireEvent.click(γ.getByText("Réponses en cours de validation"));
+    fireEvent.click(
+      γ.getByText(T.ANSWERS_INDEX_TITLE(ANSWER_STATE.PENDING_REVIEW))
+    );
 
     expect(sessionStorage.getItem("jwt")).toBe(JWT);
     expect(sessionStorage.getItem("me")).toBe(ME);
     expect(Router.push).toHaveBeenCalledWith("/answers/pending_review/1");
   });
 
+  it("should redirect to the under review answers list", () => {
+    fireEvent.click(
+      γ.getByText(T.ANSWERS_INDEX_TITLE(ANSWER_STATE.UNDER_REVIEW))
+    );
+
+    expect(sessionStorage.getItem("jwt")).toBe(JWT);
+    expect(sessionStorage.getItem("me")).toBe(ME);
+    expect(Router.push).toHaveBeenCalledWith("/answers/under_review/1");
+  });
+
   it("should redirect to the validated answers list", () => {
-    fireEvent.click(γ.getByText("Réponses validées"));
+    fireEvent.click(γ.getByText(T.ANSWERS_INDEX_TITLE(ANSWER_STATE.VALIDATED)));
 
     expect(sessionStorage.getItem("jwt")).toBe(JWT);
     expect(sessionStorage.getItem("me")).toBe(ME);

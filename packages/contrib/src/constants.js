@@ -6,13 +6,15 @@ export const ANSWER_STATE = {
   TO_DO: "todo",
   DRAFT: "draft",
   PENDING_REVIEW: "pending_review",
+  UNDER_REVIEW: "under_review",
   VALIDATED: "validated"
 };
 export const ANSWER_STATE_LABEL = {
   todo: "à rédiger",
   draft: "en cours de rédaction",
   pending_review: "en attente de validation",
-  validated: "validée(s)"
+  under_review: "en cours de validation",
+  validated: "validée"
 };
 
 export const ZONE_CATEGORY_LABEL = {

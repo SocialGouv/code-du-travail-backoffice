@@ -130,15 +130,12 @@ exports[`[Contrib] layouts/<Header /> [Contributor] should match snapshot diff 1
     >
       <div
         class=\\"sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB\\"
-@@ -21,10 +21,188 @@
-          </span>
-          <span
-            class=\\"Header__Subtitle-sc-7cr55z-4 kxPxIS\\"
+@@ -24,7 +24,190 @@
           >
             Outil de contribution
-+         </span>
-+       </div>
-+     </div>
+          </span>
+        </div>
+      </div>
 +     <div
 +       class=\\"sc-bdVaJa sc-bwzfXH jruoDg\\"
 +     >
@@ -185,6 +182,11 @@ exports[`[Contrib] layouts/<Header /> [Contributor] should match snapshot diff 1
 +             <span
 +               class=\\"Menu__BaseLink-sc-1tufs3d-1 Menu__TopLink-sc-1tufs3d-2 Menu__DropdownLink-sc-1tufs3d-6 jmXsXQ\\"
 +             >
++               Réponses en attente de validation
++             </span>
++             <span
++               class=\\"Menu__BaseLink-sc-1tufs3d-1 Menu__TopLink-sc-1tufs3d-2 Menu__DropdownLink-sc-1tufs3d-6 jmXsXQ\\"
++             >
 +               Réponses en cours de validation
 +             </span>
 +             <span
@@ -192,8 +194,8 @@ exports[`[Contrib] layouts/<Header /> [Contributor] should match snapshot diff 1
 +             >
 +               Réponses validées
 +             </span>
-+           </div>
-+         </div>
+            </div>
+          </div>
 +         <div
 +           class=\\"Menu__Dropdown-sc-1tufs3d-3 loMVOU\\"
 +         >
@@ -262,9 +264,9 @@ exports[`[Contrib] layouts/<Header /> [Contributor] should match snapshot diff 1
 +                 />
 +               </svg>
 +               Charte rédactionnelle
-              </span>
-            </div>
-          </div>
++             </span>
++           </div>
++         </div>
 +         <div
 +           class=\\"Menu__Dropdown-sc-1tufs3d-3 loMVOU\\"
 +         >
@@ -313,8 +315,8 @@ exports[`[Contrib] layouts/<Header /> [Contributor] should match snapshot diff 1
 +               </svg>
 +               Se déconnecter
 +             </span>
-            </div>
-          </div>
++           </div>
++         </div>
 +       </div>
 +     </div>
 +   </div>

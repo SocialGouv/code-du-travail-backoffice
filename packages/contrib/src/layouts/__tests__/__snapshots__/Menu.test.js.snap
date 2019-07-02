@@ -104,6 +104,11 @@ exports[`[Contrib] layouts/<Menu /> (Contributor) should match snapshot 1`] = `
         <span
           class="Menu__BaseLink-sc-1tufs3d-1 Menu__TopLink-sc-1tufs3d-2 Menu__DropdownLink-sc-1tufs3d-6 jmXsXQ"
         >
+          Réponses en attente de validation
+        </span>
+        <span
+          class="Menu__BaseLink-sc-1tufs3d-1 Menu__TopLink-sc-1tufs3d-2 Menu__DropdownLink-sc-1tufs3d-6 jmXsXQ"
+        >
           Réponses en cours de validation
         </span>
         <span
