@@ -55,7 +55,7 @@
     "@testing-library/react": "^8.0.4",
     "babel-eslint": "10.0.2",
     "babel-jest": "24.8.0",
-    "babel-plugin-styled-components": "1.10.4",
+    "babel-plugin-styled-components": "1.10.6",
     "dotenv": "^8.0.0",
     "eslint": "6.0.1",
     "file-loader": "^4.0.0",
