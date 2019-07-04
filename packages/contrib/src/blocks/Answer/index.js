@@ -53,8 +53,14 @@ export default ({ data, onCancel, onClick, onFallback }) => {
         onClick={_onClick}
       >
         <Flex alignItems="baseline">
-          <Idcc code={data.idcc} name={data.agreement} />
-          <ContentQuestion>{`${data.index}) ${data.question}`}</ContentQuestion>
+          {data.agreement !== null ? (
+            <Idcc code={data.agreement_idcc} name={data.agreement_name} />
+          ) : (
+            <Idcc code="CDT" name="Code du travail" />
+          )}
+          <ContentQuestion>
+            {`${data.question_index}) ${data.question_value}`}
+          </ContentQuestion>
         </Flex>
         {!isTodo && data.generic_reference === null && (
           <ContentExtract>{value.substr(0, 100)}…</ContentExtract>

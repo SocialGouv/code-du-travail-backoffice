@@ -12,10 +12,10 @@ describe("[Contrib] blocks/<Answer /> (Todo)", () => {
   const props = {
     data: {
       id: "12345678-9abc-4def-0123-456789abcdef",
-      idcc: "1234",
-      index: 12,
-      agreement: "A Labor Agreement Name",
-      question: "Who knows?",
+      agreement_idcc: "1234",
+      agreement_name: "A Labor Agreement Name",
+      question_index: 12,
+      question_value: "Who knows?",
       state: ANSWER_STATE.TO_DO
     },
     label: "A label",
@@ -55,9 +55,9 @@ describe("[Contrib] blocks/<Answer /> (Draft)", () => {
   const props = {
     data: {
       id: "12345678-9abc-4def-0123-456789abcdef",
-      idcc: "1234",
-      agreement: "A Labor Agreement Name",
-      question: "Who knows?",
+      agreement_idcc: "1234",
+      agreement_name: "A Labor Agreement Name",
+      question_value: "Who knows?",
       generic_reference: null,
       prevalue: "A prevalue",
       state: ANSWER_STATE.DRAFT,

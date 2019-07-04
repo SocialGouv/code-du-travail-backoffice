@@ -15,11 +15,12 @@ export const cancelFailure = error => ({
   }
 });
 
-export const load = (request, pageIndex) => ({
+export const load = (state, pageIndex, query) => ({
   type: actionTypes.ANSWERS_LOAD,
   meta: {
+    query,
     pageIndex,
-    request
+    state
   }
 });
 export const loadFailure = error => ({

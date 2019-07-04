@@ -119,15 +119,31 @@ function* setState({ meta: { ids, next, state } }) {
   }
 }
 
-function* load({ meta: { pageIndex, request } }) {
-  const originalRequest = request.clone();
-
+function* load({ meta: { pageIndex, query, state } }) {
   try {
-    const { data, pageLength } = yield request
-      .orderBy("index")
-      .orderBy("idcc")
+    const me = JSON.parse(sessionStorage.getItem("me"));
+    const queryAsNumber = isNaN(query) ? 0 : Number(query);
+
+    let request = postgrest()
       .page(pageIndex)
-      .get("/contributor_answers", true);
+      .eq("state", state)
+      .in("agreement_id", me.payload.agreements, true)
+      .orderBy("question_index")
+      .orderBy("agreement_idcc");
+
+    if (state !== ANSWER_STATE.TO_DO) {
+      request = request.eq("user_id", me.payload.id);
+    }
+
+    if (query.length > 0) {
+      request = request.or
+        .eq("agreement_idcc", queryAsNumber)
+        .ilike("agreement_name", query)
+        .eq("question_index", queryAsNumber)
+        .ilike("question_value", query);
+    }
+
+    const { data, pageLength } = yield request.get("/full_answers", true);
 
     yield put(answers.loadSuccess(data, pageIndex, pageLength));
   } catch (err) {
@@ -144,9 +160,7 @@ function* load({ meta: { pageIndex, request } }) {
         </span>
       );
 
-      return yield load({
-        meta: { pageIndex: pageIndex, request: originalRequest }
-      });
+      return yield load({ meta: { pageIndex, query, state } });
     }
 
     toast.error(err.message);
