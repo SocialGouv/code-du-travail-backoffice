@@ -12,7 +12,6 @@ import Pagination from "../../src/components/Pagination";
 import Input from "../../src/elements/Input";
 import Subtitle from "../../src/elements/Subtitle";
 import Main from "../../src/layouts/Main";
-import postgrest from "../../src/libs/postgrest";
 
 import { ANSWER_STATE } from "../../src/constants";
 import T from "../../src/texts";
@@ -110,20 +109,7 @@ class AnswersIndexPage extends React.Component {
   _loadAnswers(pageIndex = 0) {
     const { state } = this.props;
 
-    const query = this.query;
-    const request = postgrest().eq("state", state);
-
-    const finalRequest =
-      query.length !== 0
-        ? request.or
-            .ilike("agreement", `%${query}%`)
-            .eq("idcc", isNaN(query) ? 0 : query)
-            .eq("index", isNaN(query) ? 0 : query)
-            .ilike("question", `%${query}%`)
-            .ilike("value", `%${query}%`)
-        : request;
-
-    this.props.dispatch(actions.answers.load(finalRequest, pageIndex));
+    this.props.dispatch(actions.answers.load(state, pageIndex, this.query));
   }
 
   cancelAnswer(id) {
