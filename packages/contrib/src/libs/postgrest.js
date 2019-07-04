@@ -163,11 +163,11 @@ class Postgrest {
     const isNot = this.isNot ? "not." : "";
 
     if (this.isAnd) {
-      this.ands.push(`${column}.like.${value.replace(/%/g, "*")}`);
+      this.ands.push(`${column}.like."*${value}*"`);
     } else if (this.isOr) {
-      this.ors.push(`${column}.like.${value.replace(/%/g, "*")}`);
+      this.ors.push(`${column}.like."*${value}*"`);
     } else {
-      this.queries.push(`${column}=${isNot}like.${value.replace(/%/g, "*")}`);
+      this.queries.push(`${column}=${isNot}like."*${value}*"`);
       this.isNot = false;
     }
 
@@ -178,11 +178,11 @@ class Postgrest {
     const isNot = this.isNot ? "not." : "";
 
     if (this.isAnd) {
-      this.ands.push(`${column}.ilike.${value.replace(/%/g, "*")}`);
+      this.ands.push(`${column}.ilike."*${value}*"`);
     } else if (this.isOr) {
-      this.ors.push(`${column}.ilike.${value.replace(/%/g, "*")}`);
+      this.ors.push(`${column}.ilike."*${value}*"`);
     } else {
-      this.queries.push(`${column}=${isNot}ilike.${value.replace(/%/g, "*")}`);
+      this.queries.push(`${column}=${isNot}ilike."*${value}*"`);
       this.isNot = false;
     }
 
