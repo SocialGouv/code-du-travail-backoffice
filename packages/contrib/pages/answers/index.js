@@ -109,7 +109,12 @@ class AnswersIndexPage extends React.Component {
   _loadAnswers(pageIndex = 0) {
     const { state } = this.props;
 
-    this.props.dispatch(actions.answers.load(state, pageIndex, this.query));
+    const states =
+      state === ANSWER_STATE.UNDER_REVIEW
+        ? [ANSWER_STATE.PENDING_REVIEW, ANSWER_STATE.UNDER_REVIEW]
+        : [state];
+
+    this.props.dispatch(actions.answers.load(states, pageIndex, this.query));
   }
 
   cancelAnswer(id) {
