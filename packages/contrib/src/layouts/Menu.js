@@ -116,11 +116,6 @@ export default class Menu extends React.PureComponent {
               {T.ANSWERS_INDEX_TITLE(ANSWER_STATE.DRAFT)}
             </DropdownLink>
             <DropdownLink
-              onClick={() => this.goToAnswers(ANSWER_STATE.PENDING_REVIEW)}
-            >
-              {T.ANSWERS_INDEX_TITLE(ANSWER_STATE.PENDING_REVIEW)}
-            </DropdownLink>
-            <DropdownLink
               onClick={() => this.goToAnswers(ANSWER_STATE.UNDER_REVIEW)}
             >
               {T.ANSWERS_INDEX_TITLE(ANSWER_STATE.UNDER_REVIEW)}

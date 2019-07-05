@@ -48,16 +48,6 @@ describe("[Contrib] layouts/<Menu /> (Contributor)", () => {
     expect(Router.push).toHaveBeenCalledWith("/answers/draft/1");
   });
 
-  it("should redirect to the pending review answers list", () => {
-    fireEvent.click(
-      γ.getByText(T.ANSWERS_INDEX_TITLE(ANSWER_STATE.PENDING_REVIEW))
-    );
-
-    expect(sessionStorage.getItem("jwt")).toBe(JWT);
-    expect(sessionStorage.getItem("me")).toBe(ME);
-    expect(Router.push).toHaveBeenCalledWith("/answers/pending_review/1");
-  });
-
   it("should redirect to the under review answers list", () => {
     fireEvent.click(
       γ.getByText(T.ANSWERS_INDEX_TITLE(ANSWER_STATE.UNDER_REVIEW))
