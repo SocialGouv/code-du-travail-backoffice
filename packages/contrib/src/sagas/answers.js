@@ -119,19 +119,19 @@ function* setState({ meta: { ids, next, state } }) {
   }
 }
 
-function* load({ meta: { pageIndex, query, state } }) {
+function* load({ meta: { pageIndex, query, states } }) {
   try {
     const me = JSON.parse(sessionStorage.getItem("me"));
     const queryAsNumber = isNaN(query) ? 0 : Number(query);
 
     let request = postgrest()
       .page(pageIndex)
-      .eq("state", state)
+      .in("state", states)
       .in("agreement_id", me.payload.agreements, true)
       .orderBy("question_index")
       .orderBy("agreement_idcc");
 
-    if (state !== ANSWER_STATE.TO_DO) {
+    if (!states.includes(ANSWER_STATE.TO_DO)) {
       request = request.eq("user_id", me.payload.id);
     }
 
@@ -160,7 +160,7 @@ function* load({ meta: { pageIndex, query, state } }) {
         </span>
       );
 
-      return yield load({ meta: { pageIndex, query, state } });
+      return yield load({ meta: { pageIndex, query, states } });
     }
 
     toast.error(err.message);
