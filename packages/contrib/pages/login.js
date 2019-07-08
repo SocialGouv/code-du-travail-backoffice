@@ -92,7 +92,7 @@ export default class Index extends React.Component {
             </RightTitle>
             <Login onLog={this.forceUpdate} />
             <HelpText>
-              <a href="mailto:contact@code-du-travail.beta.gouv.fr">
+              <a href="mailto:codedutravail@beta.gouv.fr">
                 Une question? Un problème pour vous connecter?
               </a>
             </HelpText>
