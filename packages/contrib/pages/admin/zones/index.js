@@ -4,8 +4,6 @@ import AdminIndex from "../../../src/components/AdminIndex";
 
 import { ZONE_CATEGORY_LABEL } from "../../../src/constants";
 
-import "../../../node_modules/react-table/react-table.css";
-
 const COLUMNS = [
   {
     Header: "Code",

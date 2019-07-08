@@ -22,8 +22,6 @@ import makeApiFilter from "../../../src/libs/makeApiFilter";
 
 import { ANSWER_STATE } from "../../../src/constants";
 
-import "../../../node_modules/simplemde/dist/simplemde.min.css";
-
 const Container = styled(Flex)`
   height: 100%;
 `;

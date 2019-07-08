@@ -15,6 +15,8 @@ import mainSheetOverride from "./css/main-override.css";
 import reactTableSheet from "../../node_modules/react-table/react-table.css";
 // eslint-disable-next-line max-len
 import reactToastifySheet from "../../node_modules/react-toastify/dist/ReactToastify.css";
+// eslint-disable-next-line max-len
+import simplemdeSheet from "../../node_modules/simplemde/dist/simplemde.min.css";
 
 const Container = styled(Flex)`
   height: 100vh;
@@ -53,6 +55,9 @@ const Main = ({
       </style>
       <style jsx global>
         {reactToastifySheet}
+      </style>
+      <style jsx global>
+        {simplemdeSheet}
       </style>
     </Head>
     <Body alignItems="stretch" flexDirection="column" width={1}>

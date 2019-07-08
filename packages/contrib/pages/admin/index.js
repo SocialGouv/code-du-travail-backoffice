@@ -12,7 +12,6 @@ import customAxios from "../../src/libs/customAxios";
 
 import { ANSWER_STATE } from "../../src/constants";
 
-import "../../node_modules/react-table/react-table.css";
 import Idcc from "../../src/elements/Idcc";
 
 const Container = styled(Flex)`
