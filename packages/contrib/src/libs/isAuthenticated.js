@@ -10,6 +10,7 @@ export default async function isAuthenticated() {
   if (
     typeof token !== "string" ||
     token.length === 0 ||
+    me === null ||
     me.payload.agreements === undefined
   ) {
     return false;
