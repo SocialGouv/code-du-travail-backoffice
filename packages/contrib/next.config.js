@@ -2,8 +2,8 @@ const merge = require("webpack-merge");
 const withCss = require("@zeit/next-css");
 
 module.exports = withCss({
-  // https://github.com/zeit/next.js#runtime-configuration
-  publicRuntimeConfig: {
+  // https://nextjs.org/docs#build-time-configuration
+  env: {
     API_URI: process.env.API_URI
   },
 
