@@ -74,7 +74,7 @@
   "peerDependencies": {
     "jest-haste-map": "^24.8.1",
     "prop-types": "^15.7.2",
-    "webpack": "^4.35.2"
+    "webpack": "^4.35.3"
   },
   "license": "Apache-2.0"
 }
