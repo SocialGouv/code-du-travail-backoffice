@@ -17,19 +17,6 @@ class MainApp extends App {
     };
   }
 
-  static async getInitialProps({ ctx, Component }) {
-    let pageProps = {};
-
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps({
-        ctx,
-        query: ctx.query
-      });
-    }
-
-    return { pageProps };
-  }
-
   async componentDidMount() {
     if (!window.location.pathname.startsWith("/login")) {
       if (!(await isAuthenticated())) {
