@@ -1,6 +1,6 @@
 # This is the Docker file runnning E2E Tests.
 
-FROM ubuntu:18.04
+FROM ubuntu:18.10
 
 RUN apt-get update \
     && apt-get install -y \
