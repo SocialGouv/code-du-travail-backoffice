@@ -2,8 +2,6 @@ import React from "react";
 
 import AdminIndex from "../../../src/components/AdminIndex";
 
-import "../../../node_modules/react-table/react-table.css";
-
 const CATEGORIES = {
   contract_type: "Type de contrat",
   distinctive_identity: "Particularismes",
