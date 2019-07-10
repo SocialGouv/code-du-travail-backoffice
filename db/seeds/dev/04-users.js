@@ -31,7 +31,7 @@ exports.seed = async knex => {
     .where({ role: 'contributor' })
 
   const agreements = await knex('api.agreements')
-    .limit(5)
+    .limit(3)
 
   const usersAgreements = agreements
     .map(({ id: agreement_id }) => ({ user_id, agreement_id }))
