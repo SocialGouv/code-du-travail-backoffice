@@ -2,7 +2,7 @@ version: "3"
 
 services:
   db:
-    build: ./db
+    image: igabriele/postgresql-jwt
     ports:
       - ${DB_PORT}:5432
     environment:
@@ -50,9 +50,21 @@ services:
   test:
     build:
       context: .
-      dockerfile: Dockerfile.test
+      dockerfile: test.Dockerfile
+    links:
+      - docker-dind
     environment:
+      DOCKER_HOST: tcp://docker-dind:2375
       WEB_URI: http://web:${WEB_PORT}
+    depends_on:
+      - web
+
+  # This is required in order to enable docker-in-docker when running the "test" service:
+  docker-dind:
+    image: docker:dind
+    privileged: true
+    expose:
+      - 2375
 
 volumes:
   postgre-data:
