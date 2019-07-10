@@ -2,6 +2,7 @@
   "name": "@socialgouv/code-du-travail-backoffice",
   "version": "0.0.0",
   "description": "Applications d'administration des données du code du travail numérique.",
+  "license": "Apache-2.0",
   "private": true,
   "scripts": {
     "build": "lerna run build",
@@ -30,7 +31,5 @@
     "pg": "7.11.0",
     "puppeteer": "^1.18.1",
     "uuid": "3.3.2"
-  },
-  "devDependencies": {},
-  "license": "Apache-2.0"
+  }
 }
