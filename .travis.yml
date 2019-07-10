@@ -1,0 +1,45 @@
+language: node_js
+node_js:
+  - 10
+
+env:
+  global:
+    - API_PORT: 3200
+    - API_URI: http://localhost:3200
+    - DB_PORT: 5432
+    - WEB_PORT: 3100
+    - WEB_URI: http://localhost:3100
+    - POSTGRES_DB: test_db
+    - POSTGRES_USER: test_db_user
+    - POSTGRES_PASSWORD: test_db_password
+    - PGRST_DB_ANON_ROLE: anonymous
+    - PGRST_DB_SCHEMA: api
+    - PGRST_DB_URI: postgres://test_db_user:test_db_password@localhost:5432/test_db
+    - PGRST_JWT_SECRET: postgrest_jwt_secret
+
+cache:
+  yarn: true
+  directories:
+    - nodes_modules
+    - packages/contrib/nodes_modules
+
+jobs:
+  include:
+    - stage: Build
+      name: Yarn
+      script:
+        - yarn
+        # Install the project packages dependencies:
+        - yarn run lerna bootstrap
+
+    - stage: Test
+      name: Unit Tests
+      # Dependencies are cached, it's just a linking process:
+      before_script:
+        - yarn
+        - yarn run lerna bootstrap
+      script:
+        - yarn test -- --stream -- --coverage
+      after_script:
+        # Push the coverage data into Codecov:
+        - npx codecov
