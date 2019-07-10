@@ -1,6 +1,7 @@
 # Back-office du code du travail numérique
 
-[![Pipeline Status][img-gitlab]][link-gitlab]
+[![Travis CI Status][img-travis]][link-travis]
+[![Gitlab CI Status][img-gitlab]][link-gitlab]
 [![Code Coverage][img-codecov]][link-codecov]
 
 > Ce dépôt regroupe les applications d'administration des données du [code du
@@ -75,7 +76,9 @@ Ce dépôt est licencié sous la [licence Apacha 2.0][link-license].
 
 [img-codecov]: https://img.shields.io/codecov/c/github/SocialGouv/code-du-travail-backoffice/dev.svg?style=flat-square
 [img-gitlab]: https://gitlab.factory.social.gouv.fr/SocialGouv/code-du-travail-backoffice/badges/dev/pipeline.svg?style=flat-square
+[img-travis]: https://img.shields.io/travis/SocialGouv/code-du-travail-backoffice/dev.svg?style=flat-square
 [link-cdtn]: https://github.com/SocialGouv/code-du-travail-numerique
 [link-codecov]: https://codecov.io/gh/SocialGouv/code-du-travail-backoffice
 [link-license]: https://github.com/SocialGouv/code-du-travail-backoffice/blob/master/LICENSE
 [link-gitlab]: https://gitlab.factory.social.gouv.fr/SocialGouv/code-du-travail-backoffice/pipelines
+[link-travis]: https://travis-ci.org/SocialGouv/code-du-travail-backoffice
