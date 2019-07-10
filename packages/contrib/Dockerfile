@@ -1,5 +1,8 @@
 FROM node:10-alpine
 
+ARG API_URI
+ENV API_URI=$API_URI
+
 COPY ./__mocks__ /app/__mocks__
 COPY ./.babelrc /app/.babelrc
 COPY ./next.config.js /app/next.config.js

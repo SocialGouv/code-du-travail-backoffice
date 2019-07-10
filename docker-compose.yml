@@ -29,11 +29,13 @@ services:
       - db
 
   web:
-    build: ./packages/contrib
+    build:
+      context: ./packages/contrib
+      args:
+        API_URI: ${API_URI}
     ports:
       - ${WEB_PORT}:${WEB_PORT}
     environment:
-      API_URI: ${API_URI}
       WEB_PORT: ${WEB_PORT}
     depends_on:
       - api

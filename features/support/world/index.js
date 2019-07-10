@@ -2,7 +2,9 @@ const { setWorldConstructor } = require("cucumber");
 const { expect } = require("chai");
 const puppeteer = require("puppeteer");
 
-require("dotenv").config({ path: `${__dirname}/../../../.env` });
+if (process.env.WEB_URI === undefined) {
+  require("dotenv").config({ path: `${__dirname}/../../../.env` });
+}
 
 const { WEB_URI } = process.env;
 const ONE_SECOND = 1000;
