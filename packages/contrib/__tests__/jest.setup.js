@@ -4,7 +4,7 @@ process.env.API_URI = "http://localhost:3200";
 
 // Jest "jest-dom" extension
 // https://github.com/gnapse/jest-dom#usage
-import "jest-dom/extend-expect";
+import "@testing-library/jest-dom/extend-expect";
 
 // Jest "snapshot-diff" extension
 // https://github.com/jest-community/snapshot-diff#with-custom-matcher
