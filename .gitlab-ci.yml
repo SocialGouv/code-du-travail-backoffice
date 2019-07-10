@@ -8,15 +8,16 @@ variables:
   API_PORT: 3200
   API_URI: http://api:3000
   DB_PORT: 5432
-  WEB_PORT: 3100
-  WEB_URI: http://web:3100
+  NODE_ENV: test
   POSTGRES_DB: test_db
   POSTGRES_USER: test_db_user
   POSTGRES_PASSWORD: test_db_password
   PGRST_DB_ANON_ROLE: anonymous
   PGRST_DB_SCHEMA: api
-  PGRST_DB_URI: postgres://test_db_user:test_db_password@localhost:5432/test_db
+  PGRST_DB_URI: postgres://test_db_user:test_db_password@db:5432/test_db
   PGRST_JWT_SECRET: postgrest_jwt_secret
+  WEB_PORT: 3100
+  WEB_URI: http://web:3100
 
 stages:
   - Test
@@ -24,10 +25,6 @@ stages:
 E2E Tests:
   stage: Test
   image: igabriele/docker-compose-puppeteer
-  cache:
-    key: one-key-to-rule-them-all
-    paths:
-    - node_modules/
   # We both need to add the docker:dind service and the DOCKER_DRIVER +
   # DOCKER_HOST variables to use docker-in-docker:
   # https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker-executor
@@ -37,13 +34,12 @@ E2E Tests:
     DOCKER_DRIVER: overlay2
     DOCKER_HOST: tcp://localhost:2375
   before_script:
-    - yarn
-    # Start database:
-    - docker-compose up -d db
-    # Migrate database schema:
-    - yarn db:migrate
-    # Seed database with dummy data:
-    - yarn db:seed
+    # Start db:
+    - docker-compose up -d db > /dev/nul
+    # Build master, test & web:
+    - docker-compose build master test web > /dev/nul
+    # Start master (which will automatically migrate & seed the database):
+    - docker-compose up -d master > /dev/nul
   script:
     # We need to raise the container error to fail the CI run if the tests fail:
     - docker-compose up --abort-on-container-exit --exit-code-from test test
