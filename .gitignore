@@ -10,3 +10,6 @@
 # Manual data imports
 /*.csv
 /*.sql
+
+# Prevent any script to be pushed whithin the production database seeds:
+/db/seeds/prod/**/*.js
