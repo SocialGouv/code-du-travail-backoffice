@@ -306,6 +306,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
               </label>
               <div
                 class="sc-bdVaJa sc-bwzfXH pjOvZ"
+                style="flex-grow: 1;"
               >
                 <input
                   class="Input___Input-l1y0rz-1 bLtEdt"
@@ -951,6 +952,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
               </label>
               <div
                 class="sc-bdVaJa sc-bwzfXH pjOvZ"
+                style="flex-grow: 1;"
               >
                 <input
                   class="Input___Input-l1y0rz-1 bLtEdt"
