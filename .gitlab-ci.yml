@@ -34,12 +34,11 @@ E2E Tests:
     DOCKER_DRIVER: overlay2
     DOCKER_HOST: tcp://localhost:2375
   before_script:
-    # Start db:
-    - docker-compose up -d db > /dev/nul
-    # Build master, test & web:
-    - docker-compose build master test web > /dev/nul
+    # Start db (we manually start it so that it has the time to start during the
+    # master container build process):
+    - docker-compose up -d db
     # Start master (which will automatically migrate & seed the database):
-    - docker-compose up -d master > /dev/nul
+    - docker-compose up master
   script:
     # We need to raise the container error to fail the CI run if the tests fail:
     - docker-compose up --abort-on-container-exit --exit-code-from test test
