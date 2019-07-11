@@ -2,9 +2,6 @@ import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
-import deleteIconUri from "../../images/delete.svg";
-import linkIconUri from "../../images/link.svg";
-
 const Container = styled(Flex)`
   background-color: lightgray;
   border: solid 1px gray;
@@ -50,13 +47,13 @@ export default class extends React.PureComponent {
           <Button
             alt={`Bouton ouvrant l'url de ${ariaName} ${value}`}
             onClick={() => this.openUrl(url)}
-            src={linkIconUri}
+            src="/static/images/link.svg"
           />
         )}
         <Button
           alt={`Bouton supprimant ${ariaName} ${value}`}
           onClick={() => onRemove(value)}
-          src={deleteIconUri}
+          src="/static/images/delete.svg"
         />
       </Container>
     );

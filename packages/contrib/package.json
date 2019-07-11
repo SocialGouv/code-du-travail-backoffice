@@ -59,17 +59,13 @@
     "babel-plugin-styled-components": "1.10.6",
     "dotenv": "^8.0.0",
     "eslint": "6.0.1",
-    "file-loader": "^4.0.0",
     "identity-obj-proxy": "3.0.0",
     "jest": "24.8.0",
     "mutationobserver-shim": "^0.3.3",
     "prettier": "1.18.2",
     "redux-devtools-extension": "2.13.8",
     "snapshot-diff": "^0.5.2",
-    "svg-inline-loader": "^0.8.0",
-    "url-loader": "^2.0.1",
-    "uuid": "^3.3.2",
-    "webpack-merge": "^4.2.1"
+    "uuid": "^3.3.2"
   },
   "peerDependencies": {
     "jest-haste-map": "^24.8.1",

@@ -5,8 +5,6 @@ import styled from "styled-components";
 
 import Menu from "./Menu";
 
-import marianneImageUri from "../images/marianne.svg";
-
 const Container = styled(Flex)`
   background-color: white;
   border-top: solid 0.3rem black;
@@ -62,7 +60,7 @@ export default class Header extends React.Component {
           <Logo
             alt="Code du travail numérique"
             aria-label="Bouton de retour au tableau de bord"
-            src={marianneImageUri}
+            src="/static/images/marianne.svg"
           />
           <Flex flexDirection="column">
             <Title>Code du travail numérique</Title>
