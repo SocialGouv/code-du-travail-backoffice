@@ -1,4 +1,3 @@
-const crypto = require("crypto");
 const dotenv = require("dotenv");
 const fs = require("fs");
 const ora = require("ora");
@@ -12,7 +11,6 @@ const ROOT = `${__dirname}/../..`;
 const envPath = `${ROOT}/.env`;
 const sampleEnvPath = `${ROOT}/.env.sample`;
 
-const randomBytesP = promisify(crypto.randomBytes);
 const readFileP = promisify(fs.readFile);
 const writeFileP = promisify(fs.writeFile);
 
@@ -22,43 +20,14 @@ function waitFor(timeInMs) {
   return new Promise(resolve => setTimeout(resolve, timeInMs));
 }
 
-async function generateRandomHexString(length, onlyLetters) {
-  const res = (await randomBytesP(length)).toString("base64");
-
-  return Boolean(onlyLetters) ? res.replace(/[^a-z]/gi, "") : res;
-}
-
 async function install() {
   // Copy and fill .env file (if it doesn't already exist)
   if (!fs.existsSync(envPath)) {
     spinner.start(`Generating .env file...`);
 
     const sampleEnvBuffer = await readFileP(sampleEnvPath);
-    const sampleEnvConfig = dotenv.parse(sampleEnvBuffer);
+    const envConfig = dotenv.parse(sampleEnvBuffer);
 
-    const API_URI = process.env.API_URI !== undefined
-      ? process.env.API_URI
-      : "http://localhost:3200";
-    const POSTGRES_DB = (await generateRandomHexString(10, true))
-      .toLowerCase();
-    const POSTGRES_USER = (await generateRandomHexString(18, true))
-      .toLowerCase();
-    const POSTGRES_PASSWORD = (await generateRandomHexString(32))
-      .replace(/[^0-9a-z]/gi, "");
-    const PGRST_DB_URI =
-      `postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${sampleEnvConfig.DB_PORT}/${POSTGRES_DB}`;
-
-    const PGRST_JWT_SECRET = await generateRandomHexString(32);
-
-    const envConfig = {
-      ...sampleEnvConfig,
-      API_URI,
-      POSTGRES_DB,
-      POSTGRES_USER,
-      POSTGRES_PASSWORD,
-      PGRST_JWT_SECRET,
-      PGRST_DB_URI
-    };
     const envSource = Object.entries(envConfig).reduce(
       (acc, kvPair) => `${acc}${kvPair[0]}=${kvPair[1]}\n`,
       ""
