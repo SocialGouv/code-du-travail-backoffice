@@ -1,24 +1,15 @@
-FROM node:10-alpine
+FROM node:10-slim
 
 ARG API_URI
+ARG NODE_ENV
 ENV API_URI=$API_URI
-
-COPY ./__mocks__ /app/__mocks__
-COPY ./.babelrc /app/.babelrc
-COPY ./next.config.js /app/next.config.js
-COPY ./server /app/server
-COPY ./static /app/static
-
-COPY ./package.json /app/package.json
-COPY ./yarn.lock /app/yarn.lock
+ENV NODE_ENV=$NODE_ENV
 
 WORKDIR /app
 
-RUN yarn --frozen-lockfile && yarn cache clean
+COPY . ./
 
-COPY ./src /app/src
-COPY ./pages /app/pages
-
+RUN yarn --frozen-lockfile
 RUN yarn build
 
 ENTRYPOINT ["yarn", "start"]
