@@ -1,4 +1,4 @@
-FROM node:10-alpine
+FROM node:10-slim
 
 ARG API_URI
 ENV API_URI=$API_URI
@@ -14,7 +14,7 @@ COPY ./yarn.lock /app/yarn.lock
 
 WORKDIR /app
 
-RUN yarn --frozen-lockfile && yarn cache clean
+RUN yarn --frozen-lockfile
 
 COPY ./src /app/src
 COPY ./pages /app/pages

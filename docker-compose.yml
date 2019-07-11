@@ -41,7 +41,9 @@ services:
       - api
 
   master:
-    build: .
+    build:
+      context: .
+    image: igabriele/code-du-travail-backoffice:master-latest
     environment:
       NODE_ENV: ${NODE_ENV}
       PGRST_DB_URI: ${PGRST_DB_URI}
@@ -54,6 +56,7 @@ services:
     build:
       context: .
       dockerfile: test.Dockerfile
+    image: igabriele/code-du-travail-backoffice:test-latest
     links:
       - docker-dind
     environment:

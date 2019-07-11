@@ -4,42 +4,75 @@ node_js:
 
 env:
   global:
-    - API_PORT: 3200
-    - API_URI: http://localhost:3200
-    - DB_PORT: 5432
-    - WEB_PORT: 3100
-    - WEB_URI: http://localhost:3100
-    - POSTGRES_DB: test_db
-    - POSTGRES_USER: test_db_user
-    - POSTGRES_PASSWORD: test_db_password
-    - PGRST_DB_ANON_ROLE: anonymous
-    - PGRST_DB_SCHEMA: api
-    - PGRST_DB_URI: postgres://test_db_user:test_db_password@localhost:5432/test_db
-    - PGRST_JWT_SECRET: postgrest_jwt_secret
+    - API_PORT=3200
+    - API_URI=http://localhost:3200
+    - DB_PORT=5432
+    - NODE_ENV=test
+    - PGRST_DB_ANON_ROLE=anonymous
+    - PGRST_DB_SCHEMA=api
+    - PGRST_DB_URI=postgres://test_db_user:test_db_password@localhost:5432/test_db
+    - PGRST_JWT_SECRET=postgrest_jwt_secret
+    - POSTGRES_DB=test_db
+    - POSTGRES_PASSWORD=test_db_password
+    - POSTGRES_USER=test_db_user
+    - WEB_PORT=3100
+    - WEB_URI=http://localhost:3100
 
 cache:
-  yarn: true
+  - yarn: true
   directories:
     - nodes_modules
     - packages/contrib/nodes_modules
 
 jobs:
   include:
-    - stage: Build
+    - stage: Cache
       name: Yarn
-      script:
-        - yarn
+      install:
+        - yarn --frozen-lockfile
         # Install the project packages dependencies:
-        - yarn run lerna bootstrap
+        - yarn lerna bootstrap
 
     - stage: Test
       name: Unit Tests
-      # Dependencies are cached, it's just a linking process:
-      before_script:
-        - yarn
-        - yarn run lerna bootstrap
+      install: true
       script:
         - yarn test -- --stream -- --coverage
       after_script:
         # Push the coverage data into Codecov:
         - npx codecov
+
+    - stage: Test
+      name: E2E Tests
+      services:
+        - docker
+      before_install:
+        # Stop out-of-the-box PostgreSQL service:
+        - sudo service postgresql stop
+        # Log into Docker Hub:
+        # - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      install:
+        - sh ./scripts/prod/start.sh
+      # before_script:
+        # Start db (we manually start it so that it has the time to start during the
+        # master container build process):
+        # - docker-compose up -d db
+        # Start master (which will automatically migrate & seed the database):
+        # - docker-compose up master
+      script:
+        # We need to raise the container error to fail the CI run if the tests fail:
+        # - docker-compose up --abort-on-container-exit --exit-code-from test test
+        - yarn test:e2e
+      after_script:
+        - lsof -i | grep LISTEN
+        - docker-compose stop
+        # Push project-related images:
+        # - docker push igabriele/code-du-travail-backoffice:master-latest
+        # - docker push igabriele/code-du-travail-backoffice:test-latest
+        # Log out from Docker Hub:
+        # - docker logout
+
+notifications:
+  email:
+    on_failure: change
+    on_success: never

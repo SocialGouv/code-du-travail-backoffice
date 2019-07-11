@@ -1,10 +1,14 @@
 const { After, Before, Given, Then, When } = require("cucumber");
 
+const takeScreenshotOnFailure = require("../hooks/takeScreenshotOnFailure");
+
 Before(async function() {
   return await this.start();
 });
 
-After(async function() {
+After(async function(testCase) {
+  await takeScreenshotOnFailure(testCase, this);
+
   return await this.stop();
 });
 

@@ -24,8 +24,6 @@ echo "${GREEN}> Removing db containers & its volume…${NC}"
 docker-compose rm -v db > /dev/nul
 echo "${GREEN}> Starting db…${NC}"
 docker-compose up -d db > /dev/nul
-echo "${GREEN}> Building master, test & web…${NC}"
-docker-compose build master test web > /dev/nul
 # Starting master will automatically migrate & seed the database:
 echo "${GREEN}> Migrating & seeding database…${NC}"
 docker-compose up -d master
@@ -36,5 +34,5 @@ docker-compose up --abort-on-container-exit --exit-code-from test test
 # Clean the environment:
 unset API_URI
 
-echo "${GREEN}> Stopping docker-dind, master, test & web…${NC}"
-docker-compose stop master test docker-dind web test > /dev/nul
+echo "${GREEN}> Stopping docker-dind, test & web…${NC}"
+docker-compose stop test docker-dind web test > /dev/nul
