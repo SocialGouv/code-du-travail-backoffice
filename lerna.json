@@ -1,4 +1,9 @@
 {
+  "command": {
+    "bootstrap": {
+      "npmClientArgs": ["--frozen-lockfile"]
+    }
+  },
   "npmClient": "yarn",
   "packages": [
     "packages/*"
