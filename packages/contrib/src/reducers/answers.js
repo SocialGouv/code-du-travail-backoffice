@@ -1,11 +1,13 @@
 import { actionTypes } from "../actions/index";
+import { ANSWER_STATE } from "../constants";
 
 const initialState = {
   data: [],
   error: null,
   pageLength: 0,
   pageIndex: 0,
-  isLoading: true
+  isLoading: true,
+  state: ANSWER_STATE.PENDING_REVIEW
 };
 
 export default (state = initialState, { payload, type }) => {
@@ -36,7 +38,8 @@ export default (state = initialState, { payload, type }) => {
         error: null,
         pageLength: payload.pageLength,
         pageIndex: payload.pageIndex,
-        isLoading: false
+        isLoading: false,
+        state: payload.state
       };
 
     default:
