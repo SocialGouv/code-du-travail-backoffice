@@ -30,12 +30,13 @@ export const loadFailure = error => ({
     message: error.message
   }
 });
-export const loadSuccess = (data, pageIndex, pageLength) => ({
+export const loadSuccess = (data, pageIndex, pageLength, state) => ({
   type: actionTypes.ANSWERS_LOAD_SUCCESS,
   payload: {
     data,
     pageIndex,
-    pageLength
+    pageLength,
+    state
   }
 });
 
