@@ -13,12 +13,12 @@ exports[`[Contrib] components/Tags/<Tag /> should match snapshot 1`] = `
     <img
       alt="Bouton ouvrant l'url de le tag A Tag"
       class="Tag__Button-lc1n3o-2 jbGhej"
-      src="[object Object]"
+      src="/static/images/link.svg"
     />
     <img
       alt="Bouton supprimant le tag A Tag"
       class="Tag__Button-lc1n3o-2 jbGhej"
-      src="[object Object]"
+      src="/static/images/delete.svg"
     />
   </div>
 </div>

@@ -1,18 +1,29 @@
-const { setWorldConstructor } = require("cucumber");
+const { setDefaultTimeout, setWorldConstructor } = require("cucumber");
 const { expect } = require("chai");
 const puppeteer = require("puppeteer");
 
-require("dotenv").config({ path: `${__dirname}/../../../.env` });
+if (process.env.WEB_URI === undefined) {
+  require("dotenv").config({ path: `${__dirname}/../../../.env` });
+}
 
-const { WEB_URI } = process.env;
-const ONE_SECOND = 1000;
+const { NODE_ENV, WEB_URI } = process.env;
+
+// Increase default cucumber timeout from 5s to 30s:
+setDefaultTimeout(30000);
 
 class World {
   async start() {
     this.browser = await puppeteer.launch({
-      args: ['--no-sandbox', '--disable-setuid-sandbox']
+      args: [
+        "--disable-setuid-sandbox",
+        "--no-sandbox",
+        `--window-size=1600,1024`
+      ],
+      defaultViewport: { width: 1280, height: 768 },
+      devtools: NODE_ENV !== "test",
+      headless: NODE_ENV === "test"
     });
-    this.page = await this.browser.newPage();
+    this.page = (await this.browser.pages())[0];
     this.extendPage();
   }
 
@@ -60,7 +71,10 @@ class World {
     await $email.type(this.user.email);
     await $password.type(this.user.password);
 
-    await $button.click();
+    await Promise.all([
+      this.page.waitForNavigation(),
+      $button.click()
+    ]);
   }
 
   async checkSubtitle(text) {
@@ -89,6 +103,7 @@ class World {
   }
 
   async stop() {
+    await this.page.close();
     await this.browser.close();
   }
 }

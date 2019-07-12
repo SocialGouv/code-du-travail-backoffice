@@ -7,8 +7,6 @@ import Login from "../src/components/Login";
 import Main from "../src/layouts/Main";
 import isAuthenticated from "../src/libs/isAuthenticated";
 
-import welcomeImgUri from "../src/images/welcome.svg";
-
 const Left = styled(Flex)`
   padding: 5rem;
 `;
@@ -76,7 +74,7 @@ export default class Index extends React.Component {
     return (
       <Main isHorizontal>
         <Left flexDirection="column" justifyContent="center" width={1 / 2}>
-          <LeftImage src={welcomeImgUri} alt="" />
+          <LeftImage src="/static/images/welcome.svg" alt="" />
           <LeftTitle>
             Bienvenue sur l’outil de contribution au Code du travail numérique
           </LeftTitle>

@@ -20,7 +20,7 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should matc
             alt="Code du travail numérique"
             aria-label="Bouton de retour au tableau de bord"
             class="Header__Logo-sc-7cr55z-2 kAIypM"
-            src="[object Object]"
+            src="/static/images/marianne.svg"
           />
           <div
             class="sc-bdVaJa sc-bwzfXH eVPJMi"
@@ -189,7 +189,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
             alt="Code du travail numérique"
             aria-label="Bouton de retour au tableau de bord"
             class="Header__Logo-sc-7cr55z-2 kAIypM"
-            src="[object Object]"
+            src="/static/images/marianne.svg"
           />
           <div
             class="sc-bdVaJa sc-bwzfXH eVPJMi"
@@ -306,6 +306,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
               </label>
               <div
                 class="sc-bdVaJa sc-bwzfXH pjOvZ"
+                style="flex-grow: 1;"
               >
                 <input
                   class="Input___Input-l1y0rz-1 bLtEdt"
@@ -496,7 +497,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match 
             alt="Code du travail numérique"
             aria-label="Bouton de retour au tableau de bord"
             class="Header__Logo-sc-7cr55z-2 kAIypM"
-            src="[object Object]"
+            src="/static/images/marianne.svg"
           />
           <div
             class="sc-bdVaJa sc-bwzfXH eVPJMi"
@@ -665,7 +666,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match 
             alt="Code du travail numérique"
             aria-label="Bouton de retour au tableau de bord"
             class="Header__Logo-sc-7cr55z-2 kAIypM"
-            src="[object Object]"
+            src="/static/images/marianne.svg"
           />
           <div
             class="sc-bdVaJa sc-bwzfXH eVPJMi"
@@ -834,7 +835,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
             alt="Code du travail numérique"
             aria-label="Bouton de retour au tableau de bord"
             class="Header__Logo-sc-7cr55z-2 kAIypM"
-            src="[object Object]"
+            src="/static/images/marianne.svg"
           />
           <div
             class="sc-bdVaJa sc-bwzfXH eVPJMi"
@@ -951,6 +952,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
               </label>
               <div
                 class="sc-bdVaJa sc-bwzfXH pjOvZ"
+                style="flex-grow: 1;"
               >
                 <input
                   class="Input___Input-l1y0rz-1 bLtEdt"
@@ -1046,7 +1048,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                     <img
                       alt="Bouton supprimant le tag First A Tag"
                       class="Tag__Button-lc1n3o-2 jbGhej"
-                      src="[object Object]"
+                      src="/static/images/delete.svg"
                     />
                   </div>
                 </div>
@@ -1100,7 +1102,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                     <img
                       alt="Bouton supprimant la collection Second B Tag"
                       class="Tag__Button-lc1n3o-2 jbGhej"
-                      src="[object Object]"
+                      src="/static/images/delete.svg"
                     />
                   </div>
                   <div
@@ -1114,7 +1116,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                     <img
                       alt="Bouton supprimant la collection Third B Tag"
                       class="Tag__Button-lc1n3o-2 jbGhej"
-                      src="[object Object]"
+                      src="/static/images/delete.svg"
                     />
                   </div>
                 </div>

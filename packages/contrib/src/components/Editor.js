@@ -6,9 +6,6 @@ import styled from "styled-components";
 import markdown from "../libs/markdown";
 import unspace from "../libs/unspace";
 
-import redoImageUri from "../images/redo.svg";
-import undoImageUri from "../images/undo.svg";
-
 const TextButton = styled.button`
   color: #444444;
   font-size: 0.875rem;
@@ -101,14 +98,14 @@ export default class Editor extends React.Component {
               title="Bouton annulant la dernière modification effectuée"
               type="button"
             >
-              <TextButtonIcon src={undoImageUri} />
+              <TextButtonIcon src="/static/images/undo.svg" />
             </TextButton>
             <TextButton
               className="ql-redo"
               title="Bouton réappliquant la dernière modification annulée"
               type="button"
             >
-              <TextButtonIcon src={redoImageUri} />
+              <TextButtonIcon src="/static/images/redo.svg" />
             </TextButton>
           </span>
           <span className="ql-formats">

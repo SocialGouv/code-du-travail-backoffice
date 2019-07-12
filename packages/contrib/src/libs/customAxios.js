@@ -1,9 +1,10 @@
 import axios from "axios";
-import getConfig from "next/config";
 import Router from "next/router";
 
+const { API_URI } = process.env;
+
 const instance = axios.create({
-  baseURL: getConfig().publicRuntimeConfig.API_URI
+  baseURL: API_URI
 });
 
 // We can't possibly test this interceptor since we would need to partially

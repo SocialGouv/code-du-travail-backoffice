@@ -1,8 +1,10 @@
 /* eslint-disable max-len */
 
+process.env.API_URI = "http://localhost:3200";
+
 // Jest "jest-dom" extension
 // https://github.com/gnapse/jest-dom#usage
-import "jest-dom/extend-expect";
+import "@testing-library/jest-dom/extend-expect";
 
 // Jest "snapshot-diff" extension
 // https://github.com/jest-community/snapshot-diff#with-custom-matcher
@@ -28,21 +30,6 @@ import "../__mocks__/sessionStorage";
 
 // Mock "next/router"
 import "../__mocks__/nextRouter";
-
-// Mock "next/config"
-// TODO Wait for release of: https://github.com/zeit/next.js/pull/6458.
-// https://github.com/zeit/next.js/issues/4024#issuecomment-423843420
-jest.mock("next/config", () => () => ({
-  publicRuntimeConfig: {
-    API_URI: "http://localhost:3200"
-  }
-}));
-// https://github.com/zeit/next.js/issues/4024#issuecomment-469204986
-jest.mock("next-server/config", () => () => ({
-  publicRuntimeConfig: {
-    API_URI: "http://localhost:3200"
-  }
-}));
 
 // Mock "axios"
 import "../__mocks__/axios";

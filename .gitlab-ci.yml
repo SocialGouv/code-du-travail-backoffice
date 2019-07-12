@@ -1,68 +1,54 @@
 ---
 
+# We use the docker-compose services names for the _URI hostnames because
+# localhost is not available within the test container:
+# https://docs.docker.com/compose/networking/
+# https://docs.docker.com/compose/environment-variables/#the-env-file
+variables:
+  API_PORT: 3200
+  API_URI: http://api:3000
+  # Remove docker-compose warnings (because this environment variable is ised by
+  # the test container):
+  CONFIG_ONLY: "false"
+  DB_PORT: 5432
+  DB_URI: postgres://test_db_user:test_db_password@db:5432/test_db
+  NODE_ENV: test
+  PGRST_DB_ANON_ROLE: anonymous
+  PGRST_DB_SCHEMA: api
+  # It must be at least 32 characters long:
+  # https://github.com/PostgREST/postgrest/issues/977#issuecomment-329917367
+  PGRST_JWT_SECRET: a_test_only_postgrest_jwt_secret
+  POSTGRES_DB: test_db
+  POSTGRES_PASSWORD: test_db_password
+  POSTGRES_USER: test_db_user
+  WEB_PORT: 3100
+  WEB_URI: http://web:3100
+
 stages:
-  - Install
-  # - Build
   - Test
 
-Install:
-  stage: Install
-  image: node:10-alpine
-  cache:
-    key: $CI_COMMIT_REF_SLUG
-  artifacts:
-    expire_in: "1 day"
-    paths:
-      - .env
-      - node_modules
-      - packages/contrib/node_modules
-  script:
-    - yarn
-    - yarn run lerna bootstrap
-    # Generate the .env file:
-    - yarn setup --env-only
-
-Unit Tests:
-  stage: Test
-  image: node:10-alpine
-  dependencies:
-    - Install
-  script:
-    - yarn test -- --stream -- --coverage
-  after_script:
-    - npx codecov
-
 E2E Tests:
-  # TODO This stage should be split in 2 parts: build + push / tests.
-  stage: Install
-  image: docker/compose:1.24.1
-  dependencies: []
+  stage: Test
+  image: igabriele/docker-compose-puppeteer
+  # We both need to add the docker:dind service and the DOCKER_DRIVER +
+  # DOCKER_HOST variables to use docker-in-docker:
+  # https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker-executor
   services:
     - docker:dind
   variables:
+    DOCKER_DRIVER: overlay2
     DOCKER_HOST: tcp://localhost:2375
   before_script:
-    # Install Node and npm (which is not installed by default with nodejs):
-    # https://superuser.com/a/1187246/441835
-    - apk add --update nodejs nodejs-npm sed
-    # Install Yarn:
-    - npm i -g yarn
-    # Re-install packages correctly for this distribution:
-    - yarn
-    # Generate the .env file:
-    - yarn setup --env-only
-    # Replace API_URI value in .env by the correct DC service name and port
-    # because we don't have access to a shared localhost within the "test"
-    # container:
-    - sed -i 's/API_URI=http:\/\/localhost:3200/API_URI=http:\/\/api:3000/' .env
-    # Start DC images to run a local server instance (in the background):
-    - chmod +x ./scripts/prod/start.sh
-    - ./scripts/prod/start.sh
-    # Seed database with dummy data:
-    - yarn db:seed
-    # Build the "test" container:
-    - docker-compose build test
+    # Start db (we manually start it so that it has the time to start during the
+    # other containers build process):
+    - docker-compose up -d db
+    # Whis will build & start all the other containers as well as run database
+    # migrations & seeds:
+    - CONFIG_ONLY=true docker-compose up -d --always-recreate-deps --build --force-recreate test
+    # We need to restart the api container to apply the authentication process:
+    - docker-compose restart api
   script:
-    - docker-compose up --exit-code-from test test
+    # We need to raise the container error to fail the CI run if the tests fail:
+    - docker-compose up --abort-on-container-exit --exit-code-from test test
   after_script:
     - docker-compose stop

@@ -23,7 +23,7 @@ exports[`[Contrib] components/<Tags /> should match snapshot 1`] = `
         <img
           alt="Bouton supprimant le tag A Tag"
           class="Tag__Button-lc1n3o-2 jbGhej"
-          src="[object Object]"
+          src="/static/images/delete.svg"
         />
       </div>
       <div
@@ -37,7 +37,7 @@ exports[`[Contrib] components/<Tags /> should match snapshot 1`] = `
         <img
           alt="Bouton supprimant le tag Another Tag"
           class="Tag__Button-lc1n3o-2 jbGhej"
-          src="[object Object]"
+          src="/static/images/delete.svg"
         />
       </div>
     </div>
@@ -64,7 +64,7 @@ exports[`[Contrib] components/<Tags /> without \`isEditable\` should match snaps
         <img
           alt="Bouton supprimant l'étiquette A Tag"
           class="Tag__Button-lc1n3o-2 jbGhej"
-          src="[object Object]"
+          src="/static/images/delete.svg"
         />
       </div>
       <div
@@ -78,7 +78,7 @@ exports[`[Contrib] components/<Tags /> without \`isEditable\` should match snaps
         <img
           alt="Bouton supprimant l'étiquette Another Tag"
           class="Tag__Button-lc1n3o-2 jbGhej"
-          src="[object Object]"
+          src="/static/images/delete.svg"
         />
       </div>
     </div>

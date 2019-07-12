@@ -8,21 +8,21 @@
   font-style: normal;
   font-display: swap;
   font-weight: 400;
-  src: url(/static/assets/fonts/muli-latin-400.woff2) format("woff2"), url(/static/assets/fonts/muli-latin-400.woff) format("woff")
+  src: url(/static/fonts/muli-latin-400.woff2) format("woff2"), url(/static/fonts/muli-latin-400.woff) format("woff")
 }
 @font-face {
   font-family: Muli;
   font-style: normal;
   font-display: swap;
   font-weight: 600;
-  src: url(/static/assets/fonts/muli-latin-600.woff2) format("woff2"), url(/static/assets/fonts/muli-latin-600.woff) format("woff")
+  src: url(/static/fonts/muli-latin-600.woff2) format("woff2"), url(/static/fonts/muli-latin-600.woff) format("woff")
 }
 @font-face {
   font-family: Muli;
   font-style: normal;
   font-display: swap;
   font-weight: 700;
-  src: url(/static/assets/fonts/muli-latin-700.woff2) format("woff2"), url(/static/assets/fonts/muli-latin-700.woff) format("woff")
+  src: url(/static/fonts/muli-latin-700.woff2) format("woff2"), url(/static/fonts/muli-latin-700.woff) format("woff")
 }
 
 :root {

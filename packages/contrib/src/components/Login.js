@@ -1,7 +1,9 @@
-import customAxios from "../libs/customAxios";
+import axios from "axios";
 import React from "react";
 import { Button as ReButton, Flex } from "rebass";
 import styled from "styled-components";
+
+const { API_URI } = process.env;
 
 const Field = styled(Flex)`
   margin-bottom: 0.5rem;
@@ -56,7 +58,7 @@ export default class Login extends React.Component {
   componentDidMount() {
     this.$email.focus();
 
-    this.axios = customAxios();
+    this.axios = axios.create({ baseURL: API_URI });
   }
 
   componentDidUpdate() {

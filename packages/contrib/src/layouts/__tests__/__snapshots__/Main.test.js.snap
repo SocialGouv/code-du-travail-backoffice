@@ -20,7 +20,7 @@ exports[`[Contrib] layouts/<Main /> (administrator) should match snapshot 1`] = 
             alt="Code du travail numérique"
             aria-label="Bouton de retour au tableau de bord"
             class="Header__Logo-sc-7cr55z-2 kAIypM"
-            src="[object Object]"
+            src="/static/images/marianne.svg"
           />
           <div
             class="sc-bdVaJa sc-bwzfXH eVPJMi"
@@ -66,7 +66,7 @@ exports[`[Contrib] layouts/<Main /> (contributor) should match snapshot 1`] = `
             alt="Code du travail numérique"
             aria-label="Bouton de retour au tableau de bord"
             class="Header__Logo-sc-7cr55z-2 kAIypM"
-            src="[object Object]"
+            src="/static/images/marianne.svg"
           />
           <div
             class="sc-bdVaJa sc-bwzfXH eVPJMi"

@@ -1,7 +1,6 @@
 import axios from "axios";
-import getConfig from "next/config";
 
-const API_URI = getConfig().publicRuntimeConfig.API_URI;
+const { API_URI } = process.env;
 
 export default async function isAuthenticated() {
   const token = sessionStorage.getItem("jwt");
