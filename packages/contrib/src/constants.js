@@ -17,6 +17,11 @@ export const ANSWER_STATE_LABEL = {
   validated: "validée"
 };
 
+export const USER_ROLE = {
+  ADMINISTRATOR: "administrator",
+  CONTRIBUTOR: "contributor"
+};
+
 export const ZONE_CATEGORY_LABEL = {
   department: "Département",
   overseas_collectivity: "Collectivité d'Outre-Mer",

@@ -5,7 +5,7 @@ import { actionTypes, answers } from "../actions";
 import postgrest from "../libs/postgrest";
 import toast from "../libs/toast";
 
-import { ANSWER_STATE } from "../constants";
+import { ANSWER_STATE, USER_ROLE } from "../constants";
 
 /**
  * Cancel an answer draft by resettinng all its related data.
@@ -55,6 +55,7 @@ function* cancel({ meta: { ids, next } }) {
 function* setGenericReference({ meta: { genericReference, ids, next } }) {
   try {
     const me = JSON.parse(sessionStorage.getItem("me"));
+
     const data = {
       generic_reference: genericReference,
       prevalue: "",
@@ -121,18 +122,29 @@ function* setState({ meta: { ids, next, state } }) {
 
 function* load({ meta: { pageIndex, query, states } }) {
   try {
+    const {
+      payload: { id: userId, role: userRole }
+    } = JSON.parse(sessionStorage.getItem("me"));
+
     const me = JSON.parse(sessionStorage.getItem("me"));
     const queryAsNumber = isNaN(query) ? 0 : Number(query);
 
     let request = postgrest()
       .page(pageIndex)
       .in("state", states)
-      .in("agreement_id", me.payload.agreements, true)
       .orderBy("question_index")
       .orderBy("agreement_idcc");
 
-    if (!states.includes(ANSWER_STATE.TO_DO)) {
-      request = request.eq("user_id", me.payload.id);
+    if (userRole === USER_ROLE.ADMINISTRATOR) {
+      request = request.select("*").select("user(name)");
+    }
+
+    if (userRole === USER_ROLE.CONTRIBUTOR) {
+      request = request.in("agreement_id", me.payload.agreements, true);
+
+      if (!states.includes(ANSWER_STATE.TO_DO)) {
+        request = request.eq("user_id", userId);
+      }
     }
 
     if (query.length > 0) {
@@ -145,7 +157,7 @@ function* load({ meta: { pageIndex, query, states } }) {
 
     const { data, pageLength } = yield request.get("/full_answers", true);
 
-    yield put(answers.loadSuccess(data, pageIndex, pageLength));
+    yield put(answers.loadSuccess(data, pageIndex, pageLength, states[0]));
   } catch (err) {
     if (err.response.status === 416) {
       const pageIndex = Math.floor(

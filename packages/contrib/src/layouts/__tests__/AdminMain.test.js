@@ -46,6 +46,17 @@ describe("[Contrib] layouts/<AdminMain />", () => {
     expect(firstRender).toMatchSnapshot();
   });
 
+  it("should match snapshot diff with `hasBareContent` prop", () => {
+    const newProps = {
+      ...props,
+      hasBareContent: true
+    };
+
+    const Γ = render(<AdminMain {...newProps} />);
+
+    expect(firstRender).toMatchDiffSnapshot(Γ.asFragment());
+  });
+
   it("should match snapshot diff with `isLoading` prop", () => {
     const newProps = {
       ...props,

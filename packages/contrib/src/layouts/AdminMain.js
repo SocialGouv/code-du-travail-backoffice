@@ -9,9 +9,9 @@ const Content = styled.div`
   overflow-y: scroll;
 `;
 
-export default ({ children, isLoading }) => (
+export default ({ children, hasBareContent, isLoading }) => (
   <Main isAdmin isHorizontal isLoading={isLoading}>
     <AdminMenu />
-    <Content>{children}</Content>
+    {Boolean(hasBareContent) ? children : <Content>{children}</Content>}
   </Main>
 );

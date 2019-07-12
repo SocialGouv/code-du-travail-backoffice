@@ -8,6 +8,8 @@ function pluralize(text) {
 }
 
 export default {
+  ADMIN_ANSWERS_INFO_NO_DATA: state => `Il n'y a aucune réponse ${ANSWER_STATE_LABEL[state]}.`,
+  ADMIN_ANSWERS_INFO_NO_SEARCH_RESULT: `Cette recherche n'a retournée aucun résultat.`,
   ADMIN_ANSWERS_SEARCH_PLACEHOLDER: `Rechercher par question, réponse, utilisateur ou convention…`,
   ANSWERS_INDEX_HELP_TO_DO: `Sélectionnez une question et commencez à rédiger la réponse pour vous l'attribuer :`,
   ANSWERS_INDEX_INFO_NO_DATA: state => `Il n'y a aucune réponse ${ANSWER_STATE_LABEL[state]}.`,
