@@ -37,6 +37,7 @@ services:
     ports:
       - ${WEB_PORT}:${WEB_PORT}
     environment:
+      NODE_ENV: ${NODE_ENV}
       WEB_PORT: ${WEB_PORT}
     depends_on:
       - api
