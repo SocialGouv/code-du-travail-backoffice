@@ -1,31 +1,10 @@
-import moment from "moment-timezone";
 import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
 import Idcc from "../../elements/Idcc";
 import Checkbox from "../../elements/Checkbox";
-
-// TODO Make it a lib (to globalize the settings).
-// https://momentjs.com/docs/#/customization/relative-time/
-moment.updateLocale("en", {
-  relativeTime: {
-    future: "dans %s",
-    past: "il y a %s",
-    s: "quelques secondes",
-    ss: "%d secondes",
-    m: "a minute",
-    mm: "%d minutes",
-    h: "une heure",
-    hh: "%d heures",
-    d: "un jour",
-    dd: "%d jours",
-    M: "un mois",
-    MM: "%d mois",
-    y: "un an",
-    yy: "%d ans"
-  }
-});
+import customMoment from "../../libs/customMoment";
 
 const Container = styled(Flex)`
   margin-top: 1rem;
@@ -93,7 +72,7 @@ export default ({ data, isChecked, onCheck, onClick }) => {
           <TopState>{ANSWER_STATE_LABEL[data.state]}</TopState>
           {data.user !== null && (
             <TopAuthor>
-              {`Proposé par : ${data.user.name}, ${moment(data.updated_at)
+              {`Proposé par : ${data.user.name}, ${customMoment(data.updated_at)
                 .tz("Europe/Paris")
                 .fromNow()}`}
             </TopAuthor>
