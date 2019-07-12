@@ -1,12 +1,21 @@
 # This is the Docker file runnning E2E Tests.
 
-FROM igabriele/docker-compose-puppeteer
+FROM igabriele/docker-compose-puppeteer:latest
 
-COPY ./package.json /app/package.json
-COPY ./yarn.lock /app/yarn.lock
+ENV CONFIG_ONLY=false
 
-RUN yarn --frozen-lockfile && yarn cache clean
+ENV DB_URI=
+ENV DOCKER_HOST=
+ENV NODE_ENV=
+ENV PGRST_JWT_SECRET=
+ENV POSTGRES_DB=
+ENV WEB_URI=
 
-COPY ./features /app/features
+COPY db ./db
+COPY features ./features
+COPY scripts ./scripts
+COPY knexfile.js package.json yarn.lock ./
 
-ENTRYPOINT ["yarn", "test:e2e"]
+RUN yarn --frozen-lockfile
+
+ENTRYPOINT ["./scripts/docker/test.sh"]
