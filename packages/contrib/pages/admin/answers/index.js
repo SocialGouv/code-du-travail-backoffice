@@ -1,8 +1,11 @@
+import debounce from "lodash.debounce";
 import Router from "next/router";
 import React from "react";
+import { connect } from "react-redux";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
+import * as actions from "../../../src/actions";
 import AdminAnswer from "../../../src/blocks/AdminAnswer";
 import Pagination from "../../../src/components/Pagination";
 import Button from "../../../src/elements/Button";
@@ -11,14 +14,21 @@ import _Select from "../../../src/elements/Select";
 import Title from "../../../src/elements/Title";
 import AdminMain from "../../../src/layouts/AdminMain";
 import customAxios from "../../../src/libs/customAxios";
-import stringFrIncludes from "../../../src/libs/stringFrIncludes";
 
 import { ANSWER_STATE, ANSWER_STATE_LABEL } from "../../../src/constants";
 import T from "../../../src/texts";
 
 const Container = styled(Flex)`
+  flex-grow: 1;
   margin: 0 1rem 1rem;
 `;
+const List = styled(Flex)`
+  flex-grow: 1;
+  padding-right: 1rem;
+  min-height: 0;
+  overflow-y: auto;
+`;
+
 const FilterInput = styled(Input)`
   margin: 0.5rem 0;
   flex-grow: 0.5;
@@ -30,62 +40,46 @@ const Select = styled(_Select)`
   max-width: 15rem;
 `;
 
-const ANSWERS_PER_PAGE = 5;
+const Text = styled.p`
+  margin-bottom: 0.5rem;
+`;
+const HelpText = styled(Text)`
+  font-size: 0.875rem;
+`;
 
-export default class AdminAnswersIndexPage extends React.Component {
+class AdminAnswersIndexPage extends React.Component {
+  get queryFilter() {
+    return this.$queryFilter !== undefined && this.$queryFilter !== null
+      ? this.$queryFilter.value
+      : "";
+  }
+
+  get stateFilter() {
+    return this.$stateFilter !== undefined && this.$stateFilter !== null
+      ? this.$stateFilter.value
+      : "";
+  }
+
   constructor(props) {
     super(props);
 
     this.state = {
-      answers: [],
-      checkedAnswers: [],
-      currentPage: 0,
-      filterInputKey: 0,
-      isLoading: true,
-      paginationKey: 0,
-      query: "",
-      state: null,
-      users: []
+      checkedAnswers: []
     };
+
+    this.loadAnswers = debounce(this._loadAnswers.bind(this), 500);
   }
 
   async componentDidMount() {
     this.axios = customAxios();
 
-    await this.fetchAnswers(ANSWER_STATE.PENDING_REVIEW);
+    this.loadAnswers();
   }
 
-  async fetchAnswers(state) {
-    this.setState({ isLoading: true });
-
-    try {
-      // eslint-disable-next-line prettier/prettier
-      const select =
-        `select=*,agreement(idcc,name),question(index,value),user(name)`;
-      const filter = `state=eq.${state}`;
-      const order = `order=updated_at.desc`;
-
-      const uri = `/answers?${select}&${filter}&${order}`;
-      const { data: answers } = await this.axios.get(uri);
-
-      this.setState({
-        answers,
-        checkedAnswers: [],
-        currentPage: 0,
-        // We force a <FilterInput> re-rendering to empty its value:
-        filterInputKey: this.state.paginationKey + 1,
-        isLoading: false,
-        // We force a <Pagination> re-rendering to udpate its new initial page
-        // value:
-        paginationKey: this.state.paginationKey + 1,
-        query: "",
-        state
-      });
-    } catch (err) {
-      if (err !== undefined) console.warn(err);
-    }
-
-    this.setState({ isLoading: false });
+  _loadAnswers(state = this.props.state, pageIndex = 0) {
+    this.props.dispatch(
+      actions.answers.load([state], pageIndex, this.queryFilter)
+    );
   }
 
   async setCheckedAnswersStateTo(state) {
@@ -130,35 +124,11 @@ export default class AdminAnswersIndexPage extends React.Component {
         break;
     }
 
-    await this.fetchAnswers(this.state.state);
+    await this.loadAnswers(this.props.state, 0);
   }
 
-  async updateStateFilter(event) {
-    await this.fetchAnswers(event.target.value);
-  }
-
-  updateQueryFilter(event) {
-    this.setState({
-      currentPage: 0,
-      // We force a <Pagination> re-rendering to udpate its new initial page
-      // value:
-      paginationKey: this.state.paginationKey + 1,
-      query: event.target.value
-    });
-  }
-
-  filterAnswers() {
-    const queryFilter =
-      this.state.query.length !== 0
-        ? ({ agreement, question, user }) =>
-            stringFrIncludes(this.state.query, agreement.name) ||
-            agreement.idcc.includes(this.state.query) ||
-            question.index === Number(this.state.query) ||
-            stringFrIncludes(this.state.query, question.value) ||
-            stringFrIncludes(this.state.query, user.name)
-        : () => true;
-
-    return this.state.answers.filter(queryFilter);
+  async updateStateFilter() {
+    this.loadAnswers(this.stateFilter);
   }
 
   checkAnswer(id) {
@@ -185,22 +155,18 @@ export default class AdminAnswersIndexPage extends React.Component {
     );
   }
 
-  getAnswersList(answers) {
-    if (answers.length === 0) {
-      if (this.state.query.length !== 0) {
-        return <p>Cette recherche ne retourne aucun résultat.</p>;
+  getAnswersList() {
+    const { data, state } = this.props;
+
+    if (data.length === 0) {
+      if (this.queryFilter.length !== 0) {
+        return <p>{T.ADMIN_ANSWERS_INFO_NO_SEARCH_RESULT}</p>;
       }
 
-      return (
-        <p>
-          {`Il n'y a pour l'instant aucune réponse ${ANSWER_STATE_LABEL[
-            this.state.state
-          ].toLowerCase()}.`}
-        </p>
-      );
+      return <p>{T.ADMIN_ANSWERS_INFO_NO_DATA(state)}</p>;
     }
 
-    return answers.map(answer => (
+    return data.map(answer => (
       <AdminAnswer
         data={answer}
         isChecked={this.state.checkedAnswers.includes(answer.id)}
@@ -212,23 +178,19 @@ export default class AdminAnswersIndexPage extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading) return <AdminMain isLoading />;
-
-    const answers = this.filterAnswers();
-    const answersChunk = answers.slice(
-      this.state.currentPage * ANSWERS_PER_PAGE,
-      (this.state.currentPage + 1) * ANSWERS_PER_PAGE
-    );
-    const pageCount = Math.ceil(this.state.answers.length / ANSWERS_PER_PAGE);
+    const { isLoading, pageIndex, pageLength, state } = this.props;
 
     return (
-      <AdminMain>
+      <AdminMain hasBareContent>
         <Container flexDirection="column">
           <Head alignItems="baseline" justifyContent="space-between">
             <Title>Réponses</Title>
             <Select
-              defaultValue={this.state.state}
-              onChange={this.updateStateFilter.bind(this)}
+              defaultValue={state}
+              disabled={isLoading}
+              key={`stateFilter-${state}`}
+              onChange={() => this.updateStateFilter()}
+              ref={node => (this.$stateFilter = node)}
             >
               {Object.keys(ANSWER_STATE_LABEL).map(state => (
                 <option key={state} value={state}>
@@ -240,15 +202,13 @@ export default class AdminAnswersIndexPage extends React.Component {
           <Flex alignItems="center" justifyContent="space-between">
             <FilterInput
               icon="search"
-              key={`filterInput-${this.state.filterInputKey}`}
-              onChange={this.updateQueryFilter.bind(this)}
-              placeholder={T.ADMIN_ANSWERS_SEARCH_PLACEHOLDER}
+              key={`queryFilter-${state}`}
+              onChange={() => this.loadAnswers()}
+              ref={node => (this.$queryFilter = node)}
             />
             <Flex>
               <Button
-                disabled={
-                  this.state.isLoading || this.state.checkedAnswers.length === 0
-                }
+                disabled={isLoading || this.state.checkedAnswers.length === 0}
                 hasGroup
                 onClick={() =>
                   this.setCheckedAnswersStateTo(ANSWER_STATE.TO_DO)
@@ -257,9 +217,7 @@ export default class AdminAnswersIndexPage extends React.Component {
                 Ré-initialiser
               </Button>
               <Button
-                disabled={
-                  this.state.isLoading || this.state.checkedAnswers.length === 0
-                }
+                disabled={isLoading || this.state.checkedAnswers.length === 0}
                 onClick={() =>
                   this.setCheckedAnswersStateTo(ANSWER_STATE.DRAFT)
                 }
@@ -268,15 +226,19 @@ export default class AdminAnswersIndexPage extends React.Component {
               </Button>
             </Flex>
           </Flex>
-          {this.getAnswersList(answersChunk)}
-          {pageCount > 1 && (
+          {isLoading && (
+            <List>
+              <HelpText>Chargement…</HelpText>
+            </List>
+          )}
+          {!isLoading && (
+            <List flexDirection="column">{this.getAnswersList()}</List>
+          )}
+          {!isLoading && pageLength > 0 && (
             <Pagination
-              key={`pagination-${this.state.paginationKey}`}
-              initialPage={this.state.currentPage}
-              onPageChange={({ selected: currentPage }) =>
-                this.setState({ currentPage })
-              }
-              pageCount={pageCount}
+              initialPage={pageIndex}
+              onPageChange={({ selected }) => this.loadAnswers(state, selected)}
+              pageCount={pageLength}
             />
           )}
         </Container>
@@ -284,3 +246,14 @@ export default class AdminAnswersIndexPage extends React.Component {
     );
   }
 }
+
+export default connect(
+  ({ answers: { data, error, isLoading, pageIndex, pageLength, state } }) => ({
+    data,
+    error,
+    isLoading,
+    pageIndex,
+    pageLength,
+    state
+  })
+)(AdminAnswersIndexPage);
