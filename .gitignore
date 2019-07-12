@@ -2,7 +2,10 @@
 /node_modules
 
 /.env
+
+# Logs
 /lerna-debug.log
+/yarn-error.log
 
 # Docker shared volume
 /backups
