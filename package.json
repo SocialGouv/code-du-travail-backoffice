@@ -21,18 +21,18 @@
     "test:watch": "lerna run test:watch --parallel"
   },
   "dependencies": {
-    "boxen": "^4.1.0",
-    "chai": "^4.2.0",
-    "csv-parse": "^4.4.3",
-    "cucumber": "^5.1.0",
+    "boxen": "4.1.0",
+    "chai": "4.2.0",
+    "csv-parse": "4.4.3",
+    "cucumber": "5.1.0",
     "dotenv": "8.0.0",
-    "imgur": "^0.3.1",
+    "imgur": "0.3.1",
     "knex": "0.18.3",
     "lerna": "3.15.0",
-    "moment": "^2.24.0",
-    "ora": "^3.4.0",
+    "moment": "2.24.0",
+    "ora": "3.4.0",
     "pg": "7.11.0",
-    "puppeteer": "^1.18.1",
+    "puppeteer": "1.18.1",
     "uuid": "3.3.2"
   }
 }
