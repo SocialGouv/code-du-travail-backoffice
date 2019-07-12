@@ -23,7 +23,7 @@ class World {
       devtools: NODE_ENV !== "test",
       headless: NODE_ENV === "test"
     });
-    this.page = await this.browser.newPage();
+    this.page = (await this.browser.pages())[0];
     this.extendPage();
   }
 
@@ -103,6 +103,7 @@ class World {
   }
 
   async stop() {
+    await this.page.close();
     await this.browser.close();
   }
 }
