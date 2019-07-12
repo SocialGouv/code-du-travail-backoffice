@@ -10,37 +10,28 @@ set -e
 API_URI="$API_URI"
 NODE_ENV="$NODE_ENV"
 
+# Remove docker-compose warnings (because this environment variable is ised by
+# the test container):
+export CONFIG_ONLY=false
+
 echo "⏳ Stopping all existing DC containers…"
-sudo NODE_ENV=$NODE_ENV docker-compose stop
+NODE_ENV=$NODE_ENV docker-compose stop
 
 echo "⏳ Installing dependencies…"
-if [ "$NODE_ENV" = "production" ] || [ "$NODE_ENV" = "test" ]; then
-  yarn --frozen-lockfile --no-cache
-else
-  yarn --frozen-lockfile
-fi
+yarn --frozen-lockfile --no-cache
 
 echo "⏳ Starting db container…"
-sudo NODE_ENV=$NODE_ENV docker-compose up -d db
+docker-compose up -d db
 
 # Buiding the web container before migrating is a strategy to let the db
 # container be up and ready before running the migrations.
 # Note: merely checking if the database port is used is not enough.
 echo "⏳ Building web container…"
-if [ "$NODE_ENV" = "production" ] || [ "$NODE_ENV" = "test" ]; then
-  if [ -z $API_URI ]; then
-    sudo NODE_ENV=production docker-compose build --no-cache web
-  else
-    # Allow us to override the .env file API_URI value via the command line:
-    sudo NODE_ENV=production API_URI=$API_URI docker-compose build --no-cache web
-  fi
+if [ -z $API_URI ]; then
+  NODE_ENV=production docker-compose build --no-cache web
 else
-  if [ -z $API_URI ]; then
-    sudo NODE_ENV=$NODE_ENV docker-compose build --no-cache web
-  else
-    # Allow us to override the .env file API_URI value via the command line:
-    sudo NODE_ENV=$NODE_ENV API_URI=$API_URI docker-compose build --no-cache web
-  fi
+  # Allow us to override the .env file API_URI value via the command line:
+  NODE_ENV=production API_URI=$API_URI docker-compose build --no-cache web
 fi
 
 echo "⏳ Running database migrations…"
@@ -53,6 +44,6 @@ if [ "$NODE_ENV" != "production" ]; then
 fi
 
 echo "⏳ Starting web (and api) container…"
-sudo docker-compose up -d web
+docker-compose up -d web
 
 echo "🚀 The server is up and running!"
