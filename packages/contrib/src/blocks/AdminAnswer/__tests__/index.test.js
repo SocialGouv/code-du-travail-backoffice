@@ -21,14 +21,10 @@ const PROPS = {
             tout le monde était gai, et aussitôt l'idée me traversait<br>
             l'esprit qu'il ne se passerait plus rien et que tout était<br>
             absurde.`,
-    agreement: {
-      idcc: "1234",
-      name: "An Agreement Name"
-    },
-    question: {
-      index: 12,
-      value: "A Question Value"
-    },
+    agreement_idcc: "1234",
+    agreement_name: "An Agreement Name",
+    question_index: 12,
+    question_value: "A Question Value",
     user: {
       name: "A User Name"
     }

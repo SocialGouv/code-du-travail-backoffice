@@ -69,7 +69,11 @@ const ContentExtractRed = styled(ContentExtract)`
 
 import { ANSWER_STATE, ANSWER_STATE_LABEL } from "../../constants";
 
-const EDITABLE_STATES = [ANSWER_STATE.DRAFT, ANSWER_STATE.PENDING_REVIEW];
+const EDITABLE_STATES = [
+  ANSWER_STATE.DRAFT,
+  ANSWER_STATE.PENDING_REVIEW,
+  ANSWER_STATE.UNDER_REVIEW
+];
 
 export default ({ data, isChecked, onCheck, onClick }) => {
   const isEditable = EDITABLE_STATES.includes(data.state);
@@ -101,9 +105,9 @@ export default ({ data, isChecked, onCheck, onClick }) => {
           onClick={() => (isEditable ? onClick(data.id) : void 0)}
         >
           <Flex alignItems="baseline">
-            <Idcc code={data.agreement.idcc} name={data.agreement.name} />
+            <Idcc code={data.agreement_idcc} name={data.agreement_name} />
             <ContentQuestion>
-              {`${data.question.index}) ${data.question.value}`}
+              {`${data.question_index}) ${data.question_value}`}
             </ContentQuestion>
           </Flex>
           {!isTodo && data.generic_reference === null && (
