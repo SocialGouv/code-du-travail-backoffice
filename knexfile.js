@@ -1,13 +1,13 @@
-if (process.env.PGRST_DB_URI === undefined) {
+if (process.env.DB_URI === undefined) {
   require("dotenv").config({ path: `${__dirname}/.env` })
 }
 
-const { PGRST_DB_URI } = process.env;
+const { DB_URI } = process.env;
 
 module.exports = {
   development: {
     client: "postgresql",
-    connection: PGRST_DB_URI,
+    connection: DB_URI,
     migrations: {
       directory: `${__dirname}/db/migrations/knex`,
       tableName: "migrations"
@@ -19,7 +19,7 @@ module.exports = {
 
   production: {
     client: "postgresql",
-    connection: PGRST_DB_URI,
+    connection: DB_URI,
     migrations: {
       directory: `${__dirname}/db/migrations/knex`,
       tableName: "migrations"
@@ -31,7 +31,7 @@ module.exports = {
 
   test: {
     client: "postgresql",
-    connection: PGRST_DB_URI,
+    connection: DB_URI,
     migrations: {
       directory: `${__dirname}/db/migrations/knex`,
       tableName: "migrations"
