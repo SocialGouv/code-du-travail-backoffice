@@ -106,6 +106,37 @@ exports[`[Contrib] layouts/<AdminMain /> should match snapshot 1`] = `
 </div>
 `;
 
+exports[`[Contrib] layouts/<AdminMain /> should match snapshot diff with \`hasBareContent\` prop 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -1,6 +1,6 @@
+- <div>
++ <DocumentFragment>
+    <div
+      class=\\"sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 bBIrgk\\"
+      style=\\"height: 100vh;\\"
+    >
+      <div
+@@ -90,14 +90,10 @@
+              class=\\"AdminMenu__Link-t0dk93-2 kospmv\\"
+            >
+              Migrations
+            </div>
+          </div>
+-         <div
+-           class=\\"AdminMain__Content-lizrru-0 dcXFX\\"
+-         >
+          Some Content Text
+        </div>
+      </div>
+    </div>
+-   </div>
+- </div>
++ </DocumentFragment>"
+`;
+
 exports[`[Contrib] layouts/<AdminMain /> should match snapshot diff with \`isLoading\` prop 1`] = `
 "Snapshot Diff:
 - First value
