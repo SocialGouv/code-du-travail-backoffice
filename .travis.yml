@@ -4,18 +4,21 @@ node_js:
 
 env:
   global:
-    - API_PORT: 3200
-    - API_URI: http://localhost:3200
-    - DB_PORT: 5432
-    - WEB_PORT: 3100
-    - WEB_URI: http://localhost:3100
-    - POSTGRES_DB: test_db
-    - POSTGRES_USER: test_db_user
-    - POSTGRES_PASSWORD: test_db_password
-    - PGRST_DB_ANON_ROLE: anonymous
-    - PGRST_DB_SCHEMA: api
-    - PGRST_DB_URI: postgres://test_db_user:test_db_password@localhost:5432/test_db
-    - PGRST_JWT_SECRET: postgrest_jwt_secret
+    - API_PORT=3200
+    - API_URI=http://localhost:3200
+    - DB_PORT=5432
+    - DB_URI=postgres://test_db_user:test_db_password@localhost:5432/test_db
+    - NODE_ENV=test
+    - PGRST_DB_ANON_ROLE=anonymous
+    - PGRST_DB_SCHEMA=api
+    # It must be at least 32 characters long:
+    # https://github.com/PostgREST/postgrest/issues/977#issuecomment-329917367
+    - PGRST_JWT_SECRET=a_test_only_postgrest_jwt_secret
+    - POSTGRES_DB=test_db
+    - POSTGRES_PASSWORD=test_db_password
+    - POSTGRES_USER=test_db_user
+    - WEB_PORT=3100
+    - WEB_URI=http://localhost:3100
 
 cache:
   yarn: true
@@ -25,21 +28,30 @@ cache:
 
 jobs:
   include:
-    - stage: Build
-      name: Yarn
-      script:
-        - yarn
-        # Install the project packages dependencies:
-        - yarn run lerna bootstrap
-
     - stage: Test
       name: Unit Tests
-      # Dependencies are cached, it's just a linking process:
-      before_script:
-        - yarn
-        - yarn run lerna bootstrap
+      install:
+        - cd packages/contrib
+        - yarn --frozen-lockfile
       script:
-        - yarn test -- --stream -- --coverage
+        - yarn test --coverage --silent
       after_script:
         # Push the coverage data into Codecov:
         - npx codecov
+
+    - stage: Test
+      name: E2E Tests
+      services:
+        - docker
+      before_install:
+        # Stop Travis out-of-the-box PostgreSQL services:
+        - sudo service postgresql stop
+        # Give execution rights to production script (used by "ci:test:e2e"):
+        - sudo chmod +x ./scripts/prod/start.sh
+      script:
+        - yarn ci:test:e2e
+
+notifications:
+  email:
+    on_failure: change
+    on_success: never
