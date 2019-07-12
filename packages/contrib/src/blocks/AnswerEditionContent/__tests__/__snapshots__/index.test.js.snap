@@ -21,7 +21,7 @@ exports[`[Contrib] blocks/<AnswerEditionContent /> should match snapshot 1`] = `
           >
             <img
               class="Editor__TextButtonIcon-sc-1s8484a-1 nERRq"
-              src="[object Object]"
+              src="/static/images/undo.svg"
             />
           </button>
           <button
@@ -31,7 +31,7 @@ exports[`[Contrib] blocks/<AnswerEditionContent /> should match snapshot 1`] = `
           >
             <img
               class="Editor__TextButtonIcon-sc-1s8484a-1 nERRq"
-              src="[object Object]"
+              src="/static/images/redo.svg"
             />
           </button>
         </span>
