@@ -244,6 +244,7 @@ export default class AdminAnwsersEditPage extends React.Component {
       // An answer can't have a value and be generic at the same time:
       const data = {
         generic_reference: null,
+        state: ANSWER_STATE.UNDER_REVIEW,
         value: this.answerValueEditor.value()
       };
 
@@ -603,7 +604,8 @@ export default class AdminAnwsersEditPage extends React.Component {
                 </Button>
               </Flex>
             )}
-            {this.answer.state === ANSWER_STATE.PENDING_REVIEW && (
+            {(this.answer.state === ANSWER_STATE.PENDING_REVIEW ||
+              this.answer.state === ANSWER_STATE.UNDER_REVIEW) && (
               <Flex flexDirection="column">
                 <Button
                   disabled={this.state.isUpdating}
