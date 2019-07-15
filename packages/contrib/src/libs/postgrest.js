@@ -20,17 +20,6 @@ class Postgrest {
     this.selectors = [];
   }
 
-  clone(object = this) {
-    if (object === null || typeof object !== "object") return object;
-
-    const props = Object.getOwnPropertyDescriptors(object);
-    for (var prop in props) {
-      props[prop].value = this.clone(props[prop].value);
-    }
-
-    return Object.create(Object.getPrototypeOf(object), props);
-  }
-
   buildUri(path, isGet = false) {
     const { queries } = this;
 
