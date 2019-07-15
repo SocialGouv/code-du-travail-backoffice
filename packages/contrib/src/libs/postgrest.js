@@ -20,18 +20,7 @@ class Postgrest {
     this.selectors = [];
   }
 
-  clone(object = this) {
-    if (object === null || typeof object !== "object") return object;
-
-    const props = Object.getOwnPropertyDescriptors(object);
-    for (var prop in props) {
-      props[prop].value = this.clone(props[prop].value);
-    }
-
-    return Object.create(Object.getPrototypeOf(object), props);
-  }
-
-  buildUri(path) {
+  buildUri(path, isGet = false) {
     const { queries } = this;
 
     if (this.ands.length !== 0) {
@@ -46,6 +35,10 @@ class Postgrest {
       queries.push(`${isNot}or=(${this.ors.join(",")})`);
     }
 
+    if (!isGet) {
+      return `${path}?${queries.join("&")}`;
+    }
+
     queries.push(
       `select=${this.selectors.length !== 0 ? this.selectors.join(",") : "*"}`
     );
@@ -54,13 +47,11 @@ class Postgrest {
       queries.push(`order=${this.orderers.join(",")}`);
     }
 
-    const uri = `${path}?${queries.join("&")}`;
-
-    return uri;
+    return `${path}?${queries.join("&")}`;
   }
 
   async get(path, mustCount = false) {
-    const uri = this.buildUri(path);
+    const uri = this.buildUri(path, true);
     this.reset();
 
     const config = mustCount
@@ -140,12 +131,13 @@ class Postgrest {
     return this;
   }
 
-  eq(column, value) {
-    if (typeof value === "boolean" || value === null) {
-      return this.is(column, value);
+  eq(column, _value) {
+    if (typeof _value === "boolean" || _value === null) {
+      return this.is(column, _value);
     }
 
     const isNot = this.isNot ? "not." : "";
+    const value = typeof _value === "string" ? `"${_value}"` : _value;
 
     if (this.isAnd) {
       this.ands.push(`${column}.eq.${value}`);
