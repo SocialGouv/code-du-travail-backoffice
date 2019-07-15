@@ -140,12 +140,13 @@ class Postgrest {
     return this;
   }
 
-  eq(column, value) {
+  eq(column, _value) {
     if (typeof value === "boolean" || value === null) {
-      return this.is(column, value);
+      return this.is(column, _value);
     }
 
     const isNot = this.isNot ? "not." : "";
+    const value = typeof _value === "string" ? `"${_value}"` : _value;
 
     if (this.isAnd) {
       this.ands.push(`${column}.eq.${value}`);
