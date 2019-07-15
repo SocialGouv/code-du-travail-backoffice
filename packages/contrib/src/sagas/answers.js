@@ -127,7 +127,6 @@ function* load({ meta: { pageIndex, query, states } }) {
     } = JSON.parse(sessionStorage.getItem("me"));
 
     const me = JSON.parse(sessionStorage.getItem("me"));
-    const queryAsNumber = isNaN(query) ? 0 : Number(query);
 
     let request = postgrest()
       .page(pageIndex)
@@ -149,10 +148,14 @@ function* load({ meta: { pageIndex, query, states } }) {
 
     if (query.length > 0) {
       request = request.or
-        .eq("agreement_idcc", queryAsNumber)
         .ilike("agreement_name", query)
-        .eq("question_index", queryAsNumber)
         .ilike("question_value", query);
+
+      if (!isNaN(query)) {
+        request = request.or
+          .eq("agreement_idcc", query.padStart(4, "0"))
+          .eq("question_index", Number(query));
+      }
     }
 
     const { data, pageLength } = yield request.get("/full_answers", true);
