@@ -1,6 +1,6 @@
 # Scripts du dépôt monolithique
 
-```
+```text
 ├── ci                                Travis CI scripts
 │   ├── install_docker_compose.sh       Install Docker Compose
 │   ├── run_full_server_instance.sh     Run a production-like instance
