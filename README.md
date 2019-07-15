@@ -5,8 +5,8 @@
 [![Codecov Code Coverage][img-codecov]][link-codecov]
 [![Codacy Code Quality][img-codacy]][link-codacy]
 
-Ce dépôt regroupe les applications d'administration des données du [code du
-travail numérique][link-cdtn].
+Ce dépôt regroupe les applications d'administration des données du
+[code du travail numérique][link-cdtn].
 
 ## Contribuer au projet
 
@@ -44,11 +44,11 @@ Le site devrait être accessible à l'adresse http://localhost:3100.
 2 utilisateurs ont été générés par défaut pendant l'installation :
 
 - Administrateur:
-  - Email: `administrator@example.com`
-  - Mot de passe: `Azerty123`
+    - Email: `administrator@example.com`
+    - Mot de passe: `Azerty123`
 - Contributeur:
-  - Email: `contributor@example.com`
-  - Mot de passe: `Azerty123`
+    - Email: `contributor@example.com`
+    - Mot de passe: `Azerty123`
 
 ### Démarrer le site localement
 
@@ -60,7 +60,8 @@ docker-compose up -d api
 yarn dev
 ```
 
-Le site devrait être accessible à l'adresse http://localhost:3100.
+Le site devrait être accessible à l'adresse
+[http://localhost:3100](http://localhost:3100).
 
 ### Tester le code
 
@@ -129,15 +130,17 @@ number of file watchers reached`, la [solution	actuelle][link-issue-2] consiste
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p	
 ```
 
-## Licence
+### Licence
 
-Ce dépôt est licencié sous la [licence Apacha 2.0][link-license].
+Le code source de ce dépôt est distribué sous la
+[licence Apache 2.0][link-license].
+
+[link-cdtn]: https://codedutravail.num.social.gouv.fr
 
 [img-codacy]: https://img.shields.io/codacy/grade/4c5aebc238b94d3795371b49fa6041de.svg?style=flat-square
 [img-codecov]: https://img.shields.io/codecov/c/github/SocialGouv/code-du-travail-backoffice/dev.svg?style=flat-square
 [img-gitlab]: https://gitlab.factory.social.gouv.fr/SocialGouv/code-du-travail-backoffice/badges/dev/pipeline.svg?style=flat-square
 [img-travis]: https://img.shields.io/travis/SocialGouv/code-du-travail-backoffice/dev.svg?style=flat-square
-[link-cdtn]: https://github.com/SocialGouv/code-du-travail-numerique
 [link-codacy]: https://app.codacy.com/project/SocialGouv/code-du-travail-backoffice/dashboard
 [link-codecov]: https://codecov.io/gh/SocialGouv/code-du-travail-backoffice
 [link-license]: https://github.com/SocialGouv/code-du-travail-backoffice/blob/master/LICENSE
