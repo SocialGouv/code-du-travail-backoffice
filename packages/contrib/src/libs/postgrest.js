@@ -31,7 +31,7 @@ class Postgrest {
     return Object.create(Object.getPrototypeOf(object), props);
   }
 
-  buildUri(path) {
+  buildUri(path, isGet = false) {
     const { queries } = this;
 
     if (this.ands.length !== 0) {
@@ -46,6 +46,10 @@ class Postgrest {
       queries.push(`${isNot}or=(${this.ors.join(",")})`);
     }
 
+    if (!isGet) {
+      return `${path}?${queries.join("&")}`;
+    }
+
     queries.push(
       `select=${this.selectors.length !== 0 ? this.selectors.join(",") : "*"}`
     );
@@ -54,13 +58,11 @@ class Postgrest {
       queries.push(`order=${this.orderers.join(",")}`);
     }
 
-    const uri = `${path}?${queries.join("&")}`;
-
-    return uri;
+    return `${path}?${queries.join("&")}`;
   }
 
   async get(path, mustCount = false) {
-    const uri = this.buildUri(path);
+    const uri = this.buildUri(path, true);
     this.reset();
 
     const config = mustCount
@@ -141,7 +143,7 @@ class Postgrest {
   }
 
   eq(column, _value) {
-    if (typeof value === "boolean" || value === null) {
+    if (typeof _value === "boolean" || _value === null) {
       return this.is(column, _value);
     }
 
