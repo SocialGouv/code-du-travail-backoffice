@@ -36,7 +36,9 @@ jobs:
       script:
         - yarn test --coverage --silent
       after_script:
-        # Push the coverage data into Codecov:
+        # Push tests coverage data to Coveralls:
+        - ./packages/contrib/node_modules/.bin/coveralls < ./packages/contrib/coverage/lcov.info
+        # Push tests coverage data to Codecov:
         - npx codecov
 
     - stage: Test
