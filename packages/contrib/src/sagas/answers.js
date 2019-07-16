@@ -153,7 +153,7 @@ function* load({ meta: { pageIndex, query, states } }) {
 
       if (!isNaN(query)) {
         request = request.or
-          .eq("agreement_idcc", query.padStart(4, "0"))
+          .eq("agreement_idcc", query.padStart(4, "0"), true)
           .eq("question_index", Number(query));
       }
     }
