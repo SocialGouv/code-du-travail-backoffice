@@ -8,6 +8,8 @@
 Ce dépôt regroupe les applications d'administration des données du
 [code du travail numérique][link-cdtn].
 
+---
+
 ## Contribuer au projet
 
 ### Pré-requis
@@ -73,7 +75,7 @@ Pendant le développement, vous pouvez soit tester manuellement :
 yarn test:unit
 ```
 
-ou faire tourner les tests unitaires en continu (ajouter `--coverage` pour
+soit faire tourner les tests unitaires en continu (ajouter `--coverage` pour
 afficher l'état de couverture des tests) :
 
 ```bash
@@ -82,7 +84,7 @@ yarn test:watch
 
 #### Analyse statique
 
-Vous pouvez éxecuter l'analyse statique du code en exécutant :
+Vous pouvez exécuter l'analyse statique du code en exécutant :
 
 ```bash
 yarn test:lint
@@ -90,14 +92,14 @@ yarn test:lint
 
 #### Tests de bout en bout
 
-Vous pouvez éxecuter les tests de bout en bout du code en exécutant (votre site
+Vous pouvez exécuter les tests de bout en bout du code en exécutant (votre site
 doit alors touner localement) :
 
 ```bash
 yarn test:e2e
 ```
 
-ou vous pouvez simuler l'exécution des tests bout en bout tels qu'ils sont
+Vous pouvez aussi simuler l'exécution des tests bout en bout tels qu'ils sont
 exécutés par la CI (en mode production et entièrement docker-isés):
 
 ```bash
@@ -135,17 +137,18 @@ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo s
 Le code source de ce dépôt est distribué sous la
 [licence Apache 2.0][link-license].
 
-[link-cdtn]: https://codedutravail.num.social.gouv.fr
+---
 
 [img-codacy]: https://img.shields.io/codacy/grade/4c5aebc238b94d3795371b49fa6041de.svg?style=flat-square
 [img-codecov]: https://img.shields.io/codecov/c/github/SocialGouv/code-du-travail-backoffice/dev.svg?style=flat-square
 [img-gitlab]: https://gitlab.factory.social.gouv.fr/SocialGouv/code-du-travail-backoffice/badges/dev/pipeline.svg?style=flat-square
 [img-travis]: https://img.shields.io/travis/SocialGouv/code-du-travail-backoffice/dev.svg?style=flat-square
+
+[link-cdtn]: https://codedutravail.num.social.gouv.fr
 [link-codacy]: https://app.codacy.com/project/SocialGouv/code-du-travail-backoffice/dashboard
 [link-codecov]: https://codecov.io/gh/SocialGouv/code-du-travail-backoffice
-[link-license]: https://github.com/SocialGouv/code-du-travail-backoffice/blob/master/LICENSE
 [link-gitlab]: https://gitlab.factory.social.gouv.fr/SocialGouv/code-du-travail-backoffice/pipelines
-[link-travis]: https://travis-ci.com/SocialGouv/code-du-travail-backoffice
-
 [link-issue-1]: https://github.com/docker/docker-credential-helpers/issues/103#issuecomment-421822269
 [link-issue-2]: https://github.com/facebook/jest/issues/3254#issuecomment-297214395
+[link-license]: https://github.com/SocialGouv/code-du-travail-backoffice/blob/master/LICENSE
+[link-travis]: https://travis-ci.com/SocialGouv/code-du-travail-backoffice
