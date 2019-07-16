@@ -1,5 +1,4 @@
 import debounce from "lodash.debounce";
-import Router from "next/router";
 import React from "react";
 import { connect } from "react-redux";
 import { Flex } from "rebass";
@@ -146,13 +145,7 @@ class AdminAnswersIndexPage extends React.Component {
   }
 
   editAnswer(id) {
-    Router.push(
-      {
-        pathname: `${window.location.pathname}/edit`,
-        query: { id }
-      },
-      `${window.location.pathname}/${id}`
-    );
+    window.open(`/admin/answers/${id}`, "_blank");
   }
 
   getAnswersList() {
