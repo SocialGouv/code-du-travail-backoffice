@@ -146,28 +146,6 @@ export default class extends React.PureComponent {
       <Container flexDirection="column">
         <Part>
           <Flex flexDirection="column" width={0.5}>
-            <Subtitle isFirst>Articles du Code du travail :</Subtitle>
-            <div>
-              <Tags
-                ariaName="la référence au Code du travail"
-                hideTags
-                isEditable
-                onAdd={this.addLaborCodeReference.bind(this)}
-                onRemove={this.removeLaborCodeReference.bind(this)}
-                selectedTags={this.state.selectedLaborCodeReferences}
-                tags={this.state.laborCodeReferences}
-              />
-            </div>
-          </Flex>
-          <List
-            ariaName="la référence au Code du travail"
-            onRemove={this.removeLaborCodeReference.bind(this)}
-            references={laborCodeReferences}
-            width={0.5}
-          />
-        </Part>
-        <Part>
-          <Flex flexDirection="column" width={0.5}>
             <Subtitle isFirst>Articles de convention collective :</Subtitle>
             <form
               key={this.state.agreementReferenceFormKey}
@@ -194,6 +172,28 @@ export default class extends React.PureComponent {
             ariaName="la référence à la convention collective"
             onRemove={this.removeAgreementReference.bind(this)}
             references={agreementReferences}
+            width={0.5}
+          />
+        </Part>
+        <Part>
+          <Flex flexDirection="column" width={0.5}>
+            <Subtitle isFirst>Articles du Code du travail :</Subtitle>
+            <div>
+              <Tags
+                ariaName="la référence au Code du travail"
+                hideTags
+                isEditable
+                onAdd={this.addLaborCodeReference.bind(this)}
+                onRemove={this.removeLaborCodeReference.bind(this)}
+                selectedTags={this.state.selectedLaborCodeReferences}
+                tags={this.state.laborCodeReferences}
+              />
+            </div>
+          </Flex>
+          <List
+            ariaName="la référence au Code du travail"
+            onRemove={this.removeLaborCodeReference.bind(this)}
+            references={laborCodeReferences}
             width={0.5}
           />
         </Part>

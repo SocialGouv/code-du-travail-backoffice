@@ -15,83 +15,6 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
         <h2
           class="Subtitle-sc-17ig8qv-0 gsnyDG"
         >
-          Articles du Code du travail :
-        </h2>
-        <div>
-          <div
-            class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
-          >
-            <input
-              class="Input___Input-l1y0rz-1 bLtEdt"
-              placeholder="Commencez à taper le nom de la référence au Code du travail"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        class="sc-bdVaJa sc-bwzfXH List__Container-sc-1pm6mpm-0 euOFDR"
-      >
-        <div
-          class="sc-bdVaJa sc-bwzfXH jruoDg"
-        >
-          <svg
-            aria-hidden="true"
-            class="svg-inline--fa fa-circle fa-w-16 fa-sm Icon-sc-4jlog9-0 gomlef"
-            color="black"
-            data-icon="circle"
-            data-prefix="fas"
-            focusable="false"
-            role="img"
-            viewBox="0 0 512 512"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"
-              fill="currentColor"
-            />
-          </svg>
-          <span
-            class="List__Text-sc-1pm6mpm-1 bKJbSY"
-          >
-            L1234-5
-          </span>
-          <button
-            class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 wNuyp"
-            color="white"
-            font-size="inherit"
-            font-weight="bold"
-            title="Bouton supprimant la référence au Code du travail \\"L1234-5\\""
-          >
-            <svg
-              aria-hidden="true"
-              class="svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx"
-              color="var(--color-lapis-lazuli)"
-              data-icon="trash"
-              data-prefix="fas"
-              focusable="false"
-              role="img"
-              viewBox="0 0 448 512"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"
-                fill="currentColor"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div
-      class="sc-bdVaJa sc-bwzfXH AnswerEditionReferences__Part-sc-1inz7ja-1 fTJpKI"
-    >
-      <div
-        class="sc-bdVaJa sc-bwzfXH dicanr"
-        width="0.5"
-      >
-        <h2
-          class="Subtitle-sc-17ig8qv-0 gsnyDG"
-        >
           Articles de convention collective :
         </h2>
         <form
@@ -154,6 +77,83 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             font-size="inherit"
             font-weight="bold"
             title="Bouton supprimant la référence à la convention collective \\"An Agreement Reference\\""
+          >
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-trash fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx"
+              color="var(--color-lapis-lazuli)"
+              data-icon="trash"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              viewBox="0 0 448 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="sc-bdVaJa sc-bwzfXH AnswerEditionReferences__Part-sc-1inz7ja-1 fTJpKI"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH dicanr"
+        width="0.5"
+      >
+        <h2
+          class="Subtitle-sc-17ig8qv-0 gsnyDG"
+        >
+          Articles du Code du travail :
+        </h2>
+        <div>
+          <div
+            class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
+          >
+            <input
+              class="Input___Input-l1y0rz-1 bLtEdt"
+              placeholder="Commencez à taper le nom de la référence au Code du travail"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="sc-bdVaJa sc-bwzfXH List__Container-sc-1pm6mpm-0 euOFDR"
+      >
+        <div
+          class="sc-bdVaJa sc-bwzfXH jruoDg"
+        >
+          <svg
+            aria-hidden="true"
+            class="svg-inline--fa fa-circle fa-w-16 fa-sm Icon-sc-4jlog9-0 gomlef"
+            color="black"
+            data-icon="circle"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"
+              fill="currentColor"
+            />
+          </svg>
+          <span
+            class="List__Text-sc-1pm6mpm-1 bKJbSY"
+          >
+            L1234-5
+          </span>
+          <button
+            class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 wNuyp"
+            color="white"
+            font-size="inherit"
+            font-weight="bold"
+            title="Bouton supprimant la référence au Code du travail \\"L1234-5\\""
           >
             <svg
               aria-hidden="true"
