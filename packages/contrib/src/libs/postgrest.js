@@ -131,13 +131,13 @@ class Postgrest {
     return this;
   }
 
-  eq(column, _value) {
+  eq(column, _value, areQuotedStrings = false) {
     if (typeof _value === "boolean" || _value === null) {
       return this.is(column, _value);
     }
 
     const isNot = this.isNot ? "not." : "";
-    const value = typeof _value === "string" ? `"${_value}"` : _value;
+    const value = areQuotedStrings ? `"${_value}"` : _value;
 
     if (this.isAnd) {
       this.ands.push(`${column}.eq.${value}`);

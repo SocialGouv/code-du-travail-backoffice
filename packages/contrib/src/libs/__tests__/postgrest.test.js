@@ -24,7 +24,8 @@ describe("lib/postgrest()", () => {
 
     await query
       .eq("eqFieldNumber", 123)
-      .eq("eqFieldString", "A string")
+      .eq("eqFieldString1", "aString")
+      .eq("eqFieldString2", "A quoted string", true)
       .like("likeField", "Another string")
       .ilike("ilikeField", "Yet another string")
       .orderBy("ascField")
@@ -33,7 +34,7 @@ describe("lib/postgrest()", () => {
       .get(TEST_PATH);
 
     expect(global.axios.get).toHaveBeenCalledWith(
-      `${TEST_PATH}?eqFieldNumber=eq.123&eqFieldString=eq."A string"&likeField=like."*Another string*"&ilikeField=ilike."*Yet another string*"&limit=10&offset=10&select=*&order=ascField.asc,descField.desc`,
+      `${TEST_PATH}?eqFieldNumber=eq.123&eqFieldString1=eq.aString&eqFieldString2=eq."A quoted string"&likeField=like."*Another string*"&ilikeField=ilike."*Yet another string*"&limit=10&offset=10&select=*&order=ascField.asc,descField.desc`,
       {}
     );
   });
