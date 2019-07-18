@@ -2,11 +2,11 @@ exports.seed = async knex => {
   global.spinner.start(`Generating agreements...`)
 
   const agreements = [
-    { idcc: '0001', zones: ['OC975'], name: `Convention 1` },
-    { idcc: '0002', zones: ['01'], name: `Convention 2` },
-    { idcc: '0003', zones: ['001'], name: `Convention 3` },
-    { idcc: '0004', zones: ['002', '971'], name: `Convention 4` },
-    { idcc: '0005', zones: [], name: `Convention 5` },
+    { idcc: '0001', zones: ['OC975'], name: `Convention collective ultramarine de Saint-Pierre-et-Miquelon` },
+    { idcc: '0012', zones: ['04'], name: `Convention collective régionale de La Réunion` },
+    { idcc: '0123', zones: ['001'], name: `Convention collective départementale de l'Ain` },
+    { idcc: '1234', zones: ['002', '003'], name: `Convention collective multi-territoriale de l'Aisne et de l'Allier` },
+    { idcc: '5678', zones: [], name: `Convention collective nationale` },
   ]
 
   await knex("api.agreements")
