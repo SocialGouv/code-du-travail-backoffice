@@ -490,36 +490,6 @@ export default class AdminAnwsersEditPage extends React.Component {
             />
 
             <Hr />
-            <Subtitle isFirst>Étiquettes</Subtitle>
-
-            <Flex flexDirection="column">
-              <Strong isFirst>Type de contrat</Strong>
-              <Flex flexWrap="wrap">{this.getTags("contract_type")}</Flex>
-            </Flex>
-
-            <Flex flexDirection="column">
-              <Strong>Cible</Strong>
-              <Flex flexWrap="wrap">{this.getTags("target")}</Flex>
-            </Flex>
-
-            <Flex flexDirection="column">
-              <Strong>Durée de travail</Strong>
-              <Flex flexWrap="wrap">{this.getTags("work_time")}</Flex>
-            </Flex>
-
-            <Flex flexDirection="column">
-              <Strong>{"Type d'horaires"}</Strong>
-              <Flex flexWrap="wrap">{this.getTags("work_schedule_type")}</Flex>
-            </Flex>
-
-            <Flex flexDirection="column">
-              <Strong>Particularismes</Strong>
-              <Flex flexWrap="wrap">
-                {this.getTags("distinctive_identity")}
-              </Flex>
-            </Flex>
-
-            <Hr />
             <Subtitle isFirst>Références juridiques</Subtitle>
 
             <Flex flexDirection="column">
@@ -563,6 +533,36 @@ export default class AdminAnwsersEditPage extends React.Component {
               <Flex flexWrap="wrap">{this.getReferences()}</Flex>
               <FormHiddenSubmit type="submit" />
             </Form>
+
+            <Hr />
+            <Subtitle isFirst>Étiquettes</Subtitle>
+
+            <Flex flexDirection="column">
+              <Strong isFirst>Type de contrat</Strong>
+              <Flex flexWrap="wrap">{this.getTags("contract_type")}</Flex>
+            </Flex>
+
+            <Flex flexDirection="column">
+              <Strong>Cible</Strong>
+              <Flex flexWrap="wrap">{this.getTags("target")}</Flex>
+            </Flex>
+
+            <Flex flexDirection="column">
+              <Strong>Durée de travail</Strong>
+              <Flex flexWrap="wrap">{this.getTags("work_time")}</Flex>
+            </Flex>
+
+            <Flex flexDirection="column">
+              <Strong>{"Type d'horaires"}</Strong>
+              <Flex flexWrap="wrap">{this.getTags("work_schedule_type")}</Flex>
+            </Flex>
+
+            <Flex flexDirection="column">
+              <Strong>Particularismes</Strong>
+              <Flex flexWrap="wrap">
+                {this.getTags("distinctive_identity")}
+              </Flex>
+            </Flex>
           </LeftContainer>
           <RightContainer
             flexDirection="column"

@@ -132,7 +132,7 @@ number of file watchers reached`, la [solution	actuelle][link-issue-2] consiste
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p	
 ```
 
-### Licence
+### License
 
 Le code source de ce dépôt est distribué sous la
 [licence Apache 2.0][link-license].

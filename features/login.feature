@@ -8,7 +8,6 @@ Feature: Login
     When I log into the application
     Then I should see the title "Tableau de bord"
     And I should see the subtitle "État d'avancement des réponses"
-    And I should see the subtitle "Dernières réponses modifiées"
 
   Scenario: Successfully login as a contributor
     Given I am a registered "contributor"

@@ -4,7 +4,6 @@ import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
-import AdminAnswer from "../../src/blocks/AdminAnswer";
 import Subtitle from "../../src/elements/Subtitle";
 import Title from "../../src/elements/Title";
 import AdminMain from "../../src/layouts/AdminMain";
@@ -229,36 +228,27 @@ export default class Index extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading) return <AdminMain isLoading />;
-
     return (
       <AdminMain>
         <Container flexDirection="column">
           <Title>Tableau de bord</Title>
-
           <Subtitle isFirst>{`État d'avancement des réponses`}</Subtitle>
-          <Table>
-            <thead>
-              <tr>
-                <th>Unité</th>
-                <th>Convention</th>
-                <th>À rédiger</th>
-                <th>Brouillons</th>
-                <th>À valider</th>
-                <th>Validées</th>
-              </tr>
-            </thead>
-            <tbody>{this.getStats()}</tbody>
-          </Table>
-
-          <Subtitle isFirst>Dernières réponses modifiées</Subtitle>
-          {this.state.lastAnswers.map((answer, index) => (
-            <AdminAnswer
-              data={answer}
-              key={index}
-              onClick={this.editAnswer.bind(this)}
-            />
-          ))}
+          {this.state.isLoading && <p>Chargement en cours…</p>}
+          {!this.state.isLoading && (
+            <Table>
+              <thead>
+                <tr>
+                  <th>Unité</th>
+                  <th>Convention</th>
+                  <th>À rédiger</th>
+                  <th>Brouillons</th>
+                  <th>À valider</th>
+                  <th>Validées</th>
+                </tr>
+              </thead>
+              <tbody>{this.getStats()}</tbody>
+            </Table>
+          )}
         </Container>
       </AdminMain>
     );
