@@ -106,7 +106,7 @@ export default class LawReferences extends React.PureComponent {
           placeholder="Commencez à taper la référence au Code du travail"
           suggestions={this.state.suggestions}
         />
-        <Flex>{this.getReferences()}</Flex>
+        <Flex flexWrap="wrap">{this.getReferences()}</Flex>
       </Container>
     );
   }
