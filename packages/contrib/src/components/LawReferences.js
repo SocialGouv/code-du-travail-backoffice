@@ -54,35 +54,49 @@ export default class LawReferences extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    const references = props.references.map(({ value }) => value);
+    this.references = props.references.map(({ value }) => value);
 
     this.state = {
-      suggestions: LAW_REFERENCES.filter(
-        value => !references.includes(value)
-      ).map(value => ({ id: value, name: value }))
+      suggestions: this.getSuggestions()
     };
+  }
+
+  getSuggestions() {
+    return LAW_REFERENCES.filter(value => !this.references.includes(value)).map(
+      value => ({ id: value, name: value })
+    );
   }
 
   async onAdd(ref) {
     this.setState({ isLoading: true });
+    const value = ref.name;
 
     await this.props.onAdd({
       category: "labor_code",
-      value: ref.name
+      value
     });
 
-    this.setState({ isLoading: false });
+    this.references.push(value);
+    this.setState({
+      isLoading: false,
+      suggestions: this.getSuggestions()
+    });
   }
 
   async onRemove(index) {
     this.setState({ isLoading: true });
+    const value = this.state.suggestions[index].name;
 
     await this.props.onRemove({
       category: "labor_code",
-      value: this.state.suggestions[index].name
+      value
     });
 
-    this.setState({ isLoading: false });
+    this.references = this.references.filter(name => name !== value);
+    this.setState({
+      isLoading: false,
+      suggestions: this.getSuggestions()
+    });
   }
 
   getReferences() {
