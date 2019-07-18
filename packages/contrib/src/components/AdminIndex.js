@@ -46,17 +46,17 @@ export default class AdminIndex extends React.Component {
     this.columns = [...this.props.columns];
 
     if (!Boolean(this.props.noTimestamps)) {
-      this.columns.push({
-        Header: "Créé le",
-        accessor: data =>
-          moment(data.created_at)
-            .tz("Europe/Paris")
-            .format("YYYY-MM-DD HH:mm"),
-        filterable: false,
-        id: "createdAt",
-        style: { textAlign: "center" },
-        width: 160
-      });
+      // this.columns.push({
+      //   Header: "Créé le",
+      //   accessor: data =>
+      //     moment(data.created_at)
+      //       .tz("Europe/Paris")
+      //       .format("YYYY-MM-DD HH:mm"),
+      //   filterable: false,
+      //   id: "createdAt",
+      //   style: { textAlign: "center" },
+      //   width: 160
+      // });
 
       this.columns.push({
         Header: "Modifié le",
