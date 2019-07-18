@@ -5,7 +5,9 @@ import AdminIndex from "../../../src/components/AdminIndex";
 const COLUMNS = [
   {
     Header: "Index",
-    accessor: "index"
+    accessor: "index",
+    style: { textAlign: "right" },
+    width: 80
   },
   {
     Header: "Intitulé",
