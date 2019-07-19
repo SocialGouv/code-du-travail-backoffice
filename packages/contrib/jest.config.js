@@ -12,14 +12,15 @@ module.exports = {
     "<rootDir>/__tests__",
     "<rootDir>/.next",
     "<rootDir>/node_modules",
-    "<rootDir>/package.json",
     // Page components should be tested in e2e:
     "<rootDir>/pages",
     "<rootDir>/server",
     "<rootDir>/src/actions",
     "<rootDir>/src/reducers",
     "<rootDir>/src/sagas",
-    "<rootDir>/yarn.lock"
+    "<rootDir>/src/constants.js",
+    "<rootDir>/src/store.js",
+    "<rootDir>/src/texts.js"
   ],
   // https://github.com/facebook/create-react-app/issues/2007#issuecomment-296694661
   setupFilesAfterEnv: ["<rootDir>/__tests__/jest.setup.js"]

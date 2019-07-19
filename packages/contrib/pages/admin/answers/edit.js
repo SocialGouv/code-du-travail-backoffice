@@ -1,9 +1,11 @@
 import debounce from "lodash.debounce";
 import Router from "next/router";
 import React from "react";
+import { connect } from "react-redux";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
+import * as actions from "../../../src/actions";
 import Comment from "../../../src/components/Comment";
 import LawReferences from "../../../src/components/LawReferences";
 import Reference from "../../../src/components/Reference";
@@ -21,6 +23,7 @@ import customAxios from "../../../src/libs/customAxios";
 import makeApiFilter from "../../../src/libs/makeApiFilter";
 
 import { ANSWER_STATE } from "../../../src/constants";
+import T from "../../../src/texts";
 
 const Container = styled(Flex)`
   height: 100%;
@@ -72,14 +75,12 @@ const Button = styled(_Button)`
   margin-bottom: ${({ isFirst }) => (Boolean(isFirst) ? "0.5rem" : 0)};
 `;
 
-export default class AdminAnwsersEditPage extends React.Component {
+class AdminAnwsersEditPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       agreementReferenceValueInputKey: 0,
-      comments: [],
-      commentTextareaKey: 0,
       isUpdating: false,
       isLoading: true,
       otherReferenceUrlInputKey: 0,
@@ -114,7 +115,7 @@ export default class AdminAnwsersEditPage extends React.Component {
 
       await this.fetchTags();
       await this.fetchReferences();
-      await this.fetchComments();
+      this.props.dispatch(actions.comments.load(this.props.id));
 
       this.setState({ isLoading: false });
     } catch (err) {
@@ -365,35 +366,6 @@ export default class AdminAnwsersEditPage extends React.Component {
     this.insertReference(reference);
   }
 
-  async maybeAddComment(event) {
-    if (
-      !event.ctrlKey ||
-      event.charCode !== 13 ||
-      this.$commentTextarea.value.trim().length === 0
-    ) {
-      return;
-    }
-
-    this.setState({
-      commentTextareaKey: this.state.commentTextareaKey + 1,
-      isUpdating: true
-    });
-
-    const uri = "/answers_comments";
-    const data = {
-      answer_id: this.props.id,
-      value: this.$commentTextarea.value
-    };
-
-    try {
-      await this.axios.post(uri, data);
-    } catch (err) {
-      console.warn(err);
-    }
-
-    await this.fetchComments();
-  }
-
   showSavingSpinner() {
     if (this.state.isUpdating) {
       clearTimeout(this.state.savingSpinnerTimeout);
@@ -420,6 +392,24 @@ export default class AdminAnwsersEditPage extends React.Component {
     } else {
       this.deleteTag(id);
     }
+  }
+
+  maybeAddComment(event) {
+    if (
+      !event.ctrlKey ||
+      event.charCode !== 13 ||
+      this.$commentTextarea.value.trim().length === 0
+    ) {
+      return;
+    }
+
+    this.props.dispatch(
+      actions.comments.add(this.props.id, this.$commentTextarea.value)
+    );
+  }
+
+  removeComment(id) {
+    this.props.dispatch(actions.comments.remove(id, this.props.id));
   }
 
   getTags(category) {
@@ -451,12 +441,19 @@ export default class AdminAnwsersEditPage extends React.Component {
   }
 
   getComments() {
-    return this.state.comments.map(({ value }, index) => (
-      <Comment isMe={true} key={index} value={value} />
+    return this.props.comments.data.map(({ id, value }, index) => (
+      <Comment
+        isMe={true}
+        key={index}
+        onRemove={() => this.removeComment(id)}
+        value={value}
+      />
     ));
   }
 
   render() {
+    const { comments } = this.props;
+
     if (this.state.isLoading) return <AdminMain isLoading />;
 
     return (
@@ -580,9 +577,9 @@ export default class AdminAnwsersEditPage extends React.Component {
               <CommentField>
                 <CommentEditor
                   disabled={this.state.isUpdating}
-                  key={this.state.commentTextareaKey}
+                  key={comments.textareaKey}
                   onKeyPress={this.maybeAddComment.bind(this)}
-                  placeholder="Écrivez votre commentaire ici"
+                  placeholder={T.ADMIN_ANSWERS_COMMENT_PLACEHOLDER}
                   ref={node => (this.$commentTextarea = node)}
                   rows={10}
                 />
@@ -639,3 +636,8 @@ export default class AdminAnwsersEditPage extends React.Component {
     );
   }
 }
+
+export default connect(({ answers, comments }) => ({
+  answers,
+  comments
+}))(AdminAnwsersEditPage);

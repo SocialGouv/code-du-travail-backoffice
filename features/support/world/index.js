@@ -39,14 +39,14 @@ class World {
     switch (role) {
       case "administrator":
         this.user = {
-          email: "administrator@example.com",
+          email: "doris@sea.com",
           password: "Azerty123"
         };
         break;
 
       case "contributor":
         this.user = {
-          email: "contributor@example.com",
+          email: "nemo@sea.com",
           password: "Azerty123"
         };
         break;
