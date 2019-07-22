@@ -214,24 +214,6 @@ class AdminAnwsersEditPage extends React.Component {
     }
   }
 
-  async fetchComments() {
-    try {
-      const commentsSelect = `select=*`;
-      const commentsWhere = `answer_id=eq.${this.props.id}`;
-      // eslint-disable-next-line prettier/prettier
-      const commentsUri =
-        `/answers_comments?${commentsSelect}&${commentsWhere}`;
-      const { data: comments } = await this.axios.get(commentsUri);
-
-      this.setState({
-        comments,
-        isUpdating: false
-      });
-    } catch (err) {
-      if (err !== undefined) console.warn(err);
-    }
-  }
-
   async updateAnswerStateTo(state) {
     this.setState({ isUpdating: true });
 
