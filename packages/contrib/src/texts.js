@@ -8,7 +8,9 @@ function pluralize(text) {
 }
 
 export default {
-  ADMIN_ANSWERS_COMMENT_PLACEHOLDER: `Écrivez votre commentaire ici et appuyer sur CTRL + ENTRÉE pour l'envoyer.`,
+  ADMIN_ANSWERS_COMMENT_PLACEHOLDER: `Écrivez votre commentaire ici…\n\n` +
+    `CTRL + ENTRÉE pour envoyer le commentaire.\n` +
+    `MAJ + ENTRÉE pour passer mode public / privé.`,
   ADMIN_ANSWERS_INFO_NO_DATA: state => `Il n'y a aucune réponse ${ANSWER_STATE_LABEL[state]}.`,
   ADMIN_ANSWERS_INFO_NO_SEARCH_RESULT: `Cette recherche n'a retournée aucun résultat.`,
   ADMIN_ANSWERS_SEARCH_PLACEHOLDER: `Rechercher par question, réponse, utilisateur ou convention…`,

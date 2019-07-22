@@ -6,6 +6,31 @@ import toast from "../libs/toast";
 
 const API_PATH = "/answers_comments";
 
+/* ONE COMMENT ――――――――――――――――――――― */
+
+function* addOne({ meta: { answerId, isPrivate, value } }) {
+  try {
+    const me = JSON.parse(sessionStorage.getItem("me"));
+
+    const request = postgrest();
+    const data = {
+      answer_id: answerId,
+      is_private: isPrivate,
+      user_id: me.payload.id,
+      value
+    };
+
+    yield request.post(API_PATH, data);
+    yield put({ type: actionTypes.COMMENT_ADD_SUCCESS });
+    yield put(comments.load(answerId));
+  } catch (err) {
+    toast.error(err.message);
+    yield put(comments.addOneFailure({ message: null }));
+  }
+}
+
+/* MULTIPLE COMMENTS ――――――――――――――― */
+
 function* load({ meta: { answerId } }) {
   try {
     const request = postgrest()
@@ -20,40 +45,21 @@ function* load({ meta: { answerId } }) {
   }
 }
 
-function* add({ meta: { answerId, value } }) {
+function* remove({ meta: { answerId, ids } }) {
   try {
-    const me = JSON.parse(sessionStorage.getItem("me"));
-
-    const request = postgrest();
-    const data = {
-      answer_id: answerId,
-      user_id: me.payload.id,
-      value
-    };
-
-    yield request.post(API_PATH, data);
-    yield put({ type: actionTypes.COMMENTS_ADD_SUCCESS });
-    yield put(comments.load(answerId));
-  } catch (err) {
-    toast.error(err.message);
-    yield put(comments.addFailure({ message: null }));
-  }
-}
-
-function* remove({ meta: { answerId, id } }) {
-  try {
-    const request = postgrest().eq("id", id);
+    const request = postgrest().in("id", ids);
 
     yield request.delete(API_PATH);
     yield put(comments.load(answerId));
   } catch (err) {
     toast.error(err.message);
-    yield put(comments.addFailure({ message: null }));
+    yield put(comments.removeFailure({ message: null }));
   }
 }
 
 export default [
-  takeLatest(actionTypes.COMMENTS_ADD, add),
+  takeLatest(actionTypes.COMMENT_ADD, addOne),
+
   takeLatest(actionTypes.COMMENTS_LOAD, load),
   takeLatest(actionTypes.COMMENTS_REMOVE, remove)
 ];
