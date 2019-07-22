@@ -128,8 +128,8 @@ class AdminAnwsersEditPage extends React.Component {
       this.$commentsContainer.scrollTo(0, this.$commentsContainer.scrollHeight);
 
       if (this.answerValueEditor === undefined) {
-        // We have to load Quill here because of the global `navigator` variable
-        // check done by the original library.
+        // We have to load SimpleMDE here because of the global `navigator`
+        // variable check done by the original library.
         const SimpleMDE = require("simplemde");
 
         const config = {
@@ -137,7 +137,17 @@ class AdminAnwsersEditPage extends React.Component {
           status: false
         };
 
-        this.answerPrevalueEditor = new SimpleMDE({
+        if (this.answer.state === ANSWER_STATE.VALIDATED) {
+          this.answerValueEditor = new SimpleMDE({
+            ...config,
+            element: this.$answerPrevalue,
+            toolbar: ["preview"]
+          });
+
+          return;
+        }
+
+        new SimpleMDE({
           ...config,
           element: this.$answerPrevalue,
           toolbar: ["preview"]
@@ -223,7 +233,7 @@ class AdminAnwsersEditPage extends React.Component {
   }
 
   async updateAnswerStateTo(state) {
-    this.setState({ isLoading: true });
+    this.setState({ isUpdating: true });
 
     try {
       const uri = `/answers?id=eq.${this.props.id}`;
@@ -467,99 +477,105 @@ class AdminAnwsersEditPage extends React.Component {
               />
               <Title isFirst>{this.answer.question.value}</Title>
             </Flex>
-
             <Hr />
-            <Subtitle isFirst>Réponse proposée</Subtitle>
 
-            <AnswerEditor
-              defaultValue={this.answer.prevalue}
-              disabled
-              ref={node => (this.$answerPrevalue = node)}
-            />
-
-            <Hr />
-            <Subtitle isFirst>Réponse corrigée</Subtitle>
-
-            <AnswerEditor
-              defaultValue={this.answer.value}
-              onChange={this.updateAnswerValue}
-              ref={node => (this.$answerValue = node)}
-            />
-
-            <Hr />
-            <Subtitle isFirst>Références juridiques</Subtitle>
-
-            <Flex flexDirection="column">
-              <Strong isFirst>Articles du Code du travail</Strong>
-              <LawReferences
-                isDisabled={this.state.isUpdating}
-                onAdd={this.insertReference.bind(this)}
-                onRemove={this.deleteReference.bind(this)}
-                references={this.state.references.filter(
-                  ({ category }) => category === "labor_code"
-                )}
-              />
-            </Flex>
-
-            <Form onSubmit={event => this.submitReference(event, "agreement")}>
-              <Strong>Articles de la Convention collective</Strong>
-              <Input
-                disabled={this.state.isUpdating}
-                key={this.state.agreementReferenceValueInputKey}
-                placeholder="Ex: Article 7, Texte sur les salaires de 1984…"
-                ref={node => (this.$agreementReferenceValueInput = node)}
-              />
-              <Flex flexWrap="wrap">{this.getReferences("agreement")}</Flex>
-              <FormHiddenSubmit type="submit" />
-            </Form>
-
-            <Form onSubmit={this.submitReference.bind(this)}>
-              <Strong>Autres références juridiques</Strong>
-              <Input
-                disabled={this.state.isUpdating}
-                key={this.state.otherReferenceValueInputKey}
-                placeholder="Référence (ex: Décret n°82-447 du 28 mai 1982…)"
-                ref={node => (this.$otherReferenceValueInput = node)}
-              />
-              <Input
-                disabled={this.state.isUpdating}
-                key={this.state.otherReferenceUrlInputKey}
-                placeholder="URL (ex: https://www.legifrance.gouv.fr/…)"
-                ref={node => (this.$otherReferenceUrlInput = node)}
-              />
-              <Flex flexWrap="wrap">{this.getReferences()}</Flex>
-              <FormHiddenSubmit type="submit" />
-            </Form>
-
-            <Hr />
-            <Subtitle isFirst>Étiquettes</Subtitle>
-
-            <Flex flexDirection="column">
-              <Strong isFirst>Type de contrat</Strong>
-              <Flex flexWrap="wrap">{this.getTags("contract_type")}</Flex>
-            </Flex>
-
-            <Flex flexDirection="column">
-              <Strong>Cible</Strong>
-              <Flex flexWrap="wrap">{this.getTags("target")}</Flex>
-            </Flex>
-
-            <Flex flexDirection="column">
-              <Strong>Durée de travail</Strong>
-              <Flex flexWrap="wrap">{this.getTags("work_time")}</Flex>
-            </Flex>
-
-            <Flex flexDirection="column">
-              <Strong>{"Type d'horaires"}</Strong>
-              <Flex flexWrap="wrap">{this.getTags("work_schedule_type")}</Flex>
-            </Flex>
-
-            <Flex flexDirection="column">
-              <Strong>Particularismes</Strong>
-              <Flex flexWrap="wrap">
-                {this.getTags("distinctive_identity")}
+            {this.answer.state === ANSWER_STATE.VALIDATED && (
+              <Flex flexDirection="column" width={1}>
+                <Subtitle isFirst>Réponse validée</Subtitle>
+                <AnswerEditor
+                  defaultValue={this.answer.value}
+                  disabled
+                  ref={node => (this.$answerValue = node)}
+                />
               </Flex>
-            </Flex>
+            )}
+
+            {this.answer.state !== ANSWER_STATE.VALIDATED && (
+              <Flex flexDirection="column" width={1}>
+                <Subtitle isFirst>Réponse proposée</Subtitle>
+                <AnswerEditor defaultValue={this.answer.prevalue} disabled />
+                <Hr />
+
+                <Subtitle isFirst>Réponse corrigée</Subtitle>
+                <AnswerEditor
+                  defaultValue={this.answer.value}
+                  onChange={this.updateAnswerValue}
+                  ref={node => (this.$answerValue = node)}
+                />
+                <Hr />
+
+                <Subtitle isFirst>Références juridiques</Subtitle>
+                <Flex flexDirection="column">
+                  <Strong isFirst>Articles du Code du travail</Strong>
+                  <LawReferences
+                    isDisabled={this.state.isUpdating}
+                    onAdd={this.insertReference.bind(this)}
+                    onRemove={this.deleteReference.bind(this)}
+                    references={this.state.references.filter(
+                      ({ category }) => category === "labor_code"
+                    )}
+                  />
+                </Flex>
+                <Form
+                  onSubmit={event => this.submitReference(event, "agreement")}
+                >
+                  <Strong>Articles de la Convention collective</Strong>
+                  <Input
+                    disabled={this.state.isUpdating}
+                    key={this.state.agreementReferenceValueInputKey}
+                    placeholder="Ex: Article 7, Texte sur les salaires de 1984…"
+                    ref={node => (this.$agreementReferenceValueInput = node)}
+                  />
+                  <Flex flexWrap="wrap">{this.getReferences("agreement")}</Flex>
+                  <FormHiddenSubmit type="submit" />
+                </Form>
+                <Form onSubmit={this.submitReference.bind(this)}>
+                  <Strong>Autres références juridiques</Strong>
+                  <Input
+                    disabled={this.state.isUpdating}
+                    key={this.state.otherReferenceValueInputKey}
+                    // eslint-disable-next-line max-len
+                    placeholder="Référence (ex: Décret n°82-447 du 28 mai 1982…)"
+                    ref={node => (this.$otherReferenceValueInput = node)}
+                  />
+                  <Input
+                    disabled={this.state.isUpdating}
+                    key={this.state.otherReferenceUrlInputKey}
+                    placeholder="URL (ex: https://www.legifrance.gouv.fr/…)"
+                    ref={node => (this.$otherReferenceUrlInput = node)}
+                  />
+                  <Flex flexWrap="wrap">{this.getReferences()}</Flex>
+                  <FormHiddenSubmit type="submit" />
+                </Form>
+                <Hr />
+
+                <Subtitle isFirst>Étiquettes</Subtitle>
+                <Flex flexDirection="column">
+                  <Strong isFirst>Type de contrat</Strong>
+                  <Flex flexWrap="wrap">{this.getTags("contract_type")}</Flex>
+                </Flex>
+                <Flex flexDirection="column">
+                  <Strong>Cible</Strong>
+                  <Flex flexWrap="wrap">{this.getTags("target")}</Flex>
+                </Flex>
+                <Flex flexDirection="column">
+                  <Strong>Durée de travail</Strong>
+                  <Flex flexWrap="wrap">{this.getTags("work_time")}</Flex>
+                </Flex>
+                <Flex flexDirection="column">
+                  <Strong>{"Type d'horaires"}</Strong>
+                  <Flex flexWrap="wrap">
+                    {this.getTags("work_schedule_type")}
+                  </Flex>
+                </Flex>
+                <Flex flexDirection="column">
+                  <Strong>Particularismes</Strong>
+                  <Flex flexWrap="wrap">
+                    {this.getTags("distinctive_identity")}
+                  </Flex>
+                </Flex>
+              </Flex>
+            )}
           </LeftContainer>
           <RightContainer
             flexDirection="column"
