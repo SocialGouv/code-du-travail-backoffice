@@ -16,7 +16,19 @@ const Icon = styled(_Icon)`
   }
 `;
 const Bubble = styled(Flex)`
-  border: 2px solid #00bfb6;
+  background: ${({ isPrivate }) =>
+    !isPrivate
+      ? "white"
+      : `repeating-linear-gradient(
+            45deg,
+            #f4f4f4,
+            #f4f4f4 10px,
+            #ffffff 10px,
+            #ffffff 20px
+          )`};
+  border: 2px solid
+    ${({ isPrivate }) =>
+      isPrivate ? "var(--color-mummy-tomb)" : "var(--color-light-steel-blue)"};
   font-size: 0.75rem;
   margin: 0 1rem;
   padding: 0.5rem;
@@ -24,7 +36,11 @@ const Bubble = styled(Flex)`
 
   :before {
     border-bottom: 0.5rem solid transparent;
-    border-top: 0.5rem solid #00bfb6;
+    border-top: 0.5rem solid
+      ${({ isPrivate }) =>
+        isPrivate
+          ? "var(--color-mummy-tomb)"
+          : "var(--color-light-steel-blue)"};
     content: "";
     height: 0px;
     position: absolute;
@@ -46,7 +62,11 @@ const Bubble = styled(Flex)`
 const LeftBubble = styled(Bubble)`
   :before {
     border-left: 0.5rem solid transparent;
-    border-right: 0.5rem solid #00bfb6;
+    border-right: 0.5rem solid
+      ${({ isPrivate }) =>
+        isPrivate
+          ? "var(--color-mummy-tomb)"
+          : "var(--color-light-steel-blue)"};
     left: -1rem;
   }
 
@@ -61,7 +81,11 @@ const RightBubble = styled(Bubble)`
   flex-grow: 1;
 
   :before {
-    border-left: 0.5rem solid #00bfb6;
+    border-left: 0.5rem solid
+      ${({ isPrivate }) =>
+        isPrivate
+          ? "var(--color-mummy-tomb)"
+          : "var(--color-light-steel-blue)"};
     border-right: 0.5rem solid transparent;
     right: -1rem;
   }
@@ -73,18 +97,18 @@ const RightBubble = styled(Bubble)`
   }
 `;
 
-export default ({ isMe = false, onRemove, value }) => {
+export default ({ isMe = false, isPrivate, onRemove, value }) => {
   if (isMe)
     return (
       <Container alignItems="center">
         <Icon color="var(--color-text-red)" icon="trash" onClick={onRemove} />
-        <RightBubble>{value}</RightBubble>
+        <RightBubble isPrivate={isPrivate}>{value}</RightBubble>
       </Container>
     );
 
   return (
     <Container>
-      <LeftBubble>{value}</LeftBubble>
+      <LeftBubble isPrivate={isPrivate}>{value}</LeftBubble>
     </Container>
   );
 };
