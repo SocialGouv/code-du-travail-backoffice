@@ -12,6 +12,7 @@ import Reference from "../../../src/components/Reference";
 import AdminMain from "../../../src/layouts/AdminMain";
 import _Button from "../../../src/elements/Button";
 import Hr from "../../../src/elements/Hr";
+import Icon from "../../../src/elements/Icon";
 import Idcc from "../../../src/elements/Idcc";
 import Input from "../../../src/elements/Input";
 import SavingSpinner from "../../../src/elements/SavingSpinner";
@@ -60,15 +61,33 @@ const Comments = styled(Flex)`
   max-height: 100%;
   overflow-y: scroll;
 `;
-const CommentField = styled.div`
-  margin: 1rem 0;
-  min-height: 9rem;
-`;
 const CommentEditor = styled(Textarea)`
+  background: ${({ isPrivate }) =>
+    !Boolean(isPrivate)
+      ? "white"
+      : `repeating-linear-gradient(
+            45deg,
+            #f4f4f4,
+            #f4f4f4 10px,
+            #ffffff 10px,
+            #ffffff 20px
+          )`};
+  border-radius: 0.25rem;
   font-size: 0.75rem;
   opacity: ${props => (Boolean(props.disabled) ? 0.25 : 1)};
+  margin-top: 1rem;
   padding: 0.5rem;
   width: 100%;
+`;
+const CommentEditorIcon = styled(Icon)`
+  align-self: flex-end;
+  cursor: pointer;
+  margin: 0.25rem 0 1rem;
+  opacity: 0.25;
+
+  :hover {
+    opacity: 0.5;
+  }
 `;
 const Button = styled(_Button)`
   justify-content: center;
@@ -387,21 +406,31 @@ class AdminAnwsersEditPage extends React.Component {
   }
 
   handleCommentField(event) {
-    if (
-      !event.ctrlKey ||
-      event.charCode !== 13 ||
-      this.$commentTextarea.value.trim().length === 0
-    ) {
+    if (event.charCode !== 13) return;
+
+    if (event.shiftKey) {
+      event.preventDefault();
+      this.props.dispatch(actions.comments.toggleOnePrivacy());
+
       return;
     }
 
-    this.props.dispatch(
-      actions.comments.add(this.props.id, this.$commentTextarea.value)
-    );
+    const value = this.$commentTextarea.value.trim();
+    if (value.length === 0) return;
+
+    if (event.ctrlKey) {
+      this.props.dispatch(
+        actions.comments.addOne(
+          value,
+          this.props.comments.currentIsPrivate,
+          this.props.id
+        )
+      );
+    }
   }
 
   removeComment(id) {
-    this.props.dispatch(actions.comments.remove(id, this.props.id));
+    this.props.dispatch(actions.comments.remove([id], this.props.id));
   }
 
   getTags(category) {
@@ -433,9 +462,10 @@ class AdminAnwsersEditPage extends React.Component {
   }
 
   getComments() {
-    return this.props.comments.data.map(({ id, value }, index) => (
+    return this.props.comments.data.map(({ id, is_private, value }, index) => (
       <Comment
         isMe={true}
+        isPrivate={is_private}
         key={index}
         onRemove={() => this.removeComment(id)}
         value={value}
@@ -572,17 +602,23 @@ class AdminAnwsersEditPage extends React.Component {
               >
                 {this.getComments()}
               </Comments>
-              <CommentField>
-                <CommentEditor
-                  disabled={this.state.isUpdating}
-                  key={comments.textareaKey}
-                  onKeyPress={this.handleCommentField.bind(this)}
-                  placeholder={T.ADMIN_ANSWERS_COMMENT_PLACEHOLDER}
-                  ref={node => (this.$commentTextarea = node)}
-                  rows={10}
-                />
-              </CommentField>
+              <CommentEditor
+                disabled={comments.currentIsLoading}
+                isPrivate={comments.currentIsPrivate}
+                key={comments.currentKey}
+                onKeyPress={this.handleCommentField.bind(this)}
+                placeholder={T.ADMIN_ANSWERS_COMMENT_PLACEHOLDER}
+                ref={node => (this.$commentTextarea = node)}
+                rows={10}
+              />
+              <CommentEditorIcon
+                icon={comments.currentIsPrivate ? "lock" : "unlock"}
+                onClick={() =>
+                  this.props.dispatch(actions.comments.toggleOnePrivacy())
+                }
+              />
             </Flex>
+
             {this.answer.state === ANSWER_STATE.DRAFT && (
               <Flex flexDirection="column">
                 <Button
@@ -599,6 +635,7 @@ class AdminAnwsersEditPage extends React.Component {
                 </Button>
               </Flex>
             )}
+
             {(this.answer.state === ANSWER_STATE.PENDING_REVIEW ||
               this.answer.state === ANSWER_STATE.UNDER_REVIEW) && (
               <Flex flexDirection="column">

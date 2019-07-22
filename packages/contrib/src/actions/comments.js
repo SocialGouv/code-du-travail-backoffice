@@ -1,5 +1,29 @@
 import actionTypes from "./types";
 
+/* ONE COMMENT ――――――――――――――――――――― */
+
+export const addOne = (value, isPrivate, answerId) => ({
+  type: actionTypes.COMMENT_ADD,
+  meta: {
+    answerId,
+    isPrivate,
+    value
+  }
+});
+export const addOneFailure = error => ({
+  type: actionTypes.COMMENT_ADD_FAILURE,
+  error: true,
+  payload: {
+    message: error.message
+  }
+});
+
+export const toggleOnePrivacy = () => ({
+  type: actionTypes.COMMENT_TOGGLE_PRIVACY
+});
+
+/* MULTIPLE COMMENTS ――――――――――――――― */
+
 export const load = answerId => ({
   type: actionTypes.COMMENTS_LOAD,
   meta: {
@@ -20,26 +44,11 @@ export const loadSuccess = data => ({
   }
 });
 
-export const add = (answerId, value) => ({
-  type: actionTypes.COMMENTS_ADD,
-  meta: {
-    answerId,
-    value
-  }
-});
-export const addFailure = error => ({
-  type: actionTypes.COMMENTS_ADD_FAILURE,
-  error: true,
-  payload: {
-    message: error.message
-  }
-});
-
-export const remove = (id, answerId) => ({
+export const remove = (ids, answerId) => ({
   type: actionTypes.COMMENTS_REMOVE,
   meta: {
     answerId,
-    id
+    ids
   }
 });
 export const removeFailure = error => ({
