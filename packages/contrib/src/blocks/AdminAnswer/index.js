@@ -28,7 +28,7 @@ const Content = styled(Flex)`
   background-color: white;
   border: solid 1px var(--color-border);
   border-radius: 0.4rem;
-  cursor: ${props => (props.isEditable ? "pointer" : "default")};
+  cursor: pointer;
   flex-grow: 1;
   padding: 0.75rem 0.5rem 0.75rem 0.75rem;
 `;
@@ -48,14 +48,7 @@ const ContentExtractRed = styled(ContentExtract)`
 
 import { ANSWER_STATE, ANSWER_STATE_LABEL } from "../../constants";
 
-const EDITABLE_STATES = [
-  ANSWER_STATE.DRAFT,
-  ANSWER_STATE.PENDING_REVIEW,
-  ANSWER_STATE.UNDER_REVIEW
-];
-
 export default ({ data, isChecked, onCheck, onClick }) => {
-  const isEditable = EDITABLE_STATES.includes(data.state);
   const isTodo = data.state === ANSWER_STATE.TO_DO;
   const value = data.state === ANSWER_STATE.DRAFT ? data.prevalue : data.value;
 
@@ -78,11 +71,7 @@ export default ({ data, isChecked, onCheck, onClick }) => {
             </TopAuthor>
           )}
         </Top>
-        <Content
-          flexDirection="column"
-          isEditable={isEditable}
-          onClick={() => (isEditable ? onClick(data.id) : void 0)}
-        >
+        <Content flexDirection="column" onClick={() => onClick(data.id)}>
           <Flex alignItems="baseline">
             <Idcc code={data.agreement_idcc} name={data.agreement_name} />
             <ContentQuestion>

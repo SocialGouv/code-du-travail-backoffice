@@ -1,4 +1,5 @@
 import debounce from "lodash.debounce";
+import Router from "next/router";
 import React from "react";
 import { connect } from "react-redux";
 import { Flex } from "rebass";
@@ -16,6 +17,8 @@ import customAxios from "../../../src/libs/customAxios";
 
 import { ANSWER_STATE, ANSWER_STATE_LABEL } from "../../../src/constants";
 import T from "../../../src/texts";
+
+const { NODE_ENV } = process.env;
 
 const Container = styled(Flex)`
   flex-grow: 1;
@@ -145,7 +148,13 @@ class AdminAnswersIndexPage extends React.Component {
   }
 
   editAnswer(id) {
-    window.open(`/admin/answers/${id}`, "_blank");
+    if (NODE_ENV !== "development") {
+      window.open(`/admin/answers/${id}`, "_blank");
+
+      return;
+    }
+
+    Router.push(`/admin/answers/${id}`);
   }
 
   getAnswersList() {
