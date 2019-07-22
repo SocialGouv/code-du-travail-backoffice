@@ -386,7 +386,7 @@ class AdminAnwsersEditPage extends React.Component {
     }
   }
 
-  maybeAddComment(event) {
+  handleCommentField(event) {
     if (
       !event.ctrlKey ||
       event.charCode !== 13 ||
@@ -576,7 +576,7 @@ class AdminAnwsersEditPage extends React.Component {
                 <CommentEditor
                   disabled={this.state.isUpdating}
                   key={comments.textareaKey}
-                  onKeyPress={this.maybeAddComment.bind(this)}
+                  onKeyPress={this.handleCommentField.bind(this)}
                   placeholder={T.ADMIN_ANSWERS_COMMENT_PLACEHOLDER}
                   ref={node => (this.$commentTextarea = node)}
                   rows={10}
