@@ -3,7 +3,7 @@
 exports[`[Contrib] elements/<Input /> should match snapshot 1`] = `
 <div>
   <input
-    class="Input___Input-l1y0rz-1 bLtEdt"
+    class="Input___Input-l1y0rz-1 bpEpug"
   />
 </div>
 `;
@@ -11,7 +11,7 @@ exports[`[Contrib] elements/<Input /> should match snapshot 1`] = `
 exports[`[Contrib] elements/<Input /> should match snapshot with \`disabled\` prop 1`] = `
 <div>
   <input
-    class="Input___Input-l1y0rz-1 jHgeEG"
+    class="Input___Input-l1y0rz-1 dDAJup"
     disabled=""
   />
 </div>
@@ -44,7 +44,7 @@ exports[`[Contrib] elements/<Input /> should match snapshot with a custom \`icon
         </svg>
       </span>
       <input
-        class="Input___Input-l1y0rz-1 eMUdic"
+        class="Input___Input-l1y0rz-1 gLCQqN"
       />
     </div>
   </div>

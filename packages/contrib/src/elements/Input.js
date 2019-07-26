@@ -10,7 +10,7 @@ const InputWithIconWrapper = styled.div`
 
 const _Input = styled.input`
   -webkit-appearance: none;
-  background-color: transparent;
+  background-color: white;
   border: solid 1px var(--color-border);
   color: inherit;
   flex-grow: 1;
