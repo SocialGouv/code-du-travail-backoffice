@@ -8,4 +8,10 @@ describe("[Contrib] elements/<Select />", () => {
 
     expect(container).toMatchSnapshot();
   });
+
+  it("should match snapshot with `disabled` prop", () => {
+    const { container } = render(<Select disabled />);
+
+    expect(container).toMatchSnapshot();
+  });
 });
