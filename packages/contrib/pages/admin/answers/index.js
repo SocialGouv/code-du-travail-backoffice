@@ -12,13 +12,15 @@ import Button from "../../../src/elements/Button";
 import Input from "../../../src/elements/Input";
 import _Select from "../../../src/elements/Select";
 import Title from "../../../src/elements/Title";
+import capitalize from "../../../src/helpers/capitalize";
 import AdminMain from "../../../src/layouts/AdminMain";
 import customAxios from "../../../src/libs/customAxios";
 
-import { ANSWER_STATE, ANSWER_STATE_LABEL } from "../../../src/constants";
+import { ANSWER_STATE_LABEL } from "../../../src/constants";
 import T from "../../../src/texts";
 
 const { NODE_ENV } = process.env;
+const STATES = Object.keys(ANSWER_STATE_LABEL);
 
 const Container = styled(Flex)`
   flex-grow: 1;
@@ -35,11 +37,17 @@ const FilterInput = styled(Input)`
   margin: 0.5rem 0;
   flex-grow: 0.5;
 `;
-const Head = styled(Flex)`
+const Top = styled(Flex)`
   margin-bottom: 0.75rem;
 `;
-const Select = styled(_Select)`
+const FilterSelect = styled(_Select)`
   max-width: 15rem;
+`;
+const StateSelect = styled(_Select)`
+  border: solid 1px var(--color-lapis-lazuli);
+  color: var(--color-lapis-lazuli);
+  margin-right: 1rem;
+  width: 15rem;
 `;
 
 const Text = styled.p`
@@ -56,23 +64,13 @@ class AdminAnswersIndexPage extends React.Component {
       : "";
   }
 
-  get stateFilter() {
-    return this.$stateFilter !== undefined && this.$stateFilter !== null
-      ? this.$stateFilter.value
-      : "";
-  }
-
   constructor(props) {
     super(props);
-
-    this.state = {
-      checkedAnswers: []
-    };
 
     this.loadAnswers = debounce(this._loadAnswers.bind(this), 500);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.axios = customAxios();
 
     this.loadAnswers();
@@ -84,67 +82,22 @@ class AdminAnswersIndexPage extends React.Component {
     );
   }
 
-  async setCheckedAnswersStateTo(state) {
-    this.setState({ isLoading: true });
-
-    const answersIds = this.state.checkedAnswers.join(",");
-
-    switch (state) {
-      case ANSWER_STATE.TO_DO:
-        try {
-          const answersUri = `/answers?id=in.(${answersIds})`;
-          const answersData = {
-            generic_reference: null,
-            state: ANSWER_STATE.TO_DO,
-            user_id: null,
-            value: ""
-          };
-          const answersTagsUri = `/answers_tags?answer_id=in.(${answersIds})`;
-          // eslint-disable-next-line prettier/prettier
-          const answersReferencesUri =
-            `/answers_references?answer_id=in.(${answersIds})`;
-
-          await this.axios.delete(answersReferencesUri);
-          await this.axios.delete(answersTagsUri);
-          await this.axios.patch(answersUri, answersData);
-        } catch (err) {
-          console.warn(err);
-        }
-        break;
-
-      case ANSWER_STATE.DRAFT:
-        try {
-          const answersUri = `/answers?id=in.(${answersIds})`;
-          const answersData = {
-            state: ANSWER_STATE.DRAFT
-          };
-
-          await this.axios.patch(answersUri, answersData);
-        } catch (err) {
-          console.warn(err);
-        }
-        break;
-    }
-
-    await this.loadAnswers(this.props.state, 0);
-  }
-
-  async updateStateFilter() {
-    this.loadAnswers(this.stateFilter);
+  updateStateFilter() {
+    this.loadAnswers(this.$stateFilter.value);
   }
 
   checkAnswer(id) {
-    if (this.state.checkedAnswers.includes(id)) {
-      this.setState({
-        checkedAnswers: this.state.checkedAnswers.filter(_id => _id !== id)
-      });
+    this.props.dispatch(actions.answers.toggleCheck(this.props.checked, [id]));
+  }
 
-      return;
-    }
+  setCheckedAnswersState() {
+    const newState = this.$newStateSelect.value;
 
-    this.setState({
-      checkedAnswers: [...this.state.checkedAnswers, id]
-    });
+    this.props.dispatch(
+      actions.answers.setState(this.props.checked, newState, () =>
+        this.loadAnswers(this.props.state, 0)
+      )
+    );
   }
 
   editAnswer(id) {
@@ -171,7 +124,7 @@ class AdminAnswersIndexPage extends React.Component {
     return data.map(answer => (
       <AdminAnswer
         data={answer}
-        isChecked={this.state.checkedAnswers.includes(answer.id)}
+        isChecked={this.props.checked.includes(answer.id)}
         key={answer.id}
         onCheck={this.checkAnswer.bind(this)}
         onClick={this.editAnswer.bind(this)}
@@ -180,27 +133,27 @@ class AdminAnswersIndexPage extends React.Component {
   }
 
   render() {
-    const { isLoading, pageIndex, pageLength, state } = this.props;
+    const { checked, isLoading, pageIndex, pageLength, state } = this.props;
 
     return (
       <AdminMain hasBareContent>
         <Container flexDirection="column">
-          <Head alignItems="baseline" justifyContent="space-between">
+          <Top alignItems="baseline" justifyContent="space-between">
             <Title>Réponses</Title>
-            <Select
+            <FilterSelect
               defaultValue={state}
               disabled={isLoading}
               key={`stateFilter-${state}`}
               onChange={() => this.updateStateFilter()}
               ref={node => (this.$stateFilter = node)}
             >
-              {Object.keys(ANSWER_STATE_LABEL).map(state => (
+              {STATES.map(state => (
                 <option key={state} value={state}>
-                  {ANSWER_STATE_LABEL[state]}
+                  {capitalize(ANSWER_STATE_LABEL[state])}
                 </option>
               ))}
-            </Select>
-          </Head>
+            </FilterSelect>
+          </Top>
           <Flex alignItems="center" justifyContent="space-between">
             <FilterInput
               icon="search"
@@ -209,22 +162,22 @@ class AdminAnswersIndexPage extends React.Component {
               ref={node => (this.$queryFilter = node)}
             />
             <Flex>
-              <Button
-                disabled={isLoading || this.state.checkedAnswers.length === 0}
-                hasGroup
-                onClick={() =>
-                  this.setCheckedAnswersStateTo(ANSWER_STATE.TO_DO)
-                }
+              <StateSelect
+                defaultValue={state}
+                disabled={isLoading || checked.length === 0}
+                ref={node => (this.$newStateSelect = node)}
               >
-                Ré-initialiser
-              </Button>
+                {STATES.filter(_state => _state !== state).map(state => (
+                  <option key={state} value={state}>
+                    {capitalize(ANSWER_STATE_LABEL[state])}
+                  </option>
+                ))}
+              </StateSelect>
               <Button
-                disabled={isLoading || this.state.checkedAnswers.length === 0}
-                onClick={() =>
-                  this.setCheckedAnswersStateTo(ANSWER_STATE.DRAFT)
-                }
+                disabled={isLoading || checked.length === 0}
+                onClick={this.setCheckedAnswersState.bind(this)}
               >
-                Renvoyer en brouillon
+                Appliquer
               </Button>
             </Flex>
           </Flex>
@@ -250,7 +203,10 @@ class AdminAnswersIndexPage extends React.Component {
 }
 
 export default connect(
-  ({ answers: { data, error, isLoading, pageIndex, pageLength, state } }) => ({
+  ({
+    answers: { checked, data, error, isLoading, pageIndex, pageLength, state }
+  }) => ({
+    checked,
     data,
     error,
     isLoading,
