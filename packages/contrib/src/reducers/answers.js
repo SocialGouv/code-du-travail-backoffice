@@ -2,6 +2,7 @@ import { actionTypes } from "../actions/index";
 import { ANSWER_STATE } from "../constants";
 
 const initialState = {
+  checked: [],
   data: [],
   error: null,
   pageLength: 0,
@@ -25,6 +26,7 @@ export default (state = initialState, { payload, type }) => {
     case actionTypes.ANSWERS_LOAD_FAILURE:
     case actionTypes.ANSWERS_SET_GENERIC_REFERENCE_FAILURE:
     case actionTypes.ANSWERS_SET_STATE_FAILURE:
+    case actionTypes.ANSWERS_TOGGLE_CHECK_FAILURE:
       return {
         ...state,
         error: payload.message,
@@ -34,12 +36,19 @@ export default (state = initialState, { payload, type }) => {
     case actionTypes.ANSWERS_LOAD_SUCCESS:
       return {
         ...state,
+        checked: [],
         data: payload.data,
         error: null,
         pageLength: payload.pageLength,
         pageIndex: payload.pageIndex,
         isLoading: false,
         state: payload.state
+      };
+
+    case actionTypes.ANSWERS_TOGGLE_CHECK_SUCESS:
+      return {
+        ...state,
+        checked: payload.checked
       };
 
     default:

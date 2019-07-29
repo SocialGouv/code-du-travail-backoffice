@@ -45,11 +45,28 @@ Le site devrait être accessible à l'adresse http://localhost:3100.
 2 utilisateurs ont été générés par défaut pendant l'installation :
 
 - Administrateur:
-    - Email: `administrator@example.com`
-    - Mot de passe: `Azerty123`
+  - Email: `administrator@example.com`
+  - Mot de passe: `Azerty123`
 - Contributeur:
-    - Email: `contributor@example.com`
-    - Mot de passe: `Azerty123`
+  - Email: `contributor@example.com`
+  - Mot de passe: `Azerty123`
+
+** Recommended VS Code settings **
+
+```json
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveTimeout": 2000,
+  "eslint.nodePath": "./packages/contrib/node_modules",
+  "eslint.workingDirectories": [
+    {
+      "directory": "./packages/contrib",
+      "changeProcessCWD": true
+    }
+  ]
+}
+```
 
 ### Démarrer le site localement
 
@@ -109,7 +126,7 @@ yarn ci:test:e2e
 > La deuxième méthode va effacer toutes les données de votre base de données
 > contenues dans votre volume Docker local (cf. `docker-compose.yml`).
 
-### Problèmes connus	
+### Problèmes connus
 
 #### Docker Compose
 
@@ -123,12 +140,11 @@ dpkg -r --force-depends golang-docker-credential-helpers
 
 #### Jest Watch
 
-Sous Ubuntu, si vous rencontrez l'erreur	`Error: ENOSPC: System limit for
-number of file watchers reached`, la [solution	actuelle][link-issue-2] consiste
-à augmenter le nombre de watchers du système de fichiers en exécutant :	
+Sous Ubuntu, si vous rencontrez l'erreur `Error: ENOSPC: System limit for number of file watchers reached`, la [solution actuelle][link-issue-2] consiste
+à augmenter le nombre de watchers du système de fichiers en exécutant :
 
 ```bash
-echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p	
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 ```
 
 ### License
@@ -141,7 +157,6 @@ Le code source de ce dépôt est distribué sous la
 [img-codacy]: https://img.shields.io/codacy/grade/4c5aebc238b94d3795371b49fa6041de.svg?style=flat-square
 [img-codecov]: https://img.shields.io/codecov/c/github/SocialGouv/code-du-travail-backoffice/dev.svg?style=flat-square
 [img-travis]: https://img.shields.io/travis/SocialGouv/code-du-travail-backoffice/dev.svg?style=flat-square
-
 [link-cdtn]: https://codedutravail.num.social.gouv.fr
 [link-codacy]: https://app.codacy.com/project/SocialGouv/code-du-travail-backoffice/dashboard
 [link-codecov]: https://codecov.io/gh/SocialGouv/code-du-travail-backoffice

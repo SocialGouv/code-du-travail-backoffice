@@ -1,3 +1,4 @@
+import * as R from "ramda";
 import React from "react";
 import { put, takeLatest } from "redux-saga/effects";
 
@@ -5,7 +6,8 @@ import { actionTypes, answers } from "../actions";
 import postgrest from "../libs/postgrest";
 import toast from "../libs/toast";
 
-import { ANSWER_STATE, USER_ROLE } from "../constants";
+import { ANSWER_STATE, ANSWER_STATE_LABEL, USER_ROLE } from "../constants";
+import { pluralize } from "../texts";
 
 /**
  * Cancel an answer draft by resettinng all its related data.
@@ -91,26 +93,58 @@ function* setGenericReference({ meta: { genericReference, ids, next } }) {
 
 function* setState({ meta: { ids, next, state } }) {
   try {
-    const data = { state };
+    let data;
 
-    yield postgrest()
-      .in("id", ids, true)
-      .patch("/answers", data);
+    switch (state) {
+      case ANSWER_STATE.TO_DO:
+        data = {
+          generic_reference: null,
+          prevalue: "",
+          state,
+          user_id: null,
+          value: ""
+        };
+        yield postgrest()
+          .in("answer_id", ids, true)
+          .delete("/answers_references");
+        yield postgrest()
+          .in("answer_id", ids, true)
+          .delete("/answers_tags");
+        yield postgrest()
+          .in("id", ids, true)
+          .patch("/answers", data);
 
-    if (state === ANSWER_STATE.PENDING_REVIEW) {
-      toast.success(
-        ids.length === 1
-          ? `La réponse ${ids[0]} a été envoyée en validation.`
-          : `Les réponses ${ids.join(", ")} ont été envoyées en validation.`
-      );
-    } else if (state === ANSWER_STATE.VALIDATED) {
-      toast.success(
-        ids.length === 1
-          ? `La réponse ${ids[0]} a été validée.`
-          : `Les réponses ${ids.join(", ")} ont été validées.`
-      );
-    } else {
-      throw new Error(`Ce changement d'état est impossible.`);
+        toast.success(
+          ids.length === 1
+            ? `La réponse ${ids[0]} a été ré-initialisée.`
+            : `Les réponses ${ids.join(", ")} ont été ré-initialisée.`
+        );
+
+        break;
+
+      case ANSWER_STATE.DRAFT:
+      case ANSWER_STATE.PENDING_REVIEW:
+      case ANSWER_STATE.UNDER_REVIEW:
+      case ANSWER_STATE.VALIDATED:
+        data = { state };
+        yield postgrest()
+          .in("id", ids, true)
+          .patch("/answers", data);
+
+        toast.success(
+          ids.length === 1
+            ? `La réponse ${ids[0]} est maintenant ${
+                ANSWER_STATE_LABEL[state]
+              }.`
+            : `Les réponses ${ids.join(", ")} sont maintenant ${pluralize(
+                ANSWER_STATE_LABEL[state]
+              )}.`
+        );
+
+        break;
+
+      default:
+        throw new Error(`Ce changement d'état est impossible.`);
     }
 
     next();
@@ -183,9 +217,24 @@ function* load({ meta: { pageIndex, query, states } }) {
   }
 }
 
+function* toggleCheck({ meta: { checked, ids } }) {
+  try {
+    const newChecked = R.symmetricDifference(checked, ids);
+
+    yield put({
+      type: actionTypes.ANSWERS_TOGGLE_CHECK_SUCESS,
+      payload: { checked: newChecked }
+    });
+  } catch (err) {
+    toast.error(err.message);
+    yield put(answers.toggleCheckFailure({ message: null }));
+  }
+}
+
 export default [
   takeLatest(actionTypes.ANSWERS_CANCEL, cancel),
   takeLatest(actionTypes.ANSWERS_LOAD, load),
   takeLatest(actionTypes.ANSWERS_SET_GENERIC_REFERENCE, setGenericReference),
-  takeLatest(actionTypes.ANSWERS_SET_STATE, setState)
+  takeLatest(actionTypes.ANSWERS_SET_STATE, setState),
+  takeLatest(actionTypes.ANSWERS_TOGGLE_CHECK, toggleCheck)
 ];
