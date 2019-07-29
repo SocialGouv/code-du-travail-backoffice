@@ -6,7 +6,7 @@ exports[`[Contrib] components/<Tags /> should match snapshot 1`] = `
     class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
   >
     <input
-      class="Input___Input-l1y0rz-1 bLtEdt"
+      class="Input___Input-l1y0rz-1 bpEpug"
       placeholder="Commencez à taper le nom du tag"
     />
     <div
@@ -92,7 +92,7 @@ exports[`[Contrib] components/<Tags /> without optional props should match snaps
     class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
   >
     <input
-      class="Input___Input-l1y0rz-1 bLtEdt"
+      class="Input___Input-l1y0rz-1 bpEpug"
       placeholder="Commencez à taper le nom de l'étiquette"
     />
     <div

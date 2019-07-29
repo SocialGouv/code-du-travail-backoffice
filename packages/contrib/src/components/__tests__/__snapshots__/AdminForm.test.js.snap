@@ -118,7 +118,7 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should matc
                 A Default Input
               </label>
               <input
-                class="Input___Input-l1y0rz-1 bLtEdt"
+                class="Input___Input-l1y0rz-1 bpEpug"
                 id="defaultInput"
                 name="defaultInput"
                 type="number"
@@ -287,7 +287,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                 A Default Input
               </label>
               <input
-                class="Input___Input-l1y0rz-1 bLtEdt"
+                class="Input___Input-l1y0rz-1 bpEpug"
                 id="defaultInput"
                 name="defaultInput"
                 type="text"
@@ -309,7 +309,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                 style="flex-grow: 1;"
               >
                 <input
-                  class="Input___Input-l1y0rz-1 bLtEdt"
+                  class="Input___Input-l1y0rz-1 bpEpug"
                   id="inputWithButton"
                   name="inputWithButton"
                   type="text"
@@ -353,7 +353,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                 A Default Select
               </label>
               <select
-                class="Select-gjmg2q-0 gdnbrp"
+                class="Select-gjmg2q-0 hiUFeV"
                 id="defaultSelect"
                 name="defaultSelect"
               >
@@ -386,7 +386,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                 class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
               >
                 <input
-                  class="Input___Input-l1y0rz-1 bLtEdt"
+                  class="Input___Input-l1y0rz-1 bpEpug"
                   placeholder="Commencez à taper le nom du tag"
                 />
                 <div
@@ -425,7 +425,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                 class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
               >
                 <input
-                  class="Input___Input-l1y0rz-1 bLtEdt"
+                  class="Input___Input-l1y0rz-1 bpEpug"
                   placeholder="Commencez à taper le nom de la collection"
                 />
                 <div
@@ -595,7 +595,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match 
                 A Default Input
               </label>
               <input
-                class="Input___Input-l1y0rz-1 bLtEdt"
+                class="Input___Input-l1y0rz-1 bpEpug"
                 id="defaultInput"
                 name="defaultInput"
                 type="number"
@@ -764,7 +764,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match 
                 A Default Input
               </label>
               <input
-                class="Input___Input-l1y0rz-1 bLtEdt"
+                class="Input___Input-l1y0rz-1 bpEpug"
                 id="defaultInput"
                 name="defaultInput"
                 type="number"
@@ -933,7 +933,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                 A Default Input
               </label>
               <input
-                class="Input___Input-l1y0rz-1 bLtEdt"
+                class="Input___Input-l1y0rz-1 bpEpug"
                 id="defaultInput"
                 name="defaultInput"
                 type="text"
@@ -955,7 +955,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                 style="flex-grow: 1;"
               >
                 <input
-                  class="Input___Input-l1y0rz-1 bLtEdt"
+                  class="Input___Input-l1y0rz-1 bpEpug"
                   id="inputWithButton"
                   name="inputWithButton"
                   type="text"
@@ -999,7 +999,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                 A Default Select
               </label>
               <select
-                class="Select-gjmg2q-0 gdnbrp"
+                class="Select-gjmg2q-0 hiUFeV"
                 id="defaultSelect"
                 name="defaultSelect"
               >
@@ -1031,7 +1031,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                 class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
               >
                 <input
-                  class="Input___Input-l1y0rz-1 bLtEdt"
+                  class="Input___Input-l1y0rz-1 bpEpug"
                   placeholder="Commencez à taper le nom du tag"
                 />
                 <div
@@ -1085,7 +1085,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                 class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
               >
                 <input
-                  class="Input___Input-l1y0rz-1 bLtEdt"
+                  class="Input___Input-l1y0rz-1 bpEpug"
                   placeholder="Commencez à taper le nom de la collection"
                 />
                 <div
