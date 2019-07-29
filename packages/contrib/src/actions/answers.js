@@ -15,6 +15,21 @@ export const cancelFailure = error => ({
   }
 });
 
+export const toggleCheck = (checked, ids) => ({
+  type: actionTypes.ANSWERS_TOGGLE_CHECK,
+  meta: {
+    checked,
+    ids
+  }
+});
+export const toggleCheckFailure = error => ({
+  type: actionTypes.ANSWERS_TOGGLE_CHECK_FAILURE,
+  error: true,
+  payload: {
+    message: error.message
+  }
+});
+
 export const load = (states, pageIndex, query) => ({
   type: actionTypes.ANSWERS_LOAD,
   meta: {
