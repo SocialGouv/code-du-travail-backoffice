@@ -17,7 +17,7 @@ services:
 
   # https://postgrest.org/en/stable/install.html#containerized-postgrest-and-db-with-docker-compose
   api:
-    image: postgrest/postgrest
+    image: postgrest/postgrest:v6.0.1-53b606e
     ports:
       - ${API_PORT}:3000
     environment:
