@@ -75,8 +75,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Checked draft) should match snapshot 
           class="AdminAnswer__ContentExtract-sc-1257a91-6 dyxMzJ"
         >
           Il m'est arrivé de sentir que tout allait bien pour moi, que&lt;br&gt;
-            tout le monde était gai
-          …
+            tout le monde était…
         </div>
       </div>
     </div>
@@ -251,8 +250,119 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Draft) should match snapshot 1`] = `
           class="AdminAnswer__ContentExtract-sc-1257a91-6 dyxMzJ"
         >
           Il m'est arrivé de sentir que tout allait bien pour moi, que&lt;br&gt;
-            tout le monde était gai
-          …
+            tout le monde était…
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`[Contrib] blocks/<AdminAnswer /> (Pending Review) should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
+  >
+    <div
+      class="sc-bdVaJa sc-bwzfXH eTLtBf"
+      width="1"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Top-sc-1257a91-1 dgddaa"
+      >
+        <span
+          class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
+        >
+          en attente de validation
+        </span>
+        <span
+          class="AdminAnswer__TopAuthor-sc-1257a91-3 ecauMH"
+        >
+          Proposé par : A User Name, il y a 2 heures
+        </span>
+      </div>
+      <div
+        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
+      >
+        <div
+          class="sc-bdVaJa sc-bwzfXH dntGME"
+        >
+          <div
+            class="Idcc__Container-owzimc-0 fWXTkt"
+            currentitem="false"
+            data-tip="An Agreement Name"
+          >
+            CCN: 
+            1234
+            <div
+              class="__react_component_tooltip place-top type-dark "
+              data-id="tooltip"
+            />
+          </div>
+          <div
+            class="AdminAnswer__ContentQuestion-sc-1257a91-5 bTdchR"
+          >
+            12) A Question Value
+          </div>
+        </div>
+        <div
+          class="AdminAnswer__ContentExtract-sc-1257a91-6 dyxMzJ"
+        >
+          Il m'est arrivé de sentir que tout allait bien pour moi, que&lt;br&gt;
+            tout le monde était…
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`[Contrib] blocks/<AdminAnswer /> (To Do) should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
+  >
+    <div
+      class="sc-bdVaJa sc-bwzfXH eTLtBf"
+      width="1"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Top-sc-1257a91-1 dgddaa"
+      >
+        <span
+          class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
+        >
+          à rédiger
+        </span>
+        <span
+          class="AdminAnswer__TopAuthor-sc-1257a91-3 ecauMH"
+        >
+          Proposé par : A User Name, il y a 2 heures
+        </span>
+      </div>
+      <div
+        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
+      >
+        <div
+          class="sc-bdVaJa sc-bwzfXH dntGME"
+        >
+          <div
+            class="Idcc__Container-owzimc-0 fWXTkt"
+            currentitem="false"
+            data-tip="An Agreement Name"
+          >
+            CCN: 
+            1234
+            <div
+              class="__react_component_tooltip place-top type-dark "
+              data-id="tooltip"
+            />
+          </div>
+          <div
+            class="AdminAnswer__ContentQuestion-sc-1257a91-5 bTdchR"
+          >
+            12) A Question Value
+          </div>
         </div>
       </div>
     </div>
@@ -335,8 +445,125 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Unchecked draft) should match snapsho
           class="AdminAnswer__ContentExtract-sc-1257a91-6 dyxMzJ"
         >
           Il m'est arrivé de sentir que tout allait bien pour moi, que&lt;br&gt;
-            tout le monde était gai
-          …
+            tout le monde était…
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`[Contrib] blocks/<AdminAnswer /> (Under Review) should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
+  >
+    <div
+      class="sc-bdVaJa sc-bwzfXH eTLtBf"
+      width="1"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Top-sc-1257a91-1 dgddaa"
+      >
+        <span
+          class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
+        >
+          en cours de validation
+        </span>
+        <span
+          class="AdminAnswer__TopAuthor-sc-1257a91-3 ecauMH"
+        >
+          Proposé par : A User Name, il y a 2 heures
+        </span>
+      </div>
+      <div
+        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
+      >
+        <div
+          class="sc-bdVaJa sc-bwzfXH dntGME"
+        >
+          <div
+            class="Idcc__Container-owzimc-0 fWXTkt"
+            currentitem="false"
+            data-tip="An Agreement Name"
+          >
+            CCN: 
+            1234
+            <div
+              class="__react_component_tooltip place-top type-dark "
+              data-id="tooltip"
+            />
+          </div>
+          <div
+            class="AdminAnswer__ContentQuestion-sc-1257a91-5 bTdchR"
+          >
+            12) A Question Value
+          </div>
+        </div>
+        <div
+          class="AdminAnswer__ContentExtract-sc-1257a91-6 dyxMzJ"
+        >
+          Il m'est arrivé de sentir que tout allait bien pour moi, que&lt;br&gt;
+            tout le monde était…
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`[Contrib] blocks/<AdminAnswer /> (Validated) should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
+  >
+    <div
+      class="sc-bdVaJa sc-bwzfXH eTLtBf"
+      width="1"
+    >
+      <div
+        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Top-sc-1257a91-1 dgddaa"
+      >
+        <span
+          class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
+        >
+          validée
+        </span>
+        <span
+          class="AdminAnswer__TopAuthor-sc-1257a91-3 ecauMH"
+        >
+          Proposé par : A User Name, il y a 2 heures
+        </span>
+      </div>
+      <div
+        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
+      >
+        <div
+          class="sc-bdVaJa sc-bwzfXH dntGME"
+        >
+          <div
+            class="Idcc__Container-owzimc-0 fWXTkt"
+            currentitem="false"
+            data-tip="An Agreement Name"
+          >
+            CCN: 
+            1234
+            <div
+              class="__react_component_tooltip place-top type-dark "
+              data-id="tooltip"
+            />
+          </div>
+          <div
+            class="AdminAnswer__ContentQuestion-sc-1257a91-5 bTdchR"
+          >
+            12) A Question Value
+          </div>
+        </div>
+        <div
+          class="AdminAnswer__ContentExtract-sc-1257a91-6 dyxMzJ"
+        >
+          Il m'est arrivé de sentir que tout allait bien pour moi, que&lt;br&gt;
+            tout le monde était…
         </div>
       </div>
     </div>

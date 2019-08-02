@@ -20,6 +20,10 @@ const PROPS = {
     prevalue: `Il m'est arrivé de sentir que tout allait bien pour moi, que<br>
             tout le monde était gai, et aussitôt l'idée me traversait<br>
             l'esprit qu'il ne se passerait plus rien et que tout était<br>
+            absurde`,
+    value: `Il m'est arrivé de sentir que tout allait bien pour moi, que<br>
+            tout le monde était gai, et aussitôt l'idée me traversait<br>
+            l'esprit qu'il ne se passerait plus rien et que tout était<br>
             absurde.`,
     agreement_idcc: "1234",
     agreement_name: "An Agreement Name",
@@ -29,7 +33,8 @@ const PROPS = {
       name: "A User Name"
     }
   },
-  onCheck: jest.fn()
+  onCheck: jest.fn(),
+  onClick: jest.fn()
 };
 
 describe("[Contrib] blocks/<AdminAnswer /> (Draft)", () => {
@@ -44,6 +49,16 @@ describe("[Contrib] blocks/<AdminAnswer /> (Draft)", () => {
     fireEvent.click(λ.getAllByRole("checkbox")[0]);
 
     expect(props.onCheck).toHaveBeenCalledWith(props.data.id);
+  });
+
+  it("should have called onClick() with the expected param", () => {
+    fireEvent.click(
+      λ.getAllByText(
+        `${props.data.question_index}) ${props.data.question_value}`
+      )[0]
+    );
+
+    expect(props.onClick).toHaveBeenCalledWith(props.data.id);
   });
 });
 
@@ -106,5 +121,65 @@ describe("[Contrib] blocks/<AdminAnswer /> (Unchecked draft)", () => {
     fireEvent.click(λ.getAllByRole("checkbox")[0]);
 
     expect(props.onCheck).toHaveBeenCalledWith(props.data.id);
+  });
+});
+
+describe("[Contrib] blocks/<AdminAnswer /> (To Do)", () => {
+  const props = {
+    ...PROPS,
+    data: {
+      ...PROPS.data,
+      state: ANSWER_STATE.TO_DO
+    }
+  };
+  const λ = render(<AdminAnswer {...props} />);
+
+  it("should match snapshot", () => {
+    expect(λ.container).toMatchSnapshot();
+  });
+});
+
+describe("[Contrib] blocks/<AdminAnswer /> (Pending Review)", () => {
+  const props = {
+    ...PROPS,
+    data: {
+      ...PROPS.data,
+      state: ANSWER_STATE.PENDING_REVIEW
+    }
+  };
+  const λ = render(<AdminAnswer {...props} />);
+
+  it("should match snapshot", () => {
+    expect(λ.container).toMatchSnapshot();
+  });
+});
+
+describe("[Contrib] blocks/<AdminAnswer /> (Under Review)", () => {
+  const props = {
+    ...PROPS,
+    data: {
+      ...PROPS.data,
+      state: ANSWER_STATE.UNDER_REVIEW
+    }
+  };
+  const λ = render(<AdminAnswer {...props} />);
+
+  it("should match snapshot", () => {
+    expect(λ.container).toMatchSnapshot();
+  });
+});
+
+describe("[Contrib] blocks/<AdminAnswer /> (Validated)", () => {
+  const props = {
+    ...PROPS,
+    data: {
+      ...PROPS.data,
+      state: ANSWER_STATE.VALIDATED
+    }
+  };
+  const λ = render(<AdminAnswer {...props} />);
+
+  it("should match snapshot", () => {
+    expect(λ.container).toMatchSnapshot();
   });
 });

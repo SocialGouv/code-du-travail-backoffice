@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import Idcc from "../../elements/Idcc";
 import Checkbox from "../../elements/Checkbox";
+import excerpt from "../../helpers/excerpt";
 import customMoment from "../../libs/customMoment";
 
 const Container = styled(Flex)`
@@ -50,7 +51,11 @@ import { ANSWER_STATE, ANSWER_STATE_LABEL } from "../../constants";
 
 export default ({ data, isChecked, onCheck, onClick }) => {
   const isTodo = data.state === ANSWER_STATE.TO_DO;
-  const value = data.state === ANSWER_STATE.DRAFT ? data.prevalue : data.value;
+  const value = [ANSWER_STATE.DRAFT, ANSWER_STATE.PENDING_REVIEW].includes(
+    data.state
+  )
+    ? data.prevalue
+    : data.value;
 
   return (
     <Container>
@@ -79,7 +84,7 @@ export default ({ data, isChecked, onCheck, onClick }) => {
             </ContentQuestion>
           </Flex>
           {!isTodo && data.generic_reference === null && (
-            <ContentExtract>{value.substr(0, 100)}…</ContentExtract>
+            <ContentExtract>{excerpt(value)}</ContentExtract>
           )}
           {!isTodo && data.generic_reference === "labor_code" && (
             <ContentExtractRed>Renvoyé au Code du travail.</ContentExtractRed>
