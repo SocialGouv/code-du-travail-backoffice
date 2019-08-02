@@ -119,9 +119,8 @@ class AdminAnwsersEditPage extends React.Component {
     this.axios = customAxios();
 
     try {
-      // eslint-disable-next-line prettier/prettier
-      const answersSelect =
-        `select=*,agreement(idcc,name),question(index,value),user(name)`;
+      /* eslint-disable-next-line max-len */
+      const answersSelect = `select=*,agreement(idcc,name),question(index,value),user(name)`;
       const answersWhere = `id=eq.${this.props.id}`;
       const answersUri = `/answers?${answersSelect}&${answersWhere}`;
       const { data: answers } = await this.axios.get(answersUri);
@@ -219,9 +218,8 @@ class AdminAnwsersEditPage extends React.Component {
     try {
       const referencesSelect = `select=*`;
       const referencesWhere = `answer_id=eq.${this.props.id}`;
-      // eslint-disable-next-line prettier/prettier
-      const referencesUri =
-        `/answers_references?${referencesSelect}&${referencesWhere}`;
+      /* eslint-disable-next-line max-len */
+      const referencesUri = `/answers_references?${referencesSelect}&${referencesWhere}`;
       const { data: references } = await this.axios.get(referencesUri);
 
       this.setState({
@@ -559,7 +557,7 @@ class AdminAnwsersEditPage extends React.Component {
                   <Flex flexWrap="wrap">{this.getReferences()}</Flex>
                   <FormHiddenSubmit type="submit" />
                 </Form>
-                <Hr />
+                {/* <Hr />
 
                 <Subtitle isFirst>Étiquettes</Subtitle>
                 <Flex flexDirection="column">
@@ -585,7 +583,7 @@ class AdminAnwsersEditPage extends React.Component {
                   <Flex flexWrap="wrap">
                     {this.getTags("distinctive_identity")}
                   </Flex>
-                </Flex>
+                </Flex> */}
               </Flex>
             )}
           </LeftContainer>
