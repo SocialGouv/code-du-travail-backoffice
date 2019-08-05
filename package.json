@@ -12,7 +12,7 @@
     "db:migrate:make": "node ./scripts/db/generateMigration.js",
     "db:seed": "knex seed:run",
     "dev": "lerna run dev --parallel",
-    "setup": "lerna bootstrap && node ./scripts/setup",
+    "setup": "node ./scripts/setup",
     "start": "lerna run start --parallel",
     "start:prod": "NODE_ENV=production ./scripts/prod/start.sh",
     "test": "lerna run test",

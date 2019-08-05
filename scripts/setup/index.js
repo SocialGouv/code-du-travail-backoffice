@@ -9,7 +9,7 @@ const runDockerCompose = require("./runDockerCompose");
 
 const ROOT = `${__dirname}/../..`;
 const envPath = `${ROOT}/.env`;
-const sampleEnvPath = `${ROOT}/.env.sample`;
+const sampleEnvPath = `${ROOT}/.env.example`;
 
 const readFileP = promisify(fs.readFile);
 const writeFileP = promisify(fs.writeFile);
@@ -37,7 +37,7 @@ async function install() {
     spinner.succeed(`Local .env file generated.`);
   }
 
-  if (process.argv[2] === "--env-only") return
+  if (process.argv[2] === "--env-only") return;
 
   // Start Docker Compose
   spinner.start(`Starting a new "db" container...`);

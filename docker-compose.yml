@@ -12,8 +12,8 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
-     - postgre-data:/var/lib/postgresql/data
-     - ./backups:/backups
+      - postgre-data:/var/lib/postgresql/data
+      - ./backups:/backups
 
   # https://postgrest.org/en/stable/install.html#containerized-postgrest-and-db-with-docker-compose
   api:
@@ -41,33 +41,6 @@ services:
       WEB_PORT: ${WEB_PORT}
     depends_on:
       - api
-
-  test:
-    build:
-      context: .
-      dockerfile: test.Dockerfile
-    image: igabriele/code-du-travail-backoffice:test-latest
-    links:
-      - docker-dind
-    environment:
-      CONFIG_ONLY: ${CONFIG_ONLY}
-      DB_URI: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
-      DOCKER_HOST: tcp://docker-dind:2375
-      NODE_ENV: ${NODE_ENV}
-      PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
-      POSTGRES_DB: ${POSTGRES_DB}
-      WEB_URI: ${WEB_URI}
-    depends_on:
-      - web
-
-  # Required to enable docker-in-docker whithin "test" container:
-  docker-dind:
-    image: docker:dind
-    privileged: true
-    expose:
-      - 2375
-    logging:
-      driver: none
 
 volumes:
   postgre-data:
