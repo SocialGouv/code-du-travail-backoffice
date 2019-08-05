@@ -302,7 +302,7 @@ export default class AdminForm extends React.Component {
             id={field.name}
             name={field.name}
             onChange={this.updateFormData}
-            rows="3"
+            rows="20"
           />
         );
     }
