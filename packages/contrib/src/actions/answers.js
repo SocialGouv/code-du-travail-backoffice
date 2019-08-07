@@ -30,9 +30,10 @@ export const toggleCheckFailure = error => ({
   }
 });
 
-export const load = (states, pageIndex, query) => ({
+export const load = (states, pageIndex, query, isGeneric) => ({
   type: actionTypes.ANSWERS_LOAD,
   meta: {
+    isGeneric,
     query,
     pageIndex,
     states

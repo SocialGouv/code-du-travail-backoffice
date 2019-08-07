@@ -57,7 +57,7 @@ const HelpText = styled(Text)`
   font-size: 0.875rem;
 `;
 
-class AdminAnswersIndexPage extends React.Component {
+export class AdminAnswersIndexPage extends React.Component {
   get queryFilter() {
     return this.$queryFilter !== undefined && this.$queryFilter !== null
       ? this.$queryFilter.value
@@ -67,6 +67,7 @@ class AdminAnswersIndexPage extends React.Component {
   constructor(props) {
     super(props);
 
+    this.isGeneric = Boolean(props.isGeneric);
     this.loadAnswers = debounce(this._loadAnswers.bind(this), 500);
   }
 
@@ -76,9 +77,9 @@ class AdminAnswersIndexPage extends React.Component {
     this.loadAnswers();
   }
 
-  _loadAnswers(state = this.props.state, pageIndex = 0) {
+  _loadAnswers(state = this.props.answers.state, pageIndex = 0) {
     this.props.dispatch(
-      actions.answers.load([state], pageIndex, this.queryFilter)
+      actions.answers.load([state], pageIndex, this.queryFilter, this.isGeneric)
     );
   }
 
@@ -87,31 +88,36 @@ class AdminAnswersIndexPage extends React.Component {
   }
 
   checkAnswer(id) {
-    this.props.dispatch(actions.answers.toggleCheck(this.props.checked, [id]));
+    const { checked } = this.props.answers;
+
+    this.props.dispatch(actions.answers.toggleCheck(checked, [id]));
   }
 
   setCheckedAnswersState() {
+    const { checked, state } = this.props.answers;
     const newState = this.$newStateSelect.value;
 
     this.props.dispatch(
-      actions.answers.setState(this.props.checked, newState, () =>
-        this.loadAnswers(this.props.state, 0)
+      actions.answers.setState(checked, newState, () =>
+        this.loadAnswers(state, 0)
       )
     );
   }
 
   editAnswer(id) {
+    const path = this.isGeneric ? "generic-answers" : "answers";
+
     if (NODE_ENV !== "development") {
-      window.open(`/admin/answers/${id}`, "_blank");
+      window.open(`/admin/${path}/${id}`, "_blank");
 
       return;
     }
 
-    Router.push(`/admin/answers/${id}`);
+    Router.push(`/admin/${path}/${id}`);
   }
 
   getAnswersList() {
-    const { data, state } = this.props;
+    const { checked, data, state } = this.props.answers;
 
     if (data.length === 0) {
       if (this.queryFilter.length !== 0) {
@@ -124,7 +130,7 @@ class AdminAnswersIndexPage extends React.Component {
     return data.map(answer => (
       <AdminAnswer
         data={answer}
-        isChecked={this.props.checked.includes(answer.id)}
+        isChecked={checked.includes(answer.id)}
         key={answer.id}
         onCheck={this.checkAnswer.bind(this)}
         onClick={this.editAnswer.bind(this)}
@@ -133,13 +139,19 @@ class AdminAnswersIndexPage extends React.Component {
   }
 
   render() {
-    const { checked, isLoading, pageIndex, pageLength, state } = this.props;
+    const {
+      checked,
+      isLoading,
+      pageIndex,
+      pageLength,
+      state
+    } = this.props.answers;
 
     return (
       <AdminMain hasBareContent>
         <Container flexDirection="column">
           <Top alignItems="baseline" justifyContent="space-between">
-            <Title>Réponses</Title>
+            <Title>{`Réponses${this.isGeneric ? " génériques" : ""}`}</Title>
             <FilterSelect
               defaultValue={state}
               disabled={isLoading}
@@ -202,16 +214,6 @@ class AdminAnswersIndexPage extends React.Component {
   }
 }
 
-export default connect(
-  ({
-    answers: { checked, data, error, isLoading, pageIndex, pageLength, state }
-  }) => ({
-    checked,
-    data,
-    error,
-    isLoading,
-    pageIndex,
-    pageLength,
-    state
-  })
-)(AdminAnswersIndexPage);
+export default connect(({ answers }) => ({
+  answers
+}))(AdminAnswersIndexPage);

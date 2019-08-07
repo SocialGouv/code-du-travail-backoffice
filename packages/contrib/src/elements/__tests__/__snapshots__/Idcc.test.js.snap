@@ -4,8 +4,10 @@ exports[`[Contrib] elements/<Idcc /> should match snapshot 1`] = `
 <div>
   <div
     class="Idcc__Container-owzimc-0 fWXTkt"
+    currentitem="false"
+    data-tip="Code du travail"
   >
-    CCN: 
+    CDT
     <div
       class="__react_component_tooltip place-top type-dark "
       data-id="tooltip"

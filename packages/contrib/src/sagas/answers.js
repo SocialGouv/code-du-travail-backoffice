@@ -154,7 +154,7 @@ function* setState({ meta: { ids, next, state } }) {
   }
 }
 
-function* load({ meta: { pageIndex, query, states } }) {
+function* load({ meta: { isGeneric, pageIndex, query, states } }) {
   try {
     const {
       payload: { id: userId, role: userRole }
@@ -165,15 +165,20 @@ function* load({ meta: { pageIndex, query, states } }) {
     let request = postgrest()
       .page(pageIndex)
       .in("state", states)
-      .orderBy("question_index")
-      .orderBy("agreement_idcc");
+      .orderBy("question_index");
 
-    if (userRole === USER_ROLE.ADMINISTRATOR) {
+    if (!isGeneric) {
+      request = request.orderBy("agreement_idcc");
+    }
+
+    if (userRole === USER_ROLE.ADMINISTRATOR && !isGeneric) {
       request = request.select("*").select("user(name)");
     }
 
     if (userRole === USER_ROLE.CONTRIBUTOR) {
-      request = request.in("agreement_id", me.payload.agreements, true);
+      if (!isGeneric) {
+        request = request.in("agreement_id", me.payload.agreements, true);
+      }
 
       if (!states.includes(ANSWER_STATE.TO_DO)) {
         request = request.eq("user_id", userId);
@@ -181,18 +186,27 @@ function* load({ meta: { pageIndex, query, states } }) {
     }
 
     if (query.length > 0) {
-      request = request.or
-        .ilike("agreement_name", query)
-        .ilike("question_value", query);
+      if (isGeneric) {
+        request = request.or.ilike("question_value", query);
+      } else {
+        request = request.or
+          .ilike("agreement_name", query)
+          .ilike("question_value", query);
+      }
 
       if (!isNaN(query)) {
-        request = request.or
-          .eq("agreement_idcc", query.padStart(4, "0"), true)
-          .eq("question_index", Number(query));
+        if (isGeneric) {
+          request = request.or.eq("question_index", Number(query));
+        } else {
+          request = request.or
+            .eq("agreement_idcc", query.padStart(4, "0"), true)
+            .eq("question_index", Number(query));
+        }
       }
     }
 
-    const { data, pageLength } = yield request.get("/full_answers", true);
+    const uri = isGeneric ? "/generic_answers" : "/full_answers";
+    const { data, pageLength } = yield request.get(uri, true);
 
     yield put(answers.loadSuccess(data, pageIndex, pageLength, states[0]));
   } catch (err) {
