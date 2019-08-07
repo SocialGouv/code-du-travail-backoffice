@@ -17,8 +17,7 @@ exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot 1`] = `
           currentitem="false"
           data-tip="A Labor Agreement Name"
         >
-          CCN: 
-          1234
+          IDCC: 1234
           <div
             class="__react_component_tooltip place-top type-dark "
             data-id="tooltip"
@@ -67,8 +66,7 @@ exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot diff with a L
           currentitem="false"
           data-tip="A Labor Agreement Name"
         >
-          CCN: 
-          1234
+          IDCC: 1234
           <div
             class="__react_component_tooltip place-top type-dark "
             data-id="tooltip"
@@ -116,8 +114,7 @@ exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot diff with a N
           currentitem="false"
           data-tip="A Labor Agreement Name"
         >
-          CCN: 
-          1234
+          IDCC: 1234
           <div
             class="__react_component_tooltip place-top type-dark "
             data-id="tooltip"
@@ -165,8 +162,7 @@ exports[`[Contrib] blocks/<Answer /> (Todo) should match snapshot 1`] = `
           currentitem="false"
           data-tip="A Labor Agreement Name"
         >
-          CCN: 
-          1234
+          IDCC: 1234
           <div
             class="__react_component_tooltip place-top type-dark "
             data-id="tooltip"

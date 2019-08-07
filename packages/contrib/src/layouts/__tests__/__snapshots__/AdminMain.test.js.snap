@@ -72,6 +72,11 @@ exports[`[Contrib] layouts/<AdminMain /> should match snapshot 1`] = `
           <div
             class="AdminMenu__Link-t0dk93-2 kospmv"
           >
+            Réponses génériques
+          </div>
+          <div
+            class="AdminMenu__Link-t0dk93-2 kospmv"
+          >
             Unités
           </div>
           <div
@@ -119,7 +124,7 @@ exports[`[Contrib] layouts/<AdminMain /> should match snapshot diff with \`hasBa
       style=\\"height: 100vh;\\"
     >
       <div
-@@ -90,14 +90,10 @@
+@@ -95,14 +95,10 @@
               class=\\"AdminMenu__Link-t0dk93-2 kospmv\\"
             >
               Migrations
@@ -150,59 +155,66 @@ exports[`[Contrib] layouts/<AdminMain /> should match snapshot diff with \`isLoa
       style=\\"height: 100vh;\\"
     >
       <div
-@@ -30,74 +30,27 @@
-              <span
-                class=\\"Header__Subtitle-sc-7cr55z-4 kxPxIS\\"
-              >
-                Outil de contribution
+@@ -34,75 +34,23 @@
               </span>
--           </div>
--         </div>
             </div>
--       <div
+          </div>
+        </div>
+        <div
 -         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 iRsxhy\\"
--       >
--         <div
++         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 iaRbTA\\"
+        >
+          <div
 -           class=\\"sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ\\"
--         >
--           <div
++           class=\\"LoadingSpinner__Container-eu7nmw-0 dEMrTz\\"
+          >
+            <div
 -             class=\\"AdminMenu__Link-t0dk93-2 LnAQE\\"
 -           >
 -             Tableau de bord
+-           </div>
++             class=\\"LoadingSpinner__Spinner-eu7nmw-1 sHZX\\"
++             color=\\"#666666\\"
++           />
+            <div
+-             class=\\"AdminMenu__Link-t0dk93-2 kospmv\\"
+-           >
+-             Conventions
++             class=\\"LoadingSpinner__Spinner-eu7nmw-1 LoadingSpinner__SpinnerNext-eu7nmw-2 daPQQA\\"
++             color=\\"#666666\\"
++           />
           </div>
 -           <div
 -             class=\\"AdminMenu__Link-t0dk93-2 kospmv\\"
 -           >
--             Conventions
--           </div>
--           <div
--             class=\\"AdminMenu__Link-t0dk93-2 kospmv\\"
--           >
 -             Étiquettes
--           </div>
+        </div>
 -           <div
 -             class=\\"AdminMenu__Link-t0dk93-2 kospmv\\"
 -           >
 -             Questions
--           </div>
+      </div>
 -           <div
 -             class=\\"AdminMenu__Link-t0dk93-2 kospmv\\"
 -           >
 -             Réponses
-        </div>
-        <div
+    </div>
+-           <div
 -             class=\\"AdminMenu__Link-t0dk93-2 kospmv\\"
-+         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 iaRbTA\\"
-        >
+-           >
+-             Réponses génériques
+-           </div>
+-           <div
+-             class=\\"AdminMenu__Link-t0dk93-2 kospmv\\"
+-           >
 -             Unités
 -           </div>
-          <div
+-           <div
 -             class=\\"AdminMenu__Link-t0dk93-2 kospmv\\"
-+           class=\\"LoadingSpinner__Container-eu7nmw-0 dEMrTz\\"
-          >
+-           >
 -             Utilisateurs
 -           </div>
-            <div
+-           <div
 -             class=\\"AdminMenu__Link-t0dk93-2 kospmv\\"
 -           >
 -             Zones
@@ -218,20 +230,14 @@ exports[`[Contrib] layouts/<AdminMain /> should match snapshot diff with \`isLoa
 -             Migrations
 -           </div>
 -         </div>
-+             class=\\"LoadingSpinner__Spinner-eu7nmw-1 sHZX\\"
-+             color=\\"#666666\\"
-+           />
-            <div
+-         <div
 -           class=\\"AdminMain__Content-lizrru-0 dcXFX\\"
 -         >
 -           Some Content Text
-+             class=\\"LoadingSpinner__Spinner-eu7nmw-1 LoadingSpinner__SpinnerNext-eu7nmw-2 daPQQA\\"
-+             color=\\"#666666\\"
-+           />
-          </div>
-        </div>
-      </div>
-    </div>
+-         </div>
+-       </div>
+-     </div>
+-   </div>
 - </div>
 + </DocumentFragment>"
 `;
