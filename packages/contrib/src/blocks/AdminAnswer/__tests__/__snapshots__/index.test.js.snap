@@ -58,8 +58,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Checked draft) should match snapshot 
             currentitem="false"
             data-tip="An Agreement Name"
           >
-            CCN: 
-            1234
+            IDCC: 1234
             <div
               class="__react_component_tooltip place-top type-dark "
               data-id="tooltip"
@@ -117,8 +116,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Draft falling back to LC) should matc
             currentitem="false"
             data-tip="An Agreement Name"
           >
-            CCN: 
-            1234
+            IDCC: 1234
             <div
               class="__react_component_tooltip place-top type-dark "
               data-id="tooltip"
@@ -175,8 +173,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Draft falling back to NA) should matc
             currentitem="false"
             data-tip="An Agreement Name"
           >
-            CCN: 
-            1234
+            IDCC: 1234
             <div
               class="__react_component_tooltip place-top type-dark "
               data-id="tooltip"
@@ -233,8 +230,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Draft) should match snapshot 1`] = `
             currentitem="false"
             data-tip="An Agreement Name"
           >
-            CCN: 
-            1234
+            IDCC: 1234
             <div
               class="__react_component_tooltip place-top type-dark "
               data-id="tooltip"
@@ -292,8 +288,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Pending Review) should match snapshot
             currentitem="false"
             data-tip="An Agreement Name"
           >
-            CCN: 
-            1234
+            IDCC: 1234
             <div
               class="__react_component_tooltip place-top type-dark "
               data-id="tooltip"
@@ -351,8 +346,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (To Do) should match snapshot 1`] = `
             currentitem="false"
             data-tip="An Agreement Name"
           >
-            CCN: 
-            1234
+            IDCC: 1234
             <div
               class="__react_component_tooltip place-top type-dark "
               data-id="tooltip"
@@ -428,8 +422,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Unchecked draft) should match snapsho
             currentitem="false"
             data-tip="An Agreement Name"
           >
-            CCN: 
-            1234
+            IDCC: 1234
             <div
               class="__react_component_tooltip place-top type-dark "
               data-id="tooltip"
@@ -487,8 +480,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Under Review) should match snapshot 1
             currentitem="false"
             data-tip="An Agreement Name"
           >
-            CCN: 
-            1234
+            IDCC: 1234
             <div
               class="__react_component_tooltip place-top type-dark "
               data-id="tooltip"
@@ -546,8 +538,7 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Validated) should match snapshot 1`] 
             currentitem="false"
             data-tip="An Agreement Name"
           >
-            CCN: 
-            1234
+            IDCC: 1234
             <div
               class="__react_component_tooltip place-top type-dark "
               data-id="tooltip"

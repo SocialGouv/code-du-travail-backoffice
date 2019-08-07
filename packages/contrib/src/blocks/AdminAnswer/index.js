@@ -68,7 +68,7 @@ export default ({ data, isChecked, onCheck, onClick }) => {
       <Flex flexDirection="column" width={1}>
         <Top justifyContent="space-between">
           <TopState>{ANSWER_STATE_LABEL[data.state]}</TopState>
-          {data.user !== null && (
+          {data.user !== undefined && data.user !== null && (
             <TopAuthor>
               {`Proposé par : ${data.user.name}, ${customMoment(data.updated_at)
                 .tz("Europe/Paris")
