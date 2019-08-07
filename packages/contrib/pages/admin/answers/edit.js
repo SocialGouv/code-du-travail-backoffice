@@ -94,7 +94,7 @@ const Button = styled(_Button)`
   margin-bottom: ${({ isFirst }) => (Boolean(isFirst) ? "0.5rem" : 0)};
 `;
 
-class AdminAnwsersEditPage extends React.Component {
+export class AdminAnwsersEditPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -108,6 +108,7 @@ class AdminAnwsersEditPage extends React.Component {
       tags: []
     };
 
+    this.isGeneric = Boolean(props.isGeneric);
     this.updateAnswerValue = debounce(this._updateAnswerValue.bind(this), 500);
   }
 
@@ -119,8 +120,9 @@ class AdminAnwsersEditPage extends React.Component {
     this.axios = customAxios();
 
     try {
-      /* eslint-disable-next-line max-len */
-      const answersSelect = `select=*,agreement(idcc,name),question(index,value),user(name)`;
+      const answersSelect = this.isGeneric
+        ? `select=*,question(index,value),user(name)`
+        : `select=*,agreement(idcc,name),question(index,value),user(name)`;
       const answersWhere = `id=eq.${this.props.id}`;
       const answersUri = `/answers?${answersSelect}&${answersWhere}`;
       const { data: answers } = await this.axios.get(answersUri);
@@ -142,60 +144,62 @@ class AdminAnwsersEditPage extends React.Component {
   }
 
   componentDidUpdate() {
-    if (!this.state.isLoading) {
-      this.$commentsContainer.scrollTo(0, this.$commentsContainer.scrollHeight);
+    if (this.state.isLoading) return;
 
-      if (this.answerValueEditor === undefined) {
-        // We have to load SimpleMDE here because of the global `navigator`
-        // variable check done by the original library.
-        const SimpleMDE = require("simplemde");
+    this.$commentsContainer.scrollTo(0, this.$commentsContainer.scrollHeight);
 
-        const config = {
-          spellChecker: false,
-          status: false
-        };
+    if (this.answerValueEditor !== undefined) return;
 
-        if (this.answer.state === ANSWER_STATE.VALIDATED) {
-          this.answerValueEditor = new SimpleMDE({
-            ...config,
-            element: this.$answerPrevalue,
-            toolbar: ["preview"]
-          });
+    // We have to load SimpleMDE here because of the global `navigator`
+    // variable check done by the original library.
+    const SimpleMDE = require("simplemde");
 
-          return;
-        }
+    const config = {
+      spellChecker: false,
+      status: false
+    };
 
-        new SimpleMDE({
-          ...config,
-          element: this.$answerPrevalue,
-          toolbar: ["preview"]
-        });
+    if (this.answer.state === ANSWER_STATE.VALIDATED) {
+      this.answerValueEditor = new SimpleMDE({
+        ...config,
+        element: this.$answerPrevalue,
+        toolbar: ["preview"]
+      });
 
-        this.answerValueEditor = new SimpleMDE({
-          ...config,
-          element: this.$answerValue,
-          toolbar: [
-            "bold",
-            "italic",
-            "|",
-            "unordered-list",
-            "ordered-list",
-            "quote",
-            "|",
-            "preview",
-            "side-by-side",
-            "fullscreen",
-            "|",
-            "guide"
-          ]
-        });
-
-        this.answerValueEditor.codemirror.on(
-          "change",
-          this.updateAnswerValue.bind(this)
-        );
-      }
+      return;
     }
+
+    if (!this.isGeneric) {
+      new SimpleMDE({
+        ...config,
+        element: this.$answerPrevalue,
+        toolbar: ["preview"]
+      });
+    }
+
+    this.answerValueEditor = new SimpleMDE({
+      ...config,
+      element: this.$answerValue,
+      toolbar: [
+        "bold",
+        "italic",
+        "|",
+        "unordered-list",
+        "ordered-list",
+        "quote",
+        "|",
+        "preview",
+        "side-by-side",
+        "fullscreen",
+        "|",
+        "guide"
+      ]
+    });
+
+    this.answerValueEditor.codemirror.on(
+      "change",
+      this.updateAnswerValue.bind(this)
+    );
   }
 
   async fetchTags() {
@@ -481,10 +485,14 @@ class AdminAnwsersEditPage extends React.Component {
         <Container>
           <LeftContainer flexDirection="column" width={0.65}>
             <Flex alignItems="baseline">
-              <Idcc
-                code={this.answer.agreement.idcc}
-                name={this.answer.agreement.name}
-              />
+              {this.isGeneric ? (
+                <Idcc />
+              ) : (
+                <Idcc
+                  code={this.answer.agreement.idcc}
+                  name={this.answer.agreement.name}
+                />
+              )}
               <Title isFirst>{this.answer.question.value}</Title>
             </Flex>
             <Hr />
@@ -502,11 +510,20 @@ class AdminAnwsersEditPage extends React.Component {
 
             {this.answer.state !== ANSWER_STATE.VALIDATED && (
               <Flex flexDirection="column" width={1}>
-                <Subtitle isFirst>Réponse proposée</Subtitle>
-                <AnswerEditor defaultValue={this.answer.prevalue} disabled />
-                <Hr />
+                {!this.isGeneric && (
+                  <Flex flexDirection="column" width={1}>
+                    <Subtitle isFirst>Réponse proposée</Subtitle>
+                    <AnswerEditor
+                      defaultValue={this.answer.prevalue}
+                      disabled
+                    />
+                    <Hr />
+                  </Flex>
+                )}
 
-                <Subtitle isFirst>Réponse corrigée</Subtitle>
+                <Subtitle isFirst>
+                  {this.isGeneric ? "Réponse générique" : "Réponse corrigée"}
+                </Subtitle>
                 <AnswerEditor
                   defaultValue={this.answer.value}
                   onChange={this.updateAnswerValue}
