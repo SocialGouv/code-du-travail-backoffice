@@ -3,18 +3,17 @@
 exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 bBIrgk"
+    class="Main__Container-q4q6nx-0 kSNCLj css-1usr1wh"
     style="height: 100vh;"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 ipFTgV"
-      width="1"
+      class="Main__Body-q4q6nx-1 bSllml css-1gmfemw"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 cBdCZD"
+        class="Header__Container-sc-7cr55z-0 eHuDxq css-s3axrf"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB"
+          class="Header__Brand-sc-7cr55z-1 knuMJV css-zkfaav"
         >
           <img
             alt="Code du travail numérique"
@@ -23,7 +22,7 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should matc
             src="/static/images/marianne.svg"
           />
           <div
-            class="sc-bdVaJa sc-bwzfXH eVPJMi"
+            class="css-l3rx45"
           >
             <span
               class="Header__Title-sc-7cr55z-3 jGdlvq"
@@ -39,10 +38,10 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should matc
         </div>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 iRsxhy"
+        class="Main__Content-q4q6nx-2 iWRxVq css-1kw0tju"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"
+          class="AdminMenu__Container-t0dk93-0 bMnGdR css-l3rx45"
         >
           <div
             class="AdminMenu__Link-t0dk93-2 kospmv"
@@ -113,7 +112,7 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should matc
               Edit Item
             </h1>
             <div
-              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+              class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
             >
               <label
                 class="AdminForm__Label-scluvj-1 jCpDRz"
@@ -131,7 +130,7 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should matc
               />
             </div>
             <div
-              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+              class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
             >
               <label
                 class="AdminForm__Label-scluvj-1 jCpDRz"
@@ -141,23 +140,17 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should matc
                   class="AdminForm__Error-scluvj-2 cshRmY"
                 />
                 <div
-                  class="sc-bdVaJa sc-bwzfXH pjOvZ"
+                  class="css-4cffwv"
                 >
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 cSdDqP"
-                    color="var(--color-periwinkle)"
-                    font-size="inherit"
-                    font-weight="bold"
+                    class="Button-sc-1bpx84u-0 irZmho css-1rmi0ut"
                     title="An aria label for the cancel button"
                     type="button"
                   >
                     Annuler
                   </button>
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jPmCJs"
-                    color="var(--color-lapis-lazuli)"
-                    font-size="inherit"
-                    font-weight="bold"
+                    class="Button-sc-1bpx84u-0 lapHIA css-f6h8ex"
                     title="An aria label for the creation button"
                     type="submit"
                   >
@@ -177,18 +170,17 @@ exports[`[Contrib] components/<AdminForm /> (create / NO custom API) should matc
 exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 bBIrgk"
+    class="Main__Container-q4q6nx-0 kSNCLj css-1usr1wh"
     style="height: 100vh;"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 ipFTgV"
-      width="1"
+      class="Main__Body-q4q6nx-1 bSllml css-1gmfemw"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 cBdCZD"
+        class="Header__Container-sc-7cr55z-0 eHuDxq css-s3axrf"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB"
+          class="Header__Brand-sc-7cr55z-1 knuMJV css-zkfaav"
         >
           <img
             alt="Code du travail numérique"
@@ -197,7 +189,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
             src="/static/images/marianne.svg"
           />
           <div
-            class="sc-bdVaJa sc-bwzfXH eVPJMi"
+            class="css-l3rx45"
           >
             <span
               class="Header__Title-sc-7cr55z-3 jGdlvq"
@@ -213,10 +205,10 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
         </div>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 iRsxhy"
+        class="Main__Content-q4q6nx-2 iWRxVq css-1kw0tju"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"
+          class="AdminMenu__Container-t0dk93-0 bMnGdR css-l3rx45"
         >
           <div
             class="AdminMenu__Link-t0dk93-2 kospmv"
@@ -287,7 +279,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
               New Item
             </h1>
             <div
-              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+              class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
             >
               <label
                 class="AdminForm__Label-scluvj-1 jCpDRz"
@@ -305,7 +297,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
               />
             </div>
             <div
-              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+              class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
             >
               <label
                 class="AdminForm__Label-scluvj-1 jCpDRz"
@@ -315,7 +307,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                 An Input With Button
               </label>
               <div
-                class="sc-bdVaJa sc-bwzfXH pjOvZ"
+                class="css-4cffwv"
                 style="flex-grow: 1;"
               >
                 <input
@@ -326,10 +318,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                   value=""
                 />
                 <button
-                  class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 wNuyp"
-                  color="white"
-                  font-size="inherit"
-                  font-weight="bold"
+                  class="Button-sc-1bpx84u-0 eyWUJN css-vhv7r1"
                   title="An Input Button"
                   type="button"
                 >
@@ -353,7 +342,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
               </div>
             </div>
             <div
-              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+              class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
             >
               <label
                 class="AdminForm__Label-scluvj-1 jCpDRz"
@@ -383,7 +372,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
               </select>
             </div>
             <div
-              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+              class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
             >
               <label
                 class="AdminForm__Label-scluvj-1 jCpDRz"
@@ -393,19 +382,19 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                 A Default Tags
               </label>
               <div
-                class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
+                class="Tags__Container-sc-9wg2t-0 iDeUPd css-l3rx45"
               >
                 <input
                   class="Input___Input-l1y0rz-1 bpEpug"
                   placeholder="Commencez à taper le nom du tag"
                 />
                 <div
-                  class="sc-bdVaJa sc-bwzfXH Tags__SelectedTags-sc-9wg2t-1 gNdWxU"
+                  class="Tags__SelectedTags-sc-9wg2t-1 Fnqjz css-4cffwv"
                 />
               </div>
             </div>
             <div
-              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+              class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
             >
               <label
                 class="AdminForm__Label-scluvj-1 jCpDRz"
@@ -422,7 +411,7 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
               />
             </div>
             <div
-              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+              class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
             >
               <label
                 class="AdminForm__Label-scluvj-1 jCpDRz"
@@ -432,19 +421,19 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                 A Tags With Custom API Path
               </label>
               <div
-                class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
+                class="Tags__Container-sc-9wg2t-0 iDeUPd css-l3rx45"
               >
                 <input
                   class="Input___Input-l1y0rz-1 bpEpug"
                   placeholder="Commencez à taper le nom de la collection"
                 />
                 <div
-                  class="sc-bdVaJa sc-bwzfXH Tags__SelectedTags-sc-9wg2t-1 gNdWxU"
+                  class="Tags__SelectedTags-sc-9wg2t-1 Fnqjz css-4cffwv"
                 />
               </div>
             </div>
             <div
-              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+              class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
             >
               <label
                 class="AdminForm__Label-scluvj-1 jCpDRz"
@@ -454,23 +443,17 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
                   class="AdminForm__Error-scluvj-2 cshRmY"
                 />
                 <div
-                  class="sc-bdVaJa sc-bwzfXH pjOvZ"
+                  class="css-4cffwv"
                 >
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 cSdDqP"
-                    color="var(--color-periwinkle)"
-                    font-size="inherit"
-                    font-weight="bold"
+                    class="Button-sc-1bpx84u-0 irZmho css-1rmi0ut"
                     title="An aria label for the cancel button"
                     type="button"
                   >
                     Annuler
                   </button>
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jPmCJs"
-                    color="var(--color-lapis-lazuli)"
-                    font-size="inherit"
-                    font-weight="bold"
+                    class="Button-sc-1bpx84u-0 lapHIA css-f6h8ex"
                     title="An aria label for the create button"
                     type="submit"
                   >
@@ -490,18 +473,17 @@ exports[`[Contrib] components/<AdminForm /> (create) should match snapshot 1`] =
 exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 bBIrgk"
+    class="Main__Container-q4q6nx-0 kSNCLj css-1usr1wh"
     style="height: 100vh;"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 ipFTgV"
-      width="1"
+      class="Main__Body-q4q6nx-1 bSllml css-1gmfemw"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 cBdCZD"
+        class="Header__Container-sc-7cr55z-0 eHuDxq css-s3axrf"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB"
+          class="Header__Brand-sc-7cr55z-1 knuMJV css-zkfaav"
         >
           <img
             alt="Code du travail numérique"
@@ -510,7 +492,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match 
             src="/static/images/marianne.svg"
           />
           <div
-            class="sc-bdVaJa sc-bwzfXH eVPJMi"
+            class="css-l3rx45"
           >
             <span
               class="Header__Title-sc-7cr55z-3 jGdlvq"
@@ -526,10 +508,10 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match 
         </div>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 iRsxhy"
+        class="Main__Content-q4q6nx-2 iWRxVq css-1kw0tju"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"
+          class="AdminMenu__Container-t0dk93-0 bMnGdR css-l3rx45"
         >
           <div
             class="AdminMenu__Link-t0dk93-2 kospmv"
@@ -600,7 +582,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match 
               Edit Item
             </h1>
             <div
-              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+              class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
             >
               <label
                 class="AdminForm__Label-scluvj-1 jCpDRz"
@@ -618,7 +600,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match 
               />
             </div>
             <div
-              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+              class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
             >
               <label
                 class="AdminForm__Label-scluvj-1 jCpDRz"
@@ -628,23 +610,17 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match 
                   class="AdminForm__Error-scluvj-2 cshRmY"
                 />
                 <div
-                  class="sc-bdVaJa sc-bwzfXH pjOvZ"
+                  class="css-4cffwv"
                 >
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 cSdDqP"
-                    color="var(--color-periwinkle)"
-                    font-size="inherit"
-                    font-weight="bold"
+                    class="Button-sc-1bpx84u-0 irZmho css-1rmi0ut"
                     title="An aria label for the cancel button"
                     type="button"
                   >
                     Annuler
                   </button>
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jPmCJs"
-                    color="var(--color-lapis-lazuli)"
-                    font-size="inherit"
-                    font-weight="bold"
+                    class="Button-sc-1bpx84u-0 lapHIA css-f6h8ex"
                     title="An aria label for the edit button"
                     type="submit"
                   >
@@ -664,18 +640,17 @@ exports[`[Contrib] components/<AdminForm /> (edit / NO custom API) should match 
 exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 bBIrgk"
+    class="Main__Container-q4q6nx-0 kSNCLj css-1usr1wh"
     style="height: 100vh;"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 ipFTgV"
-      width="1"
+      class="Main__Body-q4q6nx-1 bSllml css-1gmfemw"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 cBdCZD"
+        class="Header__Container-sc-7cr55z-0 eHuDxq css-s3axrf"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB"
+          class="Header__Brand-sc-7cr55z-1 knuMJV css-zkfaav"
         >
           <img
             alt="Code du travail numérique"
@@ -684,7 +659,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match 
             src="/static/images/marianne.svg"
           />
           <div
-            class="sc-bdVaJa sc-bwzfXH eVPJMi"
+            class="css-l3rx45"
           >
             <span
               class="Header__Title-sc-7cr55z-3 jGdlvq"
@@ -700,10 +675,10 @@ exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match 
         </div>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 iRsxhy"
+        class="Main__Content-q4q6nx-2 iWRxVq css-1kw0tju"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"
+          class="AdminMenu__Container-t0dk93-0 bMnGdR css-l3rx45"
         >
           <div
             class="AdminMenu__Link-t0dk93-2 kospmv"
@@ -774,7 +749,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match 
               Edit Item
             </h1>
             <div
-              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+              class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
             >
               <label
                 class="AdminForm__Label-scluvj-1 jCpDRz"
@@ -792,7 +767,7 @@ exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match 
               />
             </div>
             <div
-              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+              class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
             >
               <label
                 class="AdminForm__Label-scluvj-1 jCpDRz"
@@ -802,23 +777,17 @@ exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match 
                   class="AdminForm__Error-scluvj-2 cshRmY"
                 />
                 <div
-                  class="sc-bdVaJa sc-bwzfXH pjOvZ"
+                  class="css-4cffwv"
                 >
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 cSdDqP"
-                    color="var(--color-periwinkle)"
-                    font-size="inherit"
-                    font-weight="bold"
+                    class="Button-sc-1bpx84u-0 irZmho css-1rmi0ut"
                     title="An aria label for the cancel button"
                     type="button"
                   >
                     Annuler
                   </button>
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jPmCJs"
-                    color="var(--color-lapis-lazuli)"
-                    font-size="inherit"
-                    font-weight="bold"
+                    class="Button-sc-1bpx84u-0 lapHIA css-f6h8ex"
                     title="An aria label for the edit button"
                     type="submit"
                   >
@@ -838,18 +807,17 @@ exports[`[Contrib] components/<AdminForm /> (edit / isApiFunction) should match 
 exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 bBIrgk"
+    class="Main__Container-q4q6nx-0 kSNCLj css-1usr1wh"
     style="height: 100vh;"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 ipFTgV"
-      width="1"
+      class="Main__Body-q4q6nx-1 bSllml css-1gmfemw"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 cBdCZD"
+        class="Header__Container-sc-7cr55z-0 eHuDxq css-s3axrf"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 ccbJhB"
+          class="Header__Brand-sc-7cr55z-1 knuMJV css-zkfaav"
         >
           <img
             alt="Code du travail numérique"
@@ -858,7 +826,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
             src="/static/images/marianne.svg"
           />
           <div
-            class="sc-bdVaJa sc-bwzfXH eVPJMi"
+            class="css-l3rx45"
           >
             <span
               class="Header__Title-sc-7cr55z-3 jGdlvq"
@@ -874,10 +842,10 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 iRsxhy"
+        class="Main__Content-q4q6nx-2 iWRxVq css-1kw0tju"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 dYccBZ"
+          class="AdminMenu__Container-t0dk93-0 bMnGdR css-l3rx45"
         >
           <div
             class="AdminMenu__Link-t0dk93-2 kospmv"
@@ -948,7 +916,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
               Edit Item
             </h1>
             <div
-              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+              class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
             >
               <label
                 class="AdminForm__Label-scluvj-1 jCpDRz"
@@ -966,7 +934,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
               />
             </div>
             <div
-              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+              class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
             >
               <label
                 class="AdminForm__Label-scluvj-1 jCpDRz"
@@ -976,7 +944,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                 An Input With Button
               </label>
               <div
-                class="sc-bdVaJa sc-bwzfXH pjOvZ"
+                class="css-4cffwv"
                 style="flex-grow: 1;"
               >
                 <input
@@ -987,10 +955,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                   value="the original input button value"
                 />
                 <button
-                  class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 wNuyp"
-                  color="white"
-                  font-size="inherit"
-                  font-weight="bold"
+                  class="Button-sc-1bpx84u-0 eyWUJN css-vhv7r1"
                   title="An Input Button"
                   type="button"
                 >
@@ -1014,7 +979,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
               </div>
             </div>
             <div
-              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+              class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
             >
               <label
                 class="AdminForm__Label-scluvj-1 jCpDRz"
@@ -1043,7 +1008,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
               </select>
             </div>
             <div
-              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+              class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
             >
               <label
                 class="AdminForm__Label-scluvj-1 jCpDRz"
@@ -1053,17 +1018,17 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                 A Default Tags
               </label>
               <div
-                class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
+                class="Tags__Container-sc-9wg2t-0 iDeUPd css-l3rx45"
               >
                 <input
                   class="Input___Input-l1y0rz-1 bpEpug"
                   placeholder="Commencez à taper le nom du tag"
                 />
                 <div
-                  class="sc-bdVaJa sc-bwzfXH Tags__SelectedTags-sc-9wg2t-1 gNdWxU"
+                  class="Tags__SelectedTags-sc-9wg2t-1 Fnqjz css-4cffwv"
                 >
                   <div
-                    class="sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb"
+                    class="Tag__Container-lc1n3o-0 VVSMg css-zkfaav"
                   >
                     <span
                       class="Tag__Text-lc1n3o-1 dtXAeC"
@@ -1080,7 +1045,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
               </div>
             </div>
             <div
-              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+              class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
             >
               <label
                 class="AdminForm__Label-scluvj-1 jCpDRz"
@@ -1097,7 +1062,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
               />
             </div>
             <div
-              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+              class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
             >
               <label
                 class="AdminForm__Label-scluvj-1 jCpDRz"
@@ -1107,17 +1072,17 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                 A Tags With Custom API Path
               </label>
               <div
-                class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
+                class="Tags__Container-sc-9wg2t-0 iDeUPd css-l3rx45"
               >
                 <input
                   class="Input___Input-l1y0rz-1 bpEpug"
                   placeholder="Commencez à taper le nom de la collection"
                 />
                 <div
-                  class="sc-bdVaJa sc-bwzfXH Tags__SelectedTags-sc-9wg2t-1 gNdWxU"
+                  class="Tags__SelectedTags-sc-9wg2t-1 Fnqjz css-4cffwv"
                 >
                   <div
-                    class="sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb"
+                    class="Tag__Container-lc1n3o-0 VVSMg css-zkfaav"
                   >
                     <span
                       class="Tag__Text-lc1n3o-1 dtXAeC"
@@ -1131,7 +1096,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                     />
                   </div>
                   <div
-                    class="sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb"
+                    class="Tag__Container-lc1n3o-0 VVSMg css-zkfaav"
                   >
                     <span
                       class="Tag__Text-lc1n3o-1 dtXAeC"
@@ -1148,7 +1113,7 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
               </div>
             </div>
             <div
-              class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 hxCooE"
+              class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
             >
               <label
                 class="AdminForm__Label-scluvj-1 jCpDRz"
@@ -1158,23 +1123,17 @@ exports[`[Contrib] components/<AdminForm /> (edit) should match snapshot 1`] = `
                   class="AdminForm__Error-scluvj-2 cshRmY"
                 />
                 <div
-                  class="sc-bdVaJa sc-bwzfXH pjOvZ"
+                  class="css-4cffwv"
                 >
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 cSdDqP"
-                    color="var(--color-periwinkle)"
-                    font-size="inherit"
-                    font-weight="bold"
+                    class="Button-sc-1bpx84u-0 irZmho css-1rmi0ut"
                     title="An aria label for the cancel button"
                     type="button"
                   >
                     Annuler
                   </button>
                   <button
-                    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jPmCJs"
-                    color="var(--color-lapis-lazuli)"
-                    font-size="inherit"
-                    font-weight="bold"
+                    class="Button-sc-1bpx84u-0 lapHIA css-f6h8ex"
                     title="An aria label for the edit button"
                     type="submit"
                   >

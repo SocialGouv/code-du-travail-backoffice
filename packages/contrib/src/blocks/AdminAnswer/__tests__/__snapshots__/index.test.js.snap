@@ -3,13 +3,10 @@
 exports[`[Contrib] blocks/<AdminAnswer /> (Checked draft) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
+    class="AdminAnswer__Container-sc-1257a91-0 cetWW css-4cffwv"
   >
     <button
-      class="sc-bdVaJa sc-EHOje Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 wNuyp"
-      color="white"
-      font-size="inherit"
-      font-weight="bold"
+      class="Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 eyWUJN css-vhv7r1"
       role="checkbox"
     >
       <svg
@@ -30,11 +27,10 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Checked draft) should match snapshot 
       </svg>
     </button>
     <div
-      class="sc-bdVaJa sc-bwzfXH eTLtBf"
-      width="1"
+      class="css-rxk9pl"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Top-sc-1257a91-1 dgddaa"
+        class="AdminAnswer__Top-sc-1257a91-1 lwJoG css-fbcqx2"
       >
         <span
           class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
@@ -48,10 +44,10 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Checked draft) should match snapshot 
         </span>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
+        class="AdminAnswer__Content-sc-1257a91-4 hHOjFH css-l3rx45"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH dntGME"
+          class="css-d6l97b"
         >
           <div
             class="Idcc__Container-owzimc-0 fWXTkt"
@@ -85,14 +81,13 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Checked draft) should match snapshot 
 exports[`[Contrib] blocks/<AdminAnswer /> (Draft falling back to LC) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
+    class="AdminAnswer__Container-sc-1257a91-0 cetWW css-4cffwv"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH eTLtBf"
-      width="1"
+      class="css-rxk9pl"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Top-sc-1257a91-1 dgddaa"
+        class="AdminAnswer__Top-sc-1257a91-1 lwJoG css-fbcqx2"
       >
         <span
           class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
@@ -106,10 +101,10 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Draft falling back to LC) should matc
         </span>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
+        class="AdminAnswer__Content-sc-1257a91-4 hHOjFH css-l3rx45"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH dntGME"
+          class="css-d6l97b"
         >
           <div
             class="Idcc__Container-owzimc-0 fWXTkt"
@@ -142,14 +137,13 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Draft falling back to LC) should matc
 exports[`[Contrib] blocks/<AdminAnswer /> (Draft falling back to NA) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
+    class="AdminAnswer__Container-sc-1257a91-0 cetWW css-4cffwv"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH eTLtBf"
-      width="1"
+      class="css-rxk9pl"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Top-sc-1257a91-1 dgddaa"
+        class="AdminAnswer__Top-sc-1257a91-1 lwJoG css-fbcqx2"
       >
         <span
           class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
@@ -163,10 +157,10 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Draft falling back to NA) should matc
         </span>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
+        class="AdminAnswer__Content-sc-1257a91-4 hHOjFH css-l3rx45"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH dntGME"
+          class="css-d6l97b"
         >
           <div
             class="Idcc__Container-owzimc-0 fWXTkt"
@@ -199,14 +193,13 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Draft falling back to NA) should matc
 exports[`[Contrib] blocks/<AdminAnswer /> (Draft) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
+    class="AdminAnswer__Container-sc-1257a91-0 cetWW css-4cffwv"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH eTLtBf"
-      width="1"
+      class="css-rxk9pl"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Top-sc-1257a91-1 dgddaa"
+        class="AdminAnswer__Top-sc-1257a91-1 lwJoG css-fbcqx2"
       >
         <span
           class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
@@ -220,10 +213,10 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Draft) should match snapshot 1`] = `
         </span>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
+        class="AdminAnswer__Content-sc-1257a91-4 hHOjFH css-l3rx45"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH dntGME"
+          class="css-d6l97b"
         >
           <div
             class="Idcc__Container-owzimc-0 fWXTkt"
@@ -257,14 +250,13 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Draft) should match snapshot 1`] = `
 exports[`[Contrib] blocks/<AdminAnswer /> (Pending Review) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
+    class="AdminAnswer__Container-sc-1257a91-0 cetWW css-4cffwv"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH eTLtBf"
-      width="1"
+      class="css-rxk9pl"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Top-sc-1257a91-1 dgddaa"
+        class="AdminAnswer__Top-sc-1257a91-1 lwJoG css-fbcqx2"
       >
         <span
           class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
@@ -278,10 +270,10 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Pending Review) should match snapshot
         </span>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
+        class="AdminAnswer__Content-sc-1257a91-4 hHOjFH css-l3rx45"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH dntGME"
+          class="css-d6l97b"
         >
           <div
             class="Idcc__Container-owzimc-0 fWXTkt"
@@ -315,14 +307,13 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Pending Review) should match snapshot
 exports[`[Contrib] blocks/<AdminAnswer /> (To Do) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
+    class="AdminAnswer__Container-sc-1257a91-0 cetWW css-4cffwv"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH eTLtBf"
-      width="1"
+      class="css-rxk9pl"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Top-sc-1257a91-1 dgddaa"
+        class="AdminAnswer__Top-sc-1257a91-1 lwJoG css-fbcqx2"
       >
         <span
           class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
@@ -336,10 +327,10 @@ exports[`[Contrib] blocks/<AdminAnswer /> (To Do) should match snapshot 1`] = `
         </span>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
+        class="AdminAnswer__Content-sc-1257a91-4 hHOjFH css-l3rx45"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH dntGME"
+          class="css-d6l97b"
         >
           <div
             class="Idcc__Container-owzimc-0 fWXTkt"
@@ -367,13 +358,10 @@ exports[`[Contrib] blocks/<AdminAnswer /> (To Do) should match snapshot 1`] = `
 exports[`[Contrib] blocks/<AdminAnswer /> (Unchecked draft) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
+    class="AdminAnswer__Container-sc-1257a91-0 cetWW css-4cffwv"
   >
     <button
-      class="sc-bdVaJa sc-EHOje Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 wNuyp"
-      color="white"
-      font-size="inherit"
-      font-weight="bold"
+      class="Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 eyWUJN css-vhv7r1"
       role="checkbox"
     >
       <svg
@@ -394,11 +382,10 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Unchecked draft) should match snapsho
       </svg>
     </button>
     <div
-      class="sc-bdVaJa sc-bwzfXH eTLtBf"
-      width="1"
+      class="css-rxk9pl"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Top-sc-1257a91-1 dgddaa"
+        class="AdminAnswer__Top-sc-1257a91-1 lwJoG css-fbcqx2"
       >
         <span
           class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
@@ -412,10 +399,10 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Unchecked draft) should match snapsho
         </span>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
+        class="AdminAnswer__Content-sc-1257a91-4 hHOjFH css-l3rx45"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH dntGME"
+          class="css-d6l97b"
         >
           <div
             class="Idcc__Container-owzimc-0 fWXTkt"
@@ -449,14 +436,13 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Unchecked draft) should match snapsho
 exports[`[Contrib] blocks/<AdminAnswer /> (Under Review) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
+    class="AdminAnswer__Container-sc-1257a91-0 cetWW css-4cffwv"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH eTLtBf"
-      width="1"
+      class="css-rxk9pl"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Top-sc-1257a91-1 dgddaa"
+        class="AdminAnswer__Top-sc-1257a91-1 lwJoG css-fbcqx2"
       >
         <span
           class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
@@ -470,10 +456,10 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Under Review) should match snapshot 1
         </span>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
+        class="AdminAnswer__Content-sc-1257a91-4 hHOjFH css-l3rx45"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH dntGME"
+          class="css-d6l97b"
         >
           <div
             class="Idcc__Container-owzimc-0 fWXTkt"
@@ -507,14 +493,13 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Under Review) should match snapshot 1
 exports[`[Contrib] blocks/<AdminAnswer /> (Validated) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH AdminAnswer__Container-sc-1257a91-0 exoODn"
+    class="AdminAnswer__Container-sc-1257a91-0 cetWW css-4cffwv"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH eTLtBf"
-      width="1"
+      class="css-rxk9pl"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Top-sc-1257a91-1 dgddaa"
+        class="AdminAnswer__Top-sc-1257a91-1 lwJoG css-fbcqx2"
       >
         <span
           class="AdminAnswer__TopState-sc-1257a91-2 RjFBy"
@@ -528,10 +513,10 @@ exports[`[Contrib] blocks/<AdminAnswer /> (Validated) should match snapshot 1`] 
         </span>
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH AdminAnswer__Content-sc-1257a91-4 httAcf"
+        class="AdminAnswer__Content-sc-1257a91-4 hHOjFH css-l3rx45"
       >
         <div
-          class="sc-bdVaJa sc-bwzfXH dntGME"
+          class="css-d6l97b"
         >
           <div
             class="Idcc__Container-owzimc-0 fWXTkt"

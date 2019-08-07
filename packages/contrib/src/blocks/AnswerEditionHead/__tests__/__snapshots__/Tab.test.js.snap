@@ -3,7 +3,7 @@
 exports[`[Contrib] blocks/AnswerEditionHead/<Tab /> should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH Tab__Container-sc-9u46t0-0 kQaMQa"
+    class="Tab__Container-sc-9u46t0-0 jJmupw css-1g1x2nw"
   >
     A Tab Text
   </div>
@@ -17,8 +17,8 @@ exports[`[Contrib] blocks/AnswerEditionHead/<Tab /> should match snapshot diff w
 
   <DocumentFragment>
     <div
--     class=\\"sc-bdVaJa sc-bwzfXH Tab__Container-sc-9u46t0-0 kQaMQa\\"
-+     class=\\"sc-bdVaJa sc-bwzfXH Tab__Container-sc-9u46t0-0 kBpqdY\\"
+-     class=\\"Tab__Container-sc-9u46t0-0 jJmupw css-1g1x2nw\\"
++     class=\\"Tab__Container-sc-9u46t0-0 fsShrS css-1g1x2nw\\"
     >
       A Tab Text
     </div>

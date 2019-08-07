@@ -3,14 +3,13 @@
 exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH fFgWKo"
-    width="1"
+    class="css-knfhfe"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Answer__Content-sc-1ccgtmi-0 dImgSX"
+      class="Answer__Content-sc-1ccgtmi-0 fUZbrp css-l3rx45"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH dntGME"
+        class="css-d6l97b"
       >
         <div
           class="Idcc__Container-owzimc-0 fWXTkt"
@@ -37,7 +36,7 @@ exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot 1`] = `
       </div>
     </div>
     <div
-      class="sc-bdVaJa sc-bwzfXH Answer__Menu-sc-1ccgtmi-4 jsjXxT"
+      class="Answer__Menu-sc-1ccgtmi-4 gUKXNr css-wxw2i9"
     >
       <button
         class="Link-c1jwt7-0 cIzIlt"
@@ -52,14 +51,13 @@ exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot 1`] = `
 exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot diff with a Labor Code generic reference 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH fFgWKo"
-    width="1"
+    class="css-knfhfe"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Answer__Content-sc-1ccgtmi-0 dImgSX"
+      class="Answer__Content-sc-1ccgtmi-0 fUZbrp css-l3rx45"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH dntGME"
+        class="css-d6l97b"
       >
         <div
           class="Idcc__Container-owzimc-0 fWXTkt"
@@ -85,7 +83,7 @@ exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot diff with a L
       </div>
     </div>
     <div
-      class="sc-bdVaJa sc-bwzfXH Answer__Menu-sc-1ccgtmi-4 jsjXxT"
+      class="Answer__Menu-sc-1ccgtmi-4 gUKXNr css-wxw2i9"
     >
       <button
         class="Link-c1jwt7-0 cIzIlt"
@@ -100,14 +98,13 @@ exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot diff with a L
 exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot diff with a National Agreement generic reference 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH fFgWKo"
-    width="1"
+    class="css-knfhfe"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Answer__Content-sc-1ccgtmi-0 dImgSX"
+      class="Answer__Content-sc-1ccgtmi-0 fUZbrp css-l3rx45"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH dntGME"
+        class="css-d6l97b"
       >
         <div
           class="Idcc__Container-owzimc-0 fWXTkt"
@@ -133,7 +130,7 @@ exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot diff with a N
       </div>
     </div>
     <div
-      class="sc-bdVaJa sc-bwzfXH Answer__Menu-sc-1ccgtmi-4 jsjXxT"
+      class="Answer__Menu-sc-1ccgtmi-4 gUKXNr css-wxw2i9"
     >
       <button
         class="Link-c1jwt7-0 cIzIlt"
@@ -148,14 +145,13 @@ exports[`[Contrib] blocks/<Answer /> (Draft) should match snapshot diff with a N
 exports[`[Contrib] blocks/<Answer /> (Todo) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH fFgWKo"
-    width="1"
+    class="css-knfhfe"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Answer__Content-sc-1ccgtmi-0 dImgSX"
+      class="Answer__Content-sc-1ccgtmi-0 fUZbrp css-l3rx45"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH dntGME"
+        class="css-d6l97b"
       >
         <div
           class="Idcc__Container-owzimc-0 fWXTkt"
@@ -176,7 +172,7 @@ exports[`[Contrib] blocks/<Answer /> (Todo) should match snapshot 1`] = `
       </div>
     </div>
     <div
-      class="sc-bdVaJa sc-bwzfXH Answer__Menu-sc-1ccgtmi-4 jsjXxT"
+      class="Answer__Menu-sc-1ccgtmi-4 gUKXNr css-wxw2i9"
     >
       <button
         class="Link-c1jwt7-0 cIzIlt"
