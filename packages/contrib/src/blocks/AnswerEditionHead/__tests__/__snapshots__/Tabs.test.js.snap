@@ -3,20 +3,20 @@
 exports[`[Contrib] blocks/AnswerEditionHead/<Tabs /> should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH Tabs__Container-sc-10g095d-0 SHUVy"
+    class="Tabs__Container-sc-10g095d-0 gDCvCg css-4cffwv"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Tab__Container-sc-9u46t0-0 kBpqdY"
+      class="Tab__Container-sc-9u46t0-0 fsShrS css-1g1x2nw"
     >
       Édition
     </div>
     <div
-      class="sc-bdVaJa sc-bwzfXH Tab__Container-sc-9u46t0-0 kQaMQa"
+      class="Tab__Container-sc-9u46t0-0 jJmupw css-1g1x2nw"
     >
       Références juridiques (2)
     </div>
     <div
-      class="sc-bdVaJa sc-bwzfXH Tab__Container-sc-9u46t0-0 kQaMQa"
+      class="Tab__Container-sc-9u46t0-0 jJmupw css-1g1x2nw"
     >
       Étiquettes (12)
     </div>

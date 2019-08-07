@@ -3,17 +3,17 @@
 exports[`[Contrib] components/<Tags /> should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
+    class="Tags__Container-sc-9wg2t-0 iDeUPd css-l3rx45"
   >
     <input
       class="Input___Input-l1y0rz-1 bpEpug"
       placeholder="Commencez à taper le nom du tag"
     />
     <div
-      class="sc-bdVaJa sc-bwzfXH Tags__SelectedTags-sc-9wg2t-1 gNdWxU"
+      class="Tags__SelectedTags-sc-9wg2t-1 Fnqjz css-4cffwv"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb"
+        class="Tag__Container-lc1n3o-0 VVSMg css-zkfaav"
       >
         <span
           class="Tag__Text-lc1n3o-1 dtXAeC"
@@ -27,7 +27,7 @@ exports[`[Contrib] components/<Tags /> should match snapshot 1`] = `
         />
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb"
+        class="Tag__Container-lc1n3o-0 VVSMg css-zkfaav"
       >
         <span
           class="Tag__Text-lc1n3o-1 dtXAeC"
@@ -48,13 +48,13 @@ exports[`[Contrib] components/<Tags /> should match snapshot 1`] = `
 exports[`[Contrib] components/<Tags /> without \`isEditable\` should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
+    class="Tags__Container-sc-9wg2t-0 iDeUPd css-l3rx45"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Tags__SelectedTags-sc-9wg2t-1 gNdWxU"
+      class="Tags__SelectedTags-sc-9wg2t-1 Fnqjz css-4cffwv"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb"
+        class="Tag__Container-lc1n3o-0 VVSMg css-zkfaav"
       >
         <span
           class="Tag__Text-lc1n3o-1 dtXAeC"
@@ -68,7 +68,7 @@ exports[`[Contrib] components/<Tags /> without \`isEditable\` should match snaps
         />
       </div>
       <div
-        class="sc-bdVaJa sc-bwzfXH Tag__Container-lc1n3o-0 dVwbtb"
+        class="Tag__Container-lc1n3o-0 VVSMg css-zkfaav"
       >
         <span
           class="Tag__Text-lc1n3o-1 dtXAeC"
@@ -89,14 +89,14 @@ exports[`[Contrib] components/<Tags /> without \`isEditable\` should match snaps
 exports[`[Contrib] components/<Tags /> without optional props should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 kGdxZz"
+    class="Tags__Container-sc-9wg2t-0 iDeUPd css-l3rx45"
   >
     <input
       class="Input___Input-l1y0rz-1 bpEpug"
       placeholder="Commencez à taper le nom de l'étiquette"
     />
     <div
-      class="sc-bdVaJa sc-bwzfXH Tags__SelectedTags-sc-9wg2t-1 gNdWxU"
+      class="Tags__SelectedTags-sc-9wg2t-1 Fnqjz css-4cffwv"
     />
   </div>
 </div>

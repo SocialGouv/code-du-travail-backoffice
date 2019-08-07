@@ -3,10 +3,10 @@
 exports[`[Contrib] blocks/<AnswerEditionContent /> should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH AnswerEditionContent__Container-sc-1xvty1w-0 bxpCKh"
+    class="AnswerEditionContent__Container-sc-1xvty1w-0 lhBQon css-4cffwv"
   >
     <div
-      class="sc-bdVaJa AnswerEditionContent__Editor-sc-1xvty1w-1 gIJVAk sc-bwzfXH eVPJMi"
+      class="AnswerEditionContent__Editor-sc-1xvty1w-1 gIJVAk css-l3rx45"
     >
       <div
         class="ql-toolbar ql-snow"
