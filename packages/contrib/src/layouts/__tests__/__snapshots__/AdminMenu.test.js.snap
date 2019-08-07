@@ -33,6 +33,11 @@ exports[`[Contrib] layouts/<AdminMenu /> should match snapshot 1`] = `
     <div
       class="AdminMenu__Link-t0dk93-2 kospmv"
     >
+      Réponses génériques
+    </div>
+    <div
+      class="AdminMenu__Link-t0dk93-2 kospmv"
+    >
       Unités
     </div>
     <div

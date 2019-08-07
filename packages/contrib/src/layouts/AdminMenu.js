@@ -73,6 +73,12 @@ export default class AdminMenu extends React.PureComponent {
           Réponses
         </Link>
         <Link
+          isCurrent={this.isCurrent("/generic-answers")}
+          onClick={() => this.goTo("/generic-answers")}
+        >
+          Réponses génériques
+        </Link>
+        <Link
           isCurrent={this.isCurrent("/locations")}
           onClick={() => this.goTo("/locations")}
         >
