@@ -21,14 +21,18 @@ const Container = styled.div`
 `;
 
 const Tooltip = styled(ReactTooltip)`
+  max-width: 22rem;
   padding: 0.25rem 0.5rem 0.45rem;
-  width: 22rem;
   white-space: normal;
 `;
 
 export default ({ className, code, name, style }) => (
-  <Container className={className} data-tip={name} style={style}>
-    CCN: {code}
+  <Container
+    className={className}
+    data-tip={code === undefined ? "Code du travail" : name}
+    style={style}
+  >
+    {code === undefined ? "CDT" : `IDCC: ${code}`}
     <Tooltip />
   </Container>
 );
