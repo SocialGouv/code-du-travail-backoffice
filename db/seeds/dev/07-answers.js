@@ -16,7 +16,17 @@ exports.seed = async knex => {
   for (let question of questions) {
     global.spinner.start(`Generating answers: ${question.value}`);
 
-    const answers = agreements.map((agreement) => {
+    const genericAnswer = {
+      state: "pending_review",
+      prevalue: "",
+      value: PREVALUE,
+      question_id: question.id,
+      agreement_id: null
+    };
+
+    await knex("api.answers").insert([genericAnswer]);
+
+    const answers = agreements.map(agreement => {
       if (Math.random() < 0.5) {
         return {
           state: "todo",
@@ -34,7 +44,7 @@ exports.seed = async knex => {
           value: "",
           question_id: question.id,
           agreement_id: agreement.id,
-          user_id: '00000000-0000-4000-0000-000000000002'
+          user_id: "00000000-0000-4000-0000-000000000002"
         };
       }
 
@@ -44,7 +54,7 @@ exports.seed = async knex => {
         value: "",
         question_id: question.id,
         agreement_id: agreement.id,
-        user_id: '00000000-0000-4000-0000-000000000002'
+        user_id: "00000000-0000-4000-0000-000000000002"
       };
     });
 
