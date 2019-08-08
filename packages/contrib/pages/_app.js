@@ -8,6 +8,8 @@ import Main from "../src/layouts/Main";
 import isAuthenticated from "../src/libs/isAuthenticated";
 import createStore from "../src/store";
 
+import { USER_ROLE } from "../src/constants";
+
 class MainApp extends App {
   constructor(props) {
     super(props);
@@ -26,13 +28,15 @@ class MainApp extends App {
         const role = JSON.parse(sessionStorage.getItem("me")).payload.role;
 
         switch (true) {
-          case role === "administrator" &&
-            !window.location.pathname.startsWith("/admin"):
+          case [
+            USER_ROLE.ADMINISTRATOR,
+            USER_ROLE.REGIONAL_ADMINISTRATOR
+          ].includes(role) && !window.location.pathname.startsWith("/admin"):
             // eslint-disable-next-line require-atomic-updates
             window.location.href = `/admin`;
             break;
 
-          case role === "contributor" &&
+          case role === USER_ROLE.CONTRIBUTOR &&
             window.location.pathname.startsWith("/admin"):
             // eslint-disable-next-line require-atomic-updates
             window.location.href = `/`;
