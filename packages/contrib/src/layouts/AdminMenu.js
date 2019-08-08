@@ -4,6 +4,9 @@ import { Flex } from "rebass";
 import styled from "styled-components";
 
 import _Subtitle from "../elements/Subtitle";
+import getCurrentUser from "../libs/getCurrentUser";
+
+import { USER_ROLE } from "../constants";
 
 const Container = styled(Flex)`
   background-color: var(--color-dark-slate-gray);
@@ -43,6 +46,16 @@ export default class AdminMenu extends React.PureComponent {
   }
 
   render() {
+    if (getCurrentUser().role === USER_ROLE.REGIONAL_ADMINISTRATOR) {
+      return (
+        <Container flexDirection="column">
+          <Link isCurrent={this.isCurrent("")} onClick={() => this.goTo("")}>
+            Tableau de bord
+          </Link>
+        </Container>
+      );
+    }
+
     return (
       <Container flexDirection="column">
         <Link isCurrent={this.isCurrent("")} onClick={() => this.goTo("")}>
