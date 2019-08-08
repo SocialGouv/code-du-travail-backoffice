@@ -19,6 +19,7 @@ const FIELDS = [
     label: "Rôle",
     options: [
       { name: "Administrateur", value: "administrator" },
+      { name: "Administrateur régional", value: "regional_administrator" },
       { name: "Contributeur", value: "contributor" }
     ]
   },
