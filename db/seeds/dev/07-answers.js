@@ -27,7 +27,7 @@ exports.seed = async knex => {
     await knex("api.answers").insert([genericAnswer]);
 
     const answers = agreements.map(agreement => {
-      if (Math.random() < 0.5) {
+      if (question.index < 4) {
         return {
           state: "todo",
           prevalue: "",
@@ -37,7 +37,7 @@ exports.seed = async knex => {
         };
       }
 
-      if (Math.random() < 0.5) {
+      if (question.index < 5) {
         return {
           state: "draft",
           prevalue: PREVALUE,
