@@ -3,7 +3,8 @@
 exports[`[Contrib] elements/<Checkbox /> should match snapshot 1`] = `
 <div>
   <button
-    class="Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 eyWUJN css-vhv7r1"
+    class="sc-bdVaJa sc-EHOje Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 crHNfS"
+    color="white"
     role="checkbox"
   >
     <svg
@@ -29,7 +30,8 @@ exports[`[Contrib] elements/<Checkbox /> should match snapshot 1`] = `
 exports[`[Contrib] elements/<Checkbox /> should match snapshot with \`isChecked\` prop 1`] = `
 <div>
   <button
-    class="Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 eyWUJN css-vhv7r1"
+    class="sc-bdVaJa sc-EHOje Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 crHNfS"
+    color="white"
     role="checkbox"
   >
     <svg
@@ -55,7 +57,8 @@ exports[`[Contrib] elements/<Checkbox /> should match snapshot with \`isChecked\
 exports[`[Contrib] elements/<Checkbox /> should match snapshot with a custom \`color\` prop 1`] = `
 <div>
   <button
-    class="Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 fKlnvv css-vhv7r1"
+    class="sc-bdVaJa sc-EHOje Checkbox-sc-1jox9lb-0 efNukH Button-sc-1bpx84u-0 gALmUs"
+    color="white"
     role="checkbox"
   >
     <svg

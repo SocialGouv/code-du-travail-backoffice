@@ -9,10 +9,10 @@ exports[`[Contrib] layouts/<Header /> [Administrator] should match snapshot 1`] 
 - <div>
 + <DocumentFragment>
     <div
-      class=\\"Header__Container-sc-7cr55z-0 eHuDxq css-s3axrf\\"
+      class=\\"sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 etybdb\\"
     >
       <div
-        class=\\"Header__Brand-sc-7cr55z-1 knuMJV css-zkfaav\\"
+        class=\\"sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 fQPTaL\\"
 @@ -21,10 +21,68 @@
           </span>
           <span
@@ -23,10 +23,10 @@ exports[`[Contrib] layouts/<Header /> [Administrator] should match snapshot 1`] 
 +       </div>
 +     </div>
 +     <div
-+       class=\\"css-zkfaav\\"
++       class=\\"sc-bdVaJa sc-bwzfXH loXcrU\\"
 +     >
 +       <div
-+         class=\\"Menu__Container-sc-1tufs3d-0 cDDMgU css-4cffwv\\"
++         class=\\"sc-bdVaJa sc-bwzfXH Menu__Container-sc-1tufs3d-0 demysH\\"
 +       >
 +         <div
 +           class=\\"Menu__Dropdown-sc-1tufs3d-3 loMVOU\\"
@@ -53,7 +53,7 @@ exports[`[Contrib] layouts/<Header /> [Administrator] should match snapshot 1`] 
 +             A Name
             </span>
 +           <div
-+             class=\\"Menu__DropdownMenu-sc-1tufs3d-5 cBtyyh css-l3rx45\\"
++             class=\\"sc-bdVaJa sc-bwzfXH Menu__DropdownMenu-sc-1tufs3d-5 iloOtC\\"
 +           >
 +             <span
 +               class=\\"Menu__BaseLink-sc-1tufs3d-1 Menu__TopLink-sc-1tufs3d-2 Menu__DropdownLink-sc-1tufs3d-6 jmXsXQ\\"
@@ -87,10 +87,10 @@ exports[`[Contrib] layouts/<Header /> [Administrator] should match snapshot 1`] 
 exports[`[Contrib] layouts/<Header /> [Anonymous] should match snapshot 1`] = `
 <div>
   <div
-    class="Header__Container-sc-7cr55z-0 eHuDxq css-s3axrf"
+    class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 etybdb"
   >
     <div
-      class="Header__Brand-sc-7cr55z-1 knuMJV css-zkfaav"
+      class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 fQPTaL"
     >
       <img
         alt="Code du travail numérique"
@@ -99,7 +99,7 @@ exports[`[Contrib] layouts/<Header /> [Anonymous] should match snapshot 1`] = `
         src="/static/images/marianne.svg"
       />
       <div
-        class="css-l3rx45"
+        class="sc-bdVaJa sc-bwzfXH hhcqrs"
       >
         <span
           class="Header__Title-sc-7cr55z-3 jGdlvq"
@@ -126,10 +126,10 @@ exports[`[Contrib] layouts/<Header /> [Contributor] should match snapshot diff 1
 - <div>
 + <DocumentFragment>
     <div
-      class=\\"Header__Container-sc-7cr55z-0 eHuDxq css-s3axrf\\"
+      class=\\"sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 etybdb\\"
     >
       <div
-        class=\\"Header__Brand-sc-7cr55z-1 knuMJV css-zkfaav\\"
+        class=\\"sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 fQPTaL\\"
 @@ -21,10 +21,188 @@
           </span>
           <span
@@ -140,10 +140,10 @@ exports[`[Contrib] layouts/<Header /> [Contributor] should match snapshot diff 1
 +       </div>
 +     </div>
 +     <div
-+       class=\\"css-zkfaav\\"
++       class=\\"sc-bdVaJa sc-bwzfXH loXcrU\\"
 +     >
 +       <div
-+         class=\\"Menu__Container-sc-1tufs3d-0 cDDMgU css-4cffwv\\"
++         class=\\"sc-bdVaJa sc-bwzfXH Menu__Container-sc-1tufs3d-0 demysH\\"
 +       >
 +         <div
 +           class=\\"Menu__Dropdown-sc-1tufs3d-3 loMVOU\\"
@@ -170,7 +170,7 @@ exports[`[Contrib] layouts/<Header /> [Contributor] should match snapshot diff 1
 +             Liste des réponses
 +           </span>
 +           <div
-+             class=\\"Menu__DropdownMenu-sc-1tufs3d-5 cBtyyh css-l3rx45\\"
++             class=\\"sc-bdVaJa sc-bwzfXH Menu__DropdownMenu-sc-1tufs3d-5 iloOtC\\"
 +           >
 +             <span
 +               class=\\"Menu__BaseLink-sc-1tufs3d-1 Menu__TopLink-sc-1tufs3d-2 Menu__DropdownLink-sc-1tufs3d-6 jmXsXQ\\"
@@ -219,7 +219,7 @@ exports[`[Contrib] layouts/<Header /> [Contributor] should match snapshot diff 1
 +             Aide
 +           </span>
 +           <div
-+             class=\\"Menu__DropdownMenu-sc-1tufs3d-5 cBtyyh css-l3rx45\\"
++             class=\\"sc-bdVaJa sc-bwzfXH Menu__DropdownMenu-sc-1tufs3d-5 iloOtC\\"
 +           >
 +             <span
 +               class=\\"Menu__BaseLink-sc-1tufs3d-1 Menu__TopLink-sc-1tufs3d-2 Menu__DropdownLink-sc-1tufs3d-6 jmXsXQ\\"
@@ -290,7 +290,7 @@ exports[`[Contrib] layouts/<Header /> [Contributor] should match snapshot diff 1
 +             A Name
 +           </span>
 +           <div
-+             class=\\"Menu__DropdownMenu-sc-1tufs3d-5 cBtyyh css-l3rx45\\"
++             class=\\"sc-bdVaJa sc-bwzfXH Menu__DropdownMenu-sc-1tufs3d-5 iloOtC\\"
 +           >
 +             <span
 +               class=\\"Menu__BaseLink-sc-1tufs3d-1 Menu__TopLink-sc-1tufs3d-2 Menu__DropdownLink-sc-1tufs3d-6 jmXsXQ\\"

@@ -3,7 +3,7 @@
 exports[`[Contrib] layouts/<AdminMenu /> should match snapshot 1`] = `
 <div>
   <div
-    class="AdminMenu__Container-t0dk93-0 bMnGdR css-l3rx45"
+    class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 imFqQo"
   >
     <div
       class="AdminMenu__Link-t0dk93-2 LnAQE"
@@ -72,7 +72,7 @@ exports[`[Contrib] layouts/<AdminMenu /> should match snapshot diff when the pat
 @@ -1,16 +1,16 @@
   <DocumentFragment>
     <div
-      class=\\"AdminMenu__Container-t0dk93-0 bMnGdR css-l3rx45\\"
+      class=\\"sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 imFqQo\\"
     >
       <div
 -       class=\\"AdminMenu__Link-t0dk93-2 LnAQE\\"

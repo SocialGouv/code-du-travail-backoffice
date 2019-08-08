@@ -3,13 +3,14 @@
 exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] = `
 <div>
   <div
-    class="AnswerEditionReferences__Container-sc-1inz7ja-0 cItSzU css-l3rx45"
+    class="sc-bdVaJa sc-bwzfXH AnswerEditionReferences__Container-sc-1inz7ja-0 cpEKyH"
   >
     <div
-      class="AnswerEditionReferences__Part-sc-1inz7ja-1 kfybIv css-4cffwv"
+      class="sc-bdVaJa sc-bwzfXH AnswerEditionReferences__Part-sc-1inz7ja-1 fXtIBl"
     >
       <div
-        class="css-9xylqt"
+        class="sc-bdVaJa sc-bwzfXH gKSvVy"
+        width="0.5"
       >
         <h2
           class="Subtitle-sc-17ig8qv-0 gsnyDG"
@@ -20,7 +21,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
           role="form"
         >
           <div
-            class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
+            class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 ficske"
           >
             <input
               class="Input___Input-l1y0rz-1 bpEpug"
@@ -28,10 +29,11 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             />
           </div>
           <div
-            class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
+            class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 ficske"
           >
             <button
-              class="Button-sc-1bpx84u-0 lapHIA css-f6h8ex"
+              class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ckKeMb"
+              color="var(--color-lapis-lazuli)"
               title="Ajouter la référence à la convention collective"
               type="submit"
             >
@@ -41,10 +43,10 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
         </form>
       </div>
       <div
-        class="List__Container-sc-1pm6mpm-0 eKoGxR css-l3rx45"
+        class="sc-bdVaJa sc-bwzfXH List__Container-sc-1pm6mpm-0 bSXnmw"
       >
         <div
-          class="css-zkfaav"
+          class="sc-bdVaJa sc-bwzfXH loXcrU"
         >
           <svg
             aria-hidden="true"
@@ -68,7 +70,8 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             An Agreement Reference
           </span>
           <button
-            class="Button-sc-1bpx84u-0 eyWUJN css-vhv7r1"
+            class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 crHNfS"
+            color="white"
             title="Bouton supprimant la référence à la convention collective \\"An Agreement Reference\\""
           >
             <svg
@@ -92,10 +95,11 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
       </div>
     </div>
     <div
-      class="AnswerEditionReferences__Part-sc-1inz7ja-1 kfybIv css-4cffwv"
+      class="sc-bdVaJa sc-bwzfXH AnswerEditionReferences__Part-sc-1inz7ja-1 fXtIBl"
     >
       <div
-        class="css-9xylqt"
+        class="sc-bdVaJa sc-bwzfXH gKSvVy"
+        width="0.5"
       >
         <h2
           class="Subtitle-sc-17ig8qv-0 gsnyDG"
@@ -104,7 +108,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
         </h2>
         <div>
           <div
-            class="Tags__Container-sc-9wg2t-0 iDeUPd css-l3rx45"
+            class="sc-bdVaJa sc-bwzfXH Tags__Container-sc-9wg2t-0 fCHXTg"
           >
             <input
               class="Input___Input-l1y0rz-1 bpEpug"
@@ -114,10 +118,10 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
         </div>
       </div>
       <div
-        class="List__Container-sc-1pm6mpm-0 eKoGxR css-l3rx45"
+        class="sc-bdVaJa sc-bwzfXH List__Container-sc-1pm6mpm-0 bSXnmw"
       >
         <div
-          class="css-zkfaav"
+          class="sc-bdVaJa sc-bwzfXH loXcrU"
         >
           <svg
             aria-hidden="true"
@@ -141,7 +145,8 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             L1234-5
           </span>
           <button
-            class="Button-sc-1bpx84u-0 eyWUJN css-vhv7r1"
+            class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 crHNfS"
+            color="white"
             title="Bouton supprimant la référence au Code du travail \\"L1234-5\\""
           >
             <svg
@@ -165,10 +170,11 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
       </div>
     </div>
     <div
-      class="AnswerEditionReferences__Part-sc-1inz7ja-1 kfybIv css-4cffwv"
+      class="sc-bdVaJa sc-bwzfXH AnswerEditionReferences__Part-sc-1inz7ja-1 fXtIBl"
     >
       <div
-        class="css-9xylqt"
+        class="sc-bdVaJa sc-bwzfXH gKSvVy"
+        width="0.5"
       >
         <h2
           class="Subtitle-sc-17ig8qv-0 gsnyDG"
@@ -179,7 +185,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
           role="form"
         >
           <div
-            class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
+            class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 ficske"
           >
             <input
               class="Input___Input-l1y0rz-1 bpEpug"
@@ -187,7 +193,7 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             />
           </div>
           <div
-            class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
+            class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 ficske"
           >
             <input
               class="Input___Input-l1y0rz-1 bpEpug"
@@ -195,10 +201,11 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             />
           </div>
           <div
-            class="Field-sc-56e27r-0 jrPnGa css-4cffwv"
+            class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 ficske"
           >
             <button
-              class="Button-sc-1bpx84u-0 lapHIA css-f6h8ex"
+              class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ckKeMb"
+              color="var(--color-lapis-lazuli)"
               title="Ajouter la référence juridique"
               type="submit"
             >
@@ -208,10 +215,10 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
         </form>
       </div>
       <div
-        class="List__Container-sc-1pm6mpm-0 eKoGxR css-l3rx45"
+        class="sc-bdVaJa sc-bwzfXH List__Container-sc-1pm6mpm-0 bSXnmw"
       >
         <div
-          class="css-zkfaav"
+          class="sc-bdVaJa sc-bwzfXH loXcrU"
         >
           <svg
             aria-hidden="true"
@@ -235,7 +242,8 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             An Uncategorized Reference
           </span>
           <button
-            class="Button-sc-1bpx84u-0 eyWUJN css-vhv7r1"
+            class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 crHNfS"
+            color="white"
             title="Bouton ouvrant le lien associé à la référence juridique \\"An Uncategorized Reference\\""
           >
             <svg
@@ -256,7 +264,8 @@ exports[`[Contrib] blocks/<AnswerEditionReferences /> should match snapshot 1`] 
             </svg>
           </button>
           <button
-            class="Button-sc-1bpx84u-0 eyWUJN css-vhv7r1"
+            class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 crHNfS"
+            color="white"
             title="Bouton supprimant la référence juridique \\"An Uncategorized Reference\\""
           >
             <svg

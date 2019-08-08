@@ -3,15 +3,17 @@
 exports[`[Contrib] blocks/AnswerEditionHead/<Actions /> should match snapshot 1`] = `
 <div>
   <div
-    class="css-d6l97b"
+    class="sc-bdVaJa sc-bwzfXH dfIzxl"
   >
     <button
-      class="Button-sc-1bpx84u-0 irZmho css-1rmi0ut"
+      class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ktNUhr"
+      color="var(--color-periwinkle)"
     >
       Annuler ma réponse
     </button>
     <button
-      class="Button-sc-1bpx84u-0 lapHIA css-f6h8ex"
+      class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ckKeMb"
+      color="var(--color-lapis-lazuli)"
     >
       Demander la validation
     </button>

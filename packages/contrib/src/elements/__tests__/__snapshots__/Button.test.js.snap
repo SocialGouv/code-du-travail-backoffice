@@ -3,7 +3,8 @@
 exports[`[Contrib] elements/<Button /> should match snapshot 1`] = `
 <div>
   <button
-    class="Button-sc-1bpx84u-0 lapHIA css-f6h8ex"
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ckKeMb"
+    color="var(--color-lapis-lazuli)"
   />
 </div>
 `;
@@ -11,7 +12,8 @@ exports[`[Contrib] elements/<Button /> should match snapshot 1`] = `
 exports[`[Contrib] elements/<Button /> should match snapshot with \`disabled\` prop 1`] = `
 <div>
   <button
-    class="Button-sc-1bpx84u-0 hhIgqQ css-f6h8ex"
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 eZpLuH"
+    color="var(--color-lapis-lazuli)"
     disabled=""
   />
 </div>
@@ -20,7 +22,8 @@ exports[`[Contrib] elements/<Button /> should match snapshot with \`disabled\` p
 exports[`[Contrib] elements/<Button /> should match snapshot with \`hasGroup\` prop 1`] = `
 <div>
   <button
-    class="Button-sc-1bpx84u-0 kWEjpm css-f6h8ex"
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 hNANlH"
+    color="var(--color-lapis-lazuli)"
   />
 </div>
 `;
@@ -28,7 +31,8 @@ exports[`[Contrib] elements/<Button /> should match snapshot with \`hasGroup\` p
 exports[`[Contrib] elements/<Button /> should match snapshot with \`isSmall\` prop 1`] = `
 <div>
   <button
-    class="Button-sc-1bpx84u-0 bToVDG css-f6h8ex"
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 dzMrlY"
+    color="var(--color-lapis-lazuli)"
   />
 </div>
 `;
@@ -36,7 +40,8 @@ exports[`[Contrib] elements/<Button /> should match snapshot with \`isSmall\` pr
 exports[`[Contrib] elements/<Button /> should match snapshot with a custom \`color\` prop 1`] = `
 <div>
   <button
-    class="Button-sc-1bpx84u-0 iqybud css-1rmi0ut"
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jmqmhd"
+    color="var(--color-periwinkle)"
   />
 </div>
 `;
@@ -44,7 +49,8 @@ exports[`[Contrib] elements/<Button /> should match snapshot with a custom \`col
 exports[`[Contrib] elements/<Button /> should match snapshot with a set \`icon\` prop 1`] = `
 <div>
   <button
-    class="Button-sc-1bpx84u-0 eyWUJN css-vhv7r1"
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 crHNfS"
+    color="white"
   >
     <svg
       aria-hidden="true"

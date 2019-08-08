@@ -3,13 +3,13 @@
 exports[`[Contrib] blocks/<AnswerEditionHead /> should match snapshot 1`] = `
 <div>
   <div
-    class="AnswerEditionHead__Container-sc-1nqi9lw-0 fqyUPC css-fbcqx2"
+    class="sc-bdVaJa sc-bwzfXH AnswerEditionHead__Container-sc-1nqi9lw-0 djzFKI"
   >
     <div
-      class="css-l3rx45"
+      class="sc-bdVaJa sc-bwzfXH hhcqrs"
     >
       <div
-        class="css-d6l97b"
+        class="sc-bdVaJa sc-bwzfXH dfIzxl"
       >
         <div
           class="AnswerEditionHead__Idcc-sc-1nqi9lw-1 jcgzPI Idcc__Container-owzimc-0 fWXTkt"
@@ -29,35 +29,37 @@ exports[`[Contrib] blocks/<AnswerEditionHead /> should match snapshot 1`] = `
         </h1>
       </div>
       <div
-        class="Tabs__Container-sc-10g095d-0 gDCvCg css-4cffwv"
+        class="sc-bdVaJa sc-bwzfXH Tabs__Container-sc-10g095d-0 eUHfiE"
       >
         <div
-          class="Tab__Container-sc-9u46t0-0 fsShrS css-1g1x2nw"
+          class="sc-bdVaJa sc-bwzfXH Tab__Container-sc-9u46t0-0 jSKpAZ"
         >
           Édition
         </div>
         <div
-          class="Tab__Container-sc-9u46t0-0 jJmupw css-1g1x2nw"
+          class="sc-bdVaJa sc-bwzfXH Tab__Container-sc-9u46t0-0 hyrWDR"
         >
           Références juridiques (undefined)
         </div>
         <div
-          class="Tab__Container-sc-9u46t0-0 jJmupw css-1g1x2nw"
+          class="sc-bdVaJa sc-bwzfXH Tab__Container-sc-9u46t0-0 hyrWDR"
         >
           Étiquettes (undefined)
         </div>
       </div>
     </div>
     <div
-      class="css-d6l97b"
+      class="sc-bdVaJa sc-bwzfXH dfIzxl"
     >
       <button
-        class="Button-sc-1bpx84u-0 irZmho css-1rmi0ut"
+        class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ktNUhr"
+        color="var(--color-periwinkle)"
       >
         Annuler ma réponse
       </button>
       <button
-        class="Button-sc-1bpx84u-0 lapHIA css-f6h8ex"
+        class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ckKeMb"
+        color="var(--color-lapis-lazuli)"
       >
         Demander la validation
       </button>

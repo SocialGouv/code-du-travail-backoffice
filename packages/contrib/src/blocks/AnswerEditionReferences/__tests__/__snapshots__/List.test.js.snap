@@ -3,10 +3,10 @@
 exports[`[Contrib] blocks/AnswerEditionReferences/<List /> should match snapshot 1`] = `
 <div>
   <div
-    class="List__Container-sc-1pm6mpm-0 eKoGxR css-l3rx45"
+    class="sc-bdVaJa sc-bwzfXH List__Container-sc-1pm6mpm-0 bSXnmw"
   >
     <div
-      class="css-zkfaav"
+      class="sc-bdVaJa sc-bwzfXH loXcrU"
     >
       <svg
         aria-hidden="true"
@@ -30,7 +30,8 @@ exports[`[Contrib] blocks/AnswerEditionReferences/<List /> should match snapshot
         L1234-5
       </span>
       <button
-        class="Button-sc-1bpx84u-0 eyWUJN css-vhv7r1"
+        class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 crHNfS"
+        color="white"
         title="Bouton supprimant A Reference Type \\"L1234-5\\""
       >
         <svg
@@ -52,7 +53,7 @@ exports[`[Contrib] blocks/AnswerEditionReferences/<List /> should match snapshot
       </button>
     </div>
     <div
-      class="css-zkfaav"
+      class="sc-bdVaJa sc-bwzfXH loXcrU"
     >
       <svg
         aria-hidden="true"
@@ -76,7 +77,8 @@ exports[`[Contrib] blocks/AnswerEditionReferences/<List /> should match snapshot
         An Uncategorized Reference
       </span>
       <button
-        class="Button-sc-1bpx84u-0 eyWUJN css-vhv7r1"
+        class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 crHNfS"
+        color="white"
         title="Bouton ouvrant le lien associé à A Reference Type \\"An Uncategorized Reference\\""
       >
         <svg
@@ -97,7 +99,8 @@ exports[`[Contrib] blocks/AnswerEditionReferences/<List /> should match snapshot
         </svg>
       </button>
       <button
-        class="Button-sc-1bpx84u-0 eyWUJN css-vhv7r1"
+        class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 crHNfS"
+        color="white"
         title="Bouton supprimant A Reference Type \\"An Uncategorized Reference\\""
       >
         <svg
@@ -119,7 +122,7 @@ exports[`[Contrib] blocks/AnswerEditionReferences/<List /> should match snapshot
       </button>
     </div>
     <div
-      class="css-zkfaav"
+      class="sc-bdVaJa sc-bwzfXH loXcrU"
     >
       <svg
         aria-hidden="true"
@@ -143,7 +146,8 @@ exports[`[Contrib] blocks/AnswerEditionReferences/<List /> should match snapshot
         An Agreement Reference
       </span>
       <button
-        class="Button-sc-1bpx84u-0 eyWUJN css-vhv7r1"
+        class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 crHNfS"
+        color="white"
         title="Bouton supprimant A Reference Type \\"An Agreement Reference\\""
       >
         <svg
