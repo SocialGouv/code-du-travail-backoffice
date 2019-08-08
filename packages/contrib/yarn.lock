@@ -1067,6 +1067,10 @@
     eslint-plugin-jest "^22.13.6"
     eslint-plugin-prettier "~3.1.0"
 
+"@socialgouv/meditor@https://github.com/SocialGouv/meditor":
+  version "0.1.0-alpha.2"
+  resolved "https://github.com/SocialGouv/meditor#54c492e7c5df510e4fe663c860a9d64d68261a44"
+
 "@styled-system/background@^5.0.18":
   version "5.0.18"
   resolved "https://registry.yarnpkg.com/@styled-system/background/-/background-5.0.18.tgz#9c43dbd3dc3e1049e2e47d30d7c5fb39160d13cf"

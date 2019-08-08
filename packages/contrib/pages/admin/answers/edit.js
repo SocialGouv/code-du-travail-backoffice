@@ -4,6 +4,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Flex } from "rebass";
 import styled from "styled-components";
+import Meditor from "@socialgouv/meditor";
 
 import * as actions from "../../../src/actions";
 import Comment from "../../../src/components/Comment";
@@ -37,9 +38,98 @@ const RightContainer = styled(Flex)`
   padding: 1rem;
 `;
 
-const AnswerEditor = styled(Textarea)`
+const aIconUri = [
+  "https://codedutravail-dev.num.social.gouv.fr",
+  "/static/assets/icons/external-link.svg"
+].join("");
+const AnswerEditor = styled(Meditor)`
+  border: solid 1px var(--color-border) !important;
+  border-radius: 0.25rem;
   flex-grow: unset;
   min-height: 15rem;
+
+  > textarea {
+    background-color: var(--color-alice-blue);
+    border-bottom-left-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+    color: var(--color-black-leather-jacket);
+    font-size: 1.2rem;
+  }
+
+  > div {
+    background-color: white;
+    border-bottom-right-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    line-height: 1.4;
+    padding-top: 0 !important;
+
+    a {
+      color: #0053b3;
+
+      :after {
+        content: "";
+        position: relative;
+        top: 1px;
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        margin-left: 5px;
+        background: url(${aIconUri}) 100% 50% / 15px no-repeat;
+      }
+
+      :hover {
+        text-decoration: none;
+      }
+    }
+
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: #006ab2;
+    }
+    h2 {
+      font-size: 1.875rem;
+    }
+    h3 {
+      font-size: 1.625rem;
+    }
+    h4 {
+      font-size: 1.375rem;
+    }
+    h5 {
+      font-size: 1.125rem;
+    }
+    h6 {
+      font-size: 1rem;
+    }
+
+    p {
+      color: #434956;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 0;
+      margin-inline-end: 0;
+    }
+
+    ul {
+      list-style-type: disc;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      padding-inline-start: 20px;
+
+      li {
+        display: list-item;
+      }
+
+      ul {
+        list-style-type: circle;
+      }
+    }
+  }
 `;
 const Strong = styled.p`
   font-weight: 600;
@@ -147,59 +237,6 @@ export class AdminAnwsersEditPage extends React.Component {
     if (this.state.isLoading) return;
 
     this.$commentsContainer.scrollTo(0, this.$commentsContainer.scrollHeight);
-
-    if (this.answerValueEditor !== undefined) return;
-
-    // We have to load SimpleMDE here because of the global `navigator`
-    // variable check done by the original library.
-    const SimpleMDE = require("simplemde");
-
-    const config = {
-      spellChecker: false,
-      status: false
-    };
-
-    if (this.answer.state === ANSWER_STATE.VALIDATED) {
-      this.answerValueEditor = new SimpleMDE({
-        ...config,
-        element: this.$answerPrevalue,
-        toolbar: ["preview"]
-      });
-
-      return;
-    }
-
-    if (!this.isGeneric) {
-      new SimpleMDE({
-        ...config,
-        element: this.$answerPrevalue,
-        toolbar: ["preview"]
-      });
-    }
-
-    this.answerValueEditor = new SimpleMDE({
-      ...config,
-      element: this.$answerValue,
-      toolbar: [
-        "bold",
-        "italic",
-        "|",
-        "unordered-list",
-        "ordered-list",
-        "quote",
-        "|",
-        "preview",
-        "side-by-side",
-        "fullscreen",
-        "|",
-        "guide"
-      ]
-    });
-
-    this.answerValueEditor.codemirror.on(
-      "change",
-      this.updateAnswerValue.bind(this)
-    );
   }
 
   async fetchTags() {
@@ -250,7 +287,7 @@ export class AdminAnwsersEditPage extends React.Component {
     }
   }
 
-  async _updateAnswerValue() {
+  async _updateAnswerValue({ source }) {
     this.setState({ isUpdating: true });
 
     try {
@@ -259,12 +296,10 @@ export class AdminAnwsersEditPage extends React.Component {
       const data = {
         generic_reference: null,
         state: ANSWER_STATE.UNDER_REVIEW,
-        value: this.answerValueEditor.value()
+        value: source
       };
 
       await this.axios.patch(uri, data);
-
-      this.answer.value = this.$answerValue.value;
     } catch (err) {
       console.warn(err);
     }
@@ -503,7 +538,7 @@ export class AdminAnwsersEditPage extends React.Component {
                 <AnswerEditor
                   defaultValue={this.answer.value}
                   disabled
-                  ref={node => (this.$answerValue = node)}
+                  headersOffset={2}
                 />
               </Flex>
             )}
@@ -515,6 +550,7 @@ export class AdminAnwsersEditPage extends React.Component {
                     <Subtitle isFirst>Réponse proposée</Subtitle>
                     <AnswerEditor
                       defaultValue={this.answer.prevalue}
+                      headersOffset={2}
                       disabled
                     />
                     <Hr />
@@ -526,8 +562,8 @@ export class AdminAnwsersEditPage extends React.Component {
                 </Subtitle>
                 <AnswerEditor
                   defaultValue={this.answer.value}
-                  onChange={this.updateAnswerValue}
-                  ref={node => (this.$answerValue = node)}
+                  headersOffset={2}
+                  onChange={this.updateAnswerValue.bind(this)}
                 />
                 <Hr />
 
