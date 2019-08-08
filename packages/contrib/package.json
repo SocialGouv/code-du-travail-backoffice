@@ -17,6 +17,7 @@
     "@fortawesome/fontawesome-svg-core": "1.2.21",
     "@fortawesome/free-solid-svg-icons": "5.10.1",
     "@fortawesome/react-fontawesome": "0.1.4",
+    "@socialgouv/meditor": "https://github.com/SocialGouv/meditor",
     "@zeit/next-css": "1.0.1",
     "axios": "0.19.0",
     "koa": "2.7.0",
