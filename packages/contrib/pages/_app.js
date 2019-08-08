@@ -3,7 +3,6 @@ import withReduxSaga from "next-redux-saga";
 import withRedux from "next-redux-wrapper";
 import React from "react";
 import { Provider } from "react-redux";
-import { ThemeProvider } from "theme-ui";
 
 import Main from "../src/layouts/Main";
 import isAuthenticated from "../src/libs/isAuthenticated";
@@ -56,13 +55,11 @@ class MainApp extends App {
     return (
       <Container>
         <Provider store={store}>
-          <ThemeProvider>
-            {!this.state.isMountedAndAllowed ? (
-              <Main isLoading />
-            ) : (
-              <Component {...pageProps} />
-            )}
-          </ThemeProvider>
+          {!this.state.isMountedAndAllowed ? (
+            <Main isLoading />
+          ) : (
+            <Component {...pageProps} />
+          )}
         </Provider>
       </Container>
     );

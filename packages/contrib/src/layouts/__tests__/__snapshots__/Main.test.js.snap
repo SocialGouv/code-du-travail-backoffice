@@ -3,17 +3,18 @@
 exports[`[Contrib] layouts/<Main /> (administrator) should match snapshot 1`] = `
 <div>
   <div
-    class="Main__Container-q4q6nx-0 kSNCLj css-1usr1wh"
+    class="sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 dGOKFr"
     style="height: 100vh;"
   >
     <div
-      class="Main__Body-q4q6nx-1 bSllml css-1gmfemw"
+      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 fjQGLo"
+      width="1"
     >
       <div
-        class="Header__Container-sc-7cr55z-0 eHuDxq css-s3axrf"
+        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 etybdb"
       >
         <div
-          class="Header__Brand-sc-7cr55z-1 knuMJV css-zkfaav"
+          class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 fQPTaL"
         >
           <img
             alt="Code du travail numérique"
@@ -22,7 +23,7 @@ exports[`[Contrib] layouts/<Main /> (administrator) should match snapshot 1`] = 
             src="/static/images/marianne.svg"
           />
           <div
-            class="css-l3rx45"
+            class="sc-bdVaJa sc-bwzfXH hhcqrs"
           >
             <span
               class="Header__Title-sc-7cr55z-3 jGdlvq"
@@ -38,7 +39,7 @@ exports[`[Contrib] layouts/<Main /> (administrator) should match snapshot 1`] = 
         </div>
       </div>
       <div
-        class="Main__Content-q4q6nx-2 iWRxVq css-l3rx45"
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 gMGhns"
       />
     </div>
   </div>
@@ -48,17 +49,18 @@ exports[`[Contrib] layouts/<Main /> (administrator) should match snapshot 1`] = 
 exports[`[Contrib] layouts/<Main /> (contributor) should match snapshot 1`] = `
 <div>
   <div
-    class="Main__Container-q4q6nx-0 kSNCLj css-1usr1wh"
+    class="sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 dGOKFr"
     style="height: 100vh;"
   >
     <div
-      class="Main__Body-q4q6nx-1 bSllml css-1gmfemw"
+      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 fjQGLo"
+      width="1"
     >
       <div
-        class="Header__Container-sc-7cr55z-0 eHuDxq css-s3axrf"
+        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 etybdb"
       >
         <div
-          class="Header__Brand-sc-7cr55z-1 knuMJV css-zkfaav"
+          class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 fQPTaL"
         >
           <img
             alt="Code du travail numérique"
@@ -67,7 +69,7 @@ exports[`[Contrib] layouts/<Main /> (contributor) should match snapshot 1`] = `
             src="/static/images/marianne.svg"
           />
           <div
-            class="css-l3rx45"
+            class="sc-bdVaJa sc-bwzfXH hhcqrs"
           >
             <span
               class="Header__Title-sc-7cr55z-3 jGdlvq"
@@ -83,7 +85,7 @@ exports[`[Contrib] layouts/<Main /> (contributor) should match snapshot 1`] = `
         </div>
       </div>
       <div
-        class="Main__Content-q4q6nx-2 iWRxVq css-l3rx45"
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 gMGhns"
       />
     </div>
   </div>
@@ -95,14 +97,14 @@ exports[`[Contrib] layouts/<Main /> (contributor) should match snapshot with \`i
 - First value
 + Second value
 
-@@ -33,10 +33,10 @@
+@@ -34,10 +34,10 @@
               </span>
             </div>
           </div>
         </div>
         <div
--         class=\\"Main__Content-q4q6nx-2 iWRxVq css-l3rx45\\"
-+         class=\\"Main__Content-q4q6nx-2 iWRxVq css-1kw0tju\\"
+-         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 gMGhns\\"
++         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 hVlhNU\\"
         />
       </div>
     </div>
@@ -114,14 +116,14 @@ exports[`[Contrib] layouts/<Main /> (contributor) should match snapshot with \`i
 - First value
 + Second value
 
-@@ -33,10 +33,23 @@
+@@ -34,10 +34,23 @@
               </span>
             </div>
           </div>
         </div>
         <div
--         class=\\"Main__Content-q4q6nx-2 iWRxVq css-l3rx45\\"
-+         class=\\"Main__Content-q4q6nx-2 iWRxVq css-1g1x2nw\\"
+-         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 gMGhns\\"
++         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 kJQuOe\\"
 +       >
 +         <div
 +           class=\\"LoadingSpinner__Container-eu7nmw-0 dEMrTz\\"

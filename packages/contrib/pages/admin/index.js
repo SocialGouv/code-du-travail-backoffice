@@ -1,5 +1,4 @@
-import Router from "next/router";
-import { toPairs } from "ramda";
+import numeral from "numeral";
 import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
@@ -11,21 +10,26 @@ import customAxios from "../../src/libs/customAxios";
 
 import { ANSWER_STATE } from "../../src/constants";
 
-import Idcc from "../../src/elements/Idcc";
-
 const Container = styled(Flex)`
   margin: 0 1rem 1rem;
 `;
 
 const Table = styled.table`
   border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
 
   tr > th {
     background-color: var(--color-label-background);
-    width: 6rem;
+    overflow: hidden;
+    text-align: left;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    width: 10%;
+    white-space: nowrap;
 
     :first-child {
-      width: auto;
+      width: 40%;
     }
   }
 
@@ -35,8 +39,6 @@ const Table = styled.table`
     border-left: 0;
     border-top: 0;
     padding: 0.25rem 0.5rem;
-    text-align: left;
-    white-space: nowrap;
   }
   tr:first-child > td,
   tr:first-child > th {
@@ -52,76 +54,121 @@ const Table = styled.table`
   }
 `;
 
+const REFRESH_DELAY = 10000;
+
 export default class Index extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       isLoading: true,
-      lastAnswers: []
+      questionsCount: 0,
+      statsAgreements: [],
+      statsLocations: [],
+      statsGlobal: [0, 0, 0, 0, 0, 0]
     };
   }
 
   async componentDidMount() {
     this.axios = customAxios();
 
-    try {
-      const lastAnswers = await this.fetchLastAnswers();
+    await this.updateStats();
+  }
 
+  async updateStats() {
+    try {
       const questionsCount = await this.countQuestions();
-      const locations = await this.fetchLocations();
+      const activeLocations = await this.fetchActiveLocations();
       const locationsAgreements = await this.fetchLocationsAgreement();
 
-      const locationsIds = locations.map(({ id }) => id);
-      const stats = locations.reduce((prev, location) => {
-        prev[location.id] = {
-          ...location,
-          agreements: []
-        };
+      let statsGlobal = [0, 0, 0, 0, 0, 0];
+      let statsLocations = activeLocations.map(location => ({
+        ...location,
+        stats: [0, 0, 0, 0, 0, 0]
+      }));
+      let statsAgreements = locationsAgreements.map(agreement => ({
+        ...agreement,
+        stats: [0, 0, 0, 0, 0, 0]
+      }));
 
-        return prev;
-      }, {});
+      const activeLocationsIds = activeLocations.map(({ id }) => id);
       for (let locationAgreement of locationsAgreements) {
-        const locationId = locationAgreement.location_id;
-        if (!locationsIds.includes(locationId)) continue;
+        const currentLocationId = locationAgreement.location_id;
+        if (!activeLocationsIds.includes(currentLocationId)) continue;
 
         const answers = await this.fetchAnswersForAgreement(
           locationAgreement.agreement_id
         );
 
-        stats[locationId].agreements.push([
-          locationAgreement.agreement,
-          answers.filter(({ state }) => state === ANSWER_STATE.TO_DO).length,
-          answers.filter(({ state }) => state === ANSWER_STATE.DRAFT).length,
-          answers.filter(({ state }) => state === ANSWER_STATE.PENDING_REVIEW)
-            .length,
-          answers.filter(({ state }) => state === ANSWER_STATE.VALIDATED).length
-        ]);
+        const todoAnswersCount = answers.filter(
+          ({ state }) => state === ANSWER_STATE.TO_DO
+        ).length;
+        const draftAnswersCount = answers.filter(
+          ({ state }) => state === ANSWER_STATE.DRAFT
+        ).length;
+        const pendingReviewAnswersCount = answers.filter(
+          ({ state }) => state === ANSWER_STATE.PENDING_REVIEW
+        ).length;
+        const underReviewAnswersCount = answers.filter(
+          ({ state }) => state === ANSWER_STATE.UNDER_REVIEW
+        ).length;
+        const validatedAnswersCount = answers.filter(
+          ({ state }) => state === ANSWER_STATE.VALIDATED
+        ).length;
+        const totalAnswersCount =
+          todoAnswersCount +
+          draftAnswersCount +
+          pendingReviewAnswersCount +
+          underReviewAnswersCount +
+          validatedAnswersCount;
+
+        statsGlobal = [
+          statsGlobal[0] + todoAnswersCount,
+          statsGlobal[1] + draftAnswersCount,
+          statsGlobal[2] + pendingReviewAnswersCount,
+          statsGlobal[3] + underReviewAnswersCount,
+          statsGlobal[4] + validatedAnswersCount,
+          statsGlobal[5] + totalAnswersCount
+        ];
+
+        const statsLocationIndex = statsLocations.findIndex(
+          ({ id }) => id === currentLocationId
+        );
+        const currentLocationStats = statsLocations[statsLocationIndex].stats;
+        statsLocations[statsLocationIndex].stats = [
+          currentLocationStats[0] + todoAnswersCount,
+          currentLocationStats[1] + draftAnswersCount,
+          currentLocationStats[2] + pendingReviewAnswersCount,
+          currentLocationStats[3] + underReviewAnswersCount,
+          currentLocationStats[4] + validatedAnswersCount,
+          currentLocationStats[5] + totalAnswersCount
+        ];
+
+        const statsAgreementIndex = statsAgreements.findIndex(
+          ({ agreement_id }) => agreement_id === locationAgreement.agreement_id
+        );
+        statsAgreements[statsAgreementIndex].stats = [
+          todoAnswersCount,
+          draftAnswersCount,
+          pendingReviewAnswersCount,
+          underReviewAnswersCount,
+          validatedAnswersCount,
+          totalAnswersCount
+        ];
       }
 
       this.setState({
         isLoading: false,
-        lastAnswers,
         questionsCount,
-        stats: toPairs(stats)
+        statsAgreements,
+        statsGlobal,
+        statsLocations
       });
+
+      setTimeout(this.updateStats.bind(this), REFRESH_DELAY);
     } catch (err) {
       if (err !== undefined) console.warn(err);
     }
-  }
-
-  async fetchLastAnswers() {
-    const select =
-      "select=*,question(index,value),agreement(idcc,name),user(name)";
-    const where = "user_id=not.is.null&order=updated_at.desc&limit=5";
-    const order = "order=updated_at.desc";
-    const limit = "limit=5";
-
-    const { data: lastAnswers } = await this.axios.get(
-      `/answers?${select}&${where}&${order}&${limit}`
-    );
-
-    return lastAnswers;
   }
 
   async countQuestions() {
@@ -132,7 +179,7 @@ export default class Index extends React.Component {
     return questions.length;
   }
 
-  async fetchLocations() {
+  async fetchActiveLocations() {
     const where = "name=ilike.UR*";
     const order = "order=name.asc";
 
@@ -144,10 +191,11 @@ export default class Index extends React.Component {
   }
 
   async fetchLocationsAgreement() {
-    const select = "select=*,agreement(idcc,name)";
+    const select = "select=*,agreement(idcc,name),location(name)";
+    const order = "agreement.order=idcc.asc";
 
     const { data: locationsAgreements } = await this.axios.get(
-      `/locations_agreements?${select}`
+      `/locations_agreements?${select}&${order}`
     );
 
     return locationsAgreements;
@@ -164,67 +212,149 @@ export default class Index extends React.Component {
     return locationsAgreements;
   }
 
-  editAnswer(id) {
-    Router.push(
-      {
-        pathname: `/admin/answers/edit`,
-        query: { id }
-      },
-      `/admin/answers/${id}`
+  getGlobalStats() {
+    const { statsGlobal } = this.state;
+
+    return (
+      <tr>
+        <th>Total</th>
+        <td>
+          {statsGlobal[0]}
+          <br />
+          {numeral(statsGlobal[0] / statsGlobal[5]).format("0%")}
+        </td>
+        <td>
+          {statsGlobal[1]}
+          <br />
+          {numeral(statsGlobal[1] / statsGlobal[5]).format("0%")}
+        </td>
+        <td>
+          {statsGlobal[2]}
+          <br />
+          {numeral(statsGlobal[2] / statsGlobal[5]).format("0%")}
+        </td>
+        <td>
+          {statsGlobal[3]}
+          <br />
+          {numeral(statsGlobal[3] / statsGlobal[5]).format("0%")}
+        </td>
+        <td>
+          {statsGlobal[4]}
+          <br />
+          {numeral(statsGlobal[4] / statsGlobal[5]).format("0%")}
+        </td>
+        <td>
+          {statsGlobal[5]}
+          <br />
+          100%
+        </td>
+      </tr>
     );
   }
 
-  getStats() {
-    return this.state.stats
-      .map(([, row], index) => {
-        if (row.agreements.length === 0) return [];
+  getUnitsStats() {
+    const { statsLocations } = this.state;
 
-        const locationTableRow = [
-          <tr key={`${index}-0`}>
-            <td
-              rowSpan={row.agreements.length}
-              style={{ fontWeight: 600, verticalAlign: "top" }}
-            >
-              {row.name}
-            </td>
-            <td>
-              <Idcc
-                code={row.agreements[0][0].idcc}
-                name={row.agreements[0][0].name}
-              />
-            </td>
-            <td>{row.agreements[0][1]}</td>
-            <td>{row.agreements[0][2]}</td>
-            <td>{row.agreements[0][3]}</td>
-            <td>{row.agreements[0][4]}</td>
-          </tr>
-        ];
+    return statsLocations.map((statsLocation, index) => (
+      <tr key={index}>
+        <th title={statsLocation.name}>{statsLocation.name}</th>
+        <td>
+          {statsLocation.stats[0]}
+          <br />
+          {numeral(statsLocation.stats[0] / statsLocation.stats[5]).format(
+            "0%"
+          )}
+        </td>
+        <td>
+          {statsLocation.stats[1]}
+          <br />
+          {numeral(statsLocation.stats[1] / statsLocation.stats[5]).format(
+            "0%"
+          )}
+        </td>
+        <td>
+          {statsLocation.stats[2]}
+          <br />
+          {numeral(statsLocation.stats[2] / statsLocation.stats[5]).format(
+            "0%"
+          )}
+        </td>
+        <td>
+          {statsLocation.stats[3]}
+          <br />
+          {numeral(statsLocation.stats[3] / statsLocation.stats[5]).format(
+            "0%"
+          )}
+        </td>
+        <td>
+          {statsLocation.stats[4]}
+          <br />
+          {numeral(statsLocation.stats[4] / statsLocation.stats[5]).format(
+            "0%"
+          )}
+        </td>
+        <td>
+          {statsLocation.stats[5]}
+          <br />
+          100%
+        </td>
+      </tr>
+    ));
+  }
 
-        if (row.agreements.length === 1) return locationTableRow;
+  getAgreementsStats() {
+    const { statsAgreements } = this.state;
 
-        return [
-          ...locationTableRow,
-          row.agreements.slice(1).map((agreement, subindex) => {
-            const keyIndex = subindex + 1;
+    return statsAgreements.map((statsAgreement, index) => {
+      const { idcc, name } = statsAgreement.agreement;
+      const title = `[${idcc}] ${name}`;
 
-            return (
-              <tr key={`${index}-${keyIndex}`}>
-                <td>
-                  <Idcc
-                    code={row.agreements[keyIndex][0].idcc}
-                    name={row.agreements[keyIndex][0].name}
-                  />
-                </td>
-                <td>{row.agreements[keyIndex][1]}</td>
-                <td>{row.agreements[keyIndex][2]}</td>
-                <td>{row.agreements[keyIndex][3]}</td>
-                <td>{row.agreements[keyIndex][4]}</td>
-              </tr>
-            );
-          })
-        ];
-      })
-      .flat();
+      return (
+        <tr key={index}>
+          <th title={title}>{title}</th>
+          <td>
+            {statsAgreement.stats[0]}
+            <br />
+            {numeral(statsAgreement.stats[0] / statsAgreement.stats[5]).format(
+              "0%"
+            )}
+          </td>
+          <td>
+            {statsAgreement.stats[1]}
+            <br />
+            {numeral(statsAgreement.stats[1] / statsAgreement.stats[5]).format(
+              "0%"
+            )}
+          </td>
+          <td>
+            {statsAgreement.stats[2]}
+            <br />
+            {numeral(statsAgreement.stats[2] / statsAgreement.stats[5]).format(
+              "0%"
+            )}
+          </td>
+          <td>
+            {statsAgreement.stats[3]}
+            <br />
+            {numeral(statsAgreement.stats[3] / statsAgreement.stats[5]).format(
+              "0%"
+            )}
+          </td>
+          <td>
+            {statsAgreement.stats[4]}
+            <br />
+            {numeral(statsAgreement.stats[4] / statsAgreement.stats[5]).format(
+              "0%"
+            )}
+          </td>
+          <td>
+            {statsAgreement.stats[5]}
+            <br />
+            100%
+          </td>
+        </tr>
+      );
+    });
   }
 
   render() {
@@ -232,23 +362,78 @@ export default class Index extends React.Component {
       <AdminMain>
         <Container flexDirection="column">
           <Title>Tableau de bord</Title>
-          <Subtitle isFirst>{`État d'avancement des réponses`}</Subtitle>
-          {this.state.isLoading && <p>Chargement en cours…</p>}
-          {!this.state.isLoading && (
-            <Table>
-              <thead>
+
+          <Subtitle isFirst>Global</Subtitle>
+          <Table>
+            <thead>
+              <tr>
+                <th />
+                <th title="À rédiger">À rédiger</th>
+                <th title="En cours de rédaction">En cours de rédaction</th>
+                <th title="À valider">À valider</th>
+                <th title="En cours de validation">En cours de validation</th>
+                <th title="Validées">Validées</th>
+                <th title="Total">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.isLoading ? (
                 <tr>
-                  <th>Unité</th>
-                  <th>Convention</th>
-                  <th>À rédiger</th>
-                  <th>Brouillons</th>
-                  <th>À valider</th>
-                  <th>Validées</th>
+                  <td colSpan="6">Calcul en cours…</td>
                 </tr>
-              </thead>
-              <tbody>{this.getStats()}</tbody>
-            </Table>
-          )}
+              ) : (
+                this.getGlobalStats()
+              )}
+            </tbody>
+          </Table>
+
+          <Subtitle isFirst>Par région</Subtitle>
+          <Table>
+            <thead>
+              <tr>
+                <th title="Région">Région</th>
+                <th title="À rédiger">À rédiger</th>
+                <th title="En cours de rédaction">En cours de rédaction</th>
+                <th title="À valider">À valider</th>
+                <th title="En cours de validation">En cours de validation</th>
+                <th title="Validées">Validées</th>
+                <th title="Total">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.isLoading ? (
+                <tr>
+                  <td colSpan="6">Calcul en cours…</td>
+                </tr>
+              ) : (
+                this.getUnitsStats()
+              )}
+            </tbody>
+          </Table>
+
+          <Subtitle isFirst>Par convention collective</Subtitle>
+          <Table>
+            <thead>
+              <tr>
+                <th title="Intitulé">Intitulé</th>
+                <th title="À rédiger">À rédiger</th>
+                <th title="En cours de rédaction">En cours de rédaction</th>
+                <th title="À valider">À valider</th>
+                <th title="En cours de validation">En cours de validation</th>
+                <th title="Validées">Validées</th>
+                <th title="Total">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.isLoading ? (
+                <tr>
+                  <td colSpan="6">Calcul en cours…</td>
+                </tr>
+              ) : (
+                this.getAgreementsStats()
+              )}
+            </tbody>
+          </Table>
         </Container>
       </AdminMain>
     );

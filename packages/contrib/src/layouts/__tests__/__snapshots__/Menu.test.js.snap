@@ -3,7 +3,7 @@
 exports[`[Contrib] layouts/<Menu /> (Admin) should match snapshot 1`] = `
 <div>
   <div
-    class="Menu__Container-sc-1tufs3d-0 cDDMgU css-4cffwv"
+    class="sc-bdVaJa sc-bwzfXH Menu__Container-sc-1tufs3d-0 demysH"
   >
     <div
       class="Menu__Dropdown-sc-1tufs3d-3 loMVOU"
@@ -30,7 +30,7 @@ exports[`[Contrib] layouts/<Menu /> (Admin) should match snapshot 1`] = `
         John Doe
       </span>
       <div
-        class="Menu__DropdownMenu-sc-1tufs3d-5 cBtyyh css-l3rx45"
+        class="sc-bdVaJa sc-bwzfXH Menu__DropdownMenu-sc-1tufs3d-5 iloOtC"
       >
         <span
           class="Menu__BaseLink-sc-1tufs3d-1 Menu__TopLink-sc-1tufs3d-2 Menu__DropdownLink-sc-1tufs3d-6 jmXsXQ"
@@ -62,7 +62,7 @@ exports[`[Contrib] layouts/<Menu /> (Admin) should match snapshot 1`] = `
 exports[`[Contrib] layouts/<Menu /> (Contributor) should match snapshot 1`] = `
 <div>
   <div
-    class="Menu__Container-sc-1tufs3d-0 cDDMgU css-4cffwv"
+    class="sc-bdVaJa sc-bwzfXH Menu__Container-sc-1tufs3d-0 demysH"
   >
     <div
       class="Menu__Dropdown-sc-1tufs3d-3 loMVOU"
@@ -89,7 +89,7 @@ exports[`[Contrib] layouts/<Menu /> (Contributor) should match snapshot 1`] = `
         Liste des réponses
       </span>
       <div
-        class="Menu__DropdownMenu-sc-1tufs3d-5 cBtyyh css-l3rx45"
+        class="sc-bdVaJa sc-bwzfXH Menu__DropdownMenu-sc-1tufs3d-5 iloOtC"
       >
         <span
           class="Menu__BaseLink-sc-1tufs3d-1 Menu__TopLink-sc-1tufs3d-2 Menu__DropdownLink-sc-1tufs3d-6 jmXsXQ"
@@ -138,7 +138,7 @@ exports[`[Contrib] layouts/<Menu /> (Contributor) should match snapshot 1`] = `
         Aide
       </span>
       <div
-        class="Menu__DropdownMenu-sc-1tufs3d-5 cBtyyh css-l3rx45"
+        class="sc-bdVaJa sc-bwzfXH Menu__DropdownMenu-sc-1tufs3d-5 iloOtC"
       >
         <span
           class="Menu__BaseLink-sc-1tufs3d-1 Menu__TopLink-sc-1tufs3d-2 Menu__DropdownLink-sc-1tufs3d-6 jmXsXQ"
@@ -209,7 +209,7 @@ exports[`[Contrib] layouts/<Menu /> (Contributor) should match snapshot 1`] = `
         John Doe
       </span>
       <div
-        class="Menu__DropdownMenu-sc-1tufs3d-5 cBtyyh css-l3rx45"
+        class="sc-bdVaJa sc-bwzfXH Menu__DropdownMenu-sc-1tufs3d-5 iloOtC"
       >
         <span
           class="Menu__BaseLink-sc-1tufs3d-1 Menu__TopLink-sc-1tufs3d-2 Menu__DropdownLink-sc-1tufs3d-6 jmXsXQ"

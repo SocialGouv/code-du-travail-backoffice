@@ -3,17 +3,18 @@
 exports[`[Contrib] layouts/<AdminMain /> should match snapshot 1`] = `
 <div>
   <div
-    class="Main__Container-q4q6nx-0 kSNCLj css-1usr1wh"
+    class="sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 dGOKFr"
     style="height: 100vh;"
   >
     <div
-      class="Main__Body-q4q6nx-1 bSllml css-1gmfemw"
+      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 fjQGLo"
+      width="1"
     >
       <div
-        class="Header__Container-sc-7cr55z-0 eHuDxq css-s3axrf"
+        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 etybdb"
       >
         <div
-          class="Header__Brand-sc-7cr55z-1 knuMJV css-zkfaav"
+          class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 fQPTaL"
         >
           <img
             alt="Code du travail numérique"
@@ -22,7 +23,7 @@ exports[`[Contrib] layouts/<AdminMain /> should match snapshot 1`] = `
             src="/static/images/marianne.svg"
           />
           <div
-            class="css-l3rx45"
+            class="sc-bdVaJa sc-bwzfXH hhcqrs"
           >
             <span
               class="Header__Title-sc-7cr55z-3 jGdlvq"
@@ -38,10 +39,10 @@ exports[`[Contrib] layouts/<AdminMain /> should match snapshot 1`] = `
         </div>
       </div>
       <div
-        class="Main__Content-q4q6nx-2 iWRxVq css-1kw0tju"
+        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 hVlhNU"
       >
         <div
-          class="AdminMenu__Container-t0dk93-0 bMnGdR css-l3rx45"
+          class="sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 imFqQo"
         >
           <div
             class="AdminMenu__Link-t0dk93-2 LnAQE"
@@ -119,11 +120,11 @@ exports[`[Contrib] layouts/<AdminMain /> should match snapshot diff with \`hasBa
 - <div>
 + <DocumentFragment>
     <div
-      class=\\"Main__Container-q4q6nx-0 kSNCLj css-1usr1wh\\"
+      class=\\"sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 dGOKFr\\"
       style=\\"height: 100vh;\\"
     >
       <div
-@@ -94,14 +94,10 @@
+@@ -95,14 +95,10 @@
               class=\\"AdminMenu__Link-t0dk93-2 kospmv\\"
             >
               Migrations
@@ -150,21 +151,21 @@ exports[`[Contrib] layouts/<AdminMain /> should match snapshot diff with \`isLoa
 - <div>
 + <DocumentFragment>
     <div
-      class=\\"Main__Container-q4q6nx-0 kSNCLj css-1usr1wh\\"
+      class=\\"sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 dGOKFr\\"
       style=\\"height: 100vh;\\"
     >
       <div
-@@ -33,75 +33,23 @@
+@@ -34,75 +34,23 @@
               </span>
             </div>
           </div>
         </div>
         <div
--         class=\\"Main__Content-q4q6nx-2 iWRxVq css-1kw0tju\\"
-+         class=\\"Main__Content-q4q6nx-2 iWRxVq css-1g1x2nw\\"
+-         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 hVlhNU\\"
++         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 kJQuOe\\"
         >
           <div
--           class=\\"AdminMenu__Container-t0dk93-0 bMnGdR css-l3rx45\\"
+-           class=\\"sc-bdVaJa sc-bwzfXH AdminMenu__Container-t0dk93-0 imFqQo\\"
 +           class=\\"LoadingSpinner__Container-eu7nmw-0 dEMrTz\\"
           >
             <div

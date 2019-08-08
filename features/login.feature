@@ -7,7 +7,9 @@ Feature: Login
     Given I am a registered "administrator"
     When I log into the application
     Then I should see the title "Tableau de bord"
-    And I should see the subtitle "État d'avancement des réponses"
+    And I should see the subtitle "Global"
+    And I should see the subtitle "Par région"
+    And I should see the subtitle "Par convention collective"
 
   Scenario: Successfully login as a contributor
     Given I am a registered "contributor"

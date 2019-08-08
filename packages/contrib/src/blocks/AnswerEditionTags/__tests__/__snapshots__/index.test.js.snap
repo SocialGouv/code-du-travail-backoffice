@@ -3,7 +3,7 @@
 exports[`[Contrib] blocks/<AnswerEditionTags /> should match snapshot 1`] = `
 <div>
   <div
-    class="AnswerEditionTags__Container-ycvsa3-0 CoxbC css-l3rx45"
+    class="sc-bdVaJa sc-bwzfXH AnswerEditionTags__Container-ycvsa3-0 sppqD"
   >
     <h2
       class="Subtitle-sc-17ig8qv-0 gsnyDG"
@@ -14,7 +14,7 @@ exports[`[Contrib] blocks/<AnswerEditionTags /> should match snapshot 1`] = `
       Sélectionnez les étiquettes correspondant à la réponse que vous rédigez afin de nous aider à classifier le contenu:
     </p>
     <div
-      class="css-l3rx45"
+      class="sc-bdVaJa sc-bwzfXH hhcqrs"
     >
       <h2
         class="Subtitle-sc-17ig8qv-0 AnswerEditionTags__Subtitle-ycvsa3-1 cVqAlR"
@@ -22,7 +22,7 @@ exports[`[Contrib] blocks/<AnswerEditionTags /> should match snapshot 1`] = `
         Type de contrat
       </h2>
       <div
-        class="css-z54kij"
+        class="sc-bdVaJa sc-bwzfXH dQqCkI"
       >
         <span
           class="Tag-sc-16selk6-0 iUqFOL"
@@ -32,7 +32,7 @@ exports[`[Contrib] blocks/<AnswerEditionTags /> should match snapshot 1`] = `
       </div>
     </div>
     <div
-      class="css-l3rx45"
+      class="sc-bdVaJa sc-bwzfXH hhcqrs"
     >
       <h2
         class="Subtitle-sc-17ig8qv-0 AnswerEditionTags__Subtitle-ycvsa3-1 eQbvOl"
@@ -40,7 +40,7 @@ exports[`[Contrib] blocks/<AnswerEditionTags /> should match snapshot 1`] = `
         Cible
       </h2>
       <div
-        class="css-z54kij"
+        class="sc-bdVaJa sc-bwzfXH dQqCkI"
       >
         <span
           class="Tag-sc-16selk6-0 cSbvW"
@@ -50,7 +50,7 @@ exports[`[Contrib] blocks/<AnswerEditionTags /> should match snapshot 1`] = `
       </div>
     </div>
     <div
-      class="css-l3rx45"
+      class="sc-bdVaJa sc-bwzfXH hhcqrs"
     >
       <h2
         class="Subtitle-sc-17ig8qv-0 AnswerEditionTags__Subtitle-ycvsa3-1 eQbvOl"
@@ -58,11 +58,11 @@ exports[`[Contrib] blocks/<AnswerEditionTags /> should match snapshot 1`] = `
         Durée de travail
       </h2>
       <div
-        class="css-z54kij"
+        class="sc-bdVaJa sc-bwzfXH dQqCkI"
       />
     </div>
     <div
-      class="css-l3rx45"
+      class="sc-bdVaJa sc-bwzfXH hhcqrs"
     >
       <h2
         class="Subtitle-sc-17ig8qv-0 AnswerEditionTags__Subtitle-ycvsa3-1 eQbvOl"
@@ -70,11 +70,11 @@ exports[`[Contrib] blocks/<AnswerEditionTags /> should match snapshot 1`] = `
         Type d'horaires
       </h2>
       <div
-        class="css-z54kij"
+        class="sc-bdVaJa sc-bwzfXH dQqCkI"
       />
     </div>
     <div
-      class="css-l3rx45"
+      class="sc-bdVaJa sc-bwzfXH hhcqrs"
     >
       <h2
         class="Subtitle-sc-17ig8qv-0 AnswerEditionTags__Subtitle-ycvsa3-1 eQbvOl"
@@ -82,7 +82,7 @@ exports[`[Contrib] blocks/<AnswerEditionTags /> should match snapshot 1`] = `
         Particularismes
       </h2>
       <div
-        class="css-z54kij"
+        class="sc-bdVaJa sc-bwzfXH dQqCkI"
       />
     </div>
   </div>
