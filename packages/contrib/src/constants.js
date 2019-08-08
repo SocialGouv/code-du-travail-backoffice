@@ -19,7 +19,8 @@ export const ANSWER_STATE_LABEL = {
 
 export const USER_ROLE = {
   ADMINISTRATOR: "administrator",
-  CONTRIBUTOR: "contributor"
+  CONTRIBUTOR: "contributor",
+  REGIONAL_ADMINISTRATOR: "regional_administrator"
 };
 
 export const ZONE_CATEGORY_LABEL = {

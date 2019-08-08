@@ -7,6 +7,8 @@ import Login from "../src/components/Login";
 import Main from "../src/layouts/Main";
 import isAuthenticated from "../src/libs/isAuthenticated";
 
+import { USER_ROLE } from "../src/constants";
+
 const Left = styled(Flex)`
   padding: 5rem;
 `;
@@ -56,11 +58,14 @@ export default class Index extends React.Component {
         const role = JSON.parse(sessionStorage.getItem("me")).payload.role;
 
         switch (true) {
-          case role === "administrator":
+          case [
+            USER_ROLE.ADMINISTRATOR,
+            USER_ROLE.REGIONAL_ADMINISTRATOR
+          ].includes(role):
             Router.push("/admin");
             break;
 
-          case role === "contributor":
+          case role === USER_ROLE.CONTRIBUTOR:
             Router.push("/");
             break;
         }

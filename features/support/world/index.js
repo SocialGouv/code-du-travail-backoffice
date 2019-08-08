@@ -14,11 +14,7 @@ setDefaultTimeout(30000);
 class World {
   async start() {
     this.browser = await puppeteer.launch({
-      args: [
-        "--disable-setuid-sandbox",
-        "--no-sandbox",
-        `--window-size=1600,1024`
-      ],
+      args: ["--disable-setuid-sandbox", "--no-sandbox", `--window-size=1600,1024`],
       defaultViewport: { width: 1280, height: 768 },
       devtools: NODE_ENV !== "test",
       headless: NODE_ENV === "test"
@@ -29,9 +25,7 @@ class World {
 
   extendPage() {
     this.page.waitForSelectors = function(selectors) {
-      return Promise.all(
-        selectors.map(selector => this.waitForSelector(selector))
-      );
+      return Promise.all(selectors.map(selector => this.waitForSelector(selector)));
     }.bind(this.page);
   }
 
@@ -50,6 +44,13 @@ class World {
           password: "Azerty123"
         };
         break;
+
+      case "regional administrator":
+        this.user = {
+          email: "deb@sea.com",
+          password: "Azerty123"
+        };
+        break;
     }
   }
 
@@ -58,11 +59,7 @@ class World {
   }
 
   async login() {
-    await this.page.waitForSelectors([
-      `input[name="email"]`,
-      `input[name="password"]`,
-      `button`
-    ]);
+    await this.page.waitForSelectors([`input[name="email"]`, `input[name="password"]`, `button`]);
 
     const $email = await this.page.$(`input[name="email"]`);
     const $password = await this.page.$(`input[name="password"]`);
@@ -71,10 +68,7 @@ class World {
     await $email.type(this.user.email);
     await $password.type(this.user.password);
 
-    await Promise.all([
-      this.page.waitForNavigation(),
-      $button.click()
-    ]);
+    await Promise.all([this.page.waitForNavigation(), $button.click()]);
   }
 
   async checkSubtitle(text) {
@@ -82,8 +76,8 @@ class World {
     await this.page.waitForSelector(subtitleSelector);
 
     const subtitleTexts = await this.page.evaluate(
-      subtitleSelector => [...document.querySelectorAll(subtitleSelector)]
-        .map(({ innerText }) => innerText),
+      subtitleSelector =>
+        [...document.querySelectorAll(subtitleSelector)].map(({ innerText }) => innerText),
       subtitleSelector
     );
 

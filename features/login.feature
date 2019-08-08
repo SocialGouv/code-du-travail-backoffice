@@ -15,3 +15,11 @@ Feature: Login
     Given I am a registered "contributor"
     When I log into the application
     Then I should see the subtitle "Réponses à rédiger"
+
+  Scenario: Successfully login as a regional administrator
+    Given I am a registered "regional administrator"
+    When I log into the application
+    Then I should see the title "Tableau de bord"
+    And I should see the subtitle "Global"
+    And I should see the subtitle "Par région"
+    And I should see the subtitle "Par convention collective"
