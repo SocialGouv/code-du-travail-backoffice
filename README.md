@@ -16,7 +16,7 @@ Ce dépôt regroupe les applications d'administration des données du
 - Node v10+
 - Docker v18+
 - Docker Compose v1.17+
-- Yarn (`npm i -g yarn`)
+- Yarn
 
 ### Installation
 
