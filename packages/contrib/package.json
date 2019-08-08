@@ -14,9 +14,11 @@
     "test:watch": "yarn test:unit --watch"
   },
   "dependencies": {
+    "@emotion/core": "10.0.15",
     "@fortawesome/fontawesome-svg-core": "1.2.21",
     "@fortawesome/free-solid-svg-icons": "5.10.1",
     "@fortawesome/react-fontawesome": "0.1.4",
+    "@mdx-js/react": "1.1.6",
     "@zeit/next-css": "1.0.1",
     "axios": "0.19.0",
     "koa": "2.7.0",
@@ -46,6 +48,7 @@
     "showdown": "1.9.0",
     "simplemde": "1.11.2",
     "styled-components": "4.3.2",
+    "theme-ui": "0.2.31",
     "ua-parser-js": "0.7.20",
     "zxcvbn": "4.4.2"
   },
