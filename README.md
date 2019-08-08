@@ -42,13 +42,16 @@ yarn dev
 
 Le site devrait être accessible à l'adresse http://localhost:3100.
 
-2 utilisateurs ont été générés par défaut pendant l'installation :
+3 utilisatrices ont été générées par défaut pendant l'installation :
 
 - Administrateur:
-  - Email: `administrator@example.com`
+  - Email: `doris@sea.com`
+  - Mot de passe: `Azerty123`
+- Administrateur régional:
+  - Email: `deb@sea.com`
   - Mot de passe: `Azerty123`
 - Contributeur:
-  - Email: `contributor@example.com`
+  - Email: `nemo@sea.com`
   - Mot de passe: `Azerty123`
 
 ** Recommended VS Code settings **
