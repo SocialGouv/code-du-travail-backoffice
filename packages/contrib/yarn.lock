@@ -1068,8 +1068,9 @@
     eslint-plugin-prettier "~3.1.0"
 
 "@socialgouv/meditor@https://github.com/SocialGouv/meditor":
-  version "0.1.0-alpha.2"
-  resolved "https://github.com/SocialGouv/meditor#54c492e7c5df510e4fe663c860a9d64d68261a44"
+  version "0.1.0-alpha.3"
+  uid "8490f337d65498947328b23cd9f2ab714e638ea0"
+  resolved "https://github.com/SocialGouv/meditor#8490f337d65498947328b23cd9f2ab714e638ea0"
 
 "@styled-system/background@^5.0.18":
   version "5.0.18"
