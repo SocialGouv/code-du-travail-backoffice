@@ -1,7 +1,7 @@
 -------------------------------------- UP --------------------------------------
 
 CREATE VIEW api.public_answers AS
-SELECT
+  SELECT
     id,
     parent_id,
     value,
