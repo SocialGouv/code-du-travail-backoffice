@@ -1,7 +1,7 @@
 -------------------------------------- UP --------------------------------------
 
 CREATE VIEW api.full_answers AS
-SELECT
+  SELECT
     answers.*,
     questions.index AS question_index,
     questions.value AS question_value,
