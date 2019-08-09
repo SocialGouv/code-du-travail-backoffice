@@ -3,7 +3,7 @@
 DROP VIEW api.contributor_answers;
 
 CREATE VIEW api.contributor_answers AS
-SELECT
+  SELECT
     answers.*,
     questions.value AS question,
     agreements.name AS agreement,
@@ -45,7 +45,7 @@ GRANT SELECT ON api.contributor_answers TO contributor;
 DROP VIEW api.contributor_answers;
 
 CREATE VIEW api.contributor_answers AS
-SELECT
+  SELECT
     answers.*,
     questions.value AS question,
     agreements.name AS agreement,
