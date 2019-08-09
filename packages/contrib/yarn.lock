@@ -1046,25 +1046,25 @@
   resolved "https://registry.yarnpkg.com/@sheerun/mutationobserver-shim/-/mutationobserver-shim-0.3.2.tgz#8013f2af54a2b7d735f71560ff360d3a8176a87b"
   integrity sha512-vTCdPp/T/Q3oSqwHmZ5Kpa9oI7iLtGl3RQaA/NyLHikvcrPxACkkKVr/XzkSPJWXHRhKGzVvb0urJsbMlRxi1Q==
 
-"@socialgouv/eslint-config-react@0.9.3":
-  version "0.9.3"
-  resolved "https://registry.yarnpkg.com/@socialgouv/eslint-config-react/-/eslint-config-react-0.9.3.tgz#da94de4e9eabaed0b57dfb13a8c25ff29ef5f0a4"
-  integrity sha512-kneX4DdQUrBjkxD7vZKYzj/7VzpJrOKQi8YjckUZMFFIHnEM1/axa3Fm0aWt/ZIlCATr18yb708RTCFDq4q9bQ==
+"@socialgouv/eslint-config-react@0.9.4":
+  version "0.9.4"
+  resolved "https://registry.yarnpkg.com/@socialgouv/eslint-config-react/-/eslint-config-react-0.9.4.tgz#82e4826116af90f6867ee3530e13edb40a7d73fb"
+  integrity sha512-pcVUT8vWQu2KztLbFNNMcKHNdd36LWDKp5l/2nsStdvPp3dPYVTrj7VwBQukOvOdp339hNY0bigHx0rnflizag==
   dependencies:
-    "@socialgouv/eslint-config-recommended" "^0.9.3"
+    "@socialgouv/eslint-config-recommended" "^0.9.4"
     babel-eslint "^10.0.2"
     eslint-plugin-jsx-a11y "~6.2.3"
     eslint-plugin-react "~7.14.3"
     eslint-plugin-react-hooks "~1.6.1"
 
-"@socialgouv/eslint-config-recommended@^0.9.3":
-  version "0.9.3"
-  resolved "https://registry.yarnpkg.com/@socialgouv/eslint-config-recommended/-/eslint-config-recommended-0.9.3.tgz#c824e800e7a1c24defe78bcbec24ddbd7fc458d0"
-  integrity sha512-xJTJgFCc4wajNsV06UfWCscLDCcFp8YRjZYb8xM6kHDhlJI1+e5XzAK311r3FUcNgLVNTEubVZWyIH+pd5OWkA==
+"@socialgouv/eslint-config-recommended@^0.9.4":
+  version "0.9.4"
+  resolved "https://registry.yarnpkg.com/@socialgouv/eslint-config-recommended/-/eslint-config-recommended-0.9.4.tgz#4ebd0a575361495bf907b553fa328fffa20609dd"
+  integrity sha512-GRAJos1gIwCEBBKx+OXW72vFDnY4+b+2USENvHQYewglVgr8JPyHGZyzqZS9hY1Ska5yG2uxeQwhhejT20gL7g==
   dependencies:
     eslint-config-prettier "~6.0.0"
     eslint-plugin-import "~2.18.2"
-    eslint-plugin-jest "^22.13.6"
+    eslint-plugin-jest "^22.15.0"
     eslint-plugin-prettier "~3.1.0"
 
 "@socialgouv/meditor@https://github.com/SocialGouv/meditor":
@@ -3148,7 +3148,7 @@ eslint-plugin-import@~2.18.2:
     read-pkg-up "^2.0.0"
     resolve "^1.11.0"
 
-eslint-plugin-jest@^22.13.6:
+eslint-plugin-jest@^22.15.0:
   version "22.15.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.15.0.tgz#fe70bfff7eeb47ca0ab229588a867f82bb8592c5"
   integrity sha512-hgnPbSqAIcLLS9ePb12hNHTRkXnkVaCfOwCt2pzQ8KpOKPWGA4HhLMaFN38NBa/0uvLfrZpcIRjT+6tMAfr58Q==
