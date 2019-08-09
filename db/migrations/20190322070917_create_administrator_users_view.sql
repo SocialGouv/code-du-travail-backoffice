@@ -8,7 +8,7 @@ CREATE TYPE administrator_users_agreements AS (
 );
 
 CREATE VIEW api.administrator_users AS
-SELECT
+  SELECT
     users.id,
     users.email,
     users.name,
