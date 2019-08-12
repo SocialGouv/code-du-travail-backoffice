@@ -24,7 +24,7 @@
   "dependencies": {
     "boxen": "4.1.0",
     "chai": "4.2.0",
-    "csv-parse": "4.4.4",
+    "csv-parse": "4.4.5",
     "cucumber": "5.1.0",
     "dotenv": "8.0.0",
     "imgur": "0.3.1",
