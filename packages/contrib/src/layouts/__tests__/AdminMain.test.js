@@ -30,7 +30,7 @@ jest.mock("react-redux", () => ({
 
 import AdminMain from "../AdminMain";
 
-describe("[Contrib] layouts/<AdminMain />", () => {
+describe.skip("[Contrib] layouts/<AdminMain />", () => {
   // https://github.com/facebook/jest/issues/890#issuecomment-415202799
   window.history.pushState({}, "", "/admin");
 

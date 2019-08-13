@@ -17,16 +17,8 @@ expect.extend({ toMatchDiffSnapshot });
 // https://github.com/megawac/MutationObserver.js
 import "mutationobserver-shim";
 
-// Polyfill "document.getSelection()""
-// https://gist.github.com/yckart/6435861
-Object.defineProperty(document, "getSelection", {
-  value: () => {
-    return document.selection && document.selection.createRange().text;
-  }
-});
-
 // Mock "sessionStorage"
-import "../__mocks__/sessionStorage";
+// import "../__mocks__/sessionStorage";
 
 // Mock "next/router"
 import "../__mocks__/nextRouter";

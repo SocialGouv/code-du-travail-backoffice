@@ -37,7 +37,7 @@ const PROPS = {
   onClick: jest.fn()
 };
 
-describe("[Contrib] blocks/<AdminAnswer /> (Draft)", () => {
+describe.skip("[Contrib] blocks/<AdminAnswer /> (Draft)", () => {
   const props = { ...PROPS };
   const λ = render(<AdminAnswer {...props} />);
 
@@ -62,7 +62,8 @@ describe("[Contrib] blocks/<AdminAnswer /> (Draft)", () => {
   });
 });
 
-describe("[Contrib] blocks/<AdminAnswer /> (Draft falling back to LC)", () => {
+// eslint-disable-next-line max-len
+describe.skip("[Contrib] blocks/<AdminAnswer /> (Draft falling back to LC)", () => {
   const props = {
     ...PROPS,
     data: {
@@ -78,7 +79,8 @@ describe("[Contrib] blocks/<AdminAnswer /> (Draft falling back to LC)", () => {
   });
 });
 
-describe("[Contrib] blocks/<AdminAnswer /> (Draft falling back to NA)", () => {
+// eslint-disable-next-line max-len
+describe.skip("[Contrib] blocks/<AdminAnswer /> (Draft falling back to NA)", () => {
   const props = {
     ...PROPS,
     data: {
@@ -94,7 +96,7 @@ describe("[Contrib] blocks/<AdminAnswer /> (Draft falling back to NA)", () => {
   });
 });
 
-describe("[Contrib] blocks/<AdminAnswer /> (Checked draft)", () => {
+describe.skip("[Contrib] blocks/<AdminAnswer /> (Checked draft)", () => {
   const props = {
     ...PROPS,
     isChecked: true
@@ -106,7 +108,7 @@ describe("[Contrib] blocks/<AdminAnswer /> (Checked draft)", () => {
   });
 });
 
-describe("[Contrib] blocks/<AdminAnswer /> (Unchecked draft)", () => {
+describe.skip("[Contrib] blocks/<AdminAnswer /> (Unchecked draft)", () => {
   const props = {
     ...PROPS,
     isChecked: false
@@ -124,7 +126,7 @@ describe("[Contrib] blocks/<AdminAnswer /> (Unchecked draft)", () => {
   });
 });
 
-describe("[Contrib] blocks/<AdminAnswer /> (To Do)", () => {
+describe.skip("[Contrib] blocks/<AdminAnswer /> (To Do)", () => {
   const props = {
     ...PROPS,
     data: {
@@ -139,7 +141,7 @@ describe("[Contrib] blocks/<AdminAnswer /> (To Do)", () => {
   });
 });
 
-describe("[Contrib] blocks/<AdminAnswer /> (Pending Review)", () => {
+describe.skip("[Contrib] blocks/<AdminAnswer /> (Pending Review)", () => {
   const props = {
     ...PROPS,
     data: {
@@ -154,7 +156,7 @@ describe("[Contrib] blocks/<AdminAnswer /> (Pending Review)", () => {
   });
 });
 
-describe("[Contrib] blocks/<AdminAnswer /> (Under Review)", () => {
+describe.skip("[Contrib] blocks/<AdminAnswer /> (Under Review)", () => {
   const props = {
     ...PROPS,
     data: {
@@ -169,7 +171,7 @@ describe("[Contrib] blocks/<AdminAnswer /> (Under Review)", () => {
   });
 });
 
-describe("[Contrib] blocks/<AdminAnswer /> (Validated)", () => {
+describe.skip("[Contrib] blocks/<AdminAnswer /> (Validated)", () => {
   const props = {
     ...PROPS,
     data: {

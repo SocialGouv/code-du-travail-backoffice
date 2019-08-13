@@ -486,16 +486,25 @@ export class AdminAnwsersEditPage extends React.Component {
   }
 
   getReferences(category = null) {
-    return this.state.references
-      .filter(({ category: _category }) => _category === category)
-      .map(({ id, url, value }, index) => (
-        <Reference
-          key={index}
-          onRemove={() => this.deleteReference(id)}
-          url={url}
-          value={value}
-        />
-      ));
+    const references = this.state.references.filter(
+      ({ category: _category }) => _category === category
+    );
+
+    if (
+      this.answer.state === ANSWER_STATE.VALIDATED &&
+      references.length === 0
+    ) {
+      return <span>Aucune référence.</span>;
+    }
+
+    return references.map(({ id, url, value }, index) => (
+      <Reference
+        key={index}
+        onRemove={() => this.deleteReference(id)}
+        url={url}
+        value={value}
+      />
+    ));
   }
 
   getComments() {
@@ -531,17 +540,6 @@ export class AdminAnwsersEditPage extends React.Component {
               <Title isFirst>{this.answer.question.value}</Title>
             </Flex>
             <Hr />
-
-            {this.answer.state === ANSWER_STATE.VALIDATED && (
-              <Flex flexDirection="column" width={1}>
-                <Subtitle isFirst>Réponse validée</Subtitle>
-                <AnswerEditor
-                  defaultValue={this.answer.value}
-                  disabled
-                  headersOffset={2}
-                />
-              </Flex>
-            )}
 
             {this.answer.state !== ANSWER_STATE.VALIDATED && (
               <Flex flexDirection="column" width={1}>
@@ -637,6 +635,25 @@ export class AdminAnwsersEditPage extends React.Component {
                     {this.getTags("distinctive_identity")}
                   </Flex>
                 </Flex> */}
+              </Flex>
+            )}
+
+            {this.answer.state === ANSWER_STATE.VALIDATED && (
+              <Flex flexDirection="column" width={1}>
+                <Subtitle isFirst>Réponse validée</Subtitle>
+                <AnswerEditor
+                  defaultValue={this.answer.value}
+                  disabled
+                  headersOffset={2}
+                />
+
+                <Subtitle>Références juridiques</Subtitle>
+                <Strong>Convention collective</Strong>
+                <Flex flexWrap="wrap">{this.getReferences("agreement")}</Flex>
+                <Strong>Code du travail</Strong>
+                <Flex flexWrap="wrap">{this.getReferences("labor_code")}</Flex>
+                <Strong>Autres</Strong>
+                <Flex flexWrap="wrap">{this.getReferences()}</Flex>
               </Flex>
             )}
           </LeftContainer>

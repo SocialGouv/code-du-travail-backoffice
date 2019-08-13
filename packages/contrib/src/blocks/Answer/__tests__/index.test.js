@@ -8,7 +8,7 @@ import { ANSWER_STATE } from "../../../constants";
 // Ignore styled-wrapped ReactTooltip className prop warning
 console.warn = jest.fn();
 
-describe("[Contrib] blocks/<Answer /> (Todo)", () => {
+describe.skip("[Contrib] blocks/<Answer /> (Todo)", () => {
   const props = {
     data: {
       id: "12345678-9abc-4def-0123-456789abcdef",
@@ -51,7 +51,7 @@ describe("[Contrib] blocks/<Answer /> (Todo)", () => {
   });
 });
 
-describe("[Contrib] blocks/<Answer /> (Draft)", () => {
+describe.skip("[Contrib] blocks/<Answer /> (Draft)", () => {
   const props = {
     data: {
       id: "12345678-9abc-4def-0123-456789abcdef",

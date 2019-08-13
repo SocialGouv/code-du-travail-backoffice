@@ -3,7 +3,7 @@ import { fireEvent, render } from "@testing-library/react";
 
 import AnswerEditionTags from "..";
 
-describe("[Contrib] blocks/<AnswerEditionTags />", () => {
+describe.skip("[Contrib] blocks/<AnswerEditionTags />", () => {
   const props = {
     onToggle: jest.fn(),
     selectedTags: ["da68fa2d-4bfc-4b5b-bea3-f39f44719650"],

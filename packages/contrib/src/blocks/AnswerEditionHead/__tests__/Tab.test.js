@@ -3,7 +3,7 @@ import { fireEvent, render } from "@testing-library/react";
 
 import Tab from "../Tab";
 
-describe("[Contrib] blocks/AnswerEditionHead/<Tab />", () => {
+describe.skip("[Contrib] blocks/AnswerEditionHead/<Tab />", () => {
   const props = {
     children: "A Tab Text",
     icon: "book",

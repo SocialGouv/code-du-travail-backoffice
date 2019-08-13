@@ -3,7 +3,7 @@ import { fireEvent, render } from "@testing-library/react";
 
 import Pagination from "../Pagination";
 
-describe("[Contrib] components/<Pagination />", () => {
+describe.skip("[Contrib] components/<Pagination />", () => {
   const props = {
     initialPage: 2,
     onPageChange: jest.fn(),
