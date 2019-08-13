@@ -3,7 +3,7 @@ import { render } from "@testing-library/react";
 
 import Editor from "../Editor";
 
-describe("<Editor />", () => {
+describe.skip("<Editor />", () => {
   const props = {
     defaultValue: `
 ## Guerre et Paix
@@ -31,8 +31,10 @@ Ceci est très **important**.
     // We need to disable this attribute since it's automatically generated and
     // we can't have any control over it:
     // eslint-disable-next-line prettier/prettier
-    γ.container.innerHTML = γ.container.innerHTML
-      .replace(/ medium-editor-index="[^"]{36}"/, "");
+    γ.container.innerHTML = γ.container.innerHTML.replace(
+      / medium-editor-index="[^"]{36}"/,
+      ""
+    );
 
     expect(γ.container).toMatchSnapshot();
   });

@@ -3,7 +3,7 @@ import { fireEvent, render } from "@testing-library/react";
 
 import Tabs, { TABS } from "../Tabs";
 
-describe("[Contrib] blocks/AnswerEditionHead/<Tabs />", () => {
+describe.skip("[Contrib] blocks/AnswerEditionHead/<Tabs />", () => {
   const props = {
     currentTab: TABS.EDITOR,
     onChange: jest.fn(),

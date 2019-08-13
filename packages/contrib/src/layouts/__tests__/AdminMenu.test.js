@@ -6,7 +6,7 @@ jest.mock("next/router");
 
 import AdminMenu from "../AdminMenu";
 
-describe("[Contrib] layouts/<AdminMenu />", () => {
+describe.skip("[Contrib] layouts/<AdminMenu />", () => {
   // https://github.com/facebook/jest/issues/890#issuecomment-415202799
   window.history.pushState({}, "", "/admin");
 

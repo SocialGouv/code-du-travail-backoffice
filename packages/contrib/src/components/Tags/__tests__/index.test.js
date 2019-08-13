@@ -5,7 +5,7 @@ import "../../../../__mocks__/waitFor";
 
 import Tags from "..";
 
-describe("[Contrib] components/<Tags />", () => {
+describe.skip("[Contrib] components/<Tags />", () => {
   const props = {
     ariaName: "le tag",
     isEditable: true,
@@ -89,7 +89,7 @@ describe("[Contrib] components/<Tags />", () => {
   });
 });
 
-describe("[Contrib] components/<Tags /> without optional props", () => {
+describe.skip("[Contrib] components/<Tags /> without optional props", () => {
   const props = {
     isEditable: true,
     onAdd: jest.fn(),
@@ -116,7 +116,7 @@ describe("[Contrib] components/<Tags /> without optional props", () => {
   // });
 });
 
-describe("[Contrib] components/<Tags /> without `isEditable`", () => {
+describe.skip("[Contrib] components/<Tags /> without `isEditable`", () => {
   const props = {
     onAdd: jest.fn(),
     onRemove: jest.fn(),

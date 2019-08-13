@@ -3,7 +3,7 @@ import { fireEvent, render } from "@testing-library/react";
 
 import Actions from "../Actions";
 
-describe("[Contrib] blocks/AnswerEditionHead/<Actions />", () => {
+describe.skip("[Contrib] blocks/AnswerEditionHead/<Actions />", () => {
   const props = {
     onCancel: jest.fn(),
     onSubmit: jest.fn()

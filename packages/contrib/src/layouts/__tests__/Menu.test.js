@@ -11,7 +11,7 @@ import Menu from "../Menu";
 import { ANSWER_STATE } from "../../constants";
 import T from "../../texts";
 
-describe("[Contrib] layouts/<Menu /> (Contributor)", () => {
+describe.skip("[Contrib] layouts/<Menu /> (Contributor)", () => {
   const props = {
     me: { payload: { name: "John Doe" } },
     router: { pathname: "/" }
@@ -105,7 +105,7 @@ describe("[Contrib] layouts/<Menu /> (Contributor)", () => {
   });
 });
 
-describe("[Contrib] layouts/<Menu /> (Admin)", () => {
+describe.skip("[Contrib] layouts/<Menu /> (Admin)", () => {
   const props = {
     isAdmin: true,
     me: { payload: { name: "John Doe" } },
