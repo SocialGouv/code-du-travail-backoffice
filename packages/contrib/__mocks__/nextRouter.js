@@ -1,6 +1,18 @@
-import Router from "next/router";
+import "next/router";
 
-Router.router = {
-  push: () => {},
-  prefetch: () => {}
+global.nextRouter = {
+  prefetch: jest.fn(),
+  push: jest.fn(),
+  withRouter: component => {
+    component.defaultProps = {
+      ...component.defaultProps,
+      router: {
+        pathname: "/admin"
+      }
+    };
+
+    return component;
+  }
 };
+
+jest.mock("next/router", () => global.nextRouter);

@@ -1,8 +1,5 @@
 jest.unmock("../customAxios");
 
-import Router from "next/router";
-jest.mock("next/router");
-
 describe("[Contrib] libs/customAxios()", () => {
   // eslint-disable-next-line max-len
   it("should redirect to /login with no JWT in session", () => {
@@ -13,7 +10,9 @@ describe("[Contrib] libs/customAxios()", () => {
     window.history.pushState({}, "A Page", "/a-path");
 
     expect(() => customAxios()).toThrow(undefined);
-    expect(Router.push).toHaveBeenCalledWith("/login?redirectTo=/a-path");
+    expect(global.nextRouter.push).toHaveBeenCalledWith(
+      "/login?redirectTo=/a-path"
+    );
   });
 
   // eslint-disable-next-line max-len
