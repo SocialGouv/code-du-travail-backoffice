@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 
 module.exports = {
+  automock: true,
   collectCoverage: true,
   collectCoverageFrom: ["<rootDir>/src/**/*.js"],
   moduleNameMapper: {
