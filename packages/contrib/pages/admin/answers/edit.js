@@ -524,6 +524,9 @@ export class AdminAnwsersEditPage extends React.Component {
 
     if (this.state.isLoading) return <AdminMain isLoading />;
 
+    const { answer } = this;
+    const title = `${answer.question.index}) ${answer.question.value}`;
+
     return (
       <AdminMain>
         <Container>
@@ -533,21 +536,21 @@ export class AdminAnwsersEditPage extends React.Component {
                 <Idcc />
               ) : (
                 <Idcc
-                  code={this.answer.agreement.idcc}
-                  name={this.answer.agreement.name}
+                  code={answer.agreement.idcc}
+                  name={answer.agreement.name}
                 />
               )}
-              <Title isFirst>{this.answer.question.value}</Title>
+              <Title isFirst>{title}</Title>
             </Flex>
             <Hr />
 
-            {this.answer.state !== ANSWER_STATE.VALIDATED && (
+            {answer.state !== ANSWER_STATE.VALIDATED && (
               <Flex flexDirection="column" width={1}>
                 {!this.isGeneric && (
                   <Flex flexDirection="column" width={1}>
                     <Subtitle isFirst>Réponse proposée</Subtitle>
                     <AnswerEditor
-                      defaultValue={this.answer.prevalue}
+                      defaultValue={answer.prevalue}
                       headersOffset={2}
                       disabled
                     />
@@ -559,7 +562,7 @@ export class AdminAnwsersEditPage extends React.Component {
                   {this.isGeneric ? "Réponse générique" : "Réponse corrigée"}
                 </Subtitle>
                 <AnswerEditor
-                  defaultValue={this.answer.value}
+                  defaultValue={answer.value}
                   headersOffset={2}
                   onChange={this.updateAnswerValue.bind(this)}
                 />
@@ -638,11 +641,11 @@ export class AdminAnwsersEditPage extends React.Component {
               </Flex>
             )}
 
-            {this.answer.state === ANSWER_STATE.VALIDATED && (
+            {answer.state === ANSWER_STATE.VALIDATED && (
               <Flex flexDirection="column" width={1}>
                 <Subtitle isFirst>Réponse validée</Subtitle>
                 <AnswerEditor
-                  defaultValue={this.answer.value}
+                  defaultValue={answer.value}
                   disabled
                   headersOffset={2}
                 />
@@ -687,7 +690,7 @@ export class AdminAnwsersEditPage extends React.Component {
               />
             </Flex>
 
-            {this.answer.state === ANSWER_STATE.DRAFT && (
+            {answer.state === ANSWER_STATE.DRAFT && (
               <Flex flexDirection="column">
                 <Button
                   disabled={this.state.isUpdating}
@@ -704,8 +707,8 @@ export class AdminAnwsersEditPage extends React.Component {
               </Flex>
             )}
 
-            {(this.answer.state === ANSWER_STATE.PENDING_REVIEW ||
-              this.answer.state === ANSWER_STATE.UNDER_REVIEW) && (
+            {(answer.state === ANSWER_STATE.PENDING_REVIEW ||
+              answer.state === ANSWER_STATE.UNDER_REVIEW) && (
               <Flex flexDirection="column">
                 <Button
                   disabled={this.state.isUpdating}
