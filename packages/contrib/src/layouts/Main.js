@@ -36,7 +36,8 @@ const Main = ({
   isAdmin = false,
   isHorizontal = false,
   isLoading = false,
-  router
+  router,
+  ...props
 }) => (
   <Container alignItems="stretch" style={{ height: "100vh" }}>
     <Head>
@@ -68,11 +69,11 @@ const Main = ({
         router={router}
       />
       {isLoading ? (
-        <Content alignItems="center" justifyContent="center">
+        <Content alignItems="center" justifyContent="center" {...props}>
           <LoadingSpinner color="#666666" />
         </Content>
       ) : (
-        <Content flexDirection={isHorizontal ? "row" : "column"}>
+        <Content flexDirection={isHorizontal ? "row" : "column"} {...props}>
           {children}
         </Content>
       )}

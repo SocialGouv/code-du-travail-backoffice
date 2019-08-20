@@ -8,12 +8,16 @@ describe("[Contrib] blocks/<AnswerEditionHead />", () => {
   const onTabChange = jest.fn();
 
   const props = {
-    agreement: "An agreement title",
+    agreement: {
+      idcc: "0123",
+      name: "An Agreement Name"
+    },
     currentTab: TABS.EDITOR,
-    idcc: "0123",
-    index: 12,
     onTabChange,
-    title: "A question title"
+    question: {
+      index: 123,
+      value: "A Question Value"
+    }
   };
 
   const { container } = render(<AnswerEditionHead {...props} />);

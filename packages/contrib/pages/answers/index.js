@@ -136,8 +136,16 @@ class AnswersIndexPage extends React.Component {
     );
   }
 
-  editAnswer(id) {
-    Router.push(`/answers/edit/${id}`);
+  openAnswer(id) {
+    const { state } = this.props;
+
+    if ([ANSWER_STATE.TO_DO, ANSWER_STATE.DRAFT].includes(state)) {
+      Router.push(`/answers/edit/${id}`);
+
+      return;
+    }
+
+    Router.push(`/answers/view/${id}`);
   }
 
   getAnswersList() {
@@ -160,7 +168,7 @@ class AnswersIndexPage extends React.Component {
         data={answer}
         key={answer.id}
         onCancel={this.cancelAnswer.bind(this)}
-        onClick={this.editAnswer.bind(this)}
+        onClick={this.openAnswer.bind(this)}
         onFallback={this.setAnswerGenericReference.bind(this)}
       />
     ]);

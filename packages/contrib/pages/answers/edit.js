@@ -43,13 +43,15 @@ class AnswersEditPage extends React.Component {
       hasSavingSpinner: false,
       isLoading: true,
       isSaving: false,
-      lastAnswerPrevalue: "",
       me: null,
-      savingSpinnerTimeout: 0
+      references: [],
+      savingSpinnerTimeout: 0,
+      tags: []
     };
 
     this.allTags = [];
-    this.originalAnswer = null;
+    this.prevalue = null;
+    this.newPrevalue = null;
 
     this.deleteReference = debounce(this._deleteReference.bind(this), 500);
     this.insertReference = debounce(this._insertReference.bind(this), 500);
@@ -71,25 +73,36 @@ class AnswersEditPage extends React.Component {
     this.axios = customAxios();
 
     try {
+      this.fetchAnswer();
+
       const tags = await this.axios.get(`/tags`);
-      const answers = await this.axios.get(
-        `/contributor_answers?id=eq.${this.props.id}`
-      );
       const laborCodeReferences = await axios.get(
         `/static/data/labor-law-references.json`
       );
 
       this.allTags = tags.data;
       this.laborCodeReferences = laborCodeReferences.data;
-      this.originalAnswer = answers.data[0];
 
-      this.setState({
-        isLoading: false,
-        lastAnswerPrevalue: this.originalAnswer.prevalue
-      });
+      this.setState({ isLoading: false });
     } catch (err) {
       console.warn(err);
     }
+  }
+
+  componentDidUpdate() {
+    if (!this.props.answers.isLoading) {
+      if (this.prevalue === null) {
+        this.prevalue = this.props.answers.data[0].prevalue;
+        this.newPrevalue = this.props.answers.data[0].prevalue;
+        this.forceUpdate();
+      }
+    }
+  }
+
+  fetchAnswer() {
+    const { dispatch, id } = this.props;
+
+    dispatch(actions.answers.loadOne(id));
   }
 
   toggleTag(id, isAdded) {
@@ -138,15 +151,13 @@ class AnswersEditPage extends React.Component {
       const uri = `/answers?id=eq.${this.props.id}`;
       // An answer can't have a value and be generic at the same time:
       const data = {
-        generic_reference: null,
         prevalue: value,
         state: "draft",
         user_id: this.state.me.payload.id
       };
 
       await this.axios.patch(uri, data);
-
-      this.originalAnswer.prevalue = value;
+      this.newPrevalue = value;
     } catch (err) {
       console.warn(err);
     }
@@ -177,9 +188,10 @@ class AnswersEditPage extends React.Component {
       console.warn(err);
     }
 
-    this.originalAnswer.tags = [...this.originalAnswer.tags, tagId];
-
-    this.setState({ isSaving: false });
+    this.setState({
+      isSaving: false,
+      tags: [...this.state.tags, tagId]
+    });
   }
 
   async _deleteTag(tagId) {
@@ -196,11 +208,10 @@ class AnswersEditPage extends React.Component {
       console.warn(err);
     }
 
-    this.originalAnswer.tags = this.originalAnswer.tags.filter(
-      id => id !== tagId
-    );
-
-    this.setState({ isSaving: false });
+    this.setState({
+      isSaving: false,
+      tags: this.state.tags.filter(id => id !== tagId)
+    });
   }
 
   async _insertReference(reference) {
@@ -226,12 +237,10 @@ class AnswersEditPage extends React.Component {
       console.warn(err);
     }
 
-    this.originalAnswer.references = [
-      ...this.originalAnswer.references,
-      reference
-    ];
-
-    this.setState({ isSaving: false });
+    this.setState({
+      isSaving: false,
+      references: [...this.state.references, reference]
+    });
   }
 
   async _deleteReference(_value) {
@@ -248,11 +257,10 @@ class AnswersEditPage extends React.Component {
       console.warn(err);
     }
 
-    this.originalAnswer.references = this.originalAnswer.references.filter(
-      ({ value }) => value !== _value
-    );
-
-    this.setState({ isSaving: false });
+    this.setState({
+      isSaving: false,
+      references: this.state.references.filter(({ value }) => value !== _value)
+    });
   }
 
   showSavingSpinner() {
@@ -276,13 +284,17 @@ class AnswersEditPage extends React.Component {
   switchTab(nextTab) {
     if (nextTab === this.state.currentTab) return;
 
-    this.setState({
-      currentTab: nextTab,
-      lastAnswerPrevalue: this.originalAnswer.prevalue
-    });
+    if (nextTab === TABS.EDITOR) {
+      this.prevalue = this.newPrevalue;
+    }
+
+    this.setState({ currentTab: nextTab });
   }
 
   getTabContent() {
+    const { prevalue } = this;
+    const { references, tags } = this.state;
+
     switch (this.state.currentTab) {
       case TABS.REFERENCES:
         return (
@@ -290,7 +302,7 @@ class AnswersEditPage extends React.Component {
             laborCodeReferences={this.laborCodeReferences}
             onAdd={this.insertReference.bind(this)}
             onRemove={this.deleteReference.bind(this)}
-            references={this.originalAnswer.references}
+            references={references}
           />
         );
 
@@ -298,7 +310,7 @@ class AnswersEditPage extends React.Component {
         return (
           <AnswerEditionTags
             onToggle={this.toggleTag.bind(this)}
-            selectedTags={this.originalAnswer.tags}
+            selectedTags={tags}
             tags={this.allTags}
           />
         );
@@ -307,32 +319,37 @@ class AnswersEditPage extends React.Component {
       default:
         return (
           <AnswerEditionContent
-            defaultValue={this.state.lastAnswerPrevalue}
+            defaultValue={prevalue}
             onChange={this.saveAnswerPrevalue}
-            onToggleTag={this.toggleTag.bind(this)}
-            selectedTags={this.originalAnswer.tags}
-            tags={this.allTags}
           />
         );
     }
   }
 
   render() {
-    if (this.state.isLoading) return <Main isLoading />;
+    const { prevalue } = this;
+    const { answers } = this.props;
+    const { isLoading, references, tags } = this.state;
+
+    if (isLoading || answers.isLoading || prevalue === null) {
+      return <Main isLoading />;
+    }
+
+    const { agreement, question } = answers.data[0];
 
     return (
       <Container>
         <AnswerEditionHead
-          agreement={this.originalAnswer.agreement}
+          agreement={agreement}
           currentTab={this.state.currentTab}
-          idcc={this.originalAnswer.idcc}
-          index={this.originalAnswer.index}
+          idcc={agreement.idcc}
+          index={agreement.index}
           onCancel={() => this.cancelAnswer()}
           onSubmit={() => this.requestForAnswerValidation()}
           onTabChange={this.switchTab.bind(this)}
-          referencesCount={this.originalAnswer.references.length}
-          tagsCount={this.originalAnswer.tags.length}
-          title={this.originalAnswer.question}
+          question={question}
+          referencesCount={references.length}
+          tagsCount={tags.length}
         />
         <Content>
           {this.state.hasSavingSpinner && (
@@ -349,4 +366,4 @@ class AnswersEditPage extends React.Component {
   }
 }
 
-export default connect()(AnswersEditPage);
+export default connect(({ answers }) => ({ answers }))(AnswersEditPage);

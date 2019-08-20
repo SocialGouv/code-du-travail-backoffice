@@ -11,7 +11,7 @@ const Content = styled(Flex)`
   background-color: white;
   border: solid 1px var(--color-border);
   border-radius: 0.4rem;
-  cursor: ${({ isEditable }) => (isEditable ? "pointer" : "auto")};
+  cursor: pointer;
   flex-grow: 1;
   margin: 0.5rem 0;
   padding: 0.75rem 0.5rem 0.75rem 0.75rem;
@@ -42,16 +42,9 @@ export default ({ data, onCancel, onClick, onFallback }) => {
   const isTodo = data.state === ANSWER_STATE.TO_DO;
   const value = isDraft ? data.prevalue : data.value;
 
-  const isEditable = isTodo || isDraft;
-  const _onClick = () => (isEditable ? onClick(data.id) : void 0);
-
   return (
     <Flex width={1}>
-      <Content
-        flexDirection="column"
-        isEditable={isEditable}
-        onClick={_onClick}
-      >
+      <Content flexDirection="column" onClick={() => onClick(data.id)}>
         <Flex alignItems="baseline">
           {data.agreement !== null ? (
             <Idcc code={data.agreement_idcc} name={data.agreement_name} />
