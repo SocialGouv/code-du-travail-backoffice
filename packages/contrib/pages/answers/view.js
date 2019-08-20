@@ -16,7 +16,7 @@ import customAxios from "../../src/libs/customAxios";
 import { ANSWER_STATE } from "../../src/constants";
 
 const Container = styled(Main)`
-  overflow-x: hidden;
+  overflow-y: auto;
   padding: 1rem;
 `;
 
