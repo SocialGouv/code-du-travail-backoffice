@@ -2,7 +2,7 @@ import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
-import Button from "../../elements/Button";
+import _Button from "../../elements/Button";
 import Icon from "../../elements/Icon";
 
 const Container = styled(Flex)`
@@ -10,8 +10,12 @@ const Container = styled(Flex)`
   margin-left: 1rem;
   padding: 0 1rem;
 `;
+
 const Text = styled.span`
   margin-left: 1rem;
+`;
+const Button = styled(_Button)`
+  padding: 0 0 0 0.5rem;
 `;
 
 export default class List extends React.PureComponent {
