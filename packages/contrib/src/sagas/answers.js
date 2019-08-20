@@ -9,6 +9,27 @@ import toast from "../libs/toast";
 import { ANSWER_STATE, ANSWER_STATE_LABEL, USER_ROLE } from "../constants";
 import { pluralize } from "../texts";
 
+/* ONE ANSWER ―――――――――――――――――――――― */
+
+function* loadOne({ meta: { id } }) {
+  try {
+    let request = postgrest()
+      .select("*")
+      .select("agreement(idcc,name)")
+      .select("question(index,value)")
+      .eq("id", id);
+
+    const { data } = yield request.get("/answers");
+
+    yield put(answers.loadOneSuccess(data));
+  } catch (err) {
+    toast.error(err.message);
+    yield put(answers.loadOneFailure({ message: null }));
+  }
+}
+
+/* MULTIPLE ANSWERS ―――――――――――――――― */
+
 /**
  * Cancel an answer draft by resettinng all its related data.
  */
@@ -56,15 +77,21 @@ function* cancel({ meta: { ids, next } }) {
  */
 function* setGenericReference({ meta: { genericReference, ids, next } }) {
   try {
-    const me = JSON.parse(sessionStorage.getItem("me"));
+    const {
+      payload: { id: userId, role: userRole }
+    } = JSON.parse(sessionStorage.getItem("me"));
 
-    const data = {
-      generic_reference: genericReference,
-      prevalue: "",
-      state: ANSWER_STATE.DRAFT,
-      user_id: me.payload.id,
-      value: ""
-    };
+    const data =
+      userRole === USER_ROLE.ADMINISTRATOR
+        ? {
+            generic_reference: genericReference,
+            state: ANSWER_STATE.UNDER_REVIEW
+          }
+        : {
+            generic_reference: genericReference,
+            state: ANSWER_STATE.DRAFT,
+            user_id: userId
+          };
 
     yield postgrest()
       .in("answer_id", ids, true)
@@ -246,6 +273,7 @@ function* toggleCheck({ meta: { checked, ids } }) {
 }
 
 export default [
+  takeLatest(actionTypes.ANSWER_LOAD_ONE, loadOne),
   takeLatest(actionTypes.ANSWERS_CANCEL, cancel),
   takeLatest(actionTypes.ANSWERS_LOAD, load),
   takeLatest(actionTypes.ANSWERS_SET_GENERIC_REFERENCE, setGenericReference),
