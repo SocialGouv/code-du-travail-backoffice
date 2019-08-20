@@ -68,22 +68,31 @@ class AnswersEditPage extends React.Component {
   }
 
   async componentDidMount() {
-    this.setState({ me: JSON.parse(sessionStorage.getItem("me")) });
+    const { id } = this.props;
+    const me = JSON.parse(sessionStorage.getItem("me"));
 
     this.axios = customAxios();
+    this.fetchAnswer();
 
     try {
-      this.fetchAnswer();
-
-      const tags = await this.axios.get(`/tags`);
+      const { data: references } = await this.axios.get(
+        `/answers_references?answer_id=eq.${id}`
+      );
+      const { data: tags } = await this.axios.get(`/answers_tags`);
+      const { data: allTags } = await this.axios.get(`/tags`);
       const laborCodeReferences = await axios.get(
         `/static/data/labor-law-references.json`
       );
 
-      this.allTags = tags.data;
+      this.allTags = allTags;
       this.laborCodeReferences = laborCodeReferences.data;
 
-      this.setState({ isLoading: false });
+      this.setState({
+        isLoading: false,
+        me,
+        references,
+        tags
+      });
     } catch (err) {
       console.warn(err);
     }
@@ -149,7 +158,6 @@ class AnswersEditPage extends React.Component {
 
     try {
       const uri = `/answers?id=eq.${this.props.id}`;
-      // An answer can't have a value and be generic at the same time:
       const data = {
         prevalue: value,
         state: "draft",
@@ -170,9 +178,7 @@ class AnswersEditPage extends React.Component {
 
     try {
       const answersUri = `/answers?id=eq.${this.props.id}`;
-      // An answer can't have a custom tag and be generic at the same time:
       const answersData = {
-        generic_reference: null,
         state: "draft",
         user_id: this.state.me.payload.id
       };
@@ -219,9 +225,7 @@ class AnswersEditPage extends React.Component {
 
     try {
       const answersUri = `/answers?id=eq.${this.props.id}`;
-      // An answer can't have a reference and be generic at the same time:
       const answersData = {
-        generic_reference: null,
         state: "draft",
         user_id: this.state.me.payload.id
       };

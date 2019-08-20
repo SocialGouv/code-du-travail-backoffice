@@ -42,7 +42,7 @@ export default class extends React.PureComponent {
     const reference = {
       category: "labor_code",
       url: null,
-      value
+      value: value.trim()
     };
 
     this.setState({
@@ -65,7 +65,8 @@ export default class extends React.PureComponent {
   addAgreementReference(event) {
     event.preventDefault();
 
-    const value = this.$agreementReferenceTitle.value;
+    const value = this.$agreementReferenceTitle.value.trim();
+    const url = this.$agreementReferenceUrl.value.trim();
     if (value.trim().length === 0) return;
 
     if (find(propEq("value", value), this.state.references) !== undefined) {
@@ -74,7 +75,7 @@ export default class extends React.PureComponent {
 
     const reference = {
       category: "agreement",
-      url: null,
+      url: url.length !== 0 ? url : null,
       value
     };
 
@@ -106,7 +107,7 @@ export default class extends React.PureComponent {
       return;
     }
 
-    const url = this.$referenceUrl.value;
+    const url = this.$referenceUrl.value.trim();
     const reference = {
       category: null,
       url: url.trim().length !== 0 ? url : null,
@@ -156,6 +157,12 @@ export default class extends React.PureComponent {
                 <Input
                   placeholder="Ex: Article 7, Texte sur les salaires de 1984…"
                   ref={node => (this.$agreementReferenceTitle = node)}
+                />
+              </Field>
+              <Field>
+                <Input
+                  placeholder="URL (ex: https://www.legifrance.gouv.fr/…)"
+                  ref={node => (this.$agreementReferenceUrl = node)}
                 />
               </Field>
               <Field>
