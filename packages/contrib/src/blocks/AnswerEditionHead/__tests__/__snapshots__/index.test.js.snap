@@ -41,11 +41,6 @@ exports[`[Contrib] blocks/<AnswerEditionHead /> should match snapshot 1`] = `
         >
           Références juridiques (undefined)
         </div>
-        <div
-          class="sc-bdVaJa sc-bwzfXH Tab__Container-sc-9u46t0-0 hyrWDR"
-        >
-          Étiquettes (undefined)
-        </div>
       </div>
     </div>
     <div

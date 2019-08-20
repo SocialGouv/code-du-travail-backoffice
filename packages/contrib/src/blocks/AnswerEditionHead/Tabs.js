@@ -14,7 +14,7 @@ export const TABS = {
   TAGS: 2
 };
 
-export default ({ currentTab, onChange, referencesCount, tagsCount }) => (
+export default ({ currentTab, onChange, referencesCount }) => (
   <Container>
     <Tab
       isActive={currentTab === TABS.EDITOR}
@@ -27,12 +27,6 @@ export default ({ currentTab, onChange, referencesCount, tagsCount }) => (
       onClick={() => onChange(TABS.REFERENCES)}
     >
       {`Références juridiques (${referencesCount})`}
-    </Tab>
-    <Tab
-      isActive={currentTab === TABS.TAGS}
-      onClick={() => onChange(TABS.TAGS)}
-    >
-      {`Étiquettes (${tagsCount})`}
     </Tab>
   </Container>
 );
