@@ -20,20 +20,18 @@ const Idcc = styled(_Idcc)`
 export default ({
   agreement,
   currentTab,
-  idcc,
-  index,
   onCancel,
   onSubmit,
   onTabChange,
+  question,
   referencesCount,
-  tagsCount,
-  title
+  tagsCount
 }) => (
   <Container justifyContent="space-between">
     <Flex flexDirection="column">
       <Flex alignItems="baseline">
-        <Idcc code={idcc} name={agreement} />
-        <Title isFirst>{`${index}) ${title}`}</Title>
+        <Idcc code={agreement.idcc} name={agreement.name} />
+        <Title isFirst>{`${question.index}) ${question.value}`}</Title>
       </Flex>
       <Tabs
         currentTab={currentTab}

@@ -14,7 +14,7 @@ exports[`[Contrib] blocks/<AnswerEditionHead /> should match snapshot 1`] = `
         <div
           class="AnswerEditionHead__Idcc-sc-1nqi9lw-1 jcgzPI Idcc__Container-owzimc-0 fWXTkt"
           currentitem="false"
-          data-tip="An agreement title"
+          data-tip="An Agreement Name"
         >
           IDCC: 0123
           <div
@@ -25,7 +25,7 @@ exports[`[Contrib] blocks/<AnswerEditionHead /> should match snapshot 1`] = `
         <h1
           class="Title-r6qlw8-0 gPMqTc"
         >
-          12) A question title
+          123) A Question Value
         </h1>
       </div>
       <div
