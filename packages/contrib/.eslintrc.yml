@@ -21,7 +21,7 @@ overrides:
       - "*.test.js"
 
     env:
-      jest: true,
+      jest: true
 
     globals:
       generateTestId: true
