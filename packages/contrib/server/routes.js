@@ -20,6 +20,11 @@ module.exports = function(nextApp) {
     ctx.respond = false;
   });
 
+  router.get("/answers/view/:id", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/answers/view", { ...ctx.params });
+    ctx.respond = false;
+  });
+
   router.get("/answers/:state/:page", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/answers", { ...ctx.params });
     ctx.respond = false;
