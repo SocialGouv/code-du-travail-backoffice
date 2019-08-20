@@ -6,7 +6,7 @@ ALTER TABLE api.questions
   ADD COLUMN index serial;
 
 CREATE VIEW api.contributor_answers AS
-SELECT
+  SELECT
     answers.*,
     questions.index AS index,
     questions.value AS question,
@@ -53,7 +53,7 @@ ALTER TABLE api.questions
   DROP COLUMN index;
 
 CREATE VIEW api.contributor_answers AS
-SELECT
+  SELECT
     answers.*,
     questions.value AS question,
     agreements.name AS agreement,

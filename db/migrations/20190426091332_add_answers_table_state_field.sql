@@ -16,7 +16,7 @@ ALTER TABLE api.answers
   ADD COLUMN state answer_state DEFAULT 'todo';
 
 CREATE VIEW api.contributor_answers AS
-SELECT
+  SELECT
     answers.*,
     questions.value AS question,
     agreements.name AS agreement,
@@ -62,7 +62,7 @@ ALTER TABLE api.answers
   ADD COLUMN is_draft boolean DEFAULT TRUE;
 
 CREATE VIEW api.contributor_answers AS
-SELECT
+  SELECT
     answers.*,
     questions.value AS question,
     agreements.name AS agreement,

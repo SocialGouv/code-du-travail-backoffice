@@ -18,7 +18,7 @@ ALTER TABLE api.answers
   ADD COLUMN generic_reference answer_generic_reference;
 
 CREATE VIEW api.contributor_answers AS
-SELECT
+  SELECT
     answers.*,
     questions.value AS question,
     agreements.name AS agreement,
@@ -64,7 +64,7 @@ ALTER TABLE api.agreements
   DROP COLUMN parent_id;
 
 CREATE VIEW api.contributor_answers AS
-SELECT
+  SELECT
     answers.*,
     questions.value AS question,
     agreements.name AS agreement,

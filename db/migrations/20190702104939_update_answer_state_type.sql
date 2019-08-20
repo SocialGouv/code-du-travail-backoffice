@@ -19,7 +19,7 @@ ALTER TABLE api.answers
   ALTER COLUMN state SET DEFAULT 'todo';
 
 CREATE VIEW api.contributor_answers AS
-SELECT
+  SELECT
     answers.*,
     questions.index AS index,
     questions.value AS question,
@@ -78,7 +78,7 @@ ALTER TABLE api.answers
   ALTER COLUMN state SET DEFAULT 'todo';
 
 CREATE VIEW api.contributor_answers AS
-SELECT
+  SELECT
     answers.*,
     questions.index AS index,
     questions.value AS question,

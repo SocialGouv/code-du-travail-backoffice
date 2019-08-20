@@ -6,7 +6,7 @@ ALTER TABLE api.answers
   ADD COLUMN prevalue text NOT NULL DEFAULT '';
 
 CREATE VIEW api.contributor_answers AS
-SELECT
+  SELECT
     answers.*,
     questions.index AS index,
     questions.value AS question,
@@ -53,7 +53,7 @@ ALTER TABLE api.answers
   DROP COLUMN prevalue;
 
 CREATE VIEW api.contributor_answers AS
-SELECT
+  SELECT
     answers.*,
     questions.index AS index,
     questions.value AS question,

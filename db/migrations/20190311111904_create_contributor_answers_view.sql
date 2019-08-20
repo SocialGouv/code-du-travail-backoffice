@@ -7,7 +7,7 @@ CREATE TYPE contributor_answers_references AS (
 );
 
 CREATE VIEW api.contributor_answers AS
-SELECT
+  SELECT
     answers.*,
     questions.value AS question,
     agreements.name AS agreement,

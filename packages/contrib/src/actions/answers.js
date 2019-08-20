@@ -1,5 +1,29 @@
 import actionTypes from "./types";
 
+/* ONE ANSWER ―――――――――――――――――――――― */
+
+export const loadOne = id => ({
+  type: actionTypes.ANSWER_LOAD_ONE,
+  meta: {
+    id
+  }
+});
+export const loadOneFailure = error => ({
+  type: actionTypes.ANSWER_LOAD_ONE_FAILURE,
+  error: true,
+  payload: {
+    message: error.message
+  }
+});
+export const loadOneSuccess = data => ({
+  type: actionTypes.ANSWER_LOAD_ONE_SUCCESS,
+  payload: {
+    data
+  }
+});
+
+/* MULTIPLE ANSWERS ―――――――――――――――― */
+
 export const cancel = (ids, next) => ({
   type: actionTypes.ANSWERS_CANCEL,
   meta: {

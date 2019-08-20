@@ -16,6 +16,7 @@ import Hr from "../../../src/elements/Hr";
 import Icon from "../../../src/elements/Icon";
 import Idcc from "../../../src/elements/Idcc";
 import Input from "../../../src/elements/Input";
+import Radio from "../../../src/elements/Radio";
 import SavingSpinner from "../../../src/elements/SavingSpinner";
 import Subtitle from "../../../src/elements/Subtitle";
 import Tag from "../../../src/elements/Tag";
@@ -194,8 +195,9 @@ export class AdminAnwsersEditPage extends React.Component {
       isLoading: true,
       otherReferenceUrlInputKey: 0,
       otherReferenceValueInputKey: 2,
+      prevalue: null,
       references: [],
-      tags: []
+      value: ""
     };
 
     this.isGeneric = Boolean(props.isGeneric);
@@ -210,20 +212,7 @@ export class AdminAnwsersEditPage extends React.Component {
     this.axios = customAxios();
 
     try {
-      const answersSelect = this.isGeneric
-        ? `select=*,question(index,value),user(name)`
-        : `select=*,agreement(idcc,name),question(index,value),user(name)`;
-      const answersWhere = `id=eq.${this.props.id}`;
-      const answersUri = `/answers?${answersSelect}&${answersWhere}`;
-      const { data: answers } = await this.axios.get(answersUri);
-
-      const tagsUri = `/tags`;
-      const { data: tags } = await this.axios.get(tagsUri);
-
-      this.answer = answers[0];
-      this.tags = tags;
-
-      await this.fetchTags();
+      this.fetchAnswer();
       await this.fetchReferences();
       this.props.dispatch(actions.comments.load(this.props.id));
 
@@ -234,25 +223,30 @@ export class AdminAnwsersEditPage extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.state.isLoading) return;
+    if (!this.props.answers.isLoading) {
+      if (this.state.prevalue === null || this.state.value === null) {
+        const { prevalue, value } = this.props.answers.data[0];
 
-    this.$commentsContainer.scrollTo(0, this.$commentsContainer.scrollHeight);
+        this.setState({
+          prevalue,
+          value
+        });
+      }
+    }
+
+    if (
+      !this.state.isLoading &&
+      !this.props.answers.isLoading &&
+      !this.props.comments.isLoading
+    ) {
+      this.$commentsContainer.scrollTo(0, this.$commentsContainer.scrollHeight);
+    }
   }
 
-  async fetchTags() {
-    try {
-      const tagsSelect = `select=tags(id,value)`;
-      const tagsWhere = `answer_id=eq.${this.props.id}`;
-      const tagsUri = `/answers_tags?${tagsSelect}&${tagsWhere}`;
-      const { data: tags } = await this.axios.get(tagsUri);
+  fetchAnswer() {
+    const { dispatch, id } = this.props;
 
-      this.setState({
-        tags: tags.map(({ tags: { id } }) => id),
-        isUpdating: false
-      });
-    } catch (err) {
-      if (err !== undefined) console.warn(err);
-    }
+    dispatch(actions.answers.loadOne(id));
   }
 
   async fetchReferences() {
@@ -292,9 +286,7 @@ export class AdminAnwsersEditPage extends React.Component {
 
     try {
       const uri = `/answers?id=eq.${this.props.id}`;
-      // An answer can't have a value and be generic at the same time:
       const data = {
-        generic_reference: null,
         state: ANSWER_STATE.UNDER_REVIEW,
         value: source
       };
@@ -491,7 +483,7 @@ export class AdminAnwsersEditPage extends React.Component {
     );
 
     if (
-      this.answer.state === ANSWER_STATE.VALIDATED &&
+      this.props.answers.data[0].state === ANSWER_STATE.VALIDATED &&
       references.length === 0
     ) {
       return <span>Aucune référence.</span>;
@@ -519,13 +511,27 @@ export class AdminAnwsersEditPage extends React.Component {
     ));
   }
 
+  updateGenericReferenceTo(generic_reference) {
+    const { dispatch, id } = this.props;
+
+    dispatch(
+      actions.answers.setGenericRefence(
+        [id],
+        generic_reference,
+        this.fetchAnswer.bind(this)
+      )
+    );
+  }
+
   render() {
-    const { comments } = this.props;
+    const { answers, comments } = this.props;
+    const { isLoading, prevalue, value } = this.state;
 
-    if (this.state.isLoading) return <AdminMain isLoading />;
+    if (isLoading || answers.isLoading || prevalue === null || value === null) {
+      return <AdminMain isLoading />;
+    }
 
-    const { answer } = this;
-    const title = `${answer.question.index}) ${answer.question.value}`;
+    const { agreement, generic_reference, question, state } = answers.data[0];
 
     return (
       <AdminMain>
@@ -535,22 +541,19 @@ export class AdminAnwsersEditPage extends React.Component {
               {this.isGeneric ? (
                 <Idcc />
               ) : (
-                <Idcc
-                  code={answer.agreement.idcc}
-                  name={answer.agreement.name}
-                />
+                <Idcc code={agreement.idcc} name={agreement.name} />
               )}
-              <Title isFirst>{title}</Title>
+              <Title isFirst>{`${question.index}) ${question.value}`}</Title>
             </Flex>
             <Hr />
 
-            {answer.state !== ANSWER_STATE.VALIDATED && (
+            {state !== ANSWER_STATE.VALIDATED && (
               <Flex flexDirection="column" width={1}>
                 {!this.isGeneric && (
                   <Flex flexDirection="column" width={1}>
                     <Subtitle isFirst>Réponse proposée</Subtitle>
                     <AnswerEditor
-                      defaultValue={answer.prevalue}
+                      defaultValue={prevalue}
                       headersOffset={2}
                       disabled
                     />
@@ -562,7 +565,7 @@ export class AdminAnwsersEditPage extends React.Component {
                   {this.isGeneric ? "Réponse générique" : "Réponse corrigée"}
                 </Subtitle>
                 <AnswerEditor
-                  defaultValue={answer.value}
+                  defaultValue={value}
                   headersOffset={2}
                   onChange={this.updateAnswerValue.bind(this)}
                 />
@@ -611,44 +614,36 @@ export class AdminAnwsersEditPage extends React.Component {
                   <Flex flexWrap="wrap">{this.getReferences()}</Flex>
                   <FormHiddenSubmit type="submit" />
                 </Form>
-                {/* <Hr />
+                <Hr />
 
-                <Subtitle isFirst>Étiquettes</Subtitle>
-                <Flex flexDirection="column">
-                  <Strong isFirst>Type de contrat</Strong>
-                  <Flex flexWrap="wrap">{this.getTags("contract_type")}</Flex>
-                </Flex>
-                <Flex flexDirection="column">
-                  <Strong>Cible</Strong>
-                  <Flex flexWrap="wrap">{this.getTags("target")}</Flex>
-                </Flex>
-                <Flex flexDirection="column">
-                  <Strong>Durée de travail</Strong>
-                  <Flex flexWrap="wrap">{this.getTags("work_time")}</Flex>
-                </Flex>
-                <Flex flexDirection="column">
-                  <Strong>{"Type d'horaires"}</Strong>
-                  <Flex flexWrap="wrap">
-                    {this.getTags("work_schedule_type")}
-                  </Flex>
-                </Flex>
-                <Flex flexDirection="column">
-                  <Strong>Particularismes</Strong>
-                  <Flex flexWrap="wrap">
-                    {this.getTags("distinctive_identity")}
-                  </Flex>
-                </Flex> */}
+                <Subtitle isFirst>Renvoi</Subtitle>
+                <Radio
+                  onChange={this.updateGenericReferenceTo.bind(this)}
+                  options={[
+                    {
+                      label: "Aucun renvoi.",
+                      value: null,
+                      isSelected: generic_reference === null
+                    },
+                    {
+                      label: "Renvoyée au texte Code du Travail.",
+                      value: "labor_code",
+                      isSelected: generic_reference === "labor_code"
+                    },
+                    {
+                      label: "Renvoyée au texte de la CCN.",
+                      value: "national_agreement",
+                      isSelected: generic_reference === "national_agreement"
+                    }
+                  ]}
+                />
               </Flex>
             )}
 
-            {answer.state === ANSWER_STATE.VALIDATED && (
+            {state === ANSWER_STATE.VALIDATED && (
               <Flex flexDirection="column" width={1}>
                 <Subtitle isFirst>Réponse validée</Subtitle>
-                <AnswerEditor
-                  defaultValue={answer.value}
-                  disabled
-                  headersOffset={2}
-                />
+                <AnswerEditor defaultValue={value} disabled headersOffset={2} />
 
                 <Subtitle>Références juridiques</Subtitle>
                 <Strong>Convention collective</Strong>
@@ -657,6 +652,16 @@ export class AdminAnwsersEditPage extends React.Component {
                 <Flex flexWrap="wrap">{this.getReferences("labor_code")}</Flex>
                 <Strong>Autres</Strong>
                 <Flex flexWrap="wrap">{this.getReferences()}</Flex>
+                <Hr />
+
+                <Subtitle isFirst>Renvoi</Subtitle>
+                {
+                  {
+                    labor_code: "Renvoyée au texte Code du Travail.",
+                    national_agreement: "Renvoyée au texte de la CCN.",
+                    null: "Aucun renvoi."
+                  }[String(generic_reference)]
+                }
               </Flex>
             )}
           </LeftContainer>
@@ -690,7 +695,7 @@ export class AdminAnwsersEditPage extends React.Component {
               />
             </Flex>
 
-            {answer.state === ANSWER_STATE.DRAFT && (
+            {state === ANSWER_STATE.DRAFT && (
               <Flex flexDirection="column">
                 <Button
                   disabled={this.state.isUpdating}
@@ -707,8 +712,8 @@ export class AdminAnwsersEditPage extends React.Component {
               </Flex>
             )}
 
-            {(answer.state === ANSWER_STATE.PENDING_REVIEW ||
-              answer.state === ANSWER_STATE.UNDER_REVIEW) && (
+            {(state === ANSWER_STATE.PENDING_REVIEW ||
+              state === ANSWER_STATE.UNDER_REVIEW) && (
               <Flex flexDirection="column">
                 <Button
                   disabled={this.state.isUpdating}

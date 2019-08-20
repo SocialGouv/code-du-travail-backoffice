@@ -13,6 +13,29 @@ const initialState = {
 
 export default (state = initialState, { payload, type }) => {
   switch (type) {
+    /* ONE ANSWER ―――――――――――――――――――――― */
+    case actionTypes.ANSWER_LOAD_ONE:
+      return {
+        ...state,
+        isLoading: true
+      };
+
+    case actionTypes.ANSWER_LOAD_ONE_FAILURE:
+      return {
+        ...state,
+        error: payload.message,
+        isLoading: false
+      };
+
+    case actionTypes.ANSWER_LOAD_ONE_SUCCESS:
+      return {
+        ...state,
+        data: payload.data,
+        isLoading: false
+      };
+
+    /* MULTIPLE ANSWERS ―――――――――――――――― */
+
     case actionTypes.ANSWERS_CANCEL:
     case actionTypes.ANSWERS_LOAD:
     case actionTypes.ANSWERS_SET_GENERIC_REFERENCE:
