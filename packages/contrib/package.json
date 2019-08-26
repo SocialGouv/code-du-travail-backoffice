@@ -61,7 +61,7 @@
     "babel-plugin-styled-components": "1.10.6",
     "coveralls": "3.0.6",
     "dotenv": "8.1.0",
-    "eslint": "6.1.0",
+    "eslint": "6.2.2",
     "identity-obj-proxy": "3.0.0",
     "jest": "24.9.0",
     "mutationobserver-shim": "0.3.3",
