@@ -1,25 +1,14 @@
 import React from "react";
 
 import AdminForm from "../../../src/components/AdminForm";
+import AdminMain from "../../../src/layouts/AdminMain";
+import customAxios from "../../../src/libs/customAxios";
 
 const FIELDS = [
   {
     type: "input",
     name: "value",
     label: "Intitulé"
-  },
-  {
-    type: "select",
-    name: "category",
-    label: "Catégorie",
-    options: [
-      { name: "Cible", value: "target" },
-      { name: "Particularismes", value: "distinctive_identity" },
-      { name: "Temps de travail", value: "work_time" },
-      { name: "Thème", value: "theme" },
-      { name: "Type d'horaires", value: "work_schedule_type" },
-      { name: "Type de contrat", value: "contract_type" }
-    ]
   }
 ];
 
@@ -28,11 +17,46 @@ export default class AdminTagsNewPage extends React.Component {
     super(props);
 
     this.state = {
-      fields: FIELDS
+      fields: [],
+      isLoading: true
     };
   }
 
+  async componentDidMount() {
+    this.axios = customAxios();
+
+    try {
+      const { data: tagsCategories } = await this.axios.get(
+        "/tags_categories?order=value.asc"
+      );
+
+      const fields = [
+        ...FIELDS,
+        {
+          type: "select",
+          name: "tag_category_id",
+          label: "Catégorie",
+          options: tagsCategories.map(({ id: value, value: name }) => ({
+            name,
+            value
+          }))
+        }
+      ];
+
+      this.setState({
+        fields,
+        isLoading: false
+      });
+    } catch (err) {
+      if (err !== undefined) console.warn(err);
+    }
+  }
+
   render() {
+    const { fields, isLoading } = this.state;
+
+    if (isLoading) return <AdminMain isLoading />;
+
     return (
       <AdminForm
         apiPath="/tags"
@@ -41,7 +65,7 @@ export default class AdminTagsNewPage extends React.Component {
           createOrEditButton: `Bouton créant une nouvelle étiquette dans la base
                               de données à partir des données du formulaire`
         }}
-        fields={this.state.fields}
+        fields={fields}
         indexPath="/tags"
         title="Nouvelle étiquette"
       />
