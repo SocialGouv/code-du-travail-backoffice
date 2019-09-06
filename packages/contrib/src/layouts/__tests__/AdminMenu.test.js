@@ -32,6 +32,14 @@ describe.skip("[Contrib] layouts/<AdminMenu />", () => {
     expect(global.nextRouter.push).toHaveBeenCalledWith("/admin/tags");
   });
 
+  it("should redirect to the tags categories path", () => {
+    fireEvent.click(getByText("└ Catégories"));
+
+    expect(global.nextRouter.push).toHaveBeenCalledWith(
+      "/admin/tags-categories"
+    );
+  });
+
   it("should redirect to the questions path", () => {
     fireEvent.click(getByText("Questions"));
 
