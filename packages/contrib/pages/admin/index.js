@@ -52,6 +52,11 @@ const Table = styled.table`
   tr > td:nth-child(n + 2) {
     text-align: right;
   }
+  tr > th.title {
+    background-color: var(--color-text-blue);
+    color: white;
+    text-align: right;
+  }
 `;
 
 const REFRESH_DELAY = 10000;
@@ -304,13 +309,14 @@ export default class Index extends React.Component {
 
   getAgreementsStats() {
     const { statsAgreements } = this.state;
+    let lastLocationId = "";
 
     return statsAgreements.map((statsAgreement, index) => {
       const { idcc, name } = statsAgreement.agreement;
       const title = `[${idcc}] ${name}`;
 
-      return (
-        <tr key={index}>
+      const agreementRowSource = (
+        <tr key={`agreement-${index}`}>
           <th title={title}>{title}</th>
           <td>
             {statsAgreement.stats[0]}
@@ -354,6 +360,21 @@ export default class Index extends React.Component {
           </td>
         </tr>
       );
+
+      if (lastLocationId !== statsAgreement.location_id) {
+        lastLocationId = statsAgreement.location_id;
+
+        return [
+          <tr key={`location-${index}`}>
+            <th className="title" colSpan={7} title={title}>
+              {statsAgreement.location.name.toUpperCase()}
+            </th>
+          </tr>,
+          agreementRowSource
+        ];
+      }
+
+      return agreementRowSource;
     });
   }
 
