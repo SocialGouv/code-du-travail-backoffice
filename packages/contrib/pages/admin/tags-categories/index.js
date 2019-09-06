@@ -4,22 +4,14 @@ import AdminIndex from "../../../src/components/AdminIndex";
 
 const COLUMNS = [
   {
-    Header: "Valeur",
+    Header: "Intitulé",
     accessor: "value"
-  },
-  {
-    Header: "Catégorie",
-    accessor: data =>
-      data.category !== null ? data.category.value : "Non renseigné",
-    id: "category",
-    width: 160
   }
 ];
 
 export default () => (
   <AdminIndex
-    apiPath="/tags"
-    apiGetPath="/tags?select=*,category:tag_category(*)"
+    apiPath="/tags_categories"
     ariaLabels={{
       cancelDeletionButton: `Bouton annulant la suppression de cette étiquette
                             de la base de données`,
@@ -33,7 +25,7 @@ export default () => (
                     après confirmation`
     }}
     columns={COLUMNS}
-    slug="tag"
-    title="Étiquettes"
+    slug="tag-category"
+    title="Étiquettes > Catégories"
   />
 );

@@ -1,38 +1,70 @@
+const TAGS_CATEGORIES = [
+  {
+    id: "00000000-0000-4000-0000-000000000001",
+    value: "Cible"
+  },
+  {
+    id: "00000000-0000-4000-0000-000000000002",
+    value: "Particularisme"
+  },
+  {
+    id: "00000000-0000-4000-0000-000000000003",
+    value: "Thème"
+  },
+  {
+    id: "00000000-0000-4000-0000-000000000004",
+    value: "Type d'horaire"
+  },
+  {
+    id: "00000000-0000-4000-0000-000000000005",
+    value: "Type de contrat"
+  },
+  {
+    id: "00000000-0000-4000-0000-000000000006",
+    value: "Temps de travail"
+  }
+];
+
+const TAGS = [
+  { value: `CDI`, tag_category_id: "00000000-0000-4000-0000-000000000005" },
+  { value: `CDD`, tag_category_id: "00000000-0000-4000-0000-000000000005" },
+  { value: `CTT`, tag_category_id: "00000000-0000-4000-0000-000000000005" },
+  { value: `CESU`, tag_category_id: "00000000-0000-4000-0000-000000000005" },
+  { value: `CEA`, tag_category_id: "00000000-0000-4000-0000-000000000005" },
+  {
+    value: `Contrat de professionnalisation`,
+    tag_category_id: "00000000-0000-4000-0000-000000000005"
+  },
+  { value: `Contrat d'apprentissage`, tag_category_id: "00000000-0000-4000-0000-000000000005" },
+  { value: `Contrat saisonnier`, tag_category_id: "00000000-0000-4000-0000-000000000005" },
+
+  { value: `Contrat de travail`, tag_category_id: "00000000-0000-4000-0000-000000000003" },
+  { value: `Durée du travail`, tag_category_id: "00000000-0000-4000-0000-000000000003" },
+  { value: `Embauche`, tag_category_id: "00000000-0000-4000-0000-000000000003" },
+  { value: `Rupture`, tag_category_id: "00000000-0000-4000-0000-000000000003" },
+  { value: `Inaptitude`, tag_category_id: "00000000-0000-4000-0000-000000000003" },
+
+  { value: `Employeur`, tag_category_id: "00000000-0000-4000-0000-000000000001" },
+  { value: `Salarié`, tag_category_id: "00000000-0000-4000-0000-000000000001" },
+
+  { value: `Mayotte`, tag_category_id: "00000000-0000-4000-0000-000000000002" },
+  { value: `Alsace-Moselle`, tag_category_id: "00000000-0000-4000-0000-000000000002" },
+  { value: `DOM`, tag_category_id: "00000000-0000-4000-0000-000000000002" },
+
+  { value: `Temps plein`, tag_category_id: "00000000-0000-4000-0000-000000000006" },
+  { value: `Temps partiel`, tag_category_id: "00000000-0000-4000-0000-000000000006" },
+
+  { value: `Collectif`, tag_category_id: "00000000-0000-4000-0000-000000000004" },
+  { value: `Individuel`, tag_category_id: "00000000-0000-4000-0000-000000000004" },
+  { value: `Forfait`, tag_category_id: "00000000-0000-4000-0000-000000000004" }
+];
+
 exports.seed = async knex => {
-  global.spinner.start(`Generating tags...`)
+  global.spinner.start(`Generating tags categories...`);
+  await knex("api.tags_categories").insert(TAGS_CATEGORIES);
+  global.spinner.succeed(`Tags categories generated.`);
 
-  const tags = [
-    { value: `CDI`, category: 'contract_type' },
-    { value: `CDD`, category: 'contract_type' },
-    { value: `CTT`, category: 'contract_type' },
-    { value: `CESU`, category: 'contract_type' },
-    { value: `CEA`, category: 'contract_type' },
-    { value: `Contrat de professionnalisation`, category: 'contract_type' },
-    { value: `Contrat d'apprentissage`, category: 'contract_type' },
-    { value: `Contrat saisonnier`, category: 'contract_type' },
-
-    { value: `Contrat de travail`, category: 'theme' },
-    { value: `Durée du travail`, category: 'theme' },
-    { value: `Embauche`, category: 'theme' },
-    { value: `Rupture`, category: 'theme' },
-    { value: `Inaptitude`, category: 'theme' },
-
-    { value: `Employeur`, category: 'target' },
-    { value: `Salarié`, category: 'target' },
-
-    { value: `Mayotte`, category: 'distinctive_identity' },
-    { value: `Alsace-Moselle`, category: 'distinctive_identity' },
-    { value: `DOM`, category: 'distinctive_identity' },
-
-    { value: `Temps plein`, category: 'work_time' },
-    { value: `Temps partiel`, category: 'work_time' },
-
-    { value: `Collectif`, category: 'work_schedule_type' },
-    { value: `Individuel`, category: 'work_schedule_type' },
-    { value: `Forfait`, category: 'work_schedule_type' },
-  ]
-
-  await knex('api.tags').insert(tags)
-
-  global.spinner.succeed(`Tags generated.`)
-}
+  global.spinner.start(`Generating tags...`);
+  await knex("api.tags").insert(TAGS);
+  global.spinner.succeed(`Tags generated.`);
+};

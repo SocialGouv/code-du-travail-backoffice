@@ -109,6 +109,18 @@ module.exports = function(nextApp) {
     ctx.respond = false;
   });
 
+  router.get("/admin/tags-categories/new", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/admin/tags-categories/new", {});
+    ctx.respond = false;
+  });
+
+  router.get("/admin/tags-categories/:id", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/admin/tags-categories/edit", {
+      ...ctx.params
+    });
+    ctx.respond = false;
+  });
+
   router.get("/admin/users/new", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/users/new", {});
     ctx.respond = false;

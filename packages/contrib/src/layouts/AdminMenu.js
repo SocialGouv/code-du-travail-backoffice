@@ -10,8 +10,8 @@ import { USER_ROLE } from "../constants";
 
 const Container = styled(Flex)`
   background-color: var(--color-dark-slate-gray);
-  min-width: 12rem;
-  width: 12rem;
+  min-width: 13rem;
+  width: 13rem;
 `;
 const Subtitle = styled(_Subtitle)`
   color: white;
@@ -40,9 +40,11 @@ export default class AdminMenu extends React.PureComponent {
   }
 
   isCurrent(path) {
-    return path.length !== 0
-      ? window.location.pathname.startsWith(`/admin${path}`)
-      : window.location.pathname === "/admin";
+    const { pathname } = window.location;
+    const regexp =
+      path.length > 0 ? new RegExp(`^/admin${path}(?=/|$)`) : /^\/admin$/;
+
+    return regexp.test(pathname);
   }
 
   render() {
@@ -72,6 +74,12 @@ export default class AdminMenu extends React.PureComponent {
           onClick={() => this.goTo("/tags")}
         >
           Étiquettes
+        </Link>
+        <Link
+          isCurrent={this.isCurrent("/tags-categories")}
+          onClick={() => this.goTo("/tags-categories")}
+        >
+          └ Catégories
         </Link>
         <Link
           isCurrent={this.isCurrent("/questions")}
