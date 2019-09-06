@@ -2,15 +2,6 @@ import React from "react";
 
 import AdminIndex from "../../../src/components/AdminIndex";
 
-const CATEGORIES = {
-  contract_type: "Type de contrat",
-  distinctive_identity: "Particularismes",
-  target: "Cible",
-  theme: "Thème",
-  work_schedule_type: "Type d'horaires",
-  work_time: "Temps de travail"
-};
-
 const COLUMNS = [
   {
     Header: "Valeur",
@@ -18,7 +9,8 @@ const COLUMNS = [
   },
   {
     Header: "Catégorie",
-    accessor: data => CATEGORIES[data.category],
+    accessor: data =>
+      data.category !== null ? data.category.value : "Non renseigné",
     id: "category",
     width: 160
   }
@@ -27,6 +19,7 @@ const COLUMNS = [
 export default () => (
   <AdminIndex
     apiPath="/tags"
+    apiGetPath="/tags?select=*,category:tag_category(*)"
     ariaLabels={{
       cancelDeletionButton: `Bouton annulant la suppression de cette étiquette
                             de la base de données`,
