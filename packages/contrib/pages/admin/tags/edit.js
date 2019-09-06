@@ -2,7 +2,6 @@ import React from "react";
 
 import AdminForm from "../../../src/components/AdminForm";
 import AdminMain from "../../../src/layouts/AdminMain";
-import customAxios from "../../../src/libs/customAxios";
 import AdminTagsNewPage from "./new";
 
 export default class AdminTagsEditPage extends AdminTagsNewPage {
@@ -12,7 +11,7 @@ export default class AdminTagsEditPage extends AdminTagsNewPage {
     this.state = {
       ...this.state,
       data: {},
-      isLoading: true
+      isLoadingOverwrite: true
     };
   }
 
@@ -21,18 +20,21 @@ export default class AdminTagsEditPage extends AdminTagsNewPage {
   }
 
   async componentDidMount() {
-    const axios = customAxios();
+    await super.componentDidMount();
 
     try {
-      const uri = `/tags?id=eq.${this.props.id}`;
+      const tagsSelect = `select=*,category:tag_category(*)`;
+      const tagsWhere = `id=eq.${this.props.id}`;
 
-      const { data: tags } = await axios.get(uri);
+      const { data: tags } = await this.axios.get(
+        `/tags?${tagsSelect}&${tagsWhere}`
+      );
 
       const data = tags[0];
 
       this.setState({
         data,
-        isLoading: false
+        isLoadingOverwrite: false
       });
     } catch (err) {
       if (err !== undefined) console.warn(err);
@@ -40,7 +42,7 @@ export default class AdminTagsEditPage extends AdminTagsNewPage {
   }
 
   render() {
-    if (this.state.isLoading) return <AdminMain isLoading />;
+    if (this.state.isLoadingOverwrite) return <AdminMain isLoading />;
 
     const { value } = this.state.data;
 
