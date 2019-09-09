@@ -1096,8 +1096,8 @@
 
 "@socialgouv/meditor@https://github.com/SocialGouv/meditor":
   version "0.1.0-alpha.4"
-  uid "165ec7c454ea85aa82bf1b7fb922c87570f01fe2"
-  resolved "https://github.com/SocialGouv/meditor#165ec7c454ea85aa82bf1b7fb922c87570f01fe2"
+  uid "8a142df1928059286f8f5eaaa4031a396afa5399"
+  resolved "https://github.com/SocialGouv/meditor#8a142df1928059286f8f5eaaa4031a396afa5399"
 
 "@styled-system/background@^5.1.0":
   version "5.1.0"
