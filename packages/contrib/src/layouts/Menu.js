@@ -46,22 +46,25 @@ const Dropdown = styled.div`
   }
 `;
 const DropdownText = styled.span`
-  margin: 0.5rem 0 0.5rem 0.25rem;
+  margin: 0.5rem 0.25rem 0.5rem 0;
 `;
 const DropdownMenu = styled(Flex)`
+  left: auto;
+  right: 0;
   background-color: white;
   box-shadow: 0 0 0.125rem lightgray;
   display: none;
   margin-top: 0.5rem;
-  padding: 0.375rem 0.75rem;
   position: absolute;
   z-index: 1;
 `;
 const DropdownLink = styled(TopLink)`
   border-bottom: 0;
-  margin: 0.125rem;
+  margin-left: 0;
+  padding: 0.375rem 0.75rem;
 
   :hover {
+    background-color: var(--color-background);
     border-bottom: 0;
   }
 
@@ -73,6 +76,10 @@ const DropdownLink = styled(TopLink)`
 export default class Menu extends React.PureComponent {
   goToAnswers(state) {
     Router.push(`/answers/${state}/1`);
+  }
+
+  openDoc(path) {
+    window.open(`/static/docs/${path}.docx`, "_blank");
   }
 
   openGuide(path) {
@@ -106,7 +113,6 @@ export default class Menu extends React.PureComponent {
     return (
       <Container>
         <Dropdown>
-          <Icon icon="caret-down" />
           <DropdownText>Liste des réponses</DropdownText>
           <DropdownMenu flexDirection="column">
             <DropdownLink onClick={() => this.goToAnswers(ANSWER_STATE.TO_DO)}>
@@ -126,9 +132,9 @@ export default class Menu extends React.PureComponent {
               {T.ANSWERS_INDEX_TITLE(ANSWER_STATE.VALIDATED)}
             </DropdownLink>
           </DropdownMenu>
+          <Icon icon="caret-down" />
         </Dropdown>
         <Dropdown>
-          <Icon icon="caret-down" />
           <DropdownText>Aide</DropdownText>
           <DropdownMenu flexDirection="column">
             <DropdownLink
@@ -138,13 +144,23 @@ export default class Menu extends React.PureComponent {
               Guide : Outil de contribution
             </DropdownLink>
             <DropdownLink onClick={() => Router.push("/chart")}>
-              <Icon icon="feather-alt" />
+              <Icon icon="file-pdf" />
               Charte rédactionnelle
             </DropdownLink>
+            <DropdownLink
+              onClick={() =>
+                this.openDoc(
+                  "Proposition-de-reponse-types-CC-metallurgie-locales"
+                )
+              }
+            >
+              <Icon icon="file-word" />
+              Proposition de réponses-types CC métallurgie locales
+            </DropdownLink>
           </DropdownMenu>
+          <Icon icon="caret-down" />
         </Dropdown>
         <Dropdown>
-          <Icon icon="caret-down" />
           <DropdownText>{this.props.me.payload.name}</DropdownText>
           <DropdownMenu flexDirection="column">
             <DropdownLink onClick={() => this.logOut()}>
@@ -152,6 +168,7 @@ export default class Menu extends React.PureComponent {
               Se déconnecter
             </DropdownLink>
           </DropdownMenu>
+          <Icon icon="caret-down" />
         </Dropdown>
       </Container>
     );
