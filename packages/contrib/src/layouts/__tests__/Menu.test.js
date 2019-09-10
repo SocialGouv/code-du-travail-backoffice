@@ -76,6 +76,19 @@ describe.skip("[Contrib] layouts/<Menu /> (Contributor)", () => {
     );
   });
 
+  it("should open the local metalworking agreement proposal", () => {
+    fireEvent.click(
+      γ.getByText("Proposition de réponses-types CC métallurgie locales")
+    );
+
+    expect(sessionStorage.getItem("jwt")).toBe(JWT);
+    expect(sessionStorage.getItem("me")).toBe(ME);
+    expect(global.open).toHaveBeenCalledWith(
+      "https://jean-rene-duscher.gitbook.io/code-du-travail-numerique/",
+      "_blank"
+    );
+  });
+
   it("should redirect to the chart path", () => {
     fireEvent.click(γ.getByText("Charte rédactionnelle"));
 
