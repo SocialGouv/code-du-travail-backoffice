@@ -89,12 +89,12 @@ describe.skip("[Contrib] layouts/<Menu /> (Contributor)", () => {
     );
   });
 
-  it("should redirect to the chart path", () => {
+  it("should redirect to the charter path", () => {
     fireEvent.click(γ.getByText("Charte rédactionnelle"));
 
     expect(sessionStorage.getItem("jwt")).toBe(JWT);
     expect(sessionStorage.getItem("me")).toBe(ME);
-    expect(global.nextRouter.push).toHaveBeenCalledWith("/chart");
+    expect(global.nextRouter.push).toHaveBeenCalledWith("/charter");
   });
 
   it("should empty session and redirect to login path", () => {

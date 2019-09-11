@@ -143,7 +143,7 @@ export default class Menu extends React.PureComponent {
               <Icon icon="book" />
               Guide : Outil de contribution
             </DropdownLink>
-            <DropdownLink onClick={() => Router.push("/chart")}>
+            <DropdownLink onClick={() => Router.push("/charter")}>
               <Icon icon="file-pdf" />
               Charte rédactionnelle
             </DropdownLink>
