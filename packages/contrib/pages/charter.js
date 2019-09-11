@@ -28,7 +28,7 @@ export default class extends React.Component {
       <Main>
         <IFrame
           frameBorder="0"
-          src="/static/docs/Charte-Redactionnelle-v1.0.pdf"
+          src="/static/docs/Charte-Redactionnelle-v2019.05.pdf"
           scrolling="no"
           title="Charte rédactionnelle"
         />
