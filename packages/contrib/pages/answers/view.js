@@ -36,6 +36,7 @@ const AnswerEditor = styled(Meditor)`
     border-top-right-radius: 0.25rem;
     line-height: 1.4;
     min-width: 100% !important;
+    overflow-y: auto;
     padding-top: 0 !important;
     width: 100% !important;
 
