@@ -3,7 +3,7 @@
 exports[`[Contrib] elements/<Button /> should match snapshot 1`] = `
 <div>
   <button
-    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 ckKeMb"
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 gJobgy"
     color="var(--color-lapis-lazuli)"
   />
 </div>
@@ -12,7 +12,7 @@ exports[`[Contrib] elements/<Button /> should match snapshot 1`] = `
 exports[`[Contrib] elements/<Button /> should match snapshot with \`disabled\` prop 1`] = `
 <div>
   <button
-    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 eZpLuH"
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 bdMFQc"
     color="var(--color-lapis-lazuli)"
     disabled=""
   />
@@ -22,7 +22,7 @@ exports[`[Contrib] elements/<Button /> should match snapshot with \`disabled\` p
 exports[`[Contrib] elements/<Button /> should match snapshot with \`hasGroup\` prop 1`] = `
 <div>
   <button
-    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 hNANlH"
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jLNIOx"
     color="var(--color-lapis-lazuli)"
   />
 </div>
@@ -31,7 +31,7 @@ exports[`[Contrib] elements/<Button /> should match snapshot with \`hasGroup\` p
 exports[`[Contrib] elements/<Button /> should match snapshot with \`isSmall\` prop 1`] = `
 <div>
   <button
-    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 dzMrlY"
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 dlkznb"
     color="var(--color-lapis-lazuli)"
   />
 </div>
@@ -40,7 +40,7 @@ exports[`[Contrib] elements/<Button /> should match snapshot with \`isSmall\` pr
 exports[`[Contrib] elements/<Button /> should match snapshot with a custom \`color\` prop 1`] = `
 <div>
   <button
-    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jmqmhd"
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 hldtVS"
     color="var(--color-periwinkle)"
   />
 </div>
@@ -49,7 +49,7 @@ exports[`[Contrib] elements/<Button /> should match snapshot with a custom \`col
 exports[`[Contrib] elements/<Button /> should match snapshot with a set \`icon\` prop 1`] = `
 <div>
   <button
-    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 crHNfS"
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 gluGhQ"
     color="white"
   >
     <svg

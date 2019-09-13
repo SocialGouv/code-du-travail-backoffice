@@ -18,7 +18,7 @@ const Button = styled(_Button)`
   min-width: 1.25rem;
   opacity: ${({ disabled }) => (disabled ? 0.25 : 1)};
   padding: ${({ isSmall }) =>
-    isSmall ? "0.1rem 0.5rem 0.15rem" : "0.2rem 1rem 0.3rem"};
+    isSmall ? "0.1rem 0.5rem 0.15rem" : "0.3rem 1rem 0.3rem"};
   white-space: nowrap;
 
   :hover {
@@ -27,6 +27,8 @@ const Button = styled(_Button)`
 
   svg {
     cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+    margin-right: ${({ hasText }) => (hasText ? "0.25rem" : 0)};
+    padding-top: ${({ hasText }) => (hasText ? "0.125rem" : 0)};
   }
 `;
 
@@ -47,6 +49,8 @@ export default ({
   isSmall = false,
   ...props
 }) => {
+  const isLight = COLOR[color].isLight;
+
   if (icon === undefined)
     return (
       <Button
@@ -54,7 +58,7 @@ export default ({
         disabled={disabled}
         hasGroup={hasGroup}
         hasText
-        isLight={COLOR[color].isLight}
+        isLight={isLight}
         isSmall={isSmall}
         {...props}
       >
@@ -64,12 +68,32 @@ export default ({
 
   const hasText = children !== undefined;
 
+  if (hasText) {
+    return (
+      <Button
+        color={COLOR[color].value}
+        disabled={disabled}
+        hasGroup={hasGroup}
+        hasText
+        isLight={isLight}
+        isSmall={isSmall}
+        {...props}
+      >
+        <Icon
+          icon={icon}
+          color={isLight ? "var(--color-eerie-black)" : "white"}
+        />
+        {children}
+      </Button>
+    );
+  }
+
   return (
     <Button
       disabled={disabled}
       hasGroup={hasGroup}
-      hasText={hasText}
-      isLight={COLOR[color].isLight}
+      hasText={false}
+      isLight={isLight}
       isSmall={isSmall}
       {...props}
     >
