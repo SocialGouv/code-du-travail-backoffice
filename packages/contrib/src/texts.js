@@ -8,9 +8,9 @@ export function pluralize(text) {
 }
 
 export default {
-  ADMIN_ANSWERS_BUTTON_CANCEL_LABEL: `Valider la réponse.`,
+  ADMIN_ANSWERS_BUTTON_CANCEL_LABEL: `Refuser la réponse.`,
   ADMIN_ANSWERS_BUTTON_PENDING_REVIEW_LABEL: `Passer la réponse en validation.`,
-  ADMIN_ANSWERS_BUTTON_VALIDATE_LABEL: `Refuser la réponse.`,
+  ADMIN_ANSWERS_BUTTON_VALIDATE_LABEL: `Valider la réponse.`,
   ADMIN_ANSWERS_COMMENT_PLACEHOLDER:
     `Écrivez votre commentaire ici…\n\n` +
     `CTRL + ENTRÉE pour envoyer le commentaire.\n` +
