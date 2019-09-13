@@ -49,19 +49,21 @@ const AnswerEditor = styled(Meditor)`
   flex-grow: unset;
   min-height: 15rem;
 
-  > textarea {
+  .editor {
     background-color: var(--color-alice-blue);
     border-bottom-left-radius: 0.25rem;
     border-top-left-radius: 0.25rem;
     color: var(--color-black-leather-jacket);
     font-size: 1.2rem;
+    resize: none;
   }
 
-  > div {
+  .preview {
     background-color: white;
     border-bottom-right-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
     line-height: 1.4;
+    overflow-y: scroll;
     padding-top: 0 !important;
 
     a {
@@ -550,7 +552,11 @@ export class AdminAnwsersEditPage extends React.Component {
             {state !== ANSWER_STATE.VALIDATED && (
               <Flex flexDirection="column" width={1}>
                 {!this.isGeneric && (
-                  <Flex flexDirection="column" width={1}>
+                  <Flex
+                    flexDirection="column"
+                    style={{ minHeight: "19rem" }}
+                    width={1}
+                  >
                     <Subtitle isFirst>Réponse proposée</Subtitle>
                     <AnswerEditor
                       defaultValue={prevalue}
