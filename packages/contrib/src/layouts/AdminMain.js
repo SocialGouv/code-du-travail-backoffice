@@ -6,12 +6,21 @@ import Main from "./Main";
 
 const Content = styled.div`
   flex-grow: 1;
-  overflow-y: scroll;
+  overflow-y: ${({ isScrollable }) => (isScrollable ? "scroll" : "hidden")};
 `;
 
-export default ({ children, hasBareContent, isLoading }) => (
+export default ({
+  children,
+  hasBareContent,
+  isLoading,
+  isScrollable = true
+}) => (
   <Main isAdmin isHorizontal isLoading={isLoading}>
     <AdminMenu />
-    {Boolean(hasBareContent) ? children : <Content>{children}</Content>}
+    {Boolean(hasBareContent) ? (
+      children
+    ) : (
+      <Content isScrollable={isScrollable}>{children}</Content>
+    )}
   </Main>
 );
