@@ -17,7 +17,6 @@ import Icon from "../../../src/elements/Icon";
 import Idcc from "../../../src/elements/Idcc";
 import Input from "../../../src/elements/Input";
 import Radio from "../../../src/elements/Radio";
-import SavingSpinner from "../../../src/elements/SavingSpinner";
 import Subtitle from "../../../src/elements/Subtitle";
 import Tag from "../../../src/elements/Tag";
 import Textarea from "../../../src/elements/Textarea";
@@ -559,17 +558,12 @@ export class AdminAnwsersEditPage extends React.Component {
               <Flex alignItems="baseline">
                 {isSidebarHidden && state === ANSWER_STATE.DRAFT && (
                   <Button
-                    disabled={this.state.isUpdating}
                     hasGroup
                     onClick={() =>
                       this.updateAnswerStateTo(ANSWER_STATE.PENDING_REVIEW)
                     }
                   >
-                    {this.state.isUpdating ? (
-                      <SavingSpinner color="white" size="21" />
-                    ) : (
-                      "Passer en validation"
-                    )}
+                    {T.ADMIN_ANSWERS_BUTTON_PENDING_REVIEW_LABEL}
                   </Button>
                 )}
 
@@ -577,33 +571,23 @@ export class AdminAnwsersEditPage extends React.Component {
                   (state === ANSWER_STATE.PENDING_REVIEW ||
                     state === ANSWER_STATE.UNDER_REVIEW) && [
                     <Button
-                      disabled={this.state.isUpdating}
                       hasGroup
                       key="validate"
                       onClick={() =>
                         this.updateAnswerStateTo(ANSWER_STATE.VALIDATED)
                       }
                     >
-                      {this.state.isUpdating ? (
-                        <SavingSpinner color="white" size="21" />
-                      ) : (
-                        "Valider la réponse"
-                      )}
+                      {T.ADMIN_ANSWERS_BUTTON_VALIDATE_LABEL}
                     </Button>,
                     <Button
                       color="danger"
-                      disabled={this.state.isUpdating}
                       hasGroup
                       key="cancel"
                       onClick={() =>
                         this.updateAnswerStateTo(ANSWER_STATE.DRAFT)
                       }
                     >
-                      {this.state.isUpdating ? (
-                        <SavingSpinner color="white" size="21" />
-                      ) : (
-                        "Refuser la réponse"
-                      )}
+                      {T.ADMIN_ANSWERS_BUTTON_CANCEL_LABEL}
                     </Button>
                   ]}
 
