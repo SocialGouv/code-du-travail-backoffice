@@ -11,7 +11,7 @@ import Comment from "../../../src/components/Comment";
 import LawReferences from "../../../src/components/LawReferences";
 import Reference from "../../../src/components/Reference";
 import AdminMain from "../../../src/layouts/AdminMain";
-import _Button from "../../../src/elements/Button";
+import Button from "../../../src/elements/Button";
 import Hr from "../../../src/elements/Hr";
 import Icon from "../../../src/elements/Icon";
 import Idcc from "../../../src/elements/Idcc";
@@ -31,12 +31,17 @@ import T from "../../../src/texts";
 const Container = styled(Flex)`
   height: 100%;
 `;
-const LeftContainer = styled(Flex)`
+const Content = styled(Flex)`
+  flex-grow: 1;
   overflow-y: scroll;
   padding: 1rem;
 `;
-const RightContainer = styled(Flex)`
+const Sidebar = styled(Flex)`
+  display: ${({ isHidden }) => (isHidden ? "none" : "flex")};
   padding: 1rem;
+  position: relative;
+  right: 0;
+  min-width: 23rem;
 `;
 
 const aIconUri = [
@@ -169,6 +174,7 @@ const CommentEditor = styled(Textarea)`
   font-size: 0.75rem;
   opacity: ${props => (Boolean(props.disabled) ? 0.25 : 1)};
   margin-top: 1rem;
+  max-height: 10rem;
   padding: 0.5rem;
   width: 100%;
 `;
@@ -181,10 +187,6 @@ const CommentEditorIcon = styled(Icon)`
   :hover {
     opacity: 0.5;
   }
-`;
-const Button = styled(_Button)`
-  justify-content: center;
-  margin-bottom: ${({ isFirst }) => (Boolean(isFirst) ? "0.5rem" : 0)};
 `;
 
 export class AdminAnwsersEditPage extends React.Component {
@@ -199,6 +201,7 @@ export class AdminAnwsersEditPage extends React.Component {
       otherReferenceValueInputKey: 2,
       prevalue: null,
       references: [],
+      isSidebarHidden: true,
       value: ""
     };
 
@@ -426,6 +429,10 @@ export class AdminAnwsersEditPage extends React.Component {
     });
   }
 
+  toggleSidebar() {
+    this.setState({ isSidebarHidden: !this.state.isSidebarHidden });
+  }
+
   toggleTag(id, isAdded) {
     this.setState({ isUpdating: true });
 
@@ -527,7 +534,7 @@ export class AdminAnwsersEditPage extends React.Component {
 
   render() {
     const { answers, comments } = this.props;
-    const { isLoading, prevalue, value } = this.state;
+    const { isLoading, prevalue, isSidebarHidden, value } = this.state;
 
     if (isLoading || answers.isLoading || prevalue === null || value === null) {
       return <AdminMain isLoading />;
@@ -536,16 +543,78 @@ export class AdminAnwsersEditPage extends React.Component {
     const { agreement, generic_reference, question, state } = answers.data[0];
 
     return (
-      <AdminMain>
+      <AdminMain isScrollable={false}>
         <Container>
-          <LeftContainer flexDirection="column" width={0.65}>
-            <Flex alignItems="baseline">
-              {this.isGeneric ? (
-                <Idcc />
-              ) : (
-                <Idcc code={agreement.idcc} name={agreement.name} />
-              )}
-              <Title isFirst>{`${question.index}) ${question.value}`}</Title>
+          <Content flexDirection="column">
+            <Flex alignItems="baseline" justifyContent="space-between">
+              <Flex alignItems="baseline">
+                {this.isGeneric ? (
+                  <Idcc />
+                ) : (
+                  <Idcc code={agreement.idcc} name={agreement.name} />
+                )}
+                <Title isFirst>{`${question.index}) ${question.value}`}</Title>
+              </Flex>
+
+              <Flex alignItems="baseline">
+                {isSidebarHidden && state === ANSWER_STATE.DRAFT && (
+                  <Button
+                    disabled={this.state.isUpdating}
+                    hasGroup
+                    onClick={() =>
+                      this.updateAnswerStateTo(ANSWER_STATE.PENDING_REVIEW)
+                    }
+                  >
+                    {this.state.isUpdating ? (
+                      <SavingSpinner color="white" size="21" />
+                    ) : (
+                      "Passer en validation"
+                    )}
+                  </Button>
+                )}
+
+                {isSidebarHidden &&
+                  (state === ANSWER_STATE.PENDING_REVIEW ||
+                    state === ANSWER_STATE.UNDER_REVIEW) && [
+                    <Button
+                      disabled={this.state.isUpdating}
+                      hasGroup
+                      key="validate"
+                      onClick={() =>
+                        this.updateAnswerStateTo(ANSWER_STATE.VALIDATED)
+                      }
+                    >
+                      {this.state.isUpdating ? (
+                        <SavingSpinner color="white" size="21" />
+                      ) : (
+                        "Valider la réponse"
+                      )}
+                    </Button>,
+                    <Button
+                      color="danger"
+                      disabled={this.state.isUpdating}
+                      hasGroup
+                      key="cancel"
+                      onClick={() =>
+                        this.updateAnswerStateTo(ANSWER_STATE.DRAFT)
+                      }
+                    >
+                      {this.state.isUpdating ? (
+                        <SavingSpinner color="white" size="21" />
+                      ) : (
+                        "Refuser la réponse"
+                      )}
+                    </Button>
+                  ]}
+
+                <Button
+                  color="info"
+                  icon="comments"
+                  onClick={this.toggleSidebar.bind(this)}
+                >
+                  {comments.data.length}
+                </Button>
+              </Flex>
             </Flex>
             <Hr />
 
@@ -643,6 +712,7 @@ export class AdminAnwsersEditPage extends React.Component {
                     }
                   ]}
                 />
+                <Hr />
               </Flex>
             )}
 
@@ -670,84 +740,35 @@ export class AdminAnwsersEditPage extends React.Component {
                 }
               </Flex>
             )}
-          </LeftContainer>
-          <RightContainer
+          </Content>
+          <Sidebar
             flexDirection="column"
+            isHidden={isSidebarHidden}
             justifyContent="space-between"
-            width={0.35}
           >
-            <Flex flexDirection="column">
-              <Subtitle isFirst>Commentaires et validation</Subtitle>
-              <Comments
-                flexDirection="column"
-                ref={node => (this.$commentsContainer = node)}
-              >
-                {this.getComments()}
-              </Comments>
-              <CommentEditor
-                disabled={comments.currentIsLoading}
-                isPrivate={comments.currentIsPrivate}
-                key={comments.currentKey}
-                onKeyPress={this.handleCommentField.bind(this)}
-                placeholder={T.ADMIN_ANSWERS_COMMENT_PLACEHOLDER}
-                ref={node => (this.$commentTextarea = node)}
-                rows={10}
-              />
-              <CommentEditorIcon
-                icon={comments.currentIsPrivate ? "lock" : "unlock"}
-                onClick={() =>
-                  this.props.dispatch(actions.comments.toggleOnePrivacy())
-                }
-              />
-            </Flex>
-
-            {state === ANSWER_STATE.DRAFT && (
-              <Flex flexDirection="column">
-                <Button
-                  disabled={this.state.isUpdating}
-                  onClick={() =>
-                    this.updateAnswerStateTo(ANSWER_STATE.PENDING_REVIEW)
-                  }
-                >
-                  {this.state.isUpdating ? (
-                    <SavingSpinner color="white" size="21" />
-                  ) : (
-                    "Passer en validation"
-                  )}
-                </Button>
-              </Flex>
-            )}
-
-            {(state === ANSWER_STATE.PENDING_REVIEW ||
-              state === ANSWER_STATE.UNDER_REVIEW) && (
-              <Flex flexDirection="column">
-                <Button
-                  disabled={this.state.isUpdating}
-                  isFirst
-                  onClick={() =>
-                    this.updateAnswerStateTo(ANSWER_STATE.VALIDATED)
-                  }
-                >
-                  {this.state.isUpdating ? (
-                    <SavingSpinner color="white" size="21" />
-                  ) : (
-                    "Valider la réponse"
-                  )}
-                </Button>
-                <Button
-                  color="danger"
-                  disabled={this.state.isUpdating}
-                  onClick={() => this.updateAnswerStateTo(ANSWER_STATE.DRAFT)}
-                >
-                  {this.state.isUpdating ? (
-                    <SavingSpinner color="white" size="21" />
-                  ) : (
-                    "Refuser la réponse"
-                  )}
-                </Button>
-              </Flex>
-            )}
-          </RightContainer>
+            <Subtitle isFirst>Commentaires et validation</Subtitle>
+            <Comments
+              flexDirection="column"
+              ref={node => (this.$commentsContainer = node)}
+            >
+              {this.getComments()}
+            </Comments>
+            <CommentEditor
+              disabled={comments.currentIsLoading}
+              isPrivate={comments.currentIsPrivate}
+              key={comments.currentKey}
+              onKeyPress={this.handleCommentField.bind(this)}
+              placeholder={T.ADMIN_ANSWERS_COMMENT_PLACEHOLDER}
+              ref={node => (this.$commentTextarea = node)}
+              rows={10}
+            />
+            <CommentEditorIcon
+              icon={comments.currentIsPrivate ? "lock" : "unlock"}
+              onClick={() =>
+                this.props.dispatch(actions.comments.toggleOnePrivacy())
+              }
+            />
+          </Sidebar>
         </Container>
       </AdminMain>
     );
