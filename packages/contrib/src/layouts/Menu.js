@@ -79,7 +79,7 @@ export default class Menu extends React.PureComponent {
   }
 
   openDoc(path) {
-    window.open(`/static/docs/${path}.docx`, "_blank");
+    window.open(`/static/docs/${path}`, "_blank");
   }
 
   openGuide(path) {
@@ -143,19 +143,41 @@ export default class Menu extends React.PureComponent {
               <Icon icon="book" />
               Guide : Outil de contribution
             </DropdownLink>
+
             <DropdownLink onClick={() => Router.push("/charter")}>
               <Icon icon="file-pdf" />
               Charte rédactionnelle
             </DropdownLink>
+
             <DropdownLink
               onClick={() =>
                 this.openDoc(
-                  "Proposition-de-reponse-types-CC-metallurgie-locales"
+                  "Proposition-de-reponse-types-CC-metallurgie-locales.docx"
                 )
               }
             >
               <Icon icon="file-word" />
               Proposition de réponses-types CC métallurgie locales
+            </DropdownLink>
+
+            <DropdownLink
+              onClick={() =>
+                this.openDoc("Reformulation-des-intitules-de-question.xlsx")
+              }
+            >
+              <Icon icon="file-excel" />
+              Reformulation des intitulés de question
+            </DropdownLink>
+
+            <DropdownLink
+              onClick={() =>
+                this.openDoc(
+                  "Premiers-retours-sur-la-validation-des-contributions.docx"
+                )
+              }
+            >
+              <Icon icon="file-word" />
+              Premiers retours sur la validation des contributions
             </DropdownLink>
           </DropdownMenu>
           <Icon icon="caret-down" />
