@@ -76,7 +76,15 @@ describe.skip("[Contrib] layouts/<Menu /> (Contributor)", () => {
     );
   });
 
-  it("should open the local metalworking agreement proposal", () => {
+  it("should redirect to the charter path", () => {
+    fireEvent.click(γ.getByText("Charte rédactionnelle"));
+
+    expect(sessionStorage.getItem("jwt")).toBe(JWT);
+    expect(sessionStorage.getItem("me")).toBe(ME);
+    expect(global.nextRouter.push).toHaveBeenCalledWith("/charter");
+  });
+
+  it("should open the local metalworking agreement proposal document", () => {
     fireEvent.click(
       γ.getByText("Proposition de réponses-types CC métallurgie locales")
     );
@@ -84,17 +92,33 @@ describe.skip("[Contrib] layouts/<Menu /> (Contributor)", () => {
     expect(sessionStorage.getItem("jwt")).toBe(JWT);
     expect(sessionStorage.getItem("me")).toBe(ME);
     expect(global.open).toHaveBeenCalledWith(
-      "https://jean-rene-duscher.gitbook.io/code-du-travail-numerique/",
+      "/static/docs/Proposition-de-reponse-types-CC-metallurgie-locales.docx",
       "_blank"
     );
   });
 
-  it("should redirect to the charter path", () => {
-    fireEvent.click(γ.getByText("Charte rédactionnelle"));
+  it("should open the questions title rewording document", () => {
+    fireEvent.click(γ.getByText("Reformulation des intitulés de question"));
 
     expect(sessionStorage.getItem("jwt")).toBe(JWT);
     expect(sessionStorage.getItem("me")).toBe(ME);
-    expect(global.nextRouter.push).toHaveBeenCalledWith("/charter");
+    expect(global.open).toHaveBeenCalledWith(
+      "/static/docs/Reformulation-des-intitules-de-question.xlsx",
+      "_blank"
+    );
+  });
+
+  it("should open the answers validation feedback document", () => {
+    fireEvent.click(
+      γ.getByText("Premiers retours sur la validation des contributions")
+    );
+
+    expect(sessionStorage.getItem("jwt")).toBe(JWT);
+    expect(sessionStorage.getItem("me")).toBe(ME);
+    expect(global.open).toHaveBeenCalledWith(
+      "/static/docs/Premiers-retours-sur-la-validation-des-contributions.docx",
+      "_blank"
+    );
   });
 
   it("should empty session and redirect to login path", () => {
