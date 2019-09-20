@@ -58,6 +58,11 @@ module.exports = function(nextApp) {
     ctx.respond = false;
   });
 
+  router.get("/admin/generic-answers/print", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/admin/generic-answers/print", {});
+    ctx.respond = false;
+  });
+
   router.get("/admin/generic-answers/:id", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/generic-answers/edit", {
       ...ctx.params
