@@ -4,6 +4,7 @@ import { Flex } from "rebass";
 import styled from "styled-components";
 
 import Menu from "./Menu";
+import getCurrentUser from "../libs/getCurrentUser";
 
 const Container = styled(Flex)`
   background-color: white;
@@ -46,7 +47,7 @@ export default class Header extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ me: JSON.parse(sessionStorage.getItem("me")) });
+    this.setState({ me: getCurrentUser() });
   }
 
   goToHome() {

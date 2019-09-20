@@ -1,3 +1,4 @@
+import jsCookie from "js-cookie";
 import Router from "next/router";
 import React from "react";
 import { Flex } from "rebass";
@@ -87,8 +88,8 @@ export default class Menu extends React.PureComponent {
   }
 
   logOut() {
-    sessionStorage.removeItem("jwt");
-    sessionStorage.removeItem("me");
+    jsCookie.remove("jwt");
+    jsCookie.remove("me");
 
     Router.push("/login");
   }
@@ -99,7 +100,7 @@ export default class Menu extends React.PureComponent {
         <Container>
           <Dropdown>
             <Icon icon="caret-down" />
-            <DropdownText>{this.props.me.payload.name}</DropdownText>
+            <DropdownText>{this.props.me.name}</DropdownText>
             <DropdownMenu flexDirection="column">
               <DropdownLink onClick={() => this.logOut()}>
                 <Icon icon="sign-out-alt" />
@@ -183,7 +184,7 @@ export default class Menu extends React.PureComponent {
           <Icon icon="caret-down" />
         </Dropdown>
         <Dropdown>
-          <DropdownText>{this.props.me.payload.name}</DropdownText>
+          <DropdownText>{this.props.me.name}</DropdownText>
           <DropdownMenu flexDirection="column">
             <DropdownLink onClick={() => this.logOut()}>
               <Icon icon="sign-out-alt" />

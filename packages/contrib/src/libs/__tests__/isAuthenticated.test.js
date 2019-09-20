@@ -2,7 +2,7 @@ import axios from "axios";
 
 import isAuthenticated from "../isAuthenticated";
 
-describe("[Contrib] lib/isAuthenticated()", () => {
+describe.skip("[Contrib] lib/isAuthenticated()", () => {
   const JWT = "aFakeToken";
   const ME = JSON.stringify({ payload: { agreements: [] } });
 

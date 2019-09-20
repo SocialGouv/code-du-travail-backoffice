@@ -39,7 +39,6 @@ module.exports = function(nextApp) {
     await nextApp.render(ctx.req, ctx.res, "/admin/agreements/new", {});
     ctx.respond = false;
   });
-
   router.get("/admin/agreements/:id", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/agreements/edit", {
       ...ctx.params
@@ -47,8 +46,8 @@ module.exports = function(nextApp) {
     ctx.respond = false;
   });
 
-  router.get("/admin/answers/new", async ctx => {
-    await nextApp.render(ctx.req, ctx.res, "/admin/answers/new", {});
+  router.get("/admin/answers/print", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/admin/answers/print", {});
     ctx.respond = false;
   });
 
@@ -56,6 +55,11 @@ module.exports = function(nextApp) {
     await nextApp.render(ctx.req, ctx.res, "/admin/answers/edit", {
       ...ctx.params
     });
+    ctx.respond = false;
+  });
+
+  router.get("/admin/generic-answers/print", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/admin/generic-answers/print", {});
     ctx.respond = false;
   });
 

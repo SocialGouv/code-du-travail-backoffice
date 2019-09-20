@@ -14,6 +14,7 @@ import AnswerEditionTags from "../../src/blocks/AnswerEditionTags";
 import Main from "../../src/layouts/Main";
 import SavingSpinner from "../../src/elements/SavingSpinner";
 import customAxios from "../../src/libs/customAxios";
+import getCurrentUser from "../../src/libs/getCurrentUser";
 import makeApiFilter from "../../src/libs/makeApiFilter";
 import { TABS } from "../../src/blocks/AnswerEditionHead/Tabs";
 import { ANSWER_STATE } from "../../src/constants";
@@ -69,7 +70,7 @@ class AnswersEditPage extends React.Component {
 
   async componentDidMount() {
     const { id } = this.props;
-    const me = JSON.parse(sessionStorage.getItem("me"));
+    const me = getCurrentUser();
 
     this.axios = customAxios();
     this.fetchAnswer();
@@ -161,7 +162,7 @@ class AnswersEditPage extends React.Component {
       const data = {
         prevalue: value,
         state: "draft",
-        user_id: this.state.me.payload.id
+        user_id: this.state.me.id
       };
 
       await this.axios.patch(uri, data);
@@ -180,7 +181,7 @@ class AnswersEditPage extends React.Component {
       const answersUri = `/answers?id=eq.${this.props.id}`;
       const answersData = {
         state: "draft",
-        user_id: this.state.me.payload.id
+        user_id: this.state.me.id
       };
       const answersTagsUri = `/answers_tags`;
       const answersTagsData = {
@@ -227,7 +228,7 @@ class AnswersEditPage extends React.Component {
       const answersUri = `/answers?id=eq.${this.props.id}`;
       const answersData = {
         state: "draft",
-        user_id: this.state.me.payload.id
+        user_id: this.state.me.id
       };
       const answersReferencesUri = `/answers_references`;
       const answersReferencesData = {

@@ -1,4 +1,5 @@
 import axios from "axios";
+import jsCookie from "js-cookie";
 import React from "react";
 import { Button as ReButton, Flex } from "rebass";
 import styled from "styled-components";
@@ -74,9 +75,9 @@ export default class Login extends React.Component {
     const token = res1.data[0].token;
     const res2 = await this.axios.post("/rpc/login_check", { token });
 
-    // Store JSON Web Token & user public data in session
-    sessionStorage.setItem("jwt", token);
-    sessionStorage.setItem("me", JSON.stringify(res2.data[0]));
+    // Store JSON Web Token & user public data in a cookie
+    jsCookie.set("jwt", token, { expires: 30 });
+    jsCookie.set("me", JSON.stringify(res2.data[0]), { expires: 30 });
   }
 
   updateFormData(event) {

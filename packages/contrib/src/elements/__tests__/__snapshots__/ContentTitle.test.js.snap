@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Contrib] elements/<ContentTitle /> should match snapshot 1`] = `
+<div>
+  <h3
+    class="ContentTitle-wfzz0s-0 hBmEVW"
+  />
+</div>
+`;
+
+exports[`[Contrib] elements/<ContentTitle /> should match snapshot with \`isFirst\` prop 1`] = `
+<div>
+  <h3
+    class="ContentTitle-wfzz0s-0 fptxKe"
+  />
+</div>
+`;

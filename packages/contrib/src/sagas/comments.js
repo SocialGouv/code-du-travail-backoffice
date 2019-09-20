@@ -1,6 +1,7 @@
 import { put, takeLatest } from "redux-saga/effects";
 
 import { actionTypes, comments } from "../actions";
+import getCurrentUser from "../libs/getCurrentUser";
 import postgrest from "../libs/postgrest";
 import toast from "../libs/toast";
 
@@ -10,13 +11,13 @@ const API_PATH = "/answers_comments";
 
 function* addOne({ meta: { answerId, isPrivate, value } }) {
   try {
-    const me = JSON.parse(sessionStorage.getItem("me"));
+    const me = getCurrentUser();
 
     const request = postgrest();
     const data = {
       answer_id: answerId,
       is_private: isPrivate,
-      user_id: me.payload.id,
+      user_id: me.id,
       value
     };
 

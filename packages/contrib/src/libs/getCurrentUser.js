@@ -1,3 +1,7 @@
+import jsCookie from "js-cookie";
+
 export default function getCurrentUser() {
-  return JSON.parse(sessionStorage.getItem("me")).payload;
+  const me = jsCookie.get("me");
+
+  return me !== undefined ? JSON.parse(me).payload : null;
 }
