@@ -1,5 +1,4 @@
 import debounce from "lodash.debounce";
-import Router from "next/router";
 import React from "react";
 import { connect } from "react-redux";
 import { Flex } from "rebass";
@@ -17,15 +16,19 @@ import Icon from "../../../src/elements/Icon";
 import Idcc from "../../../src/elements/Idcc";
 import Input from "../../../src/elements/Input";
 import Radio from "../../../src/elements/Radio";
+import _Select from "../../../src/elements/Select";
 import Subtitle from "../../../src/elements/Subtitle";
 import Tag from "../../../src/elements/Tag";
 import Textarea from "../../../src/elements/Textarea";
 import Title from "../../../src/elements/Title";
+import capitalize from "../../../src/helpers/capitalize";
 import customAxios from "../../../src/libs/customAxios";
 import makeApiFilter from "../../../src/libs/makeApiFilter";
 
-import { ANSWER_STATE } from "../../../src/constants";
+import { ANSWER_STATE, ANSWER_STATE_LABEL } from "../../../src/constants";
 import T from "../../../src/texts";
+
+const STATES = Object.keys(ANSWER_STATE_LABEL);
 
 const Container = styled(Flex)`
   height: 100%;
@@ -41,6 +44,13 @@ const Sidebar = styled(Flex)`
   position: relative;
   right: 0;
   min-width: 23rem;
+`;
+
+const StateSelect = styled(_Select)`
+  border: solid 1px var(--color-lapis-lazuli);
+  color: var(--color-lapis-lazuli);
+  margin-right: 1rem;
+  width: 15rem;
 `;
 
 const aIconUri = [
@@ -270,19 +280,13 @@ export class AdminAnwsersEditPage extends React.Component {
     }
   }
 
-  async updateAnswerStateTo(state) {
-    this.setState({ isUpdating: true });
+  updateAnswerState() {
+    const { id } = this.props;
+    const newState = this.$newStateSelect.value;
 
-    try {
-      const uri = `/answers?id=eq.${this.props.id}`;
-      const data = { state };
-
-      await this.axios.patch(uri, data);
-
-      Router.push("/admin/answers");
-    } catch (err) {
-      console.warn(err);
-    }
+    this.props.dispatch(
+      actions.answers.setState([id], newState, () => window.location.reload())
+    );
   }
 
   async _updateAnswerValue({ source }) {
@@ -555,41 +559,21 @@ export class AdminAnwsersEditPage extends React.Component {
                 <Title isFirst>{`${question.index}) ${question.value}`}</Title>
               </Flex>
 
-              <Flex alignItems="baseline">
-                {isSidebarHidden && state === ANSWER_STATE.DRAFT && (
-                  <Button
-                    hasGroup
-                    onClick={() =>
-                      this.updateAnswerStateTo(ANSWER_STATE.PENDING_REVIEW)
-                    }
+              <Flex alignItems="center">
+                {isSidebarHidden && (
+                  <StateSelect
+                    defaultValue={state}
+                    disabled={isLoading}
+                    onChange={this.updateAnswerState.bind(this)}
+                    ref={node => (this.$newStateSelect = node)}
                   >
-                    {T.ADMIN_ANSWERS_BUTTON_PENDING_REVIEW_LABEL}
-                  </Button>
+                    {STATES.map(state => (
+                      <option key={state} value={state}>
+                        {capitalize(ANSWER_STATE_LABEL[state])}
+                      </option>
+                    ))}
+                  </StateSelect>
                 )}
-
-                {isSidebarHidden &&
-                  (state === ANSWER_STATE.PENDING_REVIEW ||
-                    state === ANSWER_STATE.UNDER_REVIEW) && [
-                    <Button
-                      hasGroup
-                      key="validate"
-                      onClick={() =>
-                        this.updateAnswerStateTo(ANSWER_STATE.VALIDATED)
-                      }
-                    >
-                      {T.ADMIN_ANSWERS_BUTTON_VALIDATE_LABEL}
-                    </Button>,
-                    <Button
-                      color="danger"
-                      hasGroup
-                      key="cancel"
-                      onClick={() =>
-                        this.updateAnswerStateTo(ANSWER_STATE.DRAFT)
-                      }
-                    >
-                      {T.ADMIN_ANSWERS_BUTTON_CANCEL_LABEL}
-                    </Button>
-                  ]}
 
                 <Button
                   color="info"
