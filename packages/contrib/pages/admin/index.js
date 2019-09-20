@@ -87,17 +87,17 @@ export default class Index extends React.Component {
       const locationsAgreements = await this.fetchLocationsAgreement();
 
       let statsGlobal = [0, 0, 0, 0, 0, 0];
-      let statsLocations = activeLocations.map(location => ({
+      const statsLocations = activeLocations.map(location => ({
         ...location,
         stats: [0, 0, 0, 0, 0, 0]
       }));
-      let statsAgreements = locationsAgreements.map(agreement => ({
+      const statsAgreements = locationsAgreements.map(agreement => ({
         ...agreement,
         stats: [0, 0, 0, 0, 0, 0]
       }));
 
       const activeLocationsIds = activeLocations.map(({ id }) => id);
-      for (let locationAgreement of locationsAgreements) {
+      for (const locationAgreement of locationsAgreements) {
         const currentLocationId = locationAgreement.location_id;
         if (!activeLocationsIds.includes(currentLocationId)) continue;
 
