@@ -1,10 +1,10 @@
 import moment from "moment-timezone";
 import Router from "next/router";
 import React from "react";
-import ReactTable from "react-table";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
+import Table from "../components/Table";
 import Button from "../elements/Button";
 import Title from "../elements/Title";
 import AdminMain from "../layouts/AdminMain";
@@ -26,24 +26,18 @@ const Confirmation = styled.div`
   padding: 0.75rem 1rem;
 `;
 
+const PAGE_SIZE = 10;
+
 export default class AdminIndex extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      confirmDeletion: false,
-      data: [],
-      isLoading: true,
-      isFetching: false,
-      selectedId: ""
-    };
+    const { apiDeletePath, apiGetPath, apiPath, columns, sortedBy } = props;
 
-    this.apiGetPath =
-      props.apiGetPath !== undefined ? props.apiGetPath : props.apiPath;
-    this.apiDeletePath =
-      props.apiDeletePath !== undefined ? props.apiDeletePath : props.apiPath;
+    this.apiGetPath = apiGetPath !== undefined ? apiGetPath : apiPath;
+    this.apiDeletePath = apiDeletePath !== undefined ? apiDeletePath : apiPath;
 
-    this.columns = [...this.props.columns];
+    this.columns = [...columns];
 
     if (!Boolean(this.props.noTimestamps)) {
       // this.columns.push({
@@ -84,6 +78,7 @@ export default class AdminIndex extends React.Component {
         accessor: "id",
         filterable: false,
         headerStyle: { maxWidth: "2rem" },
+        sortable: false,
         style: { textAlign: "center" },
         width: 40
       });
@@ -101,10 +96,24 @@ export default class AdminIndex extends React.Component {
         ),
         accessor: "id",
         filterable: false,
+        sortable: false,
         style: { textAlign: "center" },
         width: 40
       });
     }
+
+    this.sortedBy =
+      sortedBy !== undefined
+        ? { ...sortedBy }
+        : { id: "updatedAt", desc: true };
+
+    this.state = {
+      confirmDeletion: false,
+      data: [],
+      isLoading: true,
+      isFetching: false,
+      selectedId: ""
+    };
   }
 
   async componentDidMount() {
@@ -205,7 +214,9 @@ export default class AdminIndex extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading) return <AdminMain isLoading />;
+    const { confirmDeletion, data, isLoading, selectedId } = this.state;
+
+    if (isLoading) return <AdminMain isLoading />;
 
     return (
       <AdminMain>
@@ -221,11 +232,9 @@ export default class AdminIndex extends React.Component {
               </Button>
             )}
           </Head>
-          {this.state.confirmDeletion && (
+          {confirmDeletion && (
             <Confirmation>
-              <div>
-                Êtes-vous sûr de vouloir supprimer {this.state.selectedId} ?
-              </div>
+              <div>Êtes-vous sûr de vouloir supprimer {selectedId} ?</div>
               <Flex justifyContent="flex-end">
                 <Button
                   color="danger"
@@ -245,15 +254,16 @@ export default class AdminIndex extends React.Component {
               </Flex>
             </Confirmation>
           )}
-          <ReactTable
-            data={this.state.data}
+          <Table
+            data={data}
             defaultFilterMethod={this.customFilter}
-            defaultPageSize={10}
-            defaultSorted={[{ id: "updated_at", desc: false }]}
+            defaultPageSize={PAGE_SIZE}
+            defaultSorted={[this.sortedBy]}
             columns={this.columns}
-            filterable={true}
+            filterable
             multiSort={false}
             resizable={false}
+            showPagination={data.length > PAGE_SIZE}
             showPageSizeOptions={false}
           />
         </Container>
