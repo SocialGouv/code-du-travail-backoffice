@@ -188,10 +188,13 @@ function* load({ meta: { isGeneric, pageIndex, query, states } }) {
       role: userRole
     } = getCurrentUser();
 
-    let request = postgrest()
-      .page(pageIndex)
-      .in("state", states)
-      .orderBy("question_index");
+    let request = postgrest();
+
+    if (pageIndex !== -1) {
+      request = request.page(pageIndex);
+    }
+
+    request = request.in("state", states).orderBy("question_index");
 
     if (!isGeneric) {
       request = request.orderBy("agreement_idcc");
