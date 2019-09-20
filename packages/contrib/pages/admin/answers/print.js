@@ -4,33 +4,47 @@ import styled from "styled-components";
 
 import * as actions from "../../../src/actions";
 import ContentTitle from "../../../src/elements/ContentTitle";
+import Idcc from "../../../src/elements/Idcc";
 import Hr from "../../../src/elements/Hr";
 import Subtitle from "../../../src/elements/Subtitle";
 import customAxios from "../../../src/libs/customAxios";
 
 import T from "../../../src/texts";
+import { Flex } from "rebass";
 
 const Container = styled.div`
   height: 100vh;
   overflow-y: auto;
+  padding: 1rem;
 
   @media print {
     height: auto;
+    padding: 0;
   }
 `;
 
-const Text = styled.p`
-  margin-bottom: 0.5rem;
-`;
-const HelpText = styled(Text)`
-  font-size: 0.875rem;
+const Pre = styled.pre`
+  font-size: 1.1rem;
+  white-space: normal;
 `;
 
 export class AdminAnswersPrintPage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.isGeneric = Boolean(props.isGeneric);
+  }
+
   componentDidMount() {
     this.axios = customAxios();
 
     this.loadAnswers();
+  }
+
+  componentDidUpdate() {
+    const { isLoading } = this.props.answers;
+
+    if (!isLoading) window.print();
   }
 
   loadAnswers() {
@@ -56,25 +70,28 @@ export class AdminAnswersPrintPage extends React.Component {
       return <p>{T.ADMIN_ANSWERS_INFO_NO_DATA(state)}</p>;
     }
 
-    return data.map(({ id, question_index, question_value, value }) => (
-      <div key={id}>
-        <Subtitle isFirst>{`${question_index}) ${question_value}`}</Subtitle>
-        <ContentTitle isFirst>Réponse corrigée:</ContentTitle>
-        <pre>{value}</pre>
-        <Hr />
-      </div>
-    ));
+    return data.map(
+      ({ agreement_idcc, id, question_index, question_value, value }) => (
+        <div key={id}>
+          <Flex alignItems="baseline">
+            <Idcc code={agreement_idcc} />
+            <Subtitle
+              isFirst
+            >{`${question_index}) ${question_value}`}</Subtitle>
+          </Flex>
+          <ContentTitle isFirst>Réponse corrigée:</ContentTitle>
+          <Pre>{value}</Pre>
+          <Hr />
+        </div>
+      )
+    );
   }
 
   render() {
     const { isLoading } = this.props.answers;
 
     if (isLoading) {
-      return (
-        <Container>
-          <HelpText>Chargement…</HelpText>
-        </Container>
-      );
+      return <Container>Chargement…</Container>;
     }
 
     return (
