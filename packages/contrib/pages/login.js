@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Login from "../src/components/Login";
 import Main from "../src/layouts/Main";
 import isAuthenticated from "../src/libs/isAuthenticated";
+import getCurrentUser from "../src/libs/getCurrentUser";
 
 import { USER_ROLE } from "../src/constants";
 
@@ -55,7 +56,7 @@ export default class Index extends React.Component {
   async componentDidUpdate() {
     try {
       if (await isAuthenticated()) {
-        const role = JSON.parse(sessionStorage.getItem("me")).payload.role;
+        const { role } = getCurrentUser();
 
         switch (true) {
           case [

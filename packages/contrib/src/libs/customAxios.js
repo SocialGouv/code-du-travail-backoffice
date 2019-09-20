@@ -1,4 +1,5 @@
 import axios from "axios";
+import jsCookie from "js-cookie";
 import Router from "next/router";
 
 const { API_URI } = process.env;
@@ -29,9 +30,10 @@ instance.interceptors.response.use(
 );
 
 export default function() {
-  const jwt = sessionStorage.getItem("jwt");
-  if (jwt !== null) {
-    const authorization = `Bearer ${sessionStorage.getItem("jwt")}`;
+  const jwt = jsCookie.get("jwt");
+
+  if (jwt !== undefined) {
+    const authorization = `Bearer ${jwt}`;
     instance.defaults.headers["Authorization"] = authorization;
   } else if (!window.location.pathname.startsWith("/login")) {
     Router.push(`/login?redirectTo=${window.location.pathname}`);

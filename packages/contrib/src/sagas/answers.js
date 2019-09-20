@@ -3,6 +3,7 @@ import React from "react";
 import { put, takeLatest } from "redux-saga/effects";
 
 import { actionTypes, answers } from "../actions";
+import getCurrentUser from "../libs/getCurrentUser";
 import postgrest from "../libs/postgrest";
 import toast from "../libs/toast";
 
@@ -77,9 +78,7 @@ function* cancel({ meta: { ids, next } }) {
  */
 function* setGenericReference({ meta: { genericReference, ids, next } }) {
   try {
-    const {
-      payload: { id: userId, role: userRole }
-    } = JSON.parse(sessionStorage.getItem("me"));
+    const { id: userId, role: userRole } = getCurrentUser();
 
     const data =
       userRole === USER_ROLE.ADMINISTRATOR
@@ -184,10 +183,10 @@ function* setState({ meta: { ids, next, state } }) {
 function* load({ meta: { isGeneric, pageIndex, query, states } }) {
   try {
     const {
-      payload: { id: userId, role: userRole }
-    } = JSON.parse(sessionStorage.getItem("me"));
-
-    const me = JSON.parse(sessionStorage.getItem("me"));
+      agreements: userAgreements,
+      id: userId,
+      role: userRole
+    } = getCurrentUser();
 
     let request = postgrest()
       .page(pageIndex)
@@ -204,7 +203,7 @@ function* load({ meta: { isGeneric, pageIndex, query, states } }) {
 
     if (userRole === USER_ROLE.CONTRIBUTOR) {
       if (!isGeneric) {
-        request = request.in("agreement_id", me.payload.agreements, true);
+        request = request.in("agreement_id", userAgreements, true);
       }
 
       if (!states.includes(ANSWER_STATE.TO_DO)) {

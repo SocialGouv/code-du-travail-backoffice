@@ -5,6 +5,7 @@ import React from "react";
 import { Provider } from "react-redux";
 
 import Main from "../src/layouts/Main";
+import getCurrentUser from "../src/libs/getCurrentUser";
 import isAuthenticated from "../src/libs/isAuthenticated";
 import createStore from "../src/store";
 
@@ -25,7 +26,7 @@ class MainApp extends App {
         // eslint-disable-next-line require-atomic-updates
         window.location.href = `/login?redirectTo=${window.location.pathname}`;
       } else {
-        const role = JSON.parse(sessionStorage.getItem("me")).payload.role;
+        const { role } = getCurrentUser();
 
         switch (true) {
           case [
