@@ -9,7 +9,7 @@ import Subtitle from "../../src/elements/Subtitle";
 import Title from "../../src/elements/Title";
 import AdminMain from "../../src/layouts/AdminMain";
 import customAxios from "../../src/libs/customAxios";
-import numeral from "../../src/libs/numeral";
+import numeral from "../../src/libs/customNumeral";
 
 import { ANSWER_STATE } from "../../src/constants";
 
