@@ -41,7 +41,9 @@ const Top = styled(Flex)`
   margin-bottom: 0.75rem;
 `;
 const FilterSelect = styled(_Select)`
+  margin-right: 1rem;
   max-width: 15rem;
+  width: 15rem;
 `;
 const StateSelect = styled(_Select)`
   border: solid 1px var(--color-lapis-lazuli);
@@ -104,6 +106,14 @@ export class AdminAnswersIndexPage extends React.Component {
     );
   }
 
+  printAnswers() {
+    const path = this.isGeneric ? "generic-answers" : "answers";
+    const { state } = this.props.answers;
+    const query = this.queryFilter;
+
+    window.open(`/admin/${path}/print?state=${state}&query=${query}`, "_blank");
+  }
+
   editAnswer(id) {
     const path = this.isGeneric ? "generic-answers" : "answers";
 
@@ -152,20 +162,31 @@ export class AdminAnswersIndexPage extends React.Component {
         <Container flexDirection="column">
           <Top alignItems="baseline" justifyContent="space-between">
             <Title>{`Réponses${this.isGeneric ? " génériques" : ""}`}</Title>
-            <FilterSelect
-              defaultValue={state}
-              disabled={isLoading}
-              key={`stateFilter-${state}`}
-              onChange={() => this.updateStateFilter()}
-              ref={node => (this.$stateFilter = node)}
-            >
-              {STATES.map(state => (
-                <option key={state} value={state}>
-                  {capitalize(ANSWER_STATE_LABEL[state])}
-                </option>
-              ))}
-            </FilterSelect>
+
+            <Flex>
+              <FilterSelect
+                defaultValue={state}
+                disabled={isLoading}
+                key={`stateFilter-${state}`}
+                onChange={() => this.updateStateFilter()}
+                ref={node => (this.$stateFilter = node)}
+              >
+                {STATES.map(state => (
+                  <option key={state} value={state}>
+                    {capitalize(ANSWER_STATE_LABEL[state])}
+                  </option>
+                ))}
+              </FilterSelect>
+
+              <Button
+                disabled={isLoading}
+                onClick={this.printAnswers.bind(this)}
+              >
+                Imprimer
+              </Button>
+            </Flex>
           </Top>
+
           <Flex alignItems="center" justifyContent="space-between">
             <FilterInput
               icon="search"
