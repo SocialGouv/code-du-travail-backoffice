@@ -13,7 +13,7 @@ import { pluralize } from "../texts";
 
 function* loadOne({ meta: { id } }) {
   try {
-    let request = postgrest()
+    const request = postgrest()
       .select("*")
       .select("agreement(idcc,name)")
       .select("question(index,value)")

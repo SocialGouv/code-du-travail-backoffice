@@ -192,7 +192,7 @@ export default class AdminForm extends React.Component {
         if (fieldsWithCustomApiPath.length > 0) {
           const itemIdName = `${this.props.name}_id`;
 
-          for (let field of fieldsWithCustomApiPath) {
+          for (const field of fieldsWithCustomApiPath) {
             const fieldIdName = `${field.singleName}_id`;
             const foreignData = fullData[field.name].map(foreignItemId => ({
               [itemIdName]: this.props.id,
@@ -218,7 +218,7 @@ export default class AdminForm extends React.Component {
           const itemId = /[0-9a-f-]+$/.exec(headers.location)[0];
           const itemIdName = `${this.props.name}_id`;
 
-          for (let field of fieldsWithCustomApiPath) {
+          for (const field of fieldsWithCustomApiPath) {
             const fieldIdName = `${field.singleName}_id`;
             const foreignData = fullData[field.name].map(foreignItemId => ({
               [itemIdName]: itemId,
