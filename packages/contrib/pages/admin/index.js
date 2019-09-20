@@ -3,6 +3,9 @@ import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
+import Table from "../../src/components/Table";
+import Button from "../../src/elements/Button";
+import ContentTitle from "../../src/elements/ContentTitle";
 import Subtitle from "../../src/elements/Subtitle";
 import Title from "../../src/elements/Title";
 import AdminMain from "../../src/layouts/AdminMain";
@@ -10,53 +13,77 @@ import customAxios from "../../src/libs/customAxios";
 
 import { ANSWER_STATE } from "../../src/constants";
 
+const COLUMNS = [
+  {
+    Header: "Nom",
+    accessor: "name",
+    id: "name"
+  },
+  {
+    Header: "À rédiger",
+    accessor: "todo",
+    id: "todo"
+  },
+  {
+    Header: "En cours de rédaction",
+    accessor: "draft",
+    id: "draft"
+  },
+  {
+    Header: "À valider",
+    accessor: "pendingReview",
+    id: "pendingReview"
+  },
+  {
+    Header: "En cours de validation",
+    accessor: "underReview",
+    id: "underReview"
+  },
+  {
+    Header: "Validées",
+    accessor: "validated",
+    id: "validated"
+  },
+  {
+    Header: "Total",
+    accessor: "total",
+    id: "total"
+  }
+];
+const PERCENTAGE_COLUMNS = [
+  {
+    ...COLUMNS[0],
+    accessor: data => data.name
+  },
+  {
+    ...COLUMNS[1],
+    accessor: data => numeral(data.todo).format("0.00%")
+  },
+  {
+    ...COLUMNS[2],
+    accessor: data => numeral(data.draft).format("0.00%")
+  },
+  {
+    ...COLUMNS[3],
+    accessor: data => numeral(data.pendingReview).format("0.00%")
+  },
+  {
+    ...COLUMNS[4],
+    accessor: data => numeral(data.underReview).format("0.00%")
+  },
+  {
+    ...COLUMNS[5],
+    accessor: data => numeral(data.validated).format("0.00%")
+  },
+  {
+    ...COLUMNS[6],
+    accessor: () => "100%",
+    sortable: false
+  }
+];
+
 const Container = styled(Flex)`
   margin: 0 1rem 1rem;
-`;
-
-const Table = styled.table`
-  border-collapse: collapse;
-  table-layout: fixed;
-  width: 100%;
-
-  tr > th {
-    background-color: var(--color-label-background);
-    overflow: hidden;
-    text-align: left;
-    text-overflow: ellipsis;
-    vertical-align: top;
-    width: 10%;
-    white-space: nowrap;
-
-    :first-child {
-      width: 40%;
-    }
-  }
-
-  tr > td,
-  tr > th {
-    border: solid 1px var(--color-border);
-    border-left: 0;
-    border-top: 0;
-    padding: 0.25rem 0.5rem;
-  }
-  tr:first-child > td,
-  tr:first-child > th {
-    border-top: solid 1px var(--color-border);
-  }
-  tr > td:first-child,
-  tr > th:first-child {
-    border-left: solid 1px var(--color-border);
-  }
-
-  tr > td:nth-child(n + 2) {
-    text-align: right;
-  }
-  tr > th.title {
-    background-color: var(--color-text-blue);
-    color: white;
-    text-align: right;
-  }
 `;
 
 const REFRESH_DELAY = 10000;
@@ -67,8 +94,8 @@ export default class Index extends React.Component {
 
     this.state = {
       isLoading: true,
+      isPercentage: true,
       questionsCount: 0,
-      statsAgreements: [],
       statsLocations: [],
       statsGlobal: [0, 0, 0, 0, 0, 0]
     };
@@ -89,11 +116,8 @@ export default class Index extends React.Component {
       let statsGlobal = [0, 0, 0, 0, 0, 0];
       const statsLocations = activeLocations.map(location => ({
         ...location,
-        stats: [0, 0, 0, 0, 0, 0]
-      }));
-      const statsAgreements = locationsAgreements.map(agreement => ({
-        ...agreement,
-        stats: [0, 0, 0, 0, 0, 0]
+        agreements: [],
+        total: [0, 0, 0, 0, 0, 0]
       }));
 
       const activeLocationsIds = activeLocations.map(({ id }) => id);
@@ -139,20 +163,20 @@ export default class Index extends React.Component {
         const statsLocationIndex = statsLocations.findIndex(
           ({ id }) => id === currentLocationId
         );
-        const currentLocationStats = statsLocations[statsLocationIndex].stats;
-        statsLocations[statsLocationIndex].stats = [
-          currentLocationStats[0] + todoAnswersCount,
-          currentLocationStats[1] + draftAnswersCount,
-          currentLocationStats[2] + pendingReviewAnswersCount,
-          currentLocationStats[3] + underReviewAnswersCount,
-          currentLocationStats[4] + validatedAnswersCount,
-          currentLocationStats[5] + totalAnswersCount
-        ];
+        const currentLocationStats = statsLocations[statsLocationIndex];
+        currentLocationStats.total[0] += todoAnswersCount;
+        currentLocationStats.total[1] += draftAnswersCount;
+        statsLocations[
+          statsLocationIndex
+        ].total[2] += pendingReviewAnswersCount;
+        currentLocationStats.total[3] += underReviewAnswersCount;
+        currentLocationStats.total[4] += validatedAnswersCount;
+        currentLocationStats.total[5] += totalAnswersCount;
 
-        const statsAgreementIndex = statsAgreements.findIndex(
+        const currentLocationAgreement = locationsAgreements.find(
           ({ agreement_id }) => agreement_id === locationAgreement.agreement_id
         );
-        statsAgreements[statsAgreementIndex].stats = [
+        currentLocationAgreement.total = [
           todoAnswersCount,
           draftAnswersCount,
           pendingReviewAnswersCount,
@@ -160,12 +184,12 @@ export default class Index extends React.Component {
           validatedAnswersCount,
           totalAnswersCount
         ];
+        currentLocationStats.agreements.push(currentLocationAgreement);
       }
 
       this.setState({
         isLoading: false,
         questionsCount,
-        statsAgreements,
         statsGlobal,
         statsLocations
       });
@@ -186,21 +210,17 @@ export default class Index extends React.Component {
 
   async fetchActiveLocations() {
     const where = "name=ilike.UR*";
-    const order = "order=name.asc";
 
-    const { data: locations } = await this.axios.get(
-      `/locations?${where}&${order}`
-    );
+    const { data: locations } = await this.axios.get(`/locations?${where}`);
 
     return locations;
   }
 
   async fetchLocationsAgreement() {
     const select = "select=*,agreement(idcc,name),location(name)";
-    const order = "agreement.order=idcc.asc";
 
     const { data: locationsAgreements } = await this.axios.get(
-      `/locations_agreements?${select}&${order}`
+      `/locations_agreements?${select}`
     );
 
     return locationsAgreements;
@@ -217,244 +237,128 @@ export default class Index extends React.Component {
     return locationsAgreements;
   }
 
+  generateDataRow(name, stats) {
+    const { isPercentage } = this.state;
+
+    return {
+      name,
+      todo: isPercentage ? stats[0] / stats[5] : stats[0],
+      draft: isPercentage ? stats[1] / stats[5] : stats[1],
+      pendingReview: isPercentage ? stats[2] / stats[5] : stats[2],
+      underReview: isPercentage ? stats[3] / stats[5] : stats[3],
+      validated: isPercentage ? stats[4] / stats[5] : stats[4],
+      total: isPercentage ? 1 : stats[5]
+    };
+  }
+
   getGlobalStats() {
-    const { statsGlobal } = this.state;
+    const { isPercentage, statsGlobal } = this.state;
+    const data = [this.generateDataRow("Total", statsGlobal)];
 
     return (
-      <tr>
-        <th>Total</th>
-        <td>
-          {statsGlobal[0]}
-          <br />
-          {numeral(statsGlobal[0] / statsGlobal[5]).format("0%")}
-        </td>
-        <td>
-          {statsGlobal[1]}
-          <br />
-          {numeral(statsGlobal[1] / statsGlobal[5]).format("0%")}
-        </td>
-        <td>
-          {statsGlobal[2]}
-          <br />
-          {numeral(statsGlobal[2] / statsGlobal[5]).format("0%")}
-        </td>
-        <td>
-          {statsGlobal[3]}
-          <br />
-          {numeral(statsGlobal[3] / statsGlobal[5]).format("0%")}
-        </td>
-        <td>
-          {statsGlobal[4]}
-          <br />
-          {numeral(statsGlobal[4] / statsGlobal[5]).format("0%")}
-        </td>
-        <td>
-          {statsGlobal[5]}
-          <br />
-          100%
-        </td>
-      </tr>
+      <Table
+        data={data}
+        defaultPageSize={data.length}
+        columns={isPercentage ? PERCENTAGE_COLUMNS : COLUMNS}
+        filterable={false}
+        multiSort={false}
+        resizable={false}
+        sortable={false}
+        showPagination={false}
+      />
     );
   }
 
   getUnitsStats() {
-    const { statsLocations } = this.state;
+    const { isPercentage, statsLocations } = this.state;
 
-    return statsLocations.map((statsLocation, index) => (
-      <tr key={index}>
-        <th title={statsLocation.name}>{statsLocation.name}</th>
-        <td>
-          {statsLocation.stats[0]}
-          <br />
-          {numeral(statsLocation.stats[0] / statsLocation.stats[5]).format(
-            "0%"
-          )}
-        </td>
-        <td>
-          {statsLocation.stats[1]}
-          <br />
-          {numeral(statsLocation.stats[1] / statsLocation.stats[5]).format(
-            "0%"
-          )}
-        </td>
-        <td>
-          {statsLocation.stats[2]}
-          <br />
-          {numeral(statsLocation.stats[2] / statsLocation.stats[5]).format(
-            "0%"
-          )}
-        </td>
-        <td>
-          {statsLocation.stats[3]}
-          <br />
-          {numeral(statsLocation.stats[3] / statsLocation.stats[5]).format(
-            "0%"
-          )}
-        </td>
-        <td>
-          {statsLocation.stats[4]}
-          <br />
-          {numeral(statsLocation.stats[4] / statsLocation.stats[5]).format(
-            "0%"
-          )}
-        </td>
-        <td>
-          {statsLocation.stats[5]}
-          <br />
-          100%
-        </td>
-      </tr>
-    ));
+    const data = statsLocations.map(({ name, total }) =>
+      this.generateDataRow(name, total)
+    );
+
+    return (
+      <Table
+        data={data}
+        defaultPageSize={data.length}
+        defaultSorted={[{ id: "validated", desc: false }]}
+        columns={isPercentage ? PERCENTAGE_COLUMNS : COLUMNS}
+        filterable={false}
+        multiSort={false}
+        resizable={false}
+        showPagination={false}
+      />
+    );
   }
 
   getAgreementsStats() {
-    const { statsAgreements } = this.state;
-    let lastLocationId = "";
+    const { isPercentage, statsLocations } = this.state;
 
-    return statsAgreements.map((statsAgreement, index) => {
-      const { idcc, name } = statsAgreement.agreement;
-      const title = `[${idcc}] ${name}`;
+    return statsLocations
+      .filter(({ agreements }) => agreements.length !== 0)
+      .map(({ agreements, name }, index) => {
+        const data = agreements.map(({ agreement: { name }, total }) =>
+          this.generateDataRow(name, total)
+        );
 
-      const agreementRowSource = (
-        <tr key={`agreement-${index}`}>
-          <th title={title}>{title}</th>
-          <td>
-            {statsAgreement.stats[0]}
-            <br />
-            {numeral(statsAgreement.stats[0] / statsAgreement.stats[5]).format(
-              "0%"
-            )}
-          </td>
-          <td>
-            {statsAgreement.stats[1]}
-            <br />
-            {numeral(statsAgreement.stats[1] / statsAgreement.stats[5]).format(
-              "0%"
-            )}
-          </td>
-          <td>
-            {statsAgreement.stats[2]}
-            <br />
-            {numeral(statsAgreement.stats[2] / statsAgreement.stats[5]).format(
-              "0%"
-            )}
-          </td>
-          <td>
-            {statsAgreement.stats[3]}
-            <br />
-            {numeral(statsAgreement.stats[3] / statsAgreement.stats[5]).format(
-              "0%"
-            )}
-          </td>
-          <td>
-            {statsAgreement.stats[4]}
-            <br />
-            {numeral(statsAgreement.stats[4] / statsAgreement.stats[5]).format(
-              "0%"
-            )}
-          </td>
-          <td>
-            {statsAgreement.stats[5]}
-            <br />
-            100%
-          </td>
-        </tr>
-      );
-
-      if (lastLocationId !== statsAgreement.location_id) {
-        lastLocationId = statsAgreement.location_id;
-
-        return [
-          <tr key={`location-${index}`}>
-            <th className="title" colSpan={7} title={title}>
-              {statsAgreement.location.name.toUpperCase()}
-            </th>
-          </tr>,
-          agreementRowSource
-        ];
-      }
-
-      return agreementRowSource;
-    });
+        return (
+          <div key={index}>
+            <ContentTitle isFirst={index === 0}>{name}</ContentTitle>
+            <Table
+              data={data}
+              defaultPageSize={data.length}
+              defaultSorted={[{ id: "validated", desc: false }]}
+              columns={isPercentage ? PERCENTAGE_COLUMNS : COLUMNS}
+              filterable={false}
+              multiSort={false}
+              resizable={false}
+              showPagination={false}
+            />
+          </div>
+        );
+      });
   }
 
   render() {
+    const { isPercentage } = this.state;
+
     return (
       <AdminMain>
         <Container flexDirection="column">
-          <Title>Tableau de bord</Title>
+          <Flex alignItems="baseline" justifyContent="space-between">
+            <Title>Tableau de bord</Title>
+            <Button
+              onClick={() => this.setState({ isPercentage: !isPercentage })}
+            >
+              {isPercentage
+                ? "Voir les nombres bruts"
+                : "Voir les pourcentages"}
+            </Button>
+          </Flex>
 
           <Subtitle isFirst>Global</Subtitle>
-          <Table>
-            <thead>
-              <tr>
-                <th />
-                <th title="À rédiger">À rédiger</th>
-                <th title="En cours de rédaction">En cours de rédaction</th>
-                <th title="À valider">À valider</th>
-                <th title="En cours de validation">En cours de validation</th>
-                <th title="Validées">Validées</th>
-                <th title="Total">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.isLoading ? (
-                <tr>
-                  <td colSpan="6">Calcul en cours…</td>
-                </tr>
-              ) : (
-                this.getGlobalStats()
-              )}
-            </tbody>
-          </Table>
+          {this.state.isLoading ? (
+            <tr>
+              <p>Calcul en cours…</p>
+            </tr>
+          ) : (
+            this.getGlobalStats()
+          )}
 
-          <Subtitle isFirst>Par région</Subtitle>
-          <Table>
-            <thead>
-              <tr>
-                <th title="Région">Région</th>
-                <th title="À rédiger">À rédiger</th>
-                <th title="En cours de rédaction">En cours de rédaction</th>
-                <th title="À valider">À valider</th>
-                <th title="En cours de validation">En cours de validation</th>
-                <th title="Validées">Validées</th>
-                <th title="Total">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.isLoading ? (
-                <tr>
-                  <td colSpan="6">Calcul en cours…</td>
-                </tr>
-              ) : (
-                this.getUnitsStats()
-              )}
-            </tbody>
-          </Table>
+          <Subtitle>Par région</Subtitle>
+          {this.state.isLoading ? (
+            <tr>
+              <p>Calcul en cours…</p>
+            </tr>
+          ) : (
+            this.getUnitsStats()
+          )}
 
-          <Subtitle isFirst>Par convention collective</Subtitle>
-          <Table>
-            <thead>
-              <tr>
-                <th title="Intitulé">Intitulé</th>
-                <th title="À rédiger">À rédiger</th>
-                <th title="En cours de rédaction">En cours de rédaction</th>
-                <th title="À valider">À valider</th>
-                <th title="En cours de validation">En cours de validation</th>
-                <th title="Validées">Validées</th>
-                <th title="Total">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.isLoading ? (
-                <tr>
-                  <td colSpan="6">Calcul en cours…</td>
-                </tr>
-              ) : (
-                this.getAgreementsStats()
-              )}
-            </tbody>
-          </Table>
+          <Subtitle>Par convention collective</Subtitle>
+          {this.state.isLoading ? (
+            <p>Calcul en cours…</p>
+          ) : (
+            this.getAgreementsStats()
+          )}
         </Container>
       </AdminMain>
     );
