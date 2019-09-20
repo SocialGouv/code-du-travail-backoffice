@@ -1,4 +1,3 @@
-import numeral from "numeral";
 import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
@@ -10,74 +9,68 @@ import Subtitle from "../../src/elements/Subtitle";
 import Title from "../../src/elements/Title";
 import AdminMain from "../../src/layouts/AdminMain";
 import customAxios from "../../src/libs/customAxios";
+import numeral from "../../src/libs/customNumeral";
 
 import { ANSWER_STATE } from "../../src/constants";
 
 const COLUMNS = [
   {
     Header: "Nom",
-    accessor: "name",
-    id: "name"
+    accessor: "name"
   },
   {
     Header: "À rédiger",
-    accessor: "todo",
-    id: "todo"
+    accessor: "todo"
   },
   {
     Header: "En cours de rédaction",
-    accessor: "draft",
-    id: "draft"
+    accessor: "draft"
   },
   {
     Header: "À valider",
-    accessor: "pendingReview",
-    id: "pendingReview"
+    accessor: "pendingReview"
   },
   {
     Header: "En cours de validation",
-    accessor: "underReview",
-    id: "underReview"
+    accessor: "underReview"
   },
   {
     Header: "Validées",
-    accessor: "validated",
-    id: "validated"
+    accessor: "validated"
   },
   {
     Header: "Total",
-    accessor: "total",
-    id: "total"
+    accessor: "total"
   }
 ];
 const PERCENTAGE_COLUMNS = [
   {
     ...COLUMNS[0],
-    accessor: data => data.name
+    Cell: ({ value }) => numeral(value).format("0.00%")
   },
   {
     ...COLUMNS[1],
-    accessor: data => numeral(data.todo).format("0.00%")
+    Cell: ({ value }) => numeral(value).format("0.00%")
   },
   {
     ...COLUMNS[2],
-    accessor: data => numeral(data.draft).format("0.00%")
+    Cell: ({ value }) => numeral(value).format("0.00%")
   },
   {
     ...COLUMNS[3],
-    accessor: data => numeral(data.pendingReview).format("0.00%")
+    Cell: ({ value }) => numeral(value).format("0.00%")
   },
   {
     ...COLUMNS[4],
-    accessor: data => numeral(data.underReview).format("0.00%")
+    Cell: ({ value }) => numeral(value).format("0.00%")
   },
   {
     ...COLUMNS[5],
-    accessor: data => numeral(data.validated).format("0.00%")
+    Cell: ({ value }) => numeral(value).format("0.00%")
   },
   {
     ...COLUMNS[6],
-    accessor: () => "100%",
+    Cell: "100.00%",
     sortable: false
   }
 ];
@@ -87,6 +80,19 @@ const Container = styled(Flex)`
 `;
 
 const REFRESH_DELAY = 10000;
+
+const StatsTable = ({ data, isPercentage, ...props }) => (
+  <Table
+    data={data}
+    defaultPageSize={data.length}
+    columns={isPercentage ? PERCENTAGE_COLUMNS : COLUMNS}
+    filterable={false}
+    multiSort={false}
+    resizable={false}
+    showPagination={false}
+    {...props}
+  />
+);
 
 export default class Index extends React.Component {
   constructor(props) {
@@ -239,14 +245,15 @@ export default class Index extends React.Component {
 
   generateDataRow(name, stats) {
     const { isPercentage } = this.state;
+    const total = stats[5] !== 0 ? stats[5] : 1;
 
     return {
       name,
-      todo: isPercentage ? stats[0] / stats[5] : stats[0],
-      draft: isPercentage ? stats[1] / stats[5] : stats[1],
-      pendingReview: isPercentage ? stats[2] / stats[5] : stats[2],
-      underReview: isPercentage ? stats[3] / stats[5] : stats[3],
-      validated: isPercentage ? stats[4] / stats[5] : stats[4],
+      todo: isPercentage ? stats[0] / total : stats[0],
+      draft: isPercentage ? stats[1] / total : stats[1],
+      pendingReview: isPercentage ? stats[2] / total : stats[2],
+      underReview: isPercentage ? stats[3] / total : stats[3],
+      validated: isPercentage ? stats[4] / total : stats[4],
       total: isPercentage ? 1 : stats[5]
     };
   }
@@ -256,16 +263,7 @@ export default class Index extends React.Component {
     const data = [this.generateDataRow("Total", statsGlobal)];
 
     return (
-      <Table
-        data={data}
-        defaultPageSize={data.length}
-        columns={isPercentage ? PERCENTAGE_COLUMNS : COLUMNS}
-        filterable={false}
-        multiSort={false}
-        resizable={false}
-        sortable={false}
-        showPagination={false}
-      />
+      <StatsTable data={data} isPercentage={isPercentage} sortable={false} />
     );
   }
 
@@ -277,15 +275,10 @@ export default class Index extends React.Component {
     );
 
     return (
-      <Table
+      <StatsTable
         data={data}
-        defaultPageSize={data.length}
         defaultSorted={[{ id: "validated", desc: false }]}
-        columns={isPercentage ? PERCENTAGE_COLUMNS : COLUMNS}
-        filterable={false}
-        multiSort={false}
-        resizable={false}
-        showPagination={false}
+        isPercentage={isPercentage}
       />
     );
   }
@@ -303,15 +296,10 @@ export default class Index extends React.Component {
         return (
           <div key={index}>
             <ContentTitle isFirst={index === 0}>{name}</ContentTitle>
-            <Table
+            <StatsTable
               data={data}
-              defaultPageSize={data.length}
               defaultSorted={[{ id: "validated", desc: false }]}
-              columns={isPercentage ? PERCENTAGE_COLUMNS : COLUMNS}
-              filterable={false}
-              multiSort={false}
-              resizable={false}
-              showPagination={false}
+              isPercentage={isPercentage}
             />
           </div>
         );
