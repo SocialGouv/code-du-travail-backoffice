@@ -1,4 +1,4 @@
-import App, { Container } from "next/app";
+import App from "next/app";
 import withReduxSaga from "next-redux-saga";
 import withRedux from "next-redux-wrapper";
 import React from "react";
@@ -58,15 +58,13 @@ class MainApp extends App {
     const { Component, pageProps, store } = this.props;
 
     return (
-      <Container>
-        <Provider store={store}>
-          {!this.state.isMountedAndAllowed ? (
-            <Main isLoading />
-          ) : (
-            <Component {...pageProps} />
-          )}
-        </Provider>
-      </Container>
+      <Provider store={store}>
+        {!this.state.isMountedAndAllowed ? (
+          <Main isLoading />
+        ) : (
+          <Component {...pageProps} />
+        )}
+      </Provider>
     );
   }
 }
