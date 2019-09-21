@@ -421,6 +421,7 @@ exports[`[Contrib] blocks/<AnswerEditionContent /> should match snapshot 1`] = `
           <a
             class="ql-preview"
             href="about:blank"
+            rel="noopener noreferrer"
             target="_blank"
           />
           <input
