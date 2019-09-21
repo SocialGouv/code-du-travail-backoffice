@@ -17,6 +17,11 @@ export const ANSWER_STATE_LABEL = {
   validated: "validée"
 };
 
+export const ANSWER_REFERENCE_CATEGORY = {
+  AGREEMENT: "agreement",
+  LABOR_CODE: "labor_code"
+};
+
 export const USER_ROLE = {
   ADMINISTRATOR: "administrator",
   CONTRIBUTOR: "contributor",
