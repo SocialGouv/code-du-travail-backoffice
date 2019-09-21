@@ -7,9 +7,8 @@ import ContentTitle from "../../../src/elements/ContentTitle";
 import Idcc from "../../../src/elements/Idcc";
 import Hr from "../../../src/elements/Hr";
 import Subtitle from "../../../src/elements/Subtitle";
-import customAxios from "../../../src/libs/customAxios";
+import getUriParams from "../../../src/libs/getUriParams";
 
-import T from "../../../src/texts";
 import { Flex } from "rebass";
 
 const Container = styled.div`
@@ -22,10 +21,20 @@ const Container = styled.div`
     padding: 0;
   }
 `;
+const Header = styled(Flex)`
+  margin-bottom: 0.875rem;
+`;
 
 const Pre = styled.pre`
   font-size: 1.1rem;
+  margin-bottom: 1rem;
   white-space: normal;
+`;
+const List = styled.ul`
+  font-size: 0.875rem;
+  list-style-type: square;
+  padding-inline-start: 0;
+  padding-left: 1.5rem;
 `;
 
 export class AdminAnswersPrintPage extends React.Component {
@@ -36,8 +45,6 @@ export class AdminAnswersPrintPage extends React.Component {
   }
 
   componentDidMount() {
-    this.axios = customAxios();
-
     this.loadAnswers();
   }
 
@@ -48,39 +55,48 @@ export class AdminAnswersPrintPage extends React.Component {
   }
 
   loadAnswers() {
-    const uriParams = new URLSearchParams(window.location.search);
-    const query = uriParams.get("query");
-    const state = uriParams.get("state");
+    const uriParams = getUriParams();
+    const meta = {
+      isGeneric: this.isGeneric,
+      query: uriParams.get("query"),
+      states: [uriParams.get("state")],
+      withReferences: true
+    };
 
-    this.props.dispatch(
-      actions.answers.load([state], -1, query, this.isGeneric)
-    );
+    this.props.dispatch(actions.answers.load(meta));
   }
 
   getAnswersList() {
-    const uriParams = new URLSearchParams(window.location.search);
-    const state = uriParams.get("state");
     const { data } = this.props.answers;
 
-    if (data.length === 0) {
-      if (this.queryFilter.length !== 0) {
-        return <p>{T.ADMIN_ANSWERS_INFO_NO_SEARCH_RESULT}</p>;
-      }
-
-      return <p>{T.ADMIN_ANSWERS_INFO_NO_DATA(state)}</p>;
-    }
-
     return data.map(
-      ({ agreement_idcc, id, question_index, question_value, value }) => (
+      ({
+        agreement_idcc,
+        id,
+        question_index,
+        question_value,
+        references,
+        value
+      }) => (
         <div key={id}>
-          <Flex alignItems="baseline">
+          <Header alignItems="baseline">
             <Idcc code={agreement_idcc} />
             <Subtitle
               isFirst
             >{`${question_index}) ${question_value}`}</Subtitle>
-          </Flex>
+          </Header>
           <ContentTitle isFirst>Réponse corrigée:</ContentTitle>
           <Pre>{value}</Pre>
+          {references.length !== 0 && (
+            <div>
+              <ContentTitle isFirst>Références:</ContentTitle>
+              <List>
+                {references.map(({ id, value }) => (
+                  <li key={id}>{value}</li>
+                ))}
+              </List>
+            </div>
+          )}
           <Hr />
         </div>
       )

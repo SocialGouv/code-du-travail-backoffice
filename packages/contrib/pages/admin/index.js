@@ -2,7 +2,7 @@ import React from "react";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
-import Table from "../../src/components/Table";
+import _Table from "../../src/components/Table";
 import Button from "../../src/elements/Button";
 import ContentTitle from "../../src/elements/ContentTitle";
 import Subtitle from "../../src/elements/Subtitle";
@@ -77,6 +77,13 @@ const PERCENTAGE_COLUMNS = [
 
 const Container = styled(Flex)`
   margin: 0 1rem 1rem;
+`;
+const Table = styled(_Table)`
+  .rt-tr > .rt-td {
+    :not(:first-child) {
+      text-align: right;
+    }
+  }
 `;
 
 const REFRESH_DELAY = 10000;
@@ -325,18 +332,14 @@ export default class Index extends React.Component {
 
           <Subtitle isFirst>Global</Subtitle>
           {this.state.isLoading ? (
-            <tr>
-              <p>Calcul en cours…</p>
-            </tr>
+            <p>Calcul en cours…</p>
           ) : (
             this.getGlobalStats()
           )}
 
           <Subtitle>Par région</Subtitle>
           {this.state.isLoading ? (
-            <tr>
-              <p>Calcul en cours…</p>
-            </tr>
+            <p>Calcul en cours…</p>
           ) : (
             this.getUnitsStats()
           )}

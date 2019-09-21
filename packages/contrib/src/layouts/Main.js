@@ -9,14 +9,12 @@ import Modal from "../components/Modal";
 import LoadingSpinner from "../elements/LoadingSpinner";
 
 // TODO Find a clean way to import these stylesheets.
-import quillSheet from "../../node_modules/quill/dist/quill.snow.css";
-import mainSheet from "./css/main.css";
-import mainSheetOverride from "./css/main-override.css";
-import reactTableSheet from "../../node_modules/react-table/react-table.css";
-// eslint-disable-next-line max-len
-import reactToastifySheet from "../../node_modules/react-toastify/dist/ReactToastify.css";
-// eslint-disable-next-line max-len
-import simplemdeSheet from "../../node_modules/simplemde/dist/simplemde.min.css";
+import "../../node_modules/quill/dist/quill.snow.css";
+import "../../node_modules/react-table/react-table.css";
+import "../../node_modules/react-toastify/dist/ReactToastify.css";
+import "../../node_modules/simplemde/dist/simplemde.min.css";
+import "./css/main.css";
+import "./css/main-override.css";
 
 const Container = styled(Flex)`
   height: 100vh;
@@ -42,24 +40,6 @@ const Main = ({
   <Container alignItems="stretch" style={{ height: "100vh" }}>
     <Head>
       <title>Outil de contribution au code du travail numérique</title>
-      <style jsx global>
-        {mainSheet}
-      </style>
-      <style jsx global>
-        {mainSheetOverride}
-      </style>
-      <style jsx global>
-        {quillSheet}
-      </style>
-      <style jsx global>
-        {reactTableSheet}
-      </style>
-      <style jsx global>
-        {reactToastifySheet}
-      </style>
-      <style jsx global>
-        {simplemdeSheet}
-      </style>
     </Head>
     <Body alignItems="stretch" flexDirection="column" width={1}>
       <Modal />

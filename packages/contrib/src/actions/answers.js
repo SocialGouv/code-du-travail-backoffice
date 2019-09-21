@@ -2,9 +2,13 @@ import actionTypes from "./types";
 
 /* ONE ANSWER ―――――――――――――――――――――― */
 
-export const loadOne = id => ({
+export const loadOne = (
+  id,
+  meta = { withReferences: false, withTags: false }
+) => ({
   type: actionTypes.ANSWER_LOAD_ONE,
   meta: {
+    ...meta,
     id
   }
 });
@@ -54,14 +58,18 @@ export const toggleCheckFailure = error => ({
   }
 });
 
-export const load = (states, pageIndex, query, isGeneric) => ({
-  type: actionTypes.ANSWERS_LOAD,
-  meta: {
-    isGeneric,
-    query,
-    pageIndex,
-    states
+export const load = (
+  meta = {
+    isGeneric: false,
+    pageIndex: -1,
+    query: "",
+    states: [],
+    withReferences: false,
+    withTags: false
   }
+) => ({
+  type: actionTypes.ANSWERS_LOAD,
+  meta
 });
 export const loadFailure = error => ({
   type: actionTypes.ANSWERS_LOAD_FAILURE,

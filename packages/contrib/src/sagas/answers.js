@@ -12,7 +12,7 @@ import { pluralize } from "../texts";
 
 /* ONE ANSWER ―――――――――――――――――――――― */
 
-function* loadOne({ meta: { id } }) {
+function* loadOne({ meta: { id, withReferences, withTags } }) {
   try {
     const request = postgrest()
       .select("*")
@@ -22,7 +22,37 @@ function* loadOne({ meta: { id } }) {
 
     const { data } = yield request.get("/answers");
 
-    yield put(answers.loadOneSuccess(data));
+    let answer = { ...data[0] };
+
+    if (withReferences) {
+      const request = postgrest()
+        .eq("answer_id", answer.id)
+        .orderBy("category")
+        .orderBy("value");
+
+      const { data: answerRefs } = yield request.get("/answers_references");
+
+      answer = {
+        ...answer,
+        references: answerRefs
+      };
+    }
+
+    if (withTags) {
+      const request = postgrest()
+        .select("*")
+        .select("tag(*)")
+        .eq("answer_id", answer.id);
+
+      const { data: answerTags } = yield request.get("/answers_tags");
+
+      answer = {
+        ...answer,
+        tags: answerTags
+      };
+    }
+
+    yield put(answers.loadOneSuccess(answer));
   } catch (err) {
     toast.error(err.message);
     yield put(answers.loadOneFailure({ message: null }));
@@ -180,7 +210,9 @@ function* setState({ meta: { ids, next, state } }) {
   }
 }
 
-function* load({ meta: { isGeneric, pageIndex, query, states } }) {
+function* load({
+  meta: { isGeneric, pageIndex, query, states, withReferences, withTags }
+}) {
   try {
     const {
       agreements: userAgreements,
@@ -237,7 +269,40 @@ function* load({ meta: { isGeneric, pageIndex, query, states } }) {
     const uri = isGeneric ? "/generic_answers" : "/full_answers";
     const { data, pageLength } = yield request.get(uri, true);
 
-    yield put(answers.loadSuccess(data, pageIndex, pageLength, states[0]));
+    const answerIds = data.map(({ id }) => id);
+    let fullData = [...data];
+
+    if (withReferences) {
+      const request = postgrest()
+        .in("answer_id", answerIds)
+        .orderBy("category")
+        .orderBy("value");
+
+      const { data: answersRefs } = yield request.get("/answers_references");
+
+      fullData = fullData.map(answer => ({
+        ...answer,
+        references: answersRefs.filter(
+          ({ answer_id }) => answer_id === answer.id
+        )
+      }));
+    }
+
+    if (withTags) {
+      const request = postgrest()
+        .select("*")
+        .select("tag(*)")
+        .in("answer_id", answerIds);
+
+      const { data: answersTags } = yield request.get("/answers_tags");
+
+      fullData = fullData.map(answer => ({
+        ...answer,
+        tags: answersTags.filter(({ answer_id }) => answer_id === answer.id)
+      }));
+    }
+
+    yield put(answers.loadSuccess(fullData, pageIndex, pageLength, states[0]));
   } catch (err) {
     if (err.response.status === 416) {
       const pageIndex = Math.floor(
