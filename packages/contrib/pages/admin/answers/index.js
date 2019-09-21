@@ -80,9 +80,14 @@ export class AdminAnswersIndexPage extends React.Component {
   }
 
   _loadAnswers(state = this.props.answers.state, pageIndex = 0) {
-    this.props.dispatch(
-      actions.answers.load([state], pageIndex, this.queryFilter, this.isGeneric)
-    );
+    const meta = {
+      isGeneric: this.isGeneric,
+      query: this.queryFilter,
+      pageIndex,
+      states: [state]
+    };
+
+    this.props.dispatch(actions.answers.load(meta));
   }
 
   updateStateFilter() {
