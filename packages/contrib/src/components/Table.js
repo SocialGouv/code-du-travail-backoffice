@@ -49,10 +49,4 @@ export default styled(ReactTable)`
       background-color: rgba(0, 0, 0, 0.05);
     }
   }
-
-  .rt-tr > .rt-td {
-    :not(:first-child) {
-      text-align: right;
-    }
-  }
 `;
