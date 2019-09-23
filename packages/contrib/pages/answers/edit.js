@@ -102,8 +102,8 @@ class AnswersEditPage extends React.Component {
   componentDidUpdate() {
     if (!this.props.answers.isLoading) {
       if (this.prevalue === null) {
-        this.prevalue = this.props.answers.data[0].prevalue;
-        this.newPrevalue = this.props.answers.data[0].prevalue;
+        this.prevalue = this.props.answers.data.prevalue;
+        this.newPrevalue = this.props.answers.data.prevalue;
         this.forceUpdate();
       }
     }
@@ -340,7 +340,7 @@ class AnswersEditPage extends React.Component {
       return <Main isLoading />;
     }
 
-    const { agreement, question } = answers.data[0];
+    const { agreement, question } = answers.data;
 
     return (
       <Container>
