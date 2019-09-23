@@ -50,10 +50,7 @@ const COLUMNS = [
   }
 ];
 const PERCENTAGE_COLUMNS = [
-  {
-    ...COLUMNS[0],
-    Cell: ({ value }) => numeral(value).format("0.00%")
-  },
+  { ...COLUMNS[0] },
   {
     ...COLUMNS[1],
     Cell: ({ value }) => numeral(value).format("0.00%")
