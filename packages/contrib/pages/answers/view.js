@@ -192,7 +192,7 @@ class AnswersViewPage extends React.Component {
       question,
       state,
       value
-    } = answers.data[0];
+    } = answers.data;
 
     const finalValue = state === ANSWER_STATE.VALIDATED ? value : prevalue;
     const valueTitle =
