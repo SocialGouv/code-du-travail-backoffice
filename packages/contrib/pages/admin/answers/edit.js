@@ -239,7 +239,7 @@ export class AdminAnwsersEditPage extends React.Component {
   componentDidUpdate() {
     if (!this.props.answers.isLoading) {
       if (this.state.prevalue === null || this.state.value === null) {
-        const { prevalue, value } = this.props.answers.data[0];
+        const { prevalue, value } = this.props.answers.data;
 
         this.setState({
           prevalue,
@@ -495,7 +495,7 @@ export class AdminAnwsersEditPage extends React.Component {
     );
 
     if (
-      this.props.answers.data[0].state === ANSWER_STATE.VALIDATED &&
+      this.props.answers.data.state === ANSWER_STATE.VALIDATED &&
       references.length === 0
     ) {
       return <span>Aucune référence.</span>;
@@ -543,7 +543,7 @@ export class AdminAnwsersEditPage extends React.Component {
       return <AdminMain isLoading />;
     }
 
-    const { agreement, generic_reference, question, state } = answers.data[0];
+    const { agreement, generic_reference, question, state } = answers.data;
 
     return (
       <AdminMain isScrollable={false}>
