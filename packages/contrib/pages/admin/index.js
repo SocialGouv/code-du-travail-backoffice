@@ -20,26 +20,32 @@ const COLUMNS = [
   },
   {
     Header: "À rédiger",
+    Cell: ({ value }) => numeral(value).format("0,0"),
     accessor: "todo"
   },
   {
     Header: "En cours de rédaction",
+    Cell: ({ value }) => numeral(value).format("0,0"),
     accessor: "draft"
   },
   {
     Header: "À valider",
+    Cell: ({ value }) => numeral(value).format("0,0"),
     accessor: "pendingReview"
   },
   {
     Header: "En cours de validation",
+    Cell: ({ value }) => numeral(value).format("0,0"),
     accessor: "underReview"
   },
   {
     Header: "Validées",
+    Cell: ({ value }) => numeral(value).format("0,0"),
     accessor: "validated"
   },
   {
     Header: "Total",
+    Cell: ({ value }) => numeral(value).format("0,0"),
     accessor: "total"
   }
 ];
@@ -70,7 +76,7 @@ const PERCENTAGE_COLUMNS = [
   },
   {
     ...COLUMNS[6],
-    Cell: "100.00%",
+    Cell: ({ value }) => numeral(value).format("0.00%"),
     sortable: false
   }
 ];
