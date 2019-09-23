@@ -156,11 +156,14 @@ export class AdminAnswersIndexPage extends React.Component {
   render() {
     const {
       checked,
-      isLoading,
+      data,
+      isLoading: _isLoading,
       pageIndex,
       pageLength,
       state
     } = this.props.answers;
+
+    const isLoading = _isLoading || !Array.isArray(data);
 
     return (
       <AdminMain hasBareContent>
