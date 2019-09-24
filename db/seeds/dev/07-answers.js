@@ -1,14 +1,6 @@
-const PREVALUE =
-  `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ` +
-  `tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim ` +
-  `veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea ` +
-  `commodo consequat.`;
+const DumDum = require("dumdum");
 
-const VALUE =
-  `Duis aute irure dolor in reprehenderit in voluptate ` +
-  `velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint ` +
-  `occaecat cupidatat non proident, sunt in culpa qui officia deserunt ` +
-  `mollit anim id est laborum.`;
+const dumdum = DumDum.create({ locale: "fr" });
 
 exports.seed = async knex => {
   global.spinner.start(`Generating answers...`);
@@ -22,7 +14,7 @@ exports.seed = async knex => {
     const genericAnswer = {
       state: "pending_review",
       prevalue: "",
-      value: VALUE,
+      value: dumdum.text([260, 620]),
       question_id: question.id,
       agreement_id: null
     };
@@ -30,7 +22,7 @@ exports.seed = async knex => {
     await knex("api.answers").insert([genericAnswer]);
 
     const answers = agreements.map(agreement => {
-      if (question.index < 7) {
+      if (question.index <= 2) {
         return {
           state: "todo",
           prevalue: "",
@@ -40,10 +32,10 @@ exports.seed = async knex => {
         };
       }
 
-      if (question.index < 8) {
+      if (question.index <= 4) {
         return {
           state: "draft",
-          prevalue: PREVALUE,
+          prevalue: dumdum.text([260, 620]),
           value: "",
           question_id: question.id,
           agreement_id: agreement.id,
@@ -51,10 +43,10 @@ exports.seed = async knex => {
         };
       }
 
-      if (question.index < 9) {
+      if (question.index <= 6) {
         return {
           state: "pending_review",
-          prevalue: PREVALUE,
+          prevalue: dumdum.text([260, 620]),
           value: "",
           question_id: question.id,
           agreement_id: agreement.id,
@@ -62,11 +54,11 @@ exports.seed = async knex => {
         };
       }
 
-      if (question.index < 10) {
+      if (question.index <= 8) {
         return {
           state: "under_review",
-          prevalue: PREVALUE,
-          value: VALUE,
+          prevalue: dumdum.text([260, 620]),
+          value: dumdum.text([260, 620]),
           question_id: question.id,
           agreement_id: agreement.id,
           user_id: "00000000-0000-4000-0000-000000000002"
@@ -75,11 +67,12 @@ exports.seed = async knex => {
 
       return {
         state: "validated",
-        prevalue: PREVALUE,
-        value: VALUE,
+        prevalue: dumdum.text([260, 620]),
+        value: dumdum.text([260, 620]),
         question_id: question.id,
         agreement_id: agreement.id,
-        user_id: "00000000-0000-4000-0000-000000000002"
+        user_id: "00000000-0000-4000-0000-000000000002",
+        is_published: Math.random() < 0.75
       };
     });
 
