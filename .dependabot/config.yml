@@ -1,0 +1,26 @@
+version: 1
+
+update_configs:
+  - package_manager: "javascript"
+    directory: "/"
+    automerged_updates:
+      - match:
+          dependency_type: "all"
+          update_type: "semver:minor"
+    commit_message:
+      prefix: "chore"
+      include_scope: false
+    update_schedule: "live"
+    version_requirement_updates: "increase_versions"
+
+  - package_manager: "javascript"
+    directory: "/packages/contrib"
+    automerged_updates:
+      - match:
+          dependency_type: "all"
+          update_type: "semver:minor"
+    commit_message:
+      prefix: "chore"
+      include_scope: true
+    update_schedule: "live"
+    version_requirement_updates: "increase_versions"
