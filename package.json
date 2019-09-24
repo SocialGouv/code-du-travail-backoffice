@@ -27,6 +27,7 @@
     "csv-parse": "4.4.7",
     "cucumber": "5.1.0",
     "dotenv": "8.1.0",
+    "dumdum": "1.0.0-alpha.3",
     "imgur": "0.3.1",
     "knex": "0.19.4",
     "lerna": "3.16.4",

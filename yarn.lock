@@ -1906,6 +1906,11 @@ dotenv@8.1.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.1.0.tgz#d811e178652bfb8a1e593c6dd704ec7e90d85ea2"
   integrity sha512-GUE3gqcDCaMltj2++g6bRQ5rBJWtkWTmqmD0fo1RnnMuUqHNCt2oTPeDnS9n6fKYvlhn7AeBkb38lymBtWBQdA==
 
+dumdum@1.0.0-alpha.3:
+  version "1.0.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/dumdum/-/dumdum-1.0.0-alpha.3.tgz#63a9dd18c77971215a44636f0761ae66bf73a957"
+  integrity sha512-ls+nlPxZxWaq7zHJYMvnvYTgTdRuJNovaHWnjCPjXkZGrvvQVn3ZirOubLM45+G17wYCAtzxvm3DH4aBaQ7rNg==
+
 duplexer@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/duplexer/-/duplexer-0.1.1.tgz#ace6ff808c1ce66b57d1ebf97977acb02334cfc1"
