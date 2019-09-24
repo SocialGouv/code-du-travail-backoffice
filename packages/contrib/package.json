@@ -53,7 +53,7 @@
     "zxcvbn": "4.4.2"
   },
   "devDependencies": {
-    "@babel/core": "7.6.0",
+    "@babel/core": "7.6.2",
     "@socialgouv/eslint-config-react": "0.10.0",
     "@testing-library/jest-dom": "4.1.0",
     "@testing-library/react": "9.1.4",
