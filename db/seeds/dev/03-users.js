@@ -7,7 +7,7 @@ exports.seed = async knex => {
 
   global.users = [
     {
-      id: "00000000-0000-4000-0000-000000000001",
+      id: "00000000-0000-4000-0000-000000000301",
       email: "doris@sea.com",
       password: "Azerty123",
       name: "Doris L'Administratrice",
@@ -15,7 +15,7 @@ exports.seed = async knex => {
       location_id: locationIds[0]
     },
     {
-      id: "00000000-0000-4000-0000-000000000002",
+      id: "00000000-0000-4000-0000-000000000302",
       email: "nemo@sea.com",
       password: "Azerty123",
       name: "Nemo Le Contributeur",
@@ -23,7 +23,7 @@ exports.seed = async knex => {
       location_id: locationIds[1]
     },
     {
-      id: "00000000-0000-4000-0000-000000000003",
+      id: "00000000-0000-4000-0000-000000000303",
       email: "astrid@sea.com",
       password: "Azerty123",
       name: "Astrid La Contributrice",
@@ -31,7 +31,7 @@ exports.seed = async knex => {
       location_id: locationIds[2]
     },
     {
-      id: "00000000-0000-4000-0000-000000000004",
+      id: "00000000-0000-4000-0000-000000000304",
       email: "marin@sea.com",
       password: "Azerty123",
       name: "Marin Le Contributeur",
@@ -39,7 +39,7 @@ exports.seed = async knex => {
       location_id: locationIds[3]
     },
     {
-      id: "00000000-0000-4000-0000-000000000005",
+      id: "00000000-0000-4000-0000-000000000305",
       email: "deb@sea.com",
       password: "Azerty123",
       name: "Deb L'Administratrice Régionale",
@@ -52,13 +52,13 @@ exports.seed = async knex => {
 
   await knex("users_agreements").insert(
     (await knex("api.agreements").limit(3)).map(({ id: agreement_id }) => ({
-      user_id: "00000000-0000-4000-0000-000000000002",
+      user_id: "00000000-0000-4000-0000-000000000302",
       agreement_id
     }))
   );
   await knex("users_agreements").insert(
     (await knex("api.agreements").limit(3)).map(({ id: agreement_id }) => ({
-      user_id: "00000000-0000-4000-0000-000000000003",
+      user_id: "00000000-0000-4000-0000-000000000303",
       agreement_id
     }))
   );
@@ -66,7 +66,7 @@ exports.seed = async knex => {
     (await knex("api.agreements")
       .limit(2)
       .offset(3)).map(({ id: agreement_id }) => ({
-      user_id: "00000000-0000-4000-0000-000000000004",
+      user_id: "00000000-0000-4000-0000-000000000304",
       agreement_id
     }))
   );
