@@ -8,6 +8,7 @@ import Idcc from "../../../src/elements/Idcc";
 import Hr from "../../../src/elements/Hr";
 import Subtitle from "../../../src/elements/Subtitle";
 import getUriParams from "../../../src/libs/getUriParams";
+import markdown from "../../../src/libs/markdown";
 
 import { Flex } from "rebass";
 
@@ -26,8 +27,10 @@ const Header = styled(Flex)`
 `;
 
 const Pre = styled.pre`
+  border: solid 1px var(--color-silver-sand);
   font-size: 1.1rem;
   margin-bottom: 1rem;
+  padding: 1rem;
   white-space: normal;
 `;
 const List = styled.ul`
@@ -66,6 +69,10 @@ export class AdminAnswersPrintPage extends React.Component {
     this.props.dispatch(actions.answers.load(meta));
   }
 
+  getAnswerValue(value) {
+    return { __html: markdown.toHtml(value) };
+  }
+
   getAnswersList() {
     const { data } = this.props.answers;
 
@@ -86,7 +93,7 @@ export class AdminAnswersPrintPage extends React.Component {
             >{`${question_index}) ${question_value}`}</Subtitle>
           </Header>
           <ContentTitle isFirst>Réponse corrigée:</ContentTitle>
-          <Pre>{value}</Pre>
+          <Pre dangerouslySetInnerHTML={this.getAnswerValue(value)} />
           {references.length !== 0 && (
             <div>
               <ContentTitle isFirst>Références:</ContentTitle>
