@@ -58,18 +58,19 @@ export const toggleCheckFailure = error => ({
   }
 });
 
-export const load = (
-  meta = {
-    isGeneric: false,
-    pageIndex: -1,
-    query: "",
-    states: [],
-    withReferences: false,
-    withTags: false
-  }
-) => ({
+export const load = meta => ({
   type: actionTypes.ANSWERS_LOAD,
-  meta
+  meta: {
+    ...{
+      isGeneric: false,
+      pageIndex: -1,
+      query: "",
+      states: [],
+      withReferences: false,
+      withTags: false
+    },
+    ...meta
+  }
 });
 export const loadFailure = error => ({
   type: actionTypes.ANSWERS_LOAD_FAILURE,
