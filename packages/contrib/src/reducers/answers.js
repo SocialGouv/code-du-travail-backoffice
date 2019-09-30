@@ -5,9 +5,10 @@ const initialState = {
   checked: [],
   data: [],
   error: null,
+  isLoading: true,
   pageLength: 0,
   pageIndex: 0,
-  isLoading: true,
+  query: "",
   state: ANSWER_STATE.PENDING_REVIEW
 };
 
@@ -64,6 +65,7 @@ export default (state = initialState, { payload, type }) => {
         error: null,
         pageLength: payload.pageLength,
         pageIndex: payload.pageIndex,
+        query: payload.query,
         isLoading: false,
         state: payload.state
       };

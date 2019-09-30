@@ -16,10 +16,11 @@ import capitalize from "../../../src/helpers/capitalize";
 import AdminMain from "../../../src/layouts/AdminMain";
 import customAxios from "../../../src/libs/customAxios";
 
-import { ANSWER_STATE_LABEL } from "../../../src/constants";
+import { ANSWER_STATE, ANSWER_STATE_LABEL } from "../../../src/constants";
 import T from "../../../src/texts";
 
 const { NODE_ENV } = process.env;
+const PRINTABLE_STATES = [ANSWER_STATE.UNDER_REVIEW, ANSWER_STATE.VALIDATED];
 const STATES = Object.keys(ANSWER_STATE_LABEL);
 
 const Container = styled(Flex)`
@@ -158,6 +159,7 @@ export class AdminAnswersIndexPage extends React.Component {
       checked,
       data,
       isLoading: _isLoading,
+      query,
       pageIndex,
       pageLength,
       state
@@ -187,7 +189,11 @@ export class AdminAnswersIndexPage extends React.Component {
               </FilterSelect>
 
               <Button
-                disabled={isLoading}
+                disabled={
+                  isLoading ||
+                  !PRINTABLE_STATES.includes(state) ||
+                  pageLength > 10
+                }
                 onClick={this.printAnswers.bind(this)}
               >
                 Imprimer
@@ -197,6 +203,7 @@ export class AdminAnswersIndexPage extends React.Component {
 
           <Flex alignItems="center" justifyContent="space-between">
             <FilterInput
+              defaultValue={query}
               icon="search"
               key={`queryFilter-${state}`}
               onChange={() => this.loadAnswers()}
