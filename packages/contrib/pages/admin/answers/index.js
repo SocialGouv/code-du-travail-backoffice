@@ -188,7 +188,11 @@ export class AdminAnswersIndexPage extends React.Component {
               </FilterSelect>
 
               <Button
-                disabled={isLoading || !PRINTABLE_STATES.includes(state)}
+                disabled={
+                  isLoading ||
+                  !PRINTABLE_STATES.includes(state) ||
+                  pageLength > 10
+                }
                 onClick={this.printAnswers.bind(this)}
               >
                 Imprimer
