@@ -79,14 +79,9 @@ export const loadFailure = error => ({
     message: error.message
   }
 });
-export const loadSuccess = (data, pageIndex, pageLength, state) => ({
+export const loadSuccess = payload => ({
   type: actionTypes.ANSWERS_LOAD_SUCCESS,
-  payload: {
-    data,
-    pageIndex,
-    pageLength,
-    state
-  }
+  payload
 });
 
 export const setGenericRefence = (ids, genericReference, next) => ({

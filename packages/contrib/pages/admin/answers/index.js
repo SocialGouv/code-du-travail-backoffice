@@ -159,6 +159,7 @@ export class AdminAnswersIndexPage extends React.Component {
       checked,
       data,
       isLoading: _isLoading,
+      query,
       pageIndex,
       pageLength,
       state
@@ -202,6 +203,7 @@ export class AdminAnswersIndexPage extends React.Component {
 
           <Flex alignItems="center" justifyContent="space-between">
             <FilterInput
+              defaultValue={query}
               icon="search"
               key={`queryFilter-${state}`}
               onChange={() => this.loadAnswers()}

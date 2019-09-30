@@ -302,7 +302,15 @@ function* load({
       }));
     }
 
-    yield put(answers.loadSuccess(fullData, pageIndex, pageLength, states[0]));
+    yield put(
+      answers.loadSuccess({
+        data: fullData,
+        pageIndex,
+        pageLength,
+        query,
+        state: states[0]
+      })
+    );
   } catch (err) {
     if (err.response.status === 416) {
       const pageIndex = Math.floor(
