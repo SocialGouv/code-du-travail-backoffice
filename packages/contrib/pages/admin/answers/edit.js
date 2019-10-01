@@ -1,9 +1,9 @@
 import debounce from "lodash.debounce";
 import React from "react";
+import Medixtor from "react-medixtor";
 import { connect } from "react-redux";
 import { Flex } from "rebass";
 import styled from "styled-components";
-import Meditor from "@socialgouv/meditor";
 
 import * as actions from "../../../src/actions";
 import Comment from "../../../src/components/Comment";
@@ -57,27 +57,20 @@ const aIconUri = [
   "https://codedutravail-dev.num.social.gouv.fr",
   "/static/assets/icons/external-link.svg"
 ].join("");
-const AnswerEditor = styled(Meditor)`
+const Editor = styled(Medixtor)`
   border: solid 1px var(--color-border) !important;
-  border-radius: 0.25rem;
   flex-grow: unset;
-  min-height: 15rem;
+  min-height: 30rem;
 
   .editor {
-    background-color: var(--color-alice-blue);
-    border-bottom-left-radius: 0.25rem;
-    border-top-left-radius: 0.25rem;
     color: var(--color-black-leather-jacket);
-    font-size: 1.2rem;
-    resize: none;
+  }
+  .editor-menu-container button {
+    display: inline-flex;
   }
 
   .preview {
-    background-color: white;
-    border-bottom-right-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
     line-height: 1.4;
-    overflow-y: scroll;
     padding-top: 0 !important;
 
     a {
@@ -146,6 +139,35 @@ const AnswerEditor = styled(Meditor)`
         list-style-type: circle;
       }
     }
+  }
+`;
+const AnswerProposal = styled(Editor)`
+  border-right: 0 !important;
+
+  .editor {
+    background-color: rgba(0, 0, 0, 0.025);
+    border: 0 !important;
+    cursor: text;
+  }
+  .editor-status {
+    display: none;
+  }
+
+  .preview {
+    background-color: rgba(0, 0, 0, 0.025);
+  }
+`;
+const AnswerCorrection = styled(Editor)`
+  .editor {
+    background-color: white;
+    border: 0 !important;
+  }
+  .editor-status {
+    min-height: 1.5rem;
+  }
+
+  .preview {
+    background-color: white;
   }
 `;
 const Strong = styled.p`
@@ -588,30 +610,40 @@ export class AdminAnwsersEditPage extends React.Component {
 
             {state !== ANSWER_STATE.VALIDATED && (
               <Flex flexDirection="column" width={1}>
-                {!this.isGeneric && (
+                <Flex>
                   <Flex
                     flexDirection="column"
                     style={{ minHeight: "19rem" }}
                     width={1}
                   >
                     <Subtitle isFirst>Réponse proposée</Subtitle>
-                    <AnswerEditor
+                    <AnswerProposal
                       defaultValue={prevalue}
-                      headersOffset={2}
                       disabled
+                      headersOffset={2}
+                      isSingleView
                     />
-                    <Hr />
                   </Flex>
-                )}
 
-                <Subtitle isFirst>
-                  {this.isGeneric ? "Réponse générique" : "Réponse corrigée"}
-                </Subtitle>
-                <AnswerEditor
-                  defaultValue={value}
-                  headersOffset={2}
-                  onChange={this.updateAnswerValue.bind(this)}
-                />
+                  <Flex
+                    flexDirection="column"
+                    style={{ minHeight: "19rem" }}
+                    width={1}
+                  >
+                    <Subtitle isFirst>
+                      {this.isGeneric
+                        ? "Réponse générique"
+                        : "Réponse corrigée"}
+                    </Subtitle>
+                    <AnswerCorrection
+                      defaultValue={value}
+                      headersOffset={2}
+                      isSingleView
+                      onChange={this.updateAnswerValue.bind(this)}
+                      singleViewDefault="editor"
+                    />
+                  </Flex>
+                </Flex>
                 <Hr />
 
                 <Subtitle isFirst>Références juridiques</Subtitle>
@@ -661,6 +693,7 @@ export class AdminAnwsersEditPage extends React.Component {
 
                 <Subtitle isFirst>Renvoi</Subtitle>
                 <Radio
+                  disabled={state === ANSWER_STATE.VALIDATED}
                   onChange={this.updateGenericReferenceTo.bind(this)}
                   options={[
                     {
@@ -680,14 +713,18 @@ export class AdminAnwsersEditPage extends React.Component {
                     }
                   ]}
                 />
-                <Hr />
               </Flex>
             )}
 
             {state === ANSWER_STATE.VALIDATED && (
               <Flex flexDirection="column" width={1}>
                 <Subtitle isFirst>Réponse validée</Subtitle>
-                <AnswerEditor defaultValue={value} disabled headersOffset={2} />
+                <AnswerCorrection
+                  defaultValue={value}
+                  disabled
+                  headersOffset={2}
+                  isSingleView
+                />
 
                 <Subtitle>Références juridiques</Subtitle>
                 <Strong>Convention collective</Strong>
@@ -708,6 +745,8 @@ export class AdminAnwsersEditPage extends React.Component {
                 }
               </Flex>
             )}
+
+            <Hr />
           </Content>
           <Sidebar
             flexDirection="column"

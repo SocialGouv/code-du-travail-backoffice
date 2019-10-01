@@ -1098,11 +1098,6 @@
     eslint-plugin-jest "^22.17.0"
     eslint-plugin-prettier "~3.1.0"
 
-"@socialgouv/meditor@https://github.com/SocialGouv/meditor":
-  version "0.1.0-alpha.4"
-  uid "60febabb56e120eb193ff0bd39c9ebeb13fd263a"
-  resolved "https://github.com/SocialGouv/meditor#60febabb56e120eb193ff0bd39c9ebeb13fd263a"
-
 "@styled-system/background@^5.1.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@styled-system/background/-/background-5.1.0.tgz#901200318fdb22cec4d79823ab36030c7fa044d3"
@@ -7351,6 +7346,11 @@ react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
+
+react-medixtor@0.1.0-alpha.16:
+  version "0.1.0-alpha.16"
+  resolved "https://registry.yarnpkg.com/react-medixtor/-/react-medixtor-0.1.0-alpha.16.tgz#fa2db91069c307097bc309c79dbccd094672f4e2"
+  integrity sha512-3RuUDIAV4seqyh/ctd9O3K9RR9Kn5MqU//xIQx0B4+bUfOrNO04w54kYpPY3aKnXW5saOF1J3iB9VPduC3cXXw==
 
 react-onclickoutside@6.9.0:
   version "6.9.0"
