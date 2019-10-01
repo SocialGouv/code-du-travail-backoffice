@@ -1,4 +1,5 @@
 import React from "react";
+import ReactTooltip from "react-tooltip";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
@@ -13,9 +14,21 @@ import numeral from "../../src/libs/customNumeral";
 
 import { ANSWER_STATE } from "../../src/constants";
 
+const Tooltip = styled(ReactTooltip)`
+  max-width: 22rem;
+  padding: 0.25rem 0.5rem 0.45rem;
+  white-space: normal;
+`;
+
 const COLUMNS = [
   {
     Header: "Nom",
+    Cell: ({ value }) => (
+      <div data-tip={value}>
+        {value}
+        <Tooltip />
+      </div>
+    ),
     accessor: "name"
   },
   {
@@ -83,13 +96,16 @@ const Container = styled(Flex)`
 `;
 const Table = styled(_Table)`
   .rt-tr > .rt-td {
+    :first-child {
+      cursor: help;
+    }
     :not(:first-child) {
       text-align: right;
     }
   }
 `;
 
-const REFRESH_DELAY = 10000;
+const REFRESH_DELAY = 30000;
 
 const StatsTable = ({ data, isPercentage, ...props }) => (
   <Table
@@ -299,8 +315,8 @@ export default class Index extends React.Component {
     return statsLocations
       .filter(({ agreements }) => agreements.length !== 0)
       .map(({ agreements, name }, index) => {
-        const data = agreements.map(({ agreement: { name }, total }) =>
-          this.generateDataRow(name, total)
+        const data = agreements.map(({ agreement: { idcc, name }, total }) =>
+          this.generateDataRow(`[${idcc}] ${name}`, total)
         );
 
         return (
