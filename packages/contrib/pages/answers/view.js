@@ -1,5 +1,5 @@
-import Meditor from "@socialgouv/meditor";
 import React from "react";
+import Medixtor from "react-medixtor";
 import { connect } from "react-redux";
 import { Flex } from "rebass";
 import styled from "styled-components";
@@ -24,13 +24,20 @@ const aIconUri = [
   "https://codedutravail-dev.num.social.gouv.fr",
   "/static/assets/icons/external-link.svg"
 ].join("");
-const AnswerEditor = styled(Meditor)`
+const AnswerEditor = styled(Medixtor)`
   border: solid 1px var(--color-border) !important;
   border-radius: 0.25rem;
   flex-grow: unset;
   min-height: 15rem;
 
-  > .preview {
+  .editor {
+    background-color: white;
+  }
+  .editor-status {
+    display: none;
+  }
+
+  .preview {
     background-color: white;
     border-bottom-right-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
@@ -167,13 +174,8 @@ class AnswersViewPage extends React.Component {
       return <span>Aucune référence.</span>;
     }
 
-    return references.map(({ id, url, value }, index) => (
-      <Reference
-        key={index}
-        onRemove={() => this.deleteReference(id)}
-        url={url}
-        value={value}
-      />
+    return references.map(({ url, value }, index) => (
+      <Reference key={index} onRemove={() => void 0} url={url} value={value} />
     ));
   }
 
@@ -211,7 +213,12 @@ class AnswersViewPage extends React.Component {
         <Hr />
 
         <Subtitle isFirst>{valueTitle}</Subtitle>
-        <AnswerEditor defaultValue={finalValue} headersOffset={2} noEditor />
+        <AnswerEditor
+          defaultValue={finalValue}
+          disabled
+          headersOffset={2}
+          isSingleView
+        />
 
         <Subtitle>Références juridiques</Subtitle>
         <Strong>Convention collective</Strong>
