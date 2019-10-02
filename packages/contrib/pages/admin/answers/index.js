@@ -106,7 +106,7 @@ export class AdminAnswersIndexPage extends React.Component {
     const newState = this.$newStateSelect.value;
 
     this.props.dispatch(
-      actions.answers.setState(checked, newState, () =>
+      actions.answers.updateState(checked, newState, () =>
         this.loadAnswers(state, 0)
       )
     );

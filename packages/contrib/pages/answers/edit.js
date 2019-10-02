@@ -54,14 +54,11 @@ class AnswersEditPage extends React.Component {
     this.prevalue = null;
     this.newPrevalue = null;
 
+    this.createReference = debounce(this._createReference.bind(this), 500);
     this.deleteReference = debounce(this._deleteReference.bind(this), 500);
-    this.insertReference = debounce(this._insertReference.bind(this), 500);
+    this.createTag = debounce(this._createTag.bind(this), 500);
     this.deleteTag = debounce(this._deleteTag.bind(this), 500);
-    this.insertTag = debounce(this._insertTag.bind(this), 500);
-    this.saveAnswerPrevalue = debounce(
-      this._saveAnswerPrevalue.bind(this),
-      500
-    );
+    this.updatePrevalue = debounce(this._updatePrevalue.bind(this), 500);
   }
 
   static getInitialProps({ query: { id } }) {
@@ -73,7 +70,7 @@ class AnswersEditPage extends React.Component {
     const me = getCurrentUser();
 
     this.axios = customAxios();
-    this.fetchAnswer();
+    this.load();
 
     try {
       const { data: references } = await this.axios.get(
@@ -109,7 +106,7 @@ class AnswersEditPage extends React.Component {
     }
   }
 
-  fetchAnswer() {
+  load() {
     const { dispatch, id } = this.props;
 
     dispatch(actions.answers.loadOne(id));
@@ -117,13 +114,13 @@ class AnswersEditPage extends React.Component {
 
   toggleTag(id, isAdded) {
     if (isAdded) {
-      this.insertTag(id);
+      this.createTag(id);
     } else {
       this.deleteTag(id);
     }
   }
 
-  async cancelAnswer() {
+  async cancel() {
     if (this.state.isSaving) return;
 
     this.props.dispatch(
@@ -144,7 +141,7 @@ class AnswersEditPage extends React.Component {
       actions.modal.open(
         `Êtes-vous sûr d'envoyer cette réponse en validation ?`,
         () =>
-          actions.answers.setState(
+          actions.answers.updateState(
             [this.props.id],
             ANSWER_STATE.PENDING_REVIEW,
             () => Router.push("/answers/draft/1")
@@ -153,7 +150,7 @@ class AnswersEditPage extends React.Component {
     );
   }
 
-  async _saveAnswerPrevalue(value) {
+  async _updatePrevalue(value) {
     this.setState({ isSaving: true });
     this.showSavingSpinner();
 
@@ -174,7 +171,7 @@ class AnswersEditPage extends React.Component {
     this.setState({ isSaving: false });
   }
 
-  async _insertTag(tagId) {
+  async _createTag(tagId) {
     this.setState({ isSaving: true });
 
     try {
@@ -221,7 +218,7 @@ class AnswersEditPage extends React.Component {
     });
   }
 
-  async _insertReference(reference) {
+  async _createReference(reference) {
     this.setState({ isSaving: true });
 
     try {
@@ -296,7 +293,7 @@ class AnswersEditPage extends React.Component {
     this.setState({ currentTab: nextTab });
   }
 
-  getTabContent() {
+  renderTab() {
     const { prevalue } = this;
     const { references, tags } = this.state;
 
@@ -305,7 +302,7 @@ class AnswersEditPage extends React.Component {
         return (
           <AnswerEditionReferences
             laborCodeReferences={this.laborCodeReferences}
-            onAdd={this.insertReference.bind(this)}
+            onAdd={this.createReference.bind(this)}
             onRemove={this.deleteReference.bind(this)}
             references={references}
           />
@@ -325,7 +322,7 @@ class AnswersEditPage extends React.Component {
         return (
           <AnswerEditionContent
             defaultValue={prevalue}
-            onChange={this.saveAnswerPrevalue}
+            onChange={this.updatePrevalue}
           />
         );
     }
@@ -349,7 +346,7 @@ class AnswersEditPage extends React.Component {
           currentTab={this.state.currentTab}
           idcc={agreement.idcc}
           index={agreement.index}
-          onCancel={() => this.cancelAnswer()}
+          onCancel={() => this.cancel()}
           onSubmit={() => this.requestForAnswerValidation()}
           onTabChange={this.switchTab.bind(this)}
           question={question}
@@ -364,7 +361,7 @@ class AnswersEditPage extends React.Component {
             </ContentInfo>
           )}
 
-          {this.getTabContent()}
+          {this.renderTab()}
         </Content>
       </Container>
     );

@@ -138,17 +138,17 @@ class AnswersViewPage extends React.Component {
   async componentDidMount() {
     this.axios = customAxios();
 
-    this.fetchAnswer();
-    await this.fetchReferences();
+    this.load();
+    await this.loadReferences();
   }
 
-  fetchAnswer() {
+  load() {
     const { dispatch, id } = this.props;
 
     dispatch(actions.answers.loadOne(id));
   }
 
-  async fetchReferences() {
+  async loadReferences() {
     try {
       const referencesSelect = `select=*`;
       const referencesWhere = `answer_id=eq.${this.props.id}`;
@@ -165,7 +165,7 @@ class AnswersViewPage extends React.Component {
     }
   }
 
-  getReferences(category = null) {
+  renderReferences(category = null) {
     const references = this.state.references.filter(
       ({ category: _category }) => _category === category
     );
@@ -222,11 +222,11 @@ class AnswersViewPage extends React.Component {
 
         <Subtitle>Références juridiques</Subtitle>
         <Strong>Convention collective</Strong>
-        <Flex flexWrap="wrap">{this.getReferences("agreement")}</Flex>
+        <Flex flexWrap="wrap">{this.renderReferences("agreement")}</Flex>
         <Strong>Code du travail</Strong>
-        <Flex flexWrap="wrap">{this.getReferences("labor_code")}</Flex>
+        <Flex flexWrap="wrap">{this.renderReferences("labor_code")}</Flex>
         <Strong>Autres</Strong>
-        <Flex flexWrap="wrap">{this.getReferences()}</Flex>
+        <Flex flexWrap="wrap">{this.renderReferences()}</Flex>
         <Hr />
 
         <Subtitle isFirst>Renvoi</Subtitle>

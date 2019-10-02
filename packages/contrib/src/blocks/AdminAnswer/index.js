@@ -3,13 +3,17 @@ import { Flex } from "rebass";
 import styled from "styled-components";
 
 import Idcc from "../../elements/Idcc";
-import Checkbox from "../../elements/Checkbox";
+import _Checkbox from "../../elements/Checkbox";
 import excerpt from "../../helpers/excerpt";
 import customMoment from "../../libs/customMoment";
 
 const Container = styled(Flex)`
   margin-top: 1rem;
   user-select: none;
+`;
+
+const Checkbox = styled(_Checkbox)`
+  margin-top: 1.75rem;
 `;
 
 const Top = styled(Flex)`
@@ -23,6 +27,13 @@ const TopState = styled.span`
 `;
 const TopAuthor = styled.span`
   color: var(--color-blue-sapphire);
+`;
+const TopPublished = styled.span`
+  background-color: var(--color-blue-sapphire);
+  color: white;
+  font-size: 0.625rem;
+  opacity: ${({ disabled }) => (disabled ? 0.1 : 1)};
+  padding: 0.125rem 0.25rem;
 `;
 
 const Content = styled(Flex)`
@@ -50,46 +61,69 @@ const ContentExtractRed = styled(ContentExtract)`
 import { ANSWER_STATE, ANSWER_STATE_LABEL } from "../../constants";
 
 export default ({ data, isChecked, onCheck, onClick }) => {
-  const isTodo = data.state === ANSWER_STATE.TO_DO;
+  const {
+    agreement_idcc,
+    agreement_name,
+    generic_reference,
+    id,
+    is_published,
+    question_index,
+    question_value,
+    state,
+    updated_at,
+    user
+  } = data;
+
+  const isTodo = state === ANSWER_STATE.TO_DO;
   const value = [ANSWER_STATE.DRAFT, ANSWER_STATE.PENDING_REVIEW].includes(
-    data.state
+    state
   )
     ? data.prevalue
     : data.value;
 
   return (
-    <Container>
+    <Container alignItems="center">
       {isChecked !== undefined && (
         <Checkbox
           icon={isChecked ? "check-square" : "square"}
-          onClick={() => onCheck(data.id)}
+          onClick={() => onCheck(id)}
         />
       )}
       <Flex flexDirection="column" width={1}>
         <Top justifyContent="space-between">
-          <TopState>{ANSWER_STATE_LABEL[data.state]}</TopState>
-          {data.user !== undefined && data.user !== null && (
-            <TopAuthor>
-              {`Proposé par : ${data.user.name}, ${customMoment(data.updated_at)
-                .tz("Europe/Paris")
-                .fromNow()}`}
-            </TopAuthor>
+          <TopState>{ANSWER_STATE_LABEL[state]}</TopState>
+          {![ANSWER_STATE.TO_DO, ANSWER_STATE.VALIDATED].includes(state) &&
+            user !== null && (
+              <TopAuthor>
+                {state === ANSWER_STATE.DRAFT && `Rédigée par : ${user.name}`}
+                {[
+                  ANSWER_STATE.PENDING_REVIEW,
+                  ANSWER_STATE.UNDER_REVIEW
+                ].includes(state) && `Proposée par : ${user.name}`}
+                {state !== ANSWER_STATE.UNDER_REVIEW &&
+                  `, ${customMoment(updated_at)
+                    .tz("Europe/Paris")
+                    .fromNow()}`}
+              </TopAuthor>
+            )}
+          {state === ANSWER_STATE.VALIDATED && (
+            <TopPublished disabled={!is_published}>Publiée</TopPublished>
           )}
         </Top>
-        <Content flexDirection="column" onClick={() => onClick(data.id)}>
+        <Content flexDirection="column" onClick={() => onClick(id)}>
           <Flex alignItems="baseline">
-            <Idcc code={data.agreement_idcc} name={data.agreement_name} />
+            <Idcc code={agreement_idcc} name={agreement_name} />
             <ContentQuestion>
-              {`${data.question_index}) ${data.question_value}`}
+              {`${question_index}) ${question_value}`}
             </ContentQuestion>
           </Flex>
-          {!isTodo && data.generic_reference === null && (
+          {!isTodo && generic_reference === null && (
             <ContentExtract>{excerpt(value)}</ContentExtract>
           )}
-          {!isTodo && data.generic_reference === "labor_code" && (
+          {!isTodo && generic_reference === "labor_code" && (
             <ContentExtractRed>Renvoyé au Code du travail.</ContentExtractRed>
           )}
-          {!isTodo && data.generic_reference === "national_agreement" && (
+          {!isTodo && generic_reference === "national_agreement" && (
             <ContentExtractRed>
               Renvoyé à la convention collective nationale.
             </ContentExtractRed>
