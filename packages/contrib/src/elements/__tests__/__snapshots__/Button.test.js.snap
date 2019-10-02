@@ -54,7 +54,7 @@ exports[`[Contrib] elements/<Button /> should match snapshot with a set \`icon\`
   >
     <svg
       aria-hidden="true"
-      class="svg-inline--fa fa-sync fa-w-16 fa-1x Icon-sc-4jlog9-0 hXLKsx"
+      class="svg-inline--fa fa-sync fa-w-16 fa-1x fa-rotate-null fa-pull-null Icon-sc-4jlog9-0 hXLKsx"
       color="var(--color-lapis-lazuli)"
       data-icon="sync"
       data-prefix="fas"
