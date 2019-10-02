@@ -118,7 +118,7 @@ exports.seed = async knex => {
             value: "",
             question_id: question.id,
             agreement_id: agreement.id,
-            user_id: "00000000-0000-4000-0000-000000000302"
+            user_id: "00000000-0000-4000-0000-000000000402"
           };
 
         case dice < diceBalance[2]:
@@ -128,7 +128,7 @@ exports.seed = async knex => {
             value: "",
             question_id: question.id,
             agreement_id: agreement.id,
-            user_id: "00000000-0000-4000-0000-000000000302"
+            user_id: "00000000-0000-4000-0000-000000000402"
           };
 
         case dice < diceBalance[3]:
@@ -138,7 +138,7 @@ exports.seed = async knex => {
             value: dumdum.text([260, 620]),
             question_id: question.id,
             agreement_id: agreement.id,
-            user_id: "00000000-0000-4000-0000-000000000302"
+            user_id: "00000000-0000-4000-0000-000000000402"
           };
 
         default:
@@ -148,7 +148,7 @@ exports.seed = async knex => {
             value: dumdum.text([260, 620]),
             question_id: question.id,
             agreement_id: agreement.id,
-            user_id: "00000000-0000-4000-0000-000000000302",
+            user_id: "00000000-0000-4000-0000-000000000402",
             is_published: Math.random() < 0.75
           };
       }

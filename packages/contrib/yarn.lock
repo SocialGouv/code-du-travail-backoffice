@@ -7065,6 +7065,13 @@ postcss@^7.0.14, postcss@^7.0.16, postcss@^7.0.17, postcss@^7.0.18, postcss@^7.0
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
+postgrester@1.0.0-alpha.2:
+  version "1.0.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/postgrester/-/postgrester-1.0.0-alpha.2.tgz#40631fc327900f785ceb903b27363984ef2f1d81"
+  integrity sha512-igXU5fjplJ60gd/4/gCOiPuctx13fxsPMg+Nj3zxIW64jdQD5YAoF85kQ3jfQoNa+KWt75heR+iI8yt/HXz1Jg==
+  dependencies:
+    axios "0.19.0"
+
 prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
@@ -7369,6 +7376,13 @@ react-redux@7.1.1:
     loose-envify "^1.4.0"
     prop-types "^15.7.2"
     react-is "^16.9.0"
+
+react-svg-map@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-svg-map/-/react-svg-map-2.0.1.tgz#d74eac4c3fe9debd531e254596c80f184f4d6392"
+  integrity sha512-C9fk+MM3vCo6rxPnu2XSmb2oMcVc3/keUEJHvDFdjhObVhNRtGlW76upb7mVp/37oSrCsCmmPWNfQDH1JxcbSw==
+  dependencies:
+    prop-types "^15.6.2"
 
 react-table@6.10.3:
   version "6.10.3"

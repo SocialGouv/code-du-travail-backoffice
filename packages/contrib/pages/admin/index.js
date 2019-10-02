@@ -3,16 +3,18 @@ import ReactTooltip from "react-tooltip";
 import { Flex } from "rebass";
 import styled from "styled-components";
 
+import FranceMap from "../../src/components/FranceMap";
 import _Table from "../../src/components/Table";
 import Button from "../../src/elements/Button";
 import ContentTitle from "../../src/elements/ContentTitle";
 import Subtitle from "../../src/elements/Subtitle";
 import Title from "../../src/elements/Title";
 import AdminMain from "../../src/layouts/AdminMain";
-import customAxios from "../../src/libs/customAxios";
+import customPostgrester from "../../src/libs/customPostgrester";
 import numeral from "../../src/libs/customNumeral";
 
 import { ANSWER_STATE } from "../../src/constants";
+import Icon from "../../src/elements/Icon";
 
 const Tooltip = styled(ReactTooltip)`
   max-width: 22rem;
@@ -33,32 +35,32 @@ const COLUMNS = [
   },
   {
     Header: "À rédiger",
-    Cell: ({ value }) => numeral(value).format("0,0"),
+    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
     accessor: "todo"
   },
   {
     Header: "En cours de rédaction",
-    Cell: ({ value }) => numeral(value).format("0,0"),
+    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
     accessor: "draft"
   },
   {
     Header: "À valider",
-    Cell: ({ value }) => numeral(value).format("0,0"),
+    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
     accessor: "pendingReview"
   },
   {
     Header: "En cours de validation",
-    Cell: ({ value }) => numeral(value).format("0,0"),
+    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
     accessor: "underReview"
   },
   {
     Header: "Validées",
-    Cell: ({ value }) => numeral(value).format("0,0"),
+    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
     accessor: "validated"
   },
   {
     Header: "Total",
-    Cell: ({ value }) => numeral(value).format("0,0"),
+    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
     accessor: "total"
   }
 ];
@@ -66,33 +68,40 @@ const PERCENTAGE_COLUMNS = [
   { ...COLUMNS[0] },
   {
     ...COLUMNS[1],
-    Cell: ({ value }) => numeral(value).format("0.00%")
+    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%"))
   },
   {
     ...COLUMNS[2],
-    Cell: ({ value }) => numeral(value).format("0.00%")
+    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%"))
   },
   {
     ...COLUMNS[3],
-    Cell: ({ value }) => numeral(value).format("0.00%")
+    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%"))
   },
   {
     ...COLUMNS[4],
-    Cell: ({ value }) => numeral(value).format("0.00%")
+    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%"))
   },
   {
     ...COLUMNS[5],
-    Cell: ({ value }) => numeral(value).format("0.00%")
+    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%"))
   },
   {
     ...COLUMNS[6],
-    Cell: ({ value }) => numeral(value).format("0.00%"),
+    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%")),
     sortable: false
   }
 ];
 
 const Container = styled(Flex)`
   margin: 0 1rem 1rem;
+`;
+const FranceMapContainer = styled(Flex)`
+  margin-bottom: 1rem;
+
+  svg {
+    width: 20rem;
+  }
 `;
 const Table = styled(_Table)`
   .rt-tr > .rt-td {
@@ -125,179 +134,252 @@ export default class Index extends React.Component {
     super(props);
 
     this.state = {
+      selectedRegionIsCalculating: false,
+      selectedRegionName: "",
+      selectedRegionStats: [],
+      globalStats: [],
+      isCalculating: true,
       isLoading: true,
       isPercentage: true,
-      questionsCount: 0,
-      statsLocations: [],
-      statsGlobal: [0, 0, 0, 0, 0, 0]
+      regionalStats: []
     };
   }
 
   async componentDidMount() {
-    this.axios = customAxios();
+    this.postgrest = customPostgrester();
 
+    await this.initializeStats();
     await this.updateStats();
   }
 
-  async updateStats() {
-    try {
-      const questionsCount = await this.countQuestions();
-      const activeLocations = await this.fetchActiveLocations();
-      const locationsAgreements = await this.fetchLocationsAgreement();
+  async fetchRegions() {
+    const { data: regions } = await this.postgrest
+      .eq("category", "region")
+      .not.in("code", ["01", "02", "03", "04", "06"])
+      .orderBy("name")
+      .get("/zones");
 
-      let statsGlobal = [0, 0, 0, 0, 0, 0];
-      const statsLocations = activeLocations.map(location => ({
-        ...location,
-        agreements: [],
-        total: [0, 0, 0, 0, 0, 0]
-      }));
-
-      const activeLocationsIds = activeLocations.map(({ id }) => id);
-      for (const locationAgreement of locationsAgreements) {
-        const currentLocationId = locationAgreement.location_id;
-        if (!activeLocationsIds.includes(currentLocationId)) continue;
-
-        const answers = await this.fetchAnswersForAgreement(
-          locationAgreement.agreement_id
-        );
-
-        const todoAnswersCount = answers.filter(
-          ({ state }) => state === ANSWER_STATE.TO_DO
-        ).length;
-        const draftAnswersCount = answers.filter(
-          ({ state }) => state === ANSWER_STATE.DRAFT
-        ).length;
-        const pendingReviewAnswersCount = answers.filter(
-          ({ state }) => state === ANSWER_STATE.PENDING_REVIEW
-        ).length;
-        const underReviewAnswersCount = answers.filter(
-          ({ state }) => state === ANSWER_STATE.UNDER_REVIEW
-        ).length;
-        const validatedAnswersCount = answers.filter(
-          ({ state }) => state === ANSWER_STATE.VALIDATED
-        ).length;
-        const totalAnswersCount =
-          todoAnswersCount +
-          draftAnswersCount +
-          pendingReviewAnswersCount +
-          underReviewAnswersCount +
-          validatedAnswersCount;
-
-        statsGlobal = [
-          statsGlobal[0] + todoAnswersCount,
-          statsGlobal[1] + draftAnswersCount,
-          statsGlobal[2] + pendingReviewAnswersCount,
-          statsGlobal[3] + underReviewAnswersCount,
-          statsGlobal[4] + validatedAnswersCount,
-          statsGlobal[5] + totalAnswersCount
-        ];
-
-        const statsLocationIndex = statsLocations.findIndex(
-          ({ id }) => id === currentLocationId
-        );
-        const currentLocationStats = statsLocations[statsLocationIndex];
-        currentLocationStats.total[0] += todoAnswersCount;
-        currentLocationStats.total[1] += draftAnswersCount;
-        statsLocations[
-          statsLocationIndex
-        ].total[2] += pendingReviewAnswersCount;
-        currentLocationStats.total[3] += underReviewAnswersCount;
-        currentLocationStats.total[4] += validatedAnswersCount;
-        currentLocationStats.total[5] += totalAnswersCount;
-
-        const currentLocationAgreement = locationsAgreements.find(
-          ({ agreement_id }) => agreement_id === locationAgreement.agreement_id
-        );
-        currentLocationAgreement.total = [
-          todoAnswersCount,
-          draftAnswersCount,
-          pendingReviewAnswersCount,
-          underReviewAnswersCount,
-          validatedAnswersCount,
-          totalAnswersCount
-        ];
-        currentLocationStats.agreements.push(currentLocationAgreement);
-      }
-
-      this.setState({
-        isLoading: false,
-        questionsCount,
-        statsGlobal,
-        statsLocations
-      });
-
-      setTimeout(this.updateStats.bind(this), REFRESH_DELAY);
-    } catch (err) {
-      if (err !== undefined) console.warn(err);
-    }
+    return regions;
   }
 
-  async countQuestions() {
-    const select = "select=id*";
-
-    const { data: questions } = await this.axios.get(`/questions?${select}`);
-
-    return questions.length;
-  }
-
-  async fetchActiveLocations() {
-    const where = "name=ilike.UR*";
-
-    const { data: locations } = await this.axios.get(`/locations?${where}`);
+  async fetchRegionalLocations() {
+    const { data: locations } = await this.postgrest
+      .select("*")
+      .select("agreements(id,idcc,name)")
+      .not.is("zone_id", null)
+      .get("/locations");
 
     return locations;
   }
 
-  async fetchLocationsAgreement() {
-    const select = "select=*,agreement(idcc,name),location(name)";
+  async fetchAnswersForAgreements(agreementIds) {
+    const { data: answers } = await this.postgrest
+      .select("*")
+      .select("agreement(*)")
+      .in("agreement_id", agreementIds)
+      .get("/answers");
 
-    const { data: locationsAgreements } = await this.axios.get(
-      `/locations_agreements?${select}`
-    );
-
-    return locationsAgreements;
+    return answers;
   }
 
-  async fetchAnswersForAgreement(agreementId) {
-    const select = "select=state";
-    const where = `agreement_id=eq.${agreementId}`;
+  async initializeStats() {
+    const regions = await this.fetchRegions();
+    const regionalLocations = await this.fetchRegionalLocations();
 
-    const { data: locationsAgreements } = await this.axios.get(
-      `/answers?${select}&${where}`
-    );
+    const regionalStats = regions.map(({ code, id, name }) => {
+      const location = regionalLocations.find(({ zone_id }) => zone_id === id);
 
-    return locationsAgreements;
+      return {
+        locationName: location.name,
+        locationId: location.id,
+        agreements: location.agreements,
+        // We do the mapping in advance for the sake of repeated performance:
+        agreementIds: location.agreements.map(({ id }) => id),
+        zoneCode: code,
+        zoneId: id,
+        zoneName: name
+      };
+    });
+
+    this.setState({
+      isLoading: false,
+      regionalStats
+    });
   }
 
-  generateDataRow(name, stats) {
+  async updateStats() {
+    const { regionalStats } = this.state;
+
+    const nextRegionalStats = await Promise.all(
+      regionalStats.map(async regionalStatsEntry => {
+        const { agreementIds } = regionalStatsEntry;
+        const answers = await this.fetchAnswersForAgreements(agreementIds);
+
+        const totals = answers.reduce(
+          (totals, { state }) => {
+            switch (state) {
+              case ANSWER_STATE.TO_DO:
+                totals[0] += 1;
+                break;
+
+              case ANSWER_STATE.DRAFT:
+                totals[4] += 1;
+                break;
+
+              case ANSWER_STATE.PENDING_REVIEW:
+                totals[2] += 1;
+                break;
+
+              case ANSWER_STATE.UNDER_REVIEW:
+                totals[3] += 1;
+                break;
+
+              case ANSWER_STATE.VALIDATED:
+                totals[4] += 1;
+                break;
+            }
+
+            totals[5] += 1;
+
+            return totals;
+          },
+          [0, 0, 0, 0, 0, 0]
+        );
+
+        return {
+          ...regionalStatsEntry,
+          totals
+        };
+      })
+    );
+
+    const nextGlobalStats = nextRegionalStats.reduce(
+      (globalTotals, { totals }) => [
+        globalTotals[0] + totals[0],
+        globalTotals[1] + totals[1],
+        globalTotals[2] + totals[2],
+        globalTotals[3] + totals[3],
+        globalTotals[4] + totals[4],
+        globalTotals[5] + totals[5]
+      ],
+      [0, 0, 0, 0, 0, 0]
+    );
+
+    this.setState({
+      globalStats: nextGlobalStats,
+      isCalculating: false,
+      regionalStats: nextRegionalStats
+    });
+
+    setTimeout(this.updateStats.bind(this), REFRESH_DELAY);
+  }
+
+  async updateSelectedRegionStats(zoneCode) {
+    const { regionalStats } = this.state;
+    const region = regionalStats.find(entry => entry.zoneCode === zoneCode);
+
+    const newSelectedRegionStats = region.agreements.map(
+      ({ id, idcc, name }) => ({
+        agreementId: id,
+        agreementIdcc: idcc,
+        agreementName: `[${idcc}] ${name}`,
+        totals: [0, 0, 0, 0, 0, 0]
+      })
+    );
+
+    this.setState({
+      selectedRegionIsCalculating: true,
+      selectedRegionName: region.zoneName,
+      selectedRegionStats: newSelectedRegionStats
+    });
+
+    const answers = await this.fetchAnswersForAgreements(region.agreementIds);
+
+    const nextSelectedRegionStats = newSelectedRegionStats.map(entry => {
+      const totals = answers
+        .filter(({ agreement_id }) => agreement_id === entry.agreementId)
+        .reduce(
+          (totals, { state }) => {
+            switch (state) {
+              case ANSWER_STATE.TO_DO:
+                totals[0] += 1;
+                break;
+
+              case ANSWER_STATE.DRAFT:
+                totals[4] += 1;
+                break;
+
+              case ANSWER_STATE.PENDING_REVIEW:
+                totals[2] += 1;
+                break;
+
+              case ANSWER_STATE.UNDER_REVIEW:
+                totals[3] += 1;
+                break;
+
+              case ANSWER_STATE.VALIDATED:
+                totals[4] += 1;
+                break;
+            }
+
+            totals[5] += 1;
+
+            return totals;
+          },
+          [0, 0, 0, 0, 0, 0]
+        );
+
+      return {
+        ...entry,
+        totals
+      };
+    });
+
+    this.setState({
+      selectedRegionIsCalculating: false,
+      selectedRegionStats: nextSelectedRegionStats
+    });
+  }
+
+  generateDataRow(name, stats, isCalculating) {
     const { isPercentage } = this.state;
-    const total = stats[5] !== 0 ? stats[5] : 1;
+
+    if (isCalculating) {
+      return {
+        name,
+        todo: -1,
+        draft: -1,
+        pendingReview: -1,
+        underReview: -1,
+        validated: -1,
+        total: -1
+      };
+    }
 
     return {
       name,
-      todo: isPercentage ? stats[0] / total : stats[0],
-      draft: isPercentage ? stats[1] / total : stats[1],
-      pendingReview: isPercentage ? stats[2] / total : stats[2],
-      underReview: isPercentage ? stats[3] / total : stats[3],
-      validated: isPercentage ? stats[4] / total : stats[4],
+      todo: isPercentage ? stats[0] / stats[5] : stats[0],
+      draft: isPercentage ? stats[1] / stats[5] : stats[1],
+      pendingReview: isPercentage ? stats[2] / stats[5] : stats[2],
+      underReview: isPercentage ? stats[3] / stats[5] : stats[3],
+      validated: isPercentage ? stats[4] / stats[5] : stats[4],
       total: isPercentage ? 1 : stats[5]
     };
   }
 
   getGlobalStats() {
-    const { isPercentage, statsGlobal } = this.state;
-    const data = [this.generateDataRow("Total", statsGlobal)];
+    const { globalStats, isCalculating, isPercentage } = this.state;
+    const data = [this.generateDataRow("Total", globalStats, isCalculating)];
 
     return (
       <StatsTable data={data} isPercentage={isPercentage} sortable={false} />
     );
   }
 
-  getUnitsStats() {
-    const { isPercentage, statsLocations } = this.state;
-
-    const data = statsLocations.map(({ name, total }) =>
-      this.generateDataRow(name, total)
+  getRegionalStats() {
+    const { isCalculating, isPercentage, regionalStats } = this.state;
+    const data = regionalStats.map(({ zoneName, totals }) =>
+      this.generateDataRow(zoneName, totals, isCalculating)
     );
 
     return (
@@ -309,31 +391,28 @@ export default class Index extends React.Component {
     );
   }
 
-  getAgreementsStats() {
-    const { isPercentage, statsLocations } = this.state;
+  getSelectedRegionStats() {
+    const {
+      isPercentage,
+      selectedRegionIsCalculating,
+      selectedRegionStats
+    } = this.state;
+    const data = selectedRegionStats.map(({ agreementName, totals }) =>
+      this.generateDataRow(agreementName, totals, selectedRegionIsCalculating)
+    );
 
-    return statsLocations
-      .filter(({ agreements }) => agreements.length !== 0)
-      .map(({ agreements, name }, index) => {
-        const data = agreements.map(({ agreement: { idcc, name }, total }) =>
-          this.generateDataRow(`[${idcc}] ${name}`, total)
-        );
-
-        return (
-          <div key={index}>
-            <ContentTitle isFirst={index === 0}>{name}</ContentTitle>
-            <StatsTable
-              data={data}
-              defaultSorted={[{ id: "validated", desc: false }]}
-              isPercentage={isPercentage}
-            />
-          </div>
-        );
-      });
+    return (
+      <StatsTable
+        data={data}
+        defaultSorted={[{ id: "validated", desc: false }]}
+        isPercentage={isPercentage}
+        key="content"
+      />
+    );
   }
 
   render() {
-    const { isPercentage } = this.state;
+    const { isLoading, isPercentage, selectedRegionName } = this.state;
 
     return (
       <AdminMain>
@@ -350,24 +429,42 @@ export default class Index extends React.Component {
           </Flex>
 
           <Subtitle isFirst>Global</Subtitle>
-          {this.state.isLoading ? (
-            <p>Calcul en cours…</p>
-          ) : (
-            this.getGlobalStats()
-          )}
+          {isLoading ? <p>Calcul en cours…</p> : this.getGlobalStats()}
 
           <Subtitle>Par région</Subtitle>
-          {this.state.isLoading ? (
-            <p>Calcul en cours…</p>
-          ) : (
-            this.getUnitsStats()
-          )}
+          {isLoading ? <p>Calcul en cours…</p> : this.getRegionalStats()}
 
           <Subtitle>Par convention collective</Subtitle>
-          {this.state.isLoading ? (
+          {isLoading ? (
             <p>Calcul en cours…</p>
           ) : (
-            this.getAgreementsStats()
+            [
+              <FranceMapContainer
+                key="map"
+                justifyContent="center"
+                style={{ marginTop: "1rem" }}
+              >
+                <FranceMap
+                  onChange={this.updateSelectedRegionStats.bind(this)}
+                />
+              </FranceMapContainer>,
+              selectedRegionName.length === 0 ? (
+                <Flex
+                  alignItems="baseline"
+                  key="content"
+                  justifyContent="center"
+                  style={{ marginTop: "1rem" }}
+                >
+                  <Icon icon="arrow-up" style={{ marginRight: "1rem" }} />
+                  Cliquez sur une région pour voir le détail.
+                </Flex>
+              ) : (
+                [
+                  <ContentTitle key="title">{selectedRegionName}</ContentTitle>,
+                  this.getSelectedRegionStats()
+                ]
+              )
+            ]
           )}
         </Container>
       </AdminMain>

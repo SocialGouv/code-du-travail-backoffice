@@ -3,7 +3,7 @@ exports.seed = async knex => {
 
   const { data: agreements } = await global.axios.get("/agreements");
 
-  await knex("api.agreements").insert(agreements.slice(0, 100));
+  await knex("api.agreements").insert(agreements);
 
   global.spinner.succeed(`Agreements generated.`);
 };
