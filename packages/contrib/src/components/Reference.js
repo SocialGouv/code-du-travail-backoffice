@@ -15,19 +15,24 @@ const Container = styled(Flex)`
 `;
 const Text = styled.span`
   color: var(--color-black-leather-jacket);
-  margin-right: 0.5rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
+const TextWithIcon = styled(Text)`
+  margin-right: 0.5rem;
+`;
 const Icon = styled(_Icon)`
+  margin-left: 0.25rem;
+
   :hover {
     color: var(--color-black-leather-jacket);
   }
 `;
-const UrlIcon = styled(Icon)`
-  margin-right: 0.25rem;
-`;
+
+const DEFAULT_PROPS = {
+  isDisabled: false
+};
 
 export default class extends React.PureComponent {
   openUrl(url) {
@@ -35,13 +40,21 @@ export default class extends React.PureComponent {
   }
 
   render() {
-    const { onRemove, url, value } = this.props;
+    const { isDisabled, onRemove, url, value } = {
+      ...DEFAULT_PROPS,
+      ...this.props
+    };
 
     return (
       <Container alignItems="center">
-        <Text>{value}</Text>
-        {typeof url === "string" && url.trim().length !== 0 && (
-          <UrlIcon
+        {isDisabled && (typeof url !== "string" || url.length === 0) && (
+          <Text>{value}</Text>
+        )}
+        {(!isDisabled || (typeof url === "string" && url.length !== 0)) && (
+          <TextWithIcon>{value}</TextWithIcon>
+        )}
+        {typeof url === "string" && url.length !== 0 && (
+          <Icon
             color="var(--color-shadow)"
             icon="link"
             onClick={() => this.openUrl(url)}
@@ -49,13 +62,15 @@ export default class extends React.PureComponent {
             title={`Bouton ouvrant l'url de la référence "${value}"`}
           />
         )}
-        <Icon
-          color="var(--color-shadow)"
-          icon="trash"
-          onClick={() => onRemove(value)}
-          role="button"
-          title={`Bouton supprimant la référence "${value}"`}
-        />
+        {!isDisabled && (
+          <Icon
+            color="var(--color-shadow)"
+            icon="trash"
+            onClick={() => onRemove(value)}
+            role="button"
+            title={`Bouton supprimant la référence "${value}"`}
+          />
+        )}
       </Container>
     );
   }

@@ -61,7 +61,7 @@ class AnswersIndexPage extends React.Component {
       me: null
     };
 
-    this.loadAnswers = debounce(this._loadAnswers.bind(this), 500);
+    this.load = debounce(this._load.bind(this), 500);
   }
 
   static getInitialProps({ query: { page: maybePage, state: maybeState } }) {
@@ -76,7 +76,7 @@ class AnswersIndexPage extends React.Component {
   }
 
   componentDidMount() {
-    this.loadAnswers(this.props.page - 1);
+    this.load(this.props.page - 1);
   }
 
   componentDidUpdate() {
@@ -106,7 +106,7 @@ class AnswersIndexPage extends React.Component {
     }
   }
 
-  _loadAnswers(pageIndex = 0) {
+  _load(pageIndex = 0) {
     const { state } = this.props;
     const meta = {
       pageIndex,
@@ -120,21 +120,20 @@ class AnswersIndexPage extends React.Component {
     this.props.dispatch(actions.answers.load(meta));
   }
 
-  cancelAnswer(id) {
-    const action = () =>
-      actions.answers.cancel([id], this.loadAnswers.bind(this));
+  cancel(id) {
+    const action = () => actions.answers.cancel([id], this.load.bind(this));
 
     this.props.dispatch(
       actions.modal.open(T.ANSWERS_INDEX_MODAL_CANCEL, action)
     );
   }
 
-  setAnswerGenericReference(id, genericReference) {
+  updateGenericReference(id, genericReference) {
     this.props.dispatch(
-      actions.answers.setGenericRefence(
+      actions.answers.updateGenericReference(
         [id],
         genericReference,
-        this.loadAnswers.bind(this)
+        this.load.bind(this)
       )
     );
   }
@@ -151,7 +150,7 @@ class AnswersIndexPage extends React.Component {
     Router.push(`/answers/view/${id}`);
   }
 
-  getAnswersList() {
+  renderAnswers() {
     const { data, error, state } = this.props;
 
     if (error !== null) {
@@ -170,9 +169,9 @@ class AnswersIndexPage extends React.Component {
       <Answer
         data={answer}
         key={answer.id}
-        onCancel={this.cancelAnswer.bind(this)}
+        onCancel={this.cancel.bind(this)}
         onClick={this.openAnswer.bind(this)}
-        onFallback={this.setAnswerGenericReference.bind(this)}
+        onFallback={this.updateGenericReference.bind(this)}
       />
     ]);
   }
@@ -187,7 +186,7 @@ class AnswersIndexPage extends React.Component {
           <FilterInputContainer>
             <FilterInput
               icon="search"
-              onChange={() => this.loadAnswers()}
+              onChange={() => this.load()}
               placeholder={T.ANSWERS_INDEX_SEARCH_PLACEHOLDER}
               ref={node => (this.$query = node)}
             />
@@ -202,13 +201,13 @@ class AnswersIndexPage extends React.Component {
               {state === ANSWER_STATE.TO_DO && data.length !== 0 && (
                 <HelpText>{T.ANSWERS_INDEX_HELP_TO_DO}</HelpText>
               )}
-              {this.getAnswersList()}
+              {this.renderAnswers()}
             </List>
           )}
           {!isLoading && pageLength !== 0 && (
             <Pagination
               initialPage={pageIndex}
-              onPageChange={({ selected }) => this.loadAnswers(selected)}
+              onPageChange={({ selected }) => this.load(selected)}
               pageCount={pageLength}
             />
           )}

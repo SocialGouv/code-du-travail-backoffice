@@ -4,7 +4,32 @@ We would love for you to contribute to the backoffice of [Code du travail
 numérique][link-cdtn] and help make it even better than it is today! As a
 contributor, here are the guidelines we would like you to follow:
 
-- [Commit Message Guidelines](#commit-message-guidelines)
+- [Contributing](#contributing)
+  - [Code Naming Guidelines](#code-naming-guidelines)
+    - [API-related Actions](#api-related-actions)
+    - [React Component Actions](#react-component-actions)
+  - [Commit Message Guidelines](#commit-message-guidelines)
+    - [Revert](#revert)
+    - [Type](#type)
+    - [Scope](#scope)
+    - [Subject](#subject)
+
+## Code Naming Guidelines
+
+### API-related Actions
+
+This includes react components methods as well as redux actions, action types
+and sagas:
+
+- Any `GET` call-related method should start with the verb **load**.
+- Any `POST` call-related method should start with the verb **create**.
+- Any `PATCH` call-related method should start with the verb **update**.
+- Any `DELETE` call-related method should start with the verb **delete** (or
+  **\_delete**).
+
+### React Component Actions
+
+- Any method generating components should start with the verb **render**.
 
 ## Commit Message Guidelines
 

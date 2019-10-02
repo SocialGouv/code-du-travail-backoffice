@@ -39,8 +39,9 @@ export default (state = initialState, { payload, type }) => {
 
     case actionTypes.ANSWERS_CANCEL:
     case actionTypes.ANSWERS_LOAD:
-    case actionTypes.ANSWERS_SET_GENERIC_REFERENCE:
-    case actionTypes.ANSWERS_SET_STATE:
+    case actionTypes.ANSWER_UPDATE_GENERIC_REFERENCE:
+    case actionTypes.ANSWER_UPDATE_IS_PUBLISHED:
+    case actionTypes.ANSWER_UPDATE_STATE:
       return {
         ...state,
         isLoading: true
@@ -48,8 +49,9 @@ export default (state = initialState, { payload, type }) => {
 
     case actionTypes.ANSWERS_CANCEL_FAILURE:
     case actionTypes.ANSWERS_LOAD_FAILURE:
-    case actionTypes.ANSWERS_SET_GENERIC_REFERENCE_FAILURE:
-    case actionTypes.ANSWERS_SET_STATE_FAILURE:
+    case actionTypes.ANSWER_UPDATE_GENERIC_REFERENCE_FAILURE:
+    case actionTypes.ANSWER_UPDATE_IS_PUBLISHED_REFERENCE_FAILURE:
+    case actionTypes.ANSWER_UPDATE_STATE_FAILURE:
     case actionTypes.ANSWERS_TOGGLE_CHECK_FAILURE:
       return {
         ...state,

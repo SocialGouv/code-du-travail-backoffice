@@ -48,7 +48,7 @@ export class AdminAnswersPrintPage extends React.Component {
   }
 
   componentDidMount() {
-    this.loadAnswers();
+    this.load();
   }
 
   componentDidUpdate() {
@@ -57,7 +57,7 @@ export class AdminAnswersPrintPage extends React.Component {
     if (!isLoading) window.print();
   }
 
-  loadAnswers() {
+  load() {
     const uriParams = getUriParams();
     const meta = {
       isGeneric: this.isGeneric,
@@ -69,11 +69,11 @@ export class AdminAnswersPrintPage extends React.Component {
     this.props.dispatch(actions.answers.load(meta));
   }
 
-  getAnswerValue(value) {
+  renderValue(value) {
     return { __html: markdown.toHtml(value) };
   }
 
-  getAnswersList() {
+  renderAnswers() {
     const { data } = this.props.answers;
 
     return data.map(
@@ -93,7 +93,7 @@ export class AdminAnswersPrintPage extends React.Component {
             >{`${question_index}) ${question_value}`}</Subtitle>
           </Header>
           <ContentTitle isFirst>Réponse corrigée:</ContentTitle>
-          <Pre dangerouslySetInnerHTML={this.getAnswerValue(value)} />
+          <Pre dangerouslySetInnerHTML={this.renderValue(value)} />
           {references.length !== 0 && (
             <div>
               <ContentTitle isFirst>Références:</ContentTitle>
@@ -117,9 +117,7 @@ export class AdminAnswersPrintPage extends React.Component {
       return <Container>Chargement…</Container>;
     }
 
-    return (
-      <Container flexDirection="column">{this.getAnswersList()}</Container>
-    );
+    return <Container flexDirection="column">{this.renderAnswers()}</Container>;
   }
 }
 

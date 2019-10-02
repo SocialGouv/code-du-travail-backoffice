@@ -11,6 +11,7 @@ import LawReferences from "../../../src/components/LawReferences";
 import Reference from "../../../src/components/Reference";
 import AdminMain from "../../../src/layouts/AdminMain";
 import Button from "../../../src/elements/Button";
+import _Checkbox from "../../../src/elements/Checkbox";
 import Hr from "../../../src/elements/Hr";
 import Icon from "../../../src/elements/Icon";
 import Idcc from "../../../src/elements/Idcc";
@@ -18,7 +19,6 @@ import Input from "../../../src/elements/Input";
 import Radio from "../../../src/elements/Radio";
 import _Select from "../../../src/elements/Select";
 import Subtitle from "../../../src/elements/Subtitle";
-import Tag from "../../../src/elements/Tag";
 import Textarea from "../../../src/elements/Textarea";
 import Title from "../../../src/elements/Title";
 import capitalize from "../../../src/helpers/capitalize";
@@ -183,6 +183,9 @@ const FormHiddenSubmit = styled.button`
   visibility: hidden;
   width: 1px;
 `;
+const Checkbox = styled(_Checkbox)`
+  padding-left: 0;
+`;
 
 const Comments = styled(Flex)`
   flex-grow: 1;
@@ -249,7 +252,7 @@ export class AdminAnwsersEditPage extends React.Component {
 
     try {
       this.fetchAnswer();
-      await this.fetchReferences();
+      await this.loadReferences();
       this.props.dispatch(actions.comments.load(this.props.id));
 
       this.setState({ isLoading: false });
@@ -285,7 +288,7 @@ export class AdminAnwsersEditPage extends React.Component {
     dispatch(actions.answers.loadOne(id));
   }
 
-  async fetchReferences() {
+  async loadReferences() {
     try {
       const referencesSelect = `select=*`;
       const referencesWhere = `answer_id=eq.${this.props.id}`;
@@ -300,15 +303,6 @@ export class AdminAnwsersEditPage extends React.Component {
     } catch (err) {
       if (err !== undefined) console.warn(err);
     }
-  }
-
-  updateAnswerState() {
-    const { id } = this.props;
-    const newState = this.$newStateSelect.value;
-
-    this.props.dispatch(
-      actions.answers.setState([id], newState, () => window.location.reload())
-    );
   }
 
   async _updateAnswerValue({ source }) {
@@ -329,7 +323,30 @@ export class AdminAnwsersEditPage extends React.Component {
     this.setState({ isUpdating: false });
   }
 
-  async insertTag(tagId) {
+  updateAnswerState() {
+    const { id } = this.props;
+    const newState = this.$newStateSelect.value;
+
+    this.props.dispatch(
+      actions.answers.updateState([id], newState, () =>
+        window.location.reload()
+      )
+    );
+  }
+
+  updateGenericReference(generic_reference) {
+    const { dispatch, id } = this.props;
+
+    dispatch(
+      actions.answers.updateGenericReference(
+        [id],
+        generic_reference,
+        this.fetchAnswer.bind(this)
+      )
+    );
+  }
+
+  async createTag(tagId) {
     try {
       const answersUri = `/answers?id=eq.${this.props.id}`;
       // An answer can't have a custom tag and be generic at the same time:
@@ -366,7 +383,7 @@ export class AdminAnwsersEditPage extends React.Component {
     await this.fetchTags();
   }
 
-  async insertReference(reference) {
+  async createReference(reference) {
     this.setState({ isUpdating: true });
 
     try {
@@ -387,7 +404,7 @@ export class AdminAnwsersEditPage extends React.Component {
       console.warn(err);
     }
 
-    await this.fetchReferences();
+    await this.loadReferences();
   }
 
   async deleteReference(id) {
@@ -401,7 +418,7 @@ export class AdminAnwsersEditPage extends React.Component {
       console.warn(err);
     }
 
-    await this.fetchReferences();
+    await this.loadReferences();
   }
 
   submitReference(event, category = null) {
@@ -433,7 +450,7 @@ export class AdminAnwsersEditPage extends React.Component {
       });
     }
 
-    this.insertReference(reference);
+    this.createReference(reference);
   }
 
   showSavingSpinner() {
@@ -462,10 +479,22 @@ export class AdminAnwsersEditPage extends React.Component {
     this.setState({ isUpdating: true });
 
     if (isAdded) {
-      this.insertTag(id);
+      this.createTag(id);
     } else {
       this.deleteTag(id);
     }
+  }
+
+  toggleIsPublished() {
+    const { id, is_published } = this.props.answers.data;
+
+    this.props.dispatch(
+      actions.answers.updateIsPublished(
+        [id],
+        !is_published,
+        this.fetchAnswer.bind(this)
+      )
+    );
   }
 
   handleCommentField(event) {
@@ -496,22 +525,7 @@ export class AdminAnwsersEditPage extends React.Component {
     this.props.dispatch(actions.comments.remove([id], this.props.id));
   }
 
-  getTags(category) {
-    return this.tags
-      .filter(tag => tag.category === category)
-      .map(({ id, value }, index) => (
-        <Tag
-          key={index}
-          isDisabled={this.state.isUpdating}
-          onClick={() => this.toggleTag(id, !this.state.tags.includes(id))}
-          selected={this.state.tags.includes(id)}
-        >
-          {value}
-        </Tag>
-      ));
-  }
-
-  getReferences(category = null) {
+  renderReferences(category, isDisabled) {
     const references = this.state.references.filter(
       ({ category: _category }) => _category === category
     );
@@ -525,6 +539,7 @@ export class AdminAnwsersEditPage extends React.Component {
 
     return references.map(({ id, url, value }, index) => (
       <Reference
+        isDisabled={isDisabled}
         key={index}
         onRemove={() => this.deleteReference(id)}
         url={url}
@@ -533,7 +548,7 @@ export class AdminAnwsersEditPage extends React.Component {
     ));
   }
 
-  getComments() {
+  renderComments() {
     return this.props.comments.data.map(({ id, is_private, value }, index) => (
       <Comment
         isMe={true}
@@ -545,18 +560,6 @@ export class AdminAnwsersEditPage extends React.Component {
     ));
   }
 
-  updateGenericReferenceTo(generic_reference) {
-    const { dispatch, id } = this.props;
-
-    dispatch(
-      actions.answers.setGenericRefence(
-        [id],
-        generic_reference,
-        this.fetchAnswer.bind(this)
-      )
-    );
-  }
-
   render() {
     const { answers, comments } = this.props;
     const { isLoading, prevalue, isSidebarHidden, value } = this.state;
@@ -565,7 +568,13 @@ export class AdminAnwsersEditPage extends React.Component {
       return <AdminMain isLoading />;
     }
 
-    const { agreement, generic_reference, question, state } = answers.data;
+    const {
+      agreement,
+      generic_reference,
+      is_published,
+      question,
+      state
+    } = answers.data;
 
     return (
       <AdminMain isScrollable={false}>
@@ -651,7 +660,7 @@ export class AdminAnwsersEditPage extends React.Component {
                   <Strong isFirst>Articles du Code du travail</Strong>
                   <LawReferences
                     isDisabled={this.state.isUpdating}
-                    onAdd={this.insertReference.bind(this)}
+                    onAdd={this.createReference.bind(this)}
                     onRemove={this.deleteReference.bind(this)}
                     references={this.state.references.filter(
                       ({ category }) => category === "labor_code"
@@ -668,7 +677,9 @@ export class AdminAnwsersEditPage extends React.Component {
                     placeholder="Ex: Article 7, Texte sur les salaires de 1984…"
                     ref={node => (this.$agreementReferenceValueInput = node)}
                   />
-                  <Flex flexWrap="wrap">{this.getReferences("agreement")}</Flex>
+                  <Flex flexWrap="wrap">
+                    {this.renderReferences("agreement")}
+                  </Flex>
                   <FormHiddenSubmit type="submit" />
                 </Form>
                 <Form onSubmit={this.submitReference.bind(this)}>
@@ -686,7 +697,7 @@ export class AdminAnwsersEditPage extends React.Component {
                     placeholder="URL (ex: https://www.legifrance.gouv.fr/…)"
                     ref={node => (this.$otherReferenceUrlInput = node)}
                   />
-                  <Flex flexWrap="wrap">{this.getReferences()}</Flex>
+                  <Flex flexWrap="wrap">{this.renderReferences(null)}</Flex>
                   <FormHiddenSubmit type="submit" />
                 </Form>
                 <Hr />
@@ -694,7 +705,7 @@ export class AdminAnwsersEditPage extends React.Component {
                 <Subtitle isFirst>Renvoi</Subtitle>
                 <Radio
                   disabled={state === ANSWER_STATE.VALIDATED}
-                  onChange={this.updateGenericReferenceTo.bind(this)}
+                  onChange={this.updateGenericReference.bind(this)}
                   options={[
                     {
                       label: "Aucun renvoi.",
@@ -728,11 +739,15 @@ export class AdminAnwsersEditPage extends React.Component {
 
                 <Subtitle>Références juridiques</Subtitle>
                 <Strong>Convention collective</Strong>
-                <Flex flexWrap="wrap">{this.getReferences("agreement")}</Flex>
+                <Flex flexWrap="wrap">
+                  {this.renderReferences("agreement", true)}
+                </Flex>
                 <Strong>Code du travail</Strong>
-                <Flex flexWrap="wrap">{this.getReferences("labor_code")}</Flex>
+                <Flex flexWrap="wrap">
+                  {this.renderReferences("labor_code", true)}
+                </Flex>
                 <Strong>Autres</Strong>
-                <Flex flexWrap="wrap">{this.getReferences()}</Flex>
+                <Flex flexWrap="wrap">{this.renderReferences(null, true)}</Flex>
                 <Hr />
 
                 <Subtitle isFirst>Renvoi</Subtitle>
@@ -743,6 +758,16 @@ export class AdminAnwsersEditPage extends React.Component {
                     null: "Aucun renvoi."
                   }[String(generic_reference)]
                 }
+                <Hr />
+
+                <Subtitle isFirst>Publication</Subtitle>
+                <Flex>
+                  <Checkbox
+                    isChecked={is_published}
+                    onClick={this.toggleIsPublished.bind(this)}
+                  />
+                  Publiée sur le site du code du travail numérique.
+                </Flex>
               </Flex>
             )}
 
@@ -758,7 +783,7 @@ export class AdminAnwsersEditPage extends React.Component {
               flexDirection="column"
               ref={node => (this.$commentsContainer = node)}
             >
-              {this.getComments()}
+              {this.renderComments()}
             </Comments>
             <CommentEditor
               disabled={comments.currentIsLoading}
