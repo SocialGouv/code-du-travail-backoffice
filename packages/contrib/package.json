@@ -27,7 +27,7 @@
     "moment-timezone": "0.5.26",
     "next": "9.0.7",
     "next-redux-saga": "4.0.2",
-    "next-redux-wrapper": "3.0.0",
+    "next-redux-wrapper": "4.0.0",
     "numeral": "2.0.6",
     "password-generator": "2.2.0",
     "postgrester": "1.0.0-alpha.2",
