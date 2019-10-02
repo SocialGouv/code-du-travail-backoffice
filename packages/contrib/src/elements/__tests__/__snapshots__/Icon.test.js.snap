@@ -4,7 +4,7 @@ exports[`[Contrib] elements/<Icon /> should match snapshot 1`] = `
 <div>
   <svg
     aria-hidden="true"
-    class="svg-inline--fa fa-book fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx"
+    class="svg-inline--fa fa-book fa-w-14 fa-1x fa-rotate-null fa-pull-null Icon-sc-4jlog9-0 hXLKsx"
     color="var(--color-black-leather-jacket)"
     data-icon="book"
     data-prefix="fas"
@@ -30,7 +30,7 @@ exports[`[Contrib] elements/<Icon /> should match snapshot with \`color\` prop 1
   <DocumentFragment>
     <svg
       aria-hidden=\\"true\\"
-      class=\\"svg-inline--fa fa-book fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx\\"
+      class=\\"svg-inline--fa fa-book fa-w-14 fa-1x fa-rotate-null fa-pull-null Icon-sc-4jlog9-0 hXLKsx\\"
 -     color=\\"var(--color-black-leather-jacket)\\"
 +     color=\\"red\\"
       data-icon=\\"book\\"
@@ -44,7 +44,7 @@ exports[`[Contrib] elements/<Icon /> should match snapshot with a \`role\` prop 
 <div>
   <svg
     aria-hidden="true"
-    class="svg-inline--fa fa-book fa-w-14 fa-1x Icon-sc-4jlog9-0 eeDzqb"
+    class="svg-inline--fa fa-book fa-w-14 fa-1x fa-rotate-null fa-pull-null Icon-sc-4jlog9-0 eeDzqb"
     color="var(--color-black-leather-jacket)"
     data-icon="book"
     data-prefix="fas"
@@ -70,8 +70,8 @@ exports[`[Contrib] elements/<Icon /> should match snapshot with a custom \`isSma
   <DocumentFragment>
     <svg
       aria-hidden=\\"true\\"
--     class=\\"svg-inline--fa fa-book fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx\\"
-+     class=\\"svg-inline--fa fa-book fa-w-14 fa-sm Icon-sc-4jlog9-0 gomlef\\"
+-     class=\\"svg-inline--fa fa-book fa-w-14 fa-1x fa-rotate-null fa-pull-null Icon-sc-4jlog9-0 hXLKsx\\"
++     class=\\"svg-inline--fa fa-book fa-w-14 fa-sm fa-rotate-null fa-pull-null Icon-sc-4jlog9-0 gomlef\\"
       color=\\"var(--color-black-leather-jacket)\\"
       data-icon=\\"book\\"
       data-prefix=\\"fas\\"
@@ -83,7 +83,7 @@ exports[`[Contrib] elements/<Icon /> should match snapshot with a dashed icon na
 <div>
   <svg
     aria-hidden="true"
-    class="svg-inline--fa fa-caret-down fa-w-10 fa-1x Icon-sc-4jlog9-0 hXLKsx"
+    class="svg-inline--fa fa-caret-down fa-w-10 fa-1x fa-rotate-null fa-pull-null Icon-sc-4jlog9-0 hXLKsx"
     color="var(--color-black-leather-jacket)"
     data-icon="caret-down"
     data-prefix="fas"
