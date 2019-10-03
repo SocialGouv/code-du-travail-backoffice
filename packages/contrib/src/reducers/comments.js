@@ -14,20 +14,20 @@ export default (state = initialState, { payload, type }) => {
   switch (type) {
     /* ONE COMMENT ――――――――――――――――――――― */
 
-    case actionTypes.COMMENT_ADD:
+    case actionTypes.COMMENT_CREATE_ONE:
       return {
         ...state,
         currentIsLoading: true
       };
 
-    case actionTypes.COMMENT_ADD_FAILURE:
+    case actionTypes.COMMENT_CREATE_ONE_FAILURE:
       return {
         ...state,
         error: payload.message,
         currentIsLoading: false
       };
 
-    case actionTypes.COMMENT_ADD_SUCCESS:
+    case actionTypes.COMMENT_CREATE_ONE_SUCCESS:
       return {
         ...state,
         currentIsLoading: false,
@@ -43,15 +43,15 @@ export default (state = initialState, { payload, type }) => {
 
     /* MULTIPLE COMMENTS ――――――――――――――― */
 
+    case actionTypes.COMMENTS_DELETE:
     case actionTypes.COMMENTS_LOAD:
-    case actionTypes.COMMENTS_REMOVE:
       return {
         ...state,
         isLoading: true
       };
 
+    case actionTypes.COMMENTS_DELETE_FAILURE:
     case actionTypes.COMMENTS_LOAD_FAILURE:
-    case actionTypes.COMMENTS_REMOVE_FAILURE:
       return {
         ...state,
         error: payload.message,
