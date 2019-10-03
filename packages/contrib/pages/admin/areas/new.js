@@ -1,20 +1,35 @@
+import * as R from "ramda";
 import React from "react";
 
 import AdminForm from "../../../src/components/AdminForm";
 import AdminMain from "../../../src/layouts/AdminMain";
 import customAxios from "../../../src/libs/customAxios";
 
-import { ZONE_CATEGORY_LABEL } from "../../../src/constants";
+import { AREA_CATEGORY_LABEL } from "../../../src/constants";
 
 const FIELDS = [
   {
     type: "input",
     name: "name",
     label: "Nom"
+  },
+  {
+    type: "input",
+    name: "code",
+    label: "Code"
+  },
+  {
+    type: "select",
+    name: "category",
+    label: "Type",
+    options: R.pipe(
+      R.toPairs,
+      R.map(([value, name]) => ({ name, value }))
+    )(AREA_CATEGORY_LABEL)
   }
 ];
 
-export default class AdminZonesNewPage extends React.Component {
+export default class AdminAreasNewPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -29,7 +44,7 @@ export default class AdminZonesNewPage extends React.Component {
 
     try {
       const order = `order=name.asc`;
-      const { data: zones } = await this.axios.get(`/zones?${order}`);
+      const { data: areas } = await this.axios.get(`/areas?${order}`);
 
       const fields = [
         ...FIELDS,
@@ -37,8 +52,8 @@ export default class AdminZonesNewPage extends React.Component {
           type: "select",
           name: "parent_id",
           label: "Zone parente",
-          options: zones.map(({ category, code, id, name }) => ({
-            name: `${name} [${ZONE_CATEGORY_LABEL[category]} - ${code}]`,
+          options: areas.map(({ category, code, id, name }) => ({
+            name: `${name} [${AREA_CATEGORY_LABEL[category]} - ${code}]`,
             value: id
           }))
         }
@@ -58,14 +73,14 @@ export default class AdminZonesNewPage extends React.Component {
 
     return (
       <AdminForm
-        apiPath="/zones"
+        apiPath="/areas"
         ariaLabels={{
           cancelButton: `Bouton redirigeant vers la liste des unités`,
           createOrEditButton: `Bouton créant une nouvelle unité dans la base
                               de données à partir des données du formulaire`
         }}
         fields={this.state.fields}
-        indexPath="/zones"
+        indexPath="/areas"
         name="location"
         title="Nouvelle zones"
       />

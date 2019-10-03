@@ -134,9 +134,9 @@ export default class AdminMenu extends React.PureComponent {
           Utilisateurs
         </Link>
         <Link
-          isActive={this.isActive("/zones")}
-          onClick={() => this.goTo("/zones")}
-          onKeyPress={() => this.goTo("/zones")}
+          isActive={this.isActive("/areas")}
+          onClick={() => this.goTo("/areas")}
+          onKeyPress={() => this.goTo("/areas")}
           role="link"
           tabIndex="0"
         >

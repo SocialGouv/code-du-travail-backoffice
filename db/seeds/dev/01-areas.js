@@ -1,5 +1,5 @@
 exports.seed = async knex => {
-  global.spinner.start(`Generating zones...`);
+  global.spinner.start(`Generating areas...`);
 
   const suiGenerisCollectivities = [
     {
@@ -9,7 +9,7 @@ exports.seed = async knex => {
     }
   ];
 
-  await knex("api.zones").insert(suiGenerisCollectivities);
+  await knex("api.areas").insert(suiGenerisCollectivities);
 
   const overseasCollectivities = [
     {
@@ -35,7 +35,7 @@ exports.seed = async knex => {
     }
   ];
 
-  await knex("api.zones").insert(overseasCollectivities);
+  await knex("api.areas").insert(overseasCollectivities);
 
   const regions = [
     { category: "region", code: "01", name: `Guadeloupe` },
@@ -58,7 +58,7 @@ exports.seed = async knex => {
     { category: "region", code: "94", name: `Corse` }
   ];
 
-  await knex("api.zones").insert(regions);
+  await knex("api.areas").insert(regions);
 
   const departments = [
     { region: "84", code: "001", name: `Ain` },
@@ -165,15 +165,15 @@ exports.seed = async knex => {
   ];
 
   for (let department of departments) {
-    const zoneRes = await knex("api.zones").where({ code: department.region });
+    const areaRes = await knex("api.areas").where({ code: department.region });
 
-    await knex("api.zones").insert({
+    await knex("api.areas").insert({
       code: department.code,
       name: department.name,
       category: "department",
-      parent_id: zoneRes[0].id
+      parent_id: areaRes[0].id
     });
   }
 
-  global.spinner.succeed(`Zones generated.`);
+  global.spinner.succeed(`Areas generated.`);
 };

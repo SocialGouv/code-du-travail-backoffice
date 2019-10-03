@@ -4,8 +4,6 @@ import AdminForm from "../../../src/components/AdminForm";
 import AdminMain from "../../../src/layouts/AdminMain";
 import customAxios from "../../../src/libs/customAxios";
 
-import { ZONE_CATEGORY_LABEL } from "../../../src/constants";
-
 const FIELDS = [
   {
     type: "input",
@@ -34,7 +32,6 @@ export default class AdminAgreementsNewPage extends React.Component {
 
     try {
       const { data: agreements } = await this.axios.get("/agreements");
-      const { data: zones } = await this.axios.get("/zones");
 
       const fields = [
         ...FIELDS,
@@ -46,18 +43,6 @@ export default class AdminAgreementsNewPage extends React.Component {
             name: `${idcc} - ${name}`,
             value: id
           }))
-        },
-        {
-          type: "tags",
-          name: "zones",
-          label: "Zones",
-          tags: zones.map(({ category, code, id, name }) => ({
-            id,
-            value: `${name} [${ZONE_CATEGORY_LABEL[category]} - ${code}]`
-          })),
-          ariaName: "la zone",
-          apiPath: "/agreements_zones",
-          singleName: "zone"
         }
       ];
 

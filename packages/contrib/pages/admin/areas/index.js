@@ -2,7 +2,7 @@ import React from "react";
 
 import AdminIndex from "../../../src/components/AdminIndex";
 
-import { ZONE_CATEGORY_LABEL } from "../../../src/constants";
+import { AREA_CATEGORY_LABEL } from "../../../src/constants";
 
 const COLUMNS = [
   {
@@ -16,7 +16,7 @@ const COLUMNS = [
   },
   {
     Header: "Catégorie",
-    accessor: ({ category }) => ZONE_CATEGORY_LABEL[category],
+    accessor: ({ category }) => AREA_CATEGORY_LABEL[category],
     id: "category",
     width: 240
   }
@@ -24,7 +24,7 @@ const COLUMNS = [
 
 export default () => (
   <AdminIndex
-    apiPath="/zones"
+    apiPath="/areas"
     ariaLabels={{
       editButton: `Bouton redirigeant vers le formulaire d'édition des données
                   de cette zone`,
@@ -33,7 +33,7 @@ export default () => (
     }}
     columns={COLUMNS}
     noDelete
-    slug="zone"
+    slug="area"
     title="Zones"
   />
 );

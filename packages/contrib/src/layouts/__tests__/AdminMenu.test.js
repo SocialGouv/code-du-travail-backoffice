@@ -72,10 +72,10 @@ describe.skip("[Contrib] layouts/<AdminMenu />", () => {
     expect(global.nextRouter.push).toHaveBeenCalledWith("/admin/users");
   });
 
-  it("should redirect to the zones path", () => {
+  it("should redirect to the areas path", () => {
     fireEvent.click(getByText("Zones"));
 
-    expect(global.nextRouter.push).toHaveBeenCalledWith("/admin/zones");
+    expect(global.nextRouter.push).toHaveBeenCalledWith("/admin/areas");
   });
 
   it("should redirect to the migrations path", () => {

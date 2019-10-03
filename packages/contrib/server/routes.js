@@ -137,13 +137,13 @@ module.exports = function(nextApp) {
     ctx.respond = false;
   });
 
-  router.get("/admin/zones/new", async ctx => {
-    await nextApp.render(ctx.req, ctx.res, "/admin/zones/new", {});
+  router.get("/admin/areas/new", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/admin/areas/new", {});
     ctx.respond = false;
   });
 
-  router.get("/admin/zones/:id", async ctx => {
-    await nextApp.render(ctx.req, ctx.res, "/admin/zones/edit", {
+  router.get("/admin/areas/:id", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/admin/areas/edit", {
       ...ctx.params
     });
     ctx.respond = false;

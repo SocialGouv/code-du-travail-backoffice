@@ -157,7 +157,7 @@ export default class Index extends React.Component {
       .eq("category", "region")
       .not.in("code", ["01", "02", "03", "04", "06"])
       .orderBy("name")
-      .get("/zones");
+      .get("/areas");
 
     return regions;
   }
@@ -166,7 +166,7 @@ export default class Index extends React.Component {
     const { data: locations } = await this.postgrest
       .select("*")
       .select("agreements(id,idcc,name)")
-      .not.is("zone_id", null)
+      .not.is("area_id", null)
       .get("/locations");
 
     return locations;
@@ -187,7 +187,7 @@ export default class Index extends React.Component {
     const regionalLocations = await this.fetchRegionalLocations();
 
     const regionalStats = regions.map(({ code, id, name }) => {
-      const location = regionalLocations.find(({ zone_id }) => zone_id === id);
+      const location = regionalLocations.find(({ area_id }) => area_id === id);
 
       return {
         locationName: location.name,
@@ -195,9 +195,9 @@ export default class Index extends React.Component {
         agreements: location.agreements,
         // We do the mapping in advance for the sake of repeated performance:
         agreementIds: location.agreements.map(({ id }) => id),
-        zoneCode: code,
-        zoneId: id,
-        zoneName: name
+        areaCode: code,
+        areaId: id,
+        areaName: name
       };
     });
 
@@ -274,9 +274,9 @@ export default class Index extends React.Component {
     setTimeout(this.updateStats.bind(this), REFRESH_DELAY);
   }
 
-  async updateSelectedRegionStats(zoneCode) {
+  async updateSelectedRegionStats(areaCode) {
     const { regionalStats } = this.state;
-    const region = regionalStats.find(entry => entry.zoneCode === zoneCode);
+    const region = regionalStats.find(entry => entry.areaCode === areaCode);
 
     const newSelectedRegionStats = region.agreements.map(
       ({ id, idcc, name }) => ({
@@ -289,7 +289,7 @@ export default class Index extends React.Component {
 
     this.setState({
       selectedRegionIsCalculating: true,
-      selectedRegionName: region.zoneName,
+      selectedRegionName: region.areaName,
       selectedRegionStats: newSelectedRegionStats
     });
 
@@ -378,8 +378,8 @@ export default class Index extends React.Component {
 
   getRegionalStats() {
     const { isCalculating, isPercentage, regionalStats } = this.state;
-    const data = regionalStats.map(({ zoneName, totals }) =>
-      this.generateDataRow(zoneName, totals, isCalculating)
+    const data = regionalStats.map(({ areaName, totals }) =>
+      this.generateDataRow(areaName, totals, isCalculating)
     );
 
     return (

@@ -29,18 +29,18 @@ export default class AdminLocationsNewPage extends React.Component {
 
     try {
       const { data: agreements } = await this.axios.get("/agreements");
-      const { data: zones } = await this.postgrest
+      const { data: areas } = await this.postgrest
         .orderBy("category")
         .orderBy("name")
-        .get("/zones");
+        .get("/areas");
 
       const fields = [
         ...FIELDS,
         {
           type: "select",
-          name: "zone_id",
+          name: "area_id",
           label: "Zone",
-          options: zones.map(({ category, id: value, name }) => ({
+          options: areas.map(({ category, id: value, name }) => ({
             name: `[${category.substr(0, 3).toUpperCase()}] ${name}`,
             value
           }))
