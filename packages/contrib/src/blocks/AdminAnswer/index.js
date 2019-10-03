@@ -93,6 +93,7 @@ export default ({ data, isChecked, onCheck, onClick }) => {
         <Top justifyContent="space-between">
           <TopState>{ANSWER_STATE_LABEL[state]}</TopState>
           {![ANSWER_STATE.TO_DO, ANSWER_STATE.VALIDATED].includes(state) &&
+            user !== undefined &&
             user !== null && (
               <TopAuthor>
                 {state === ANSWER_STATE.DRAFT && `Rédigée par : ${user.name}`}

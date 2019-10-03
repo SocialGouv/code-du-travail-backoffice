@@ -64,7 +64,7 @@ export default function* load({
     }
 
     const uri = isGeneric ? "/generic_answers" : "/full_answers";
-    const { data, pageLength } = yield request.get(uri, true);
+    const { data, pagesLength } = yield request.get(uri, true);
 
     const answerIds = data.map(({ id }) => id);
     let fullData = [...data];
@@ -103,7 +103,7 @@ export default function* load({
       answers.loadSuccess({
         data: fullData,
         pageIndex,
-        pageLength,
+        pagesLength,
         query,
         state: states[0]
       })
