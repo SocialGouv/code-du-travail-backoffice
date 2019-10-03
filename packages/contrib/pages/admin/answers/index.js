@@ -161,7 +161,7 @@ export class AdminAnswersIndexPage extends React.Component {
       isLoading: _isLoading,
       query,
       pageIndex,
-      pageLength,
+      pagesLength,
       state
     } = this.props.answers;
 
@@ -192,7 +192,7 @@ export class AdminAnswersIndexPage extends React.Component {
                 disabled={
                   isLoading ||
                   !PRINTABLE_STATES.includes(state) ||
-                  pageLength > 10
+                  pagesLength > 10
                 }
                 onClick={this.printAnswers.bind(this)}
               >
@@ -237,11 +237,11 @@ export class AdminAnswersIndexPage extends React.Component {
           {!isLoading && (
             <List flexDirection="column">{this.getAnswersList()}</List>
           )}
-          {!isLoading && pageLength > 0 && (
+          {!isLoading && pagesLength > 0 && (
             <Pagination
               initialPage={pageIndex}
               onPageChange={({ selected }) => this.loadAnswers(state, selected)}
-              pageCount={pageLength}
+              pageCount={pagesLength}
             />
           )}
         </Container>
