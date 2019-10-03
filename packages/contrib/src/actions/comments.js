@@ -3,7 +3,7 @@ import actionTypes from "./types";
 /* ONE COMMENT ――――――――――――――――――――― */
 
 export const addOne = (value, isPrivate, answerId) => ({
-  type: actionTypes.COMMENT_ADD,
+  type: actionTypes.COMMENT_CREATE_ONE,
   meta: {
     answerId,
     isPrivate,
@@ -11,7 +11,7 @@ export const addOne = (value, isPrivate, answerId) => ({
   }
 });
 export const addOneFailure = error => ({
-  type: actionTypes.COMMENT_ADD_FAILURE,
+  type: actionTypes.COMMENT_CREATE_ONE_FAILURE,
   error: true,
   payload: {
     message: error.message
@@ -45,14 +45,14 @@ export const loadSuccess = data => ({
 });
 
 export const remove = (ids, answerId) => ({
-  type: actionTypes.COMMENTS_REMOVE,
+  type: actionTypes.COMMENTS_DELETE,
   meta: {
     answerId,
     ids
   }
 });
 export const removeFailure = error => ({
-  type: actionTypes.COMMENTS_REMOVE_FAILURE,
+  type: actionTypes.COMMENTS_DELETE_FAILURE,
   error: true,
   payload: {
     message: error.message

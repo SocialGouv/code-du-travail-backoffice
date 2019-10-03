@@ -85,7 +85,7 @@ export const toggleCheckFailure = error => ({
 });
 
 export const updateGenericReference = (ids, genericReference, next) => ({
-  type: actionTypes.ANSWER_UPDATE_GENERIC_REFERENCE,
+  type: actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE,
   meta: {
     genericReference,
     ids,
@@ -93,7 +93,7 @@ export const updateGenericReference = (ids, genericReference, next) => ({
   }
 });
 export const updateGenericReferenceFailure = error => ({
-  type: actionTypes.ANSWER_UPDATE_GENERIC_REFERENCE_FAILURE,
+  type: actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE_FAILURE,
   error: true,
   payload: {
     message: error.message
@@ -101,7 +101,7 @@ export const updateGenericReferenceFailure = error => ({
 });
 
 export const updateIsPublished = (ids, is, next) => ({
-  type: actionTypes.ANSWER_UPDATE_IS_PUBLISHED_REFERENCE,
+  type: actionTypes.ANSWERS_UPDATE_IS_PUBLISHED_REFERENCE,
   meta: {
     ids,
     is,
@@ -109,7 +109,7 @@ export const updateIsPublished = (ids, is, next) => ({
   }
 });
 export const updateIsPublishedFailure = error => ({
-  type: actionTypes.ANSWER_UPDATE_IS_PUBLISHED_REFERENCE_FAILURE,
+  type: actionTypes.ANSWERS_UPDATE_IS_PUBLISHED_REFERENCE_FAILURE,
   error: true,
   payload: {
     message: error.message
@@ -117,7 +117,7 @@ export const updateIsPublishedFailure = error => ({
 });
 
 export const updateState = (ids, state, next) => ({
-  type: actionTypes.ANSWER_UPDATE_STATE,
+  type: actionTypes.ANSWERS_UPDATE_STATE,
   meta: {
     ids,
     next,
@@ -125,7 +125,7 @@ export const updateState = (ids, state, next) => ({
   }
 });
 export const updateStateFailure = error => ({
-  type: actionTypes.ANSWER_UPDATE_STATE_FAILURE,
+  type: actionTypes.ANSWERS_UPDATE_STATE_FAILURE,
   error: true,
   payload: {
     message: error.message

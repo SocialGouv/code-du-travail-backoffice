@@ -22,12 +22,12 @@ export default [
   takeLatest(actionTypes.ANSWERS_LOAD, load),
   takeLatest(actionTypes.ANSWERS_TOGGLE_CHECK, toggleCheck),
   takeLatest(
-    actionTypes.ANSWER_UPDATE_GENERIC_REFERENCE,
+    actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE,
     updateGenericReference
   ),
   takeLatest(
-    actionTypes.ANSWER_UPDATE_IS_PUBLISHED_REFERENCE,
+    actionTypes.ANSWERS_UPDATE_IS_PUBLISHED_REFERENCE,
     updateIsPublished
   ),
-  takeLatest(actionTypes.ANSWER_UPDATE_STATE, updateState)
+  takeLatest(actionTypes.ANSWERS_UPDATE_STATE, updateState)
 ];
