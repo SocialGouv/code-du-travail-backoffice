@@ -50,24 +50,3 @@ describe("[Contrib] layouts/<Main /> (contributor)", () => {
     expect(firstRender).toMatchDiffSnapshot(asFragment());
   });
 });
-
-describe("[Contrib] layouts/<Main /> (administrator)", () => {
-  it("should match snapshot", () => {
-    jest.mock("next/router", () => ({
-      withRouter: component => {
-        component.defaultProps = {
-          ...component.defaultProps,
-          router: {
-            pathname: "/admin"
-          }
-        };
-
-        return component;
-      }
-    }));
-
-    const γ = render(<Main isAdmin />);
-
-    expect(γ.container).toMatchSnapshot();
-  });
-});
