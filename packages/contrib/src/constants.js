@@ -22,15 +22,15 @@ export const ANSWER_REFERENCE_CATEGORY = {
   LABOR_CODE: "labor_code"
 };
 
-export const USER_ROLE = {
-  ADMINISTRATOR: "administrator",
-  CONTRIBUTOR: "contributor",
-  REGIONAL_ADMINISTRATOR: "regional_administrator"
-};
-
-export const ZONE_CATEGORY_LABEL = {
+export const AREA_CATEGORY_LABEL = {
   department: "Département",
   overseas_collectivity: "Collectivité d'Outre-Mer",
   region: "Région",
   sui_generis_collectivity: "Collectivité Sui Generis"
+};
+
+export const USER_ROLE = {
+  ADMINISTRATOR: "administrator",
+  CONTRIBUTOR: "contributor",
+  REGIONAL_ADMINISTRATOR: "regional_administrator"
 };

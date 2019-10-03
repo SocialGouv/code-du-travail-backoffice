@@ -36,12 +36,12 @@ exports.seed = async knex => {
   await knex("api.locations_agreements").del();
   global.spinner.start(`Emptying tables: api.locations`);
   await knex("api.locations").del();
-  global.spinner.start(`Emptying tables: api.agreements_zones`);
-  await knex("api.agreements_zones").del();
+  global.spinner.start(`Emptying tables: api.agreements_areas`);
+  await knex("api.agreements_areas").del();
   global.spinner.start(`Emptying tables: api.agreements`);
   await knex("api.agreements").del();
-  global.spinner.start(`Emptying tables: api.zones`);
-  await knex("api.zones").del();
+  global.spinner.start(`Emptying tables: api.areas`);
+  await knex("api.areas").del();
 
   global.spinner.succeed(`Tables emptied.`);
 };

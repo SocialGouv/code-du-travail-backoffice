@@ -3,9 +3,9 @@ import React from "react";
 import AdminForm from "../../../src/components/AdminForm";
 import AdminMain from "../../../src/layouts/AdminMain";
 
-import AdminZonesNewPage from "./new";
+import AdminAreasNewPage from "./new";
 
-export default class AdminZonesEditPage extends AdminZonesNewPage {
+export default class AdminAreasEditPage extends AdminAreasNewPage {
   constructor(props) {
     super(props);
 
@@ -24,11 +24,11 @@ export default class AdminZonesEditPage extends AdminZonesNewPage {
     await super.componentDidMount();
 
     try {
-      const uri = `/zones?id=eq.${this.props.id}`;
+      const uri = `/areas?id=eq.${this.props.id}`;
 
-      const { data: zones } = await this.axios.get(uri);
+      const { data: areas } = await this.axios.get(uri);
 
-      const data = zones[0];
+      const data = areas[0];
 
       this.setState({
         data,
@@ -46,7 +46,7 @@ export default class AdminZonesEditPage extends AdminZonesNewPage {
 
     return (
       <AdminForm
-        apiPath="/zones"
+        apiPath="/areas"
         ariaLabels={{
           cancelButton: `Bouton redirigeant vers la liste des zones`,
           createOrEditButton: `Bouton mettant à jour la zone "${name}" dans
@@ -56,8 +56,8 @@ export default class AdminZonesEditPage extends AdminZonesNewPage {
         defaultData={this.state.data}
         fields={this.state.fields}
         id={this.props.id}
-        indexPath="/zones"
-        name="zone"
+        indexPath="/areas"
+        name="area"
         title={`Modifier la zone « ${this.state.data.name} »`}
       />
     );

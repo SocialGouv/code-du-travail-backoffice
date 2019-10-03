@@ -21,14 +21,14 @@ const LOCATION_ZONE_CODE = {
 exports.seed = async knex => {
   global.spinner.start(`Generating locations...`);
 
-  const zones = await knex("api.zones");
+  const areas = await knex("api.areas");
   const { data: _locations } = await global.axios.get("/locations");
   const locations = _locations
     .filter(({ name }) => name.startsWith("UR"))
     .map(location => ({
       ...location,
-      zone_id: zones.filter(
-        ({ code }) => code === LOCATION_ZONE_CODE[location.name]
+      area_id: areas.filter(
+        ({ code }) => code === LOCATION_AREA_CODE[location.name]
       )[0].id
     }));
 

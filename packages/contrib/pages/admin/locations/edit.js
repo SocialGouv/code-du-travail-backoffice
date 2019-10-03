@@ -25,7 +25,6 @@ export default class AdminLocationsEditPage extends AdminLocationsNewPage {
 
     try {
       const uri = `/locations?select=*,agreements(*)&id=eq.${this.props.id}`;
-
       const { data: locations } = await this.axios.get(uri);
 
       const data = {

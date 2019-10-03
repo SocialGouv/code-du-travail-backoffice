@@ -4,8 +4,6 @@ import AdminForm from "../../../src/components/AdminForm";
 import AdminMain from "../../../src/layouts/AdminMain";
 import AdminAgreementsNewPage from "./new";
 
-import { ZONE_CATEGORY_LABEL } from "../../../src/constants";
-
 export default class AdminAgreementsEditPage extends AdminAgreementsNewPage {
   constructor(props) {
     super(props);
@@ -25,25 +23,11 @@ export default class AdminAgreementsEditPage extends AdminAgreementsNewPage {
     await super.componentDidMount();
 
     try {
-      const agreementsUri = `/agreements?id=eq.${this.props.id}`;
-
-      const zonesSelect = `select=zone(category,code,id,name)`;
-      const zonesWhere = `agreement_id=eq.${this.props.id}`;
-      const zonesUri = `/agreements_zones?${zonesSelect}&${zonesWhere}`;
-
-      const { data: agreements } = await this.axios.get(agreementsUri);
-      const { data: agreementsZones } = await this.axios.get(zonesUri);
+      const uri = `/agreements?id=eq.${this.props.id}`;
+      const { data: agreements } = await this.axios.get(uri);
 
       this.setState({
-        data: {
-          ...agreements[0],
-          zones: agreementsZones.map(({ zone }) => ({
-            id: zone.id,
-            value: `${zone.name} [${ZONE_CATEGORY_LABEL[zone.category]} - ${
-              zone.code
-            }]`
-          }))
-        },
+        data: agreements[0],
         isLoadingOverwrite: false
       });
     } catch (err) {
