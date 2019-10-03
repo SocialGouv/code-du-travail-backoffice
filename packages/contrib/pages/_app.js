@@ -4,6 +4,7 @@ import withRedux from "next-redux-wrapper";
 import React from "react";
 import { Provider } from "react-redux";
 
+import cache from "../src/cache";
 import Main from "../src/layouts/Main";
 import getCurrentUser from "../src/libs/getCurrentUser";
 import isAuthenticated from "../src/libs/isAuthenticated";
@@ -21,6 +22,10 @@ class MainApp extends App {
   }
 
   async componentDidMount() {
+    if (cache.get("me") === null) {
+      cache.set("me", getCurrentUser());
+    }
+
     if (!window.location.pathname.startsWith("/login")) {
       if (!(await isAuthenticated())) {
         // eslint-disable-next-line require-atomic-updates

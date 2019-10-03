@@ -1,93 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] layouts/<Main /> (administrator) should match snapshot 1`] = `
-<div>
-  <div
-    class="sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 dGOKFr"
-    style="height: 100vh;"
-  >
-    <div
-      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 fjQGLo"
-      width="1"
-    >
-      <div
-        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 etybdb"
-      >
-        <div
-          class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 fQPTaL"
-        >
-          <img
-            alt="Code du travail numérique"
-            aria-label="Bouton de retour au tableau de bord"
-            class="Header__Logo-sc-7cr55z-2 kAIypM"
-            src="/static/images/marianne.svg"
-          />
-          <div
-            class="sc-bdVaJa sc-bwzfXH hhcqrs"
-          >
-            <span
-              class="Header__Title-sc-7cr55z-3 jGdlvq"
-            >
-              Code du travail numérique
-            </span>
-            <span
-              class="Header__Subtitle-sc-7cr55z-4 kxPxIS"
-            >
-              Outil de contribution
-            </span>
-          </div>
-        </div>
-      </div>
-      <div
-        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 gMGhns"
-      />
-    </div>
-  </div>
-</div>
-`;
-
 exports[`[Contrib] layouts/<Main /> (contributor) should match snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH Main__Container-q4q6nx-0 dGOKFr"
-    style="height: 100vh;"
+    class="jsx-4018971342 Container"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH Main__Body-q4q6nx-1 fjQGLo"
-      width="1"
+      class="jsx-1061080774 Container"
     >
       <div
-        class="sc-bdVaJa sc-bwzfXH Header__Container-sc-7cr55z-0 etybdb"
+        aria-label="Bouton de retour au tableau de bord"
+        class="jsx-1061080774 Brand"
+        role="button"
+        tabindex="0"
       >
+        <img
+          alt="Code du travail numérique"
+          class="jsx-1061080774 BrandLogo"
+          src="/static/images/marianne.svg"
+        />
         <div
-          class="sc-bdVaJa sc-bwzfXH Header__Brand-sc-7cr55z-1 fQPTaL"
+          class="jsx-1061080774 BrandText"
         >
-          <img
-            alt="Code du travail numérique"
-            aria-label="Bouton de retour au tableau de bord"
-            class="Header__Logo-sc-7cr55z-2 kAIypM"
-            src="/static/images/marianne.svg"
-          />
-          <div
-            class="sc-bdVaJa sc-bwzfXH hhcqrs"
+          <span
+            class="jsx-1061080774 BrandTextTitle"
           >
-            <span
-              class="Header__Title-sc-7cr55z-3 jGdlvq"
-            >
-              Code du travail numérique
-            </span>
-            <span
-              class="Header__Subtitle-sc-7cr55z-4 kxPxIS"
-            >
-              Outil de contribution
-            </span>
-          </div>
+            Code du travail numérique
+          </span>
+          <span
+            class="jsx-1061080774 BrandTextSubtitle"
+          >
+            Outil de contribution
+          </span>
         </div>
       </div>
-      <div
-        class="sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 gMGhns"
-      />
     </div>
+    <div
+      class="jsx-4018971342 Content Content--horizontal"
+    />
   </div>
 </div>
 `;
@@ -97,16 +47,15 @@ exports[`[Contrib] layouts/<Main /> (contributor) should match snapshot with \`i
 - First value
 + Second value
 
-@@ -34,10 +34,10 @@
-              </span>
-            </div>
+@@ -31,9 +31,9 @@
+            </span>
           </div>
         </div>
-        <div
--         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 gMGhns\\"
-+         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 hVlhNU\\"
-        />
       </div>
+      <div
+-       class=\\"jsx-4018971342 Content Content--horizontal\\"
++       class=\\"jsx-4018971342 Content\\"
+      />
     </div>
   </DocumentFragment>"
 `;
@@ -116,29 +65,28 @@ exports[`[Contrib] layouts/<Main /> (contributor) should match snapshot with \`i
 - First value
 + Second value
 
-@@ -34,10 +34,23 @@
-              </span>
-            </div>
+@@ -31,9 +31,22 @@
+            </span>
           </div>
         </div>
-        <div
--         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 gMGhns\\"
-+         class=\\"sc-bdVaJa sc-bwzfXH Main__Content-q4q6nx-2 kJQuOe\\"
+      </div>
+      <div
+-       class=\\"jsx-4018971342 Content Content--horizontal\\"
++       class=\\"jsx-4018971342 Content Content--loading\\"
++     >
++       <div
++         class=\\"LoadingSpinner__Container-eu7nmw-0 dEMrTz\\"
 +       >
 +         <div
-+           class=\\"LoadingSpinner__Container-eu7nmw-0 dEMrTz\\"
-+         >
-+           <div
-+             class=\\"LoadingSpinner__Spinner-eu7nmw-1 sHZX\\"
-+             color=\\"#666666\\"
-+           />
-+           <div
-+             class=\\"LoadingSpinner__Spinner-eu7nmw-1 LoadingSpinner__SpinnerNext-eu7nmw-2 daPQQA\\"
-+             color=\\"#666666\\"
-            />
-+         </div>
++           class=\\"LoadingSpinner__Spinner-eu7nmw-1 sHZX\\"
++           color=\\"#666666\\"
++         />
++         <div
++           class=\\"LoadingSpinner__Spinner-eu7nmw-1 LoadingSpinner__SpinnerNext-eu7nmw-2 daPQQA\\"
++           color=\\"#666666\\"
+          />
 +       </div>
-      </div>
++     </div>
     </div>
   </DocumentFragment>"
 `;
