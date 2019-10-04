@@ -1655,10 +1655,12 @@ cross-spawn@^6.0.0, cross-spawn@^6.0.5:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
-csv-parse@4.4.7:
-  version "4.4.7"
-  resolved "https://registry.yarnpkg.com/csv-parse/-/csv-parse-4.4.7.tgz#069de0875b92780ca74a018c9880ab41cb3517a1"
-  integrity sha512-QfjZ9mhBHcNDUM7Ab1sLC5HNa7wVFSl5jDK3lpM0YyvAUb9bVgO1Veht13tWJno8cEZ2eSowFDwcvRCO4BVvNA==
+csv-parse@4.6.1:
+  version "4.6.1"
+  resolved "https://registry.yarnpkg.com/csv-parse/-/csv-parse-4.6.1.tgz#5b468e2f3ed79f19cb5813714841f557971ee493"
+  integrity sha512-4ynBqCVauF5HST3hZHPP62eOlCJpXYH00Tf+4MeQP/4aLoV3vsR9oVnLiTDDlOZ9wvNPbcvi0lXpCUoDp6Zk4w==
+  dependencies:
+    pad "^3.2.0"
 
 cucumber-expressions@^6.0.0:
   version "6.6.2"
@@ -4098,6 +4100,13 @@ pad-right@^0.2.2:
   integrity sha1-b7ySQEXSRPKiokRQMGDTv8YAl3Q=
   dependencies:
     repeat-string "^1.5.2"
+
+pad@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/pad/-/pad-3.2.0.tgz#be7a1d1cb6757049b4ad5b70e71977158fea95d1"
+  integrity sha512-2u0TrjcGbOjBTJpyewEl4hBO3OeX5wWue7eIFPzQTg6wFSvoaHcBTTUY5m+n0hd04gmTCPuY0kCpVIVuw5etwg==
+  dependencies:
+    wcwidth "^1.0.1"
 
 parallel-transform@^1.1.0:
   version "1.1.0"
