@@ -2,7 +2,7 @@ function getRandomArrayValue(input) {
   return input[Math.floor(Math.random() * input.length)];
 }
 
-const LOCATION_ZONE_CODE = {
+const LOCATION_AREA_CODE = {
   "UR de Bourgogne-Franche-Comté": "27",
   "UR d'Auvergne-Rhône-Alpes": "84",
   "UR d'Occitanie": "76",
