@@ -1655,10 +1655,10 @@ cross-spawn@^6.0.0, cross-spawn@^6.0.5:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
-csv-parse@4.6.1:
-  version "4.6.1"
-  resolved "https://registry.yarnpkg.com/csv-parse/-/csv-parse-4.6.1.tgz#5b468e2f3ed79f19cb5813714841f557971ee493"
-  integrity sha512-4ynBqCVauF5HST3hZHPP62eOlCJpXYH00Tf+4MeQP/4aLoV3vsR9oVnLiTDDlOZ9wvNPbcvi0lXpCUoDp6Zk4w==
+csv-parse@4.6.3:
+  version "4.6.3"
+  resolved "https://registry.yarnpkg.com/csv-parse/-/csv-parse-4.6.3.tgz#25ab95a9320871847947ac633741ef2c483441a9"
+  integrity sha512-pAxEb5kabSaKEwqSXv7vpq6eucXQgY67MLpeLwnYCd21YjTD5OCIIIXGKyUKN/uNQNnzW/elNfxJfozQ1EjB/g==
   dependencies:
     pad "^3.2.0"
 
