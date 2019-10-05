@@ -25,7 +25,7 @@
     "axios": "0.19.0",
     "boxen": "4.1.0",
     "chai": "4.2.0",
-    "csv-parse": "4.6.1",
+    "csv-parse": "4.6.2",
     "cucumber": "5.1.0",
     "dotenv": "8.1.0",
     "dumdum": "1.0.0-alpha.4",
