@@ -11,7 +11,8 @@ const InputWithIconWrapper = styled.div`
 const _Input = styled.input`
   -webkit-appearance: none;
   background-color: white;
-  border: solid 1px var(--color-border);
+  border: solid 1px
+    var(${p => (Boolean(p.hasError) ? "--color-text-red" : "--color-border")});
   color: inherit;
   flex-grow: 1;
   font-family: inherit;
@@ -19,9 +20,8 @@ const _Input = styled.input`
   font-size: 0.875rem;
   height: 2rem;
   line-height: 1;
-  opacity: ${({ disabled }) => (Boolean(disabled) ? 0.25 : 1)};
-  padding: 0.5rem 0.6rem 0.55rem
-    ${({ hasIcon }) => (Boolean(hasIcon) ? "2rem" : "0.6rem")};
+  opacity: ${p => (Boolean(p.disabled) ? 0.25 : 1)};
+  padding: 0.5rem 0.6rem 0.55rem ${p => (p.hasIcon ? "2rem" : "0.6rem")};
   width: 100%;
 
   ::placeholder {
@@ -37,8 +37,18 @@ const InputIcon = styled(Icon)`
   color: var(--color-placeholder);
 `;
 
-const Input = ({ icon, ...props }, ref) => {
-  if (icon === undefined) return <_Input ref={ref} {...props} />;
+const Input = ({ disabled = false, icon, hasError, ...props }, ref) => {
+  if (icon === undefined) {
+    return (
+      <_Input
+        disabled={disabled}
+        hasError={hasError}
+        hasIcon={false}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
 
   const { className, style } = props;
   const inputProps = omit(["className", "style"], props);
@@ -49,7 +59,13 @@ const Input = ({ icon, ...props }, ref) => {
         <InputIconContainer>
           <InputIcon icon={icon} />
         </InputIconContainer>
-        <_Input hasIcon ref={ref} {...inputProps} />
+        <_Input
+          disabled={disabled}
+          hasError={hasError}
+          hasIcon
+          ref={ref}
+          {...inputProps}
+        />
       </InputWithIconWrapper>
     </div>
   );

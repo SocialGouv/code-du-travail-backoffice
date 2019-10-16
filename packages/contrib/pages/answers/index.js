@@ -1,6 +1,5 @@
 import debounce from "lodash.debounce";
-import Router from "next/router";
-import * as R from "ramda";
+import Router, { withRouter } from "next/router";
 import React from "react";
 import { connect } from "react-redux";
 import { Flex } from "rebass";
@@ -64,60 +63,59 @@ class AnswersIndexPage extends React.Component {
     this.load = debounce(this._load.bind(this), 500);
   }
 
-  static getInitialProps({ query: { page: maybePage, state: maybeState } }) {
-    const page =
-      Math.abs(Math.floor(!isNaN(maybePage) ? Number(maybePage) - 1 : 0)) + 1;
-    const state =
-      maybeState !== undefined && R.values(ANSWER_STATE).includes(maybeState)
-        ? maybeState
-        : ANSWER_STATE.TO_DO;
-
-    return { page, state };
-  }
-
   componentDidMount() {
-    this.load(this.props.page - 1);
+    this.load();
   }
 
-  componentDidUpdate() {
-    const { isLoading, pageIndex, state } = this.props;
-    const page = pageIndex + 1;
-
-    if (!isLoading) {
-      if (window.location.pathname === "/") {
-        Router.replace(
-          {
-            pathname: "/answers",
-            query: { page, state }
-          },
-          `/answers/${state}/${page}`,
-          { shallow: true }
-        );
-      } else {
-        Router.push(
-          {
-            pathname: "/answers",
-            query: { page, state }
-          },
-          `/answers/${state}/${page}`,
-          { shallow: true }
-        );
+  componentDidUpdate(prevProps) {
+    const {
+      router: {
+        query: { page: prevPage, state: prevState }
       }
+    } = prevProps;
+    const {
+      router: {
+        query: { page, state }
+      }
+    } = this.props;
+
+    if (page !== prevPage || state !== prevState) {
+      this.load();
     }
   }
 
-  _load(pageIndex = 0) {
-    const { state } = this.props;
+  _load() {
+    const {
+      router: {
+        query: { page, state }
+      }
+    } = this.props;
+
+    const pageIndex = Number(page) - 1;
+    const states =
+      state === ANSWER_STATE.UNDER_REVIEW
+        ? [ANSWER_STATE.PENDING_REVIEW, ANSWER_STATE.UNDER_REVIEW]
+        : [state];
+
     const meta = {
       pageIndex,
       query: this.query,
-      states:
-        state === ANSWER_STATE.UNDER_REVIEW
-          ? [ANSWER_STATE.PENDING_REVIEW, ANSWER_STATE.UNDER_REVIEW]
-          : [state]
+      states
     };
 
     this.props.dispatch(actions.answers.load(meta));
+  }
+
+  goToPage({ selected }) {
+    const {
+      router: {
+        query: { state }
+      }
+    } = this.props;
+
+    const href = `/answers?state=${state}&page=${selected + 1}`;
+    const as = `/answers/${state}/${selected + 1}`;
+    Router.push(href, as, { shallow: true });
   }
 
   cancel(id) {
@@ -139,7 +137,11 @@ class AnswersIndexPage extends React.Component {
   }
 
   openAnswer(id) {
-    const { state } = this.props;
+    const {
+      router: {
+        query: { state }
+      }
+    } = this.props;
 
     if ([ANSWER_STATE.TO_DO, ANSWER_STATE.DRAFT].includes(state)) {
       Router.push(`/answers/edit/${id}`);
@@ -151,7 +153,13 @@ class AnswersIndexPage extends React.Component {
   }
 
   renderAnswers() {
-    const { data, error, state } = this.props;
+    const {
+      answers,
+      router: {
+        query: { state }
+      }
+    } = this.props;
+    const { data, error } = answers;
 
     if (error !== null) {
       return <ErrorText>{error}</ErrorText>;
@@ -177,7 +185,13 @@ class AnswersIndexPage extends React.Component {
   }
 
   render() {
-    const { data, isLoading, pageIndex, pageLength, state } = this.props;
+    const {
+      answers,
+      router: {
+        query: { state }
+      }
+    } = this.props;
+    const { data, isLoading, pageIndex, pagesLength } = answers;
 
     return (
       <Main isHorizontal>
@@ -204,11 +218,11 @@ class AnswersIndexPage extends React.Component {
               {this.renderAnswers()}
             </List>
           )}
-          {!isLoading && pageLength !== 0 && (
+          {!isLoading && pagesLength !== 0 && (
             <Pagination
               initialPage={pageIndex}
-              onPageChange={({ selected }) => this.load(selected)}
-              pageCount={pageLength}
+              onPageChange={this.goToPage.bind(this)}
+              pageCount={pagesLength}
             />
           )}
         </Content>
@@ -217,12 +231,6 @@ class AnswersIndexPage extends React.Component {
   }
 }
 
-export default connect(
-  ({ answers: { data, error, isLoading, pageIndex, pageLength } }) => ({
-    data,
-    error,
-    isLoading,
-    pageIndex,
-    pageLength
-  })
-)(AnswersIndexPage);
+export default connect(({ answers }) => ({
+  answers
+}))(withRouter(AnswersIndexPage));

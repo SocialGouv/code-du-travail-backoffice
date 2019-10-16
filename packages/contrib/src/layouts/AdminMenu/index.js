@@ -11,12 +11,13 @@ export default class AdminMenu extends React.PureComponent {
     Router.push(`/admin${resource}`);
   }
 
-  isActive(path) {
-    const { pathname } = window.location;
-    const regexp =
-      path.length > 0 ? new RegExp(`^/admin${path}(?=/|$)`) : /^\/admin$/;
+  isActive() {
+    return false;
+    // const { pathname } = window.location;
+    // const regexp =
+    //   path.length > 0 ? new RegExp(`^/admin${path}(?=/|$)`) : /^\/admin$/;
 
-    return regexp.test(pathname);
+    // return regexp.test(pathname);
   }
 
   render() {

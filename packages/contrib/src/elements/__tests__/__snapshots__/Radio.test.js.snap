@@ -5,7 +5,7 @@ exports[`[Contrib] elements/<Radio /> should match snapshot 1`] = `
   <div>
     <svg
       aria-hidden="true"
-      class="svg-inline--fa fa-dot-circle fa-w-16 fa-1x fa-rotate-null fa-pull-null Radio__Icon-sc-1e1pwch-0 hFpPrh Icon-sc-4jlog9-0 hXLKsx"
+      class="svg-inline--fa fa-dot-circle fa-w-16 fa-1x Icon-sc-4jlog9-0 hXLKsx Radio__Icon-sc-1e1pwch-0 hFpPrh"
       color="var(--color-black-leather-jacket)"
       data-icon="dot-circle"
       data-prefix="fas"
@@ -24,7 +24,7 @@ exports[`[Contrib] elements/<Radio /> should match snapshot 1`] = `
   <div>
     <svg
       aria-hidden="true"
-      class="svg-inline--fa fa-circle fa-w-16 fa-1x fa-rotate-null fa-pull-null Radio__Icon-sc-1e1pwch-0 gsNZpb Icon-sc-4jlog9-0 hXLKsx"
+      class="svg-inline--fa fa-circle fa-w-16 fa-1x Icon-sc-4jlog9-0 hXLKsx Radio__Icon-sc-1e1pwch-0 gsNZpb"
       color="var(--color-black-leather-jacket)"
       data-icon="circle"
       data-prefix="fas"
@@ -43,7 +43,7 @@ exports[`[Contrib] elements/<Radio /> should match snapshot 1`] = `
   <div>
     <svg
       aria-hidden="true"
-      class="svg-inline--fa fa-circle fa-w-16 fa-1x fa-rotate-null fa-pull-null Radio__Icon-sc-1e1pwch-0 gsNZpb Icon-sc-4jlog9-0 hXLKsx"
+      class="svg-inline--fa fa-circle fa-w-16 fa-1x Icon-sc-4jlog9-0 hXLKsx Radio__Icon-sc-1e1pwch-0 gsNZpb"
       color="var(--color-black-leather-jacket)"
       data-icon="circle"
       data-prefix="fas"

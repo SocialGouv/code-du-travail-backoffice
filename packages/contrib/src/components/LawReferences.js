@@ -6,7 +6,7 @@ import { Flex } from "rebass";
 import Reference from "./Reference";
 
 // eslint-disable-next-line prettier/prettier
-const LAW_REFERENCES = require("../../static/data/labor-law-references.json");
+const LAW_REFERENCES = require("../data/labor-law-references.json");
 
 const Container = styled.div`
   .react-tags__selected > button {
