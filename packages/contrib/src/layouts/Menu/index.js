@@ -25,15 +25,12 @@ export default class Menu extends React.PureComponent {
 
   logOut() {
     jsCookie.remove("jwt");
-    jsCookie.remove("me");
 
-    Router.push("/login");
+    window.location.href = "/";
   }
 
   render() {
     const me = cache.get("me");
-
-    if (me === null) return null;
 
     if (me.isAdmin)
       return (
@@ -41,7 +38,7 @@ export default class Menu extends React.PureComponent {
           <style jsx>{styles}</style>
           <div className="Dropdown">
             <Icon icon="caret-down" />
-            <span className="DropdownText">{me.name}</span>
+            <span className="DropdownText">{me.data.name}</span>
             <div className="DropdownMenu">
               <a
                 className="DropdownLink"
@@ -184,7 +181,7 @@ export default class Menu extends React.PureComponent {
           <Icon icon="caret-down" />
         </div>
         <div className="Dropdown">
-          <span className="DropdownText">{me.name}</span>
+          <span className="DropdownText">{me.data.name}</span>
           <div className="DropdownMenu">
             <a
               className="DropdownLink"

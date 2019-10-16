@@ -1,6 +1,7 @@
 import axios from "axios";
-import jsCookie from "js-cookie";
 import Router from "next/router";
+
+import cache from "../cache";
 
 const { API_URI } = process.env;
 
@@ -20,9 +21,9 @@ instance.interceptors.response.use(
       error.response.status !== undefined &&
       error.response.status === 401
     ) {
-      Router.push(`/login?redirectTo=${window.location.pathname}`);
+      Router.reload();
 
-      throw undefined;
+      return;
     }
 
     throw error;
@@ -30,16 +31,10 @@ instance.interceptors.response.use(
 );
 
 export default function() {
-  const jwt = jsCookie.get("jwt");
+  const { token } = cache.get("me");
 
-  if (jwt !== undefined) {
-    const authorization = `Bearer ${jwt}`;
-    instance.defaults.headers["Authorization"] = authorization;
-  } else if (!window.location.pathname.startsWith("/login")) {
-    Router.push(`/login?redirectTo=${window.location.pathname}`);
-
-    throw undefined;
-  }
+  const authorization = `Bearer ${token}`;
+  instance.defaults.headers["Authorization"] = authorization;
 
   return instance;
 }

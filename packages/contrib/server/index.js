@@ -2,6 +2,8 @@ const Koa = require("koa");
 const next = require("next");
 
 const isInternetExplorer = require("./middlewares/isInternetExplorer");
+const withAuthentication = require("./middlewares/withAuthentication");
+const withPostgres = require("./middlewares/withPostgres");
 
 // If we are in a non-production environment, we want to load the env vars via
 // the monorepo global .env file.
@@ -24,7 +26,13 @@ async function start() {
   // Show a page advising the user to use Chrome if the current browser is IE:
   koaApp.use(isInternetExplorer);
 
-  // Attach routes
+  // Attach Postgres connection (via `ctx.pg`):
+  koaApp.use(withPostgres);
+
+  // Attach authentication data (via `ctx.me`):
+  koaApp.use(withAuthentication);
+
+  // Attach routes:
   koaApp.use(routes(nextApp));
 
   koaApp.listen(WEB_PORT, err => {

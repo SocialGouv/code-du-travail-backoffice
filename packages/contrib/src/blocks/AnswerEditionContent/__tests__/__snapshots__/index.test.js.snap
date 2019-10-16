@@ -6,7 +6,7 @@ exports[`[Contrib] blocks/<AnswerEditionContent /> should match snapshot 1`] = `
     class="sc-bdVaJa sc-bwzfXH AnswerEditionContent__Container-sc-1xvty1w-0 ilYRzc"
   >
     <div
-      class="sc-bdVaJa AnswerEditionContent__Editor-sc-1xvty1w-1 gIJVAk sc-bwzfXH hhcqrs"
+      class="sc-bdVaJa sc-bwzfXH hhcqrs AnswerEditionContent__Editor-sc-1xvty1w-1 gIJVAk"
     >
       <div
         class="ql-toolbar ql-snow"
@@ -15,7 +15,7 @@ exports[`[Contrib] blocks/<AnswerEditionContent /> should match snapshot 1`] = `
           class="ql-formats"
         >
           <button
-            class="ql-undo Editor__TextButton-sc-1s8484a-0 eNdwXj"
+            class="Editor__TextButton-sc-1s8484a-0 eNdwXj ql-undo"
             title="Bouton annulant la dernière modification effectuée"
             type="button"
           >
@@ -25,7 +25,7 @@ exports[`[Contrib] blocks/<AnswerEditionContent /> should match snapshot 1`] = `
             />
           </button>
           <button
-            class="ql-redo Editor__TextButton-sc-1s8484a-0 eNdwXj"
+            class="Editor__TextButton-sc-1s8484a-0 eNdwXj ql-redo"
             title="Bouton réappliquant la dernière modification annulée"
             type="button"
           >

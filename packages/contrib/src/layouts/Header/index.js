@@ -37,7 +37,7 @@ export default class Header extends React.PureComponent {
             <span className="BrandTextSubtitle">Outil de contribution</span>
           </div>
         </div>
-        {me !== null && (
+        {me.isAuthenticated && (
           <div className="User">
             <Menu />
           </div>

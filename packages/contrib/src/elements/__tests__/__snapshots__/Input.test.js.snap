@@ -28,7 +28,7 @@ exports[`[Contrib] elements/<Input /> should match snapshot with a custom \`icon
       >
         <svg
           aria-hidden="true"
-          class="svg-inline--fa fa-search fa-w-16 fa-1x fa-rotate-null fa-pull-null Input__InputIcon-l1y0rz-3 eiJHjO Icon-sc-4jlog9-0 hXLKsx"
+          class="svg-inline--fa fa-search fa-w-16 fa-1x Icon-sc-4jlog9-0 hXLKsx Input__InputIcon-l1y0rz-3 eiJHjO"
           color="var(--color-black-leather-jacket)"
           data-icon="search"
           data-prefix="fas"

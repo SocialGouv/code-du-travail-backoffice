@@ -3,73 +3,69 @@ import withReduxSaga from "next-redux-saga";
 import withRedux from "next-redux-wrapper";
 import React from "react";
 import { Provider } from "react-redux";
+import { ThemeProvider } from "styled-components";
 
 import cache from "../src/cache";
-import Main from "../src/layouts/Main";
-import getCurrentUser from "../src/libs/getCurrentUser";
-import isAuthenticated from "../src/libs/isAuthenticated";
+import Login from "../src/blocks/Login";
+import getMe from "../src/libs/getMe";
 import createStore from "../src/store";
 
-import { USER_ROLE } from "../src/constants";
-
 class MainApp extends App {
-  constructor(props) {
-    super(props);
+  static async getInitialProps(appContext) {
+    const { ctx } = appContext;
 
-    this.state = {
-      isMountedAndAllowed: false
+    const appProps = await App.getInitialProps(appContext);
+    const me = await getMe(ctx);
+
+    return {
+      ...appProps,
+      me
     };
   }
 
-  async componentDidMount() {
-    if (cache.get("me") === null) {
-      cache.set("me", getCurrentUser());
-    }
+  constructor(props) {
+    super(props);
 
-    if (!window.location.pathname.startsWith("/login")) {
-      if (!(await isAuthenticated())) {
-        // eslint-disable-next-line require-atomic-updates
-        window.location.href = `/login?redirectTo=${window.location.pathname}`;
-      } else {
-        const { role } = getCurrentUser();
+    const { me } = props;
 
-        switch (true) {
-          case [
-            USER_ROLE.ADMINISTRATOR,
-            USER_ROLE.REGIONAL_ADMINISTRATOR
-          ].includes(role) && !window.location.pathname.startsWith("/admin"):
-            // eslint-disable-next-line require-atomic-updates
-            window.location.href = `/admin`;
-            break;
+    cache.set("me", me);
 
-          case role === USER_ROLE.CONTRIBUTOR &&
-            window.location.pathname.startsWith("/admin"):
-            // eslint-disable-next-line require-atomic-updates
-            window.location.href = `/`;
-            break;
+    this.state = { me };
+  }
 
-          default:
-            this.setState({ isMountedAndAllowed: true });
-        }
-      }
+  async login() {
+    const { ctx } = this.props;
+
+    const me = await getMe(ctx);
+
+    cache.set("me", me);
+
+    if (window.location.pathname === "/") {
+      window.location.reload();
 
       return;
     }
 
-    this.setState({ isMountedAndAllowed: true });
+    this.setState({ me });
   }
 
   render() {
     const { Component, pageProps, store } = this.props;
+    const { me } = this.state;
+    const { statusCode } = pageProps;
+
+    const hasError = statusCode !== undefined && statusCode !== 200;
 
     return (
-      <Provider store={store}>
-        {!this.state.isMountedAndAllowed ? (
-          <Main isLoading />
-        ) : (
-          <Component {...pageProps} />
-        )}
-      </Provider>
+      <ThemeProvider theme={{}}>
+        <Provider store={store}>
+          {hasError || me.isAuthenticated ? (
+            <Component {...pageProps} />
+          ) : (
+            <Login onLoggedIn={this.login.bind(this)} />
+          )}
+        </Provider>
+      </ThemeProvider>
     );
   }
 }

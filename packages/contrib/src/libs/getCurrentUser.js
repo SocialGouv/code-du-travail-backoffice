@@ -1,17 +1,14 @@
-import jsCookie from "js-cookie";
+import cache from "../cache";
 
 import { USER_ROLE } from "../constants";
 
 export default function getCurrentUser() {
-  const me = jsCookie.get("me");
+  const { data } = cache.get("me");
 
-  if (me === undefined) return null;
-
-  const mePayload = JSON.parse(me).payload;
-  mePayload.isAdmin = [
+  data.isAdmin = [
     USER_ROLE.ADMINISTRATOR,
     USER_ROLE.REGIONAL_ADMINISTRATOR
-  ].includes(mePayload.role);
+  ].includes(data.role);
 
-  return mePayload;
+  return data;
 }

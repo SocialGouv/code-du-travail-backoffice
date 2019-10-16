@@ -1,4 +1,4 @@
-const boxen = require('boxen');
+const boxen = require("boxen");
 const { Status } = require("cucumber");
 const imgur = require("imgur");
 
@@ -18,16 +18,19 @@ module.exports = async (testCase, world) => {
     });
 
     // Upload it to imgur:
-    const { data: { link } } = await imgur.uploadBase64(screenshotImageBase64);
+    const {
+      data: { link }
+    } = await imgur.uploadBase64(screenshotImageBase64);
 
-    const message = `FAILED FEATURE STEP \n\n` +
-                    `Feature: ${pickle.name}\n` +
-                    `Assertion: ${result.exception.message}\n` +
-                    `Screenshot: ${link}`
+    const message =
+      `FAILED FEATURE STEP \n\n` +
+      `Feature: ${pickle.name}\n` +
+      `Assertion: ${result.exception.message}\n` +
+      `Screenshot: ${link}`;
 
     console.log();
     console.log(boxen(message, { padding: 1 }));
-  } catch(err) {
+  } catch (err) {
     console.log(err);
     console.log(`\n\nError: ${err.message}`);
 
@@ -35,4 +38,4 @@ module.exports = async (testCase, world) => {
       console.log(`Output:\n${JSON.stringify(err.response.data, null, 2)}`);
     }
   }
-}
+};

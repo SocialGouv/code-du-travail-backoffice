@@ -21,7 +21,25 @@ export default ({ isHorizontal = false, isLoading = false, ...props }) => (
     </style>
     <style jsx>{styles}</style>
     <Head>
-      <title>Outil de contribution au code du travail numérique</title>
+      <title>Outil de contribution au Code du travail numérique</title>
+      <link
+        href="/static/icons/apple-touch-icon.png"
+        rel="apple-touch-icon"
+        sizes="180x180"
+      />
+      <link
+        href="/static/icons/favicon-32x32.png"
+        rel="icon"
+        sizes="32x32"
+        type="image/png"
+      />
+      <link
+        href="/static/icons/favicon-16x16.png"
+        rel="icon"
+        sizes="16x16"
+        type="image/png"
+      />
+      <link rel="manifest" href="/static/site.webmanifest" />
     </Head>
     <Modal />
     <Header />

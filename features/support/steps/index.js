@@ -28,9 +28,9 @@ When("I log into the application", async function() {
 });
 
 Then("I should see the subtitle {string}", async function(text) {
-  await this.checkSubtitle(text)
+  await this.checkSubtitle(text);
 });
 
 Then("I should see the title {string}", async function(text) {
-  await this.checkTitle(text)
+  await this.checkTitle(text);
 });
