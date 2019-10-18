@@ -110,6 +110,7 @@ class World {
 
   async stop() {
     await this.page.close();
+    await this.browser.close();
   }
 }
 

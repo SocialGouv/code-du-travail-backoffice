@@ -1,7 +1,7 @@
 import _fetch from "isomorphic-unfetch";
 import jsCookie from "js-cookie";
 
-const { API_URI } = process.env;
+import isNode from "../helpers/isNode";
 
 class ApiError extends Error {
   constructor({ message, ...props }) {
@@ -13,6 +13,10 @@ class ApiError extends Error {
 
 class Api {
   async _fetch(method, path, body, { headers = {}, skipAuth }) {
+    const apiUri =
+      isNode() && ["production", "test"].includes(process.env.NODE_ENV)
+        ? process.env.API_DOCKER_URI
+        : process.env.API_URI;
     const jwt = jsCookie.get("jwt");
     const headersOptions = skipAuth
       ? { headers }
@@ -30,7 +34,7 @@ class Api {
       method
     };
 
-    const res = await _fetch(`${API_URI}${path}`, options);
+    const res = await _fetch(`${apiUri}${path}`, options);
     const data = await res.json();
     if (res.status < 200 || res.status >= 300) throw new ApiError(data);
 

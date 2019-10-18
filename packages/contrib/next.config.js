@@ -6,11 +6,13 @@ if (!["production", "test"].includes(process.env.NODE_ENV)) {
   require("dotenv").config({ path: `${__dirname}/../../.env` });
 }
 
-const { API_URI } = process.env;
+const { API_DOCKER_URI, API_URI, DB_URI } = process.env;
 
 module.exports = withCss({
   // https://nextjs.org/docs#build-time-configuration
   env: {
-    API_URI
+    API_DOCKER_URI,
+    API_URI,
+    DB_URI
   }
 });

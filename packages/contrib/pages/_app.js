@@ -54,7 +54,7 @@ class MainApp extends App {
     const { me } = this.state;
     const { statusCode } = pageProps;
 
-    const hasError = statusCode !== undefined && statusCode !== 200;
+    const hasError = statusCode !== undefined && statusCode >= 400;
 
     return (
       <ThemeProvider theme={{}}>

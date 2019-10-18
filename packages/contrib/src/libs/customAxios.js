@@ -3,10 +3,8 @@ import Router from "next/router";
 
 import cache from "../cache";
 
-const { API_URI } = process.env;
-
 const instance = axios.create({
-  baseURL: API_URI
+  baseURL: process.env.API_URI
 });
 
 // We can't possibly test this interceptor since we would need to partially

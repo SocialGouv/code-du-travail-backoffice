@@ -52,6 +52,8 @@ jobs:
         - sudo chmod +x ./scripts/prod/start.sh
       script:
         - yarn ci:test:e2e
+      after_script:
+        - docker-compose stop
 
 notifications:
   email:
