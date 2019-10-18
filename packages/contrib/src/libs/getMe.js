@@ -33,6 +33,8 @@ export default async function getMe(ctx) {
       token
     };
   } catch (err) {
-    return ANOMNYMOUS_RESPONSE;
+    console.error(`[libs/getMe()] Error: ${err.message}`);
+
+    return { ...ANOMNYMOUS_RESPONSE, err };
   }
 }
