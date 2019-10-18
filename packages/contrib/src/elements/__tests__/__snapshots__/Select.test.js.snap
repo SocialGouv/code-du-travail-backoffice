@@ -3,7 +3,7 @@
 exports[`[Contrib] elements/<Select /> should match snapshot 1`] = `
 <div>
   <select
-    class="Select-gjmg2q-0 hiUFeV"
+    class="Select-gjmg2q-0 djMATm"
   />
 </div>
 `;
@@ -11,7 +11,7 @@ exports[`[Contrib] elements/<Select /> should match snapshot 1`] = `
 exports[`[Contrib] elements/<Select /> should match snapshot with \`disabled\` prop 1`] = `
 <div>
   <select
-    class="Select-gjmg2q-0 hwJewC"
+    class="Select-gjmg2q-0 dxaiaH"
     disabled=""
   />
 </div>
