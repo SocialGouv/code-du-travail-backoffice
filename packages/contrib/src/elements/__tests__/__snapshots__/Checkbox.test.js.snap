@@ -3,7 +3,7 @@
 exports[`[Contrib] elements/<Checkbox /> should match snapshot 1`] = `
 <div>
   <button
-    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 gluGhQ"
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 kafYuo"
     color="white"
     role="checkbox"
   >
@@ -30,7 +30,7 @@ exports[`[Contrib] elements/<Checkbox /> should match snapshot 1`] = `
 exports[`[Contrib] elements/<Checkbox /> should match snapshot with \`isChecked\` prop 1`] = `
 <div>
   <button
-    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 gluGhQ"
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 kafYuo"
     color="white"
     role="checkbox"
   >
@@ -57,7 +57,7 @@ exports[`[Contrib] elements/<Checkbox /> should match snapshot with \`isChecked\
 exports[`[Contrib] elements/<Checkbox /> should match snapshot with a custom \`color\` prop 1`] = `
 <div>
   <button
-    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 edYpuX"
+    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jnThSP"
     color="white"
     role="checkbox"
   >

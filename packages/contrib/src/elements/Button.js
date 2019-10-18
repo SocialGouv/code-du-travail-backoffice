@@ -27,8 +27,10 @@ const Button = styled(_Button)`
 
   svg {
     cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+    height: 1rem;
     margin-right: ${({ hasText }) => (hasText ? "0.25rem" : 0)};
     padding-top: ${({ hasText }) => (hasText ? "0.125rem" : 0)};
+    width: 1rem;
   }
 `;
 
