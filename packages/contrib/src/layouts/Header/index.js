@@ -5,6 +5,7 @@ import Menu from "../Menu";
 import cache from "../../cache";
 
 import styles from "./styles";
+import Marianne from "./marianne.svg";
 
 export default class Header extends React.PureComponent {
   goToHome() {
@@ -27,10 +28,12 @@ export default class Header extends React.PureComponent {
           role="button"
           tabIndex="0"
         >
-          <img
+          <Marianne
             alt="Code du travail numérique"
-            className="BrandLogo"
-            src="/static/images/marianne.svg"
+            style={{
+              height: "3rem",
+              width: "auto"
+            }}
           />
           <div className="BrandText">
             <span className="BrandTextTitle">Code du travail numérique</span>

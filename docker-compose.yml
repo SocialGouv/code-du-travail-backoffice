@@ -32,12 +32,13 @@ services:
     build:
       context: ./packages/contrib
       args:
-        API_URI: ${API_URI}
+        API_URI: http://api:${API_PORT}
         NODE_ENV: ${NODE_ENV}
     ports:
       - ${WEB_PORT}:${WEB_PORT}
     environment:
       NODE_ENV: ${NODE_ENV}
+      DB_URI: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
       WEB_PORT: ${WEB_PORT}
     depends_on:
       - api

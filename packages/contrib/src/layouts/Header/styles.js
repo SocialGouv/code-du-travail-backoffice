@@ -22,14 +22,10 @@ export default css`
     height: 3rem;
   }
 
-  .BrandLogo {
-    height: 3rem;
-    margin-right: 1rem;
-  }
-
   .BrandText {
     display: flex;
     flex-direction: column;
+    margin-left: 1rem;
   }
 
   .BrandTextTitle {
