@@ -12,15 +12,3 @@ update_configs:
       include_scope: true
     update_schedule: "live"
     version_requirement_updates: "increase_versions"
-
-  - package_manager: "javascript"
-    directory: "/packages/contrib"
-    automerged_updates:
-      - match:
-          dependency_type: "all"
-          update_type: "semver:minor"
-    commit_message:
-      prefix: "chore"
-      include_scope: true
-    update_schedule: "live"
-    version_requirement_updates: "increase_versions"
