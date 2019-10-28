@@ -1,17 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[Contrib] elements/<Subtitle /> should match snapshot 1`] = `
+.emotion-0 {
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 <div>
   <h2
-    class="Subtitle-sc-17ig8qv-0 hSClQd"
+    class="emotion-0 emotion-1"
   />
 </div>
 `;
 
 exports[`[Contrib] elements/<Subtitle /> should match snapshot with \`isFirst\` prop 1`] = `
+.emotion-0 {
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 <div>
   <h2
-    class="Subtitle-sc-17ig8qv-0 gsnyDG"
+    class="emotion-0 emotion-1"
   />
 </div>
 `;

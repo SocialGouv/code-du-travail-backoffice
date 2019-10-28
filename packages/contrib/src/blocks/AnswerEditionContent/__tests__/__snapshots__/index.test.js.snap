@@ -1,7 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[Contrib] blocks/<AnswerEditionContent /> should match snapshot 1`] = `
-.c1 {
+.emotion-10 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.emotion-9 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -12,48 +26,31 @@ exports[`[Contrib] blocks/<AnswerEditionContent /> should match snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
 }
 
-.c3 {
+.emotion-2 {
   color: #444444;
   font-size: 0.875rem;
   width: auto !important;
 }
 
-.c4 {
+.emotion-0 {
   height: 0.75rem;
   margin: 2px 3px 0;
   vertical-align: -1px;
   width: 0.75rem;
 }
 
-.c0 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-}
-
-.c2 {
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-}
-
 <div>
   <div
-    class="c0"
+    class="emotion-10 emotion-11"
   >
     <div
-      class="c1 c2"
+      class="emotion-8 emotion-9"
     >
       <div
         class="ql-toolbar ql-snow"
@@ -62,22 +59,22 @@ exports[`[Contrib] blocks/<AnswerEditionContent /> should match snapshot 1`] = `
           class="ql-formats"
         >
           <button
-            class="c3 ql-undo"
+            class="ql-undo emotion-2 emotion-3"
             title="Bouton annulant la dernière modification effectuée"
             type="button"
           >
             <img
-              class="c4"
+              class="emotion-0 emotion-1"
               src="/static/images/undo.svg"
             />
           </button>
           <button
-            class="c3 ql-redo"
+            class="ql-redo emotion-2 emotion-3"
             title="Bouton réappliquant la dernière modification annulée"
             type="button"
           >
             <img
-              class="c4"
+              class="emotion-0 emotion-1"
               src="/static/images/redo.svg"
             />
           </button>

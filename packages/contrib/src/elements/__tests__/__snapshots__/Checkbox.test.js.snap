@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[Contrib] elements/<Checkbox /> should match snapshot 1`] = `
-.c0 {
+.emotion-3 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -22,14 +22,6 @@ exports[`[Contrib] elements/<Checkbox /> should match snapshot 1`] = `
   background-color: primary;
   border: 0;
   border-radius: 4px;
-}
-
-.c2 {
-  cursor: default;
-  width: 1rem !important;
-}
-
-.c1 {
   background-color: transparent;
   border-radius: 0.125rem;
   color: white;
@@ -48,11 +40,11 @@ exports[`[Contrib] elements/<Checkbox /> should match snapshot 1`] = `
   white-space: nowrap;
 }
 
-.c1:hover {
+.emotion-3:hover {
   opacity: 1;
 }
 
-.c1 svg {
+.emotion-3 svg {
   cursor: pointer;
   height: 1rem;
   margin-right: 0;
@@ -60,14 +52,19 @@ exports[`[Contrib] elements/<Checkbox /> should match snapshot 1`] = `
   width: 1rem;
 }
 
+.emotion-0 {
+  cursor: default;
+  width: 1rem !important;
+}
+
 <div>
   <button
-    class="c0 c1"
+    class="emotion-2 emotion-3"
     role="checkbox"
   >
     <svg
       aria-hidden="true"
-      class="svg-inline--fa fa-square fa-w-14 fa-1x c2"
+      class="svg-inline--fa fa-square fa-w-14 fa-1x  emotion-0 emotion-1"
       color="var(--color-lapis-lazuli)"
       data-icon="square"
       data-prefix="fas"
@@ -86,7 +83,7 @@ exports[`[Contrib] elements/<Checkbox /> should match snapshot 1`] = `
 `;
 
 exports[`[Contrib] elements/<Checkbox /> should match snapshot with \`isChecked\` prop 1`] = `
-.c0 {
+.emotion-3 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -107,14 +104,6 @@ exports[`[Contrib] elements/<Checkbox /> should match snapshot with \`isChecked\
   background-color: primary;
   border: 0;
   border-radius: 4px;
-}
-
-.c2 {
-  cursor: default;
-  width: 1rem !important;
-}
-
-.c1 {
   background-color: transparent;
   border-radius: 0.125rem;
   color: white;
@@ -133,11 +122,11 @@ exports[`[Contrib] elements/<Checkbox /> should match snapshot with \`isChecked\
   white-space: nowrap;
 }
 
-.c1:hover {
+.emotion-3:hover {
   opacity: 1;
 }
 
-.c1 svg {
+.emotion-3 svg {
   cursor: pointer;
   height: 1rem;
   margin-right: 0;
@@ -145,14 +134,19 @@ exports[`[Contrib] elements/<Checkbox /> should match snapshot with \`isChecked\
   width: 1rem;
 }
 
+.emotion-0 {
+  cursor: default;
+  width: 1rem !important;
+}
+
 <div>
   <button
-    class="c0 c1"
+    class="emotion-2 emotion-3"
     role="checkbox"
   >
     <svg
       aria-hidden="true"
-      class="svg-inline--fa fa-check-square fa-w-14 fa-1x c2"
+      class="svg-inline--fa fa-check-square fa-w-14 fa-1x  emotion-0 emotion-1"
       color="var(--color-lapis-lazuli)"
       data-icon="check-square"
       data-prefix="fas"
@@ -171,7 +165,12 @@ exports[`[Contrib] elements/<Checkbox /> should match snapshot with \`isChecked\
 `;
 
 exports[`[Contrib] elements/<Checkbox /> should match snapshot with a custom \`color\` prop 1`] = `
-.c0 {
+.emotion-0 {
+  cursor: default;
+  width: 1rem !important;
+}
+
+.emotion-3 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -192,14 +191,6 @@ exports[`[Contrib] elements/<Checkbox /> should match snapshot with a custom \`c
   background-color: primary;
   border: 0;
   border-radius: 4px;
-}
-
-.c2 {
-  cursor: default;
-  width: 1rem !important;
-}
-
-.c1 {
   background-color: transparent;
   border-radius: 0.125rem;
   color: var(--color-eerie-black);
@@ -218,11 +209,11 @@ exports[`[Contrib] elements/<Checkbox /> should match snapshot with a custom \`c
   white-space: nowrap;
 }
 
-.c1:hover {
+.emotion-3:hover {
   opacity: 1;
 }
 
-.c1 svg {
+.emotion-3 svg {
   cursor: pointer;
   height: 1rem;
   margin-right: 0;
@@ -232,12 +223,12 @@ exports[`[Contrib] elements/<Checkbox /> should match snapshot with a custom \`c
 
 <div>
   <button
-    class="c0 c1"
+    class="emotion-2 emotion-3"
     role="checkbox"
   >
     <svg
       aria-hidden="true"
-      class="svg-inline--fa fa-square fa-w-14 fa-1x c2"
+      class="svg-inline--fa fa-square fa-w-14 fa-1x  emotion-0 emotion-1"
       color="var(--color-periwinkle)"
       data-icon="square"
       data-prefix="fas"

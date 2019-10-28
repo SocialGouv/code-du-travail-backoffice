@@ -1,8 +1,8 @@
 import React from "react";
 import Medixtor from "react-medixtor";
 import { connect } from "react-redux";
-import { Flex } from "rebass/styled-components";
-import styled from "styled-components";
+import { Flex } from "rebass";
+import styled from "@emotion/styled";
 
 import * as actions from "../../src/actions";
 import Reference from "../../src/components/Reference";

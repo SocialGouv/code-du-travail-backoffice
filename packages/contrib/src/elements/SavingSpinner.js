@@ -1,7 +1,8 @@
 // https://loading.io/css/
 
+import { keyframes } from "@emotion/core";
+import styled from "@emotion/styled";
 import React from "react";
-import styled, { keyframes } from "styled-components";
 
 const Container = styled.div`
   display: inline-block;
@@ -20,8 +21,7 @@ const rotation = keyframes`
 `;
 const Spinner = styled.div`
   animation: ${rotation} 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border: ${props => Math.round(props.size / 10)}px solid
-    ${props => props.color};
+  border: ${props => Math.round(props.size / 10)}px solid ${props => props.color};
   border-color: ${props => props.color} transparent transparent transparent;
   border-radius: 50%;
   box-sizing: border-box;

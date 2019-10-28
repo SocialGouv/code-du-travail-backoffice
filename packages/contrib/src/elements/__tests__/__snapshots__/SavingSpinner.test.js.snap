@@ -1,28 +1,153 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[Contrib] elements/<SavingSpinner /> should match snapshot 1`] = `
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.emotion-8 {
+  display: inline-block;
+  height: 64px;
+  position: relative;
+  width: 64px;
+}
+
+.emotion-0 {
+  -webkit-animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  border: 6px solid white;
+  border-color: white transparent transparent transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: block;
+  height: 51px;
+  margin: 6px;
+  position: absolute;
+  width: 51px;
+  -webkit-animation-delay: -0.45s;
+  animation-delay: -0.45s;
+}
+
+.emotion-2 {
+  -webkit-animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  border: 6px solid white;
+  border-color: white transparent transparent transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: block;
+  height: 51px;
+  margin: 6px;
+  position: absolute;
+  width: 51px;
+  -webkit-animation-delay: -0.3s;
+  animation-delay: -0.3s;
+}
+
+.emotion-4 {
+  -webkit-animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  border: 6px solid white;
+  border-color: white transparent transparent transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: block;
+  height: 51px;
+  margin: 6px;
+  position: absolute;
+  width: 51px;
+  -webkit-animation-delay: -0.15s;
+  animation-delay: -0.15s;
+}
+
+.emotion-6 {
+  -webkit-animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  border: 6px solid white;
+  border-color: white transparent transparent transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: block;
+  height: 51px;
+  margin: 6px;
+  position: absolute;
+  width: 51px;
+}
+
 <div>
   <div
-    class="SavingSpinner__Container-sc-14j744e-0 fmakGk"
+    class="emotion-8 emotion-9"
     size="64"
   >
     <div
-      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__FirstSpinner-sc-14j744e-2 hhrNYz"
+      class="emotion-0 emotion-1"
       color="white"
       size="64"
     />
     <div
-      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__SecondSpinner-sc-14j744e-3 fKsSQB"
+      class="emotion-2 emotion-3"
       color="white"
       size="64"
     />
     <div
-      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__ThirdSpinner-sc-14j744e-4 deTZhs"
+      class="emotion-4 emotion-5"
       color="white"
       size="64"
     />
     <div
-      class="SavingSpinner__Spinner-sc-14j744e-1 iwQIXv"
+      class="emotion-6 emotion-7"
       color="white"
       size="64"
     />
@@ -31,28 +156,209 @@ exports[`[Contrib] elements/<SavingSpinner /> should match snapshot 1`] = `
 `;
 
 exports[`[Contrib] elements/<SavingSpinner /> should match snapshot with a custom \`color\` prop 1`] = `
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.emotion-8 {
+  display: inline-block;
+  height: 64px;
+  position: relative;
+  width: 64px;
+}
+
+.emotion-0 {
+  -webkit-animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  border: 6px solid red;
+  border-color: red transparent transparent transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: block;
+  height: 51px;
+  margin: 6px;
+  position: absolute;
+  width: 51px;
+  -webkit-animation-delay: -0.45s;
+  animation-delay: -0.45s;
+}
+
+.emotion-2 {
+  -webkit-animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  border: 6px solid red;
+  border-color: red transparent transparent transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: block;
+  height: 51px;
+  margin: 6px;
+  position: absolute;
+  width: 51px;
+  -webkit-animation-delay: -0.3s;
+  animation-delay: -0.3s;
+}
+
+.emotion-4 {
+  -webkit-animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  border: 6px solid red;
+  border-color: red transparent transparent transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: block;
+  height: 51px;
+  margin: 6px;
+  position: absolute;
+  width: 51px;
+  -webkit-animation-delay: -0.15s;
+  animation-delay: -0.15s;
+}
+
+.emotion-6 {
+  -webkit-animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  border: 6px solid red;
+  border-color: red transparent transparent transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: block;
+  height: 51px;
+  margin: 6px;
+  position: absolute;
+  width: 51px;
+}
+
 <div>
   <div
-    class="SavingSpinner__Container-sc-14j744e-0 fmakGk"
+    class="emotion-8 emotion-9"
     size="64"
   >
     <div
-      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__FirstSpinner-sc-14j744e-2 kkdtbe"
+      class="emotion-0 emotion-1"
       color="red"
       size="64"
     />
     <div
-      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__SecondSpinner-sc-14j744e-3 gIHSzm"
+      class="emotion-2 emotion-3"
       color="red"
       size="64"
     />
     <div
-      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__ThirdSpinner-sc-14j744e-4 ehfGEs"
+      class="emotion-4 emotion-5"
       color="red"
       size="64"
     />
     <div
-      class="SavingSpinner__Spinner-sc-14j744e-1 idnQnD"
+      class="emotion-6 emotion-7"
       color="red"
       size="64"
     />
@@ -61,28 +367,265 @@ exports[`[Contrib] elements/<SavingSpinner /> should match snapshot with a custo
 `;
 
 exports[`[Contrib] elements/<SavingSpinner /> should match snapshot with a custom \`size\` prop 1`] = `
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.emotion-8 {
+  display: inline-block;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
+
+.emotion-0 {
+  -webkit-animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  border: 3px solid white;
+  border-color: white transparent transparent transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: block;
+  height: 26px;
+  margin: 3px;
+  position: absolute;
+  width: 26px;
+  -webkit-animation-delay: -0.45s;
+  animation-delay: -0.45s;
+}
+
+.emotion-2 {
+  -webkit-animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  border: 3px solid white;
+  border-color: white transparent transparent transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: block;
+  height: 26px;
+  margin: 3px;
+  position: absolute;
+  width: 26px;
+  -webkit-animation-delay: -0.3s;
+  animation-delay: -0.3s;
+}
+
+.emotion-4 {
+  -webkit-animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  border: 3px solid white;
+  border-color: white transparent transparent transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: block;
+  height: 26px;
+  margin: 3px;
+  position: absolute;
+  width: 26px;
+  -webkit-animation-delay: -0.15s;
+  animation-delay: -0.15s;
+}
+
+.emotion-6 {
+  -webkit-animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  animation: animation-0 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  border: 3px solid white;
+  border-color: white transparent transparent transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: block;
+  height: 26px;
+  margin: 3px;
+  position: absolute;
+  width: 26px;
+}
+
 <div>
   <div
-    class="SavingSpinner__Container-sc-14j744e-0 hIouue"
+    class="emotion-8 emotion-9"
     size="32"
   >
     <div
-      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__FirstSpinner-sc-14j744e-2 enkCUK"
+      class="emotion-0 emotion-1"
       color="white"
       size="32"
     />
     <div
-      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__SecondSpinner-sc-14j744e-3 fJKTfQ"
+      class="emotion-2 emotion-3"
       color="white"
       size="32"
     />
     <div
-      class="SavingSpinner__Spinner-sc-14j744e-1 SavingSpinner__ThirdSpinner-sc-14j744e-4 ikgKqF"
+      class="emotion-4 emotion-5"
       color="white"
       size="32"
     />
     <div
-      class="SavingSpinner__Spinner-sc-14j744e-1 jpGwIN"
+      class="emotion-6 emotion-7"
       color="white"
       size="32"
     />

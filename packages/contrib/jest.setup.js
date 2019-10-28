@@ -6,10 +6,6 @@ process.env.API_URI = "http://localhost:3200";
 // https://github.com/gnapse/jest-dom#usage
 import "@testing-library/jest-dom/extend-expect";
 
-// Jest "styled-components" extension
-// https://github.com/styled-components/jest-styled-components#usage
-import "jest-styled-components";
-
 // Jest "snapshot-diff" extension
 // https://github.com/jest-community/snapshot-diff#with-custom-matcher
 // https://github.com/facebook/create-react-app/issues/2007#issuecomment-296250751

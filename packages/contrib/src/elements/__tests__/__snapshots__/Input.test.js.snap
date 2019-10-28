@@ -1,34 +1,155 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[Contrib] elements/<Input /> should match snapshot 1`] = `
+.emotion-0 {
+  -webkit-appearance: none;
+  background-color: white;
+  border: solid 1px var(--color-border);
+  color: inherit;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: 0.875rem;
+  height: 2rem;
+  line-height: 1;
+  opacity: 1;
+  padding: 0.5rem 0.6rem 0.55rem 0.6rem;
+  width: 100%;
+}
+
+.emotion-0::-webkit-input-placeholder {
+  color: var(--color-placeholder);
+}
+
+.emotion-0::-moz-placeholder {
+  color: var(--color-placeholder);
+}
+
+.emotion-0:-ms-input-placeholder {
+  color: var(--color-placeholder);
+}
+
+.emotion-0::placeholder {
+  color: var(--color-placeholder);
+}
+
 <div>
   <input
-    class="Input___Input-l1y0rz-1 bpEpug"
+    class="emotion-0 emotion-1"
   />
 </div>
 `;
 
 exports[`[Contrib] elements/<Input /> should match snapshot with \`disabled\` prop 1`] = `
+.emotion-0 {
+  -webkit-appearance: none;
+  background-color: white;
+  border: solid 1px var(--color-border);
+  color: inherit;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: 0.875rem;
+  height: 2rem;
+  line-height: 1;
+  opacity: 0.25;
+  padding: 0.5rem 0.6rem 0.55rem 0.6rem;
+  width: 100%;
+}
+
+.emotion-0::-webkit-input-placeholder {
+  color: var(--color-placeholder);
+}
+
+.emotion-0::-moz-placeholder {
+  color: var(--color-placeholder);
+}
+
+.emotion-0:-ms-input-placeholder {
+  color: var(--color-placeholder);
+}
+
+.emotion-0::placeholder {
+  color: var(--color-placeholder);
+}
+
 <div>
   <input
-    class="Input___Input-l1y0rz-1 dDAJup"
+    class="emotion-0 emotion-1"
     disabled=""
   />
 </div>
 `;
 
 exports[`[Contrib] elements/<Input /> should match snapshot with a custom \`icon\` prop 1`] = `
+.emotion-7 {
+  margin-top: -1.375rem;
+}
+
+.emotion-3 {
+  left: 0.625rem;
+  top: 1.675rem;
+  position: relative;
+}
+
+.emotion-1 {
+  cursor: default;
+  width: 1rem !important;
+  color: var(--color-placeholder);
+}
+
+.emotion-5 {
+  -webkit-appearance: none;
+  background-color: white;
+  border: solid 1px var(--color-border);
+  color: inherit;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: 0.875rem;
+  height: 2rem;
+  line-height: 1;
+  opacity: 1;
+  padding: 0.5rem 0.6rem 0.55rem 2rem;
+  width: 100%;
+}
+
+.emotion-5::-webkit-input-placeholder {
+  color: var(--color-placeholder);
+}
+
+.emotion-5::-moz-placeholder {
+  color: var(--color-placeholder);
+}
+
+.emotion-5:-ms-input-placeholder {
+  color: var(--color-placeholder);
+}
+
+.emotion-5::placeholder {
+  color: var(--color-placeholder);
+}
+
 <div>
   <div>
     <div
-      class="Input__InputWithIconWrapper-l1y0rz-0 Qjren"
+      class="emotion-7 emotion-8"
     >
       <span
-        class="Input__InputIconContainer-l1y0rz-2 IyOKF"
+        class="emotion-3 emotion-4"
       >
         <svg
           aria-hidden="true"
-          class="svg-inline--fa fa-search fa-w-16 fa-1x Icon-sc-4jlog9-0 hXLKsx Input__InputIcon-l1y0rz-3 eiJHjO"
+          class="svg-inline--fa fa-search fa-w-16 fa-1x emotion-0 emotion-1 emotion-2"
           color="var(--color-black-leather-jacket)"
           data-icon="search"
           data-prefix="fas"
@@ -44,7 +165,7 @@ exports[`[Contrib] elements/<Input /> should match snapshot with a custom \`icon
         </svg>
       </span>
       <input
-        class="Input___Input-l1y0rz-1 gLCQqN"
+        class="emotion-5 emotion-6"
       />
     </div>
   </div>

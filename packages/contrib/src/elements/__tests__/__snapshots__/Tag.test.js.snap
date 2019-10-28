@@ -1,17 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[Contrib] elements/<Tag /> should match snapshot 1`] = `
+.emotion-0 {
+  background-color: transparent;
+  border-radius: 0.8rem;
+  border: solid 1px var(--color-lapis-lazuli);
+  color: var(--color-lapis-lazuli);
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin: 0 0.5rem 0.5rem 0;
+  opacity: 1;
+  padding: 0.25rem 0.75rem;
+  white-space: nowrap;
+}
+
 <div>
   <span
-    class="Tag-sc-16selk6-0 cSbvW"
+    class="emotion-0 emotion-1"
   />
 </div>
 `;
 
 exports[`[Contrib] elements/<Tag /> should match snapshot with \`isDisabled\` prop 1`] = `
+.emotion-0 {
+  background-color: transparent;
+  border-radius: 0.8rem;
+  border: solid 1px var(--color-lapis-lazuli);
+  color: var(--color-lapis-lazuli);
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin: 0 0.5rem 0.5rem 0;
+  opacity: 0.25;
+  padding: 0.25rem 0.75rem;
+  white-space: nowrap;
+}
+
 <div>
   <span
-    class="Tag-sc-16selk6-0 cuMsMr"
+    class="emotion-0 emotion-1"
   />
 </div>
 `;

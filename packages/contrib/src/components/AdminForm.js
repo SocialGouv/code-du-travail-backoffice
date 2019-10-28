@@ -4,8 +4,8 @@
 import Router from "next/router";
 import * as R from "ramda";
 import React from "react";
-import { Flex } from "rebass/styled-components";
-import styled from "styled-components";
+import { Flex } from "rebass";
+import styled from "@emotion/styled";
 
 import Tags from "../components/Tags";
 import Button from "../elements/Button";

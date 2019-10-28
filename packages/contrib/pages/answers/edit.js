@@ -3,8 +3,8 @@ import debounce from "lodash.debounce";
 import Router from "next/router";
 import React from "react";
 import { connect } from "react-redux";
-import { Flex } from "rebass/styled-components";
-import styled from "styled-components";
+import { Flex } from "rebass";
+import styled from "@emotion/styled";
 
 import * as actions from "../../src/actions";
 import AnswerEditionContent from "../../src/blocks/AnswerEditionContent";

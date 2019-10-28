@@ -1,6 +1,6 @@
 import React from "react";
-import { Flex } from "rebass/styled-components";
-import styled from "styled-components";
+import { Flex } from "rebass";
+import styled from "@emotion/styled";
 
 import _Button from "../../elements/Button";
 import Icon from "../../elements/Icon";

@@ -3,7 +3,6 @@ import withReduxSaga from "next-redux-saga";
 import withRedux from "next-redux-wrapper";
 import React from "react";
 import { Provider } from "react-redux";
-import { ThemeProvider } from "styled-components";
 
 import cache from "../src/cache";
 import Login from "../src/blocks/Login";
@@ -57,15 +56,13 @@ class MainApp extends App {
     const hasError = statusCode !== undefined && statusCode >= 400;
 
     return (
-      <ThemeProvider theme={{}}>
-        <Provider store={store}>
-          {hasError || me.isAuthenticated ? (
-            <Component {...pageProps} />
-          ) : (
-            <Login onLoggedIn={this.login.bind(this)} />
-          )}
-        </Provider>
-      </ThemeProvider>
+      <Provider store={store}>
+        {hasError || me.isAuthenticated ? (
+          <Component {...pageProps} />
+        ) : (
+          <Login onLoggedIn={this.login.bind(this)} />
+        )}
+      </Provider>
     );
   }
 }

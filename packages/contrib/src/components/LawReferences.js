@@ -1,7 +1,7 @@
 import React from "react";
 import ReactTagAutocomplete from "react-tag-autocomplete";
-import styled from "styled-components";
-import { Flex } from "rebass/styled-components";
+import styled from "@emotion/styled";
+import { Flex } from "rebass";
 
 import Reference from "./Reference";
 

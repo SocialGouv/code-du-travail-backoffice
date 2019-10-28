@@ -1,8 +1,7 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 export default styled.span`
-  background-color: ${props =>
-    props.selected ? "var(--color-lapis-lazuli)" : "transparent"};
+  background-color: ${props => (props.selected ? "var(--color-lapis-lazuli)" : "transparent")};
   border-radius: 0.8rem;
   border: solid 1px var(--color-lapis-lazuli);
   color: ${props => (props.selected ? "white" : "var(--color-lapis-lazuli)")};

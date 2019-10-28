@@ -1,7 +1,8 @@
 // https://loading.io/css/
 
+import { keyframes } from "@emotion/core";
+import styled from "@emotion/styled";
 import React from "react";
-import styled, { keyframes } from "styled-components";
 
 const Container = styled.div`
   display: inline-block;

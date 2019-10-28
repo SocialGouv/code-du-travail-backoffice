@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import * as actions from "../../../src/actions";
 import ContentTitle from "../../../src/elements/ContentTitle";
@@ -10,7 +10,7 @@ import Subtitle from "../../../src/elements/Subtitle";
 import getUriParams from "../../../src/libs/getUriParams";
 import markdown from "../../../src/libs/markdown";
 
-import { Flex } from "rebass/styled-components";
+import { Flex } from "rebass";
 
 const Container = styled.div`
   height: 100vh;

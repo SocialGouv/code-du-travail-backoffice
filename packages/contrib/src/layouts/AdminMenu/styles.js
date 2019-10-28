@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import css from "styled-jsx/css";
 
 import _Subtitle from "../../elements/Subtitle";
@@ -26,8 +26,7 @@ export const Link = styled.div`
   padding: 0.5rem;
 
   :hover {
-    background-color: ${p =>
-      p.isActive ? "black" : "var(--color-japenese-indigo)"};
+    background-color: ${p => (p.isActive ? "black" : "var(--color-japenese-indigo)")};
     color: white;
   }
 `;

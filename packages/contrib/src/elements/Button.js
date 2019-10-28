@@ -1,11 +1,11 @@
 import React from "react";
-import { Button as _Button } from "rebass/styled-components";
-import styled from "styled-components";
+import { Button as _Button } from "rebass";
+import styled from "@emotion/styled";
 
 import Icon from "./Icon";
 
 const Button = styled(_Button)`
-  background-color: ${p => (!p.hasText ? "transparent" : p.color)};
+  background-color: ${p => (p.hasText ? p.color : "transparent")};
   border-radius: 0.125rem;
   color: ${p => (p.isLight ? "var(--color-eerie-black)" : "white")};
   cursor: ${p => (p.disabled ? "not-allowed" : "pointer")};

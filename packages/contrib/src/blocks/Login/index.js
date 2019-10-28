@@ -1,6 +1,6 @@
 // import Router from "next/router";
 import React from "react";
-import { Flex, Text } from "rebass/styled-components";
+import { Flex, Text } from "rebass";
 
 import Form from "./Form";
 import Main from "../../layouts/Main";

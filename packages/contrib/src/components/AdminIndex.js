@@ -1,8 +1,8 @@
 import moment from "moment-timezone";
 import Router from "next/router";
 import React from "react";
-import { Flex } from "rebass/styled-components";
-import styled from "styled-components";
+import { Flex } from "rebass";
+import styled from "@emotion/styled";
 
 import Table from "../components/Table";
 import Button from "../elements/Button";

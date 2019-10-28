@@ -1,11 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[Contrib] elements/<Radio /> should match snapshot 1`] = `
+.emotion-1 {
+  cursor: default;
+  width: 1rem !important;
+  color: var(--color-text-blue);
+  cursor: auto;
+  margin-right: 0.5rem;
+}
+
+.emotion-1:hover {
+  color: var(--color-text-blue);
+}
+
+.emotion-4 {
+  cursor: default;
+  width: 1rem !important;
+  color: var(--color-text-blue);
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.emotion-4:hover {
+  color: var(--color-lapis-lazuli);
+}
+
 <div>
   <div>
     <svg
       aria-hidden="true"
-      class="svg-inline--fa fa-dot-circle fa-w-16 fa-1x Icon-sc-4jlog9-0 hXLKsx Radio__Icon-sc-1e1pwch-0 hFpPrh"
+      class="svg-inline--fa fa-dot-circle fa-w-16 fa-1x emotion-0 emotion-1 emotion-2"
       color="var(--color-black-leather-jacket)"
       data-icon="dot-circle"
       data-prefix="fas"
@@ -24,7 +48,7 @@ exports[`[Contrib] elements/<Radio /> should match snapshot 1`] = `
   <div>
     <svg
       aria-hidden="true"
-      class="svg-inline--fa fa-circle fa-w-16 fa-1x Icon-sc-4jlog9-0 hXLKsx Radio__Icon-sc-1e1pwch-0 gsNZpb"
+      class="svg-inline--fa fa-circle fa-w-16 fa-1x emotion-0 emotion-4 emotion-2"
       color="var(--color-black-leather-jacket)"
       data-icon="circle"
       data-prefix="fas"
@@ -43,7 +67,7 @@ exports[`[Contrib] elements/<Radio /> should match snapshot 1`] = `
   <div>
     <svg
       aria-hidden="true"
-      class="svg-inline--fa fa-circle fa-w-16 fa-1x Icon-sc-4jlog9-0 hXLKsx Radio__Icon-sc-1e1pwch-0 gsNZpb"
+      class="svg-inline--fa fa-circle fa-w-16 fa-1x emotion-0 emotion-4 emotion-2"
       color="var(--color-black-leather-jacket)"
       data-icon="circle"
       data-prefix="fas"

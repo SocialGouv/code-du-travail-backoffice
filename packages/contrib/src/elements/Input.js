@@ -1,6 +1,6 @@
 import { omit } from "ramda";
 import React from "react";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import Icon from "./Icon";
 
@@ -11,8 +11,7 @@ const InputWithIconWrapper = styled.div`
 const _Input = styled.input`
   -webkit-appearance: none;
   background-color: white;
-  border: solid 1px
-    var(${p => (Boolean(p.hasError) ? "--color-text-red" : "--color-border")});
+  border: solid 1px var(${p => (Boolean(p.hasError) ? "--color-text-red" : "--color-border")});
   color: inherit;
   flex-grow: 1;
   font-family: inherit;
@@ -39,15 +38,7 @@ const InputIcon = styled(Icon)`
 
 const Input = ({ disabled = false, icon, hasError, ...props }, ref) => {
   if (icon === undefined) {
-    return (
-      <_Input
-        disabled={disabled}
-        hasError={hasError}
-        hasIcon={false}
-        ref={ref}
-        {...props}
-      />
-    );
+    return <_Input disabled={disabled} hasError={hasError} hasIcon={false} ref={ref} {...props} />;
   }
 
   const { className, style } = props;
@@ -59,13 +50,7 @@ const Input = ({ disabled = false, icon, hasError, ...props }, ref) => {
         <InputIconContainer>
           <InputIcon icon={icon} />
         </InputIconContainer>
-        <_Input
-          disabled={disabled}
-          hasError={hasError}
-          hasIcon
-          ref={ref}
-          {...inputProps}
-        />
+        <_Input disabled={disabled} hasError={hasError} hasIcon ref={ref} {...inputProps} />
       </InputWithIconWrapper>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactTooltip from "react-tooltip";
-import { Flex } from "rebass/styled-components";
-import styled from "styled-components";
+import { Flex } from "rebass";
+import styled from "@emotion/styled";
 
 import FranceMap from "../../src/components/FranceMap";
 import _Table from "../../src/components/Table";

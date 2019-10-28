@@ -1,9 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[Contrib] elements/<Idcc /> should match snapshot 1`] = `
+.emotion-0 {
+  background-color: var(--color-label-background);
+  border: solid 1px var(--color-black-leather-jacket);
+  border-radius: 1rem;
+  cursor: help;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-right: 0.75rem;
+  opacity: 0.75;
+  padding: 0.25rem 0.5rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.emotion-0:hover {
+  opacity: 1;
+}
+
 <div>
   <div
-    class="Idcc__Container-owzimc-0 fWXTkt"
+    class="emotion-0 emotion-1"
     currentitem="false"
     data-tip="Code du travail"
   >

@@ -1,6 +1,6 @@
 import React from "react";
 import ReactTooltip from "react-tooltip";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 const Container = styled.div`
   background-color: var(--color-label-background);

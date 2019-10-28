@@ -1,55 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[Contrib] blocks/<AnswerEditionHead /> should match snapshot 1`] = `
-.c8 {
+.emotion-18 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  display: inline-block;
-  text-align: center;
-  line-height: inherit;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  font-size: inherit;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
-  background-color: primary;
-  border: 0;
-  border-radius: 4px;
-  color: var(--color-periwinkle);
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: white;
+  box-shadow: 0 0 0.125rem lightgray;
+  padding: 1rem 1rem 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-.c10 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  display: inline-block;
-  text-align: center;
-  line-height: inherit;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  font-size: inherit;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
-  background-color: primary;
-  border: 0;
-  border-radius: 4px;
-  color: var(--color-lapis-lazuli);
-}
-
-.c1 {
+.emotion-12 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -62,7 +35,7 @@ exports[`[Contrib] blocks/<AnswerEditionHead /> should match snapshot 1`] = `
   display: flex;
 }
 
-.c2 {
+.emotion-5 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -76,7 +49,7 @@ exports[`[Contrib] blocks/<AnswerEditionHead /> should match snapshot 1`] = `
   display: flex;
 }
 
-.c3 {
+.emotion-1 {
   background-color: var(--color-label-background);
   border: solid 1px var(--color-black-leather-jacket);
   border-radius: 1rem;
@@ -93,11 +66,11 @@ exports[`[Contrib] blocks/<AnswerEditionHead /> should match snapshot 1`] = `
   white-space: nowrap;
 }
 
-.c3:hover {
+.emotion-1:hover {
   opacity: 1;
 }
 
-.c4 {
+.emotion-3 {
   color: black;
   font-size: 1.3rem;
   font-weight: 600;
@@ -108,69 +81,18 @@ exports[`[Contrib] blocks/<AnswerEditionHead /> should match snapshot 1`] = `
   user-select: none;
 }
 
-.c9 {
-  background-color: var(--color-periwinkle);
-  border-radius: 0.125rem;
-  color: var(--color-eerie-black);
-  cursor: pointer;
+.emotion-10 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  margin-right: 1rem;
-  min-height: 1.25rem;
-  min-width: 1.25rem;
-  opacity: 1;
-  padding: 0.3rem 1rem 0.3rem;
-  white-space: nowrap;
+  margin-top: 0.5rem;
 }
 
-.c9:hover {
-  opacity: 1;
-}
-
-.c9 svg {
-  cursor: pointer;
-  height: 1rem;
-  margin-right: 0.25rem;
-  padding-top: 0.125rem;
-  width: 1rem;
-}
-
-.c11 {
-  background-color: var(--color-lapis-lazuli);
-  border-radius: 0.125rem;
-  color: white;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  margin-right: 0;
-  min-height: 1.25rem;
-  min-width: 1.25rem;
-  opacity: 1;
-  padding: 0.3rem 1rem 0.3rem;
-  white-space: nowrap;
-}
-
-.c11:hover {
-  opacity: 1;
-}
-
-.c11 svg {
-  cursor: pointer;
-  height: 1rem;
-  margin-right: 0.25rem;
-  padding-top: 0.125rem;
-  width: 1rem;
-}
-
-.c6 {
+.emotion-6 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -195,7 +117,7 @@ exports[`[Contrib] blocks/<AnswerEditionHead /> should match snapshot 1`] = `
   width: 12rem;
 }
 
-.c7 {
+.emotion-8 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -220,50 +142,122 @@ exports[`[Contrib] blocks/<AnswerEditionHead /> should match snapshot 1`] = `
   width: 12rem;
 }
 
-.c5 {
+.emotion-14 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  text-align: center;
+  line-height: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-size: inherit;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: white;
+  background-color: primary;
+  border: 0;
+  border-radius: 4px;
+  color: var(--color-periwinkle);
+  background-color: var(--color-periwinkle);
+  border-radius: 0.125rem;
+  color: var(--color-eerie-black);
+  cursor: pointer;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  margin-top: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin-right: 1rem;
+  min-height: 1.25rem;
+  min-width: 1.25rem;
+  opacity: 1;
+  padding: 0.3rem 1rem 0.3rem;
+  white-space: nowrap;
 }
 
-.c0 {
+.emotion-14:hover {
+  opacity: 1;
+}
+
+.emotion-14 svg {
+  cursor: pointer;
+  height: 1rem;
+  margin-right: 0.25rem;
+  padding-top: 0.125rem;
+  width: 1rem;
+}
+
+.emotion-16 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  text-align: center;
+  line-height: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-size: inherit;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: white;
+  background-color: primary;
+  border: 0;
+  border-radius: 4px;
+  color: var(--color-lapis-lazuli);
+  background-color: var(--color-lapis-lazuli);
+  border-radius: 0.125rem;
+  color: white;
+  cursor: pointer;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  background-color: white;
-  box-shadow: 0 0 0.125rem lightgray;
-  padding: 1rem 1rem 0;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin-right: 0;
+  min-height: 1.25rem;
+  min-width: 1.25rem;
+  opacity: 1;
+  padding: 0.3rem 1rem 0.3rem;
+  white-space: nowrap;
+}
+
+.emotion-16:hover {
+  opacity: 1;
+}
+
+.emotion-16 svg {
+  cursor: pointer;
+  height: 1rem;
+  margin-right: 0.25rem;
+  padding-top: 0.125rem;
+  width: 1rem;
 }
 
 <div>
   <div
-    class="c0"
+    class="emotion-18 emotion-19"
   >
     <div
-      class="c1"
+      class="emotion-12"
     >
       <div
-        class="c2"
+        class="emotion-5"
       >
         <div
-          class="c3 "
+          class="emotion-0 emotion-1 emotion-2"
           currentitem="false"
           data-tip="An Agreement Name"
         >
@@ -274,38 +268,36 @@ exports[`[Contrib] blocks/<AnswerEditionHead /> should match snapshot 1`] = `
           />
         </div>
         <h1
-          class="c4"
+          class="emotion-3 emotion-4"
         >
           123) A Question Value
         </h1>
       </div>
       <div
-        class="c5"
+        class="emotion-10 emotion-11"
       >
         <div
-          class="c6"
+          class="emotion-6 emotion-7"
         >
           Édition
         </div>
         <div
-          class="c7"
+          class="emotion-8 emotion-7"
         >
           Références juridiques (undefined)
         </div>
       </div>
     </div>
     <div
-      class="c2"
+      class="emotion-5"
     >
       <button
-        class="c8 c9"
-        color="var(--color-periwinkle)"
+        class="emotion-13 emotion-14"
       >
         Annuler ma réponse
       </button>
       <button
-        class="c10 c11"
-        color="var(--color-lapis-lazuli)"
+        class="emotion-13 emotion-16"
       >
         Demander la validation
       </button>

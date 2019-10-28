@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 
 import React from "react";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import _Icon from "./Icon";
 
