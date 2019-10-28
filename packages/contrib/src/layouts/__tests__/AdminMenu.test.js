@@ -35,9 +35,7 @@ describe.skip("[Contrib] layouts/<AdminMenu />", () => {
   it("should redirect to the tags categories path", () => {
     fireEvent.click(getByText("└ Catégories"));
 
-    expect(global.nextRouter.push).toHaveBeenCalledWith(
-      "/admin/tags-categories"
-    );
+    expect(global.nextRouter.push).toHaveBeenCalledWith("/admin/tags-categories");
   });
 
   it("should redirect to the questions path", () => {
@@ -55,9 +53,7 @@ describe.skip("[Contrib] layouts/<AdminMenu />", () => {
   it("should redirect to the generic answers path", () => {
     fireEvent.click(getByText("Réponses génériques"));
 
-    expect(global.nextRouter.push).toHaveBeenCalledWith(
-      "/admin/generic-answers"
-    );
+    expect(global.nextRouter.push).toHaveBeenCalledWith("/admin/generic-answers");
   });
 
   it("should redirect to the locations path", () => {

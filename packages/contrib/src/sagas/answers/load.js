@@ -11,11 +11,7 @@ export default function* load({
   meta: { isGeneric, pageIndex, query, states, withReferences, withTags }
 }) {
   try {
-    const {
-      agreements: userAgreements,
-      id: userId,
-      role: userRole
-    } = getCurrentUser();
+    const { agreements: userAgreements, id: userId, role: userRole } = getCurrentUser();
 
     let request = customPostgrester();
 
@@ -47,9 +43,7 @@ export default function* load({
       if (isGeneric) {
         request = request.or.ilike("question_value", query);
       } else {
-        request = request.or
-          .ilike("agreement_name", query)
-          .ilike("question_value", query);
+        request = request.or.ilike("agreement_name", query).ilike("question_value", query);
       }
 
       if (!isNaN(query)) {
@@ -79,9 +73,7 @@ export default function* load({
 
       fullData = fullData.map(answer => ({
         ...answer,
-        references: answersRefs.filter(
-          ({ answer_id }) => answer_id === answer.id
-        )
+        references: answersRefs.filter(({ answer_id }) => answer_id === answer.id)
       }));
     }
 
@@ -110,9 +102,7 @@ export default function* load({
     );
   } catch (err) {
     if (err.response.status === 416) {
-      const pageIndex = Math.floor(
-        Number(err.response.headers["content-range"].substr(2)) / 10
-      );
+      const pageIndex = Math.floor(Number(err.response.headers["content-range"].substr(2)) / 10);
 
       toast.error(
         <span>

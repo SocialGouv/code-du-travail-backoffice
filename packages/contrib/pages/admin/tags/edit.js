@@ -26,9 +26,7 @@ export default class AdminTagsEditPage extends AdminTagsNewPage {
       const tagsSelect = `select=*,category:tag_category(*)`;
       const tagsWhere = `id=eq.${this.props.id}`;
 
-      const { data: tags } = await this.axios.get(
-        `/tags?${tagsSelect}&${tagsWhere}`
-      );
+      const { data: tags } = await this.axios.get(`/tags?${tagsSelect}&${tagsWhere}`);
 
       const data = tags[0];
 

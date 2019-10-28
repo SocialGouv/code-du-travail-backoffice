@@ -1,2 +1,1 @@
-global.waitFor = delayInMs =>
-  new Promise(resolve => setTimeout(resolve, delayInMs));
+global.waitFor = delayInMs => new Promise(resolve => setTimeout(resolve, delayInMs));

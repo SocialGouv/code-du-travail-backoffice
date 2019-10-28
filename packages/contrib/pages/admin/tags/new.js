@@ -26,9 +26,7 @@ export default class AdminTagsNewPage extends React.Component {
     this.axios = customAxios();
 
     try {
-      const { data: tagsCategories } = await this.axios.get(
-        "/tags_categories?order=value.asc"
-      );
+      const { data: tagsCategories } = await this.axios.get("/tags_categories?order=value.asc");
 
       const fields = [
         ...FIELDS,

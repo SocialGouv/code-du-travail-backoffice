@@ -9,8 +9,7 @@ const COLUMNS = [
   },
   {
     Header: "Catégorie",
-    accessor: data =>
-      data.category !== null ? data.category.value : "Non renseigné",
+    accessor: data => (data.category !== null ? data.category.value : "Non renseigné"),
     id: "category",
     width: 160
   }

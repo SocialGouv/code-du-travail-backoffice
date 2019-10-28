@@ -12,11 +12,7 @@ describe.skip("[Contrib] components/<Tags />", () => {
     onAdd: jest.fn(),
     onRemove: jest.fn(),
     selectedTags: [{ value: "A Tag" }, { value: "Another Tag" }],
-    tags: [
-      { value: "A Tag" },
-      { value: "Another Tag" },
-      { value: "Yet Another Tag" }
-    ]
+    tags: [{ value: "A Tag" }, { value: "Another Tag" }, { value: "Yet Another Tag" }]
   };
 
   const γ = render(<Tags {...props} />);
@@ -40,25 +36,17 @@ describe.skip("[Contrib] components/<Tags />", () => {
     fireEvent.click(γ.queryByText(props.tags[2].value));
 
     expect(props.onAdd).toHaveBeenCalledWith(props.tags[2]);
-    expect(
-      γ.getByPlaceholderText(`Commencez à taper le nom du tag`).value
-    ).toBe("");
+    expect(γ.getByPlaceholderText(`Commencez à taper le nom du tag`).value).toBe("");
     expect(γ.queryByText(props.tags[0].value)).toBeInTheDocument();
     expect(γ.queryByText(props.tags[1].value)).toBeInTheDocument();
     expect(γ.queryByText(props.tags[2].value)).toBeInTheDocument();
     expect(
-      γ.queryByAltText(
-        `Bouton supprimant ${props.ariaName} ${props.tags[2].value}`
-      )
+      γ.queryByAltText(`Bouton supprimant ${props.ariaName} ${props.tags[2].value}`)
     ).toBeInTheDocument();
   });
 
   it("should remove the expected tag", async () => {
-    fireEvent.click(
-      γ.getByAltText(
-        `Bouton supprimant ${props.ariaName} ${props.tags[0].value}`
-      )
-    );
+    fireEvent.click(γ.getByAltText(`Bouton supprimant ${props.ariaName} ${props.tags[0].value}`));
 
     expect(props.onRemove).toHaveBeenCalledWith(props.tags[0]);
     expect(γ.queryByText(props.tags[0].value)).not.toBeInTheDocument();
@@ -71,9 +59,7 @@ describe.skip("[Contrib] components/<Tags />", () => {
       target: { value: "a" }
     });
 
-    expect(
-      γ.getByPlaceholderText(`Commencez à taper le nom du tag`).value
-    ).toBe("a");
+    expect(γ.getByPlaceholderText(`Commencez à taper le nom du tag`).value).toBe("a");
     expect(γ.queryByText(props.tags[0].value)).toBeInTheDocument();
   });
 
@@ -82,9 +68,7 @@ describe.skip("[Contrib] components/<Tags />", () => {
       target: { value: "" }
     });
 
-    expect(
-      γ.getByPlaceholderText(`Commencez à taper le nom du tag`).value
-    ).toBe("");
+    expect(γ.getByPlaceholderText(`Commencez à taper le nom du tag`).value).toBe("");
     expect(γ.queryByText(props.tags[0].value)).not.toBeInTheDocument();
   });
 });
@@ -121,11 +105,7 @@ describe.skip("[Contrib] components/<Tags /> without `isEditable`", () => {
     onAdd: jest.fn(),
     onRemove: jest.fn(),
     selectedTags: [{ value: "A Tag" }, { value: "Another Tag" }],
-    tags: [
-      { value: "A Tag" },
-      { value: "Another Tag" },
-      { value: "Yet Another Tag" }
-    ]
+    tags: [{ value: "A Tag" }, { value: "Another Tag" }, { value: "Yet Another Tag" }]
   };
 
   let γ;

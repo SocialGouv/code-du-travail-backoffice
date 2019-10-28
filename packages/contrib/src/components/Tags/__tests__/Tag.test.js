@@ -24,24 +24,18 @@ describe.skip("[Contrib] components/Tags/<Tag />", () => {
       γ.queryByAltText(`Bouton supprimant ${props.ariaName} ${props.value}`)
     ).toBeInTheDocument();
     expect(
-      γ.queryByAltText(
-        `Bouton ouvrant l'url de ${props.ariaName} ${props.value}`
-      )
+      γ.queryByAltText(`Bouton ouvrant l'url de ${props.ariaName} ${props.value}`)
     ).toBeInTheDocument();
   });
 
   it("should trigger onRemove() with the expected param", () => {
-    fireEvent.click(
-      γ.getByAltText(`Bouton supprimant ${props.ariaName} ${props.value}`)
-    );
+    fireEvent.click(γ.getByAltText(`Bouton supprimant ${props.ariaName} ${props.value}`));
 
     expect(props.onRemove).toHaveBeenCalledWith(props.value);
   });
 
   it("should trigger window.open() with the expected param", () => {
-    fireEvent.click(
-      γ.getByAltText(`Bouton ouvrant l'url de ${props.ariaName} ${props.value}`)
-    );
+    fireEvent.click(γ.getByAltText(`Bouton ouvrant l'url de ${props.ariaName} ${props.value}`));
 
     expect(global.open).toHaveBeenCalledWith(props.url, "_blank");
   });
@@ -54,9 +48,7 @@ describe.skip("[Contrib] components/Tags/<Tag />", () => {
     const γ = render(<Tag {...newProps} />);
 
     expect(γ.queryByText(props.value)).toBeInTheDocument();
-    expect(
-      γ.queryByAltText(`Bouton supprimant l'étiquette ${props.value}`)
-    ).toBeInTheDocument();
+    expect(γ.queryByAltText(`Bouton supprimant l'étiquette ${props.value}`)).toBeInTheDocument();
     expect(
       γ.queryByAltText(`Bouton ouvrant l'url de l'étiquette ${props.value}`)
     ).toBeInTheDocument();

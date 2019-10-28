@@ -10,9 +10,7 @@ describe.skip("[Contrib] libs/customAxios()", () => {
     window.history.pushState({}, "A Page", "/a-path");
 
     expect(() => customAxios()).toThrow(undefined);
-    expect(global.nextRouter.push).toHaveBeenCalledWith(
-      "/login?redirectTo=/a-path"
-    );
+    expect(global.nextRouter.push).toHaveBeenCalledWith("/login?redirectTo=/a-path");
   });
 
   // eslint-disable-next-line max-len
@@ -43,11 +41,7 @@ describe.skip("[Contrib] libs/customAxios()", () => {
     expect(sessionStorage.getItem("jwt")).toBe(token);
     expect(_axios.interceptors.request.handlers.length).toBe(0);
     expect(_axios.interceptors.response.handlers.length).toBe(1);
-    expect(typeof _axios.interceptors.response.handlers[0].fulfilled).toBe(
-      "function"
-    );
-    expect(typeof _axios.interceptors.response.handlers[0].rejected).toBe(
-      "function"
-    );
+    expect(typeof _axios.interceptors.response.handlers[0].fulfilled).toBe("function");
+    expect(typeof _axios.interceptors.response.handlers[0].rejected).toBe("function");
   });
 });

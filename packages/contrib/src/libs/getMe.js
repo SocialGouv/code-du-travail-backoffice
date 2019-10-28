@@ -21,10 +21,9 @@ export default async function getMe(ctx) {
 
     if (!isAuthenticated) return ANOMNYMOUS_RESPONSE;
 
-    const isAdmin = [
-      USER_ROLE.ADMINISTRATOR,
-      USER_ROLE.REGIONAL_ADMINISTRATOR
-    ].includes(data[0].payload.role);
+    const isAdmin = [USER_ROLE.ADMINISTRATOR, USER_ROLE.REGIONAL_ADMINISTRATOR].includes(
+      data[0].payload.role
+    );
 
     return {
       data: isAuthenticated ? data[0].payload : null,

@@ -56,7 +56,9 @@ exports[`[Contrib] elements/<Button /> should match snapshot 1`] = `
 <div>
   <button
     class="emotion-0 emotion-1"
-  />
+  >
+    A Button
+  </button>
 </div>
 `;
 

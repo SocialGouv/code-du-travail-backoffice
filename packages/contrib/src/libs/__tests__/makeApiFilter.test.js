@@ -7,8 +7,6 @@ describe("lib/makeApiFilter()", () => {
       anInteger: 1337
     };
 
-    expect(makeApiFilter("/foo", data)).toBe(
-      "/foo?aString=eq.string&anInteger=eq.1337"
-    );
+    expect(makeApiFilter("/foo", data)).toBe("/foo?aString=eq.string&anInteger=eq.1337");
   });
 });

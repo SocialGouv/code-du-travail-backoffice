@@ -83,17 +83,13 @@ describe.skip("[Contrib] components/<AdminIndex />", () => {
     γ = render(<AdminIndex {...props} />);
 
     expect(γ.container).toMatchSnapshot();
-    expect(global.axios.get).toHaveBeenCalledWith(
-      `${props.apiPath}?order=updated_at.desc`
-    );
+    expect(global.axios.get).toHaveBeenCalledWith(`${props.apiPath}?order=updated_at.desc`);
   });
 
   it("should redirect to the creation path", async () => {
     fireEvent.click(γ.getAllByTitle(props.ariaLabels.newButton)[0]);
 
-    expect(global.nextRouter.push).toHaveBeenCalledWith(
-      `${locationPathname}/new`
-    );
+    expect(global.nextRouter.push).toHaveBeenCalledWith(`${locationPathname}/new`);
   });
 
   it("should redirect to the edition path", async () => {
@@ -113,24 +109,16 @@ describe.skip("[Contrib] components/<AdminIndex />", () => {
     fireEvent.click(γ.getAllByTitle(props.ariaLabels.removeButton)[0]);
     await waitFor(0);
 
-    expect(
-      γ.getAllByTitle(props.ariaLabels.cancelDeletionButton)[0]
-    ).toBeInTheDocument();
-    expect(
-      γ.getAllByTitle(props.ariaLabels.deleteButton)[0]
-    ).toBeInTheDocument();
+    expect(γ.getAllByTitle(props.ariaLabels.cancelDeletionButton)[0]).toBeInTheDocument();
+    expect(γ.getAllByTitle(props.ariaLabels.deleteButton)[0]).toBeInTheDocument();
   });
 
   it("should behave as expected when cancelling deletion", async () => {
     fireEvent.click(γ.getAllByTitle(props.ariaLabels.cancelDeletionButton)[0]);
     await waitFor(0);
 
-    expect(
-      γ.queryByTitle(props.ariaLabels.cancelDeletionButton)
-    ).not.toBeInTheDocument();
-    expect(
-      γ.queryByTitle(props.ariaLabels.deleteButton)
-    ).not.toBeInTheDocument();
+    expect(γ.queryByTitle(props.ariaLabels.cancelDeletionButton)).not.toBeInTheDocument();
+    expect(γ.queryByTitle(props.ariaLabels.deleteButton)).not.toBeInTheDocument();
   });
 
   it("should behave as expected when confirming deletion", async () => {
@@ -142,12 +130,8 @@ describe.skip("[Contrib] components/<AdminIndex />", () => {
     fireEvent.click(γ.getAllByTitle(props.ariaLabels.deleteButton)[0]);
     await waitFor(0);
 
-    expect(global.axios.delete).toHaveBeenCalledWith(
-      `${props.apiPath}?id=eq.${data[0].id}`
-    );
-    expect(global.axios.get).toHaveBeenCalledWith(
-      `${props.apiPath}?order=updated_at.desc`
-    );
+    expect(global.axios.delete).toHaveBeenCalledWith(`${props.apiPath}?id=eq.${data[0].id}`);
+    expect(global.axios.get).toHaveBeenCalledWith(`${props.apiPath}?order=updated_at.desc`);
   });
 });
 
@@ -194,9 +178,7 @@ describe.skip("[Contrib] components/<AdminIndex /> (custom API paths)", () => {
     expect(global.axios.post).toHaveBeenCalledWith(props.apiDeletePath, {
       id: DATA[0].id
     });
-    expect(global.axios.get).toHaveBeenCalledWith(
-      `${props.apiGetPath}?order=updated_at.desc`
-    );
+    expect(global.axios.get).toHaveBeenCalledWith(`${props.apiGetPath}?order=updated_at.desc`);
   });
 });
 

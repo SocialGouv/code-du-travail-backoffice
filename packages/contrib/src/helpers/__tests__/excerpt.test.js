@@ -14,9 +14,7 @@ describe("[Contrib] helpers/excerpt()", () => {
       `so much inspiration.`;
 
     expect(lessThanOneHundredCharsText.length).toBeLessThan(100);
-    expect(excerpt(lessThanOneHundredCharsText)).toStrictEqual(
-      lessThanOneHundredCharsText
-    );
+    expect(excerpt(lessThanOneHundredCharsText)).toStrictEqual(lessThanOneHundredCharsText);
   });
 
   it("should return the text as-is when it's 100 chars long", () => {
