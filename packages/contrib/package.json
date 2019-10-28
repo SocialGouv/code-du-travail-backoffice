@@ -74,6 +74,7 @@
     "eslint": "6.6.0",
     "identity-obj-proxy": "3.0.0",
     "jest": "24.9.0",
+    "jest-styled-components": "6.3.3",
     "mutationobserver-shim": "0.3.3",
     "prettier": "1.18.2",
     "rimraf": "3.0.0",
