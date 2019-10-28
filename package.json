@@ -37,5 +37,8 @@
     "pg": "7.12.1",
     "puppeteer": "2.0.0",
     "uuid": "3.3.3"
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.20"
   }
 }
