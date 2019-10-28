@@ -1,11 +1,9 @@
-/* eslint-disable max-len */
-
 module.exports = {
   collectCoverage: true,
-  collectCoverageFrom: ["<rootDir>/src/**/*.js"],
+  // https://github.com/facebook/jest/issues/7331
+  // collectCoverageFrom: ["<rootDir>/src/**/*.js"],
   moduleNameMapper: {
-    "\\.(jpg|jpeg|png|gif|eot|svg|ttf|woff|woff2)$":
-      "<rootDir>/__mocks__/fileTransformer.js",
+    "\\.(jpg|jpeg|png|gif|eot|svg|ttf|woff|woff2)$": "<rootDir>/__mocks__/fileTransformer.js",
     "\\.css$": "identity-obj-proxy"
   },
   modulePathIgnorePatterns: [
