@@ -13,6 +13,12 @@ import "@testing-library/jest-dom/extend-expect";
 import { toMatchDiffSnapshot } from "snapshot-diff";
 expect.extend({ toMatchDiffSnapshot });
 
+// Jest "emotion" extension
+// https://github.com/emotion-js/emotion/tree/master/packages/jest-emotion#custom-matchers
+// import expect from "expect";
+import { matchers } from "jest-emotion";
+expect.extend(matchers);
+
 // Polyfill "MutationObserver"
 // https://github.com/megawac/MutationObserver.js
 import "mutationobserver-shim";
