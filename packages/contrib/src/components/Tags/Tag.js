@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex } from "rebass";
+import { Flex } from "rebass/styled-components";
 import styled from "styled-components";
 
 const Container = styled(Flex)`
@@ -37,8 +37,7 @@ export default class extends React.PureComponent {
 
   render() {
     const { onRemove, url, value } = this.props;
-    const ariaName =
-      this.props.ariaName !== undefined ? this.props.ariaName : "l'étiquette";
+    const ariaName = this.props.ariaName !== undefined ? this.props.ariaName : "l'étiquette";
 
     return (
       <Container alignItems="center">

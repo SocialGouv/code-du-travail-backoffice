@@ -2,7 +2,7 @@ import debounce from "lodash.debounce";
 import Router from "next/router";
 import React from "react";
 import { connect } from "react-redux";
-import { Flex } from "rebass";
+import { Flex } from "rebass/styled-components";
 import styled from "styled-components";
 
 import * as actions from "../../../src/actions";
@@ -106,9 +106,7 @@ export class AdminAnswersIndexPage extends React.Component {
     const newState = this.$newStateSelect.value;
 
     this.props.dispatch(
-      actions.answers.updateState(checked, newState, () =>
-        this.loadAnswers(state, 0)
-      )
+      actions.answers.updateState(checked, newState, () => this.loadAnswers(state, 0))
     );
   }
 
@@ -189,11 +187,7 @@ export class AdminAnswersIndexPage extends React.Component {
               </FilterSelect>
 
               <Button
-                disabled={
-                  isLoading ||
-                  !PRINTABLE_STATES.includes(state) ||
-                  pagesLength > 10
-                }
+                disabled={isLoading || !PRINTABLE_STATES.includes(state) || pagesLength > 10}
                 onClick={this.printAnswers.bind(this)}
               >
                 Imprimer
@@ -234,9 +228,7 @@ export class AdminAnswersIndexPage extends React.Component {
               <HelpText>Chargement…</HelpText>
             </List>
           )}
-          {!isLoading && (
-            <List flexDirection="column">{this.getAnswersList()}</List>
-          )}
+          {!isLoading && <List flexDirection="column">{this.getAnswersList()}</List>}
           {!isLoading && pagesLength > 0 && (
             <Pagination
               initialPage={pageIndex}

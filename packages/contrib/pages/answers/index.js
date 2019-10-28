@@ -2,7 +2,7 @@ import debounce from "lodash.debounce";
 import Router, { withRouter } from "next/router";
 import React from "react";
 import { connect } from "react-redux";
-import { Flex } from "rebass";
+import { Flex } from "rebass/styled-components";
 import styled from "styled-components";
 
 import * as actions from "../../src/actions";
@@ -48,9 +48,7 @@ const FilterInput = styled(Input)`
 
 class AnswersIndexPage extends React.Component {
   get query() {
-    return this.$query !== undefined && this.$query !== null
-      ? this.$query.value
-      : "";
+    return this.$query !== undefined && this.$query !== null ? this.$query.value : "";
   }
 
   constructor(props) {
@@ -121,18 +119,12 @@ class AnswersIndexPage extends React.Component {
   cancel(id) {
     const action = () => actions.answers.cancel([id], this.load.bind(this));
 
-    this.props.dispatch(
-      actions.modal.open(T.ANSWERS_INDEX_MODAL_CANCEL, action)
-    );
+    this.props.dispatch(actions.modal.open(T.ANSWERS_INDEX_MODAL_CANCEL, action));
   }
 
   updateGenericReference(id, genericReference) {
     this.props.dispatch(
-      actions.answers.updateGenericReference(
-        [id],
-        genericReference,
-        this.load.bind(this)
-      )
+      actions.answers.updateGenericReference([id], genericReference, this.load.bind(this))
     );
   }
 

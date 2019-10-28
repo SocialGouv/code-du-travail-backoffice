@@ -1,7 +1,7 @@
 import React from "react";
 import reactOnClickOutside from "react-onclickoutside";
 import { connect } from "react-redux";
-import { Flex } from "rebass";
+import { Flex } from "rebass/styled-components";
 import styled from "styled-components";
 
 import * as actions from "../actions";
@@ -40,16 +40,10 @@ class _Modal extends React.PureComponent {
       <Container flexDirection="column">
         <p>{message}</p>
         <Actions justifyContent="flex-end">
-          <Button
-            color="secondary"
-            hasGroup
-            onClick={() => dispatch(actions.modal.close())}
-          >
+          <Button color="secondary" hasGroup onClick={() => dispatch(actions.modal.close())}>
             Annuler
           </Button>
-          <Button onClick={() => dispatch(actions.modal.submit())}>
-            Confirmer
-          </Button>
+          <Button onClick={() => dispatch(actions.modal.submit())}>Confirmer</Button>
         </Actions>
       </Container>
     );

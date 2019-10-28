@@ -1,5 +1,5 @@
 // import Router from "next/router";
-import { Flex } from "rebass";
+import { Flex } from "rebass/styled-components";
 import styled from "styled-components";
 
 import _Title from "../../elements/Title";

@@ -1,6 +1,6 @@
 import React from "react";
 import ReactTooltip from "react-tooltip";
-import { Flex } from "rebass";
+import { Flex } from "rebass/styled-components";
 import styled from "styled-components";
 
 import FranceMap from "../../src/components/FranceMap";
@@ -278,14 +278,12 @@ export default class Index extends React.Component {
     const { regionalStats } = this.state;
     const region = regionalStats.find(entry => entry.areaCode === areaCode);
 
-    const newSelectedRegionStats = region.agreements.map(
-      ({ id, idcc, name }) => ({
-        agreementId: id,
-        agreementIdcc: idcc,
-        agreementName: `[${idcc}] ${name}`,
-        totals: [0, 0, 0, 0, 0, 0]
-      })
-    );
+    const newSelectedRegionStats = region.agreements.map(({ id, idcc, name }) => ({
+      agreementId: id,
+      agreementIdcc: idcc,
+      agreementName: `[${idcc}] ${name}`,
+      totals: [0, 0, 0, 0, 0, 0]
+    }));
 
     this.setState({
       selectedRegionIsCalculating: true,
@@ -371,9 +369,7 @@ export default class Index extends React.Component {
     const { globalStats, isCalculating, isPercentage } = this.state;
     const data = [this.generateDataRow("Total", globalStats, isCalculating)];
 
-    return (
-      <StatsTable data={data} isPercentage={isPercentage} sortable={false} />
-    );
+    return <StatsTable data={data} isPercentage={isPercentage} sortable={false} />;
   }
 
   getRegionalStats() {
@@ -392,11 +388,7 @@ export default class Index extends React.Component {
   }
 
   getSelectedRegionStats() {
-    const {
-      isPercentage,
-      selectedRegionIsCalculating,
-      selectedRegionStats
-    } = this.state;
+    const { isPercentage, selectedRegionIsCalculating, selectedRegionStats } = this.state;
     const data = selectedRegionStats.map(({ agreementName, totals }) =>
       this.generateDataRow(agreementName, totals, selectedRegionIsCalculating)
     );
@@ -419,12 +411,8 @@ export default class Index extends React.Component {
         <Container flexDirection="column">
           <Flex alignItems="baseline" justifyContent="space-between">
             <Title>Tableau de bord</Title>
-            <Button
-              onClick={() => this.setState({ isPercentage: !isPercentage })}
-            >
-              {isPercentage
-                ? "Voir les nombres bruts"
-                : "Voir les pourcentages"}
+            <Button onClick={() => this.setState({ isPercentage: !isPercentage })}>
+              {isPercentage ? "Voir les nombres bruts" : "Voir les pourcentages"}
             </Button>
           </Flex>
 
@@ -439,14 +427,8 @@ export default class Index extends React.Component {
             <p>Calcul en cours…</p>
           ) : (
             [
-              <FranceMapContainer
-                key="map"
-                justifyContent="center"
-                style={{ marginTop: "1rem" }}
-              >
-                <FranceMap
-                  onChange={this.updateSelectedRegionStats.bind(this)}
-                />
+              <FranceMapContainer key="map" justifyContent="center" style={{ marginTop: "1rem" }}>
+                <FranceMap onChange={this.updateSelectedRegionStats.bind(this)} />
               </FranceMapContainer>,
               selectedRegionName.length === 0 ? (
                 <Flex

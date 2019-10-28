@@ -1,9 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[Contrib] elements/<Field /> should match snapshot 1`] = `
+.c0 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH Field-sc-56e27r-0 ficske"
+    class="c0"
   />
 </div>
 `;

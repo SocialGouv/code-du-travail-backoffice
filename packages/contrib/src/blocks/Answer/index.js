@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex } from "rebass";
+import { Flex } from "rebass/styled-components";
 import styled from "styled-components";
 
 import Idcc from "../../elements/Idcc";
@@ -51,53 +51,33 @@ export default ({ data, onCancel, onClick, onFallback }) => {
           ) : (
             <Idcc code="CDT" name="Code du travail" />
           )}
-          <ContentQuestion>
-            {`${data.question_index}) ${data.question_value}`}
-          </ContentQuestion>
+          <ContentQuestion>{`${data.question_index}) ${data.question_value}`}</ContentQuestion>
         </Flex>
         {!isTodo && data.generic_reference === null && (
           <ContentExtract>{value.substr(0, 100)}…</ContentExtract>
         )}
-        {!isTodo &&
-          data.generic_reference === ANSWER_GENERIC_REFERENCE.LABOR_CODE && (
-            <ContentExtractRed>Renvoyé au Code du travail.</ContentExtractRed>
-          )}
-        {!isTodo &&
-          data.generic_reference ===
-            ANSWER_GENERIC_REFERENCE.NATIONAL_AGREEMENT && (
-            <ContentExtractRed>
-              Renvoyé à la convention collective nationale.
-            </ContentExtractRed>
-          )}
+        {!isTodo && data.generic_reference === ANSWER_GENERIC_REFERENCE.LABOR_CODE && (
+          <ContentExtractRed>Renvoyé au Code du travail.</ContentExtractRed>
+        )}
+        {!isTodo && data.generic_reference === ANSWER_GENERIC_REFERENCE.NATIONAL_AGREEMENT && (
+          <ContentExtractRed>Renvoyé à la convention collective nationale.</ContentExtractRed>
+        )}
       </Content>
-      <Menu
-        alignItems="start"
-        justifyContent="space-evenly"
-        flexDirection="column"
-      >
+      <Menu alignItems="start" justifyContent="space-evenly" flexDirection="column">
         {isTodo && [
           <Link
-            disabled={
-              data.generic_reference === ANSWER_GENERIC_REFERENCE.LABOR_CODE
-            }
+            disabled={data.generic_reference === ANSWER_GENERIC_REFERENCE.LABOR_CODE}
             key="0"
             isSmall
-            onClick={() =>
-              onFallback(data.id, ANSWER_GENERIC_REFERENCE.LABOR_CODE)
-            }
+            onClick={() => onFallback(data.id, ANSWER_GENERIC_REFERENCE.LABOR_CODE)}
           >
             Renvoi au Code du travail
           </Link>,
           <Link
-            disabled={
-              data.generic_reference ===
-              ANSWER_GENERIC_REFERENCE.NATIONAL_AGREEMENT
-            }
+            disabled={data.generic_reference === ANSWER_GENERIC_REFERENCE.NATIONAL_AGREEMENT}
             key="1"
             isSmall
-            onClick={() =>
-              onFallback(data.id, ANSWER_GENERIC_REFERENCE.NATIONAL_AGREEMENT)
-            }
+            onClick={() => onFallback(data.id, ANSWER_GENERIC_REFERENCE.NATIONAL_AGREEMENT)}
           >
             Renvoi à la CC nationale
           </Link>

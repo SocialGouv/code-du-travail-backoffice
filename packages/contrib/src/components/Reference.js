@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex } from "rebass";
+import { Flex } from "rebass/styled-components";
 import styled from "styled-components";
 
 import _Icon from "../elements/Icon";
@@ -47,9 +47,7 @@ export default class extends React.PureComponent {
 
     return (
       <Container alignItems="center">
-        {isDisabled && (typeof url !== "string" || url.length === 0) && (
-          <Text>{value}</Text>
-        )}
+        {isDisabled && (typeof url !== "string" || url.length === 0) && <Text>{value}</Text>}
         {(!isDisabled || (typeof url === "string" && url.length !== 0)) && (
           <TextWithIcon>{value}</TextWithIcon>
         )}

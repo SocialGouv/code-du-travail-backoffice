@@ -4,7 +4,7 @@
 import Router from "next/router";
 import * as R from "ramda";
 import React from "react";
-import { Flex } from "rebass";
+import { Flex } from "rebass/styled-components";
 import styled from "styled-components";
 
 import Tags from "../components/Tags";
@@ -68,18 +68,12 @@ export default class AdminForm extends React.Component {
    * Initialize default data missing properties with coherently typed values.
    */
   initDefaultData() {
-    const defaultData =
-      this.props.defaultData !== undefined ? this.props.defaultData : {};
+    const defaultData = this.props.defaultData !== undefined ? this.props.defaultData : {};
 
     return this.props.fields.reduce(
       (prev, { name, type }) => ({
         ...prev,
-        [name]:
-          defaultData[name] !== undefined
-            ? defaultData[name]
-            : type === "tags"
-            ? []
-            : ""
+        [name]: defaultData[name] !== undefined ? defaultData[name] : type === "tags" ? [] : ""
       }),
       {}
     );
@@ -144,10 +138,7 @@ export default class AdminForm extends React.Component {
     });
 
     // We need to remove the non-data properties from the state:
-    const rawData = R.omit(
-      ["error", "inputKeys", "isLoading", "isSubmitting"],
-      this.state
-    );
+    const rawData = R.omit(["error", "inputKeys", "isLoading", "isSubmitting"], this.state);
 
     // We need to clean the tag fields by transforming their array of objects
     // into an array of ids:
@@ -157,9 +148,7 @@ export default class AdminForm extends React.Component {
     const rawDataWithTags = R.compose(
       R.fromPairs,
       R.map(([fieldName, value]) =>
-        tagFields.includes(fieldName)
-          ? [fieldName, value.map(({ id }) => id)]
-          : [fieldName, value]
+        tagFields.includes(fieldName) ? [fieldName, value.map(({ id }) => id)] : [fieldName, value]
       ),
       R.toPairs
     )(rawData);
@@ -176,10 +165,7 @@ export default class AdminForm extends React.Component {
     );
 
     // Remove the fields with a custom apiPath property from the main data:
-    const data = R.omit(
-      fieldsWithCustomApiPath.map(({ name }) => name),
-      fullData
-    );
+    const data = R.omit(fieldsWithCustomApiPath.map(({ name }) => name), fullData);
 
     // Most of the comments below are related to:
     // http://postgrest.org/en/v5.2/api.html#insertions-updates

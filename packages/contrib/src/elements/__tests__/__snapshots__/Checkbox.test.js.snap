@@ -1,15 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[Contrib] elements/<Checkbox /> should match snapshot 1`] = `
+.c0 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  text-align: center;
+  line-height: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-size: inherit;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: white;
+  background-color: primary;
+  border: 0;
+  border-radius: 4px;
+}
+
+.c2 {
+  cursor: default;
+  width: 1rem !important;
+}
+
+.c1 {
+  background-color: transparent;
+  border-radius: 0.125rem;
+  color: white;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin-right: 0;
+  min-height: 1.25rem;
+  min-width: 1.25rem;
+  opacity: 1;
+  padding: 0.3rem 1rem 0.3rem;
+  white-space: nowrap;
+}
+
+.c1:hover {
+  opacity: 1;
+}
+
+.c1 svg {
+  cursor: pointer;
+  height: 1rem;
+  margin-right: 0;
+  padding-top: 0;
+  width: 1rem;
+}
+
 <div>
   <button
-    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 kafYuo"
-    color="white"
+    class="c0 c1"
     role="checkbox"
   >
     <svg
       aria-hidden="true"
-      class="svg-inline--fa fa-square fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx"
+      class="svg-inline--fa fa-square fa-w-14 fa-1x c2"
       color="var(--color-lapis-lazuli)"
       data-icon="square"
       data-prefix="fas"
@@ -28,15 +86,73 @@ exports[`[Contrib] elements/<Checkbox /> should match snapshot 1`] = `
 `;
 
 exports[`[Contrib] elements/<Checkbox /> should match snapshot with \`isChecked\` prop 1`] = `
+.c0 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  text-align: center;
+  line-height: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-size: inherit;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: white;
+  background-color: primary;
+  border: 0;
+  border-radius: 4px;
+}
+
+.c2 {
+  cursor: default;
+  width: 1rem !important;
+}
+
+.c1 {
+  background-color: transparent;
+  border-radius: 0.125rem;
+  color: white;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin-right: 0;
+  min-height: 1.25rem;
+  min-width: 1.25rem;
+  opacity: 1;
+  padding: 0.3rem 1rem 0.3rem;
+  white-space: nowrap;
+}
+
+.c1:hover {
+  opacity: 1;
+}
+
+.c1 svg {
+  cursor: pointer;
+  height: 1rem;
+  margin-right: 0;
+  padding-top: 0;
+  width: 1rem;
+}
+
 <div>
   <button
-    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 kafYuo"
-    color="white"
+    class="c0 c1"
     role="checkbox"
   >
     <svg
       aria-hidden="true"
-      class="svg-inline--fa fa-check-square fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx"
+      class="svg-inline--fa fa-check-square fa-w-14 fa-1x c2"
       color="var(--color-lapis-lazuli)"
       data-icon="check-square"
       data-prefix="fas"
@@ -55,15 +171,73 @@ exports[`[Contrib] elements/<Checkbox /> should match snapshot with \`isChecked\
 `;
 
 exports[`[Contrib] elements/<Checkbox /> should match snapshot with a custom \`color\` prop 1`] = `
+.c0 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  text-align: center;
+  line-height: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-size: inherit;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: white;
+  background-color: primary;
+  border: 0;
+  border-radius: 4px;
+}
+
+.c2 {
+  cursor: default;
+  width: 1rem !important;
+}
+
+.c1 {
+  background-color: transparent;
+  border-radius: 0.125rem;
+  color: var(--color-eerie-black);
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin-right: 0;
+  min-height: 1.25rem;
+  min-width: 1.25rem;
+  opacity: 1;
+  padding: 0.3rem 1rem 0.3rem;
+  white-space: nowrap;
+}
+
+.c1:hover {
+  opacity: 1;
+}
+
+.c1 svg {
+  cursor: pointer;
+  height: 1rem;
+  margin-right: 0;
+  padding-top: 0;
+  width: 1rem;
+}
+
 <div>
   <button
-    class="sc-bdVaJa sc-EHOje Button-sc-1bpx84u-0 jnThSP"
-    color="white"
+    class="c0 c1"
     role="checkbox"
   >
     <svg
       aria-hidden="true"
-      class="svg-inline--fa fa-square fa-w-14 fa-1x Icon-sc-4jlog9-0 hXLKsx"
+      class="svg-inline--fa fa-square fa-w-14 fa-1x c2"
       color="var(--color-periwinkle)"
       data-icon="square"
       data-prefix="fas"

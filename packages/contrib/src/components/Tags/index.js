@@ -1,6 +1,6 @@
 import { any, prop, propEq, sortBy } from "ramda";
 import React from "react";
-import { Flex } from "rebass";
+import { Flex } from "rebass/styled-components";
 import styled from "styled-components";
 
 import Input from "../../elements/Input";
@@ -45,25 +45,19 @@ export default class Tags extends React.PureComponent {
     const tags =
       props.tags !== undefined
         ? this.sortByValue(
-            props.tags.filter(
-              ({ value }) => !any(propEq("value", value))(props.selectedTags)
-            )
+            props.tags.filter(({ value }) => !any(propEq("value", value))(props.selectedTags))
           )
         : [];
 
     this.state = {
       inputKey: 0,
       isLoading: true,
-      selectedTags:
-        props.selectedTags !== undefined
-          ? this.sortByValue(props.selectedTags)
-          : [],
+      selectedTags: props.selectedTags !== undefined ? this.sortByValue(props.selectedTags) : [],
       suggestedTags: [],
       tags
     };
 
-    this.ariaName =
-      this.props.ariaName !== undefined ? this.props.ariaName : "l'étiquette";
+    this.ariaName = this.props.ariaName !== undefined ? this.props.ariaName : "l'étiquette";
   }
 
   getTagByValue(_value, source) {
@@ -91,9 +85,7 @@ export default class Tags extends React.PureComponent {
     const tag = this.getTagByValue(value, this.state.selectedTags);
 
     this.setState({
-      selectedTags: this.state.selectedTags.filter(
-        ({ value: _value }) => _value !== value
-      ),
+      selectedTags: this.state.selectedTags.filter(({ value: _value }) => _value !== value),
       tags: this.sortByValue([...this.state.tags, tag])
     });
 
@@ -145,22 +137,14 @@ export default class Tags extends React.PureComponent {
           <Input
             key={this.state.inputKey}
             onChange={this.refreshSuggestedTags.bind(this)}
-            placeholder={`Commencez à taper le nom de ${this.ariaName}`.replace(
-              "de le",
-              "du"
-            )}
+            placeholder={`Commencez à taper le nom de ${this.ariaName}`.replace("de le", "du")}
             ref={node => (this.$input = node)}
           />
         )}
-        {Boolean(this.props.isEditable) &&
-          this.state.suggestedTags.length !== 0 && (
-            <SuggestedTags flexDirection="column">
-              {this.getSuggestedTags()}
-            </SuggestedTags>
-          )}
-        {!Boolean(this.props.hideTags) && (
-          <SelectedTags>{this.getSelectedTags()}</SelectedTags>
+        {Boolean(this.props.isEditable) && this.state.suggestedTags.length !== 0 && (
+          <SuggestedTags flexDirection="column">{this.getSuggestedTags()}</SuggestedTags>
         )}
+        {!Boolean(this.props.hideTags) && <SelectedTags>{this.getSelectedTags()}</SelectedTags>}
       </Container>
     );
   }

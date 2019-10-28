@@ -1,12 +1,59 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[Contrib] blocks/<AnswerEditionContent /> should match snapshot 1`] = `
+.c1 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c3 {
+  color: #444444;
+  font-size: 0.875rem;
+  width: auto !important;
+}
+
+.c4 {
+  height: 0.75rem;
+  margin: 2px 3px 0;
+  vertical-align: -1px;
+  width: 0.75rem;
+}
+
+.c0 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c2 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
 <div>
   <div
-    class="sc-bdVaJa sc-bwzfXH AnswerEditionContent__Container-sc-1xvty1w-0 ilYRzc"
+    class="c0"
   >
     <div
-      class="sc-bdVaJa sc-bwzfXH hhcqrs AnswerEditionContent__Editor-sc-1xvty1w-1 gIJVAk"
+      class="c1 c2"
     >
       <div
         class="ql-toolbar ql-snow"
@@ -15,22 +62,22 @@ exports[`[Contrib] blocks/<AnswerEditionContent /> should match snapshot 1`] = `
           class="ql-formats"
         >
           <button
-            class="Editor__TextButton-sc-1s8484a-0 eNdwXj ql-undo"
+            class="c3 ql-undo"
             title="Bouton annulant la dernière modification effectuée"
             type="button"
           >
             <img
-              class="Editor__TextButtonIcon-sc-1s8484a-1 nERRq"
+              class="c4"
               src="/static/images/undo.svg"
             />
           </button>
           <button
-            class="Editor__TextButton-sc-1s8484a-0 eNdwXj ql-redo"
+            class="c3 ql-redo"
             title="Bouton réappliquant la dernière modification annulée"
             type="button"
           >
             <img
-              class="Editor__TextButtonIcon-sc-1s8484a-1 nERRq"
+              class="c4"
               src="/static/images/redo.svg"
             />
           </button>

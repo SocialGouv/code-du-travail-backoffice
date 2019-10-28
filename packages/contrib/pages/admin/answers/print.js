@@ -10,7 +10,7 @@ import Subtitle from "../../../src/elements/Subtitle";
 import getUriParams from "../../../src/libs/getUriParams";
 import markdown from "../../../src/libs/markdown";
 
-import { Flex } from "rebass";
+import { Flex } from "rebass/styled-components";
 
 const Container = styled.div`
   height: 100vh;
@@ -76,38 +76,27 @@ export class AdminAnswersPrintPage extends React.Component {
   renderAnswers() {
     const { data } = this.props.answers;
 
-    return data.map(
-      ({
-        agreement_idcc,
-        id,
-        question_index,
-        question_value,
-        references,
-        value
-      }) => (
-        <div key={id}>
-          <Header alignItems="baseline">
-            <Idcc code={agreement_idcc} />
-            <Subtitle
-              isFirst
-            >{`${question_index}) ${question_value}`}</Subtitle>
-          </Header>
-          <ContentTitle isFirst>Réponse corrigée:</ContentTitle>
-          <Pre dangerouslySetInnerHTML={this.renderValue(value)} />
-          {references.length !== 0 && (
-            <div>
-              <ContentTitle isFirst>Références:</ContentTitle>
-              <List>
-                {references.map(({ id, value }) => (
-                  <li key={id}>{value}</li>
-                ))}
-              </List>
-            </div>
-          )}
-          <Hr />
-        </div>
-      )
-    );
+    return data.map(({ agreement_idcc, id, question_index, question_value, references, value }) => (
+      <div key={id}>
+        <Header alignItems="baseline">
+          <Idcc code={agreement_idcc} />
+          <Subtitle isFirst>{`${question_index}) ${question_value}`}</Subtitle>
+        </Header>
+        <ContentTitle isFirst>Réponse corrigée:</ContentTitle>
+        <Pre dangerouslySetInnerHTML={this.renderValue(value)} />
+        {references.length !== 0 && (
+          <div>
+            <ContentTitle isFirst>Références:</ContentTitle>
+            <List>
+              {references.map(({ id, value }) => (
+                <li key={id}>{value}</li>
+              ))}
+            </List>
+          </div>
+        )}
+        <Hr />
+      </div>
+    ));
   }
 
   render() {

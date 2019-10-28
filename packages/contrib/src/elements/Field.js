@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Text } from "rebass";
+import { Flex, Text } from "rebass/styled-components";
 import styled from "styled-components";
 
 const Field = styled(Flex)`

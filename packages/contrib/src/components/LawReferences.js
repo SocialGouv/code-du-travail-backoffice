@@ -1,7 +1,7 @@
 import React from "react";
 import ReactTagAutocomplete from "react-tag-autocomplete";
 import styled from "styled-components";
-import { Flex } from "rebass";
+import { Flex } from "rebass/styled-components";
 
 import Reference from "./Reference";
 
@@ -62,9 +62,10 @@ export default class LawReferences extends React.PureComponent {
   }
 
   getSuggestions() {
-    return LAW_REFERENCES.filter(value => !this.references.includes(value)).map(
-      value => ({ id: value, name: value })
-    );
+    return LAW_REFERENCES.filter(value => !this.references.includes(value)).map(value => ({
+      id: value,
+      name: value
+    }));
   }
 
   async onAdd(ref) {
@@ -101,11 +102,7 @@ export default class LawReferences extends React.PureComponent {
 
   getReferences() {
     return this.props.references.map(({ id, value }, index) => (
-      <Reference
-        key={index}
-        onRemove={() => this.props.onRemove(id)}
-        value={value}
-      />
+      <Reference key={index} onRemove={() => this.props.onRemove(id)} value={value} />
     ));
   }
 

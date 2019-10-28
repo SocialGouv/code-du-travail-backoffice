@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex } from "rebass";
+import { Flex } from "rebass/styled-components";
 import styled from "styled-components";
 
 import BaseEditor from "../../components/Editor";
