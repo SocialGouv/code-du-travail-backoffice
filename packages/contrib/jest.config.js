@@ -23,5 +23,5 @@ module.exports = {
     "<rootDir>/src/texts.js"
   ],
   // https://github.com/facebook/create-react-app/issues/2007#issuecomment-296694661
-  setupFilesAfterEnv: ["<rootDir>/__tests__/jest.setup.js"]
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"]
 };

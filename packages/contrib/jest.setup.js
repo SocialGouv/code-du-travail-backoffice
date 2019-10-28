@@ -2,9 +2,13 @@
 
 process.env.API_URI = "http://localhost:3200";
 
-// Jest "jest-dom" extension
+// Jest "dom" extension
 // https://github.com/gnapse/jest-dom#usage
 import "@testing-library/jest-dom/extend-expect";
+
+// Jest "styled-components" extension
+// https://github.com/styled-components/jest-styled-components#usage
+import "jest-styled-components";
 
 // Jest "snapshot-diff" extension
 // https://github.com/jest-community/snapshot-diff#with-custom-matcher
@@ -21,13 +25,13 @@ import "mutationobserver-shim";
 // import "../__mocks__/sessionStorage";
 
 // Mock "next/router"
-import "../__mocks__/nextRouter";
+import "./__mocks__/nextRouter";
 
 // Mock "axios"
-import "../__mocks__/axios";
+import "./__mocks__/axios";
 
 // Mock "../src/libs/customAxios"
-import "../__mocks__/customAxios";
+import "./__mocks__/customAxios";
 
 // Globalize generateTestId() helper
-import "../__mocks__/generateTestId";
+import "./__mocks__/generateTestId";
