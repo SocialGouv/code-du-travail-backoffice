@@ -1,17 +1,20 @@
 import React from "react";
-import { render } from "@testing-library/react";
+
 import Title from "../Title";
 
 describe("[Contrib] elements/<Title />", () => {
-  it("should match snapshot", () => {
-    const { container } = render(<Title />);
+  const TEXT = "A Title";
 
-    expect(container).toMatchSnapshot();
+  it(`should pass`, () => {
+    const $title = testRender(<Title>{TEXT}</Title>);
+
+    expect($title).toMatchSnapshot();
+    expect($title).toHaveStyleRule("margin", "1.5rem 0 0.5rem");
   });
 
-  it("should match snapshot with `isFirst` prop", () => {
-    const { container } = render(<Title isFirst />);
+  it(`should pass with {isFirst}`, () => {
+    const $title = testRender(<Title isFirst>{TEXT}</Title>);
 
-    expect(container).toMatchSnapshot();
+    expect($title).toHaveStyleRule("margin", "0 0 0.5rem");
   });
 });
