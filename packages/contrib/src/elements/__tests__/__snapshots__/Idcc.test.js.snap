@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<Idcc /> should match snapshot 1`] = `
+exports[`[Contrib] elements/<Idcc /> should pass 1`] = `
 .emotion-0 {
   background-color: var(--color-label-background);
   border: solid 1px var(--color-black-leather-jacket);
@@ -22,17 +22,14 @@ exports[`[Contrib] elements/<Idcc /> should match snapshot 1`] = `
   opacity: 1;
 }
 
-<div>
+<div
+  className="emotion-0 emotion-1"
+  data-tip="Code du travail"
+>
+  CDT
   <div
-    class="emotion-0 emotion-1"
-    currentitem="false"
-    data-tip="Code du travail"
-  >
-    CDT
-    <div
-      class="__react_component_tooltip place-top type-dark "
-      data-id="tooltip"
-    />
-  </div>
+    className="__react_component_tooltip place-top type-dark "
+    data-id="tooltip"
+  />
 </div>
 `;

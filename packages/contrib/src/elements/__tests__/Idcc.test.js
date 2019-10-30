@@ -1,15 +1,25 @@
 import React from "react";
-import { render } from "@testing-library/react";
+
 import Idcc from "../Idcc";
 
-// Ignore styled-wrapped ReactTooltip className prop warning
-console.warn = jest.fn();
-
 describe("[Contrib] elements/<Idcc />", () => {
-  it("should match snapshot", () => {
-    const data = { idcc: "1234", name: "A labor agreement title" };
-    const { container } = render(<Idcc data={data} />);
+  const COMMON_PROPS = {
+    name: "A Labor Agreement"
+  };
 
-    expect(container).toMatchSnapshot();
+  it(`should pass`, () => {
+    const $idcc = testRender(<Idcc {...COMMON_PROPS} />);
+
+    expect($idcc).toMatchSnapshot();
+    expect($idcc.props).toHaveProperty("data-tip", "Code du travail");
+    expect($idcc.children[0]).toStrictEqual("CDT");
+  });
+
+  it(`should pass with {code} = 1234`, () => {
+    const CODE = 1234;
+    const $idcc = testRender(<Idcc code={CODE} {...COMMON_PROPS} />);
+
+    expect($idcc.props).toHaveProperty("data-tip", COMMON_PROPS.name);
+    expect($idcc.children[0]).toStrictEqual(`IDCC: ${CODE}`);
   });
 });
