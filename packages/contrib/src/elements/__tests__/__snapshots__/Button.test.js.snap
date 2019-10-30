@@ -1,309 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<Button /> should match snapshot 1`] = `
-.emotion-1 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  display: inline-block;
-  text-align: center;
-  line-height: inherit;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  font-size: inherit;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
-  background-color: primary;
-  border: 0;
-  border-radius: 4px;
-  color: var(--color-lapis-lazuli);
-  background-color: var(--color-lapis-lazuli);
-  border-radius: 0.125rem;
-  color: white;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  margin-right: 0;
-  min-height: 1.25rem;
-  min-width: 1.25rem;
-  opacity: 1;
-  padding: 0.3rem 1rem 0.3rem;
-  white-space: nowrap;
+exports[`[Contrib] elements/<Button /> should have a transparent background with {icon} = "sync" and no children 1`] = `
+.emotion-0 {
+  cursor: default;
+  width: 1rem !important;
 }
 
-.emotion-1:hover {
-  opacity: 1;
-}
-
-.emotion-1 svg {
-  cursor: pointer;
-  height: 1rem;
-  margin-right: 0.25rem;
-  padding-top: 0.125rem;
-  width: 1rem;
-}
-
-<div>
-  <button
-    class="emotion-0 emotion-1"
-  >
-    A Button
-  </button>
-</div>
-`;
-
-exports[`[Contrib] elements/<Button /> should match snapshot with \`disabled\` prop 1`] = `
-.emotion-1 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  display: inline-block;
-  text-align: center;
-  line-height: inherit;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  font-size: inherit;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
-  background-color: primary;
-  border: 0;
-  border-radius: 4px;
-  color: var(--color-lapis-lazuli);
-  background-color: var(--color-lapis-lazuli);
-  border-radius: 0.125rem;
-  color: white;
-  cursor: not-allowed;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  margin-right: 0;
-  min-height: 1.25rem;
-  min-width: 1.25rem;
-  opacity: 0.25;
-  padding: 0.3rem 1rem 0.3rem;
-  white-space: nowrap;
-}
-
-.emotion-1:hover {
-  opacity: 0.25;
-}
-
-.emotion-1 svg {
-  cursor: not-allowed;
-  height: 1rem;
-  margin-right: 0.25rem;
-  padding-top: 0.125rem;
-  width: 1rem;
-}
-
-<div>
-  <button
-    class="emotion-0 emotion-1"
-    disabled=""
-  />
-</div>
-`;
-
-exports[`[Contrib] elements/<Button /> should match snapshot with \`hasGroup\` prop 1`] = `
-.emotion-1 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  display: inline-block;
-  text-align: center;
-  line-height: inherit;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  font-size: inherit;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
-  background-color: primary;
-  border: 0;
-  border-radius: 4px;
-  color: var(--color-lapis-lazuli);
-  background-color: var(--color-lapis-lazuli);
-  border-radius: 0.125rem;
-  color: white;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  margin-right: 1rem;
-  min-height: 1.25rem;
-  min-width: 1.25rem;
-  opacity: 1;
-  padding: 0.3rem 1rem 0.3rem;
-  white-space: nowrap;
-}
-
-.emotion-1:hover {
-  opacity: 1;
-}
-
-.emotion-1 svg {
-  cursor: pointer;
-  height: 1rem;
-  margin-right: 0.25rem;
-  padding-top: 0.125rem;
-  width: 1rem;
-}
-
-<div>
-  <button
-    class="emotion-0 emotion-1"
-  />
-</div>
-`;
-
-exports[`[Contrib] elements/<Button /> should match snapshot with \`isSmall\` prop 1`] = `
-.emotion-1 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  display: inline-block;
-  text-align: center;
-  line-height: inherit;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  font-size: inherit;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
-  background-color: primary;
-  border: 0;
-  border-radius: 4px;
-  color: var(--color-lapis-lazuli);
-  background-color: var(--color-lapis-lazuli);
-  border-radius: 0.125rem;
-  color: white;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  margin-right: 0;
-  min-height: 1.25rem;
-  min-width: 1.25rem;
-  opacity: 1;
-  padding: 0.1rem 0.5rem 0.15rem;
-  white-space: nowrap;
-}
-
-.emotion-1:hover {
-  opacity: 1;
-}
-
-.emotion-1 svg {
-  cursor: pointer;
-  height: 1rem;
-  margin-right: 0.25rem;
-  padding-top: 0.125rem;
-  width: 1rem;
-}
-
-<div>
-  <button
-    class="emotion-0 emotion-1"
-  />
-</div>
-`;
-
-exports[`[Contrib] elements/<Button /> should match snapshot with a custom \`color\` prop 1`] = `
-.emotion-1 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  display: inline-block;
-  text-align: center;
-  line-height: inherit;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  font-size: inherit;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
-  background-color: primary;
-  border: 0;
-  border-radius: 4px;
-  color: var(--color-periwinkle);
-  background-color: var(--color-periwinkle);
-  border-radius: 0.125rem;
-  color: var(--color-eerie-black);
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  margin-right: 0;
-  min-height: 1.25rem;
-  min-width: 1.25rem;
-  opacity: 1;
-  padding: 0.3rem 1rem 0.3rem;
-  white-space: nowrap;
-}
-
-.emotion-1:hover {
-  opacity: 1;
-}
-
-.emotion-1 svg {
-  cursor: pointer;
-  height: 1rem;
-  margin-right: 0.25rem;
-  padding-top: 0.125rem;
-  width: 1rem;
-}
-
-<div>
-  <button
-    class="emotion-0 emotion-1"
-  />
-</div>
-`;
-
-exports[`[Contrib] elements/<Button /> should match snapshot with a set \`icon\` prop 1`] = `
 .emotion-3 {
   box-sizing: border-box;
   margin: 0;
@@ -355,31 +57,172 @@ exports[`[Contrib] elements/<Button /> should match snapshot with a set \`icon\`
   width: 1rem;
 }
 
+<button
+  className="emotion-2 emotion-3"
+  disabled={false}
+>
+  <svg
+    aria-hidden="true"
+    className="svg-inline--fa fa-sync fa-w-16 fa-1x  emotion-0 emotion-1"
+    color="var(--color-lapis-lazuli)"
+    data-icon="sync"
+    data-prefix="fas"
+    focusable="false"
+    role="img"
+    style={Object {}}
+    viewBox="0 0 512 512"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M440.65 12.57l4 82.77A247.16 247.16 0 0 0 255.83 8C134.73 8 33.91 94.92 12.29 209.82A12 12 0 0 0 24.09 224h49.05a12 12 0 0 0 11.67-9.26 175.91 175.91 0 0 1 317-56.94l-101.46-4.86a12 12 0 0 0-12.57 12v47.41a12 12 0 0 0 12 12H500a12 12 0 0 0 12-12V12a12 12 0 0 0-12-12h-47.37a12 12 0 0 0-11.98 12.57zM255.83 432a175.61 175.61 0 0 1-146-77.8l101.8 4.87a12 12 0 0 0 12.57-12v-47.4a12 12 0 0 0-12-12H12a12 12 0 0 0-12 12V500a12 12 0 0 0 12 12h47.35a12 12 0 0 0 12-12.6l-4.15-82.57A247.17 247.17 0 0 0 255.83 504c121.11 0 221.93-86.92 243.55-201.82a12 12 0 0 0-11.8-14.18h-49.05a12 12 0 0 0-11.67 9.26A175.86 175.86 0 0 1 255.83 432z"
+      fill="currentColor"
+      style={Object {}}
+    />
+  </svg>
+</button>
+`;
+
+exports[`[Contrib] elements/<Button /> should pass 1`] = `
+.emotion-1 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  text-align: center;
+  line-height: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-size: inherit;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: white;
+  background-color: primary;
+  border: 0;
+  border-radius: 4px;
+  color: var(--color-lapis-lazuli);
+  background-color: var(--color-lapis-lazuli);
+  border-radius: 0.125rem;
+  color: white;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin-right: 0;
+  min-height: 1.25rem;
+  min-width: 1.25rem;
+  opacity: 1;
+  padding: 0.3rem 1rem 0.3rem;
+  white-space: nowrap;
+}
+
+.emotion-1:hover {
+  opacity: 1;
+}
+
+.emotion-1 svg {
+  cursor: pointer;
+  height: 1rem;
+  margin-right: 0.25rem;
+  padding-top: 0.125rem;
+  width: 1rem;
+}
+
+<button
+  className="emotion-0 emotion-1"
+  disabled={false}
+>
+  A Button
+</button>
+`;
+
+exports[`[Contrib] elements/<Button /> should pass with {icon} = "sync" 1`] = `
+.emotion-3 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  text-align: center;
+  line-height: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-size: inherit;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: white;
+  background-color: primary;
+  border: 0;
+  border-radius: 4px;
+  color: var(--color-lapis-lazuli);
+  background-color: var(--color-lapis-lazuli);
+  border-radius: 0.125rem;
+  color: white;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin-right: 0;
+  min-height: 1.25rem;
+  min-width: 1.25rem;
+  opacity: 1;
+  padding: 0.3rem 1rem 0.3rem;
+  white-space: nowrap;
+}
+
+.emotion-3:hover {
+  opacity: 1;
+}
+
+.emotion-3 svg {
+  cursor: pointer;
+  height: 1rem;
+  margin-right: 0.25rem;
+  padding-top: 0.125rem;
+  width: 1rem;
+}
+
 .emotion-0 {
   cursor: default;
   width: 1rem !important;
 }
 
-<div>
-  <button
-    class="emotion-2 emotion-3"
+<button
+  className="emotion-2 emotion-3"
+  disabled={false}
+>
+  <svg
+    aria-hidden="true"
+    className="svg-inline--fa fa-sync fa-w-16 fa-1x  emotion-0 emotion-1"
+    color="white"
+    data-icon="sync"
+    data-prefix="fas"
+    focusable="false"
+    role="img"
+    style={Object {}}
+    viewBox="0 0 512 512"
+    xmlns="http://www.w3.org/2000/svg"
   >
-    <svg
-      aria-hidden="true"
-      class="svg-inline--fa fa-sync fa-w-16 fa-1x  emotion-0 emotion-1"
-      color="var(--color-lapis-lazuli)"
-      data-icon="sync"
-      data-prefix="fas"
-      focusable="false"
-      role="img"
-      viewBox="0 0 512 512"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M440.65 12.57l4 82.77A247.16 247.16 0 0 0 255.83 8C134.73 8 33.91 94.92 12.29 209.82A12 12 0 0 0 24.09 224h49.05a12 12 0 0 0 11.67-9.26 175.91 175.91 0 0 1 317-56.94l-101.46-4.86a12 12 0 0 0-12.57 12v47.41a12 12 0 0 0 12 12H500a12 12 0 0 0 12-12V12a12 12 0 0 0-12-12h-47.37a12 12 0 0 0-11.98 12.57zM255.83 432a175.61 175.61 0 0 1-146-77.8l101.8 4.87a12 12 0 0 0 12.57-12v-47.4a12 12 0 0 0-12-12H12a12 12 0 0 0-12 12V500a12 12 0 0 0 12 12h47.35a12 12 0 0 0 12-12.6l-4.15-82.57A247.17 247.17 0 0 0 255.83 504c121.11 0 221.93-86.92 243.55-201.82a12 12 0 0 0-11.8-14.18h-49.05a12 12 0 0 0-11.67 9.26A175.86 175.86 0 0 1 255.83 432z"
-        fill="currentColor"
-      />
-    </svg>
-  </button>
-</div>
+    <path
+      d="M440.65 12.57l4 82.77A247.16 247.16 0 0 0 255.83 8C134.73 8 33.91 94.92 12.29 209.82A12 12 0 0 0 24.09 224h49.05a12 12 0 0 0 11.67-9.26 175.91 175.91 0 0 1 317-56.94l-101.46-4.86a12 12 0 0 0-12.57 12v47.41a12 12 0 0 0 12 12H500a12 12 0 0 0 12-12V12a12 12 0 0 0-12-12h-47.37a12 12 0 0 0-11.98 12.57zM255.83 432a175.61 175.61 0 0 1-146-77.8l101.8 4.87a12 12 0 0 0 12.57-12v-47.4a12 12 0 0 0-12-12H12a12 12 0 0 0-12 12V500a12 12 0 0 0 12 12h47.35a12 12 0 0 0 12-12.6l-4.15-82.57A247.17 247.17 0 0 0 255.83 504c121.11 0 221.93-86.92 243.55-201.82a12 12 0 0 0-11.8-14.18h-49.05a12 12 0 0 0-11.67 9.26A175.86 175.86 0 0 1 255.83 432z"
+      fill="currentColor"
+      style={Object {}}
+    />
+  </svg>
+  A Button
+</button>
 `;
