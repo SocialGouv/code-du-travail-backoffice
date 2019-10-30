@@ -1,40 +1,38 @@
 import React from "react";
-import { render } from "@testing-library/react";
+
 import Icon from "../Icon";
 
 describe("[Contrib] elements/<Icon />", () => {
-  const props = {
+  const COMMON_PROPS = {
     icon: "book"
   };
 
-  const { asFragment, container } = render(<Icon {...props} />);
-  const firstRender = asFragment();
+  it(`should pass`, () => {
+    const $icon = testRender(<Icon {...COMMON_PROPS} />);
 
-  it("should match snapshot", () => {
-    expect(container).toMatchSnapshot();
+    expect($icon).toMatchSnapshot();
+    expect($icon.props).toHaveProperty("color", "var(--color-black-leather-jacket)");
+    expect($icon.props).toHaveProperty("role", "img");
+    expect($icon).toHaveStyleRule("cursor", "default");
+    expect($icon).toHaveStyleRule("width", "1rem !important");
   });
 
-  it("should match snapshot with `color` prop", () => {
-    const { asFragment } = render(<Icon {...props} color="red" />);
+  it(`should pass with {color} = "red"`, () => {
+    const $icon = testRender(<Icon {...COMMON_PROPS} color="red" />);
 
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
+    expect($icon.props).toHaveProperty("color", "red");
   });
 
-  it("should match snapshot with a custom `isSmall` prop", () => {
-    const { asFragment } = render(<Icon {...props} isSmall />);
+  it(`should pass with {isSmall}`, () => {
+    const $icon = testRender(<Icon {...COMMON_PROPS} isSmall />);
 
-    expect(firstRender).toMatchDiffSnapshot(asFragment());
+    expect($icon).toHaveStyleRule("width", "0.5rem !important");
   });
 
-  it("should match snapshot with a `role` prop set to 'button'", () => {
-    const { container } = render(<Icon {...props} role="button" />);
+  it(`should pass with {role} = "button"`, () => {
+    const $icon = testRender(<Icon {...COMMON_PROPS} role="button" />);
 
-    expect(container).toMatchSnapshot();
-  });
-
-  it("should match snapshot with a dashed icon name", () => {
-    const { container } = render(<Icon icon="caret-down" />);
-
-    expect(container).toMatchSnapshot();
+    expect($icon.props).toHaveProperty("role", "button");
+    expect($icon).toHaveStyleRule("cursor", "pointer");
   });
 });
