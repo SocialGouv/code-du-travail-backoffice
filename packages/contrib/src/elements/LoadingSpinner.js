@@ -30,7 +30,7 @@ const ripple = keyframes`
 const Spinner = styled.div`
   animation: ${ripple} 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
   border-radius: 50%;
-  border: 4px solid ${props => props.color};
+  border: 4px solid ${p => p.color};
   opacity: 1;
   position: absolute;
 `;
@@ -38,13 +38,11 @@ const SpinnerNext = styled(Spinner)`
   animation-delay: -0.5s;
 `;
 
-export default ({ color }) => {
-  const _color = color !== undefined ? color : "white";
-
+export default ({ color = "white", ...props }) => {
   return (
-    <Container>
-      <Spinner color={_color} />
-      <SpinnerNext color={_color} />
+    <Container {...props}>
+      <Spinner color={color} />
+      <SpinnerNext color={color} />
     </Container>
   );
 };

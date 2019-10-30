@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<LoadingSpinner /> should match snapshot 1`] = `
+exports[`[Contrib] elements/<LoadingSpinner /> should pass 1`] = `
 @keyframes animation-0 {
   0% {
     height: 0;
@@ -64,134 +64,17 @@ exports[`[Contrib] elements/<LoadingSpinner /> should match snapshot 1`] = `
   animation-delay: -0.5s;
 }
 
-<div>
+<div
+  className="emotion-4 emotion-5"
+  size="8rem"
+>
   <div
-    class="emotion-4 emotion-5"
-  >
-    <div
-      class="emotion-0 emotion-1"
-      color="white"
-    />
-    <div
-      class="emotion-2 emotion-3"
-      color="white"
-    />
-  </div>
-</div>
-`;
-
-exports[`[Contrib] elements/<LoadingSpinner /> should match snapshot with a custom \`color\` prop 1`] = `
-@keyframes animation-0 {
-  0% {
-    height: 0;
-    left: 28px;
-    opacity: 1;
-    top: 28px;
-    width: 0;
-  }
-
-  100% {
-    height: 58px;
-    left: -1px;
-    opacity: 0;
-    top: -1px;
-    width: 58px;
-  }
-}
-
-@keyframes animation-0 {
-  0% {
-    height: 0;
-    left: 28px;
-    opacity: 1;
-    top: 28px;
-    width: 0;
-  }
-
-  100% {
-    height: 58px;
-    left: -1px;
-    opacity: 0;
-    top: -1px;
-    width: 58px;
-  }
-}
-
-@keyframes animation-0 {
-  0% {
-    height: 0;
-    left: 28px;
-    opacity: 1;
-    top: 28px;
-    width: 0;
-  }
-
-  100% {
-    height: 58px;
-    left: -1px;
-    opacity: 0;
-    top: -1px;
-    width: 58px;
-  }
-}
-
-@keyframes animation-0 {
-  0% {
-    height: 0;
-    left: 28px;
-    opacity: 1;
-    top: 28px;
-    width: 0;
-  }
-
-  100% {
-    height: 58px;
-    left: -1px;
-    opacity: 0;
-    top: -1px;
-    width: 58px;
-  }
-}
-
-.emotion-4 {
-  display: inline-block;
-  position: relative;
-  width: 64px;
-  height: 64px;
-}
-
-.emotion-0 {
-  -webkit-animation: animation-0 1s cubic-bezier(0,0.2,0.8,1) infinite;
-  animation: animation-0 1s cubic-bezier(0,0.2,0.8,1) infinite;
-  border-radius: 50%;
-  border: 4px solid blue;
-  opacity: 1;
-  position: absolute;
-}
-
-.emotion-2 {
-  -webkit-animation: animation-0 1s cubic-bezier(0,0.2,0.8,1) infinite;
-  animation: animation-0 1s cubic-bezier(0,0.2,0.8,1) infinite;
-  border-radius: 50%;
-  border: 4px solid blue;
-  opacity: 1;
-  position: absolute;
-  -webkit-animation-delay: -0.5s;
-  animation-delay: -0.5s;
-}
-
-<div>
+    className="emotion-0 emotion-1"
+    color="white"
+  />
   <div
-    class="emotion-4 emotion-5"
-  >
-    <div
-      class="emotion-0 emotion-1"
-      color="blue"
-    />
-    <div
-      class="emotion-2 emotion-3"
-      color="blue"
-    />
-  </div>
+    className="emotion-2 emotion-3"
+    color="white"
+  />
 </div>
 `;
