@@ -1,11 +1,13 @@
 import React from "react";
-import { render } from "@testing-library/react";
+
 import Link from "../Link";
 
 describe("[Contrib] elements/<Link />", () => {
-  it("should match snapshot", () => {
-    const { container } = render(<Link />);
+  const TEXT = "A Link";
 
-    expect(container).toMatchSnapshot();
+  it(`should pass`, () => {
+    const $link = testRender(<Link>{TEXT}</Link>);
+
+    expect($link).toMatchSnapshot();
   });
 });
