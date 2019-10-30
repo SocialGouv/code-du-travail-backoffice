@@ -20,7 +20,7 @@ export default styled.select`
   font-size: inherit;
   height: 2rem;
   line-height: 1;
-  opacity: ${({ disabled }) => (Boolean(disabled) ? 0.25 : 1)};
+  opacity: ${p => (Boolean(p.disabled) ? 0.25 : 1)};
   padding: 0.4rem 0.6rem 0.575rem;
   width: 100%;
 `;
