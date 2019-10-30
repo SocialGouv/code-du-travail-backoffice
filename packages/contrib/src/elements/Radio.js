@@ -16,16 +16,22 @@ const Icon = styled(_Icon)`
   }
 `;
 
-export default ({ onChange, options, ...props }) => {
-  return options.map(({ isSelected, label, value }, index) => (
-    <div key={index}>
-      <Icon
-        icon={`${isSelected ? "dot-" : ""}circle`}
-        onClick={() => onChange(value)}
-        selected={isSelected}
-        {...props}
-      />
-      {label}
-    </div>
-  ));
-};
+export default ({ onChange, options, ...props }) => (
+  <div role="radiogroup">
+    {options.map(({ isSelected = false, label, value }, index) => (
+      <div key={index}>
+        <Icon
+          aria-checked={String(isSelected)}
+          aria-hidden="false"
+          icon={`${isSelected ? "dot-" : ""}circle`}
+          onClick={() => (isSelected ? void 0 : onChange(value))}
+          role="radio"
+          selected={isSelected}
+          tabIndex={index === 0 ? "0" : "-1"}
+          {...props}
+        />
+        {label}
+      </div>
+    ))}
+  </div>
+);
