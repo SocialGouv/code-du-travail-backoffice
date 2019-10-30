@@ -1,23 +1,36 @@
 import React from "react";
-import { render } from "@testing-library/react";
+
 import Input from "../Input";
 
 describe("[Contrib] elements/<Input />", () => {
-  it("should match snapshot", () => {
-    const { container } = render(<Input />);
+  it(`should pass`, () => {
+    const $input = testRender(<Input />);
 
-    expect(container).toMatchSnapshot();
+    expect($input).toMatchSnapshot();
+    expect($input).toHaveStyleRule("border", "solid 1px var(--color-border)");
+    expect($input).toHaveStyleRule("opacity", "1");
   });
 
-  it("should match snapshot with `disabled` prop", () => {
-    const { container } = render(<Input disabled />);
+  it(`should pass with {disabled}`, () => {
+    const $input = testRender(<Input disabled />);
 
-    expect(container).toMatchSnapshot();
+    expect($input).toHaveStyleRule("opacity", "0.25");
   });
 
-  it("should match snapshot with a custom `icon` prop", () => {
-    const { container } = render(<Input icon="search" />);
+  it(`should pass with {hasError}`, () => {
+    const $input = testRender(<Input hasError />);
 
-    expect(container).toMatchSnapshot();
+    expect($input).toHaveStyleRule("border", "solid 1px var(--color-text-red)");
+  });
+
+  it(`should pass with a {icon} = "search"`, () => {
+    const $input = testRender(<Input icon="search" />);
+    const $icon = $input
+      .findByType("div")
+      .findByType("span")
+      .findByType("svg");
+
+    expect($input).toMatchSnapshot();
+    expect($icon.props).toHaveProperty("data-icon", "search");
   });
 });
