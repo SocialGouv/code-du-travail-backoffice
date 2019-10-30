@@ -1,18 +1,27 @@
 import React from "react";
-import { render } from "@testing-library/react";
 
 import Tag from "../Tag";
 
 describe("[Contrib] elements/<Tag />", () => {
-  it("should match snapshot", () => {
-    const { container } = render(<Tag />);
+  it(`should pass`, () => {
+    const $tag = testRender(<Tag />);
 
-    expect(container).toMatchSnapshot();
+    expect($tag).toMatchSnapshot();
+    expect($tag).toHaveStyleRule("background-color", "transparent");
+    expect($tag).toHaveStyleRule("color", "var(--color-lapis-lazuli)");
+    expect($tag).toHaveStyleRule("opacity", "1");
   });
 
-  it("should match snapshot with `isDisabled` prop", () => {
-    const { container } = render(<Tag isDisabled />);
+  it(`should pass with {disabled}`, () => {
+    const $tag = testRender(<Tag isDisabled />);
 
-    expect(container).toMatchSnapshot();
+    expect($tag).toHaveStyleRule("opacity", "0.25");
+  });
+
+  it(`should pass with {selected}`, () => {
+    const $tag = testRender(<Tag selected />);
+
+    expect($tag).toHaveStyleRule("background-color", "var(--color-lapis-lazuli)");
+    expect($tag).toHaveStyleRule("color", "white");
   });
 });
