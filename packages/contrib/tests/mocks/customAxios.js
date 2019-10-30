@@ -1,4 +1,4 @@
-import "../src/libs/customAxios";
+import "../../src/libs/customAxios";
 
 global.axios = {
   delete: jest.fn(),
@@ -8,6 +8,6 @@ global.axios = {
   put: jest.fn()
 };
 
-jest.mock("../src/libs/customAxios", () => () => {
+jest.mock("../../src/libs/customAxios", () => () => {
   return global.axios;
 });

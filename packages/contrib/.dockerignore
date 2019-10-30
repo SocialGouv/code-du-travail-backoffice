@@ -1,8 +1,7 @@
-/__mocks__
-/__tests__
 /.next
 /coverage
 /node_modules
+/tests
 
 /.eslintrc.yml
 /.gitignore

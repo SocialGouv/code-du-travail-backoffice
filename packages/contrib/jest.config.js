@@ -3,13 +3,13 @@ module.exports = {
   // https://github.com/facebook/jest/issues/7331
   // collectCoverageFrom: ["<rootDir>/src/**/*.js"],
   moduleNameMapper: {
-    "\\.(jpg|jpeg|png|gif|eot|svg|ttf|woff|woff2)$": "<rootDir>/__mocks__/fileTransformer.js",
+    "\\.(jpg|jpeg|png|gif|eot|svg|ttf|woff|woff2)$": "<rootDir>/tests/mappers/fileTransformer.js",
     "\\.css$": "identity-obj-proxy"
   },
   modulePathIgnorePatterns: [
-    "<rootDir>/__tests__",
     "<rootDir>/.next",
     "<rootDir>/node_modules",
+    "<rootDir>/tests",
     // Page components should be tested in e2e:
     "<rootDir>/pages",
     "<rootDir>/server",
@@ -21,6 +21,6 @@ module.exports = {
     "<rootDir>/src/texts.js"
   ],
   // https://github.com/facebook/create-react-app/issues/2007#issuecomment-296694661
-  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
+  setupFilesAfterEnv: ["<rootDir>/tests/jest.setup.js"],
   snapshotSerializers: ["jest-emotion"]
 };

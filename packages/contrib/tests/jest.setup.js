@@ -23,17 +23,14 @@ expect.extend(matchers);
 // https://github.com/megawac/MutationObserver.js
 import "mutationobserver-shim";
 
-// Mock "sessionStorage"
-// import "../__mocks__/sessionStorage";
-
 // Mock "next/router"
-import "./__mocks__/nextRouter";
+import "./mocks/nextRouter";
 
 // Mock "axios"
-import "./__mocks__/axios";
+import "./mocks/axios";
 
 // Mock "../src/libs/customAxios"
-import "./__mocks__/customAxios";
+import "./mocks/customAxios";
 
-// Globalize generateTestId() helper
-import "./__mocks__/generateTestId";
+// Globalize render() helper
+import "./globals/testRender";

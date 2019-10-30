@@ -1,8 +1,8 @@
 import React from "react";
 import { cleanup, fireEvent, render } from "@testing-library/react";
 
-import "../../../__mocks__/console";
-import "../../../__mocks__/waitFor";
+import "../../../tests/globals/console";
+import "../../../tests/globals/waitFor";
 
 jest.mock("react-redux", () => ({
   connect: () => component => {

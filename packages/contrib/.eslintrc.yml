@@ -15,7 +15,6 @@ rules:
 
 overrides:
   - files:
-      - "__mocks__/*"
       - "jest.setup.js"
       - "*.test.js"
 
@@ -23,5 +22,5 @@ overrides:
       jest: true
 
     globals:
-      generateTestId: true
+      testRender: true
       waitFor: true
