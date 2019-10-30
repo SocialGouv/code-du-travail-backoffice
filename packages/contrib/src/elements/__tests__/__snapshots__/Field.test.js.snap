@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<Field /> should match snapshot 1`] = `
+exports[`[Contrib] elements/<Field /> should pass 1`] = `
 .emotion-0 {
   box-sizing: border-box;
   margin: 0;
@@ -12,9 +12,40 @@ exports[`[Contrib] elements/<Field /> should match snapshot 1`] = `
   margin-bottom: 0.5rem;
 }
 
-<div>
+<div
+  className="emotion-0 emotion-1"
+/>
+`;
+
+exports[`[Contrib] elements/<Field /> should pass with {error} 1`] = `
+.emotion-2 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+
+.emotion-1 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  color: red;
+  font-size: 0.75rem;
+  font-weight: 600;
+  height: 1rem;
+}
+
+<div
+  className="emotion-2 emotion-3"
+>
   <div
-    class="emotion-0 emotion-1"
-  />
+    className="emotion-0 emotion-1"
+  >
+    An Error
+  </div>
 </div>
 `;
