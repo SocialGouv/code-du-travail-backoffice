@@ -1,9 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<Hr /> should match snapshot 1`] = `
-<div>
-  <hr
-    class="Hr-zpmpsi-0 hnUWRB"
-  />
-</div>
+exports[`[Contrib] elements/<Hr /> should pass 1`] = `
+.emotion-0 {
+  border: 0;
+  border-top: solid 1px var(--color-border);
+  margin: 1rem 0;
+}
+
+<hr
+  className="emotion-0 emotion-1"
+/>
 `;

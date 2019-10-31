@@ -1,17 +1,18 @@
 import React from "react";
-import { render } from "@testing-library/react";
+
 import Select from "../Select";
 
 describe("[Contrib] elements/<Select />", () => {
-  it("should match snapshot", () => {
-    const { container } = render(<Select />);
+  it(`should pass`, () => {
+    const $select = testRender(<Select />);
 
-    expect(container).toMatchSnapshot();
+    expect($select).toMatchSnapshot();
+    expect($select).toHaveStyleRule("opacity", "1");
   });
 
-  it("should match snapshot with `disabled` prop", () => {
-    const { container } = render(<Select disabled />);
+  it(`should pass with {disabled}`, () => {
+    const $select = testRender(<Select disabled />);
 
-    expect(container).toMatchSnapshot();
+    expect($select).toHaveStyleRule("opacity", "0.25");
   });
 });

@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex } from "rebass";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import Idcc from "../../elements/Idcc";
 import _Checkbox from "../../elements/Checkbox";
@@ -75,19 +75,14 @@ export default ({ data, isChecked, onCheck, onClick }) => {
   } = data;
 
   const isTodo = state === ANSWER_STATE.TO_DO;
-  const value = [ANSWER_STATE.DRAFT, ANSWER_STATE.PENDING_REVIEW].includes(
-    state
-  )
+  const value = [ANSWER_STATE.DRAFT, ANSWER_STATE.PENDING_REVIEW].includes(state)
     ? data.prevalue
     : data.value;
 
   return (
     <Container alignItems="center">
       {isChecked !== undefined && (
-        <Checkbox
-          icon={isChecked ? "check-square" : "square"}
-          onClick={() => onCheck(id)}
-        />
+        <Checkbox icon={isChecked ? "check-square" : "square"} onClick={() => onCheck(id)} />
       )}
       <Flex flexDirection="column" width={1}>
         <Top justifyContent="space-between">
@@ -97,10 +92,8 @@ export default ({ data, isChecked, onCheck, onClick }) => {
             user !== null && (
               <TopAuthor>
                 {state === ANSWER_STATE.DRAFT && `Rédigée par : ${user.name}`}
-                {[
-                  ANSWER_STATE.PENDING_REVIEW,
-                  ANSWER_STATE.UNDER_REVIEW
-                ].includes(state) && `Proposée par : ${user.name}`}
+                {[ANSWER_STATE.PENDING_REVIEW, ANSWER_STATE.UNDER_REVIEW].includes(state) &&
+                  `Proposée par : ${user.name}`}
                 {state !== ANSWER_STATE.UNDER_REVIEW &&
                   `, ${customMoment(updated_at)
                     .tz("Europe/Paris")
@@ -114,9 +107,7 @@ export default ({ data, isChecked, onCheck, onClick }) => {
         <Content flexDirection="column" onClick={() => onClick(id)}>
           <Flex alignItems="baseline">
             <Idcc code={agreement_idcc} name={agreement_name} />
-            <ContentQuestion>
-              {`${question_index}) ${question_value}`}
-            </ContentQuestion>
+            <ContentQuestion>{`${question_index}) ${question_value}`}</ContentQuestion>
           </Flex>
           {!isTodo && generic_reference === null && (
             <ContentExtract>{excerpt(value)}</ContentExtract>
@@ -125,9 +116,7 @@ export default ({ data, isChecked, onCheck, onClick }) => {
             <ContentExtractRed>Renvoyé au Code du travail.</ContentExtractRed>
           )}
           {!isTodo && generic_reference === "national_agreement" && (
-            <ContentExtractRed>
-              Renvoyé à la convention collective nationale.
-            </ContentExtractRed>
+            <ContentExtractRed>Renvoyé à la convention collective nationale.</ContentExtractRed>
           )}
         </Content>
       </Flex>

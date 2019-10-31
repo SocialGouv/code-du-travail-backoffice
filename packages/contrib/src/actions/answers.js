@@ -2,10 +2,7 @@ import actionTypes from "./types";
 
 /* ONE ANSWER ―――――――――――――――――――――― */
 
-export const loadOne = (
-  id,
-  meta = { withReferences: false, withTags: false }
-) => ({
+export const loadOne = (id, meta = { withReferences: false, withTags: false }) => ({
   type: actionTypes.ANSWER_LOAD_ONE,
   meta: {
     ...meta,

@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex, Text } from "rebass";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 const Field = styled(Flex)`
   margin-bottom: 0.5rem;

@@ -46,15 +46,11 @@ describe.skip("[Contrib] layouts/<Menu /> (Contributor)", () => {
   });
 
   it("should redirect to the under review answers list", () => {
-    fireEvent.click(
-      γ.getByText(T.ANSWERS_INDEX_TITLE(ANSWER_STATE.UNDER_REVIEW))
-    );
+    fireEvent.click(γ.getByText(T.ANSWERS_INDEX_TITLE(ANSWER_STATE.UNDER_REVIEW)));
 
     expect(sessionStorage.getItem("jwt")).toBe(JWT);
     expect(sessionStorage.getItem("me")).toBe(ME);
-    expect(global.nextRouter.push).toHaveBeenCalledWith(
-      "/answers/under_review/1"
-    );
+    expect(global.nextRouter.push).toHaveBeenCalledWith("/answers/under_review/1");
   });
 
   it("should redirect to the validated answers list", () => {
@@ -85,9 +81,7 @@ describe.skip("[Contrib] layouts/<Menu /> (Contributor)", () => {
   });
 
   it("should open the local metalworking agreement proposal document", () => {
-    fireEvent.click(
-      γ.getByText("Proposition de réponses-types CC métallurgie locales")
-    );
+    fireEvent.click(γ.getByText("Proposition de réponses-types CC métallurgie locales"));
 
     expect(sessionStorage.getItem("jwt")).toBe(JWT);
     expect(sessionStorage.getItem("me")).toBe(ME);
@@ -109,9 +103,7 @@ describe.skip("[Contrib] layouts/<Menu /> (Contributor)", () => {
   });
 
   it("should open the answers validation feedback document", () => {
-    fireEvent.click(
-      γ.getByText("Premiers retours sur la validation des contributions")
-    );
+    fireEvent.click(γ.getByText("Premiers retours sur la validation des contributions"));
 
     expect(sessionStorage.getItem("jwt")).toBe(JWT);
     expect(sessionStorage.getItem("me")).toBe(ME);

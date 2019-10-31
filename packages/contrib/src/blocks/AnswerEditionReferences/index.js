@@ -1,7 +1,7 @@
 import { find, propEq } from "ramda";
 import React from "react";
 import { Flex } from "rebass";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import Tags from "../../components/Tags";
 import Field from "../../elements/Field";
@@ -25,11 +25,9 @@ export default class extends React.PureComponent {
 
     this.state = {
       agreementReferenceFormKey: 0,
-      laborCodeReferences: props.laborCodeReferences.map(
-        laborCodeReference => ({
-          value: laborCodeReference
-        })
-      ),
+      laborCodeReferences: props.laborCodeReferences.map(laborCodeReference => ({
+        value: laborCodeReference
+      })),
       selectedLaborCodeReferences: props.references
         .filter(({ category }) => category === "labor_code")
         .map(({ value }) => ({ value })),
@@ -54,9 +52,7 @@ export default class extends React.PureComponent {
 
   removeLaborCodeReference(value) {
     this.setState({
-      references: this.state.references.filter(
-        ({ value: _value }) => _value !== value
-      )
+      references: this.state.references.filter(({ value: _value }) => _value !== value)
     });
 
     this.props.onRemove(value);
@@ -89,9 +85,7 @@ export default class extends React.PureComponent {
 
   removeAgreementReference(value) {
     this.setState({
-      references: this.state.references.filter(
-        ({ value: _value }) => _value !== value
-      )
+      references: this.state.references.filter(({ value: _value }) => _value !== value)
     });
 
     this.props.onRemove(value);
@@ -124,9 +118,7 @@ export default class extends React.PureComponent {
 
   removeReference(value) {
     this.setState({
-      references: this.state.references.filter(
-        ({ value: _value }) => _value !== value
-      )
+      references: this.state.references.filter(({ value: _value }) => _value !== value)
     });
 
     this.props.onRemove(value);
@@ -139,9 +131,7 @@ export default class extends React.PureComponent {
     const laborCodeReferences = this.state.references.filter(
       ({ category }) => category === "labor_code"
     );
-    const otherReferences = this.state.references.filter(
-      ({ category }) => category === null
-    );
+    const otherReferences = this.state.references.filter(({ category }) => category === null);
 
     return (
       <Container flexDirection="column">
@@ -166,10 +156,7 @@ export default class extends React.PureComponent {
                 />
               </Field>
               <Field>
-                <Button
-                  title="Ajouter la référence à la convention collective"
-                  type="submit"
-                >
+                <Button title="Ajouter la référence à la convention collective" type="submit">
                   Ajouter la référence Convention Collective
                 </Button>
               </Field>
@@ -207,8 +194,7 @@ export default class extends React.PureComponent {
         <Part>
           <Flex flexDirection="column" width={0.5}>
             <Subtitle isFirst>
-              Autre référence juridique (décret, règlementation, circulaire,
-              jurisprudence) :
+              Autre référence juridique (décret, règlementation, circulaire, jurisprudence) :
             </Subtitle>
             <form
               key={this.state.referenceFormKey}

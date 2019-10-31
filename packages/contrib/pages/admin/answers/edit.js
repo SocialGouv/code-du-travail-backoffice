@@ -3,7 +3,7 @@ import React from "react";
 import Medixtor from "react-medixtor";
 import { connect } from "react-redux";
 import { Flex } from "rebass";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import * as actions from "../../../src/actions";
 import Comment from "../../../src/components/Comment";
@@ -273,11 +273,7 @@ export class AdminAnwsersEditPage extends React.Component {
       }
     }
 
-    if (
-      !this.state.isLoading &&
-      !this.props.answers.isLoading &&
-      !this.props.comments.isLoading
-    ) {
+    if (!this.state.isLoading && !this.props.answers.isLoading && !this.props.comments.isLoading) {
       this.$commentsContainer.scrollTo(0, this.$commentsContainer.scrollHeight);
     }
   }
@@ -328,9 +324,7 @@ export class AdminAnwsersEditPage extends React.Component {
     const newState = this.$newStateSelect.value;
 
     this.props.dispatch(
-      actions.answers.updateState([id], newState, () =>
-        window.location.reload()
-      )
+      actions.answers.updateState([id], newState, () => window.location.reload())
     );
   }
 
@@ -338,11 +332,7 @@ export class AdminAnwsersEditPage extends React.Component {
     const { dispatch, id } = this.props;
 
     dispatch(
-      actions.answers.updateGenericReference(
-        [id],
-        generic_reference,
-        this.fetchAnswer.bind(this)
-      )
+      actions.answers.updateGenericReference([id], generic_reference, this.fetchAnswer.bind(this))
     );
   }
 
@@ -433,8 +423,7 @@ export class AdminAnwsersEditPage extends React.Component {
       };
 
       this.setState({
-        agreementReferenceValueInputKey:
-          this.state.agreementReferenceValueInputKey + 1
+        agreementReferenceValueInputKey: this.state.agreementReferenceValueInputKey + 1
       });
     } else {
       const url = this.$otherReferenceUrlInput.value.trim();
@@ -489,11 +478,7 @@ export class AdminAnwsersEditPage extends React.Component {
     const { id, is_published } = this.props.answers.data;
 
     this.props.dispatch(
-      actions.answers.updateIsPublished(
-        [id],
-        !is_published,
-        this.fetchAnswer.bind(this)
-      )
+      actions.answers.updateIsPublished([id], !is_published, this.fetchAnswer.bind(this))
     );
   }
 
@@ -512,11 +497,7 @@ export class AdminAnwsersEditPage extends React.Component {
 
     if (event.ctrlKey) {
       this.props.dispatch(
-        actions.comments.addOne(
-          value,
-          this.props.comments.currentIsPrivate,
-          this.props.id
-        )
+        actions.comments.addOne(value, this.props.comments.currentIsPrivate, this.props.id)
       );
     }
   }
@@ -530,10 +511,7 @@ export class AdminAnwsersEditPage extends React.Component {
       ({ category: _category }) => _category === category
     );
 
-    if (
-      this.props.answers.data.state === ANSWER_STATE.VALIDATED &&
-      references.length === 0
-    ) {
+    if (this.props.answers.data.state === ANSWER_STATE.VALIDATED && references.length === 0) {
       return <span>Aucune référence.</span>;
     }
 
@@ -568,13 +546,7 @@ export class AdminAnwsersEditPage extends React.Component {
       return <AdminMain isLoading />;
     }
 
-    const {
-      agreement,
-      generic_reference,
-      is_published,
-      question,
-      state
-    } = answers.data;
+    const { agreement, generic_reference, is_published, question, state } = answers.data;
 
     return (
       <AdminMain isScrollable={false}>
@@ -582,11 +554,7 @@ export class AdminAnwsersEditPage extends React.Component {
           <Content flexDirection="column">
             <Flex alignItems="baseline" justifyContent="space-between">
               <Flex alignItems="baseline">
-                {this.isGeneric ? (
-                  <Idcc />
-                ) : (
-                  <Idcc code={agreement.idcc} name={agreement.name} />
-                )}
+                {this.isGeneric ? <Idcc /> : <Idcc code={agreement.idcc} name={agreement.name} />}
                 <Title isFirst>{`${question.index}) ${question.value}`}</Title>
               </Flex>
 
@@ -606,11 +574,7 @@ export class AdminAnwsersEditPage extends React.Component {
                   </StateSelect>
                 )}
 
-                <Button
-                  color="info"
-                  icon="comments"
-                  onClick={this.toggleSidebar.bind(this)}
-                >
+                <Button color="info" icon="comments" onClick={this.toggleSidebar.bind(this)}>
                   {comments.data.length}
                 </Button>
               </Flex>
@@ -620,11 +584,7 @@ export class AdminAnwsersEditPage extends React.Component {
             {state !== ANSWER_STATE.VALIDATED && (
               <Flex flexDirection="column" width={1}>
                 <Flex>
-                  <Flex
-                    flexDirection="column"
-                    style={{ minHeight: "19rem" }}
-                    width={1}
-                  >
+                  <Flex flexDirection="column" style={{ minHeight: "19rem" }} width={1}>
                     <Subtitle isFirst>Réponse proposée</Subtitle>
                     <AnswerProposal
                       defaultValue={prevalue}
@@ -634,15 +594,9 @@ export class AdminAnwsersEditPage extends React.Component {
                     />
                   </Flex>
 
-                  <Flex
-                    flexDirection="column"
-                    style={{ minHeight: "19rem" }}
-                    width={1}
-                  >
+                  <Flex flexDirection="column" style={{ minHeight: "19rem" }} width={1}>
                     <Subtitle isFirst>
-                      {this.isGeneric
-                        ? "Réponse générique"
-                        : "Réponse corrigée"}
+                      {this.isGeneric ? "Réponse générique" : "Réponse corrigée"}
                     </Subtitle>
                     <AnswerCorrection
                       defaultValue={value}
@@ -667,9 +621,7 @@ export class AdminAnwsersEditPage extends React.Component {
                     )}
                   />
                 </Flex>
-                <Form
-                  onSubmit={event => this.submitReference(event, "agreement")}
-                >
+                <Form onSubmit={event => this.submitReference(event, "agreement")}>
                   <Strong>Articles de la Convention collective</Strong>
                   <Input
                     disabled={this.state.isUpdating}
@@ -677,9 +629,7 @@ export class AdminAnwsersEditPage extends React.Component {
                     placeholder="Ex: Article 7, Texte sur les salaires de 1984…"
                     ref={node => (this.$agreementReferenceValueInput = node)}
                   />
-                  <Flex flexWrap="wrap">
-                    {this.renderReferences("agreement")}
-                  </Flex>
+                  <Flex flexWrap="wrap">{this.renderReferences("agreement")}</Flex>
                   <FormHiddenSubmit type="submit" />
                 </Form>
                 <Form onSubmit={this.submitReference.bind(this)}>
@@ -730,22 +680,13 @@ export class AdminAnwsersEditPage extends React.Component {
             {state === ANSWER_STATE.VALIDATED && (
               <Flex flexDirection="column" width={1}>
                 <Subtitle isFirst>Réponse validée</Subtitle>
-                <AnswerCorrection
-                  defaultValue={value}
-                  disabled
-                  headersOffset={2}
-                  isSingleView
-                />
+                <AnswerCorrection defaultValue={value} disabled headersOffset={2} isSingleView />
 
                 <Subtitle>Références juridiques</Subtitle>
                 <Strong>Convention collective</Strong>
-                <Flex flexWrap="wrap">
-                  {this.renderReferences("agreement", true)}
-                </Flex>
+                <Flex flexWrap="wrap">{this.renderReferences("agreement", true)}</Flex>
                 <Strong>Code du travail</Strong>
-                <Flex flexWrap="wrap">
-                  {this.renderReferences("labor_code", true)}
-                </Flex>
+                <Flex flexWrap="wrap">{this.renderReferences("labor_code", true)}</Flex>
                 <Strong>Autres</Strong>
                 <Flex flexWrap="wrap">{this.renderReferences(null, true)}</Flex>
                 <Hr />
@@ -762,10 +703,7 @@ export class AdminAnwsersEditPage extends React.Component {
 
                 <Subtitle isFirst>Publication</Subtitle>
                 <Flex>
-                  <Checkbox
-                    isChecked={is_published}
-                    onClick={this.toggleIsPublished.bind(this)}
-                  />
+                  <Checkbox isChecked={is_published} onClick={this.toggleIsPublished.bind(this)} />
                   Publiée sur le site du code du travail numérique.
                 </Flex>
               </Flex>
@@ -773,16 +711,9 @@ export class AdminAnwsersEditPage extends React.Component {
 
             <Hr />
           </Content>
-          <Sidebar
-            flexDirection="column"
-            isHidden={isSidebarHidden}
-            justifyContent="space-between"
-          >
+          <Sidebar flexDirection="column" isHidden={isSidebarHidden} justifyContent="space-between">
             <Subtitle isFirst>Commentaires et validation</Subtitle>
-            <Comments
-              flexDirection="column"
-              ref={node => (this.$commentsContainer = node)}
-            >
+            <Comments flexDirection="column" ref={node => (this.$commentsContainer = node)}>
               {this.renderComments()}
             </Comments>
             <CommentEditor
@@ -796,9 +727,7 @@ export class AdminAnwsersEditPage extends React.Component {
             />
             <CommentEditorIcon
               icon={comments.currentIsPrivate ? "lock" : "unlock"}
-              onClick={() =>
-                this.props.dispatch(actions.comments.toggleOnePrivacy())
-              }
+              onClick={() => this.props.dispatch(actions.comments.toggleOnePrivacy())}
             />
           </Sidebar>
         </Container>

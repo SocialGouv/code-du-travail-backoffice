@@ -134,8 +134,8 @@ export default css.global`
     color: var(--color-dark-text);
     background: #ebeff3;
     background: var(--color-dark-background);
-    font-family: Muli, -apple-system, BlinkMacSystemFont, Helvetica Neue,
-      Helvetica, Arial, sans-serif;
+    font-family: Muli, -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial,
+      sans-serif;
     line-height: 1.4;
     line-height: var(--line-height-base);
     -webkit-text-size-adjust: 100%;

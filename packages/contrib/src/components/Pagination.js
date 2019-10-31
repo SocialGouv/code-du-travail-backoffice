@@ -1,7 +1,7 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 import { Flex } from "rebass";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 const Container = styled(Flex)`
   user-select: none;

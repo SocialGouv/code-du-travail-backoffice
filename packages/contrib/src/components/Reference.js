@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex } from "rebass";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import _Icon from "../elements/Icon";
 
@@ -47,9 +47,7 @@ export default class extends React.PureComponent {
 
     return (
       <Container alignItems="center">
-        {isDisabled && (typeof url !== "string" || url.length === 0) && (
-          <Text>{value}</Text>
-        )}
+        {isDisabled && (typeof url !== "string" || url.length === 0) && <Text>{value}</Text>}
         {(!isDisabled || (typeof url === "string" && url.length !== 0)) && (
           <TextWithIcon>{value}</TextWithIcon>
         )}

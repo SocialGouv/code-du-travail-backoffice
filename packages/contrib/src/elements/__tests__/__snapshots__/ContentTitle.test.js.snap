@@ -1,17 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<ContentTitle /> should match snapshot 1`] = `
-<div>
-  <h3
-    class="ContentTitle-wfzz0s-0 hBmEVW"
-  />
-</div>
-`;
+exports[`[Contrib] elements/<ContentTitle /> should pass 1`] = `
+.emotion-0 {
+  color: black;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
-exports[`[Contrib] elements/<ContentTitle /> should match snapshot with \`isFirst\` prop 1`] = `
-<div>
-  <h3
-    class="ContentTitle-wfzz0s-0 fptxKe"
-  />
-</div>
+<h3
+  className="emotion-0 emotion-1"
+>
+  A Content Title
+</h3>
 `;

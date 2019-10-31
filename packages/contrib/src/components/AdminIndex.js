@@ -2,7 +2,7 @@ import moment from "moment-timezone";
 import Router from "next/router";
 import React from "react";
 import { Flex } from "rebass";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import Table from "../components/Table";
 import Button from "../elements/Button";
@@ -102,10 +102,7 @@ export default class AdminIndex extends React.Component {
       });
     }
 
-    this.sortedBy =
-      sortedBy !== undefined
-        ? { ...sortedBy }
-        : { id: "updatedAt", desc: true };
+    this.sortedBy = sortedBy !== undefined ? { ...sortedBy } : { id: "updatedAt", desc: true };
 
     this.state = {
       confirmDeletion: false,
@@ -128,9 +125,7 @@ export default class AdminIndex extends React.Component {
     try {
       const uri = Boolean(this.props.noTimestamps)
         ? this.apiGetPath
-        : `${this.apiGetPath}${
-            this.apiGetPath.includes("?") ? "&" : "?"
-          }order=updated_at.desc`;
+        : `${this.apiGetPath}${this.apiGetPath.includes("?") ? "&" : "?"}order=updated_at.desc`;
       const { data } = await this.axios.get(uri);
       this.setState({
         data,
@@ -182,9 +177,7 @@ export default class AdminIndex extends React.Component {
           id: this.state.selectedId
         });
       } else {
-        await this.axios.delete(
-          `${this.apiDeletePath}?id=eq.${this.state.selectedId}`
-        );
+        await this.axios.delete(`${this.apiDeletePath}?id=eq.${this.state.selectedId}`);
       }
       await this.fetchData();
     } catch (err) {
@@ -224,10 +217,7 @@ export default class AdminIndex extends React.Component {
           <Head alignItems="flex-end" justifyContent="space-between">
             <Title>{this.props.title}</Title>
             {!Boolean(this.props.noCreate) && (
-              <Button
-                onClick={this.new}
-                title={unspace(this.props.ariaLabels.newButton)}
-              >
+              <Button onClick={this.new} title={unspace(this.props.ariaLabels.newButton)}>
                 Nouveau
               </Button>
             )}

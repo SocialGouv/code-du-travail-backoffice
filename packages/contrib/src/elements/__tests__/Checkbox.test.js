@@ -1,36 +1,72 @@
 import React from "react";
-import { fireEvent, render } from "@testing-library/react";
 
 import Checkbox from "../Checkbox";
 
 describe("[Contrib] elements/<Checkbox />", () => {
-  it("should match snapshot", () => {
-    const { container } = render(<Checkbox />);
+  it(`should pass`, () => {
+    const $button = testRender(<Checkbox />);
+    const $icon = $button.findByType("svg");
 
-    expect(container).toMatchSnapshot();
+    expect($button).toMatchSnapshot();
+    expect($button).toHaveStyleRule("background-color", "transparent");
+    expect($icon.props).toHaveProperty("data-icon", "square");
+    expect($icon.props).toHaveProperty("color", "var(--color-lapis-lazuli)");
   });
 
-  it("should match snapshot with a custom `color` prop", () => {
-    const { container } = render(<Checkbox color="secondary" />);
+  it(`should pass with {color} = "danger"`, () => {
+    const $button = testRender(<Checkbox color="danger" />);
+    const $icon = $button.findByType("svg");
 
-    expect(container).toMatchSnapshot();
+    expect($button).toHaveStyleRule("background-color", "transparent");
+    expect($icon.props).toHaveProperty("color", "var(--color-shadow)");
   });
 
-  it("should match snapshot with `isChecked` prop", () => {
-    const { container } = render(<Checkbox isChecked />);
+  it(`should pass with {color} = "info"`, () => {
+    const $button = testRender(<Checkbox color="info" />);
+    const $icon = $button.findByType("svg");
 
-    expect(container).toMatchSnapshot();
+    expect($button).toHaveStyleRule("background-color", "transparent");
+    expect($icon.props).toHaveProperty("color", "var(--color-misty-moss)");
   });
 
-  it("should have called onClick()", () => {
+  it(`should pass with {color} = "primary"`, () => {
+    const $button = testRender(<Checkbox color="primary" />);
+    const $icon = $button.findByType("svg");
+
+    expect($button).toHaveStyleRule("background-color", "transparent");
+    expect($icon.props).toHaveProperty("color", "var(--color-lapis-lazuli)");
+  });
+
+  it(`should pass with {color} = "secondary"`, () => {
+    const $button = testRender(<Checkbox color="secondary" />);
+    const $icon = $button.findByType("svg");
+
+    expect($button).toHaveStyleRule("background-color", "transparent");
+    expect($icon.props).toHaveProperty("color", "var(--color-periwinkle)");
+  });
+
+  it(`should pass with {color} = "warning"`, () => {
+    const $button = testRender(<Checkbox color="warning" />);
+    const $icon = $button.findByType("svg");
+
+    expect($button).toHaveStyleRule("background-color", "transparent");
+    expect($icon.props).toHaveProperty("color", "var(--color-lapis-lazuli)");
+  });
+
+  it(`should pass with {isChecked}`, () => {
+    const $button = testRender(<Checkbox isChecked />);
+    const $icon = $button.findByType("svg");
+
+    expect($icon.props).toHaveProperty("data-icon", "check-square");
+  });
+
+  it(`should call {onClick}`, () => {
     const props = {
-      "data-testid": generateTestId(),
       onClick: jest.fn()
     };
-    const λ = render(<Checkbox {...props} />);
+    const $button = testRender(<Checkbox {...props} />);
 
-    fireEvent.click(λ.getByTestId(props["data-testid"]));
-
+    $button.props.onClick();
     expect(props.onClick).toHaveBeenCalled();
   });
 });

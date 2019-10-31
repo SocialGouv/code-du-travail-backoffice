@@ -44,10 +44,7 @@ describe.skip("[Contrib] blocks/<Answer /> (Todo)", () => {
   it("should have called onFallback() with the expected params (CCN)", () => {
     fireEvent.click(γ.getByText(/Renvoi à la CC nationale/));
 
-    expect(props.onFallback).toHaveBeenCalledWith(
-      props.data.id,
-      "national_agreement"
-    );
+    expect(props.onFallback).toHaveBeenCalledWith(props.data.id, "national_agreement");
   });
 });
 

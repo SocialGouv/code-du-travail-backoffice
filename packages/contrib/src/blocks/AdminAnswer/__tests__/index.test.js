@@ -53,9 +53,7 @@ describe.skip("[Contrib] blocks/<AdminAnswer /> (Draft)", () => {
 
   it("should have called onClick() with the expected param", () => {
     fireEvent.click(
-      λ.getAllByText(
-        `${props.data.question_index}) ${props.data.question_value}`
-      )[0]
+      λ.getAllByText(`${props.data.question_index}) ${props.data.question_value}`)[0]
     );
 
     expect(props.onClick).toHaveBeenCalledWith(props.data.id);

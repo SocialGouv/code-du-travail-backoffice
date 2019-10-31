@@ -53,9 +53,7 @@ export default function* updateState({ meta: { ids, next, state } }) {
     toast.success(
       ids.length === 1
         ? `La réponse ${ids[0]} est maintenant ${ANSWER_STATE_LABEL[state]}.`
-        : `Les réponses ${ids.join(", ")} sont maintenant ${pluralize(
-            ANSWER_STATE_LABEL[state]
-          )}.`
+        : `Les réponses ${ids.join(", ")} sont maintenant ${pluralize(ANSWER_STATE_LABEL[state])}.`
     );
 
     next();

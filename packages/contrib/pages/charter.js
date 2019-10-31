@@ -1,6 +1,6 @@
 import React from "react";
 // import { Flex } from "rebass";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import Main from "../src/layouts/Main";
 

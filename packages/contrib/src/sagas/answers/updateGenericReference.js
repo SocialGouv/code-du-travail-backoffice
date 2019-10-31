@@ -14,9 +14,7 @@ import { ANSWER_STATE, USER_ROLE } from "../../constants";
  * A generic answer can fallback to either Labor Code or its parent national
  * agreement text.
  */
-export default function* updateGenericReference({
-  meta: { genericReference, ids, next }
-}) {
+export default function* updateGenericReference({ meta: { genericReference, ids, next } }) {
   try {
     const { id: userId, role: userRole } = getCurrentUser();
 

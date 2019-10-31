@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex } from "rebass";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import _Subtitle from "../../elements/Subtitle";
 import Tag from "../../elements/Tag";
@@ -57,8 +57,8 @@ export default class extends React.PureComponent {
       <Container className={this.props.className} flexDirection="column">
         <_Subtitle isFirst>Étiquettes</_Subtitle>
         <p>
-          Sélectionnez les étiquettes correspondant à la réponse que vous
-          rédigez afin de nous aider à classifier le contenu:
+          Sélectionnez les étiquettes correspondant à la réponse que vous rédigez afin de nous aider
+          à classifier le contenu:
         </p>
 
         <Flex flexDirection="column">

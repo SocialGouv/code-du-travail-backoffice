@@ -13,9 +13,7 @@ export default ({ onLoggedIn }) => (
   <Main isHorizontal>
     <Left flexDirection="column" justifyContent="center" width={0.5}>
       <Welcome />
-      <Title>
-        Bienvenue sur l’outil de contribution au Code du travail numérique
-      </Title>
+      <Title>Bienvenue sur l’outil de contribution au Code du travail numérique</Title>
       <Text>
         {`Un outil simple pour composer et éditer vos contributions au `}
         <a

@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex } from "rebass";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 const Container = styled(Flex)`
   background-color: lightgray;
@@ -37,8 +37,7 @@ export default class extends React.PureComponent {
 
   render() {
     const { onRemove, url, value } = this.props;
-    const ariaName =
-      this.props.ariaName !== undefined ? this.props.ariaName : "l'étiquette";
+    const ariaName = this.props.ariaName !== undefined ? this.props.ariaName : "l'étiquette";
 
     return (
       <Container alignItems="center">

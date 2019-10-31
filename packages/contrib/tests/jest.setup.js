@@ -2,7 +2,7 @@
 
 process.env.API_URI = "http://localhost:3200";
 
-// Jest "jest-dom" extension
+// Jest "dom" extension
 // https://github.com/gnapse/jest-dom#usage
 import "@testing-library/jest-dom/extend-expect";
 
@@ -13,21 +13,24 @@ import "@testing-library/jest-dom/extend-expect";
 import { toMatchDiffSnapshot } from "snapshot-diff";
 expect.extend({ toMatchDiffSnapshot });
 
+// Jest "emotion" extension
+// https://github.com/emotion-js/emotion/tree/master/packages/jest-emotion#custom-matchers
+// import expect from "expect";
+import { matchers } from "jest-emotion";
+expect.extend(matchers);
+
 // Polyfill "MutationObserver"
 // https://github.com/megawac/MutationObserver.js
 import "mutationobserver-shim";
 
-// Mock "sessionStorage"
-// import "../__mocks__/sessionStorage";
-
 // Mock "next/router"
-import "../__mocks__/nextRouter";
+import "./mocks/nextRouter";
 
 // Mock "axios"
-import "../__mocks__/axios";
+import "./mocks/axios";
 
 // Mock "../src/libs/customAxios"
-import "../__mocks__/customAxios";
+import "./mocks/customAxios";
 
-// Globalize generateTestId() helper
-import "../__mocks__/generateTestId";
+// Globalize render() helper
+import "./globals/testRender";

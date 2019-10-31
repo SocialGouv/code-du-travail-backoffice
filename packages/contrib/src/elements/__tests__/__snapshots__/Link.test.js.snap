@@ -1,9 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<Link /> should match snapshot 1`] = `
-<div>
-  <button
-    class="Link-c1jwt7-0 cIzIlt"
-  />
-</div>
+exports[`[Contrib] elements/<Link /> should pass 1`] = `
+.emotion-0 {
+  background: transparent;
+  border: 0;
+  color: var(--color-text-blue);
+  cursor: pointer;
+  padding: 0;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+<button
+  className="emotion-0 emotion-1"
+>
+  A Link
+</button>
 `;

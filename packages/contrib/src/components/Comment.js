@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex } from "rebass";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import _Icon from "../elements/Icon";
 
@@ -27,8 +27,7 @@ const Bubble = styled(Flex)`
             #ffffff 20px
           )`};
   border: 2px solid
-    ${({ isPrivate }) =>
-      isPrivate ? "var(--color-mummy-tomb)" : "var(--color-light-steel-blue)"};
+    ${({ isPrivate }) => (isPrivate ? "var(--color-mummy-tomb)" : "var(--color-light-steel-blue)")};
   font-size: 0.75rem;
   margin: 0 1rem;
   padding: 0.5rem;
@@ -38,9 +37,7 @@ const Bubble = styled(Flex)`
     border-bottom: 0.5rem solid transparent;
     border-top: 0.5rem solid
       ${({ isPrivate }) =>
-        isPrivate
-          ? "var(--color-mummy-tomb)"
-          : "var(--color-light-steel-blue)"};
+        isPrivate ? "var(--color-mummy-tomb)" : "var(--color-light-steel-blue)"};
     content: "";
     height: 0px;
     position: absolute;
@@ -64,9 +61,7 @@ const LeftBubble = styled(Bubble)`
     border-left: 0.5rem solid transparent;
     border-right: 0.5rem solid
       ${({ isPrivate }) =>
-        isPrivate
-          ? "var(--color-mummy-tomb)"
-          : "var(--color-light-steel-blue)"};
+        isPrivate ? "var(--color-mummy-tomb)" : "var(--color-light-steel-blue)"};
     left: -1rem;
   }
 
@@ -83,9 +78,7 @@ const RightBubble = styled(Bubble)`
   :before {
     border-left: 0.5rem solid
       ${({ isPrivate }) =>
-        isPrivate
-          ? "var(--color-mummy-tomb)"
-          : "var(--color-light-steel-blue)"};
+        isPrivate ? "var(--color-mummy-tomb)" : "var(--color-light-steel-blue)"};
     border-right: 0.5rem solid transparent;
     right: -1rem;
   }

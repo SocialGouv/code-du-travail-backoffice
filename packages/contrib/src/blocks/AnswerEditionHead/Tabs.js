@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex } from "rebass";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import Tab from "./Tab";
 
@@ -16,16 +16,10 @@ export const TABS = {
 
 export default ({ currentTab, onChange, referencesCount }) => (
   <Container>
-    <Tab
-      isActive={currentTab === TABS.EDITOR}
-      onClick={() => onChange(TABS.EDITOR)}
-    >
+    <Tab isActive={currentTab === TABS.EDITOR} onClick={() => onChange(TABS.EDITOR)}>
       Édition
     </Tab>
-    <Tab
-      isActive={currentTab === TABS.REFERENCES}
-      onClick={() => onChange(TABS.REFERENCES)}
-    >
+    <Tab isActive={currentTab === TABS.REFERENCES} onClick={() => onChange(TABS.REFERENCES)}>
       {`Références juridiques (${referencesCount})`}
     </Tab>
   </Container>

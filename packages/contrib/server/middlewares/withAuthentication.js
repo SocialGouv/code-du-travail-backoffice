@@ -14,10 +14,7 @@ async function getMe(ctx) {
   }
 
   const data = res.rows[0].payload;
-  const isAdmin = [
-    USER_ROLE.ADMINISTRATOR,
-    USER_ROLE.REGIONAL_ADMINISTRATOR
-  ].includes(data.role);
+  const isAdmin = [USER_ROLE.ADMINISTRATOR, USER_ROLE.REGIONAL_ADMINISTRATOR].includes(data.role);
 
   return {
     isAdmin,

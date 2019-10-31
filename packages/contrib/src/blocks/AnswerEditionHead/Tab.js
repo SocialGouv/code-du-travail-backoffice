@@ -1,14 +1,11 @@
 import React from "react";
 import { Flex } from "rebass";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 const Container = styled(Flex)`
-  border-bottom: ${props =>
-    props.isActive ? "solid 0.25rem var(--color-blue-sapphire)" : 0};
+  border-bottom: ${props => (props.isActive ? "solid 0.25rem var(--color-blue-sapphire)" : 0)};
   color: ${props =>
-    props.isActive
-      ? "var(--color-lapis-lazuli)"
-      : "var(--color-black-leather-jacket)"};
+    props.isActive ? "var(--color-lapis-lazuli)" : "var(--color-black-leather-jacket)"};
   cursor: pointer;
   font-size: 0.875rem;
   font-weight: ${props => (props.isActive ? 600 : 400)};
@@ -17,12 +14,7 @@ const Container = styled(Flex)`
 `;
 
 export default ({ children, isActive, onClick }) => (
-  <Container
-    alignItems="center"
-    isActive={isActive}
-    justifyContent="center"
-    onClick={onClick}
-  >
+  <Container alignItems="center" isActive={isActive} justifyContent="center" onClick={onClick}>
     {children}
   </Container>
 );

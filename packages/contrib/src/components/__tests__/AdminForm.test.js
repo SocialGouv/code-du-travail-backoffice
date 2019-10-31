@@ -1,8 +1,8 @@
 import React from "react";
 import { cleanup, fireEvent, render } from "@testing-library/react";
 
-import "../../../__mocks__/console";
-import "../../../__mocks__/waitFor";
+import "../../../tests/globals/console";
+import "../../../tests/globals/waitFor";
 
 jest.mock("react-redux", () => ({
   connect: () => component => {
@@ -105,9 +105,7 @@ describe.skip("[Contrib] components/<AdminForm /> (create)", () => {
   it("should redirect to the index path", async () => {
     fireEvent.click(γ.getByTitle(props.ariaLabels.cancelButton));
 
-    expect(global.nextRouter.push).toHaveBeenCalledWith(
-      `/admin${props.indexPath}`
-    );
+    expect(global.nextRouter.push).toHaveBeenCalledWith(`/admin${props.indexPath}`);
   });
 
   it("should transform the input with button value as expected", async () => {
@@ -145,11 +143,7 @@ describe.skip("[Contrib] components/<AdminForm /> (create)", () => {
     const field = props.fields[3];
     expectedData[field.name] = [];
 
-    fireEvent.click(
-      γ.getByAltText(
-        `Bouton supprimant ${field.ariaName} ${field.tags[0].value}`
-      )
-    );
+    fireEvent.click(γ.getByAltText(`Bouton supprimant ${field.ariaName} ${field.tags[0].value}`));
     await waitFor(0);
     fireEvent.click(γ.getByTitle(props.ariaLabels.createOrEditButton));
     await waitFor(0);
@@ -208,20 +202,14 @@ describe.skip("[Contrib] components/<AdminForm /> (create)", () => {
         acollection_id: field5.tags[2].id
       }
     ];
-    fireEvent.input(
-      γ.getByPlaceholderText(`Commencez à taper le nom de la collection`),
-      {
-        target: { value: field5.tags[1].value }
-      }
-    );
+    fireEvent.input(γ.getByPlaceholderText(`Commencez à taper le nom de la collection`), {
+      target: { value: field5.tags[1].value }
+    });
     fireEvent.click(γ.getByText(field5.tags[1].value));
     await waitFor(0);
-    fireEvent.input(
-      γ.getByPlaceholderText(`Commencez à taper le nom de la collection`),
-      {
-        target: { value: field5.tags[2].value }
-      }
-    );
+    fireEvent.input(γ.getByPlaceholderText(`Commencez à taper le nom de la collection`), {
+      target: { value: field5.tags[2].value }
+    });
     fireEvent.click(γ.getByText(field5.tags[2].value));
     await waitFor(0);
 
@@ -234,9 +222,7 @@ describe.skip("[Contrib] components/<AdminForm /> (create)", () => {
       [props.apiPath, expectedData],
       [props.fields[5].apiPath, expectedCustomData]
     ]);
-    expect(global.nextRouter.push).toHaveBeenCalledWith(
-      `/admin${props.indexPath}`
-    );
+    expect(global.nextRouter.push).toHaveBeenCalledWith(`/admin${props.indexPath}`);
   });
 });
 
@@ -357,13 +343,8 @@ describe.skip("[Contrib] components/<AdminForm /> (edit)", () => {
     expect(global.axios.delete).toHaveBeenCalledWith(
       `${props.fields[5].apiPath}?anitem_id=eq.${props.id}`
     );
-    expect(global.axios.post).toHaveBeenCalledWith(
-      props.fields[5].apiPath,
-      expectedCustomData
-    );
-    expect(global.nextRouter.push).toHaveBeenCalledWith(
-      `/admin${props.indexPath}`
-    );
+    expect(global.axios.post).toHaveBeenCalledWith(props.fields[5].apiPath, expectedCustomData);
+    expect(global.nextRouter.push).toHaveBeenCalledWith(`/admin${props.indexPath}`);
   });
 });
 
@@ -417,9 +398,7 @@ describe.skip("[Contrib] components/<AdminForm /> (create / NO custom API)", () 
 
     expect(global.axios.post).toHaveBeenCalledTimes(1);
     expect(global.axios.post).toHaveBeenCalledWith(props.apiPath, expectedData);
-    expect(global.nextRouter.push).toHaveBeenCalledWith(
-      `/admin${props.indexPath}`
-    );
+    expect(global.nextRouter.push).toHaveBeenCalledWith(`/admin${props.indexPath}`);
   });
 
   it("should not resubmit the form", async () => {
@@ -481,9 +460,7 @@ describe.skip("[Contrib] components/<AdminForm /> (edit / NO custom API)", () =>
       `${props.apiPath}?id=eq.${props.id}`,
       expectedData
     );
-    expect(global.nextRouter.push).toHaveBeenCalledWith(
-      `/admin${props.indexPath}`
-    );
+    expect(global.nextRouter.push).toHaveBeenCalledWith(`/admin${props.indexPath}`);
   });
 });
 
@@ -535,8 +512,6 @@ describe.skip("[Contrib] components/<AdminForm /> (edit / isApiFunction)", () =>
 
     expect(global.axios.post).toHaveBeenCalledTimes(1);
     expect(global.axios.post).toHaveBeenCalledWith(props.apiPath, expectedData);
-    expect(global.nextRouter.push).toHaveBeenCalledWith(
-      `/admin${props.indexPath}`
-    );
+    expect(global.nextRouter.push).toHaveBeenCalledWith(`/admin${props.indexPath}`);
   });
 });

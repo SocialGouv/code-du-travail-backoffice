@@ -1,11 +1,19 @@
 import React from "react";
-import { render } from "@testing-library/react";
+
 import Field from "../Field";
 
 describe("[Contrib] elements/<Field />", () => {
-  it("should match snapshot", () => {
-    const { container } = render(<Field />);
+  it(`should pass`, () => {
+    const $field = testRender(<Field />);
 
-    expect(container).toMatchSnapshot();
+    expect($field).toMatchSnapshot();
+  });
+
+  it(`should pass with {error}`, () => {
+    const $field = testRender(<Field error="An Error" />);
+    const $error = $field.findByType("div");
+
+    expect($field).toMatchSnapshot();
+    expect($error).not.toBeUndefined();
   });
 });

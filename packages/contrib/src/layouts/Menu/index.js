@@ -5,13 +5,7 @@ import React from "react";
 import cache from "../../cache";
 import Icon from "../../elements/Icon";
 
-import {
-  Container,
-  Dropdown,
-  DropdownLink,
-  DropdownMenu,
-  DropdownText
-} from "./styles";
+import { Container, Dropdown, DropdownLink, DropdownMenu, DropdownText } from "./styles";
 
 import { ANSWER_STATE } from "../../constants";
 import T from "../../texts";
@@ -124,14 +118,10 @@ export default class Menu extends React.PureComponent {
 
             <DropdownLink
               onClick={() =>
-                this.openDoc(
-                  "Proposition-de-reponse-types-CC-metallurgie-locales.docx"
-                )
+                this.openDoc("Proposition-de-reponse-types-CC-metallurgie-locales.docx")
               }
               onKeyPress={() =>
-                this.openDoc(
-                  "Proposition-de-reponse-types-CC-metallurgie-locales.docx"
-                )
+                this.openDoc("Proposition-de-reponse-types-CC-metallurgie-locales.docx")
               }
               role="link"
               tabIndex="0"
@@ -141,12 +131,8 @@ export default class Menu extends React.PureComponent {
             </DropdownLink>
 
             <DropdownLink
-              onClick={() =>
-                this.openDoc("Reformulation-des-intitules-de-question.xlsx")
-              }
-              onKeyPress={() =>
-                this.openDoc("Reformulation-des-intitules-de-question.xlsx")
-              }
+              onClick={() => this.openDoc("Reformulation-des-intitules-de-question.xlsx")}
+              onKeyPress={() => this.openDoc("Reformulation-des-intitules-de-question.xlsx")}
               role="link"
               tabIndex="0"
             >
@@ -156,14 +142,10 @@ export default class Menu extends React.PureComponent {
 
             <DropdownLink
               onClick={() =>
-                this.openDoc(
-                  "Premiers-retours-sur-la-validation-des-contributions.docx"
-                )
+                this.openDoc("Premiers-retours-sur-la-validation-des-contributions.docx")
               }
               onKeyPress={() =>
-                this.openDoc(
-                  "Premiers-retours-sur-la-validation-des-contributions.docx"
-                )
+                this.openDoc("Premiers-retours-sur-la-validation-des-contributions.docx")
               }
               role="link"
               tabIndex="0"

@@ -1,7 +1,7 @@
 import React from "react";
 import { fireEvent, render } from "@testing-library/react";
 
-import "../../../../__mocks__/waitFor";
+import "../../../../tests/globals/waitFor";
 
 global.open = jest.fn();
 
@@ -41,9 +41,7 @@ describe.skip("[Contrib] blocks/AnswerEditionReferences/<List />", () => {
 
   it("should call `onRemove()` prop with the expected param", async () => {
     fireEvent.click(
-      γ.getByTitle(
-        `Bouton supprimant ${props.ariaName} "${props.references[0].value}"`
-      )
+      γ.getByTitle(`Bouton supprimant ${props.ariaName} "${props.references[0].value}"`)
     );
 
     expect(props.onRemove).toHaveBeenCalledWith(props.references[0].value);
@@ -52,8 +50,7 @@ describe.skip("[Contrib] blocks/AnswerEditionReferences/<List />", () => {
   it("should call `window.open()` with the expected params", async () => {
     fireEvent.click(
       γ.getByTitle(
-        `Bouton ouvrant le lien associé à ${props.ariaName} ` +
-          `"${props.references[1].value}"`
+        `Bouton ouvrant le lien associé à ${props.ariaName} ` + `"${props.references[1].value}"`
       )
     );
 

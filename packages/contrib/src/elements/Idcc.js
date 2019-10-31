@@ -1,6 +1,6 @@
 import React from "react";
 import ReactTooltip from "react-tooltip";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 const Container = styled.div`
   background-color: var(--color-label-background);
@@ -26,12 +26,8 @@ const Tooltip = styled(ReactTooltip)`
   white-space: normal;
 `;
 
-export default ({ className, code, name, style }) => (
-  <Container
-    className={className}
-    data-tip={code === undefined ? "Code du travail" : name}
-    style={style}
-  >
+export default ({ code, name, ...props }) => (
+  <Container data-tip={code === undefined ? "Code du travail" : name} {...props}>
     {code === undefined ? "CDT" : `IDCC: ${code}`}
     <Tooltip />
   </Container>

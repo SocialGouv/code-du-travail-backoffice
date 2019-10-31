@@ -2,7 +2,7 @@ import React from "react";
 import Medixtor from "react-medixtor";
 import { connect } from "react-redux";
 import { Flex } from "rebass";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import * as actions from "../../src/actions";
 import Reference from "../../src/components/Reference";
@@ -187,38 +187,21 @@ class AnswersViewPage extends React.Component {
       return <Main isLoading />;
     }
 
-    const {
-      agreement,
-      generic_reference,
-      prevalue,
-      question,
-      state,
-      value
-    } = answers.data;
+    const { agreement, generic_reference, prevalue, question, state, value } = answers.data;
 
     const finalValue = state === ANSWER_STATE.VALIDATED ? value : prevalue;
-    const valueTitle =
-      state === ANSWER_STATE.VALIDATED ? "Réponse validée" : "Réponse proposée";
+    const valueTitle = state === ANSWER_STATE.VALIDATED ? "Réponse validée" : "Réponse proposée";
 
     return (
       <Container style={{ padding: "1rem" }}>
         <Flex alignItems="baseline">
-          {this.isGeneric ? (
-            <Idcc />
-          ) : (
-            <Idcc code={agreement.idcc} name={agreement.name} />
-          )}
+          {this.isGeneric ? <Idcc /> : <Idcc code={agreement.idcc} name={agreement.name} />}
           <Title isFirst>{`${question.index}) ${question.value}`}</Title>
         </Flex>
         <Hr />
 
         <Subtitle isFirst>{valueTitle}</Subtitle>
-        <AnswerEditor
-          defaultValue={finalValue}
-          disabled
-          headersOffset={2}
-          isSingleView
-        />
+        <AnswerEditor defaultValue={finalValue} disabled headersOffset={2} isSingleView />
 
         <Subtitle>Références juridiques</Subtitle>
         <Strong>Convention collective</Strong>

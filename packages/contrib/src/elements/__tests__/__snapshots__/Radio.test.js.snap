@@ -1,60 +1,104 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<Radio /> should match snapshot 1`] = `
-<div>
+exports[`[Contrib] elements/<Radio /> should pass 1`] = `
+.emotion-1 {
+  cursor: default;
+  width: 1rem !important;
+  color: var(--color-text-blue);
+  cursor: auto;
+  margin-right: 0.5rem;
+}
+
+.emotion-1:hover {
+  color: var(--color-text-blue);
+}
+
+.emotion-4 {
+  cursor: default;
+  width: 1rem !important;
+  color: var(--color-text-blue);
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.emotion-4:hover {
+  color: var(--color-lapis-lazuli);
+}
+
+<div
+  role="radiogroup"
+>
   <div>
     <svg
-      aria-hidden="true"
-      class="svg-inline--fa fa-dot-circle fa-w-16 fa-1x Icon-sc-4jlog9-0 hXLKsx Radio__Icon-sc-1e1pwch-0 hFpPrh"
+      aria-checked="true"
+      aria-hidden="false"
+      className="svg-inline--fa fa-dot-circle fa-w-16 fa-1x emotion-0 emotion-1 emotion-2"
       color="var(--color-black-leather-jacket)"
       data-icon="dot-circle"
       data-prefix="fas"
       focusable="false"
-      role="img"
+      onClick={[Function]}
+      role="radio"
+      selected={true}
+      style={Object {}}
+      tabIndex="0"
       viewBox="0 0 512 512"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
         d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm80 248c0 44.112-35.888 80-80 80s-80-35.888-80-80 35.888-80 80-80 80 35.888 80 80z"
         fill="currentColor"
+        style={Object {}}
       />
     </svg>
     A Selected Label
   </div>
   <div>
     <svg
-      aria-hidden="true"
-      class="svg-inline--fa fa-circle fa-w-16 fa-1x Icon-sc-4jlog9-0 hXLKsx Radio__Icon-sc-1e1pwch-0 gsNZpb"
+      aria-checked="false"
+      aria-hidden="false"
+      className="svg-inline--fa fa-circle fa-w-16 fa-1x emotion-0 emotion-4 emotion-2"
       color="var(--color-black-leather-jacket)"
       data-icon="circle"
       data-prefix="fas"
       focusable="false"
-      role="img"
+      onClick={[Function]}
+      role="radio"
+      selected={false}
+      style={Object {}}
+      tabIndex="-1"
       viewBox="0 0 512 512"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
         d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"
         fill="currentColor"
+        style={Object {}}
       />
     </svg>
     A Label
   </div>
   <div>
     <svg
-      aria-hidden="true"
-      class="svg-inline--fa fa-circle fa-w-16 fa-1x Icon-sc-4jlog9-0 hXLKsx Radio__Icon-sc-1e1pwch-0 gsNZpb"
+      aria-checked="false"
+      aria-hidden="false"
+      className="svg-inline--fa fa-circle fa-w-16 fa-1x emotion-0 emotion-4 emotion-2"
       color="var(--color-black-leather-jacket)"
       data-icon="circle"
       data-prefix="fas"
       focusable="false"
-      role="img"
+      onClick={[Function]}
+      role="radio"
+      selected={false}
+      style={Object {}}
+      tabIndex="-1"
       viewBox="0 0 512 512"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
         d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"
         fill="currentColor"
+        style={Object {}}
       />
     </svg>
     Another Label

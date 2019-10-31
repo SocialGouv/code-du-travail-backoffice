@@ -4,7 +4,7 @@ import Router from "next/router";
 import React from "react";
 import { connect } from "react-redux";
 import { Flex } from "rebass";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import * as actions from "../../src/actions";
 import AnswerEditionContent from "../../src/blocks/AnswerEditionContent";
@@ -73,14 +73,10 @@ class AnswersEditPage extends React.Component {
     this.load();
 
     try {
-      const { data: references } = await this.axios.get(
-        `/answers_references?answer_id=eq.${id}`
-      );
+      const { data: references } = await this.axios.get(`/answers_references?answer_id=eq.${id}`);
       const { data: tags } = await this.axios.get(`/answers_tags`);
       const { data: allTags } = await this.axios.get(`/tags`);
-      const laborCodeReferences = await axios.get(
-        `/static/data/labor-law-references.json`
-      );
+      const laborCodeReferences = await axios.get(`/static/data/labor-law-references.json`);
 
       this.allTags = allTags;
       this.laborCodeReferences = laborCodeReferences.data;
@@ -126,10 +122,7 @@ class AnswersEditPage extends React.Component {
     this.props.dispatch(
       actions.modal.open(
         `Êtes-vous sûr d'annuler cette réponse (son contenu sera supprimé) ?`,
-        () =>
-          actions.answers.cancel([this.props.id], () =>
-            Router.push("/answers/draft/1")
-          )
+        () => actions.answers.cancel([this.props.id], () => Router.push("/answers/draft/1"))
       )
     );
   }
@@ -138,14 +131,10 @@ class AnswersEditPage extends React.Component {
     if (this.state.isSaving) return;
 
     this.props.dispatch(
-      actions.modal.open(
-        `Êtes-vous sûr d'envoyer cette réponse en validation ?`,
-        () =>
-          actions.answers.updateState(
-            [this.props.id],
-            ANSWER_STATE.PENDING_REVIEW,
-            () => Router.push("/answers/draft/1")
-          )
+      actions.modal.open(`Êtes-vous sûr d'envoyer cette réponse en validation ?`, () =>
+        actions.answers.updateState([this.props.id], ANSWER_STATE.PENDING_REVIEW, () =>
+          Router.push("/answers/draft/1")
+        )
       )
     );
   }
@@ -319,12 +308,7 @@ class AnswersEditPage extends React.Component {
 
       case TABS.EDITOR:
       default:
-        return (
-          <AnswerEditionContent
-            defaultValue={prevalue}
-            onChange={this.updatePrevalue}
-          />
-        );
+        return <AnswerEditionContent defaultValue={prevalue} onChange={this.updatePrevalue} />;
     }
   }
 
