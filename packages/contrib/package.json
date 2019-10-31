@@ -69,7 +69,7 @@
     "@types/react-test-renderer": "16.9.1",
     "babel-eslint": "10.0.3",
     "babel-jest": "24.9.0",
-    "babel-plugin-emotion": "10.0.22",
+    "babel-plugin-emotion": "10.0.23",
     "coveralls": "3.0.7",
     "cross-env": "6.0.3",
     "dotenv": "8.2.0",
