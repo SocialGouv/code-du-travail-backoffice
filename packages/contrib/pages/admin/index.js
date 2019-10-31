@@ -304,7 +304,7 @@ export default class Index extends React.Component {
                 break;
 
               case ANSWER_STATE.DRAFT:
-                totals[4] += 1;
+                totals[1] += 1;
                 break;
 
               case ANSWER_STATE.PENDING_REVIEW:
