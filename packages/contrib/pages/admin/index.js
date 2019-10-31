@@ -105,10 +105,10 @@ const FranceMapContainer = styled(Flex)`
 `;
 const Table = styled(_Table)`
   .rt-tr > .rt-td {
-    :first-child {
+    :first-of-type {
       cursor: help;
     }
-    :not(:first-child) {
+    :not(:first-of-type) {
       text-align: right;
     }
   }
@@ -119,10 +119,10 @@ const REFRESH_DELAY = 30000;
 const StatsTable = ({ data, isPercentage, ...props }) => (
   <Table
     data={data}
-    defaultPageSize={data.length}
     columns={isPercentage ? PERCENTAGE_COLUMNS : COLUMNS}
     filterable={false}
     multiSort={false}
+    pageSize={data.length}
     resizable={false}
     showPagination={false}
     {...props}
@@ -223,7 +223,7 @@ export default class Index extends React.Component {
                 break;
 
               case ANSWER_STATE.DRAFT:
-                totals[4] += 1;
+                totals[1] += 1;
                 break;
 
               case ANSWER_STATE.PENDING_REVIEW:
@@ -398,7 +398,6 @@ export default class Index extends React.Component {
         data={data}
         defaultSorted={[{ id: "validated", desc: false }]}
         isPercentage={isPercentage}
-        key="content"
       />
     );
   }
@@ -426,27 +425,22 @@ export default class Index extends React.Component {
           {isLoading ? (
             <p>Calcul en cours…</p>
           ) : (
-            [
-              <FranceMapContainer key="map" justifyContent="center" style={{ marginTop: "1rem" }}>
+            <>
+              <FranceMapContainer justifyContent="center" style={{ marginTop: "1rem" }}>
                 <FranceMap onChange={this.updateSelectedRegionStats.bind(this)} />
-              </FranceMapContainer>,
-              selectedRegionName.length === 0 ? (
-                <Flex
-                  alignItems="baseline"
-                  key="content"
-                  justifyContent="center"
-                  style={{ marginTop: "1rem" }}
-                >
+              </FranceMapContainer>
+              {selectedRegionName.length === 0 ? (
+                <Flex alignItems="baseline" justifyContent="center" style={{ marginTop: "1rem" }}>
                   <Icon icon="arrow-up" style={{ marginRight: "1rem" }} />
                   Cliquez sur une région pour voir le détail.
                 </Flex>
               ) : (
-                [
-                  <ContentTitle key="title">{selectedRegionName}</ContentTitle>,
-                  this.getSelectedRegionStats()
-                ]
-              )
-            ]
+                <>
+                  <ContentTitle>{selectedRegionName}</ContentTitle>
+                  {this.getSelectedRegionStats()}
+                </>
+              )}
+            </>
           )}
         </Container>
       </AdminMain>
