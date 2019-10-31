@@ -13,10 +13,10 @@ export default styled(ReactTable)`
 
   .rt-tr > .rt-th,
   .rt-tr > .rt-td {
-    :first-child {
+    :first-of-type {
       width: 40% !important;
     }
-    :not(:first-child) {
+    :not(:first-of-type) {
       width: 10% !important;
     }
 

@@ -76,6 +76,9 @@ exports.seed = async knex => {
 
   const questions = await knex("api.questions");
   const agreements = await knex("api.agreements");
+  const activeAgreementIds = await knex("api.locations_agreements").map(
+    ({ agreement_id }) => agreement_id
+  );
   const tags = await knex("api.tags");
 
   for (let question of questions) {
@@ -99,6 +102,16 @@ exports.seed = async knex => {
     ].sort();
 
     const answers = agreements.map(agreement => {
+      if (!activeAgreementIds.includes(agreement.id)) {
+        return {
+          state: "todo",
+          prevalue: "",
+          value: "",
+          question_id: question.id,
+          agreement_id: agreement.id
+        };
+      }
+
       const dice = Math.random();
 
       switch (true) {
