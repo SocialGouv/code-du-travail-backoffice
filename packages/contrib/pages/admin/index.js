@@ -134,6 +134,7 @@ export default class Index extends React.Component {
     super(props);
 
     this.state = {
+      agreementsStats: [],
       selectedRegionIsCalculating: false,
       selectedRegionName: "",
       selectedRegionStats: [],
@@ -165,7 +166,7 @@ export default class Index extends React.Component {
   async fetchRegionalLocations() {
     const { data: locations } = await this.postgrest
       .select("*")
-      .select("agreements(id,idcc,name)")
+      .select("agreements(id,idcc,name,parent_id)")
       .not.is("area_id", null)
       .get("/locations");
 
@@ -186,6 +187,15 @@ export default class Index extends React.Component {
     const regions = await this.fetchRegions();
     const regionalLocations = await this.fetchRegionalLocations();
 
+    const agreementsStats = regionalLocations
+      .reduce((prev, { agreements }) => [...prev, ...agreements], [])
+      .map(({ id, idcc, name, parent_id }) => ({
+        id,
+        isNational: parent_id === null,
+        name: `[${idcc}] ${name}`,
+        totals: [0, 0, 0, 0, 0, 0]
+      }));
+
     const regionalStats = regions.map(({ code, id, name }) => {
       const location = regionalLocations.find(({ area_id }) => area_id === id);
 
@@ -202,18 +212,54 @@ export default class Index extends React.Component {
     });
 
     this.setState({
+      agreementsStats,
       isLoading: false,
       regionalStats
     });
   }
 
   async updateStats() {
-    const { regionalStats } = this.state;
+    const { agreementsStats, regionalStats } = this.state;
+
+    const nextAgreementsStats = agreementsStats.map(agreementsStatsEntry => ({
+      ...agreementsStatsEntry,
+      totals: [0, 0, 0, 0, 0, 0]
+    }));
 
     const nextRegionalStats = await Promise.all(
       regionalStats.map(async regionalStatsEntry => {
         const { agreementIds } = regionalStatsEntry;
         const answers = await this.fetchAnswersForAgreements(agreementIds);
+
+        answers.forEach(({ agreement_id, state }) => {
+          const agreementsStatsIndex = nextAgreementsStats.findIndex(
+            ({ id }) => id === agreement_id
+          );
+
+          switch (state) {
+            case ANSWER_STATE.TO_DO:
+              nextAgreementsStats[agreementsStatsIndex].totals[0] += 1;
+              break;
+
+            case ANSWER_STATE.DRAFT:
+              nextAgreementsStats[agreementsStatsIndex].totals[1] += 1;
+              break;
+
+            case ANSWER_STATE.PENDING_REVIEW:
+              nextAgreementsStats[agreementsStatsIndex].totals[2] += 1;
+              break;
+
+            case ANSWER_STATE.UNDER_REVIEW:
+              nextAgreementsStats[agreementsStatsIndex].totals[3] += 1;
+              break;
+
+            case ANSWER_STATE.VALIDATED:
+              nextAgreementsStats[agreementsStatsIndex].totals[4] += 1;
+              break;
+          }
+
+          nextAgreementsStats[agreementsStatsIndex].totals[5] += 1;
+        });
 
         const totals = answers.reduce(
           (totals, { state }) => {
@@ -266,6 +312,7 @@ export default class Index extends React.Component {
     );
 
     this.setState({
+      agreementsStats: nextAgreementsStats,
       globalStats: nextGlobalStats,
       isCalculating: false,
       regionalStats: nextRegionalStats
@@ -402,6 +449,21 @@ export default class Index extends React.Component {
     );
   }
 
+  getAgreementsStats(isNational = false) {
+    const { agreementsStats, isCalculating, isPercentage } = this.state;
+    const data = agreementsStats
+      .filter(agreement => agreement.isNational === isNational)
+      .map(({ name, totals }) => this.generateDataRow(name, totals, isCalculating));
+
+    return (
+      <StatsTable
+        data={data}
+        defaultSorted={[{ id: "name", desc: false }]}
+        isPercentage={isPercentage}
+      />
+    );
+  }
+
   render() {
     const { isLoading, isPercentage, selectedRegionName } = this.state;
 
@@ -422,6 +484,12 @@ export default class Index extends React.Component {
           {isLoading ? <p>Calcul en cours…</p> : this.getRegionalStats()}
 
           <Subtitle>Par convention collective</Subtitle>
+          <ContentTitle isFirst>Conventions nationales</ContentTitle>
+          {isLoading ? <p>Calcul en cours…</p> : this.getAgreementsStats(true)}
+          <ContentTitle>Conventions locales</ContentTitle>
+          {isLoading ? <p>Calcul en cours…</p> : this.getAgreementsStats()}
+
+          <Subtitle>Par région (détaillée)</Subtitle>
           {isLoading ? (
             <p>Calcul en cours…</p>
           ) : (
