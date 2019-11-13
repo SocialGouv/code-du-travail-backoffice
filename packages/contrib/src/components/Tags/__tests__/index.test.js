@@ -89,15 +89,6 @@ describe.skip("[Contrib] components/<Tags /> without optional props", () => {
 
     expect(γ.container).toMatchSnapshot();
   });
-
-  // it("should ot show any suggestion", () => {
-  //   fireEvent.input(
-  //     γ.getByPlaceholderText(`Commencez à taper le nom de l'étiquette`),
-  //     {
-  //       target: { value: "a" }
-  //     }
-  //   );
-  // });
 });
 
 describe.skip("[Contrib] components/<Tags /> without `isEditable`", () => {

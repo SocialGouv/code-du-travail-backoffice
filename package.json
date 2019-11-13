@@ -17,6 +17,7 @@
     "start:prod": "NODE_ENV=production ./scripts/prod/start.sh",
     "test": "lerna run test",
     "test:e2e": "cucumber-js",
+    "test:lint": "lerna run test:lint",
     "test:unit": "lerna run test:unit",
     "test:update": "lerna run test:update",
     "test:watch": "lerna run test:watch --parallel"
