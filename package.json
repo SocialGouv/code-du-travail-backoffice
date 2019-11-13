@@ -27,7 +27,7 @@
     "boxen": "4.1.0",
     "chai": "4.2.0",
     "csv-parse": "4.6.5",
-    "cucumber": "6.0.4",
+    "cucumber": "6.0.5",
     "dotenv": "8.2.0",
     "dumdum": "1.0.0-alpha.4",
     "imgur": "0.3.1",
