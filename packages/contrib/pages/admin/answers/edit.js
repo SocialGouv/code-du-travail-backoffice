@@ -25,7 +25,7 @@ import capitalize from "../../../src/helpers/capitalize";
 import customAxios from "../../../src/libs/customAxios";
 import makeApiFilter from "../../../src/libs/makeApiFilter";
 
-import { ANSWER_STATE, ANSWER_STATE_LABEL } from "../../../src/constants";
+import { ANSWER_STATE, ANSWER_STATE_LABEL, ANSWER_STATE_OPTIONS } from "../../../src/constants";
 import T from "../../../src/texts";
 
 const STATES = Object.keys(ANSWER_STATE_LABEL);
@@ -47,10 +47,7 @@ const Sidebar = styled(Flex)`
 `;
 
 const StateSelect = styled(_Select)`
-  border: solid 1px var(--color-lapis-lazuli);
-  color: var(--color-lapis-lazuli);
   margin-right: 1rem;
-  width: 15rem;
 `;
 
 const aIconUri = [
@@ -319,13 +316,10 @@ export class AdminAnwsersEditPage extends React.Component {
     this.setState({ isUpdating: false });
   }
 
-  updateAnswerState() {
+  updateAnswerState({ value }) {
     const { id } = this.props;
-    const newState = this.$newStateSelect.value;
 
-    this.props.dispatch(
-      actions.answers.updateState([id], newState, () => window.location.reload())
-    );
+    this.props.dispatch(actions.answers.updateState([id], value, () => window.location.reload()));
   }
 
   updateGenericReference(generic_reference) {
@@ -547,6 +541,7 @@ export class AdminAnwsersEditPage extends React.Component {
     }
 
     const { agreement, generic_reference, is_published, question, state } = answers.data;
+    const stateSelectValue = ANSWER_STATE_OPTIONS.find(({ value }) => value === state);
 
     return (
       <AdminMain isScrollable={false}>
@@ -561,10 +556,10 @@ export class AdminAnwsersEditPage extends React.Component {
               <Flex alignItems="center">
                 {isSidebarHidden && (
                   <StateSelect
-                    defaultValue={state}
-                    disabled={isLoading}
+                    isDisabled={isLoading}
                     onChange={this.updateAnswerState.bind(this)}
-                    ref={node => (this.$newStateSelect = node)}
+                    options={ANSWER_STATE_OPTIONS}
+                    value={stateSelectValue}
                   >
                     {STATES.map(state => (
                       <option key={state} value={state}>

@@ -40,7 +40,7 @@ export default class AdminAgreementsNewPage extends React.Component {
           name: "parent_id",
           label: "Convention parente",
           options: agreements.map(({ id, idcc, name }) => ({
-            name: `${idcc} - ${name}`,
+            label: `${idcc} - ${name}`,
             value: id
           }))
         }

@@ -34,8 +34,8 @@ export default class AdminTagsNewPage extends React.Component {
           type: "select",
           name: "tag_category_id",
           label: "Catégorie",
-          options: tagsCategories.map(({ id: value, value: name }) => ({
-            name,
+          options: tagsCategories.map(({ id: value, value: label }) => ({
+            label,
             value
           }))
         }
