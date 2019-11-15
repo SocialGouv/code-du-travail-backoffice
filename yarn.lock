@@ -1769,12 +1769,10 @@ css@^2.2.3:
     source-map-resolve "^0.5.2"
     urix "^0.1.0"
 
-csv-parse@4.7.0:
-  version "4.7.0"
-  resolved "https://registry.yarnpkg.com/csv-parse/-/csv-parse-4.7.0.tgz#6bcfbd7128bc1c2605d9b7811fa9b285e7a034d1"
-  integrity sha512-gBCu5F47ULzhJl00Pg7Qlpx0orRrobWbYG8yImpTUY5aGXaTe72pxPbsQ5jWMAVbDLGXWQuNQSQzSxJTIDleqg==
-  dependencies:
-    pad "^3.2.0"
+csv-parse@4.8.1:
+  version "4.8.1"
+  resolved "https://registry.yarnpkg.com/csv-parse/-/csv-parse-4.8.1.tgz#674028dbf4c89846864352a9f0083793be68c8f7"
+  integrity sha512-2zMwLuKE3gyFtshJ+eZyA9JPv3a1Hl2UW3JEuJlyGdL9ODhwcrez53+/A3JU1Gc6dCgOdp6buczG44OQ+pLLtg==
 
 cucumber-expressions@^8.1.0:
   version "8.1.0"
@@ -4237,13 +4235,6 @@ pad-right@^0.2.2:
   integrity sha1-b7ySQEXSRPKiokRQMGDTv8YAl3Q=
   dependencies:
     repeat-string "^1.5.2"
-
-pad@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/pad/-/pad-3.2.0.tgz#be7a1d1cb6757049b4ad5b70e71977158fea95d1"
-  integrity sha512-2u0TrjcGbOjBTJpyewEl4hBO3OeX5wWue7eIFPzQTg6wFSvoaHcBTTUY5m+n0hd04gmTCPuY0kCpVIVuw5etwg==
-  dependencies:
-    wcwidth "^1.0.1"
 
 parallel-transform@^1.1.0:
   version "1.1.0"
