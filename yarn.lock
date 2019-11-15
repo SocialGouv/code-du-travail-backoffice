@@ -1769,10 +1769,10 @@ css@^2.2.3:
     source-map-resolve "^0.5.2"
     urix "^0.1.0"
 
-csv-parse@4.8.1:
-  version "4.8.1"
-  resolved "https://registry.yarnpkg.com/csv-parse/-/csv-parse-4.8.1.tgz#674028dbf4c89846864352a9f0083793be68c8f7"
-  integrity sha512-2zMwLuKE3gyFtshJ+eZyA9JPv3a1Hl2UW3JEuJlyGdL9ODhwcrez53+/A3JU1Gc6dCgOdp6buczG44OQ+pLLtg==
+csv-parse@4.8.2:
+  version "4.8.2"
+  resolved "https://registry.yarnpkg.com/csv-parse/-/csv-parse-4.8.2.tgz#c717cc8d87f619dbd556d5a15222a83b6d7a6d06"
+  integrity sha512-WfYwyJepTbjS5jWAWpVskOJ8Z10231HaFw6qJhSjGrpfMPf3yuoRohlasYsP/6/3YgTQcvZpTvoUo37eaei9Fw==
 
 cucumber-expressions@^8.1.0:
   version "8.1.0"
