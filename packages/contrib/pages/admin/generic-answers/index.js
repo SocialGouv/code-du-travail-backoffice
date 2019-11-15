@@ -4,7 +4,9 @@ import { AdminAnswersIndexPage } from "../answers/index";
 
 class AdminGenericAnswersIndexPage extends AdminAnswersIndexPage {}
 
-export default connect(({ answers }) => ({
+export default connect(({ agreements, answers, questions }) => ({
+  agreements,
   answers,
-  isGeneric: true
+  isGeneric: true,
+  questions
 }))(AdminGenericAnswersIndexPage);

@@ -40,19 +40,8 @@ export const cancelFailure = error => ({
   }
 });
 
-export const load = meta => ({
-  type: actionTypes.ANSWERS_LOAD,
-  meta: {
-    ...{
-      isGeneric: false,
-      pageIndex: -1,
-      query: "",
-      states: [],
-      withReferences: false,
-      withTags: false
-    },
-    ...meta
-  }
+export const load = () => ({
+  type: actionTypes.ANSWERS_LOAD
 });
 export const loadFailure = error => ({
   type: actionTypes.ANSWERS_LOAD_FAILURE,
@@ -64,6 +53,21 @@ export const loadFailure = error => ({
 export const loadSuccess = payload => ({
   type: actionTypes.ANSWERS_LOAD_SUCCESS,
   payload
+});
+
+export const setFilter = (key, value) => ({
+  type: actionTypes.ANSWERS_SET_FILTER,
+  meta: {
+    key,
+    value
+  }
+});
+export const setFilterFailure = error => ({
+  type: actionTypes.ANSWERS_SET_FILTER_FAILURE,
+  error: true,
+  payload: {
+    message: error.message
+  }
 });
 
 export const toggleCheck = (checked, ids) => ({

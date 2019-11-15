@@ -1,3 +1,5 @@
+import capitalize from "./helpers/capitalize";
+
 export const ANSWER_GENERIC_REFERENCE = {
   LABOR_CODE: "labor_code",
   NATIONAL_AGREEMENT: "national_agreement"
@@ -16,6 +18,11 @@ export const ANSWER_STATE_LABEL = {
   under_review: "en cours de validation",
   validated: "validée"
 };
+export const ANSWER_STATES = Object.keys(ANSWER_STATE_LABEL);
+export const ANSWER_STATE_OPTIONS = ANSWER_STATES.map(state => ({
+  label: capitalize(ANSWER_STATE_LABEL[state]),
+  value: state
+}));
 
 export const ANSWER_REFERENCE_CATEGORY = {
   AGREEMENT: "agreement",
