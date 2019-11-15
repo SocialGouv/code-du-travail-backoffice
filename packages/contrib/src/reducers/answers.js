@@ -1,15 +1,19 @@
 import { actionTypes } from "../actions/index";
-import { ANSWER_STATE } from "../constants";
 
 const initialState = {
   checked: [],
   data: [],
   error: null,
+  filters: {
+    agreements: [],
+    isGeneric: false,
+    page: 0,
+    query: "",
+    questions: [],
+    states: []
+  },
   isLoading: true,
-  pagesLength: 0,
-  pageIndex: 0,
-  query: "",
-  state: ANSWER_STATE.PENDING_REVIEW
+  pagesLength: 0
 };
 
 export default (state = initialState, { payload, type }) => {
@@ -39,6 +43,7 @@ export default (state = initialState, { payload, type }) => {
 
     case actionTypes.ANSWERS_CANCEL:
     case actionTypes.ANSWERS_LOAD:
+    case actionTypes.ANSWERS_SET_FILTER:
     case actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE:
     case actionTypes.ANSWERS_UPDATE_IS_PUBLISHED:
     case actionTypes.ANSWERS_UPDATE_STATE:
@@ -49,10 +54,11 @@ export default (state = initialState, { payload, type }) => {
 
     case actionTypes.ANSWERS_CANCEL_FAILURE:
     case actionTypes.ANSWERS_LOAD_FAILURE:
+    case actionTypes.ANSWERS_SET_FILTER_FAILURE:
+    case actionTypes.ANSWERS_TOGGLE_CHECK_FAILURE:
     case actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE_FAILURE:
     case actionTypes.ANSWERS_UPDATE_IS_PUBLISHED_REFERENCE_FAILURE:
     case actionTypes.ANSWERS_UPDATE_STATE_FAILURE:
-    case actionTypes.ANSWERS_TOGGLE_CHECK_FAILURE:
       return {
         ...state,
         error: payload.message,
@@ -65,11 +71,14 @@ export default (state = initialState, { payload, type }) => {
         checked: [],
         data: payload.data,
         error: null,
-        pagesLength: payload.pagesLength,
-        pageIndex: payload.pageIndex,
-        query: payload.query,
         isLoading: false,
-        state: payload.state
+        pagesLength: payload.pagesLength
+      };
+
+    case actionTypes.ANSWERS_SET_FILTER_SUCESS:
+      return {
+        ...state,
+        filters: payload.filters
       };
 
     case actionTypes.ANSWERS_TOGGLE_CHECK_SUCESS:

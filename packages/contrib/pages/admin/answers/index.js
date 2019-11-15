@@ -1,4 +1,3 @@
-import debounce from "lodash.debounce";
 import Router from "next/router";
 import React from "react";
 import { connect } from "react-redux";
@@ -10,18 +9,14 @@ import AdminAnswer from "../../../src/blocks/AdminAnswer";
 import Pagination from "../../../src/components/Pagination";
 import Button from "../../../src/elements/Button";
 import Input from "../../../src/elements/Input";
-import _Select from "../../../src/elements/Select";
+import Select from "../../../src/elements/Select";
 import Title from "../../../src/elements/Title";
-import capitalize from "../../../src/helpers/capitalize";
 import AdminMain from "../../../src/layouts/AdminMain";
-import customAxios from "../../../src/libs/customAxios";
 
-import { ANSWER_STATE, ANSWER_STATE_LABEL } from "../../../src/constants";
+import { ANSWER_STATE_OPTIONS } from "../../../src/constants";
 import T from "../../../src/texts";
 
 const { NODE_ENV } = process.env;
-const PRINTABLE_STATES = [ANSWER_STATE.UNDER_REVIEW, ANSWER_STATE.VALIDATED];
-const STATES = Object.keys(ANSWER_STATE_LABEL);
 
 const Container = styled(Flex)`
   flex-grow: 1;
@@ -34,23 +29,11 @@ const List = styled(Flex)`
   overflow-y: auto;
 `;
 
-const FilterInput = styled(Input)`
-  margin: 0.5rem 0;
-  flex-grow: 0.5;
-`;
 const Top = styled(Flex)`
   margin-bottom: 0.75rem;
 `;
-const FilterSelect = styled(_Select)`
-  margin-right: 1rem;
-  max-width: 15rem;
-  width: 15rem;
-`;
-const StateSelect = styled(_Select)`
-  border: solid 1px var(--color-lapis-lazuli);
-  color: var(--color-lapis-lazuli);
-  margin-right: 1rem;
-  width: 15rem;
+const FilterSelect = styled(Select)`
+  margin-left: 1rem;
 `;
 
 const Text = styled.p`
@@ -67,32 +50,33 @@ export class AdminAnswersIndexPage extends React.Component {
       : "";
   }
 
-  constructor(props) {
-    super(props);
-
-    this.isGeneric = Boolean(props.isGeneric);
-    this.loadAnswers = debounce(this._loadAnswers.bind(this), 500);
-  }
-
   componentDidMount() {
-    this.axios = customAxios();
-
-    this.loadAnswers();
+    this.props.dispatch(actions.agreements.load());
+    this.props.dispatch(actions.questions.load());
+    this.props.dispatch(actions.answers.setFilter("isGeneric", this.props.isGeneric));
   }
 
-  _loadAnswers(state = this.props.answers.state, pageIndex = 0) {
-    const meta = {
-      isGeneric: this.isGeneric,
-      query: this.queryFilter,
-      pageIndex,
-      states: [state]
-    };
-
-    this.props.dispatch(actions.answers.load(meta));
+  setAgreeementsFilter(selected) {
+    const agreements = selected !== null ? selected : [];
+    this.props.dispatch(actions.answers.setFilter("agreements", agreements));
   }
 
-  updateStateFilter() {
-    this.loadAnswers(this.$stateFilter.value);
+  setPageFilter({ selected }) {
+    this.props.dispatch(actions.answers.setFilter("page", selected));
+  }
+
+  setQuestionsFilter(selected) {
+    const questions = selected !== null ? selected : [];
+    this.props.dispatch(actions.answers.setFilter("questions", questions));
+  }
+
+  setQueryFilter() {
+    this.props.dispatch(actions.answers.setFilter("query", this.queryFilter));
+  }
+
+  setStatesFilter(selected) {
+    const states = selected !== null ? selected : [];
+    this.props.dispatch(actions.answers.setFilter("states", states));
   }
 
   checkAnswer(id) {
@@ -102,16 +86,16 @@ export class AdminAnswersIndexPage extends React.Component {
   }
 
   setCheckedAnswersState() {
-    const { checked, state } = this.props.answers;
+    const { checked } = this.props.answers;
     const newState = this.$newStateSelect.value;
 
     this.props.dispatch(
-      actions.answers.updateState(checked, newState, () => this.loadAnswers(state, 0))
+      actions.answers.updateState(checked, newState, this.loadAnswers.bind(this))
     );
   }
 
   printAnswers() {
-    const path = this.isGeneric ? "generic-answers" : "answers";
+    const path = this.props.isGeneric ? "generic-answers" : "answers";
     const { state } = this.props.answers;
     const query = this.queryFilter;
 
@@ -119,7 +103,7 @@ export class AdminAnswersIndexPage extends React.Component {
   }
 
   editAnswer(id) {
-    const path = this.isGeneric ? "generic-answers" : "answers";
+    const path = this.props.isGeneric ? "generic-answers" : "answers";
 
     if (NODE_ENV !== "development") {
       window.open(`/admin/${path}/${id}`, "_blank");
@@ -131,14 +115,14 @@ export class AdminAnswersIndexPage extends React.Component {
   }
 
   getAnswersList() {
-    const { checked, data, state } = this.props.answers;
+    const { checked, data, isLoading } = this.props.answers;
+
+    if (isLoading) {
+      return <HelpText>Chargement…</HelpText>;
+    }
 
     if (data.length === 0) {
-      if (this.queryFilter.length !== 0) {
-        return <p>{T.ADMIN_ANSWERS_INFO_NO_SEARCH_RESULT}</p>;
-      }
-
-      return <p>{T.ADMIN_ANSWERS_INFO_NO_DATA(state)}</p>;
+      return <p>{T.ADMIN_ANSWERS_INFO_NO_DATA}</p>;
     }
 
     return data.map(answer => (
@@ -153,87 +137,86 @@ export class AdminAnswersIndexPage extends React.Component {
   }
 
   render() {
-    const {
-      checked,
-      data,
-      isLoading: _isLoading,
-      query,
-      pageIndex,
-      pagesLength,
-      state
-    } = this.props.answers;
+    const { agreements, answers, isGeneric, questions } = this.props;
 
-    const isLoading = _isLoading || !Array.isArray(data);
+    const isLoading = isGeneric
+      ? answers.isLoading
+      : agreements.isLoading || answers.isLoading || questions.isLoading;
+    const stateFilterAgreements = agreements.data.map(({ id, idcc, name }) => ({
+      label: `[${idcc}] ${name}`,
+      value: id
+    }));
+    const stateFilterQuestions = questions.data.map(({ id, index, value }) => ({
+      label: `${index}) ${value}`,
+      value: id
+    }));
+    const stateActionOptions = ANSWER_STATE_OPTIONS.filter(({ value }) => value !== answers.state);
 
     return (
       <AdminMain hasBareContent>
         <Container flexDirection="column">
           <Top alignItems="baseline" justifyContent="space-between">
-            <Title>{`Réponses${this.isGeneric ? " génériques" : ""}`}</Title>
+            <Title>{`Réponses${isGeneric ? " génériques" : ""}`}</Title>
 
-            <Flex>
-              <FilterSelect
-                defaultValue={state}
-                disabled={isLoading}
-                key={`stateFilter-${state}`}
-                onChange={() => this.updateStateFilter()}
-                ref={node => (this.$stateFilter = node)}
-              >
-                {STATES.map(state => (
-                  <option key={state} value={state}>
-                    {capitalize(ANSWER_STATE_LABEL[state])}
-                  </option>
-                ))}
-              </FilterSelect>
-
-              <Button
-                disabled={isLoading || !PRINTABLE_STATES.includes(state) || pagesLength > 10}
-                onClick={this.printAnswers.bind(this)}
-              >
-                Imprimer
-              </Button>
-            </Flex>
+            <Button disabled={isLoading} onClick={this.printAnswers.bind(this)}>
+              Imprimer
+            </Button>
           </Top>
 
-          <Flex alignItems="center" justifyContent="space-between">
-            <FilterInput
-              defaultValue={query}
-              icon="search"
-              key={`queryFilter-${state}`}
-              onChange={() => this.loadAnswers()}
-              ref={node => (this.$queryFilter = node)}
-            />
-            <Flex>
-              <StateSelect
-                defaultValue={state}
-                disabled={isLoading || checked.length === 0}
-                ref={node => (this.$newStateSelect = node)}
-              >
-                {STATES.filter(_state => _state !== state).map(state => (
-                  <option key={state} value={state}>
-                    {capitalize(ANSWER_STATE_LABEL[state])}
-                  </option>
-                ))}
-              </StateSelect>
-              <Button
-                disabled={isLoading || checked.length === 0}
-                onClick={this.setCheckedAnswersState.bind(this)}
-              >
-                Appliquer
-              </Button>
+          {/* Filters */}
+          {!isGeneric && (
+            <Flex alignItems="center">
+              <Input
+                defaultValue={answers.filters.query}
+                icon="search"
+                onChange={this.setQueryFilter.bind(this)}
+                ref={node => (this.$queryFilter = node)}
+              />
+              {/* We must set the {instanceId} prop to avoid "Prop `id` did not match." warning. */}
+              {/* https://github.com/trezor/trezor-suite/issues/290#issuecomment-516349580 */}
+              <FilterSelect
+                instanceId="statesFilter"
+                isLoading={isLoading}
+                isMulti
+                onChange={this.setStatesFilter.bind(this)}
+                options={ANSWER_STATE_OPTIONS}
+                value={answers.filters.states}
+              />
+              <FilterSelect
+                instanceId="agreementsFilter"
+                isLoading={isLoading}
+                isMulti
+                onChange={this.setAgreeementsFilter.bind(this)}
+                options={stateFilterAgreements}
+                value={answers.filters.agreements}
+              />
+              <FilterSelect
+                instanceId="questionsFilter"
+                isLoading={isLoading}
+                isMulti
+                onChange={this.setQuestionsFilter.bind(this)}
+                options={stateFilterQuestions}
+                value={answers.filters.questions}
+              />
             </Flex>
-          </Flex>
-          {isLoading && (
-            <List>
-              <HelpText>Chargement…</HelpText>
-            </List>
           )}
-          {!isLoading && <List flexDirection="column">{this.getAnswersList()}</List>}
-          {!isLoading && pagesLength > 0 && (
+
+          {/* Actions */}
+          {!isLoading && answers.checked.length > 0 && (
+            <Flex alignItems="center" justifyContent="space-between">
+              <Flex>
+                <Select options={stateActionOptions} />
+                <Button onClick={this.setCheckedAnswersState.bind(this)}>Appliquer</Button>
+              </Flex>
+            </Flex>
+          )}
+
+          <List flexDirection="column">{this.getAnswersList()}</List>
+          {!isLoading && answers.pagesLength > 0 && (
             <Pagination
-              initialPage={pageIndex}
-              onPageChange={({ selected }) => this.loadAnswers(state, selected)}
-              pageCount={pagesLength}
+              initialPage={answers.filters.page}
+              onPageChange={this.setPageFilter.bind(this)}
+              pageCount={answers.pagesLength}
             />
           )}
         </Container>
@@ -242,6 +225,9 @@ export class AdminAnswersIndexPage extends React.Component {
   }
 }
 
-export default connect(({ answers }) => ({
-  answers
+export default connect(({ agreements, answers, questions }) => ({
+  agreements,
+  answers,
+  isGeneric: false,
+  questions
 }))(AdminAnswersIndexPage);

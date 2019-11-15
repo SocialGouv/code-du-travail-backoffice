@@ -254,18 +254,12 @@ export default class AdminForm extends React.Component {
       case "select":
         return (
           <Select
-            defaultValue={this.defaultData[field.name]}
+            defaultValue={field.options.find(({ value }) => value === this.defaultData[field.name])}
             id={field.name}
             name={field.name}
             onChange={this.updateFormData}
-          >
-            <option />
-            {field.options.map((option, index) => (
-              <option key={index} value={option.value}>
-                {option.name}
-              </option>
-            ))}
-          </Select>
+            options={field.options}
+          />
         );
 
       case "tags":

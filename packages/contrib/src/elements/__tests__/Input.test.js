@@ -25,10 +25,7 @@ describe("[Contrib] elements/<Input />", () => {
 
   it(`should pass with a {icon} = "search"`, () => {
     const $input = testRender(<Input icon="search" />);
-    const $icon = $input
-      .findByType("div")
-      .findByType("span")
-      .findByType("svg");
+    const $icon = $input.findByType("div").findByType("svg");
 
     expect($input).toMatchSnapshot();
     expect($icon.props).toHaveProperty("data-icon", "search");

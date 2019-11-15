@@ -7,12 +7,5 @@ describe("[Contrib] elements/<Select />", () => {
     const $select = testRender(<Select />);
 
     expect($select).toMatchSnapshot();
-    expect($select).toHaveStyleRule("opacity", "1");
-  });
-
-  it(`should pass with {disabled}`, () => {
-    const $select = testRender(<Select disabled />);
-
-    expect($select).toHaveStyleRule("opacity", "0.25");
   });
 });

@@ -18,9 +18,9 @@ const FIELDS = [
     name: "role",
     label: "Rôle",
     options: [
-      { name: "Administrateur", value: "administrator" },
-      { name: "Administrateur régional", value: "regional_administrator" },
-      { name: "Contributeur", value: "contributor" }
+      { label: "Administrateur", value: "administrator" },
+      { label: "Administrateur régional", value: "regional_administrator" },
+      { label: "Contributeur", value: "contributor" }
     ]
   },
   {
@@ -64,8 +64,8 @@ export default class AdminUsersNewPage extends React.Component {
           type: "select",
           name: "location_id",
           label: "Unité",
-          options: locations.map(({ id: value, name }) => ({
-            name,
+          options: locations.map(({ id: value, name: label }) => ({
+            label,
             value
           }))
         },

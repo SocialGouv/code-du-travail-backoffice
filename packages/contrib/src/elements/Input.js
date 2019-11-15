@@ -27,13 +27,11 @@ const _Input = styled.input`
     color: var(--color-placeholder);
   }
 `;
-const InputIconContainer = styled.span`
-  left: 0.625rem;
-  top: 1.675rem;
-  position: relative;
-`;
 const InputIcon = styled(Icon)`
   color: var(--color-placeholder);
+  left: 0.625rem;
+  top: 1.775rem;
+  position: relative;
 `;
 
 const Input = ({ disabled = false, icon, hasError, ...props }, ref) => {
@@ -47,9 +45,7 @@ const Input = ({ disabled = false, icon, hasError, ...props }, ref) => {
   return (
     <div className={className} style={style}>
       <InputWithIconWrapper>
-        <InputIconContainer>
-          <InputIcon icon={icon} />
-        </InputIconContainer>
+        <InputIcon icon={icon} />
         <_Input disabled={disabled} hasError={hasError} hasIcon ref={ref} {...inputProps} />
       </InputWithIconWrapper>
     </div>

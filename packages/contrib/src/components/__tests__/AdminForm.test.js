@@ -48,8 +48,8 @@ describe.skip("[Contrib] components/<AdminForm /> (create)", () => {
         name: "defaultSelect",
         label: "A Default Select",
         options: [
-          { name: "First Option", value: "first_option" },
-          { name: "Second Option", value: "second_option" }
+          { label: "First Option", value: "first_option" },
+          { label: "Second Option", value: "second_option" }
         ]
       },
       {
@@ -254,8 +254,8 @@ describe.skip("[Contrib] components/<AdminForm /> (edit)", () => {
         name: "defaultSelect",
         label: "A Default Select",
         options: [
-          { name: "First Option", value: "first_option" },
-          { name: "Second Option", value: "second_option" }
+          { label: "First Option", value: "first_option" },
+          { label: "Second Option", value: "second_option" }
         ]
       },
       {

@@ -41,7 +41,7 @@ export default class AdminLocationsNewPage extends React.Component {
           name: "area_id",
           label: "Zone",
           options: areas.map(({ category, id: value, name }) => ({
-            name: `[${category.substr(0, 3).toUpperCase()}] ${name}`,
+            label: `[${category.substr(0, 3).toUpperCase()}] ${name}`,
             value
           }))
         },

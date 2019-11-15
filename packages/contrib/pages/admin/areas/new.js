@@ -24,7 +24,7 @@ const FIELDS = [
     label: "Type",
     options: R.pipe(
       R.toPairs,
-      R.map(([value, name]) => ({ name, value }))
+      R.map(([value, label]) => ({ label, value }))
     )(AREA_CATEGORY_LABEL)
   }
 ];
@@ -53,7 +53,7 @@ export default class AdminAreasNewPage extends React.Component {
           name: "parent_id",
           label: "Zone parente",
           options: areas.map(({ category, code, id, name }) => ({
-            name: `${name} [${AREA_CATEGORY_LABEL[category]} - ${code}]`,
+            label: `${name} [${AREA_CATEGORY_LABEL[category]} - ${code}]`,
             value: id
           }))
         }
