@@ -3,6 +3,7 @@ version: "3"
 services:
   db:
     image: igabriele/postgresql-jwt
+    restart: always
     ports:
       - ${DB_PORT}:5432
     environment:
@@ -18,6 +19,7 @@ services:
   # https://postgrest.org/en/stable/install.html#containerized-postgrest-and-db-with-docker-compose
   api:
     image: postgrest/postgrest:v6.0.2
+    restart: always
     ports:
       - ${API_PORT}:3000
     environment:
@@ -29,6 +31,7 @@ services:
       - db
 
   web:
+    restart: always
     build:
       context: ./packages/contrib
       args:
