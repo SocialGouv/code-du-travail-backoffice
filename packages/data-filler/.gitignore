@@ -1,0 +1,4 @@
+node_modules
+out
+.nex
+docker-compose.override.yml
