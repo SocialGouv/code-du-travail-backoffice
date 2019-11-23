@@ -1,20 +1,10 @@
 import React from "react";
 import { Formik } from "formik";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import * as Yup from "yup";
 import { CheckCircle } from "react-feather";
 
-import {
-  Alert,
-  Button,
-  Container,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Row,
-  Col
-} from "reactstrap";
+import { Alert, Button, Container, Form, FormGroup, Label, Input, Row, Col } from "reactstrap";
 
 import CDTNReferences from "./components/CDTNReferences";
 import MarkdownLink from "./components/MarkdownLink";
@@ -153,9 +143,7 @@ const ReponseForm = ({ data, onSubmit, onDelete }) => (
                   type="submit"
                   disabled={
                     // disable when errors, nothing changed or while submitting
-                    !!Object.keys(errors).length ||
-                    !Object.keys(touched).length ||
-                    isSubmitting
+                    !!Object.keys(errors).length || !Object.keys(touched).length || isSubmitting
                   }
                 >
                   Enregistrer

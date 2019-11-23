@@ -1,27 +1,16 @@
 // client for kinto on browser side
 
-// use require for calls from server.js
-const getConfig = require("next/config").default;
-
 // SSR hack
 global.fetch = require("node-fetch");
+
 const KintoClient = require("kinto-http");
 
-const { publicRuntimeConfig } = getConfig();
+const { KINTO_URI } = process.env;
 
 const getClient = () => {
-  const KINTO_URL =
-    typeof window !== "undefined"
-      ? publicRuntimeConfig.KINTO_URL
-      : (process.env.KINTO_URL_SERVER || "http://kinto:8888") + "/v1";
+  const url = `${KINTO_URI}/v1`;
+  const kintoClient = new KintoClient(url, { headers: {} });
 
-  console.log(
-    "KINTO_URL",
-    typeof window !== "undefined" ? "browser" : "server",
-    KINTO_URL
-  );
-
-  const kintoClient = new KintoClient(KINTO_URL, { headers: {} });
   return kintoClient;
 };
 

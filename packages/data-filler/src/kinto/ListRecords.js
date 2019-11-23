@@ -6,7 +6,7 @@ import memoizee from "memoizee";
 
 // cache by bucket + collection
 // todo: update when some item change
-const cache = {};
+// const cache = {};
 
 const fetchRecords = (client, bucket, collection, sort) =>
   client
@@ -25,14 +25,10 @@ const memoizedFetchRecords = memoizee(fetchRecords, {
 // render prop that render with `result` from `collection.listRecords`
 const ListRecords = ({ bucket, collection, render, sort = "title" }) => (
   <KintoFetch
-    fetch={({ client }) =>
-      memoizedFetchRecords(client, bucket, collection, sort)
-    }
+    fetch={({ client }) => memoizedFetchRecords(client, bucket, collection, sort)}
     render={({ status, result }) => (
       <React.Fragment>
-        {status === "error" && (
-          <div>error fetching bucket {bucket} collections</div>
-        )}
+        {status === "error" && <div>error fetching bucket {bucket} collections</div>}
         {status === "success" &&
           render({
             result

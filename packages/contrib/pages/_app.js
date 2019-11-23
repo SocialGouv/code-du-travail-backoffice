@@ -4,6 +4,9 @@ import withRedux from "next-redux-wrapper";
 import React from "react";
 import { Provider } from "react-redux";
 
+import KintoContext from "@socialgouv/cdtn-data-filler/src/kinto/KintoContext";
+import getClient from "@socialgouv/cdtn-data-filler/src/kinto/client";
+
 import cache from "../src/cache";
 import Login from "../src/blocks/Login";
 import getMe from "../src/libs/getMe";
@@ -49,6 +52,7 @@ class MainApp extends App {
   }
 
   render() {
+    const kintoClient = getClient();
     const { Component, pageProps, store } = this.props;
     const { me } = this.state;
     const { statusCode } = pageProps;
@@ -58,7 +62,9 @@ class MainApp extends App {
     return (
       <Provider store={store}>
         {hasError || me.isAuthenticated ? (
-          <Component {...pageProps} />
+          <KintoContext.Provider value={{ client: kintoClient }}>
+            <Component {...pageProps} />
+          </KintoContext.Provider>
         ) : (
           <Login onLoggedIn={this.login.bind(this)} />
         )}

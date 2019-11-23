@@ -13,11 +13,7 @@ class Delayed extends React.Component {
   }
 
   render() {
-    return (
-      <div className={`FadeDelay-ready-${this.state.ready}`}>
-        {this.props.children}
-      </div>
-    );
+    return <div className={`FadeDelay-ready-${this.state.ready}`}>{this.props.children}</div>;
   }
 }
 

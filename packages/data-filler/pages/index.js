@@ -1,13 +1,12 @@
+import Router from "next/router";
 import React from "react";
-import getConfig from "next/config";
-import Link from "next/link";
 
 import ProgressIndicator from "../src/forms/components/ProgressIndicator";
-import sortByKey from "../src/sortByKey";
-import getScore from "../src/getScore";
-import getClient from "../src/kinto/client";
-import { sources, getRouteBySource } from "../src/sources";
 import dump from "../src/dump.data.json";
+import getClient from "../src/kinto/client";
+import getScore from "../src/getScore";
+import sortByKey from "../src/sortByKey";
+import { sources, getRouteBySource } from "../src/sources";
 
 import { Eye, Database, Plus, Star } from "react-feather";
 
@@ -27,26 +26,39 @@ import {
   Progress
 } from "reactstrap";
 
-const { publicRuntimeConfig } = getConfig();
+const { DATA_FILLER_PATH } = process.env;
+
+class Link extends React.PureComponent {
+  goTo(path) {
+    Router.push(`${DATA_FILLER_PATH}${path}`);
+  }
+
+  render() {
+    const { children, href } = this.props;
+
+    return (
+      <span
+        onClick={() => this.goTo(href)}
+        onKeyPress={() => this.goTo(href)}
+        role="link"
+        tabIndex="-1"
+      >
+        {children}
+      </span>
+    );
+  }
+}
 
 const BucketIntro = ({ count }) => (
   <Jumbotron>
     <h2 className="display-3">
-      <Database
-        style={{ marginRight: 5, verticalAlign: "bottom" }}
-        size="1.35em"
-      />{" "}
-      Datafiller
-      <div
-        style={{ fontSize: "1.5rem", display: "inline-block", marginLeft: 10 }}
-      >
+      <Database style={{ marginRight: 5, verticalAlign: "bottom" }} size="1.35em" /> Datafiller
+      <div style={{ fontSize: "1.5rem", display: "inline-block", marginLeft: 10 }}>
         {count}
         <Star fill="yellow" size={24} style={{ marginLeft: 5 }} />
       </div>
     </h2>
-    <p className="lead">
-      Données de référence pour alimenter le moteur de recherche.
-    </p>
+    <p className="lead">Données de référence pour alimenter le moteur de recherche.</p>
   </Jumbotron>
 );
 
@@ -78,10 +90,7 @@ const BucketView = ({ bucket, collections = [], themes }) => {
                   <Row>
                     <Col xs={8} style={{ fontSize: "1.5em" }}>
                       {collection.id}
-                      <Badge
-                        style={{ marginLeft: 15, display: "inline" }}
-                        color="success"
-                      >
+                      <Badge style={{ marginLeft: 15, display: "inline" }} color="success">
                         {collection.records.length}
                       </Badge>
                     </Col>
@@ -125,9 +134,7 @@ const BucketView = ({ bucket, collections = [], themes }) => {
                           style={{ padding: ".5rem 1.25rem" }}
                           className="text-truncate"
                         >
-                          <ProgressIndicator
-                            score={getScore(collection.id, rec)}
-                          />
+                          <ProgressIndicator score={getScore(collection.id, rec)} />
                           {rec.title}
                         </ListGroupItem>
                       </Link>
@@ -141,9 +148,7 @@ const BucketView = ({ bucket, collections = [], themes }) => {
         <Col xs={12} sm={6} key="themes">
           <Card style={{ marginTop: 15 }}>
             <CardBody>
-              <div style={{ fontSize: "1.5em", marginBottom: 35 }}>
-                Contenus à thémer
-              </div>
+              <div style={{ fontSize: "1.5em", marginBottom: 35 }}>Contenus à thémer</div>
               <Table>
                 <tbody>
                   {themes
@@ -151,29 +156,14 @@ const BucketView = ({ bucket, collections = [], themes }) => {
                     .map(item => (
                       <tr key={item.source}>
                         <td>
-                          <Link
-                            href={`/themes/[source]`}
-                            as={`/themes/${item.source}`}
-                            passHref
-                          >
+                          <Link href={`/themes/[source]`} as={`/themes/${item.source}`} passHref>
                             <a>{getRouteBySource(item.source)}</a>
                           </Link>
                         </td>
                         <td>
                           <div>
-                            <Progress
-                              value={
-                                ((item.total - item.items.length) /
-                                  item.total) *
-                                100
-                              }
-                            >
-                              {parseInt(
-                                ((item.total - item.items.length) /
-                                  item.total) *
-                                  100
-                              )}
-                              %
+                            <Progress value={((item.total - item.items.length) / item.total) * 100}>
+                              {parseInt(((item.total - item.items.length) / item.total) * 100)}%
                             </Progress>
                           </div>
                         </td>
@@ -220,10 +210,7 @@ const fetchRecapThemes = async () => {
       const contentSlug = `/${getRouteBySource(source)}/${content.slug}`;
       return themes.data.find(
         theme =>
-          theme.refs &&
-          theme.refs
-            .filter(ref => !!ref.url)
-            .find(ref => ref.url === contentSlug)
+          theme.refs && theme.refs.filter(ref => !!ref.url).find(ref => ref.url === contentSlug)
       );
     };
     const hasNoTheme = content => !hasTheme(content);
@@ -245,16 +232,18 @@ const fetchRecapThemes = async () => {
 };
 
 // by default we list the process.env.KINTO_BUCKET
-class Home extends React.Component {
+export default class Home extends React.Component {
   static async getInitialProps({ query }) {
     const collections = await fetchAllCollections();
     const themes = await fetchRecapThemes();
     return { query: query.query, collections, themes };
   }
+
   render() {
-    const bucket = publicRuntimeConfig.KINTO_BUCKET;
+    const bucket = process.env.KINTO_BUCKET;
     const { collections, themes } = this.props;
     const total = sum(collections.map(c => c.records.length));
+
     return (
       <Container>
         <BucketIntro count={total} />
@@ -263,5 +252,3 @@ class Home extends React.Component {
     );
   }
 }
-
-export default Home;

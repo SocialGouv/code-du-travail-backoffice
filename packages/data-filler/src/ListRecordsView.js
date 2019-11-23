@@ -7,18 +7,13 @@ import ThemeLink from "./ThemeLink";
 import ProgressIndicator from "./forms/components/ProgressIndicator";
 import getScore from "./getScore";
 
+const { DATA_FILLER_PATH } = process.env;
+
 const normalize = str => str.toLowerCase().trim();
 
-const matchQuery = query => record =>
-  !query || normalize(record.title).includes(normalize(query));
+const matchQuery = query => record => !query || normalize(record.title).includes(normalize(query));
 
-const ListRecordsView = ({
-  records,
-  bucket,
-  collection,
-  record,
-  onAddClick
-}) => {
+const ListRecordsView = ({ records, bucket, collection, record, onAddClick }) => {
   const [query, setQuery] = useState("");
   return (
     <React.Fragment>
@@ -31,10 +26,9 @@ const ListRecordsView = ({
         }}
       >
         <ListGroupItem action style={{ flex: "0 0 auto" }}>
-          <Link href="/" passHref>
+          <Link href={DATA_FILLER_PATH} passHref>
             <a>
-              <Home style={{ marginRight: 5, verticalAlign: "middle" }} />{" "}
-              Accueil
+              <Home style={{ marginRight: 5, verticalAlign: "middle" }} /> Accueil
             </a>
           </Link>
         </ListGroupItem>
@@ -43,9 +37,7 @@ const ListRecordsView = ({
           <KintoContext.Consumer>
             {({ client }) => (
               <a href="#" onClick={() => onAddClick({ client })}>
-                <PlusSquare
-                  style={{ marginRight: 5, verticalAlign: "middle" }}
-                />
+                <PlusSquare style={{ marginRight: 5, verticalAlign: "middle" }} />
                 Ajouter une entrée
               </a>
             )}
@@ -53,11 +45,7 @@ const ListRecordsView = ({
         </ListGroupItem>
 
         <ListGroupItem style={{ flex: "0 0 auto" }}>
-          <Input
-            onChange={e => setQuery(e.target.value)}
-            value={query}
-            placeholder="Filtrer"
-          />
+          <Input onChange={e => setQuery(e.target.value)} value={query} placeholder="Filtrer" />
         </ListGroupItem>
 
         <div style={{ overflow: "scroll" }}>

@@ -1,8 +1,7 @@
+import Router from "next/router";
 import React from "react";
 
 import withKinto from "./kinto/withKinto";
-
-import { withRouter } from "next/router";
 
 const forms = {
   requetes: require("./forms/Requete").default,
@@ -32,7 +31,7 @@ const onDelete = ({ client, bucket, collection, id }) =>
       throw e;
     });
 
-const EditRecord = withKinto(({ client, query, record, router }) => {
+const EditRecord = withKinto(({ client, query, record }) => {
   // todo: use json-schema-form when no schema defined
   const Component = forms[query.collection];
   if (!Component) {
@@ -60,10 +59,10 @@ const EditRecord = withKinto(({ client, query, record, router }) => {
           bucket: query.bucket,
           collection: query.collection,
           id: record.data.id
-        }).then(() => router.push(`/`))
+        }).then(() => Router.push(`/`))
       }
     />
   );
 });
 
-export default withRouter(EditRecord);
+export default EditRecord;

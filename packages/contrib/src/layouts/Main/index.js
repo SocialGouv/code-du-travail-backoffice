@@ -26,6 +26,10 @@ export default ({ isHorizontal = false, isLoading = false, ...props }) => (
       <link href="/static/icons/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />
       <link href="/static/icons/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
       <link rel="manifest" href="/static/site.webmanifest" />
+      <link
+        href="https://incubateur.social.gouv.fr/bootstrap/master/@socialgouv/bootstrap.core/dist/socialgouv-bootstrap.min.css"
+        rel="stylesheet"
+      />
     </Head>
     <Modal />
     <Header />

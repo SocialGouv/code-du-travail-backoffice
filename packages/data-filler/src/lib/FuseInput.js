@@ -4,7 +4,7 @@ import Autosuggest from "react-autosuggest";
 import Fuse from "fuse.js";
 import getSlug from "speakingurl";
 
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 const DEFAULT_FUSE_OPTIONS = {
   shouldSort: true,
@@ -43,7 +43,7 @@ const SuggestionContainer = styled.div`
 `;
 
 // render a highlighted html with span.fuse-highlighter from a fuse.js suggestion and a query.
-const FuseHighLighter = ({ suggestion, query, style, labelKey }) => {
+const FuseHighLighter = ({ suggestion, style, labelKey }) => {
   let html = suggestion.item[labelKey];
   let offset = 0;
   let newHtml;
@@ -118,7 +118,7 @@ class FuseInput extends React.Component {
     });
   };
 
-  onSelect = (event, { suggestion, suggestionValue }) => {
+  onSelect = (event, { suggestion }) => {
     this.setState(
       {
         value: (suggestion.item && suggestion.item[this.props.labelKey]) || ""
@@ -160,9 +160,7 @@ class FuseInput extends React.Component {
 
 import { Input } from "reactstrap";
 
-const renderInputComponent = inputProps => (
-  <Input {...inputProps} innerRef={inputProps.ref} />
-);
+const renderInputComponent = inputProps => <Input {...inputProps} innerRef={inputProps.ref} />;
 
 const SuggestionsContainer = styled.div`
   white-space: nowrap;

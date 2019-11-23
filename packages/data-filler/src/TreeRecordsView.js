@@ -9,14 +9,9 @@ import ThemeLink from "./ThemeLink";
 import ProgressIndicator from "./forms/components/ProgressIndicator";
 import getScore from "./getScore";
 
-const renderChildren = ({
-  parent,
-  themes,
-  record,
-  collection,
-  bucket,
-  depth = 0
-}) => {
+const { DATA_FILLER_PATH } = process.env;
+
+const renderChildren = ({ parent, themes, record, collection, bucket, depth = 0 }) => {
   return themes
     .filter(t => t.parent === parent)
     .sort((a, b) => {
@@ -81,10 +76,9 @@ const TreeRecordsView = ({ bucket, collection, record, onAddClick }) => (
           }}
         >
           <ListGroupItem action style={{ flex: "0 0 auto" }}>
-            <Link href="/" passHref>
+            <Link href={DATA_FILLER_PATH} passHref>
               <a>
-                <Home style={{ marginRight: 5, verticalAlign: "middle" }} />{" "}
-                Accueil
+                <Home style={{ marginRight: 5, verticalAlign: "middle" }} /> Accueil
               </a>
             </Link>
           </ListGroupItem>
@@ -92,9 +86,7 @@ const TreeRecordsView = ({ bucket, collection, record, onAddClick }) => (
             <KintoContext.Consumer>
               {({ client }) => (
                 <a href="#" onClick={() => onAddClick({ client })}>
-                  <PlusSquare
-                    style={{ marginRight: 5, verticalAlign: "middle" }}
-                  />
+                  <PlusSquare style={{ marginRight: 5, verticalAlign: "middle" }} />
                   Ajouter une entrée
                 </a>
               )}
