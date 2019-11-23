@@ -1,18 +1,14 @@
-FROM node:10-alpine
+FROM node:12.13.1-slim
 
-COPY ./package.json /app/package.json
-COPY ./yarn.lock /app/yarn.lock
+ARG NODE_ENV
+
+ENV NODE_ENV=$NODE_ENV
 
 WORKDIR /app
 
-RUN yarn --frozen-lockfile && yarn cache clean
+COPY . ./
 
-COPY . .
-
-RUN yarn build
-
-ENV NODE_ENV="production"
+RUN yarn --frozen-lockfile
+RUN yarn build:docker
 
 ENTRYPOINT ["yarn", "start"]
-
-

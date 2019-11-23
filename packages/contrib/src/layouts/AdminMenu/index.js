@@ -146,6 +146,15 @@ export default class AdminMenu extends React.PureComponent {
 
         <Subtitle>Maintenance</Subtitle>
         <Link
+          isActive={this.isActive("/data-filler")}
+          onClick={() => this.goTo("/data-filler")}
+          onKeyPress={() => this.goTo("/data-filler")}
+          role="link"
+          tabIndex="0"
+        >
+          Data Filler
+        </Link>
+        <Link
           isActive={this.isActive("/migrations")}
           onClick={() => this.goTo("/migrations")}
           onKeyPress={() => this.goTo("/migrations")}

@@ -7,7 +7,7 @@ services:
       dockerfile: ./Dockerfile
       context: .
     environment:
-      - KINTO_URL_SERVER=http://kinto:8888
+      - KINTO_URI_SERVER=http://kinto:8888
       - SENTRY_PUBLIC_DSN=https://a681630d02834fddaaf37fbccd62cd5b@sentry.tools.factory.social.gouv.fr/23
     ports:
       - 3001:3000

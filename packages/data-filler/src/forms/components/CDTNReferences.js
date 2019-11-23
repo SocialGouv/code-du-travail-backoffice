@@ -2,11 +2,7 @@ import React from "react";
 import { FieldArray } from "formik";
 import { Button, Table } from "reactstrap";
 import { Trash, ExternalLink, PlusSquare, RotateCw, Menu } from "react-feather";
-import {
-  SortableContainer,
-  SortableElement,
-  SortableHandle
-} from "react-sortable-hoc";
+import { SortableContainer, SortableElement, SortableHandle } from "react-sortable-hoc";
 
 import { searchResults } from "../../cdtn-api";
 
@@ -14,7 +10,7 @@ import CDTNPicker from "./CDTNPicker";
 import Relevance from "./Relevance";
 import getRowId from "./getRowId";
 
-const MyTableFooter = ({ sortable, loadable, onAddClick, onRefreshClick }) => (
+const MyTableFooter = ({ loadable, onAddClick, onRefreshClick }) => (
   <thead>
     <tr>
       <td colSpan={4}>
@@ -51,12 +47,10 @@ const MyTableFooter = ({ sortable, loadable, onAddClick, onRefreshClick }) => (
   </thead>
 );
 
-const DragHandle = SortableHandle(() => (
-  <Menu size={16} style={{ cursor: "pointer" }} />
-));
+const DragHandle = SortableHandle(() => <Menu size={16} style={{ cursor: "pointer" }} />);
 
 const ReferenceRow = SortableElement(
-  ({ index, row, sortable, setRowValue, setRowRelevance, onRemoveClick }) => (
+  ({ row, sortable, setRowValue, setRowRelevance, onRemoveClick }) => (
     <tr>
       {sortable && (
         <td width={50}>
@@ -64,10 +58,7 @@ const ReferenceRow = SortableElement(
         </td>
       )}
       <td>
-        <CDTNPicker
-          query={getRowId(row) || ""}
-          onSelect={value => setRowValue(value)}
-        />
+        <CDTNPicker query={getRowId(row) || ""} onSelect={value => setRowValue(value)} />
       </td>
       <td
         align="center"
@@ -81,8 +72,7 @@ const ReferenceRow = SortableElement(
           size={16}
           style={{ cursor: "pointer" }}
           onClick={() => {
-            const CDTN_URL =
-              "https://code-du-travail-numerique.incubateur.social.gouv.fr";
+            const CDTN_URL = "https://code-du-travail-numerique.incubateur.social.gouv.fr";
             const url = row.url[0] === "/" ? `${CDTN_URL}${row.url}` : row.url;
             window.open(url);
           }}
@@ -96,12 +86,8 @@ const ReferenceRow = SortableElement(
             padding: 0,
             verticalAlign: "middle"
           }}
-          align="center"
         >
-          <Relevance
-            value={row.relevance}
-            onChange={value => setRowRelevance(value)}
-          />
+          <Relevance value={row.relevance} onChange={value => setRowRelevance(value)} />
         </td>
       )}
       <td
@@ -112,11 +98,7 @@ const ReferenceRow = SortableElement(
           verticalAlign: "middle"
         }}
       >
-        <Trash
-          size={16}
-          onClick={onRemoveClick}
-          style={{ cursor: "pointer", color: "#d63626" }}
-        />
+        <Trash size={16} onClick={onRemoveClick} style={{ cursor: "pointer", color: "#d63626" }} />
       </td>
     </tr>
   )
@@ -145,7 +127,7 @@ const References = SortableContainer(
   }) => (
     <FieldArray
       name="refs"
-      render={({}) => (
+      render={() => (
         <Table padding="dense">
           <thead>
             <tr>
@@ -169,9 +151,7 @@ const References = SortableContainer(
                         index={index}
                         row={row}
                         setRowValue={value => setRowValue(index, value)}
-                        setRowRelevance={relevance =>
-                          setRowRelevance(index, relevance)
-                        }
+                        setRowRelevance={relevance => setRowRelevance(index, relevance)}
                         onRemoveClick={() => onRemoveClick({ index })}
                       />
                     )
@@ -231,10 +211,7 @@ const CDTNReferences = ({
     }}
     onAddClick={() => {
       setFieldTouched("refs");
-      setFieldValue(
-        "refs",
-        (values.refs || []).concat([{ title: "", url: "" }])
-      );
+      setFieldValue("refs", (values.refs || []).concat([{ title: "", url: "" }]));
     }}
     onRemoveClick={({ index }) => {
       values.refs.splice(index, 1);
@@ -249,9 +226,7 @@ const CDTNReferences = ({
           res.hits.hits
             .filter(hit =>
               values.refs
-                ? values.refs
-                    .map(ref => ref.url)
-                    .indexOf(getRowId(hit._source)) === -1
+                ? values.refs.map(ref => ref.url).indexOf(getRowId(hit._source)) === -1
                 : true
             )
             .map(hit => ({

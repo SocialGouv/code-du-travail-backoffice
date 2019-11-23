@@ -1,0 +1,18 @@
+{
+  "coverage-gutters.coverageReportFileName": "packages/contrib/coverage/**/index.html",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveTimeout": 2000,
+  "editor.rulers": [100],
+  "eslint.workingDirectories": [
+    {
+      "directory": "./packages/contrib",
+      "changeProcessCWD": true
+    },
+    {
+      "directory": "./packages/data-filler",
+      "changeProcessCWD": true
+    }
+  ]
+}

@@ -7,52 +7,52 @@ import Layout from "../../../../../../src/Layout";
 import getClient from "../../../../../../src/kinto/client";
 import sortByKey from "../../../../../../src/sortByKey";
 
-const RecordPage = props => {
-  const { record, records, ...otherProps } = props;
-  return (
-    <div>
-      <Head>
-        <title>Dataset: {(record.data && record.data.id) || ""}</title>
-      </Head>
-      <Layout records={records}>
-        <EditRecord record={record} {...otherProps} />
-      </Layout>
-    </div>
-  );
-};
+export default class RecordPage extends React.Component {
+  static async getInitialProps({ query }) {
+    const client = getClient();
 
-RecordPage.getInitialProps = async ({ query }) => {
-  const client = getClient();
-
-  const recordsQuery = await client
-    .bucket(query.bucket, { headers: {} })
-    .collection(query.collection, { headers: {} })
-    .listRecords({ limit: 1000 });
-  const records = recordsQuery.data.sort(
-    sortByKey(r => r.title.trim().toLowerCase())
-  );
-  let record;
-  if (records.length === 0 || query.record === "new") {
-    record = await client
+    const recordsQuery = await client
       .bucket(query.bucket, { headers: {} })
       .collection(query.collection, { headers: {} })
-      .createRecord({ title: "nouveau..." });
-  } else {
-    if (query.record) {
+      .listRecords({ limit: 1000 });
+    const records = recordsQuery.data.sort(sortByKey(r => r.title.trim().toLowerCase()));
+
+    let record;
+    if (records.length === 0 || query.record === "new") {
       record = await client
         .bucket(query.bucket, { headers: {} })
         .collection(query.collection, { headers: {} })
-        .getRecord(query.record, { headers: {} });
+        .createRecord({ title: "nouveau..." });
     } else {
-      record = records[-1];
+      if (query.record) {
+        record = await client
+          .bucket(query.bucket, { headers: {} })
+          .collection(query.collection, { headers: {} })
+          .getRecord(query.record, { headers: {} });
+      } else {
+        record = records[-1];
+      }
     }
+
+    return {
+      record,
+      records,
+      query
+    };
   }
 
-  return {
-    record,
-    records,
-    query
-  };
-};
+  render() {
+    const { record, query, records, ...props } = this.props;
 
-export default RecordPage; // () => <div>RecordPage</div>;
+    return (
+      <div>
+        <Head>
+          <title>Dataset: {(record.data && record.data.id) || ""}</title>
+        </Head>
+        <Layout query={query} records={records}>
+          <EditRecord query={query} record={record} {...props} />
+        </Layout>
+      </div>
+    );
+  }
+}

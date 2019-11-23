@@ -57,6 +57,10 @@ module.exports = function(nextApp) {
 
   router.redirect("/login", "/");
 
+  router.get("/api/ccn/:ccn.json", async ctx => {
+    ctx.body = require(`@socialgouv/kali-data/data/${ctx.params.ccn}.json`);
+  });
+
   withErrorAndAuth(nextApp, "/answers/edit/:id", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/answers/edit", { ...ctx.params });
   });

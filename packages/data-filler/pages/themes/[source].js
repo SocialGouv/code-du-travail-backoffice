@@ -79,51 +79,49 @@ const ThemeItems = ({ records }) => (
   </Table>
 );
 
-const ContentPage = props => {
-  const { records, source } = props;
-  const label = getRouteBySource(source);
-  return (
-    <div>
-      <Head>
-        <title>Theming {label}</title>
-      </Head>
-      <Layout>
-        <h4 style={{ margin: "40px 0" }}>
-          <Link href="/">
-            <a>Accueil</a>
-          </Link>{" "}
-          &gt; {records.length} {label} sans thème
-        </h4>
-        <ThemeItems records={records} />
-      </Layout>
-    </div>
-  );
-};
+export default class ThemesSourcesPage extends React.Component {
+  static async getInitialProps({ query }) {
+    const { source } = query;
+    const client = getClient();
+    const themes = await client
+      .bucket("datasets", { headers: {} })
+      .collection("themes", { headers: {} })
+      .listRecords({ limit: 1000 });
+    const hasTheme = content => {
+      const contentSlug = `/${getRouteBySource(source)}/${content.slug}`;
+      return themes.data.find(
+        theme =>
+          theme.refs && theme.refs.filter(ref => !!ref.url).find(ref => ref.url === contentSlug)
+      );
+    };
+    const hasNoTheme = content => !hasTheme(content);
+    const noThemeContents = dump.filter(content => content.source === source).filter(hasNoTheme);
 
-ContentPage.getInitialProps = async ({ query }) => {
-  const { source } = query;
-  const client = getClient();
-  const themes = await client
-    .bucket("datasets", { headers: {} })
-    .collection("themes", { headers: {} })
-    .listRecords({ limit: 1000 });
-  const hasTheme = content => {
-    const contentSlug = `/${getRouteBySource(source)}/${content.slug}`;
-    return themes.data.find(
-      theme =>
-        theme.refs &&
-        theme.refs.filter(ref => !!ref.url).find(ref => ref.url === contentSlug)
+    return {
+      records: noThemeContents,
+      source
+    };
+  }
+
+  render() {
+    const { records, source } = this.props;
+    const label = getRouteBySource(source);
+
+    return (
+      <div>
+        <Head>
+          <title>Theming {label}</title>
+        </Head>
+        <Layout>
+          <h4 style={{ margin: "40px 0" }}>
+            <Link href="/">
+              <a>Accueil</a>
+            </Link>{" "}
+            &gt; {records.length} {label} sans thème
+          </h4>
+          <ThemeItems records={records} />
+        </Layout>
+      </div>
     );
-  };
-  const hasNoTheme = content => !hasTheme(content);
-  const noThemeContents = dump
-    .filter(content => content.source === source)
-    .filter(hasNoTheme);
-
-  return {
-    records: noThemeContents,
-    source
-  };
-};
-
-export default ContentPage;
+  }
+}

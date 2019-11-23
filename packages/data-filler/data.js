@@ -38,16 +38,16 @@ congé maternité	https://www.service-public.fr/particuliers/vosdroits/F2265	htt
 
 const getRow = row => row.split("\t").map(x => (x === "_" ? null : x));
 
-console.log(
-	JSON.stringify(
-		data
-			.split("\n")
-			.map(getRow)
-			.map(row => ({
-				query: row[0],
-				children: row.slice(1).map(child => ({
-					url: child
-				}))
-			}))
-	)
+console.info(
+  JSON.stringify(
+    data
+      .split("\n")
+      .map(getRow)
+      .map(row => ({
+        query: row[0],
+        children: row.slice(1).map(child => ({
+          url: child
+        }))
+      }))
+  )
 );

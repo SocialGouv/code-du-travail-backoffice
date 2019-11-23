@@ -1,20 +1,10 @@
 import React from "react";
 import { Formik } from "formik";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import * as Yup from "yup";
 import { CheckCircle } from "react-feather";
 
-import {
-  Alert,
-  Button,
-  Container,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Row,
-  Col
-} from "reactstrap";
+import { Alert, Button, Container, Form, FormGroup, Label, Input, Row, Col } from "reactstrap";
 
 import ThemePicker from "./components/ThemePicker";
 import CDTNReferences from "./components/CDTNReferences";
@@ -186,9 +176,7 @@ const ThemeForm = ({ data, onSubmit, onDelete }) => (
                   type="submit"
                   disabled={
                     // disable when errors, nothing changed or while submitting
-                    !!Object.keys(errors).length ||
-                    !Object.keys(touched).length ||
-                    isSubmitting
+                    !!Object.keys(errors).length || !Object.keys(touched).length || isSubmitting
                   }
                 >
                   Enregistrer

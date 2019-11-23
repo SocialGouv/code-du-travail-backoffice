@@ -39,4 +39,3 @@ export const getExcludeSources = value => {
   if (Boolean(value) === false) return "";
   return sources.filter(source => source.startsWith(value) === false).join(",");
 };
-

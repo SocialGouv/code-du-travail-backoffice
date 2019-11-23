@@ -1,8 +1,8 @@
 #!/bin/bash
 
-################################################################################
+####################################################################################################
 # This script prepare, build and start containers for a production environment.
-################################################################################
+####################################################################################################
 
 # Exit when any command fails:
 set -e
@@ -33,6 +33,15 @@ else
   # Allow us to override the .env file API_URI value via the command line:
   NODE_ENV=production API_URI=$API_URI docker-compose build --no-cache web
 fi
+
+# Crate Kinto database for non-production environments:
+if [ "$NODE_ENV" != "production" ]; then
+  echo "⏳ Create Kinto database for non-production environment…"
+  yarn db:init
+fi
+
+echo "⏳ Starting kinto container…"
+docker-compose up -d kinto
 
 echo "⏳ Running database migrations…"
 yarn db:migrate

@@ -4,17 +4,12 @@ import FuseInput from "../../lib/FuseInput";
 import ListRecords from "../../kinto/ListRecords";
 import fuseInputTheme from "./fuseInputTheme";
 
-const getSuggestionValue = suggestion =>
-  (suggestion.item && suggestion.item.title) || "";
+const getSuggestionValue = suggestion => (suggestion.item && suggestion.item.title) || "";
 
 const PARENT_MAX_LENGTH = 15;
 
 const trimTitle = (item, index, all) => {
-  if (
-    all.length > 1 &&
-    index < all.length - 1 &&
-    item.length > PARENT_MAX_LENGTH
-  ) {
+  if (all.length > 1 && index < all.length - 1 && item.length > PARENT_MAX_LENGTH) {
     return item.substring(0, PARENT_MAX_LENGTH) + "...";
   }
   return item;
@@ -39,8 +34,7 @@ const FuseThemePicker = props => (
     bucket="datasets"
     collection="themes"
     render={({ result }) => {
-      const currentTheme =
-        result && result.data.find(t => t.id === props.value);
+      const currentTheme = result && result.data.find(t => t.id === props.value);
       const resultsWithParents = result.data.map(r => ({
         ...r,
         fullTitle: makeTitle(result.data, r)
@@ -71,7 +65,13 @@ const LazyThemePicker = props => {
       {editing ? (
         <FuseThemePicker {...props} onChange={onChangeTheme} />
       ) : (
-        <div style={props.style} onClick={() => setEditing(true)}>
+        <div
+          style={props.style}
+          onClick={() => setEditing(true)}
+          onKeyPress={() => setEditing(true)}
+          role="button"
+          tabIndex="-1"
+        >
           {props.title}
         </div>
       )}

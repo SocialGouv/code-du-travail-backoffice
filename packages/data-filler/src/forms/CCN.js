@@ -2,16 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import useFetch from "react-fetch-hook";
 import Tooltip from "rc-tooltip";
 
-import {
-  Badge,
-  Card,
-  CardBody,
-  Container,
-  FormGroup,
-  Jumbotron,
-  Label,
-  Input
-} from "reactstrap";
+import { Badge, Card, CardBody, Container, FormGroup, Jumbotron, Label, Input } from "reactstrap";
 
 import "rc-tooltip/assets/bootstrap_white.css";
 
@@ -92,13 +83,14 @@ const Article = ({ article, idTexte, onSelectGroup }) => {
               borderRight: "1px solid silver",
               padding: "5px 5px",
               minWidth: 30,
-              backgroundColor: currentGroupsIds.includes(group.id)
-                ? "#ddf1ff"
-                : "white"
+              backgroundColor: currentGroupsIds.includes(group.id) ? "#ddf1ff" : "white"
             }}
             title={group.label}
             key={group.id}
             onClick={() => onSelectGroup(group)}
+            onKeyPress={() => onSelectGroup(group)}
+            role="button"
+            tabIndex="-1"
           >
             {group.id}
           </div>
@@ -150,13 +142,7 @@ const SelectionContext = React.createContext([]);
             </FormGroup>
           </div>*/
 
-const CCNSection = ({
-  idConvention,
-  section,
-  onSelect,
-  depth = 0,
-  idTexte
-}) => {
+const CCNSection = ({ idConvention, section, onSelect, depth = 0, idTexte }) => {
   idTexte = (depth === 0 && section.id) || idTexte;
   return (
     <Card
@@ -218,7 +204,7 @@ const CCNPreview = ({ id, initialData, onDataUpdate }) => {
   const setSelection = (node, group) => {
     // check if already present : remove it
     const curGroup = groups && groups.find(gr => gr.id === group.id);
-    let newGroups = curGroup
+    const newGroups = curGroup
       ? // when group exist, modify or create the selection
         groups.map(gr =>
           gr.id === group.id
@@ -269,12 +255,7 @@ const CCNPreview = ({ id, initialData, onDataUpdate }) => {
             />
           </FormGroup>
         </Container>
-        <CCNSection
-          idConvention={id}
-          onSelect={setSelection}
-          section={data.sections[0]}
-        />
-        ;
+        <CCNSection idConvention={id} onSelect={setSelection} section={data.sections[0]} />;
       </SelectionContext.Provider>
     </Container>
   );
@@ -294,7 +275,7 @@ const FormCCN = ({ data, onSubmit }) => {
     onSubmit(newData)
       .then(() => setFormData(newData))
       .catch(e => {
-        console.log(e);
+        console.error(e);
         alert("Impossible de mettre à jour");
       });
     // todo: handle errors

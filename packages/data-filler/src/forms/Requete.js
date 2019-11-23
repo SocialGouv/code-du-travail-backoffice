@@ -1,20 +1,10 @@
 import React from "react";
 import { Formik } from "formik";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import * as Yup from "yup";
 import { CheckCircle } from "react-feather";
 
-import {
-  Alert,
-  Button,
-  Container,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Row,
-  Col
-} from "reactstrap";
+import { Alert, Button, Container, Form, FormGroup, Label, Input, Row, Col } from "reactstrap";
 
 import MarkdownLink from "./components/MarkdownLink";
 import ThemePicker from "./components/ThemePicker";
@@ -120,7 +110,6 @@ const RequeteForm = ({ data, onSubmit, onDelete }) => {
                   name="theme"
                   value={values.theme || ""}
                   onChange={theme => {
-                    console.log("onChange", theme);
                     setFieldValue("theme", theme.id);
                     setFieldTouched("theme");
                   }}
@@ -165,9 +154,7 @@ const RequeteForm = ({ data, onSubmit, onDelete }) => {
                     type="submit"
                     disabled={
                       // disable when errors, nothing changed or while submitting
-                      !!Object.keys(errors).length ||
-                      !Object.keys(touched).length ||
-                      isSubmitting
+                      !!Object.keys(errors).length || !Object.keys(touched).length || isSubmitting
                     }
                   >
                     Enregistrer

@@ -1,17 +1,13 @@
 import React from "react";
-import { withRouter } from "next/router";
-
 import { Container, Row, Col } from "reactstrap";
 
 import { ListRecords } from "./ListRecords";
 
-const ListRecordsRouter = withRouter(ListRecords);
-
-const Layout = ({ records, RightComponent, children }) => (
+const Layout = ({ query, records, RightComponent, children }) => (
   <Row>
     {records && (
       <Col xs={3}>
-        <ListRecordsRouter records={records} />
+        <ListRecords query={query} records={records} />
       </Col>
     )}
     <Col xs={records ? 9 : 12}>

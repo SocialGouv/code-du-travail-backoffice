@@ -5,15 +5,15 @@ const fs = require("fs");
 const btoa = require("btoa");
 const fetch = require("node-fetch");
 
+// If we are in a non-production environment, we want to load the env vars via
+// the monorepo global .env file.
+if (!["production", "test"].includes(process.env.NODE_ENV)) {
+  require("dotenv").config({ path: `${__dirname}/../../.env` });
+}
+
 // queries from TU
 const data = [
-  [
-    "rupture conventionnelle",
-    "/fiche-service-public/rupture-conventionnelle",
-    "",
-    "",
-    ""
-  ],
+  ["rupture conventionnelle", "/fiche-service-public/rupture-conventionnelle", "", "", ""],
   [
     "rupture conventionnelle individuelle",
     "/fiche-service-public/rupture-conventionnelle",
@@ -72,13 +72,7 @@ const data = [
     "",
     ""
   ],
-  [
-    "cpf",
-    "/fiche-service-public/compte-personnel-de-formation-cpf",
-    "",
-    "",
-    ""
-  ],
+  ["cpf", "/fiche-service-public/compte-personnel-de-formation-cpf", "", "", ""],
   [
     "chsct",
     "/fiche-service-public/comite-dhygiene-de-securite-et-des-conditions-de-travail-chsct",
@@ -86,20 +80,8 @@ const data = [
     "",
     ""
   ],
-  [
-    "vae",
-    "/fiche-ministere-travail/vae-a-quoi-ca-sert-et-pour-quelle-reconnaissance",
-    "",
-    "",
-    ""
-  ],
-  [
-    "kbis",
-    "/fiche-service-public/comment-se-procurer-un-extrait-k-ou-kbis",
-    "",
-    "",
-    ""
-  ],
+  ["vae", "/fiche-ministere-travail/vae-a-quoi-ca-sert-et-pour-quelle-reconnaissance", "", "", ""],
+  ["kbis", "/fiche-service-public/comment-se-procurer-un-extrait-k-ou-kbis", "", "", ""],
   [
     "abandon de poste",
     "/fiche-service-public/abandon-de-poste-quelles-sont-les-regles-dans-le-secteur-prive",
@@ -483,10 +465,7 @@ const schema = {
   }
 };
 
-const KINTO_URL = process.env.KINTO_URL || "http://127.0.0.1:8888/v1";
-
-const BUCKET = "datasets";
-const DATASET_NAME = "requetes";
+const { KINTO_BUCKET, KINTO_URI } = process.env;
 
 const parseResponse = res => {
   if (res.status >= 400) {
@@ -494,27 +473,26 @@ const parseResponse = res => {
   }
 };
 
-const wait = (delay = 1000) =>
-  new Promise((resolve, _) => setTimeout(resolve, delay * Math.random()));
+const wait = (delay = 1000) => new Promise(resolve => setTimeout(resolve, delay * Math.random()));
 
 const updateDatabase = async () => {
   try {
     // create admin account
-    await fetch(`${KINTO_URL}/accounts/admin`, {
+    await fetch(`${KINTO_URI}/accounts/admin`, {
       method: "PUT",
       body: JSON.stringify({ data: { password: "s3cr3t" } }),
       headers: { "Content-Type": "application/json" }
     });
 
     // create bucket
-    await fetch(`${KINTO_URL}/buckets/${BUCKET}`, {
+    await fetch(`${KINTO_URI}/buckets/${KINTO_BUCKET}`, {
       headers: {
         "Content-Type": "application/json",
         authorization: `Basic ${btoa("admin:s3cr3t")}`
       },
       body: JSON.stringify({
         data: {
-          id: BUCKET
+          id: KINTO_BUCKET
         },
         permissions: {
           read: ["account:admin", "system.Everyone"],
@@ -526,23 +504,26 @@ const updateDatabase = async () => {
     }).then(parseResponse);
 
     // remove any existing collection
-    await fetch(`${KINTO_URL}/buckets/${BUCKET}/collections/${DATASET_NAME}`, {
+    await fetch(`${KINTO_URI}/buckets/${KINTO_BUCKET}/collections/requetes`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json"
       }
     });
 
-    // create collection
-    await fetch(`${KINTO_URL}/buckets/${BUCKET}/collections/${DATASET_NAME}`, {
-      method: "PUT",
-      body: JSON.stringify({
-        data: { id: DATASET_NAME, schema }
-      }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then(parseResponse);
+    // create collections
+    const collections = ["ccns", "glossaire", "requetes", "reponses", "themes"];
+    for (const collection of collections) {
+      await fetch(`${KINTO_URI}/buckets/${KINTO_BUCKET}/collections/${collection}`, {
+        method: "PUT",
+        body: JSON.stringify({
+          data: { id: collection, schema }
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(parseResponse);
+    }
 
     // create records from TUs
     data.forEach(async row => {
@@ -556,22 +537,17 @@ const updateDatabase = async () => {
         ].filter(Boolean)
       };
 
-      await fetch(
-        `${KINTO_URL}/buckets/${BUCKET}/collections/${DATASET_NAME}/records`,
-        {
-          method: "POST",
-          body: JSON.stringify({ data }),
-          headers: { "Content-Type": "application/json" }
-        }
-      ).then(parseResponse);
+      await fetch(`${KINTO_URI}/buckets/${KINTO_BUCKET}/collections/requetes/records`, {
+        method: "POST",
+        body: JSON.stringify({ data }),
+        headers: { "Content-Type": "application/json" }
+      }).then(parseResponse);
 
       await wait();
     });
 
     // add frequent queries (from armand file)
-    const frequentQueries = fs
-      .readFileSync("./frequent-queries.tsv")
-      .toString();
+    const frequentQueries = fs.readFileSync(`${__dirname}/frequent-queries.tsv`).toString();
     const rows = frequentQueries
       .split("\n")
       .slice(1)
@@ -594,19 +570,16 @@ const updateDatabase = async () => {
         refs: [{}]
       };
 
-      await fetch(
-        `${KINTO_URL}/buckets/${BUCKET}/collections/${DATASET_NAME}/records`,
-        {
-          method: "POST",
-          body: JSON.stringify({ data }),
-          headers: { "Content-Type": "application/json" }
-        }
-      ).then(parseResponse);
+      await fetch(`${KINTO_URI}/buckets/${KINTO_BUCKET}/collections/requetes/records`, {
+        method: "POST",
+        body: JSON.stringify({ data }),
+        headers: { "Content-Type": "application/json" }
+      }).then(parseResponse);
 
       await wait();
     });
-  } catch (e) {
-    console.log("e", e);
+  } catch (err) {
+    console.error(`Error: ${err}`);
   }
 };
 

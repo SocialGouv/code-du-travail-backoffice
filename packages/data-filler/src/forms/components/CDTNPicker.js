@@ -1,6 +1,6 @@
 import React from "react";
 import Autosuggest from "react-autosuggest";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import { Input } from "reactstrap";
 
@@ -23,9 +23,7 @@ class SuggestionState extends React.Component {
       this.setState({ query, hits: [] });
     } else {
       this.setState({ query, hits: [] }, () => {
-        this.props
-          .fetchSuggestions(query)
-          .then(hits => this.setState({ hits }));
+        this.props.fetchSuggestions(query).then(hits => this.setState({ hits }));
       });
     }
   };
@@ -39,14 +37,11 @@ class SuggestionState extends React.Component {
   }
 }
 
-const renderInputComponent = inputProps => (
-  <Input {...inputProps} innerRef={inputProps.ref} />
-);
+const renderInputComponent = inputProps => <Input {...inputProps} innerRef={inputProps.ref} />;
 
-const getSuggestionValue = suggestion =>
-  `${suggestion._source.source}/${suggestion._source.id}`;
+const getSuggestionValue = suggestion => `${suggestion._source.source}/${suggestion._source.id}`;
 
-export const CDTNPicker = ({ query, onSelect }) => {
+const CDTNPicker = ({ query, onSelect }) => {
   const originalQuery = query;
   return (
     <SuggestionState

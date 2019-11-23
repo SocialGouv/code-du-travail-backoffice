@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import { Button } from "reactstrap";
 
@@ -15,8 +15,7 @@ const colors = [
 
 const StyledButton = styled(Button)`
   background: ${props => props.color};
-  border: ${props =>
-    props.selected ? "1px solid #333" : "1px solid transparent"};
+  border: ${props => (props.selected ? "1px solid #333" : "1px solid transparent")};
   width: 30px;
   padding: 0;
   height: 30px;

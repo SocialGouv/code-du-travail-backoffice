@@ -1,3 +1,4 @@
+import Router from "next/router";
 import React from "react";
 
 import ListRecordsView from "../src/ListRecordsView";
@@ -8,9 +9,11 @@ const leftComponents = {
   default: ListRecordsView
 };
 
-export const ListRecords = ({ records, router }) => {
-  const { bucket, record, collection } = router.query;
+export const ListRecords = ({ query, records }) => {
+  const { bucket, record, collection } = query;
+
   const LeftComponent = leftComponents[collection] || leftComponents.default;
+
   if (bucket && collection) {
     return (
       <LeftComponent
@@ -29,13 +32,10 @@ export const ListRecords = ({ records, router }) => {
           const result = await client
             .bucket(bucket, { headers: {} })
             .collection(collection, { headers: {} })
-            .createRecord(
-              defaultRecordData[collection] || { title: "nouveau" },
-              {
-                headers: {}
-              }
-            );
-          router.push(
+            .createRecord(defaultRecordData[collection] || { title: "nouveau" }, {
+              headers: {}
+            });
+          Router.push(
             `/bucket/[bucket]/collection/[collection]/record/[record]`,
             `/bucket/${bucket}/collection/${collection}/record/${result.data.id}`
           );
@@ -48,5 +48,6 @@ export const ListRecords = ({ records, router }) => {
       />
     );
   }
+
   return null;
 };
