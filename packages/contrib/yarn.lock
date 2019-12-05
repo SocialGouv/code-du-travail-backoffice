@@ -7669,12 +7669,13 @@ react-svg-map@2.0.1:
   dependencies:
     prop-types "^15.6.2"
 
-react-table@6.10.3:
-  version "6.10.3"
-  resolved "https://registry.yarnpkg.com/react-table/-/react-table-6.10.3.tgz#d085487a5a1b18b76486b71cf1d388d87c8c7362"
-  integrity sha512-sVlq2/rxVaQJywGD95+qGiMr/SMHFIFnXdx619BLOWE/Os5FOGtV6pQJNAjZixbQZiOu7dmBO1kME28uxh6wmA==
+react-table@6.11.3:
+  version "6.11.3"
+  resolved "https://registry.yarnpkg.com/react-table/-/react-table-6.11.3.tgz#d8659f410a45e6d16babe2556560851434986742"
+  integrity sha512-zbtGkGSaEE6vJvsJEJJWWeNCXAkXOUNGXWAd5P1koM+mPOvcexhsK7gQ7QSIx4RrY2nNAbL3vJDEGYSNxOHJsw==
   dependencies:
     classnames "^2.2.5"
+    react-is "^16.8.1"
 
 react-tag-autocomplete@5.11.2:
   version "5.11.2"
