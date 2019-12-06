@@ -165,7 +165,10 @@ export default class AdminForm extends React.Component {
     );
 
     // Remove the fields with a custom apiPath property from the main data:
-    const data = R.omit(fieldsWithCustomApiPath.map(({ name }) => name), fullData);
+    const data = R.omit(
+      fieldsWithCustomApiPath.map(({ name }) => name),
+      fullData
+    );
 
     // Most of the comments below are related to:
     // http://postgrest.org/en/v5.2/api.html#insertions-updates
