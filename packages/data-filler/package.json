@@ -20,7 +20,7 @@
     "btoa": "1.2.1",
     "dotenv": "8.2.0",
     "express": "4.17.1",
-    "formik": "2.0.7",
+    "formik": "2.0.8",
     "fuse.js": "3.4.6",
     "google-spreadsheets": "2.0.0",
     "gradient2": "1.0.3",
