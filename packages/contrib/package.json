@@ -69,7 +69,7 @@
     "@babel/core": "7.7.5",
     "@socialgouv/eslint-config-react": "0.10.4",
     "@testing-library/jest-dom": "4.2.4",
-    "@testing-library/react": "9.3.3",
+    "@testing-library/react": "9.4.0",
     "@types/next": "9.0.0",
     "@types/react-test-renderer": "16.9.1",
     "babel-eslint": "10.0.3",
