@@ -67,7 +67,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.7.5",
-    "@socialgouv/eslint-config-react": "0.10.4",
+    "@socialgouv/eslint-config-react": "0.11.1",
     "@testing-library/jest-dom": "4.2.4",
     "@testing-library/react": "9.4.0",
     "@types/next": "9.0.0",
