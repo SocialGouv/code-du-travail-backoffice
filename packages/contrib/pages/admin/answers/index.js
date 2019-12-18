@@ -51,9 +51,16 @@ export class AdminAnswersIndexPage extends React.Component {
   }
 
   componentDidMount() {
+    const { isGeneric } = this.props;
+
     this.props.dispatch(actions.agreements.load());
     this.props.dispatch(actions.questions.load());
-    this.props.dispatch(actions.answers.setFilter("isGeneric", this.props.isGeneric));
+    this.props.dispatch(
+      actions.answers.setFilters({
+        isGeneric,
+        pageLength: 10
+      })
+    );
   }
 
   setAgreeementsFilter(selected) {
@@ -95,11 +102,10 @@ export class AdminAnswersIndexPage extends React.Component {
   }
 
   printAnswers() {
-    const path = this.props.isGeneric ? "generic-answers" : "answers";
-    const { state } = this.props.answers;
-    const query = this.queryFilter;
+    const { isGeneric } = this.props;
+    const path = isGeneric ? "generic-answers" : "answers";
 
-    window.open(`/admin/${path}/print?state=${state}&query=${query}`, "_blank");
+    window.open(`/admin/${path}/print`, "_blank");
   }
 
   editAnswer(id) {

@@ -3,14 +3,7 @@ import { connect } from "react-redux";
 import styled from "@emotion/styled";
 
 import * as actions from "../../../src/actions";
-import ContentTitle from "../../../src/elements/ContentTitle";
-import Idcc from "../../../src/elements/Idcc";
-import Hr from "../../../src/elements/Hr";
-import Subtitle from "../../../src/elements/Subtitle";
-import getUriParams from "../../../src/libs/getUriParams";
 import markdown from "../../../src/libs/markdown";
-
-import { Flex } from "rebass";
 
 const Container = styled.div`
   height: 100vh;
@@ -22,15 +15,15 @@ const Container = styled.div`
     padding: 0;
   }
 `;
-const Header = styled(Flex)`
-  margin-bottom: 0.875rem;
-`;
 
-const Pre = styled.pre`
-  border: solid 1px var(--color-silver-sand);
+const Answer = styled.div`
+  @media print {
+    page-break-inside: avoid;
+  }
+`;
+const Content = styled.p`
   font-size: 1.1rem;
   margin-bottom: 1rem;
-  padding: 1rem;
   white-space: normal;
 `;
 const List = styled.ul`
@@ -41,32 +34,22 @@ const List = styled.ul`
 `;
 
 export class AdminAnswersPrintPage extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.isGeneric = Boolean(props.isGeneric);
-  }
-
   componentDidMount() {
-    this.load();
+    const { isGeneric } = this.props;
+
+    this.props.dispatch(
+      actions.answers.setFilters({
+        isGeneric,
+        page: 0,
+        pageLength: 100
+      })
+    );
   }
 
   componentDidUpdate() {
     const { isLoading } = this.props.answers;
 
     if (!isLoading) window.print();
-  }
-
-  load() {
-    const uriParams = getUriParams();
-    const meta = {
-      isGeneric: this.isGeneric,
-      query: uriParams.get("query"),
-      states: [uriParams.get("state")],
-      withReferences: true
-    };
-
-    this.props.dispatch(actions.answers.load(meta));
   }
 
   renderValue(value) {
@@ -77,16 +60,13 @@ export class AdminAnswersPrintPage extends React.Component {
     const { data } = this.props.answers;
 
     return data.map(({ agreement_idcc, id, question_index, question_value, references, value }) => (
-      <div key={id}>
-        <Header alignItems="baseline">
-          <Idcc code={agreement_idcc} />
-          <Subtitle isFirst>{`${question_index}) ${question_value}`}</Subtitle>
-        </Header>
-        <ContentTitle isFirst>Réponse corrigée:</ContentTitle>
-        <Pre dangerouslySetInnerHTML={this.renderValue(value)} />
+      <Answer key={id}>
+        <h2>{`[IDCC: ${agreement_idcc}] ${question_index}) ${question_value}`}</h2>
+        <h3>Réponse corrigée:</h3>
+        <Content dangerouslySetInnerHTML={this.renderValue(value)} />
         {references.length !== 0 && (
           <div>
-            <ContentTitle isFirst>Références:</ContentTitle>
+            <h3>Références:</h3>
             <List>
               {references.map(({ id, value }) => (
                 <li key={id}>{value}</li>
@@ -94,8 +74,8 @@ export class AdminAnswersPrintPage extends React.Component {
             </List>
           </div>
         )}
-        <Hr />
-      </div>
+        <hr />
+      </Answer>
     ));
   }
 
@@ -111,5 +91,6 @@ export class AdminAnswersPrintPage extends React.Component {
 }
 
 export default connect(({ answers }) => ({
-  answers
+  answers,
+  isGeneric: false
 }))(AdminAnswersPrintPage);
