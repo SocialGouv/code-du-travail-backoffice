@@ -11,6 +11,8 @@ const forms = {
   reponses: require("./forms/Reponse").default
 };
 
+const { DATA_FILLER_PATH } = process.env;
+
 const onSubmit = ({ client, bucket, collection, data }) =>
   client
     .bucket(bucket, { headers: {} })
@@ -59,7 +61,7 @@ const EditRecord = withKinto(({ client, query, record }) => {
           bucket: query.bucket,
           collection: query.collection,
           id: record.data.id
-        }).then(() => Router.push(`/`))
+        }).then(() => Router.push(DATA_FILLER_PATH))
       }
     />
   );
