@@ -13,7 +13,13 @@ const { DATA_FILLER_PATH } = process.env;
 
 const renderChildren = ({ parent, themes, record, collection, bucket, depth = 0 }) => {
   return themes
-    .filter(t => t.parent === parent)
+    .filter(t => {
+      if (parent === null) {
+        return t.parent === null || t.parent === undefined;
+      }
+
+      return t.parent === parent;
+    })
     .sort((a, b) => {
       if (a.position < b.position) {
         return -1;

@@ -4,6 +4,8 @@ import React from "react";
 import ListRecordsView from "../src/ListRecordsView";
 import TreeRecordsView from "../src/TreeRecordsView";
 
+const { DATA_FILLER_PATH } = process.env;
+
 const leftComponents = {
   themes: TreeRecordsView,
   default: ListRecordsView
@@ -36,8 +38,8 @@ export const ListRecords = ({ query, records }) => {
               headers: {}
             });
           Router.push(
-            `/bucket/[bucket]/collection/[collection]/record/[record]`,
-            `/bucket/${bucket}/collection/${collection}/record/${result.data.id}`
+            `${DATA_FILLER_PATH}/bucket/[bucket]/collection/[collection]/record/[record]`,
+            `${DATA_FILLER_PATH}/bucket/${bucket}/collection/${collection}/record/${result.data.id}`
           );
           setTimeout(() => {
             const target = document.querySelector("input[name='title']");

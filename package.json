@@ -7,7 +7,6 @@
   "scripts": {
     "build": "lerna run --scope \"@socialgouv/cdtn-contrib\" build",
     "ci:test:e2e": "NODE_ENV=test ./scripts/prod/start.sh && yarn test:e2e",
-    "db:import": "node ./scripts/db/importGoogleFormData.js",
     "db:migrate": "knex migrate:latest",
     "db:migrate:make": "node ./scripts/db/generateMigration.js",
     "db:init": "docker-compose exec -T db ./scripts/create_kinto_database.sh",
