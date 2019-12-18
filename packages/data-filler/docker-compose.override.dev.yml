@@ -1,7 +1,0 @@
-version: '2.0'
-
-services:
-  kinto:
-    # export kinto port for dev
-    ports:
-      - 8888:8888
