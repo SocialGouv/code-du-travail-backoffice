@@ -57,7 +57,7 @@ const ReferenceRow = SortableElement(
           <DragHandle />
         </td>
       )}
-      <td>
+      <td style={{ background: row.valid === false ? "#ff8a8a" : "" }}>
         <CDTNPicker query={getRowId(row) || ""} onSelect={value => setRowValue(value)} />
       </td>
       <td
@@ -201,6 +201,7 @@ const CDTNReferences = ({
       const rowId = getRowId(value._source); //return source/slug or url
       values.refs[i].url = rowId;
       values.refs[i].title = value._source.title;
+      values.refs[i].valid = true;
       setFieldValue("refs", values.refs);
       setFieldTouched("refs");
     }}

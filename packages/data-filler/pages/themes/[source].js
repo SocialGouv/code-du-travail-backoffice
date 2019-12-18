@@ -17,19 +17,32 @@ const addToTheme = async (content, theme) => {
     .collection("themes", { headers: {} })
     .getRecord(theme);
 
+  const newRefs = [];
+
+  // select all fiches MT with same slug
+  if (content.source === "fiches_ministere_travail") {
+    const siblings = dump
+      .filter(r => r.source === "fiches_ministere_travail")
+      .filter(r => r.slug.split("#")[0] === content.slug.split("#")[0])
+      .map(r => ({
+        title: r.title,
+        url: `/${getRouteBySource(content.source)}/${r.slug}`
+      }));
+    newRefs.push(...siblings);
+  } else {
+    newRefs.push({
+      title: content.title,
+      url: `/${getRouteBySource(content.source)}/${content.slug}`
+    });
+  }
+
   await client
     .bucket("datasets", { headers: {} })
     .collection("themes", { headers: {} })
     .updateRecord(
       {
         id: theme,
-        refs: [
-          ...(themeRecord.data.refs || []),
-          {
-            title: content.title,
-            url: `/${getRouteBySource(content.source)}/${content.slug}`
-          }
-        ]
+        refs: [...(themeRecord.data.refs || []), ...newRefs]
       },
       {
         patch: true
@@ -58,20 +71,20 @@ const ThemeItems = ({ records }) => (
   <Table padding="dense" striped>
     <thead>
       <tr>
+        <td width="400">Thème</td>
         <td>Titre</td>
-        <td>Thème</td>
       </tr>
     </thead>
     <tbody>
       {records.map(record => (
         <tr key={record.title}>
+          <td width="400">
+            <ThemeSelector record={record} />
+          </td>
           <td>
             <a href={record.url} target="_blank" rel="noopener noreferrer">
               {record.title}
             </a>
-          </td>
-          <td>
-            <ThemeSelector record={record} />
           </td>
         </tr>
       ))}
@@ -88,14 +101,28 @@ export default class ThemesSourcesPage extends React.Component {
       .collection("themes", { headers: {} })
       .listRecords({ limit: 1000 });
     const hasTheme = content => {
-      const contentSlug = `/${getRouteBySource(source)}/${content.slug}`;
+      const contentSlug = `/${getRouteBySource(source)}/${content.slug.split("#")[0]}`;
       return themes.data.find(
         theme =>
-          theme.refs && theme.refs.filter(ref => !!ref.url).find(ref => ref.url === contentSlug)
+          theme.refs &&
+          theme.refs.filter(ref => !!ref.url).find(ref => ref.url.split("#")[0] === contentSlug)
       );
     };
     const hasNoTheme = content => !hasTheme(content);
-    const noThemeContents = dump.filter(content => content.source === source).filter(hasNoTheme);
+    const noThemeContents = dump
+      .filter(content => content.source === source)
+      .filter(hasNoTheme)
+      .reduce((acc, content) => {
+        // return only une fiche MT per slug (group documents)
+        if (
+          source === "fiches_ministere_travail" &&
+          acc.find(c => c.slug.split("#")[0] === content.slug.split("#")[0])
+        ) {
+          return acc;
+        }
+        acc.push(content);
+        return acc;
+      }, []);
 
     return {
       records: noThemeContents,

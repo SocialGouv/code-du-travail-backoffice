@@ -207,15 +207,25 @@ const fetchRecapThemes = async () => {
 
   const bySource = source => {
     const hasTheme = content => {
-      const contentSlug = `/${getRouteBySource(source)}/${content.slug}`;
+      const contentSlug = `/${getRouteBySource(source)}/${content.slug.split("#")[0]}`;
       return themes.data.find(
         theme =>
-          theme.refs && theme.refs.filter(ref => !!ref.url).find(ref => ref.url === contentSlug)
+          theme.refs &&
+          theme.refs.filter(ref => !!ref.url).find(ref => ref.url.split("#")[0] === contentSlug)
       );
     };
     const hasNoTheme = content => !hasTheme(content);
     const allContent = dump.filter(content => content.source === source);
-    const noThemeContents = allContent.filter(hasNoTheme);
+    const noThemeContents = allContent.filter(hasNoTheme).reduce((acc, content) => {
+      if (
+        source === "fiches_ministere_travail" &&
+        acc.find(c => c.slug.split("#")[0] === content.slug.split("#")[0])
+      ) {
+        return acc;
+      }
+      acc.push(content);
+      return acc;
+    }, []);
 
     return {
       total: allContent.length,

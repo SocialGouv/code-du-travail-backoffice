@@ -64,6 +64,10 @@ const ListRecordsView = ({ records, bucket, collection, record, onAddClick }) =>
               }}
             >
               <ProgressIndicator score={getScore(collection, item)} />
+              {collection === "requetes" &&
+                item.refs &&
+                item.refs.filter(ref => ref.valid === false).length > 0 &&
+                "⚠️"}
               <ThemeLink
                 bucket={bucket}
                 collection={collection}

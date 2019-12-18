@@ -140,7 +140,7 @@ const SuggestionsContainer = styled.div`
     position: absolute;
     z-index: 99999;
   }
-  li[role="option"]:nth-child(2n + 1) {
+  li[role="option"]:nth-of-type(2n + 1) {
     background: #f7f7f7;
   }
 `;
