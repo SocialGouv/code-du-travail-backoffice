@@ -70,6 +70,20 @@ export const setFilterFailure = error => ({
   }
 });
 
+export const setFilters = filters => ({
+  type: actionTypes.ANSWERS_SET_FILTERS,
+  meta: {
+    filters
+  }
+});
+export const setFiltersFailure = error => ({
+  type: actionTypes.ANSWERS_SET_FILTERS_FAILURE,
+  error: true,
+  payload: {
+    message: error.message
+  }
+});
+
 export const toggleCheck = (checked, ids) => ({
   type: actionTypes.ANSWERS_TOGGLE_CHECK,
   meta: {

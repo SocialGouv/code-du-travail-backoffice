@@ -8,6 +8,7 @@ const initialState = {
     agreements: [],
     isGeneric: false,
     page: 0,
+    pageLength: 10,
     query: "",
     questions: [],
     states: []
@@ -44,6 +45,7 @@ export default (state = initialState, { payload, type }) => {
     case actionTypes.ANSWERS_CANCEL:
     case actionTypes.ANSWERS_LOAD:
     case actionTypes.ANSWERS_SET_FILTER:
+    case actionTypes.ANSWERS_SET_FILTERS:
     case actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE:
     case actionTypes.ANSWERS_UPDATE_IS_PUBLISHED:
     case actionTypes.ANSWERS_UPDATE_STATE:
@@ -55,6 +57,7 @@ export default (state = initialState, { payload, type }) => {
     case actionTypes.ANSWERS_CANCEL_FAILURE:
     case actionTypes.ANSWERS_LOAD_FAILURE:
     case actionTypes.ANSWERS_SET_FILTER_FAILURE:
+    case actionTypes.ANSWERS_SET_FILTERS_FAILURE:
     case actionTypes.ANSWERS_TOGGLE_CHECK_FAILURE:
     case actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE_FAILURE:
     case actionTypes.ANSWERS_UPDATE_IS_PUBLISHED_REFERENCE_FAILURE:
@@ -75,7 +78,8 @@ export default (state = initialState, { payload, type }) => {
         pagesLength: payload.pagesLength
       };
 
-    case actionTypes.ANSWERS_SET_FILTER_SUCESS:
+    case actionTypes.ANSWERS_SET_FILTER_SUCCESS:
+    case actionTypes.ANSWERS_SET_FILTERS_SUCCESS:
       return {
         ...state,
         filters: payload.filters

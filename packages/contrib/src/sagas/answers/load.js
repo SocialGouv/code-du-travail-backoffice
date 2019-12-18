@@ -15,9 +15,7 @@ export default function* load() {
 
     let request = customPostgrester();
 
-    if (filters.page !== -1) {
-      request = request.page(filters.page);
-    }
+    request = request.page(filters.page, filters.pageLength);
 
     if (!filters.isGeneric) {
       const states =
