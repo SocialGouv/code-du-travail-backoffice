@@ -22,7 +22,7 @@ services:
     image: kinto/kinto-server:13.5.0
     restart: always
     ports:
-      - 8888:8888
+      - ${KINTO_PORT}:8888
     environment:
       - KINTO_STORAGE_BACKEND=kinto.core.storage.postgresql
       - KINTO_STORAGE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_KINTO_DB}

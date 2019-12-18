@@ -46,6 +46,10 @@ const renderChildren = ({ parent, themes, record, collection, bucket, depth = 0 
           }}
         >
           <ProgressIndicator score={getScore("themes", item)} />
+          {collection === "themes" &&
+            item.refs &&
+            item.refs.filter(ref => ref.valid === false).length > 0 &&
+            "⚠️"}
           <ThemeLink
             bucket={bucket}
             collection={collection}

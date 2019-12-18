@@ -4,27 +4,11 @@ Custom React forms to edit random data collections.
 
 Use [Kinto](https://kinto.readthedocs.io) as a backend.
 
-# Usage
+## Scripts
 
-Run Postgres + Kinto with docker-compose :
-
-rename and edit `docker-compose.override.(prod|dev).yml` to `docker-compose.override.yml`
-
-```sh
-docker-compose up
-```
-
-Fill the sample data with `node fixture.js` or `docker-compose exec front node fixture.js` in
-docker.
-
-## Dev
-
-```
-yarn
-
-env KINTO_URI_SERVER=http://127.0.0.1:8888 yarn dev
-
-```
+- download-dump : download latest CDTN documents index
+- detect-doublons : return list of detected doublons
+- fix-urls : autofix detected urls and mark others as invalid
 
 ## Get the data back
 
