@@ -156,8 +156,8 @@ const BucketView = ({ bucket, collections = [], themes }) => {
                     .map(item => (
                       <tr key={item.source}>
                         <td>
-                          <Link href={`/themes/[source]`} as={`/themes/${item.source}`} passHref>
-                            <a>{getRouteBySource(item.source)}</a>
+                          <Link href={`/themes/${item.source}`}>
+                            <a href="#">{getRouteBySource(item.source)}</a>
                           </Link>
                         </td>
                         <td>
