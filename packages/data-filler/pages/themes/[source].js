@@ -10,6 +10,8 @@ import dump from "../../src/dump.data.json";
 import { getRouteBySource } from "../../src/sources";
 import ThemePicker from "../../src/forms/components/ThemePicker";
 
+const { DATA_FILLER_PATH } = process.env;
+
 const addToTheme = async (content, theme) => {
   const client = getClient();
   const themeRecord = await client
@@ -141,7 +143,7 @@ export default class ThemesSourcesPage extends React.Component {
         </Head>
         <Layout>
           <h4 style={{ margin: "40px 0" }}>
-            <Link href="/">
+            <Link href={DATA_FILLER_PATH}>
               <a>Accueil</a>
             </Link>{" "}
             &gt; {records.length} {label} sans thème
