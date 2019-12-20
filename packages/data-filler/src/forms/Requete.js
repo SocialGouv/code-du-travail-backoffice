@@ -41,7 +41,7 @@ const StyledForm = styled(Form)`
 const RequeteForm = ({ data, onSubmit, onDelete }) => {
   return (
     <React.Fragment>
-      <h1 style={{ margin: "1em 0" }}>Requêtes</h1>
+      <h3 style={{ margin: "1em 0" }}>Requêtes</h3>
       <Container>
         <Formik
           key={JSON.stringify(data)}

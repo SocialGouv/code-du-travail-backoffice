@@ -51,6 +51,9 @@ export default class RecordPage extends React.Component {
         </Head>
         <Layout query={query} records={records}>
           <EditRecord query={query} record={record} {...props} />
+          <br />
+          <br />
+          <br />
         </Layout>
       </div>
     );
