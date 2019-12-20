@@ -39,7 +39,7 @@ const StyledForm = styled(Form)`
 
 const GlossaireForm = ({ data, onSubmit, onDelete }) => (
   <React.Fragment>
-    <h1 style={{ margin: "1em 0" }}>Glossaire</h1>
+    <h3 style={{ margin: "1em 0" }}>Glossaire</h3>
     <Container>
       <Formik
         key={JSON.stringify(data)}

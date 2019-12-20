@@ -40,7 +40,7 @@ const StyledForm = styled(Form)`
 
 const ThemeForm = ({ data, onSubmit, onDelete }) => (
   <React.Fragment>
-    <h1 style={{ margin: "1em 0" }}>Thèmes</h1>
+    <h3 style={{ margin: "1em 0" }}>Thèmes</h3>
     <Container>
       <Formik
         key={JSON.stringify(data)}

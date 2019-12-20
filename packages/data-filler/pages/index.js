@@ -8,7 +8,7 @@ import getScore from "../src/getScore";
 import sortByKey from "../src/sortByKey";
 import { sources, getRouteBySource } from "../src/sources";
 
-import { Eye, Database, Plus, Star } from "react-feather";
+import { Eye, Database, Plus } from "react-feather";
 
 import {
   Badge,
@@ -30,7 +30,7 @@ const { DATA_FILLER_PATH } = process.env;
 
 class Link extends React.PureComponent {
   goTo(path) {
-    Router.push(`${DATA_FILLER_PATH}${path}`);
+    Router.push(path);
   }
 
   render() {
@@ -49,24 +49,20 @@ class Link extends React.PureComponent {
   }
 }
 
-const BucketIntro = ({ count }) => (
-  <Jumbotron>
-    <h2 className="display-3">
+const BucketIntro = () => (
+  <Jumbotron style={{ padding: 10, marginTop: 5, marginBottom: 0 }}>
+    <h2 className="display-6">
       <Database style={{ marginRight: 5, verticalAlign: "bottom" }} size="1.35em" /> Datafiller
-      <div style={{ fontSize: "1.5rem", display: "inline-block", marginLeft: 10 }}>
-        {count}
-        <Star fill="yellow" size={24} style={{ marginLeft: 5 }} />
-      </div>
     </h2>
-    <p className="lead">Données de référence pour alimenter le moteur de recherche.</p>
+    <p className="lead" style={{ marginBottom: 0 }}>
+      Données de référence pour alimenter le moteur de recherche.
+    </p>
   </Jumbotron>
 );
 
-const sum = arr => arr.reduce((a, c) => a + c, 0);
-
 const ButtonRecord = ({ bucket, collection, record, text, Icon }) => (
-  <Link href={`/bucket/${bucket}/collection/${collection}/record/${record}`}>
-    <Button variant="contained" color="primary">
+  <Link href={`${DATA_FILLER_PATH}/bucket/${bucket}/collection/${collection}/record/${record}`}>
+    <Button color="primary" size="sm">
       {Icon && <Icon style={{ marginRight: 10 }} />}
       {text}
     </Button>
@@ -81,7 +77,7 @@ const BucketView = ({ bucket, collections = [], themes }) => {
           const lastRecords = collection.records
             .filter(r => !!r.title)
             .sort(sortByKey(r => -r.last_modified))
-            .slice(0, 5);
+            .slice(0, 10);
           const lastRecord = lastRecords.length && lastRecords[0];
           return (
             <Col xs={12} sm={6} key={collection.id}>
@@ -90,7 +86,15 @@ const BucketView = ({ bucket, collections = [], themes }) => {
                   <Row>
                     <Col xs={8} style={{ fontSize: "1.5em" }}>
                       {collection.id}
-                      <Badge style={{ marginLeft: 15, display: "inline" }} color="success">
+                      <Badge
+                        style={{
+                          marginLeft: 15,
+                          display: "inline",
+                          fontSize: "0.6em",
+                          verticalAlign: "middle"
+                        }}
+                        color="success"
+                      >
                         {collection.records.length}
                       </Badge>
                     </Col>
@@ -114,14 +118,16 @@ const BucketView = ({ bucket, collections = [], themes }) => {
                       )}
                     </Col>
                   </Row>
-                  <Row>
-                    <Col>
-                      <CardText variant="subtitle1">
-                        {collection.schema && collection.schema.title}
-                      </CardText>
-                    </Col>
-                  </Row>
-                  <ListGroup flush style={{ marginTop: 30 }}>
+                  {collection.schema && collection.schema.title && (
+                    <Row>
+                      <Col>
+                        <CardText variant="subtitle1">
+                          {collection.schema && collection.schema.title}
+                        </CardText>
+                      </Col>
+                    </Row>
+                  )}
+                  <ListGroup flush style={{ marginTop: 20 }}>
                     {lastRecords.map(rec => (
                       <Link
                         href={`/bucket/${bucket}/collection/${collection.id}/record/${rec.id}`}
@@ -131,7 +137,7 @@ const BucketView = ({ bucket, collections = [], themes }) => {
                           tag="a"
                           href="#"
                           title={rec.title}
-                          style={{ padding: ".5rem 1.25rem" }}
+                          style={{ padding: ".2rem 0" }}
                           className="text-truncate"
                         >
                           <ProgressIndicator score={getScore(collection.id, rec)} />
@@ -156,16 +162,17 @@ const BucketView = ({ bucket, collections = [], themes }) => {
                     .map(item => (
                       <tr key={item.source}>
                         <td>
-                          <Link href={`/themes/${item.source}`}>
+                          <Link href={`${DATA_FILLER_PATH}/themes/${item.source}`}>
                             <a href="#">{getRouteBySource(item.source)}</a>
                           </Link>
                         </td>
-                        <td>
-                          <div>
-                            <Progress value={((item.total - item.items.length) / item.total) * 100}>
-                              {parseInt(((item.total - item.items.length) / item.total) * 100)}%
-                            </Progress>
-                          </div>
+                        <td width="200" style={{ verticalAlign: "middle" }}>
+                          <Progress
+                            color="success"
+                            value={((item.total - item.items.length) / item.total) * 100}
+                          >
+                            {parseInt(((item.total - item.items.length) / item.total) * 100)}%
+                          </Progress>
                         </td>
                       </tr>
                     ))}
@@ -252,11 +259,10 @@ export default class Home extends React.Component {
   render() {
     const bucket = process.env.KINTO_BUCKET;
     const { collections, themes } = this.props;
-    const total = sum(collections.map(c => c.records.length));
 
     return (
       <Container>
-        <BucketIntro count={total} />
+        <BucketIntro />
         <BucketView bucket={bucket} collections={collections} themes={themes} />
       </Container>
     );

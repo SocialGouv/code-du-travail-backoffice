@@ -28,7 +28,7 @@ const ListRecordsView = ({ records, bucket, collection, record, onAddClick }) =>
         <ListGroupItem action style={{ flex: "0 0 auto" }}>
           <Link href={DATA_FILLER_PATH} passHref>
             <a>
-              <Home style={{ marginRight: 5, verticalAlign: "middle" }} /> Accueil
+              <Home style={{ marginRight: 5, verticalAlign: "middle" }} /> Accueil Datafiller
             </a>
           </Link>
         </ListGroupItem>

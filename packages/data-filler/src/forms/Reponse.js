@@ -39,7 +39,7 @@ const StyledForm = styled(Form)`
 
 const ReponseForm = ({ data, onSubmit, onDelete }) => (
   <React.Fragment>
-    <h1 style={{ margin: "1em 0" }}>Réponses directes</h1>
+    <h3 style={{ margin: "1em 0" }}>Réponses directes</h3>
     <Container>
       <Formik
         key={JSON.stringify(data)}
