@@ -1,12 +1,14 @@
 import * as R from "ramda";
-import { put } from "redux-saga/effects";
+import { put, select } from "redux-saga/effects";
 
 import { actionTypes, answers } from "../../actions";
 import toast from "../../libs/toast";
+import { getAnswersChecked } from "../../selectors";
 
-export default function* toggleCheck({ meta: { checked, ids } }) {
+export default function* toggleCheck({ meta: { ids } }) {
   try {
-    const newChecked = R.symmetricDifference(checked, ids);
+    const checkedIds = yield select(getAnswersChecked);
+    const newChecked = R.symmetricDifference(checkedIds, ids);
 
     yield put({
       type: actionTypes.ANSWERS_TOGGLE_CHECK_SUCESS,

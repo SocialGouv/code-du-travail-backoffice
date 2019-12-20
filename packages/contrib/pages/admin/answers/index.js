@@ -87,17 +87,15 @@ export class AdminAnswersIndexPage extends React.Component {
   }
 
   checkAnswer(id) {
-    const { checked } = this.props.answers;
-
-    this.props.dispatch(actions.answers.toggleCheck(checked, [id]));
+    this.props.dispatch(actions.answers.toggleCheck([id]));
   }
 
   setCheckedAnswersState() {
     const { checked } = this.props.answers;
-    const newState = this.$newStateSelect.value;
+    const { value } = this.$newState.state.value;
 
     this.props.dispatch(
-      actions.answers.updateState(checked, newState, this.loadAnswers.bind(this))
+      actions.answers.updateState(checked, value, () => this.props.dispatch(actions.answers.load()))
     );
   }
 
@@ -120,10 +118,10 @@ export class AdminAnswersIndexPage extends React.Component {
     Router.push(`/admin/${path}/${id}`);
   }
 
-  getAnswersList() {
+  renderAnswersList() {
     const { checked, data, isLoading } = this.props.answers;
 
-    if (isLoading) {
+    if (isLoading || !Array.isArray(data)) {
       return <HelpText>Chargement…</HelpText>;
     }
 
@@ -211,13 +209,13 @@ export class AdminAnswersIndexPage extends React.Component {
           {!isLoading && answers.checked.length > 0 && (
             <Flex alignItems="center" justifyContent="space-between">
               <Flex>
-                <Select options={stateActionOptions} />
+                <Select ref={node => (this.$newState = node)} options={stateActionOptions} />
                 <Button onClick={this.setCheckedAnswersState.bind(this)}>Appliquer</Button>
               </Flex>
             </Flex>
           )}
 
-          <List flexDirection="column">{this.getAnswersList()}</List>
+          <List flexDirection="column">{this.renderAnswersList()}</List>
           {!isLoading && answers.pagesLength > 0 && (
             <Pagination
               initialPage={answers.filters.page}
