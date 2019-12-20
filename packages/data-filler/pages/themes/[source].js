@@ -79,7 +79,7 @@ const ThemeItems = ({ records }) => (
     </thead>
     <tbody>
       {records.map(record => (
-        <tr key={record.title} key={record.id}>
+        <tr key={record.id}>
           <td width="400">
             <ThemeSelector record={record} />
           </td>

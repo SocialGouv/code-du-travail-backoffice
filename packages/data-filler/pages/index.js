@@ -130,7 +130,7 @@ const BucketView = ({ bucket, collections = [], themes }) => {
                   <ListGroup flush style={{ marginTop: 20 }}>
                     {lastRecords.map(rec => (
                       <Link
-                        href={`/bucket/${bucket}/collection/${collection.id}/record/${rec.id}`}
+                        href={`${DATA_FILLER_PATH}/bucket/${bucket}/collection/${collection.id}/record/${rec.id}`}
                         key={rec.id}
                       >
                         <ListGroupItem
