@@ -11,6 +11,7 @@ env:
     - DB_URI=postgres://test_db_user:test_db_password@localhost:5432/test_db
     - KINTO_BUCKET=datasets
     - KINTO_URI=http://127.0.0.1:8888
+    - KINTO_PORT=8888
     - NODE_ENV=test
     - PGRST_DB_ANON_ROLE=anonymous
     - PGRST_DB_SCHEMA=api
