@@ -38,4 +38,6 @@ const styles = {
   })
 };
 
-export default props => <ReactSelect styles={styles} {...props} />;
+const Select = (props, ref) => <ReactSelect ref={ref} styles={styles} {...props} />;
+
+export default React.forwardRef(Select);

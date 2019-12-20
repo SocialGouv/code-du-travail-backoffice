@@ -84,10 +84,9 @@ export const setFiltersFailure = error => ({
   }
 });
 
-export const toggleCheck = (checked, ids) => ({
+export const toggleCheck = ids => ({
   type: actionTypes.ANSWERS_TOGGLE_CHECK,
   meta: {
-    checked,
     ids
   }
 });
