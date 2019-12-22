@@ -80,7 +80,7 @@
     "eslint": "6.7.2",
     "identity-obj-proxy": "3.0.0",
     "jest": "24.9.0",
-    "jest-emotion": "10.0.26",
+    "jest-emotion": "10.0.27",
     "mutationobserver-shim": "0.3.3",
     "prettier": "1.19.1",
     "react-test-renderer": "16.12.0",
