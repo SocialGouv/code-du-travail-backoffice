@@ -15,7 +15,7 @@
     "test:watch": "yarn test:unit --watch"
   },
   "dependencies": {
-    "@emotion/core": "10.0.22",
+    "@emotion/core": "10.0.27",
     "@emotion/styled": "10.0.23",
     "@fortawesome/fontawesome-svg-core": "1.2.26",
     "@fortawesome/free-solid-svg-icons": "5.12.0",
