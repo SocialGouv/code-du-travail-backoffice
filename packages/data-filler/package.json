@@ -28,7 +28,7 @@
     "http-proxy-middleware": "0.20.0",
     "kinto-http": "4.7.3",
     "memoizee": "0.4.14",
-    "next": "9.1.6",
+    "next": "9.1.7",
     "node-fetch": "2.6.0",
     "p-all": "2.1.0",
     "rc-tooltip": "3.7.3",
