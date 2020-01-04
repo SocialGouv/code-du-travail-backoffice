@@ -28,7 +28,7 @@ exports[`[Contrib] elements/<Idcc /> should pass 1`] = `
 >
   CDT
   <div
-    className="__react_component_tooltip place-top type-dark "
+    className="__react_component_tooltip place-top type-dark"
     data-id="tooltip"
   />
 </div>
