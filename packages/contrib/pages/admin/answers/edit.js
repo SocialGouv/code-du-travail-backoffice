@@ -299,14 +299,18 @@ export class AdminAnwsersEditPage extends React.Component {
   }
 
   async _updateAnswerValue({ source }) {
-    this.setState({ isUpdating: true });
-
     try {
+      this.setState({ isUpdating: true });
+
+      const value = source.trim();
+      const { state } = this.props.answers.data;
       const uri = `/answers?id=eq.${this.props.id}`;
-      const data = {
-        state: ANSWER_STATE.UNDER_REVIEW,
-        value: source
-      };
+      const data = { value };
+
+      // An answer can't have a "to do" state with a non-empty value:
+      if (state === ANSWER_STATE.TO_DO && value.length > 0) {
+        data.state = ANSWER_STATE.UNDER_REVIEW;
+      }
 
       await this.axios.patch(uri, data);
     } catch (err) {
@@ -332,11 +336,19 @@ export class AdminAnwsersEditPage extends React.Component {
 
   async createTag(tagId) {
     try {
+      const { state } = this.props.answers.data;
       const answersUri = `/answers?id=eq.${this.props.id}`;
+
       // An answer can't have a custom tag and be generic at the same time:
       const answersData = {
         generic_reference: null
       };
+
+      // An answer can't have a "to do" state with a tag:
+      if (state === ANSWER_STATE.TO_DO) {
+        answersData.state = ANSWER_STATE.UNDER_REVIEW;
+      }
+
       const answersTagsUri = `/answers_tags`;
       const answersTagsData = {
         answer_id: this.props.id,
@@ -371,11 +383,19 @@ export class AdminAnwsersEditPage extends React.Component {
     this.setState({ isUpdating: true });
 
     try {
+      const { state } = this.props.answers.data;
       const answersUri = `/answers?id=eq.${this.props.id}`;
+
       // An answer can't have a reference and be generic at the same time:
       const answersData = {
         generic_reference: null
       };
+
+      // An answer can't have a "to do" state with a reference:
+      if (state === ANSWER_STATE.TO_DO) {
+        answersData.state = ANSWER_STATE.UNDER_REVIEW;
+      }
+
       const answersReferencesUri = `/answers_references`;
       const answersReferencesData = {
         answer_id: this.props.id,
