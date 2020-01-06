@@ -4063,7 +4063,7 @@ color-string@^1.5.2:
     color-name "^1.0.0"
     simple-swizzle "^0.2.2"
 
-color@^3.1.0:
+color@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/color/-/color-3.1.2.tgz#68148e7f85d41ad7649c5fa8c8106f098d229e10"
   integrity sha512-vXTJhHebByxZn3lDvDJYw4lR5+uB3vuoHsuYA5AKuxRVn5wzzIfQKGLBmgdVRHKTJYeK5rvJcHnrd0Li49CFpg==
@@ -6503,12 +6503,12 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
   integrity sha1-TK+tdrxi8C+gObL5Tpo906ORpyU=
 
-gradient2@1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/gradient2/-/gradient2-1.0.3.tgz#a81a46837fdea87b229df7461baaa60ae78ae86e"
-  integrity sha512-4HJ+CSKawf1+4bCTb/hG4QsqdBgNEL+Gs22zeVF0tcnC/SFOpGtmY4aUmXPYk76KkJfkLfoihDe7qIAW911YHw==
+gradient2@1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/gradient2/-/gradient2-1.0.5.tgz#e7c0ed7cc7ffaa54a938582bbd0837b6da3b85df"
+  integrity sha512-GuDk96N2avYfC9+jWXdd4/2EfH4T3Igyhoy8R+uod7mMNgT6Svqdx0GVEKZQeRN2GSsE8EApcQE0cUxxzZvA2A==
   dependencies:
-    color "^3.1.0"
+    color "^3.1.2"
 
 growly@^1.3.0:
   version "1.3.0"
