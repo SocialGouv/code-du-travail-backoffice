@@ -11214,12 +11214,12 @@ react-sortable-hoc@1.10.1:
     invariant "^2.2.4"
     prop-types "^15.5.7"
 
-react-svg-map@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/react-svg-map/-/react-svg-map-2.0.1.tgz#d74eac4c3fe9debd531e254596c80f184f4d6392"
-  integrity sha512-C9fk+MM3vCo6rxPnu2XSmb2oMcVc3/keUEJHvDFdjhObVhNRtGlW76upb7mVp/37oSrCsCmmPWNfQDH1JxcbSw==
+react-svg-map@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/react-svg-map/-/react-svg-map-2.0.2.tgz#3182f495cd56a9ba9b475eaf4b0f794dae8cba90"
+  integrity sha512-c/z5DQ+d0fLWFtEdhwqpBNm1CvPk4mN5Wq0MnfN7yOUHehpvw2OSCGglAVH/sTR/S/bq12fZqFjOQNjCJxs6ow==
   dependencies:
-    prop-types "^15.6.2"
+    prop-types "^15.7.2"
 
 react-table@6.11.5:
   version "6.11.5"
