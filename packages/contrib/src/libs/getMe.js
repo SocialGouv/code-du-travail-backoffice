@@ -1,3 +1,4 @@
+import jsCookie from "js-cookie";
 import nextCookies from "next-cookies";
 
 import { USER_ROLE } from "../constants";
@@ -10,7 +11,7 @@ const ANOMNYMOUS_RESPONSE = {
 };
 
 export default async function getMe(ctx) {
-  const { jwt: token } = nextCookies(ctx);
+  const { jwt: token } = ctx === undefined ? jsCookie.get() : nextCookies(ctx);
 
   if (typeof token !== "string") return ANOMNYMOUS_RESPONSE;
 

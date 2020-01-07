@@ -24,17 +24,14 @@ function withErrorAndAuth(nextApp, route, callback) {
       if (me.isAuthenticated) {
         switch (true) {
           case ctx.path === "/":
-            ctx.status = 301;
             ctx.redirect(me.isAdmin ? "/admin" : "/answers/todo/1");
             break;
 
           case ctx.path.startsWith("/admin") && !me.isAdmin:
-            ctx.status = 302;
             ctx.redirect("/answers/todo/1");
             break;
 
           case !ctx.path.startsWith("/admin") && me.isAdmin:
-            ctx.status = 302;
             ctx.redirect("/admin");
             break;
 
@@ -44,6 +41,12 @@ function withErrorAndAuth(nextApp, route, callback) {
             ctx.respond = false;
         }
       } else {
+        if (ctx.path !== "/") {
+          ctx.redirect("/");
+
+          return;
+        }
+
         ctx.status = 200;
         await callback(ctx);
         ctx.respond = false;

@@ -31,30 +31,16 @@ class MainApp extends App {
     const { me } = props;
 
     cache.set("me", me);
-
-    this.state = { me };
   }
 
   async login() {
-    const { ctx } = this.props;
-
-    const me = await getMe(ctx);
-
-    cache.set("me", me);
-
-    if (window.location.pathname === "/") {
-      window.location.reload();
-
-      return;
-    }
-
-    this.setState({ me });
+    window.location.reload();
   }
 
   render() {
     const kintoClient = getClient();
+    const me = cache.get("me");
     const { Component, pageProps, store } = this.props;
-    const { me } = this.state;
     const { statusCode } = pageProps;
 
     const hasError = statusCode !== undefined && statusCode >= 400;
