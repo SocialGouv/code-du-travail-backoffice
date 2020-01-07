@@ -52,6 +52,8 @@ export default function* load() {
           .ilike("prevalue", filters.query)
           .ilike("value", filters.query);
       }
+    } else {
+      request = request.orderBy("question_index");
     }
 
     const uri = filters.isGeneric ? "/generic_answers" : "/full_answers";
