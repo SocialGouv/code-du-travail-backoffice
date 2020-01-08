@@ -24,9 +24,9 @@ numérique][link-cdtn].
 git clone https://github.com/SocialGouv/code-du-travail-backoffice.git
 cd code-du-travail-backoffice
 yarn
-# Generates the .env file with pre-filled dev/test values:
-yarn setup --env-only
-docker-compose up -d db
+# Generates the .env file with pre-filled development values:
+yarn setup
+docker-compose up -d db elastic
 # Create Kinto database:
 yarn db:init
 docker-compose up -d kinto

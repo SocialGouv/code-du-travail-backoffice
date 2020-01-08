@@ -27,7 +27,7 @@ module.exports = async (ctx, next) => {
     // eslint-disable-next-line require-atomic-updates
     ctx.me = await getMe(ctx);
   } catch (err) {
-    reportError(ctx, "middlewares/withAuthentication()", err);
+    await reportError(ctx, "middlewares/withAuthentication()", err);
   }
 
   await next();

@@ -4,24 +4,25 @@
 # https://docs.docker.com/compose/networking/
 # https://docs.docker.com/compose/environment-variables/#the-env-file
 variables:
-  API_PORT: 3000
   API_URI: http://api:3000
   # Remove docker-compose warnings (because this environment variable is ised by
   # the test container):
   CONFIG_ONLY: "false"
-  DB_PORT: 5432
-  DB_URI: postgres://test_db_user:test_db_password@localhost:5432/test_db
+  DB_URI: postgresql://test_db_user:test_db_password@localhost:5432/test_db
+  ELASTIC_PASSWORD: test_elastic_password
   NODE_ENV: test
   PGRST_DB_ANON_ROLE: anonymous
   PGRST_DB_SCHEMA: api
   # It must be at least 32 characters long:
   # https://github.com/PostgREST/postgrest/issues/977#issuecomment-329917367
   PGRST_JWT_SECRET: a_test_only_postgrest_jwt_secret
+  PGRST_PORT: 3000
   POSTGRES_DB: test_db
   POSTGRES_PASSWORD: test_db_password
+  POSTGRES_PORT: 5432
   POSTGRES_USER: test_db_user
+  TEST_WEB_URI: http://localhost:3100
   WEB_PORT: 3100
-  WEB_URI: http://localhost:3100
 
 stages:
   - Test
@@ -42,7 +43,6 @@ E2E Tests:
   before_script:
     - npm i -g wait-on
     - yarn --frozen-lockfile
-    # - yarn setup --env-only
     - yarn db:migrate
     - yarn db:seed
     - docker run -d postgrest/postgrest:v6.0.1-53b606e

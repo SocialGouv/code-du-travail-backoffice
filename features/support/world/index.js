@@ -2,11 +2,11 @@ const { setDefaultTimeout, setWorldConstructor } = require("cucumber");
 const { expect } = require("chai");
 const puppeteer = require("puppeteer");
 
-if (process.env.WEB_URI === undefined) {
+if (process.env.TEST_WEB_URI === undefined) {
   require("dotenv").config({ path: `${__dirname}/../../../.env` });
 }
 
-const { NODE_ENV, WEB_URI } = process.env;
+const { NODE_ENV, TEST_WEB_URI } = process.env;
 
 // Increase default cucumber timeout from 5s to 30s:
 setDefaultTimeout(30000);
@@ -14,11 +14,7 @@ setDefaultTimeout(30000);
 class World {
   async start() {
     this.browser = await puppeteer.launch({
-      args: [
-        "--disable-setuid-sandbox",
-        "--no-sandbox",
-        `--window-size=1600,1024`
-      ],
+      args: ["--disable-setuid-sandbox", "--no-sandbox", `--window-size=1600,1024`],
       defaultViewport: { width: 1280, height: 768 },
       devtools: NODE_ENV !== "test",
       headless: NODE_ENV === "test"
@@ -29,9 +25,7 @@ class World {
 
   extendPage() {
     this.page.waitForSelectors = function(selectors) {
-      return Promise.all(
-        selectors.map(selector => this.waitForSelector(selector))
-      );
+      return Promise.all(selectors.map(selector => this.waitForSelector(selector)));
     }.bind(this.page);
   }
 
@@ -61,15 +55,11 @@ class World {
   }
 
   async goToHome() {
-    await this.page.goto(WEB_URI);
+    await this.page.goto(TEST_WEB_URI);
   }
 
   async login() {
-    await this.page.waitForSelectors([
-      `input[name="email"]`,
-      `input[name="password"]`,
-      `button`
-    ]);
+    await this.page.waitForSelectors([`input[name="email"]`, `input[name="password"]`, `button`]);
 
     const $email = await this.page.$(`input[name="email"]`);
     const $password = await this.page.$(`input[name="password"]`);
@@ -87,9 +77,7 @@ class World {
 
     const subtitleTexts = await this.page.evaluate(
       subtitleSelector =>
-        [...document.querySelectorAll(subtitleSelector)].map(
-          ({ innerText }) => innerText
-        ),
+        [...document.querySelectorAll(subtitleSelector)].map(({ innerText }) => innerText),
       subtitleSelector
     );
 
