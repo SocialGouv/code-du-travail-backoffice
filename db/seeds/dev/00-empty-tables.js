@@ -2,7 +2,7 @@ const axios = require("axios");
 const ora = require("ora");
 
 global.axios = axios.create({
-  baseURL: "https://contributions-api.codedutravail.num.social.gouv.fr"
+  baseURL: "https://contributions-api.codedutravail.fabrique.social.gouv.fr"
 });
 
 global.spinner = ora({
