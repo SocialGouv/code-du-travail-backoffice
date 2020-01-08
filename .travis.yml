@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "12.13.1"
+  - "12.14.1"
 
 env:
   global:
@@ -10,8 +10,8 @@ env:
     - DB_PORT=5432
     - DB_URI=postgres://test_db_user:test_db_password@localhost:5432/test_db
     - KINTO_BUCKET=datasets
-    - KINTO_URI=http://127.0.0.1:8888
-    - KINTO_PORT=8888
+    - KINTO_URI=http://127.0.0.1:8889
+    - KINTO_PORT=8889
     - NODE_ENV=test
     - PGRST_DB_ANON_ROLE=anonymous
     - PGRST_DB_SCHEMA=api

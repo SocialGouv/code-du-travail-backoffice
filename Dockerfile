@@ -1,6 +1,6 @@
 # Web container (including contrib & data-filler packages)
 
-FROM node:12.13.1-slim
+FROM node:12.14.1-slim
 
 ARG API_DOCKER_URI
 ARG API_URI

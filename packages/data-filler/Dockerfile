@@ -1,4 +1,4 @@
-FROM node:12.13.1-slim
+FROM node:12.14.1-slim
 
 ARG NODE_ENV
 
