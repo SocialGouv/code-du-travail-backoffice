@@ -9,7 +9,6 @@ import LoadingSpinner from "../../elements/LoadingSpinner";
 import "quill/dist/quill.snow.css";
 import "react-table/react-table.css";
 import "react-toastify/dist/ReactToastify.css";
-import "simplemde/dist/simplemde.min.css";
 
 import globalStyles from "./globalStyles";
 import styles from "./styles";
