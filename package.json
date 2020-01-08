@@ -1,8 +1,8 @@
 {
   "name": "@socialgouv/cdtn-backoffice",
   "version": "0.0.0",
-  "description": "Applications d'administration des données du code du travail numérique.",
   "license": "Apache-2.0",
+  "description": "Applications d'administration des données du code du travail numérique.",
   "private": true,
   "scripts": {
     "build": "lerna run --scope \"@socialgouv/cdtn-contrib\" build",
@@ -13,7 +13,7 @@
     "db:seed": "knex seed:run && node ./packages/data-filler/fixture.js",
     "dev": "lerna run --scope \"@socialgouv/cdtn-contrib\" dev --parallel",
     "docker:web": "cross-env NODE_ENV=production docker-compose up --build -d web",
-    "postinstall": "lerna link && lerna bootstrap",
+    "postinstall": "lerna link",
     "setup": "node ./scripts/setup",
     "start": "lerna run --scope \"@socialgouv/cdtn-contrib\" start",
     "start:prod": "NODE_ENV=production ./scripts/prod/start.sh",
