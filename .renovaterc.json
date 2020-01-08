@@ -1,0 +1,10 @@
+{
+  "enabled": true,
+  "extends": ["github>SocialGouv/renovate-config", "group:allNonMajor", ":automergeAll"],
+  "packageRules": [
+    {
+      "groupName": "SocialGouv",
+      "packagePatterns": ["^@socialgouv/"]
+    }
+  ]
+}
