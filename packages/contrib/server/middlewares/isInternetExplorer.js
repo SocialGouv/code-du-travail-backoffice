@@ -34,7 +34,7 @@ module.exports = async (ctx, next) => {
       return;
     }
   } catch (err) {
-    reportError(ctx, "middlewares/withAuthentication()", err);
+    await reportError(ctx, "middlewares/withAuthentication()", err);
   }
 
   await next();

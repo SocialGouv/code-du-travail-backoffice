@@ -14,7 +14,7 @@
     "dev": "lerna run --scope \"@socialgouv/cdtn-contrib\" dev --parallel",
     "docker:web": "cross-env NODE_ENV=production docker-compose up --build -d web",
     "postinstall": "lerna link",
-    "setup": "node ./scripts/setup",
+    "setup": "cpy --rename=\".env\" ./.env.example .",
     "start": "lerna run --scope \"@socialgouv/cdtn-contrib\" start",
     "start:prod": "NODE_ENV=production ./scripts/prod/start.sh",
     "test": "lerna run test",
@@ -25,25 +25,28 @@
     "test:watch": "lerna run test:watch --parallel"
   },
   "dependencies": {
-    "axios": "0.19.1",
-    "boxen": "4.2.0",
-    "chai": "4.2.0",
     "csv-parse": "4.8.3",
-    "cucumber": "6.0.5",
     "dotenv": "8.2.0",
-    "dumdum": "1.0.0-alpha.4",
-    "imgur": "0.3.1",
     "knex": "0.20.7",
     "lerna": "3.20.2",
-    "moment": "2.24.0",
     "ora": "4.0.3",
     "pg": "7.17.0",
-    "puppeteer": "2.0.0",
+    "remove": "^0.1.5",
     "uuid": "3.3.3"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "4.2.4",
-    "@types/jest": "24.0.25"
+    "@types/jest": "24.0.25",
+    "axios": "0.19.1",
+    "boxen": "4.2.0",
+    "chai": "4.2.0",
+    "copyfiles": "^2.1.1",
+    "cpy-cli": "3.0.0",
+    "cucumber": "6.0.5",
+    "dumdum": "1.0.0-alpha.4",
+    "imgur": "0.3.1",
+    "moment": "2.24.0",
+    "puppeteer": "2.0.0"
   },
   "workspaces": [
     "packages/*"

@@ -5,7 +5,7 @@ services:
     image: igabriele/postgresql-jwt
     restart: always
     ports:
-      - ${DB_PORT}:5432
+      - ${POSTGRES_PORT}:5432
     environment:
       # The JWT secret is used whithin the api.login() function:
       PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
@@ -18,17 +18,32 @@ services:
       - ./backups:/backups
       - ./scripts/docker/db:/scripts
 
+  elastic:
+    image: elasticsearch:7.5.1
+    restart: always
+    environment:
+      # Single-node cluster:
+      # https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html#single-node-discovery
+      discovery.type: single-node
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      # Enable security features:
+      # https://www.elastic.co/guide/en/elasticsearch/reference/current/security-settings.html#general-security-settings
+      xpack.security.enabled: "true"
+    volumes:
+      - elastic-data:/usr/share/elasticsearch/data
+
   kinto:
     image: kinto/kinto-server:13.5.0
     restart: always
     ports:
       - ${KINTO_PORT}:8888
     environment:
-      - KINTO_STORAGE_BACKEND=kinto.core.storage.postgresql
-      - KINTO_STORAGE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_KINTO_DB}
-      - KINTO_PERMISSION_BACKEND=kinto.core.permission.postgresql
-      - KINTO_PERMISSION_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_KINTO_DB}
-      - KINTO_BUCKET_CREATE_PRINCIPALS=system.Everyone
+      KINTO_STORAGE_BACKEND: kinto.core.storage.postgresql
+      KINTO_STORAGE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_KINTO_DB}
+      KINTO_PERMISSION_BACKEND: kinto.core.permission.postgresql
+      KINTO_PERMISSION_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_KINTO_DB}
+      KINTO_BUCKET_CREATE_PRINCIPALS: system.Everyone
+      KINTO_BUCKET_READ_PRINCIPALS: system.Everyone
     depends_on:
       - db
 
@@ -37,11 +52,11 @@ services:
     image: postgrest/postgrest:v6.0.2
     restart: always
     ports:
-      - ${API_PORT}:3000
+      - ${PGRST_PORT}:3000
     environment:
       PGRST_DB_ANON_ROLE: ${PGRST_DB_ANON_ROLE}
       PGRST_DB_SCHEMA: ${PGRST_DB_SCHEMA}
-      PGRST_DB_URI: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      PGRST_DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
       PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
     depends_on:
       - db
@@ -54,7 +69,9 @@ services:
         API_DOCKER_URI: http://api:3000
         API_URI: ${API_URI}
         DATA_FILLER_PATH: ${DATA_FILLER_PATH}
-        DB_URI: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+        DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+        ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+        ELASTIC_URI: http://elastic:9200
         NODE_ENV: ${NODE_ENV}
         KINTO_BUCKET: ${KINTO_BUCKET}
         KINTO_URI: ${KINTO_URI}
@@ -69,4 +86,5 @@ services:
       - kinto
 
 volumes:
+  elastic-data:
   postgre-data:
