@@ -80,7 +80,7 @@ Le site devrait être accessible à l'adresse http://localhost:3100.
 Un fois installé, vous pouvez simplement faire tourner le site avec ces deux commandes :
 
 ```bash
-docker-compose up -d api
+docker-compose up -d api elastic kinto
 yarn dev
 ```
 
