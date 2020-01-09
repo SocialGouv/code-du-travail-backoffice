@@ -25,14 +25,11 @@
     "test:watch": "lerna run test:watch --parallel"
   },
   "dependencies": {
-    "csv-parse": "4.8.3",
     "dotenv": "8.2.0",
     "knex": "0.20.7",
     "lerna": "3.20.2",
     "ora": "4.0.3",
-    "pg": "7.17.0",
-    "remove": "^0.1.5",
-    "uuid": "3.3.3"
+    "pg": "7.17.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "4.2.4",
@@ -40,7 +37,6 @@
     "axios": "0.19.1",
     "boxen": "4.2.0",
     "chai": "4.2.0",
-    "copyfiles": "^2.1.1",
     "cpy-cli": "3.0.0",
     "cucumber": "6.0.5",
     "dumdum": "1.0.0-alpha.4",
