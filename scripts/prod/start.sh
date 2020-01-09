@@ -8,7 +8,7 @@
 set -e
 
 # Read .env file
-export $(egrep -v '^#' ../.env | xargs)
+export $(egrep -v '^#' .env | xargs)
 
 # Remove docker-compose warnings (because this environment variable is ised by
 # the test container):
