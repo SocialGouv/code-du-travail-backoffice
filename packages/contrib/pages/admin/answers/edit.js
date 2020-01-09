@@ -46,6 +46,10 @@ const Sidebar = styled(Flex)`
   min-width: 23rem;
 `;
 
+const Question = styled(Title)`
+  margin: 0;
+  user-select: text;
+`;
 const StateSelect = styled(_Select)`
   margin-right: 1rem;
 `;
@@ -570,7 +574,7 @@ export class AdminAnwsersEditPage extends React.Component {
             <Flex alignItems="baseline" justifyContent="space-between">
               <Flex alignItems="baseline">
                 {this.isGeneric ? <Idcc /> : <Idcc code={agreement.idcc} name={agreement.name} />}
-                <Title isFirst>{`${question.index}) ${question.value}`}</Title>
+                <Question>{`${question.index}) ${question.value}`}</Question>
               </Flex>
 
               <Flex alignItems="center">
