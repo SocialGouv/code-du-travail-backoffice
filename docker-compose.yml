@@ -33,7 +33,7 @@ services:
       - elastic-data:/usr/share/elasticsearch/data
 
   kinto:
-    image: kinto/kinto-server:13.5.0
+    image: kinto/kinto-server:13.6.2
     restart: always
     ports:
       - ${KINTO_PORT}:8888
