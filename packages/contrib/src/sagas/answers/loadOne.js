@@ -1,6 +1,7 @@
 import { put } from "redux-saga/effects";
 
 import { answers } from "../../actions";
+import shortenAgreementName from "../../helpers/shortenAgreementName";
 import customPostgrester from "../../libs/customPostgrester";
 import toast from "../../libs/toast";
 
@@ -14,7 +15,10 @@ export default function* loadOne({ meta: { id, withReferences, withTags } }) {
 
     const { data } = yield request.get("/answers");
 
-    let answer = { ...data[0] };
+    let answer = {
+      ...data[0],
+      agreement: { ...data[0].agreement, name: shortenAgreementName(data[0].agreement.name) }
+    };
 
     if (withReferences) {
       const request = customPostgrester()

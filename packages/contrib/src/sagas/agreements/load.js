@@ -2,6 +2,7 @@ import React from "react";
 import { put } from "redux-saga/effects";
 
 import { agreements } from "../../actions";
+import shortenAgreementName from "../../helpers/shortenAgreementName";
 import customPostgrester from "../../libs/customPostgrester";
 import toast from "../../libs/toast";
 
@@ -21,7 +22,7 @@ export default function* load({ meta: { pageIndex, query } }) {
 
     yield put(
       agreements.loadSuccess({
-        data,
+        data: data.map(({ name, ...props }) => ({ name: shortenAgreementName(name), ...props })),
         pageIndex,
         pagesLength,
         query

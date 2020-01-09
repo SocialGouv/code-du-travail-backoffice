@@ -1,5 +1,4 @@
 import React from "react";
-import ReactTooltip from "react-tooltip";
 import { Flex } from "rebass";
 import styled from "@emotion/styled";
 
@@ -9,6 +8,7 @@ import Button from "../../src/elements/Button";
 import ContentTitle from "../../src/elements/ContentTitle";
 import Subtitle from "../../src/elements/Subtitle";
 import Title from "../../src/elements/Title";
+import shortenAgreementName from "../../src/helpers/shortenAgreementName";
 import AdminMain from "../../src/layouts/AdminMain";
 import customPostgrester from "../../src/libs/customPostgrester";
 import numeral from "../../src/libs/customNumeral";
@@ -16,21 +16,10 @@ import numeral from "../../src/libs/customNumeral";
 import { ANSWER_STATE } from "../../src/constants";
 import Icon from "../../src/elements/Icon";
 
-const Tooltip = styled(ReactTooltip)`
-  max-width: 22rem;
-  padding: 0.25rem 0.5rem 0.45rem;
-  white-space: normal;
-`;
-
 const COLUMNS = [
   {
     Header: "Nom",
-    Cell: ({ value }) => (
-      <div data-tip={value}>
-        {value}
-        <Tooltip />
-      </div>
-    ),
+    Cell: ({ value }) => <span title={value}>{value}</span>,
     accessor: "name"
   },
   {
@@ -104,6 +93,8 @@ const FranceMapContainer = styled(Flex)`
   }
 `;
 const Table = styled(_Table)`
+  font-size: 0.875rem;
+
   .rt-tr > .rt-td {
     :first-of-type {
       cursor: help;
@@ -192,7 +183,7 @@ export default class Index extends React.Component {
       .map(({ id, idcc, name, parent_id }) => ({
         id,
         isNational: parent_id === null,
-        name: `[${idcc}] ${name}`,
+        name: `[${idcc}] ${shortenAgreementName(name)}`,
         totals: [0, 0, 0, 0, 0, 0]
       }));
 

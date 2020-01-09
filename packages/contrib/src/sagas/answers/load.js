@@ -3,6 +3,7 @@ import { put, select } from "redux-saga/effects";
 
 import { answers } from "../../actions";
 import { ANSWER_STATE, ANSWER_STATES, USER_ROLE } from "../../constants";
+import shortenAgreementName from "../../helpers/shortenAgreementName";
 import customPostgrester from "../../libs/customPostgrester";
 import getCurrentUser from "../../libs/getCurrentUser";
 import toast from "../../libs/toast";
@@ -60,7 +61,10 @@ export default function* load() {
     const { data, pagesLength } = yield request.get(uri, true);
 
     const answerIds = data.map(({ id }) => id);
-    let fullData = [...data];
+    let fullData = data.map(({ agreement_name, ...props }) => ({
+      ...props,
+      agreement_name: shortenAgreementName(agreement_name)
+    }));
 
     const referencesRequest = customPostgrester()
       .in("answer_id", answerIds)

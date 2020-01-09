@@ -1,11 +1,13 @@
 import React from "react";
 
 import AdminIndex from "../../../src/components/AdminIndex";
+import shortenAgreementName from "../../../src/helpers/shortenAgreementName";
 
 const COLUMNS = [
   {
     Header: "Nom",
-    accessor: "name"
+    accessor: ({ name }) => shortenAgreementName(name),
+    id: "name"
   },
   {
     Header: "IDCC",
