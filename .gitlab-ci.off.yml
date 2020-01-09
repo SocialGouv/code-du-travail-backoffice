@@ -8,7 +8,7 @@ variables:
   # Remove docker-compose warnings (because this environment variable is ised by
   # the test container):
   CONFIG_ONLY: "false"
-  DB_URI: postgresql://test_db_user:test_db_password@localhost:5432/test_db
+  DB_PUBLIC_URI: postgresql://test_db_user:test_db_password@localhost:5432/test_db
   ELASTIC_PASSWORD: test_elastic_password
   NODE_ENV: test
   PGRST_DB_ANON_ROLE: anonymous

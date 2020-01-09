@@ -7,15 +7,15 @@
 # Exit when any command fails:
 set -e
 
-API_URI="$API_URI"
-NODE_ENV="$NODE_ENV"
+# Read .env file
+export $(egrep -v '^#' ../.env | xargs)
 
 # Remove docker-compose warnings (because this environment variable is ised by
 # the test container):
 export CONFIG_ONLY=false
 
 echo "⏳ Stopping all existing DC containers…"
-NODE_ENV=$NODE_ENV docker-compose stop
+docker-compose stop
 
 echo "⏳ Installing dependencies…"
 yarn --frozen-lockfile --no-cache
@@ -30,11 +30,10 @@ docker-compose up -d elastic
 # container be up and ready before running the migrations.
 # Note: merely checking if the database port is used is not enough.
 echo "⏳ Building web container…"
-if [ -z $API_URI ]; then
+if [ "$NODE_ENV" = "test" ]; then
   NODE_ENV=production docker-compose build --no-cache web
 else
-  # Allow us to override the .env file API_URI value via the command line:
-  NODE_ENV=production API_URI=$API_URI docker-compose build --no-cache web
+  docker-compose build --no-cache web
 fi
 
 # Crate Kinto database for non-production environments:
@@ -57,5 +56,7 @@ fi
 
 echo "⏳ Starting web (and api) container…"
 docker-compose up -d web
+bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' ${TEST_WEB_URI})" != "200" ]]; do sleep 5; done'
+bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' ${API_URI})" != "200" ]]; do sleep 5; done'
 
 echo "🚀 The server is up and running!"
