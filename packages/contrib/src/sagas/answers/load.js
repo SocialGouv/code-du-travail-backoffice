@@ -61,10 +61,12 @@ export default function* load() {
     const { data, pagesLength } = yield request.get(uri, true);
 
     const answerIds = data.map(({ id }) => id);
-    let fullData = data.map(({ agreement_name, ...props }) => ({
-      ...props,
-      agreement_name: shortenAgreementName(agreement_name)
-    }));
+    let fullData = filters.isGeneric
+      ? [...data]
+      : data.map(({ agreement_name, ...props }) => ({
+          ...props,
+          agreement_name: shortenAgreementName(agreement_name)
+        }));
 
     const referencesRequest = customPostgrester()
       .in("answer_id", answerIds)
