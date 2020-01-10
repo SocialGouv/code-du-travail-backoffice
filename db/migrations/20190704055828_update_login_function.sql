@@ -24,7 +24,7 @@ CREATE FUNCTION
 
     -- Select the user id & location name from the logged user and assign it to
     -- _user_id & _location_name record variables.
-    -- https://www.postgresql.org/docs/current/plpgsql-statements.html#PLPGSQL-STATEMENTS-SQL-ONEROW
+    -- https://www.postgresql.org/docs/11/plpgsql-statements.html#PLPGSQL-STATEMENTS-SQL-ONEROW
     SELECT
       u.id,
       u.name,
@@ -80,7 +80,7 @@ CREATE FUNCTION
 
     -- Select the user id & location name from the logged user and assign it to
     -- _user_id & _location_name record variables.
-    -- https://www.postgresql.org/docs/current/plpgsql-statements.html#PLPGSQL-STATEMENTS-SQL-ONEROW
+    -- https://www.postgresql.org/docs/11/plpgsql-statements.html#PLPGSQL-STATEMENTS-SQL-ONEROW
     SELECT u.id, u.name, l.name INTO _user_id, _user_name, _location_name
     FROM auth.users u
     INNER JOIN api.locations l ON u.location_id = l.id

@@ -1,5 +1,5 @@
 /**
- * @see http://postgrest.org/en/v5.2/auth.html#jwt-from-sql
+ * @see http://postgrest.org/en/latest/auth.html#jwt-from-sql
  */
 
 exports.up = async knex => {
