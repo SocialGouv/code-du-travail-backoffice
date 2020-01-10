@@ -38,7 +38,7 @@ CREATE FUNCTION
     _user_id uuid := current_setting('request.jwt.claim.id', true)::uuid;
     _user_role name;
   BEGIN
-      -- https://www.postgresql.org/docs/current/plpgsql-trigger.html
+      -- https://www.postgresql.org/docs/11/plpgsql-trigger.html
     IF (TG_OP = 'DELETE') THEN
       _record := OLD;
     ELSE
@@ -61,8 +61,8 @@ CREATE FUNCTION
     END IF;
 
     IF NOT (_agreement_id = ANY(get_current_user_agreements())) THEN
-      -- http://postgrest.org/en/v5.2/api.html#http-status-codes
-      -- https://www.postgresql.org/docs/current/errcodes-appendix.html
+      -- http://postgrest.org/en/latest/api.html#http-status-codes
+      -- https://www.postgresql.org/docs/11/errcodes-appendix.html
       RAISE insufficient_privilege
       USING MESSAGE = 'User "' || user_id || '" is not allowed to update answer "' || _answer_id || '".';
 
