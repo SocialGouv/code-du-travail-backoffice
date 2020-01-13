@@ -171,7 +171,7 @@ export default class AdminForm extends React.Component {
     );
 
     // Most of the comments below are related to:
-    // http://postgrest.org/en/v5.2/api.html#insertions-updates
+    // http://postgrest.org/en/latest/api.html#insertions-updates
     try {
       if (this.props.id !== undefined && !Boolean(this.props.isApiFunction)) {
         // PostgREST exposed api table updates are done via PATCH requests:
