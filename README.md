@@ -26,14 +26,10 @@ cd code-du-travail-backoffice
 yarn
 # Generates the .env file with pre-filled development values:
 yarn setup
-docker-compose up -d db elastic
-# Create Kinto database:
-yarn db:init
-docker-compose up -d kinto
+docker-compose up -d db
 yarn db:migrate
-# Seed the database with dev/test dummy data:
-yarn db:seed
-docker-compose up -d api
+yarn db:snapshot:restore
+docker-compose up -d api kinto
 yarn dev
 ```
 
