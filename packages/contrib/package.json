@@ -7,7 +7,7 @@
   "scripts": {
     "build": "rimraf ./.next && next build",
     "build:docker": "node --max-old-space-size=1024 ./node_modules/.bin/next build",
-    "dev": "node ./server",
+    "dev": "nodemon --watch ./server ./server",
     "start": "NODE_ENV=production node ./server",
     "test": "yarn test:lint && yarn test:unit",
     "test:lint": "eslint .",
@@ -82,6 +82,7 @@
     "jest": "24.9.0",
     "jest-emotion": "10.0.27",
     "mutationobserver-shim": "0.3.3",
+    "nodemon": "2.0.2",
     "prettier": "1.19.1",
     "react-test-renderer": "16.12.0",
     "rimraf": "3.0.0",
