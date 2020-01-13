@@ -21,7 +21,7 @@
     "@fortawesome/fontawesome-svg-core": "1.2.26",
     "@fortawesome/free-solid-svg-icons": "5.12.0",
     "@fortawesome/react-fontawesome": "0.1.8",
-    "@socialgouv/kali-data": "1.2.103",
+    "@socialgouv/kali-data": "1.3.0",
     "@zeit/next-css": "1.0.1",
     "axios": "0.19.1",
     "babel-plugin-inline-react-svg": "1.1.0",
@@ -40,7 +40,7 @@
     "next-transpile-modules": "2.3.1",
     "numeral": "2.0.6",
     "password-generator": "2.2.3",
-    "pg": "7.17.0",
+    "pg": "7.17.1",
     "postgrester": "1.0.0-alpha.2",
     "quill": "1.3.7",
     "ramda": "0.26.1",
@@ -66,7 +66,7 @@
     "zxcvbn": "4.4.2"
   },
   "devDependencies": {
-    "@babel/core": "7.7.7",
+    "@babel/core": "7.8.0",
     "@socialgouv/eslint-config-react": "0.13.0",
     "@testing-library/jest-dom": "4.2.4",
     "@testing-library/react": "9.4.0",
@@ -86,7 +86,7 @@
     "prettier": "1.19.1",
     "react-test-renderer": "16.12.0",
     "rimraf": "3.0.0",
-    "snapshot-diff": "0.6.1",
+    "snapshot-diff": "0.6.2",
     "uuid": "3.3.3"
   }
 }
