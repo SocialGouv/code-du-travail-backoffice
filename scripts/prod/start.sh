@@ -14,6 +14,9 @@ export $(egrep -v '^#' .env | xargs)
 # the test container):
 export CONFIG_ONLY=false
 
+echo "⏳ Dumping current databases…"
+yarn db:backup
+
 echo "⏳ Stopping all existing DC containers…"
 docker-compose stop
 
