@@ -18,20 +18,6 @@ services:
       - ./backups:/backups
       - ./scripts/docker/db:/scripts
 
-  elastic:
-    image: elasticsearch:7.5.1
-    restart: always
-    environment:
-      # Single-node cluster:
-      # https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html#single-node-discovery
-      discovery.type: single-node
-      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
-      # Enable security features:
-      # https://www.elastic.co/guide/en/elasticsearch/reference/current/security-settings.html#general-security-settings
-      xpack.security.enabled: "true"
-    volumes:
-      - elastic-data:/usr/share/elasticsearch/data
-
   kinto:
     image: kinto/kinto-server:13.6.2
     restart: always
@@ -70,8 +56,6 @@ services:
         API_URI: ${API_URI}
         DATA_FILLER_PATH: ${DATA_FILLER_PATH}
         DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
-        ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
-        ELASTIC_URI: http://elastic:9200
         NODE_ENV: ${NODE_ENV}
         KINTO_BUCKET: ${KINTO_BUCKET}
         KINTO_URI: ${KINTO_URI}
@@ -86,5 +70,4 @@ services:
       - kinto
 
 volumes:
-  elastic-data:
   postgre-data:
