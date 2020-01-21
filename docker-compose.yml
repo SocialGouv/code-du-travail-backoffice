@@ -55,6 +55,11 @@ services:
       - ${API_PORT}:${API_PORT}
     depends_on:
       - postgrest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.entrypoints=web,websecure"
+      - "traefik.http.routers.api.rule=Host(`${API_DOMAIN}`)"
+      - "traefik.http.routers.api.tls.certresolver=httpchallenge"
 
   web:
     restart: always
@@ -77,6 +82,39 @@ services:
     depends_on:
       - api
       - kinto
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.web.entrypoints=web,websecure"
+      - "traefik.http.routers.web.rule=Host(`${WEB_DOMAIN}`)"
+      - "traefik.http.routers.web.tls.certresolver=httpchallenge"
+
+  reverse-proxy:
+    image: traefik:v2.0
+    # Enable the web UI and tell Traefik to listen to Docker:
+    ports:
+      # The HTTP ports:
+      - "80:80"
+      - "443:443"
+      # Web UI (enabled by --api.insecure=true):
+      - "8080:8080"
+    command:
+      - "--api.insecure=true"
+      # Uncomment to test with a staging letsencrypt environment:
+      # - "--certificatesresolvers.httpchallenge.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.httpchallenge.acme.email=LD-DSI-MITECH@sg.social.gouv.fr"
+      - "--certificatesresolvers.httpchallenge.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.httpchallenge.acme.httpchallenge=true"
+      - "--certificatesresolvers.httpchallenge.acme.storage=/letsencrypt/acme.json"
+      - "--entryPoints.web.address=:80"
+      - "--entryPoints.websecure.address=:443"
+      # Uncomment for debug mode:
+      # - "--log.level=DEBUG"
+      - "--providers.docker"
+      - "--providers.docker.exposedbydefault=false"
+    volumes:
+      - "./letsencrypt:/letsencrypt"
+      # Allow Traefik to listen to Docker events:
+      - /var/run/docker.sock:/var/run/docker.sock
 
   master:
     # Keep the container up:
