@@ -28,9 +28,6 @@ yarn --frozen-lockfile --no-cache
 echo "⏳ Starting db container…"
 docker-compose up -d db
 
-# echo "⏳ Starting elastic container…"
-# docker-compose up -d elastic
-
 # Buiding the web container before migrating is a strategy to let the db
 # container be up and ready before running the migrations.
 # Note: merely checking if the database port is used is not enough.

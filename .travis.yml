@@ -7,7 +7,6 @@ env:
     - API_URI=http://localhost:3200
     - DATA_FILLER_PATH=/admin/data-filler
     - DB_PUBLIC_URI=postgresql://test_db_user:test_db_password@localhost:5432/test_db
-    - ELASTIC_PASSWORD=test_elastic_password
     - KINTO_BUCKET=datasets
     - KINTO_URI=http://127.0.0.1:8889
     - KINTO_PORT=8889
