@@ -24,12 +24,9 @@ numérique][link-cdtn].
 git clone https://github.com/SocialGouv/code-du-travail-backoffice.git
 cd code-du-travail-backoffice
 yarn
-# Generates the .env file with pre-filled development values:
+# Build, migrate and seed the database (PostgreSQL), as well as the apis (PostgREST & Kinto):
 yarn setup
-docker-compose up -d db
-yarn db:migrate
-yarn db:snapshot:restore
-docker-compose up -d api kinto
+# Start the containers and run packages code in dev mode (with watch & hot reload):
 yarn dev
 ```
 
@@ -73,10 +70,9 @@ Le site devrait être accessible à l'adresse http://localhost:3100.
 
 ### Démarrer le site localement
 
-Un fois installé, vous pouvez simplement faire tourner le site avec ces deux commandes :
+Un fois installé, vous pouvez simplement faire tourner le site en exécutant cette commande :
 
 ```bash
-docker-compose up -d api kinto
 yarn dev
 ```
 

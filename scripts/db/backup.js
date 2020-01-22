@@ -1,9 +1,7 @@
 require("colors");
-const dotenv = require("dotenv");
 const moment = require("moment");
 const shell = require("shelljs");
 
-dotenv.config({ path: `${__dirname}/../../.env` });
 const { POSTGRES_DB, POSTGRES_KINTO_DB, POSTGRES_USER } = process.env;
 
 const NOW = process.argv[2] === "--dev" ? "snapshot" : moment().format("YYYYMMDDHHmmss");
@@ -24,19 +22,27 @@ if (!shell.which("docker-compose")) {
   shell.exit(1);
 }
 
+function run(command) {
+  shell.echo(`Running: \`${command}\`…`.blue);
+  const output = shell.exec(command);
+  if (output.code !== 0) shell.exit(1);
+
+  return output;
+}
+
 try {
-  shell.exec(
+  run(
     `docker-compose exec -T ${DB_SERVICE_NAME} pg_dump -cC -Fc --if-exists -f /${MAIN_DB_FILENAME} -U ${POSTGRES_USER} ${POSTGRES_DB}`
   );
-  shell.exec(
+  run(
     `docker-compose exec -T ${DB_SERVICE_NAME} pg_dump -cC -Fc --if-exists -f /${KINTO_DB_FILENAME} -U ${POSTGRES_USER} ${POSTGRES_KINTO_DB}`
   );
-  const output = shell.exec(`docker-compose ps -q ${DB_SERVICE_NAME}`);
+  const output = run(`docker-compose ps -q ${DB_SERVICE_NAME}`);
   const dockerDbContainerId = output.stdout.trim();
-  shell.exec(`docker cp ${dockerDbContainerId}:/${MAIN_DB_FILENAME} ${BACKUPS_DIRECTORY}`);
-  shell.exec(`docker cp ${dockerDbContainerId}:/${KINTO_DB_FILENAME} ${BACKUPS_DIRECTORY}`);
-  shell.exec(`docker-compose exec -T ${DB_SERVICE_NAME} rm /${MAIN_DB_FILENAME}`);
-  shell.exec(`docker-compose exec -T ${DB_SERVICE_NAME} rm /${KINTO_DB_FILENAME}`);
+  run(`docker cp ${dockerDbContainerId}:/${MAIN_DB_FILENAME} ${BACKUPS_DIRECTORY}`);
+  run(`docker cp ${dockerDbContainerId}:/${KINTO_DB_FILENAME} ${BACKUPS_DIRECTORY}`);
+  run(`docker-compose exec -T ${DB_SERVICE_NAME} rm /${MAIN_DB_FILENAME}`);
+  run(`docker-compose exec -T ${DB_SERVICE_NAME} rm /${KINTO_DB_FILENAME}`);
 } catch (err) {
   shell.echo(`[script/db/backup] Error: ${err.message}`.red);
 
