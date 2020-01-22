@@ -59,6 +59,12 @@ jobs:
       script:
         - yarn ci:test:e2e
 
+# Limit branches builds to "master" & "develop" ones:
+branches:
+  only:
+    - develop
+    - master
+
 notifications:
   email:
     on_failure: change
