@@ -10,9 +10,8 @@ set -e
 # Read .env file
 export $(egrep -v '^#' .env | xargs)
 
-# Remove docker-compose warnings (because this environment variable is ised by
-# the test container):
-export CONFIG_ONLY=false
+echo "⏳ Installing dependencies…"
+yarn --frozen-lockfile --no-cache
 
 if [ "$NODE_ENV" = "production" ]; then
   echo "⏳ Dumping current databases…"
@@ -21,9 +20,6 @@ fi
 
 echo "⏳ Stopping all existing DC containers…"
 docker-compose stop
-
-echo "⏳ Installing dependencies…"
-yarn --frozen-lockfile --no-cache
 
 echo "⏳ Starting db container…"
 docker-compose up -d db
