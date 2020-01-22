@@ -21,8 +21,9 @@ fi
 echo "⏳ Stopping all existing DC containers…"
 docker-compose stop
 
+# We take the opportunity of the first "docker-compose" up to remove potential left orphans:
 echo "⏳ Starting db container…"
-docker-compose up -d db
+docker-compose up -d --remove-orphans db
 
 # Buiding the web container before migrating is a strategy to let the db
 # container be up and ready before running the migrations.
