@@ -20,10 +20,6 @@ const Container = styled(Main)`
   padding: 1rem;
 `;
 
-const aIconUri = [
-  "https://codedutravail-dev.num.social.gouv.fr",
-  "/static/assets/icons/external-link.svg"
-].join("");
 const AnswerEditor = styled(Medixtor)`
   border: solid 1px var(--color-border) !important;
   border-radius: 0.25rem;
@@ -58,7 +54,7 @@ const AnswerEditor = styled(Medixtor)`
         width: 15px;
         height: 15px;
         margin-left: 5px;
-        background: url(${aIconUri}) 100% 50% / 15px no-repeat;
+        background: url("/static/assets/icons/external-link.svg") 100% 50% / 15px no-repeat;
       }
 
       :hover {

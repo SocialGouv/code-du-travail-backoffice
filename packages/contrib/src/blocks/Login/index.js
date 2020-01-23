@@ -4,10 +4,9 @@ import { Flex, Text } from "rebass";
 
 import Form from "./Form";
 import Main from "../../layouts/Main";
+import Welcome from "../../svgs/Welcome";
 
 import { HelpText, Left, Right, Subtitle, Title } from "./styles";
-
-import Welcome from "./welcome.svg";
 
 export default ({ onLoggedIn }) => (
   <Main isHorizontal>

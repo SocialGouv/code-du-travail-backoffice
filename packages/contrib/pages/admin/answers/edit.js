@@ -54,10 +54,6 @@ const StateSelect = styled(_Select)`
   margin-right: 1rem;
 `;
 
-const aIconUri = [
-  "https://codedutravail-dev.num.social.gouv.fr",
-  "/static/assets/icons/external-link.svg"
-].join("");
 const Editor = styled(Medixtor)`
   border: solid 1px var(--color-border) !important;
   flex-grow: unset;
@@ -85,7 +81,7 @@ const Editor = styled(Medixtor)`
         width: 15px;
         height: 15px;
         margin-left: 5px;
-        background: url(${aIconUri}) 100% 50% / 15px no-repeat;
+        background: url("/static/assets/icons/external-link.svg") 100% 50% / 15px no-repeat;
       }
 
       :hover {
