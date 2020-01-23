@@ -1,4 +1,16 @@
+import styled from "@emotion/styled";
 import css from "styled-jsx/css";
+import { Flex } from "rebass";
+
+export const Brand = styled(Flex)`
+  cursor: pointer;
+  height: 3rem;
+
+  > svg {
+    height: 3rem;
+    width: auto;
+  }
+`;
 
 export default css`
   .Container {
@@ -15,11 +27,9 @@ export default css`
     z-index: 1;
   }
 
-  .Brand {
-    align-items: center;
-    cursor: pointer;
-    display: flex;
+  .BrandLogo {
     height: 3rem;
+    width: auto;
   }
 
   .BrandText {

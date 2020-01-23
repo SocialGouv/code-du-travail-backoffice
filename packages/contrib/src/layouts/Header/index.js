@@ -1,11 +1,11 @@
 import Router from "next/router";
 import React from "react";
 
+import Marianne from "../../svgs/Marianne";
 import Menu from "../Menu";
 import cache from "../../cache";
 
-import styles from "./styles";
-import Marianne from "./marianne.svg";
+import styles, { Brand } from "./styles";
 
 export default class Header extends React.PureComponent {
   goToHome() {
@@ -20,26 +20,20 @@ export default class Header extends React.PureComponent {
     return (
       <div className="Container">
         <style jsx>{styles}</style>
-        <div
+        <Brand
+          alignItems="center"
           aria-label="Bouton de retour au tableau de bord"
-          className="Brand"
           onClick={() => this.goToHome()}
           onKeyUp={() => this.goToHome()}
           role="button"
           tabIndex="0"
         >
-          <Marianne
-            alt="Code du travail numérique"
-            style={{
-              height: "3rem",
-              width: "auto"
-            }}
-          />
+          <Marianne className="BrandLogo" />
           <div className="BrandText">
             <span className="BrandTextTitle">Code du travail numérique</span>
             <span className="BrandTextSubtitle">Outil de contribution</span>
           </div>
-        </div>
+        </Brand>
         {me.isAuthenticated && (
           <div className="User">
             <Menu />
