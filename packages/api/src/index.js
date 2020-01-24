@@ -3,13 +3,13 @@ const httpProxy = require("http-proxy");
 const logActions = require("./middlewares/logActions");
 
 const NODE_ENV = process.env.NODE_ENV !== undefined ? process.env.NODE_ENV : "development";
-const { API_DOMAIN, API_PORT, API_SCHEME, DEV_POSTGREST_PORT } = process.env;
+const { API_DOMAIN, API_PORT, API_PORT_PUBLIC, API_SCHEME, DEV_POSTGREST_PORT } = process.env;
 let { POSTGREST_URI } = process.env;
 if (NODE_ENV === "development") {
   POSTGREST_URI = `http://localhost:${DEV_POSTGREST_PORT}`;
 }
 
-const API_URI = `${API_SCHEME}://${API_DOMAIN}:${API_PORT}`;
+const API_URI = `${API_SCHEME}://${API_DOMAIN}:${API_PORT_PUBLIC}`;
 
 httpProxy
   .createProxyServer({ target: POSTGREST_URI })
