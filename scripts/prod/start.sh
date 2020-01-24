@@ -22,20 +22,23 @@ else
   echo "WEB_URI=${WEB_URI}"
 fi
 
-echo "⏳ Installing dependencies…"
-yarn --frozen-lockfile --no-cache
-
 if [ "$NODE_ENV" = "production" ] && [ "$CI" != "true" ]; then
   echo "⏳ Dumping current databases…"
   yarn db:backup
 fi
 
-echo "⏳ Stopping all existing DC containers…"
-docker-compose stop
+echo "⏳ Stopping all existing containers…"
+docker-compose down
+
+echo "⏳ Installing dependencies…"
+yarn --pure-lockfile
 
 # We take the opportunity of the first "docker-compose" up to remove potential left orphans:
 echo "⏳ Starting db container…"
 docker-compose up -d --remove-orphans db
+
+echo "⏳ Building master container…"
+docker-compose build --force-rm --no-cache master
 
 echo "⏳ Starting master container…"
 docker-compose up -d master
@@ -47,7 +50,7 @@ echo "⏳ Stopping master container…"
 docker-compose stop master
 
 echo "⏳ Building web container…"
-docker-compose build --no-cache web
+docker-compose build web
 
 # Seed databases for non-production environments:
 if [ "$CI" = "true" ] || [ "$NODE_ENV" != "production" ]; then
@@ -68,3 +71,9 @@ docker-compose up -d web
 # bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' ${API_URI})" != "200" ]]; do sleep 5; done'
 
 echo "🚀 The server is up and running!"
+
+if [ "$NODE_ENV" = "production" ] && [ "$CI" != "true" ]; then
+  echo "🗑 Cleaning unused containers, networks, images and build cache…"
+  docker system prune -af
+  yarn cache clean
+fi
