@@ -1,7 +1,5 @@
 /* eslint-disable max-len */
 
-process.env.API_URI = "http://localhost:3200";
-
 // Jest "dom" extension
 // https://github.com/gnapse/jest-dom#usage
 import "@testing-library/jest-dom/extend-expect";

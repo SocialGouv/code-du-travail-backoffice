@@ -1,0 +1,13 @@
+extends:
+  - "@socialgouv/eslint-config-recommended"
+
+rules:
+  no-console: ["error", { allow: ["info", "error", "warn"] }]
+
+overrides:
+  - files:
+      - "jest.setup.js"
+      - "*.test.js"
+
+    env:
+      jest: true

@@ -1,12 +1,14 @@
 import { applyMiddleware, createStore, combineReducers } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
 
 import * as reducers from "./reducers";
 import rootSaga from "./sagas";
 
+const { NODE_ENV } = process.env;
+
 const bindMiddleware = middleware => {
-  if (!["production", "test"].includes(process.env.NODE_ENV)) {
-    const { composeWithDevTools } = require("redux-devtools-extension");
+  if (NODE_ENV !== "production") {
     return composeWithDevTools(applyMiddleware(...middleware));
   }
 

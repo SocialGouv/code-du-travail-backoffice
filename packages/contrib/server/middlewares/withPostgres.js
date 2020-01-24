@@ -1,32 +1,27 @@
-const { Client } = require("pg");
+const { Client: PostgresClient } = require("pg");
 
 const reportError = require("../libs/reportError");
 
-// If we are in a non-production environment, we want to load the env vars via
-// the monorepo global .env file.
-let DB_URI;
-if (!["production", "test"].includes(process.env.NODE_ENV)) {
-  require("dotenv").config({ path: `${__dirname}/../../../../.env` });
-
-  DB_URI = process.env.DB_PUBLIC_URI;
-} else {
-  DB_URI = process.env.DB_URI;
+const { DEV_DB_PORT, NODE_ENV, POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_USER } = process.env;
+let { DB_URI } = process.env;
+if (NODE_ENV !== "production") {
+  DB_URI = `postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${DEV_DB_PORT}/${POSTGRES_DB}`;
 }
 
-let client;
-let isConnected = false;
+let postgresClient;
+let postgresClientIsConnected = false;
 
 module.exports = async (ctx, next) => {
   try {
-    if (!isConnected) {
-      client = new Client({ connectionString: DB_URI });
-      await client.connect();
+    if (!postgresClientIsConnected) {
+      postgresClient = new PostgresClient({ connectionString: DB_URI });
+      await postgresClient.connect();
 
       // eslint-disable-next-line require-atomic-updates
-      isConnected = true;
+      postgresClientIsConnected = true;
     }
 
-    ctx.pg = client;
+    ctx.pg = postgresClient;
   } catch (err) {
     await reportError(ctx, "middlewares/withPostgres()", err);
   }

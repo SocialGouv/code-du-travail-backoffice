@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  db:
+    ports:
+      - ${DEV_DB_PORT}:5432
+
+  kinto:
+    ports:
+      - ${DEV_KINTO_PORT}:8888
+
+  postgrest:
+    ports:
+      - ${DEV_POSTGREST_PORT}:3000
+
+volumes:
+  postgre-data:

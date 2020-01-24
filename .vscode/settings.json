@@ -7,6 +7,10 @@
   "editor.rulers": [100],
   "eslint.workingDirectories": [
     {
+      "directory": "./packages/api",
+      "changeProcessCWD": true
+    },
+    {
       "directory": "./packages/contrib",
       "changeProcessCWD": true
     },

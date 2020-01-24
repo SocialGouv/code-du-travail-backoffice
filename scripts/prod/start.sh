@@ -10,10 +10,22 @@ set -e
 # Read .env file
 export $(egrep -v '^#' .env | xargs)
 
+API_URI="${API_SCHEME}://${API_DOMAIN}:${API_PORT}"
+WEB_URI="${WEB_SCHEME}://${WEB_DOMAIN}:${WEB_PORT}"
+
+echo "⏳ Checking variables…"
+if [ -z $API_URI ] || [ -z $WEB_URI ]; then
+  exit 1
+else
+  echo "API_URI=${API_URI}"
+  echo "WEB_URI=${WEB_URI}"
+fi
+
+
 echo "⏳ Installing dependencies…"
 yarn --frozen-lockfile --no-cache
 
-if [ "$NODE_ENV" = "production" ]; then
+if [ $CI != "true" ] && [ $NODE_ENV = "production" ]; then
   echo "⏳ Dumping current databases…"
   yarn db:backup
 fi
@@ -25,22 +37,25 @@ docker-compose stop
 echo "⏳ Starting db container…"
 docker-compose up -d --remove-orphans db
 
-# Buiding the web container before migrating is a strategy to let the db
-# container be up and ready before running the migrations.
-# Note: merely checking if the database port is used is not enough.
-echo "⏳ Building web container…"
-if [ "$NODE_ENV" = "test" ]; then
-  NODE_ENV=production docker-compose build --no-cache web
-else
-  docker-compose build --no-cache web
-fi
+echo "⏳ Starting master container…"
+docker-compose up -d master
 
 echo "⏳ Running database migrations…"
-yarn db:migrate
+docker-compose exec -T master npx knex migrate:latest
+
+echo "⏳ Stopping master container…"
+docker-compose stop master
+
+echo "⏳ Building web container…"
+docker-compose build --no-cache web
 
 # Seed databases for non-production environments:
-if [ "$NODE_ENV" != "production" ]; then
-  echo "⏳ Restoring databases snapshot for non-production environment…"
+if [ $CI = "true" ] || [ $NODE_ENV != "production" ]; then
+  if [ $CI = "true" ]; then
+    echo "⏳ Restoring databases snapshot for CI environment…"
+  else
+    echo "⏳ Restoring databases snapshot for development environment…"
+  fi
   yarn db:snapshot:restore
 fi
 
@@ -49,7 +64,7 @@ docker-compose up -d kinto
 
 echo "⏳ Starting web (and api) container…"
 docker-compose up -d web
-bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' ${TEST_WEB_URI})" != "200" ]]; do sleep 5; done'
-bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' ${API_URI})" != "200" ]]; do sleep 5; done'
+# bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' ${WEB_URI})" != "200" ]]; do sleep 5; done'
+# bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' ${API_URI})" != "200" ]]; do sleep 5; done'
 
 echo "🚀 The server is up and running!"
