@@ -1,14 +1,18 @@
-let DB_URI;
-if (!["production", "test"].includes(process.env.NODE_ENV)) {
-  require("dotenv").config({ path: `${__dirname}/.env` });
-}
+let { DB_URI } = process.env;
 
-const { DB_PUBLIC_URI } = process.env;
+if (DB_URI === undefined) {
+  const dotenv = require("dotenv");
+
+  dotenv.config();
+  const { DEV_DB_PORT, POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_USER } = process.env;
+
+  DB_URI = `postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${DEV_DB_PORT}/${POSTGRES_DB}`;
+}
 
 module.exports = {
   development: {
     client: "postgresql",
-    connection: DB_PUBLIC_URI,
+    connection: DB_URI,
     migrations: {
       directory: `${__dirname}/db/migrations/knex`,
       tableName: "migrations"
@@ -20,25 +24,13 @@ module.exports = {
 
   production: {
     client: "postgresql",
-    connection: DB_PUBLIC_URI,
+    connection: DB_URI,
     migrations: {
       directory: `${__dirname}/db/migrations/knex`,
       tableName: "migrations"
     },
     seeds: {
       directory: `${__dirname}/db/seeds/prod`
-    }
-  },
-
-  test: {
-    client: "postgresql",
-    connection: DB_PUBLIC_URI,
-    migrations: {
-      directory: `${__dirname}/db/migrations/knex`,
-      tableName: "migrations"
-    },
-    seeds: {
-      directory: `${__dirname}/db/seeds/dev`
     }
   }
 };

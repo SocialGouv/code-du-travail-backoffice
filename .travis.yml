@@ -2,33 +2,11 @@ language: node_js
 node_js:
   - "12.14.1"
 
-env:
-  global:
-    - API_URI=http://localhost:3200
-    - DATA_FILLER_PATH=/admin/data-filler
-    - DB_PUBLIC_URI=postgresql://test_db_user:test_db_password@localhost:5432/test_db
-    - KINTO_BUCKET=datasets
-    - KINTO_URI=http://127.0.0.1:8889
-    - KINTO_PORT=8889
-    - NODE_ENV=test
-    - PGRST_DB_ANON_ROLE=anonymous
-    - PGRST_DB_SCHEMA=api
-    # It must be at least 32 characters long:
-    # https://github.com/PostgREST/postgrest/issues/977#issuecomment-329917367
-    - PGRST_JWT_SECRET=a_test_only_postgrest_jwt_secret
-    - PGRST_PORT=3200
-    - POSTGRES_DB=test_db
-    - POSTGRES_KINTO_DB=test_kinto_db
-    - POSTGRES_PASSWORD=test_db_password
-    - POSTGRES_PORT=5432
-    - POSTGRES_USER=test_db_user
-    - TEST_WEB_URI=http://localhost:3100
-    - WEB_PORT=3100
-
 cache:
   yarn: true
   directories:
     - nodes_modules
+    - packages/api/nodes_modules
     - packages/contrib/nodes_modules
     - packages/data-filler/nodes_modules
 
@@ -49,15 +27,21 @@ jobs:
 
     - stage: Test
       name: E2E Tests
+      env:
+        - NODE_ENV=production
       services:
         - docker
-      before_install:
+      before_script:
+        # Copy default environment variables:
+        - cp ./.env.example ./.env
         # Stop Travis out-of-the-box PostgreSQL services:
         - sudo service postgresql stop
         # Give execution rights to production script (used by "ci:test:e2e"):
         - sudo chmod +x ./scripts/prod/start.sh
+        # Run production script:
+        - ./scripts/prod/start.sh
       script:
-        - yarn ci:test:e2e
+        - yarn test:e2e
 
 # Limit branches builds to "master" & "develop" ones:
 branches:

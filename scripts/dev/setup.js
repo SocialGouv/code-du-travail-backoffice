@@ -1,10 +1,9 @@
 require("colors");
-const cpy = require("cpy");
+const fs = require("fs");
 const knex = require("knex");
-const path = require("path");
 const shell = require("shelljs");
 
-const { DB_PUBLIC_URI, NODE_ENV, POSTGRES_DB, POSTGRES_KINTO_DB, POSTGRES_USER } = process.env;
+const { DEV_DB_PORT, NODE_ENV, POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_USER } = process.env;
 
 if (NODE_ENV === "production") {
   shell.echo(
@@ -24,9 +23,11 @@ if (!shell.which("docker-compose")) {
   shell.exit(1);
 }
 
+const DB_URI = `postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${DEV_DB_PORT}/${POSTGRES_DB}`;
+
 const knexClient = knex({
   client: "pg",
-  connection: DB_PUBLIC_URI
+  connection: DB_URI
 });
 
 function run(command) {
@@ -37,7 +38,7 @@ function run(command) {
 
 async function waitForDb() {
   try {
-    await knexClient.raw("select 1+1 as result");
+    await knexClient.raw("SELECT 1 + 1 AS result;");
   } catch {
     await waitForDb();
   }
@@ -45,14 +46,14 @@ async function waitForDb() {
 
 (async () => {
   try {
-    await cpy(".env.example", ".", { rename: ".env" });
+    fs.appendFileSync(".env", "\nNODE_ENV=development\n");
     run(`docker-compose down --remove-orphans -v`);
-    run(`docker-compose up -d db`);
+    run(`docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d db`);
     shell.echo(`Waiting for db to be up and ready…`.blue);
     await waitForDb();
     run(`yarn db:migrate`);
     run(`yarn db:snapshot:restore`);
-    run(`docker-compose up -d api kinto`);
+    run(`yarn dev:docker`);
     run(`docker-compose stop`);
     shell.exit(0);
   } catch (err) {

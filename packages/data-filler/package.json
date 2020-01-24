@@ -8,7 +8,7 @@
     "build": "next build",
     "build:docker": "node --max-old-space-size=2048 ./node_modules/.bin/next build",
     "dev": "cross-env DATA_FILLER_PATH=/ KINTO_BUCKET=datasets KINTO_URI=http://127.0.0.1:8888 NODE_ENV=development node server",
-    "start": "cross-env NODE_ENV=production node server",
+    "start": "node server",
     "test": "yarn test:lint",
     "test:lint": "eslint ."
   },

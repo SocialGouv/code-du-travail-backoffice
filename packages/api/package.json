@@ -1,0 +1,26 @@
+{
+  "name": "@socialgouv/cdtn-api",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "description": "Proxify and log PostgREST-based API.",
+  "main": "./src/index.js",
+  "scripts": {
+    "dev": "cross-env nodemon --exec \"node -r dotenv/config ./src dotenv_config_path=../../.env\"",
+    "start": "node ./src",
+    "test": "yarn test:lint",
+    "test:lint": "eslint ."
+  },
+  "dependencies": {
+    "http-proxy": "1.18.0",
+    "jsonwebtoken": "8.5.1",
+    "knex": "0.20.8",
+    "pg": "7.17.1"
+  },
+  "devDependencies": {
+    "cross-env": "6.0.3",
+    "dotenv": "8.2.0",
+    "eslint": "6.8.0",
+    "nodemon": "2.0.2",
+    "prettier": "1.19.1"
+  }
+}
