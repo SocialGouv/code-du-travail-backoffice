@@ -30,27 +30,9 @@ ENV WEB_SCHEME=$WEB_SCHEME
 
 WORKDIR /app
 
-# Package "contrib"
-COPY ./packages/contrib/pages ./packages/contrib/pages
-COPY ./packages/contrib/public ./packages/contrib/public
-COPY ./packages/contrib/server ./packages/contrib/server
-COPY ./packages/contrib/src ./packages/contrib/src
-COPY ./packages/contrib/.babelrc ./packages/contrib/.babelrc
-COPY ./packages/contrib/next.config.js ./packages/contrib/next.config.js
-COPY ./packages/contrib/package.json ./packages/contrib/package.json
+COPY . .
 
-# Package "data-filler"
-COPY ./packages/data-filler ./packages/data-filler
-COPY ./packages/data-filler/pages ./packages/data-filler/pages
-COPY ./packages/data-filler/src ./packages/data-filler/src
-COPY ./packages/data-filler/package.json ./packages/data-filler/package.json
-
-# Mono-repository
-COPY ./lerna.json ./lerna.json
-COPY ./package.json ./package.json
-COPY ./yarn.lock ./yarn.lock
-
-RUN yarn --frozen-lockfile
+RUN yarn --pure-lockfile
 # Otherwise, we have a fatal error:
 # "Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory"
 # https://stackoverflow.com/a/55547893/2736233

@@ -1,0 +1,10 @@
+__tests__/
+.next/
+coverage/
+node_modules/
+tests/
+
+.env
+
+/db/seeds
+/features
