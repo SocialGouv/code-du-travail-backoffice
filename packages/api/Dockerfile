@@ -14,9 +14,8 @@ ENV POSTGREST_URI=$POSTGREST_URI
 
 WORKDIR /app
 
-COPY ./src ./src
-COPY ./package.json ./package.json
+COPY . .
 
-RUN yarn
+RUN yarn --pure-lockfile
 
 ENTRYPOINT ["yarn", "start"]
