@@ -14,18 +14,18 @@ API_URI="${API_SCHEME}://${API_DOMAIN}:${API_PORT}"
 WEB_URI="${WEB_SCHEME}://${WEB_DOMAIN}:${WEB_PORT}"
 
 echo "⏳ Checking variables…"
-if [ -z $API_URI ] || [ -z $WEB_URI ]; then
+if [ -z "$API_URI" ] || [ -z "$WEB_URI" ]; then
+  echo "Error: \$API_URI and/or \$WEB_URI is/are empty."
   exit 1
 else
   echo "API_URI=${API_URI}"
   echo "WEB_URI=${WEB_URI}"
 fi
 
-
 echo "⏳ Installing dependencies…"
 yarn --frozen-lockfile --no-cache
 
-if [ $CI != "true" ] && [ $NODE_ENV = "production" ]; then
+if [ "$NODE_ENV" = "production" ] && [ "$CI" != "true" ]; then
   echo "⏳ Dumping current databases…"
   yarn db:backup
 fi
@@ -50,8 +50,8 @@ echo "⏳ Building web container…"
 docker-compose build --no-cache web
 
 # Seed databases for non-production environments:
-if [ $CI = "true" ] || [ $NODE_ENV != "production" ]; then
-  if [ $CI = "true" ]; then
+if [ "$CI" = "true" ] || [ "$NODE_ENV" != "production" ]; then
+  if [ "$CI" = "true" ]; then
     echo "⏳ Restoring databases snapshot for CI environment…"
   else
     echo "⏳ Restoring databases snapshot for development environment…"
