@@ -1,4 +1,3 @@
-import Head from "next/head";
 import React from "react";
 
 import Header from "../Header";
@@ -19,17 +18,6 @@ export default ({ isHorizontal = false, isLoading = false, ...props }) => (
       {globalStyles}
     </style>
     <style jsx>{styles}</style>
-    <Head>
-      <title>Outil de contribution au Code du travail numérique</title>
-      <link href="/static/icons/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
-      <link href="/static/icons/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />
-      <link href="/static/icons/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
-      <link rel="manifest" href="/static/site.webmanifest" />
-      <link
-        href="https://incubateur.social.gouv.fr/bootstrap/master/@socialgouv/bootstrap.core/dist/socialgouv-bootstrap.min.css"
-        rel="stylesheet"
-      />
-    </Head>
     <Modal />
     <Header />
     {isLoading ? (
