@@ -5,18 +5,14 @@ const isInternetExplorer = require("./middlewares/isInternetExplorer");
 const withAuthentication = require("./middlewares/withAuthentication");
 const withPostgres = require("./middlewares/withPostgres");
 
-// If we are in a non-production environment, we want to load the env vars via
-// the monorepo global .env file.
-if (!["production", "test"].includes(process.env.NODE_ENV)) {
-  require("dotenv").config({ path: `${__dirname}/../../../.env` });
-}
-
 const routes = require("./routes");
 
-const { NODE_ENV, WEB_PORT } = process.env;
-const environment = NODE_ENV !== undefined ? NODE_ENV : "development";
+const NODE_ENV = process.env.NODE_ENV !== undefined ? process.env.NODE_ENV : "development";
+const { WEB_DOMAIN, WEB_PORT, WEB_SCHEME } = process.env;
 
-const nextApp = next({ dev: environment !== "production" });
+const WEB_URI = `${WEB_SCHEME}://${WEB_DOMAIN}:${WEB_PORT}`;
+
+const nextApp = next({ dev: NODE_ENV === "development" });
 
 async function start() {
   await nextApp.prepare();
@@ -26,7 +22,7 @@ async function start() {
   // Show a page advising the user to use Chrome if the current browser is IE:
   koaApp.use(isInternetExplorer);
 
-  // Attach Postgres connection (via `ctx.pg`):
+  // Attach PostgreSQL connection (via `ctx.pg`):
   koaApp.use(withPostgres);
 
   // Attach authentication data (via `ctx.me`):
@@ -38,7 +34,7 @@ async function start() {
   koaApp.listen(WEB_PORT, err => {
     if (err) throw err;
 
-    console.info(`> Ready on http://localhost:${WEB_PORT} (${environment})`);
+    console.info(`> Website ready on ${WEB_URI} (${NODE_ENV})`);
   });
 }
 

@@ -1,12 +1,12 @@
 const { setDefaultTimeout, setWorldConstructor } = require("cucumber");
 const { expect } = require("chai");
+const dotenv = require("dotenv");
 const puppeteer = require("puppeteer");
 
-if (process.env.TEST_WEB_URI === undefined) {
-  require("dotenv").config({ path: `${__dirname}/../../../.env` });
-}
+dotenv.config({ path: `${__dirname}/../../../.env` });
+const { CI, WEB_DOMAIN, WEB_PORT } = process.env;
 
-const { NODE_ENV, TEST_WEB_URI } = process.env;
+const WEB_URI = `http://${WEB_DOMAIN}:${WEB_PORT}`;
 
 // Increase default cucumber timeout from 5s to 30s:
 setDefaultTimeout(30000);
@@ -16,8 +16,8 @@ class World {
     this.browser = await puppeteer.launch({
       args: ["--disable-setuid-sandbox", "--no-sandbox", `--window-size=1600,1024`],
       defaultViewport: { width: 1280, height: 768 },
-      devtools: NODE_ENV !== "test",
-      headless: NODE_ENV === "test"
+      devtools: CI !== "true",
+      headless: CI === "true"
     });
     this.page = (await this.browser.pages())[0];
     this.extendPage();
@@ -55,7 +55,7 @@ class World {
   }
 
   async goToHome() {
-    await this.page.goto(TEST_WEB_URI);
+    await this.page.goto(WEB_URI);
   }
 
   async login() {

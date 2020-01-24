@@ -1,26 +1,8 @@
 ########################################
-# Custom
-
-/.vscode/settings.json
-/builds
-
-/.env
-
-# Docker shared volume
-/backups
-
-# Manual data imports
-/*.csv
-/*.sql
-
-# Prevent any script to be pushed whithin the production database seeds:
-/db/seeds/prod/**/*.js
-
-########################################
 # Node
 
 # Logs
-logs
+# logs
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -153,3 +135,23 @@ Temporary Items
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
 .history
+
+########################################
+# Custom
+
+/.vscode/settings.json
+/builds
+
+/.env
+
+# Docker shared volume
+/backups/*
+!/backups/.gitkeep
+
+# Manual data imports
+/*.csv
+/*.sql
+
+# Prevent any script to be pushed whithin the production database seeds:
+/db/seeds/prod/*
+!/db/seeds/prod/.gitkeep

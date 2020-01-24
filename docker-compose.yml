@@ -4,8 +4,6 @@ services:
   db:
     image: igabriele/postgresql-jwt
     restart: always
-    ports:
-      - ${POSTGRES_PORT}:5432
     environment:
       # The JWT secret is used whithin the api.login() function:
       PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
@@ -18,11 +16,10 @@ services:
       - ./backups:/backups
       - ./scripts/docker/db:/scripts
 
+  # TODO Secure Kinto in prod.
   kinto:
     image: kinto/kinto-server:13.6.2
     restart: always
-    ports:
-      - ${KINTO_PORT}:8888
     environment:
       KINTO_STORAGE_BACKEND: kinto.core.storage.postgresql
       KINTO_STORAGE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_KINTO_DB}
@@ -34,11 +31,9 @@ services:
       - db
 
   # https://postgrest.org/en/stable/install.html#containerized-postgrest-and-db-with-docker-compose
-  api:
+  postgrest:
     image: postgrest/postgrest:v6.0.2
     restart: always
-    ports:
-      - ${PGRST_PORT}:3000
     environment:
       PGRST_DB_ANON_ROLE: ${PGRST_DB_ANON_ROLE}
       PGRST_DB_SCHEMA: ${PGRST_DB_SCHEMA}
@@ -47,27 +42,60 @@ services:
     depends_on:
       - db
 
+  api:
+    restart: always
+    build:
+      context: ./packages/api
+      args:
+        API_DOMAIN: ${API_DOMAIN}
+        API_PORT: ${API_PORT}
+        API_SCHEME: ${API_SCHEME}
+        DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+        NODE_ENV: ${NODE_ENV}
+        POSTGREST_URI: http://postgrest:3000
+    ports:
+      - ${API_PORT}:${API_PORT}
+    depends_on:
+      - postgrest
+
   web:
     restart: always
     build:
       context: .
+      dockerfile: image.web.Dockerfile
       args:
-        API_DOCKER_URI: http://api:3000
-        API_URI: ${API_URI}
+        API_DOMAIN: ${API_DOMAIN}
+        API_PORT: ${API_PORT}
+        API_SCHEME: ${API_SCHEME}
+        API_URI_DOCKER: http://api:${API_PORT}
         DATA_FILLER_PATH: ${DATA_FILLER_PATH}
         DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
         NODE_ENV: ${NODE_ENV}
         KINTO_BUCKET: ${KINTO_BUCKET}
-        KINTO_URI: ${KINTO_URI}
-        KINTO_URI_SERVER: http://kinto:8888
-        # SENTRY_DSN: ${SENTRY_DSN}
-        # SENTRY_PUBLIC_DSN: ${SENTRY_PUBLIC_DSN}
+        KINTO_URI: http://kinto:8888
+        WEB_DOMAIN: ${WEB_DOMAIN}
         WEB_PORT: ${WEB_PORT}
+        WEB_SCHEME: ${WEB_SCHEME}
     ports:
       - ${WEB_PORT}:${WEB_PORT}
     depends_on:
       - api
       - kinto
+
+  master:
+    # Keep the container up:
+    # https://stackoverflow.com/a/55953120/2736233
+    tty: true
+    build:
+      context: .
+      dockerfile: image.master.Dockerfile
+    environment:
+      DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      NODE_ENV: ${NODE_ENV}
+      PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
+      POSTGRES_DB: ${POSTGRES_DB}
+    depends_on:
+      - db
 
 volumes:
   postgre-data:

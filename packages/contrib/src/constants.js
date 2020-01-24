@@ -36,6 +36,12 @@ export const AREA_CATEGORY_LABEL = {
   sui_generis_collectivity: "Collectivité Sui Generis"
 };
 
+export const LOG_ACTION_LABEL = {
+  delete: "SUPPRESSION",
+  patch: "MODIFICATION",
+  post: "INSERTION"
+};
+
 export const SESSION = {
   ANSWERS_FILTERS: "history.answers.filters",
   GENERIC_ANSWERS_FILTERS: "history.genericAnswers.filters"

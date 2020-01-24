@@ -31,10 +31,7 @@ function getRandomAnswerReference(answerId, category) {
     case ANSWER_REFERENCE_CATEGORY[2]:
       return {
         ...answerReference,
-        value:
-          LABOR_LAW_REFERENCES[
-            Math.floor(Math.random() * LABOR_LAW_REFERENCES_LENGTH)
-          ],
+        value: LABOR_LAW_REFERENCES[Math.floor(Math.random() * LABOR_LAW_REFERENCES_LENGTH)],
         url: null
       };
   }
@@ -94,12 +91,7 @@ exports.seed = async knex => {
 
     await knex("api.answers").insert([genericAnswer]);
 
-    const diceBalance = [
-      Math.random(),
-      Math.random(),
-      Math.random(),
-      Math.random()
-    ].sort();
+    const diceBalance = [Math.random(), Math.random(), Math.random(), Math.random()].sort();
 
     const answers = agreements.map(agreement => {
       if (!activeAgreementIds.includes(agreement.id)) {
@@ -131,7 +123,7 @@ exports.seed = async knex => {
             value: "",
             question_id: question.id,
             agreement_id: agreement.id,
-            user_id: "00000000-0000-4000-0000-000000000402"
+            user_id: "00000000-0000-4000-8000-000000000402"
           };
 
         case dice < diceBalance[2]:
@@ -141,7 +133,7 @@ exports.seed = async knex => {
             value: "",
             question_id: question.id,
             agreement_id: agreement.id,
-            user_id: "00000000-0000-4000-0000-000000000402"
+            user_id: "00000000-0000-4000-8000-000000000402"
           };
 
         case dice < diceBalance[3]:
@@ -151,7 +143,7 @@ exports.seed = async knex => {
             value: dumdum.text([260, 620]),
             question_id: question.id,
             agreement_id: agreement.id,
-            user_id: "00000000-0000-4000-0000-000000000402"
+            user_id: "00000000-0000-4000-8000-000000000402"
           };
 
         default:
@@ -161,7 +153,7 @@ exports.seed = async knex => {
             value: dumdum.text([260, 620]),
             question_id: question.id,
             agreement_id: agreement.id,
-            user_id: "00000000-0000-4000-0000-000000000402",
+            user_id: "00000000-0000-4000-8000-000000000402",
             is_published: Math.random() < 0.75
           };
       }

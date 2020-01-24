@@ -2,18 +2,12 @@ const { After, Before, Given, Then, When } = require("cucumber");
 
 const takeScreenshotOnFailure = require("../hooks/takeScreenshotOnFailure");
 
-if (process.env.NODE_ENV === undefined) {
-  require("dotenv").config({ path: `${__dirname}/../../../.env` });
-}
-
-const { NODE_ENV } = process.env;
-
 Before(async function() {
   return await this.start();
 });
 
 After(async function(testCase) {
-  if (NODE_ENV === "test") await takeScreenshotOnFailure(testCase, this);
+  await takeScreenshotOnFailure(testCase, this);
 
   return await this.stop();
 });

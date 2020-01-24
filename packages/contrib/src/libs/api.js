@@ -14,8 +14,8 @@ class ApiError extends Error {
 class Api {
   async _fetch(method, path, body, { headers = {}, skipAuth }) {
     const apiUri =
-      isNode() && ["production", "test"].includes(process.env.NODE_ENV)
-        ? process.env.API_DOCKER_URI
+      isNode() && process.env.NODE_ENV === "production"
+        ? process.env.API_URI_DOCKER
         : process.env.API_URI;
     const jwt = jsCookie.get("jwt");
     const headersOptions = skipAuth

@@ -2,7 +2,6 @@
 
 [![Travis CI Status][img-travis]][link-travis]
 [![Coveralls Code Coverage][img-coveralls]][link-coveralls]
-[![Codacy Code Quality][img-codacy]][link-codacy]
 
 Ce dépôt regroupe les applications d'administration des données du [code du travail
 numérique][link-cdtn].
@@ -13,10 +12,10 @@ numérique][link-cdtn].
 
 ### Pré-requis
 
-- Node v10+
-- Docker v18+
-- Docker Compose v1.17+
-- Yarn
+- Docker v19+
+- Docker Compose v1.24+
+- Node v12+
+- Yarn v1.21+
 
 ### Installation
 
@@ -30,24 +29,24 @@ yarn setup
 yarn dev
 ```
 
-> **Note**<br> Si vous ne pouvez exécuter `docker-compose` qu'avec `sudo`, vous devez remplacer tous
-> les `docker-compose` par `sudo docker-compose`.
+> 📓 Si vous ne pouvez exécuter `docker-compose` qu'avec `sudo`, vous devez remplacer tous les
+> `docker-compose` par `sudo docker-compose`.
 
 Le site devrait être accessible à l'adresse http://localhost:3100.
 
 3 utilisatrices ont été générées par défaut pendant l'installation :
 
-- Administrateur:
+- Administratrice:
   - Email: `doris@sea.com`
   - Mot de passe: `Azerty123`
-- Administrateur régional:
+- Administratrice régionale:
   - Email: `deb@sea.com`
   - Mot de passe: `Azerty123`
 - Contributeur:
   - Email: `nemo@sea.com`
   - Mot de passe: `Azerty123`
 
-** Recommended VS Code settings **
+**Recommended VS Code settings**
 
 ```json
 {
@@ -56,6 +55,10 @@ Le site devrait être accessible à l'adresse http://localhost:3100.
   "editor.formatOnSaveTimeout": 2000,
   "eslint.nodePath": "./packages/contrib/node_modules",
   "eslint.workingDirectories": [
+    {
+      "directory": "./packages/api",
+      "changeProcessCWD": true
+    },
     {
       "directory": "./packages/contrib",
       "changeProcessCWD": true
@@ -82,14 +85,13 @@ Le site devrait être accessible à l'adresse [http://localhost:3100](http://loc
 
 #### Test unitaires
 
-Pendant le développement, vous pouvez soit tester manuellement :
+Durant le développement, vous pouvez soit tester manuellement :
 
 ```bash
 yarn test:unit
 ```
 
-soit faire tourner les tests unitaires en continu (ajouter `--coverage` pour afficher l'état de
-couverture des tests) :
+soit faire tourner les tests unitaires en continu :
 
 ```bash
 yarn test:watch
@@ -105,22 +107,12 @@ yarn test:lint
 
 #### Tests de bout en bout
 
-Vous pouvez exécuter les tests de bout en bout du code en exécutant (votre site doit alors touner
-localement) :
+Vous pouvez exécuter les tests de bout en bout du code en exécutant (votre site doit d'abord être
+démarré localement) :
 
 ```bash
 yarn test:e2e
 ```
-
-Vous pouvez aussi simuler l'exécution des tests bout en bout tels qu'ils sont exécutés par la CI (en
-mode production et entièrement docker-isés):
-
-```bash
-yarn ci:test:e2e
-```
-
-> **Attention**<br> La deuxième méthode va effacer toutes les données de votre base de données
-> contenues dans votre volume Docker local (cf. `docker-compose.yml`).
 
 ### Problèmes connus
 
@@ -150,14 +142,11 @@ Le code source de ce dépôt est distribué sous la [licence Apache 2.0][link-li
 
 ---
 
-[img-codacy]:
-  https://img.shields.io/codacy/grade/4c5aebc238b94d3795371b49fa6041de.svg?style=flat-square
 [img-coveralls]:
   https://img.shields.io/coveralls/github/SocialGouv/code-du-travail-backoffice?style=flat-square
 [img-travis]:
   https://img.shields.io/travis/SocialGouv/code-du-travail-backoffice/dev.svg?style=flat-square
 [link-cdtn]: https://codedutravail.num.social.gouv.fr
-[link-codacy]: https://app.codacy.com/project/SocialGouv/code-du-travail-backoffice/dashboard
 [link-coveralls]: https://coveralls.io/github/SocialGouv/code-du-travail-backoffice
 [link-issue-1]:
   https://github.com/docker/docker-credential-helpers/issues/103#issuecomment-421822269

@@ -16,8 +16,6 @@ import AdminMain from "../../../src/layouts/AdminMain";
 import { ANSWER_STATE_OPTIONS } from "../../../src/constants";
 import T from "../../../src/texts";
 
-const { NODE_ENV } = process.env;
-
 const Container = styled(Flex)`
   flex-grow: 1;
   margin: 0 1rem 1rem;
@@ -109,7 +107,7 @@ export class AdminAnswersIndexPage extends React.Component {
   editAnswer(id) {
     const path = this.props.isGeneric ? "generic-answers" : "answers";
 
-    if (NODE_ENV !== "development") {
+    if (process.env.NODE_ENV !== "development") {
       window.open(`/admin/${path}/${id}`, "_blank");
 
       return;
