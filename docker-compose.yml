@@ -47,10 +47,7 @@ services:
     build:
       context: ./packages/api
       args:
-        API_DOMAIN: ${API_DOMAIN}
         API_PORT: ${API_PORT}
-        API_PORT_PUBLIC: ${API_PORT_PUBLIC}
-        API_SCHEME: ${API_SCHEME}
         DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
         NODE_ENV: ${NODE_ENV}
         POSTGREST_URI: http://postgrest:3000
@@ -65,18 +62,14 @@ services:
       context: .
       dockerfile: image.web.Dockerfile
       args:
-        API_DOMAIN: ${API_DOMAIN}
-        API_PORT_PUBLIC: ${API_PORT_PUBLIC}
-        API_SCHEME: ${API_SCHEME}
+        API_URI: ${API_SCHEME}://${API_DOMAIN}:${API_PORT_PUBLIC}
         API_URI_DOCKER: http://api:${API_PORT}
         DATA_FILLER_PATH: ${DATA_FILLER_PATH}
         DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
         NODE_ENV: ${NODE_ENV}
         KINTO_BUCKET: ${KINTO_BUCKET}
         KINTO_URI: http://kinto:8888
-        WEB_DOMAIN: ${WEB_DOMAIN}
-        WEB_PORT: ${WEB_PORT_PUBLIC}
-        WEB_SCHEME: ${WEB_SCHEME}
+        WEB_PORT: ${WEB_PORT}
     ports:
       - ${WEB_PORT}:${WEB_PORT}
     depends_on:
