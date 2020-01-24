@@ -49,6 +49,9 @@ docker-compose exec -T master npx knex migrate:latest
 echo "⏳ Stopping master container…"
 docker-compose stop master
 
+echo "⏳ Building api container…"
+docker-compose build api
+
 echo "⏳ Building web container…"
 docker-compose build web
 
@@ -65,11 +68,11 @@ fi
 echo "⏳ Starting kinto container…"
 docker-compose up -d kinto
 
-echo "⏳ Starting web (and api) container…"
+echo "⏳ Starting postgrest, api and web containers…"
 docker-compose up -d web
-# bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' ${WEB_URI})" != "200" ]]; do sleep 5; done'
-# bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' ${API_URI})" != "200" ]]; do sleep 5; done'
 
+while [[ "$(curl -s -o /dev/null -w %{http_code} ${WEB_URI})" != "200" ]]; do sleep 5; done
+while [[ "$(curl -s -o /dev/null -w %{http_code} ${API_URI})" != "200" ]]; do sleep 5; done
 echo "🚀 The server is up and running!"
 
 if [ "$NODE_ENV" = "production" ] && [ "$CI" != "true" ]; then
@@ -77,3 +80,5 @@ if [ "$NODE_ENV" = "production" ] && [ "$CI" != "true" ]; then
   docker system prune -af
   yarn cache clean
 fi
+
+echo "✔ Cache cleaned."
