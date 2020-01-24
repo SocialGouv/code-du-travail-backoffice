@@ -10,8 +10,8 @@ set -e
 # Read .env file
 export $(egrep -v '^#' .env | xargs)
 
-API_URI="${API_SCHEME}://${API_DOMAIN}:${API_PORT}"
-WEB_URI="${WEB_SCHEME}://${WEB_DOMAIN}:${WEB_PORT}"
+API_URI="${API_SCHEME}://${API_DOMAIN}:${API_PORT_PUBLIC}"
+WEB_URI="${WEB_SCHEME}://${WEB_DOMAIN}:${WEB_PORT_PUBLIC}"
 
 echo "⏳ Checking variables…"
 if [ -z "$API_URI" ] || [ -z "$WEB_URI" ]; then

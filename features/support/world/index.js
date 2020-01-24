@@ -4,9 +4,9 @@ const dotenv = require("dotenv");
 const puppeteer = require("puppeteer");
 
 dotenv.config({ path: `${__dirname}/../../../.env` });
-const { CI, WEB_DOMAIN, WEB_PORT } = process.env;
+const { CI, WEB_DOMAIN, WEB_PORT_PUBLIC, WEB_SCHEME } = process.env;
 
-const WEB_URI = `http://${WEB_DOMAIN}:${WEB_PORT}`;
+const WEB_URI = `${WEB_SCHEME}://${WEB_DOMAIN}:${WEB_PORT_PUBLIC}`;
 
 // Increase default cucumber timeout from 5s to 30s:
 setDefaultTimeout(30000);

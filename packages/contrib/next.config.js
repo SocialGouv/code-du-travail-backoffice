@@ -3,7 +3,7 @@ const withTranspileModules = require("next-transpile-modules");
 
 const {
   API_DOMAIN,
-  API_PORT,
+  API_PORT_PUBLIC,
   API_SCHEME,
   API_URI_DOCKER,
   DATA_FILLER_PATH,
@@ -11,7 +11,7 @@ const {
   KINTO_URI
 } = process.env;
 
-const API_URI = `${API_SCHEME}://${API_DOMAIN}:${API_PORT}`;
+const API_URI = `${API_SCHEME}://${API_DOMAIN}:${API_PORT_PUBLIC}`;
 
 module.exports = withCss(
   // We use next-transpile-modules in order to transpile the data-filler package source so that it
