@@ -62,7 +62,9 @@ services:
       context: .
       dockerfile: image.web.Dockerfile
       args:
-        API_URI: ${API_SCHEME}://${API_DOMAIN}:${API_PORT_PUBLIC}
+        API_DOMAIN: ${API_DOMAIN}
+        API_PORT_PUBLIC: ${API_PORT_PUBLIC}
+        API_SCHEME: ${API_SCHEME}
         API_URI_DOCKER: http://api:${API_PORT}
         DATA_FILLER_PATH: ${DATA_FILLER_PATH}
         DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
