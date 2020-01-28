@@ -2,7 +2,7 @@ version: "3"
 
 services:
   db:
-    image: igabriele/postgresql-jwt
+    image: igabriele/postgresql-jwt:12-alpine
     restart: always
     environment:
       # The JWT secret is used whithin the api.login() function:
