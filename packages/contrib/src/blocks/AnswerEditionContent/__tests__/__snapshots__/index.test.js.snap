@@ -396,7 +396,7 @@ exports[`[Contrib] blocks/<AnswerEditionContent /> should match snapshot 1`] = `
               tabindex="-1"
             >
               <span
-                class="ql-picker-item ql-selected"
+                class="ql-picker-item"
                 data-label="Normal"
                 data-value=""
                 role="button"
