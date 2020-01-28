@@ -1,6 +1,6 @@
 # API Proxy Container
 
-FROM node:12.14.1-slim
+FROM node:12.14.1-alpine
 
 ARG API_PORT
 ARG DB_URI
