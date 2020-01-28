@@ -1,12 +1,7 @@
-# Web Container (including contrib & data-filler packages)
+# Master Container for db migrations
 
-FROM node:12.14.1-alpine
+FROM igabriele/knex-pg:12.0.7.0
 
-WORKDIR /app
-
-# Package "data-filler"
 COPY ./db/migrations ./db/migrations
 COPY ./scripts/db/getMigrationQuery.js ./scripts/db/getMigrationQuery.js
 COPY ./knexfile.js ./knexfile.js
-
-RUN npm i knex@0.20.8 pg@7.17.1
