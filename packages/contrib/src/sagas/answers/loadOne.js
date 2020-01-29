@@ -15,10 +15,13 @@ export default function* loadOne({ meta: { id, withReferences, withTags } }) {
 
     const { data } = yield request.get("/answers");
 
-    let answer = {
-      ...data[0],
-      agreement: { ...data[0].agreement, name: shortenAgreementName(data[0].agreement.name) }
-    };
+    let answer = data[0];
+    if (answer.agreement !== null) {
+      answer.agreement = {
+        ...data[0].agreement,
+        name: shortenAgreementName(data[0].agreement.name)
+      };
+    }
 
     if (withReferences) {
       const request = customPostgrester()
