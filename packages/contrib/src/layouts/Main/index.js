@@ -1,3 +1,4 @@
+import Head from "next/head";
 import React from "react";
 
 import Header from "../Header";
@@ -14,13 +15,13 @@ import styles from "./styles";
 
 export default ({ isHorizontal = false, isLoading = false, ...props }) => (
   <div className="Container">
+    <Head>
+      <title>Outil de contribution au Code du travail numérique</title>
+    </Head>
     <style jsx global>
       {globalStyles}
     </style>
     <style jsx>{styles}</style>
-    <head>
-      <title>Outil de contribution au Code du travail numérique</title>
-    </head>
     <Modal />
     <Header />
     {isLoading ? (
