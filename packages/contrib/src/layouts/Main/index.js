@@ -18,6 +18,9 @@ export default ({ isHorizontal = false, isLoading = false, ...props }) => (
       {globalStyles}
     </style>
     <style jsx>{styles}</style>
+    <head>
+      <title>Outil de contribution au Code du travail numérique</title>
+    </head>
     <Modal />
     <Header />
     {isLoading ? (
