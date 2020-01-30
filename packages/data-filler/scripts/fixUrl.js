@@ -33,9 +33,7 @@ const logFix = (original, fixed) => {
 const findFicheMTByAnchor = slug => {
   const results = fuzz.extract(
     slug,
-    data
-      .filter(r => r.source === "fiches_ministere_travail")
-      .filter(r => r.anchor),
+    data.filter(r => r.source === "fiches_ministere_travail").filter(r => r.anchor),
     {
       scorer: fuzz.ratio,
       processor: choice => choice.anchor,
@@ -68,15 +66,9 @@ const findModeleBySlug = slug => {
 
 const fixUrl = url => {
   if (url.match(/^https?:\/\//)) {
-    if (
-      url.includes("code.travail.gouv.fr") ||
-      url.includes("code-du-travail-numerique")
-    ) {
+    if (url.includes("code.travail.gouv.fr") || url.includes("code-du-travail-numerique")) {
       // keep relative path and anchor only
-      url = url.replace(
-        /^https?:\/\/[^/]+\/([^?]+)(?:\?[^#]+)?(#.*)?/gis,
-        "/$1$2"
-      );
+      url = url.replace(/^https?:\/\/[^/]+\/([^?]+)(?:\?[^#]+)?(#.*)?/gis, "/$1$2");
     } else {
       //external urls
       return url;
@@ -109,10 +101,7 @@ const fixUrl = url => {
   if (modeleMatch2) {
     const found = modeles.find(fiche => fiche.slug === modeleMatch2[1]);
     if (found) {
-      const fixedUrl = url.replace(
-        "modeles_de_courriers",
-        "modeles-de-courriers"
-      );
+      const fixedUrl = url.replace("modeles_de_courriers", "modeles-de-courriers");
       logFix(url, fixedUrl);
       return fixedUrl;
     }
@@ -183,7 +172,7 @@ const fixUrl = url => {
     return false;
   }
 
-  const contributionsMatch = url.match(/^\/contributions\/(.*)\/?/);
+  const contributionsMatch = url.match(/^\/contribution\/(.*)\/?/);
   if (contributionsMatch) {
     const slug = contributionsMatch[1];
     const found = contributions.find(fiche => fiche.slug === slug);

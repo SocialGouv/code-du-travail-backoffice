@@ -1,8 +1,6 @@
 import memoizee from "memoizee";
 
-const API_URL = "https://api.code-du-travail-numerique.incubateur.social.gouv.fr/api/v1";
-//"https://cdtn-api.num.social.gouv.fr/api/v1";
-//"https://api.code-du-travail-numerique.incubateur.social.gouv.fr/api/v1";
+export const API_URL = "https://api-master-code-travail.dev.fabrique.social.gouv.fr/api/v1";
 
 const sortByRelevance = (a, b) => {
   if (a._source._score < b._source._score) {

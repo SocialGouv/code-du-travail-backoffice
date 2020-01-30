@@ -62,7 +62,7 @@ const Article = ({ article, idTexte, onSelectGroup }) => {
   const currentGroupsIds =
     selection.groups &&
     selection.groups
-      .filter(group => group.selection && group.selection.includes(article.id))
+      .filter(group => group.selection && group.selection.includes(article.data.id))
       .map(gr => gr.id);
 
   return (
@@ -98,7 +98,7 @@ const Article = ({ article, idTexte, onSelectGroup }) => {
       </div>
       <Badge
         color="primary"
-        {...formatEtat(article.etat)}
+        {...formatEtat(article.data.etat)}
         style={{ fontSize: 10, margin: "0 5px", minWidth: 30 }}
         size="small"
       />
@@ -106,16 +106,16 @@ const Article = ({ article, idTexte, onSelectGroup }) => {
         overlayStyle={{ maxWidth: "50%" }}
         placement="bottom"
         trigger={["click"]}
-        overlay={<span dangerouslySetInnerHTML={{ __html: article.content }} />}
+        overlay={<span dangerouslySetInnerHTML={{ __html: article.data.content }} />}
       >
         <span style={{ cursor: "pointer", marginLeft: 10 }}>
-          Article {article.num || "-"} {article.surtitre || null}
+          Article {article.data.num || "-"} {article.data.surtitre || null}
         </span>
       </Tooltip>
 
       <a
         style={{ marginLeft: 5, fontSize: 12 }}
-        href={`https://www.legifrance.gouv.fr/affichIDCCArticle.do?idArticle=${article.id}&cidTexte=${idTexte}`}
+        href={`https://www.legifrance.gouv.fr/affichIDCCArticle.do?idArticle=${article.data.id}&cidTexte=${idTexte}`}
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -143,7 +143,10 @@ const SelectionContext = React.createContext([]);
           </div>*/
 
 const CCNSection = ({ idConvention, section, onSelect, depth = 0, idTexte }) => {
-  idTexte = (depth === 0 && section.id) || idTexte;
+  if (!section) {
+    return null;
+  }
+  idTexte = (depth === 0 && section.data.id) || idTexte;
   return (
     <Card
       style={{
@@ -153,12 +156,12 @@ const CCNSection = ({ idConvention, section, onSelect, depth = 0, idTexte }) => 
       className="card--section"
     >
       <CardBody>
-        {depth >= 0 && <h6>{section.title}</h6>}
+        {depth >= 0 && <h6>{section.data.title}</h6>}
 
         {(depth === 0 && (
           <a
             style={{ marginLeft: 5, fontSize: 12 }}
-            href={`https://www.legifrance.gouv.fr/affichIDCC.do?cidTexte=${section.id}&idConvention=${idConvention}`}
+            href={`https://www.legifrance.gouv.fr/affichIDCC.do?cidTexte=${section.data.id}&idConvention=${idConvention}`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -166,24 +169,30 @@ const CCNSection = ({ idConvention, section, onSelect, depth = 0, idTexte }) => 
           </a>
         )) ||
           null}
-        {section.sections.map(section => (
-          <CCNSection
-            key={section.id}
-            idConvention={idConvention}
-            idTexte={idTexte}
-            section={section}
-            depth={depth + 1}
-            onSelect={onSelect}
-          />
-        ))}
-        {section.articles.map(article => (
-          <Article
-            idTexte={idTexte}
-            key={article.id}
-            article={article}
-            onSelectGroup={group => onSelect(article, group)}
-          />
-        ))}
+        {section.children &&
+          section.children
+            .filter(n => n.type === "section")
+            .map(subSection => (
+              <CCNSection
+                key={subSection.data.id}
+                idConvention={idConvention}
+                idTexte={idTexte}
+                section={subSection}
+                depth={depth + 1}
+                onSelect={onSelect}
+              />
+            ))}
+        {section.children &&
+          section.children
+            .filter(n => n.type === "article")
+            .map(article => (
+              <Article
+                idTexte={idTexte}
+                key={article.data.id}
+                article={article}
+                onSelectGroup={group => onSelect(article, group)}
+              />
+            ))}
       </CardBody>
     </Card>
   );
@@ -211,10 +220,10 @@ const CCNPreview = ({ id, initialData, onDataUpdate }) => {
             ? {
                 id: gr.id,
                 selection: gr.selection
-                  ? gr.selection.includes(node.id)
+                  ? gr.selection.includes(node.data.id)
                     ? // if already selected, drop it
-                      gr.selection.filter(sel => sel !== node.id)
-                    : gr.selection.concat([node.id])
+                      gr.selection.filter(sel => sel !== node.data.id)
+                    : gr.selection.concat([node.data.id])
                   : [node.id]
               }
             : gr
@@ -224,7 +233,7 @@ const CCNPreview = ({ id, initialData, onDataUpdate }) => {
           ...(groups || []),
           {
             id: group.id,
-            selection: [node.id]
+            selection: [node.data.id]
           }
         ];
     setGroups(newGroups);
@@ -237,7 +246,7 @@ const CCNPreview = ({ id, initialData, onDataUpdate }) => {
     <Container>
       <SelectionContext.Provider value={{ groups: initialData.groups || [] }}>
         <Jumbotron>
-          <h5>{data.titre}</h5>
+          <h5>{data.data.titre}</h5>
         </Jumbotron>
         <Container>
           <FormGroup row>
@@ -255,7 +264,12 @@ const CCNPreview = ({ id, initialData, onDataUpdate }) => {
             />
           </FormGroup>
         </Container>
-        <CCNSection idConvention={id} onSelect={setSelection} section={data.sections[0]} />;
+        <CCNSection
+          idConvention={id}
+          onSelect={setSelection}
+          section={data.children.find(n => n.type === "section")}
+        />
+        ;
       </SelectionContext.Provider>
     </Container>
   );
