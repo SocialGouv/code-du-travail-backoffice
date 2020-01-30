@@ -7,7 +7,7 @@ const routeBySource = {
   code_du_travail: "code-du-travail",
   conventions_collectives: "convention-collective",
   modeles_de_courriers: "modeles-de-courriers",
-  contributions: "contributions",
+  contributions: "contribution",
   themes: "themes",
   outils: "outils",
   idcc: "idcc",
