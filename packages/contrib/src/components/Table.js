@@ -13,13 +13,6 @@ export default styled(ReactTable)`
 
   .rt-tr > .rt-th,
   .rt-tr > .rt-td {
-    :first-of-type {
-      width: 40% !important;
-    }
-    :not(:first-of-type) {
-      width: 10% !important;
-    }
-
     > div {
       overflow: hidden;
       text-overflow: ellipsis;
