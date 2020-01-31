@@ -48,6 +48,11 @@ const COLUMNS = [
     accessor: "validated"
   },
   {
+    Header: "Publiées",
+    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
+    accessor: "published"
+  },
+  {
     Header: "Total",
     Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
     accessor: "total"
@@ -77,6 +82,10 @@ const PERCENTAGE_COLUMNS = [
   },
   {
     ...COLUMNS[6],
+    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%"))
+  },
+  {
+    ...COLUMNS[7],
     Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%")),
     sortable: false
   }
@@ -94,6 +103,16 @@ const FranceMapContainer = styled(Flex)`
 `;
 const Table = styled(_Table)`
   font-size: 0.875rem;
+
+  .rt-tr > .rt-th,
+  .rt-tr > .rt-td {
+    :first-of-type {
+      width: 30% !important;
+    }
+    :not(:first-of-type) {
+      width: 10% !important;
+    }
+  }
 
   .rt-tr > .rt-td {
     :first-of-type {
@@ -184,7 +203,7 @@ export default class Index extends React.Component {
         id,
         isNational: parent_id === null,
         name: `[${idcc}] ${shortenAgreementName(name)}`,
-        totals: [0, 0, 0, 0, 0, 0]
+        totals: [0, 0, 0, 0, 0, 0, 0]
       }));
 
     const regionalStats = regions.map(({ code, id, name }) => {
@@ -214,7 +233,7 @@ export default class Index extends React.Component {
 
     const nextAgreementsStats = agreementsStats.map(agreementsStatsEntry => ({
       ...agreementsStatsEntry,
-      totals: [0, 0, 0, 0, 0, 0]
+      totals: [0, 0, 0, 0, 0, 0, 0]
     }));
 
     const nextRegionalStats = await Promise.all(
@@ -222,7 +241,7 @@ export default class Index extends React.Component {
         const { agreementIds } = regionalStatsEntry;
         const answers = await this.fetchAnswersForAgreements(agreementIds);
 
-        answers.forEach(({ agreement_id, state }) => {
+        answers.forEach(({ agreement_id, is_published, state }) => {
           const agreementsStatsIndex = nextAgreementsStats.findIndex(
             ({ id }) => id === agreement_id
           );
@@ -249,11 +268,15 @@ export default class Index extends React.Component {
               break;
           }
 
-          nextAgreementsStats[agreementsStatsIndex].totals[5] += 1;
+          if (is_published) {
+            nextAgreementsStats[agreementsStatsIndex].totals[5] += 1;
+          }
+
+          nextAgreementsStats[agreementsStatsIndex].totals[6] += 1;
         });
 
         const totals = answers.reduce(
-          (totals, { state }) => {
+          (totals, { is_published, state }) => {
             switch (state) {
               case ANSWER_STATE.TO_DO:
                 totals[0] += 1;
@@ -276,11 +299,15 @@ export default class Index extends React.Component {
                 break;
             }
 
-            totals[5] += 1;
+            if (is_published) {
+              totals[5] += 1;
+            }
+
+            totals[6] += 1;
 
             return totals;
           },
-          [0, 0, 0, 0, 0, 0]
+          [0, 0, 0, 0, 0, 0, 0]
         );
 
         return {
@@ -297,9 +324,10 @@ export default class Index extends React.Component {
         globalTotals[2] + totals[2],
         globalTotals[3] + totals[3],
         globalTotals[4] + totals[4],
-        globalTotals[5] + totals[5]
+        globalTotals[5] + totals[5],
+        globalTotals[6] + totals[6]
       ],
-      [0, 0, 0, 0, 0, 0]
+      [0, 0, 0, 0, 0, 0, 0]
     );
 
     this.setState({
@@ -320,7 +348,7 @@ export default class Index extends React.Component {
       agreementId: id,
       agreementIdcc: idcc,
       agreementName: `[${idcc}] ${name}`,
-      totals: [0, 0, 0, 0, 0, 0]
+      totals: [0, 0, 0, 0, 0, 0, 0]
     }));
 
     this.setState({
@@ -335,7 +363,7 @@ export default class Index extends React.Component {
       const totals = answers
         .filter(({ agreement_id }) => agreement_id === entry.agreementId)
         .reduce(
-          (totals, { state }) => {
+          (totals, { is_published, state }) => {
             switch (state) {
               case ANSWER_STATE.TO_DO:
                 totals[0] += 1;
@@ -358,11 +386,15 @@ export default class Index extends React.Component {
                 break;
             }
 
-            totals[5] += 1;
+            if (is_published) {
+              totals[5] += 1;
+            }
+
+            totals[6] += 1;
 
             return totals;
           },
-          [0, 0, 0, 0, 0, 0]
+          [0, 0, 0, 0, 0, 0, 0]
         );
 
       return {
@@ -388,18 +420,20 @@ export default class Index extends React.Component {
         pendingReview: -1,
         underReview: -1,
         validated: -1,
+        published: -1,
         total: -1
       };
     }
 
     return {
       name,
-      todo: isPercentage ? stats[0] / stats[5] : stats[0],
-      draft: isPercentage ? stats[1] / stats[5] : stats[1],
-      pendingReview: isPercentage ? stats[2] / stats[5] : stats[2],
-      underReview: isPercentage ? stats[3] / stats[5] : stats[3],
-      validated: isPercentage ? stats[4] / stats[5] : stats[4],
-      total: isPercentage ? 1 : stats[5]
+      todo: isPercentage ? stats[0] / stats[6] : stats[0],
+      draft: isPercentage ? stats[1] / stats[6] : stats[1],
+      pendingReview: isPercentage ? stats[2] / stats[6] : stats[2],
+      underReview: isPercentage ? stats[3] / stats[6] : stats[3],
+      validated: isPercentage ? stats[4] / stats[6] : stats[4],
+      published: isPercentage ? stats[5] / stats[6] : stats[5],
+      total: isPercentage ? 1 : stats[6]
     };
   }
 
@@ -419,7 +453,7 @@ export default class Index extends React.Component {
     return (
       <StatsTable
         data={data}
-        defaultSorted={[{ id: "validated", desc: false }]}
+        defaultSorted={[{ id: "published", desc: false }]}
         isPercentage={isPercentage}
       />
     );
