@@ -1,5 +1,5 @@
 const withCss = require("@zeit/next-css");
-const withTranspileModules = require("next-transpile-modules");
+const withTranspileModules = require("next-transpile-modules")(["@socialgouv/cdtn-data-filler"]);
 
 const {
   API_DOMAIN,
@@ -29,7 +29,6 @@ module.exports = withCss(
       DATA_FILLER_PATH,
       KINTO_BUCKET,
       KINTO_URI
-    },
-    transpileModules: ["@socialgouv/cdtn-data-filler"]
+    }
   })
 );
