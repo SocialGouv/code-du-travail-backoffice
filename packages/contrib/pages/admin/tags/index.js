@@ -15,7 +15,7 @@ const COLUMNS = [
   }
 ];
 
-export default () => (
+const AdminTagsIndexPage = () => (
   <AdminIndex
     apiPath="/tags"
     apiGetPath="/tags?select=*,category:tag_category(*)"
@@ -36,3 +36,5 @@ export default () => (
     title="Étiquettes"
   />
 );
+
+export default AdminTagsIndexPage;

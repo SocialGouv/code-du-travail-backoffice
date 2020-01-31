@@ -3,7 +3,7 @@ import { Flex } from "rebass";
 
 import Button from "../../elements/Button";
 
-export default ({ onCancel, onSubmit }) => (
+const AnswerEditionHeadBlockActions = ({ onCancel, onSubmit }) => (
   <Flex alignItems="baseline">
     <Button color="secondary" hasGroup onClick={onCancel}>
       Annuler ma réponse
@@ -13,3 +13,5 @@ export default ({ onCancel, onSubmit }) => (
     </Button>
   </Flex>
 );
+
+export default AnswerEditionHeadBlockActions;

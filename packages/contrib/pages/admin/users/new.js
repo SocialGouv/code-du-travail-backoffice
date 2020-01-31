@@ -1,7 +1,7 @@
 import React from "react";
 
 import AdminForm from "../../../src/components/AdminForm";
-import AdminMain from "../../../src/layouts/AdminMain";
+import AdminMainLayout from "../../../src/layouts/AdminMain";
 import customAxios from "../../../src/libs/customAxios";
 import generatePassword from "../../../src/libs/generatePassword";
 
@@ -9,35 +9,35 @@ const PASSWORD_LENGTH = 16;
 
 const FIELDS = [
   {
-    type: "input",
+    label: "Nom",
     name: "name",
-    label: "Nom"
+    type: "input"
   },
   {
-    type: "select",
-    name: "role",
     label: "Rôle",
+    name: "role",
     options: [
       { label: "Administrateur", value: "administrator" },
       { label: "Administrateur régional", value: "regional_administrator" },
       { label: "Contributeur", value: "contributor" }
-    ]
+    ],
+    type: "select"
   },
   {
-    type: "input",
-    name: "email",
+    inputType: "email",
     label: "E-mail",
-    inputType: "email"
+    name: "email",
+    type: "input"
   },
   {
-    type: "input",
-    name: "password",
-    label: "Mot-de-passe",
     button: {
       ariaLabel: "Bouton générant un mot de passe aléatoire",
-      icon: "sync",
-      handler: () => generatePassword(PASSWORD_LENGTH)
-    }
+      handler: () => generatePassword(PASSWORD_LENGTH),
+      icon: "sync"
+    },
+    label: "Mot-de-passe",
+    name: "password",
+    type: "input"
   }
 ];
 
@@ -61,23 +61,23 @@ export default class AdminUsersNewPage extends React.Component {
       const fields = [
         ...FIELDS,
         {
-          type: "select",
-          name: "location_id",
           label: "Unité",
+          name: "location_id",
           options: locations.map(({ id: value, name: label }) => ({
             label,
             value
-          }))
+          })),
+          type: "select"
         },
         {
-          type: "tags",
-          name: "agreements",
+          ariaName: "la convention",
           label: "Conventions",
+          name: "agreements",
           tags: agreements.map(({ id, idcc, name }) => ({
             id,
             value: `${idcc} - ${name}`
           })),
-          ariaName: "la convention"
+          type: "tags"
         }
       ];
 
@@ -91,7 +91,7 @@ export default class AdminUsersNewPage extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading) return <AdminMain isLoading />;
+    if (this.state.isLoading) return <AdminMainLayout isLoading />;
 
     return (
       <AdminForm

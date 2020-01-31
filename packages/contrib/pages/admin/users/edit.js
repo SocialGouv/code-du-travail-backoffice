@@ -1,8 +1,7 @@
 import React from "react";
 
 import AdminForm from "../../../src/components/AdminForm";
-import AdminMain from "../../../src/layouts/AdminMain";
-
+import AdminMainLayout from "../../../src/layouts/AdminMain";
 import AdminUsersNewPage from "./new";
 
 export default class AdminUsersEditPage extends AdminUsersNewPage {
@@ -46,7 +45,7 @@ export default class AdminUsersEditPage extends AdminUsersNewPage {
   }
 
   render() {
-    if (this.state.isLoadingOverwrite) return <AdminMain isLoading />;
+    if (this.state.isLoadingOverwrite) return <AdminMainLayout isLoading />;
 
     const { name } = this.state.data;
 

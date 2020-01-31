@@ -1,7 +1,7 @@
 import React from "react";
 
 import AdminForm from "../../../src/components/AdminForm";
-import AdminMain from "../../../src/layouts/AdminMain";
+import AdminMainLayout from "../../../src/layouts/AdminMain";
 import customAxios from "../../../src/libs/customAxios";
 import AdminTagsCategoriesNewPage from "./new";
 
@@ -40,7 +40,7 @@ class AdminTagsCategoriesEditPage extends AdminTagsCategoriesNewPage {
   }
 
   render() {
-    if (this.state.isLoading) return <AdminMain isLoading />;
+    if (this.state.isLoading) return <AdminMainLayout isLoading />;
 
     const { value } = this.state.data;
 

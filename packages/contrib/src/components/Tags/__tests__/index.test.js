@@ -1,7 +1,7 @@
-import React from "react";
-import { cleanup, fireEvent, render } from "@testing-library/react";
-
 import "../../../../tests/globals/waitFor";
+
+import { cleanup, fireEvent, render } from "@testing-library/react";
+import React from "react";
 
 import Tags from "..";
 

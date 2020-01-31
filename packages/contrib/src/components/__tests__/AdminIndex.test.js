@@ -1,8 +1,8 @@
-import React from "react";
-import { cleanup, fireEvent, render } from "@testing-library/react";
-
 import "../../../tests/globals/console";
 import "../../../tests/globals/waitFor";
+
+import { cleanup, fireEvent, render } from "@testing-library/react";
+import React from "react";
 
 jest.mock("react-redux", () => ({
   connect: () => component => {
@@ -22,11 +22,11 @@ import AdminIndex from "../AdminIndex";
 
 const DATA = [
   {
-    id: "b864ea83-cdbd-45f5-bca4-75efbb6b8954",
     aDataProp: "First Data Prop Value",
     anotherDataProp: "First Other Data Prop Value",
-    updated_at: 0,
-    created_at: 0
+    created_at: 0,
+    id: "b864ea83-cdbd-45f5-bca4-75efbb6b8954",
+    updated_at: 0
   }
 ];
 const PROPS = {
@@ -55,11 +55,11 @@ describe.skip("[Contrib] components/<AdminIndex />", () => {
   const data = [
     ...DATA,
     {
-      id: "631e6a28-2c7d-4bb5-983a-16962caae1e4",
       aDataProp: "Second Data Prop Value",
       anotherDataProp: "Second Other Data Prop Value",
-      updated_at: 0,
-      created_at: 0
+      created_at: 0,
+      id: "631e6a28-2c7d-4bb5-983a-16962caae1e4",
+      updated_at: 0
     }
   ];
 

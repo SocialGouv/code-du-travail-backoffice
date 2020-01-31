@@ -1,6 +1,6 @@
+import styled from "@emotion/styled";
 import React from "react";
 import { connect } from "react-redux";
-import styled from "@emotion/styled";
 
 import * as actions from "../../../src/actions";
 import markdown from "../../../src/libs/markdown";

@@ -1,7 +1,7 @@
-import React from "react";
 import { fireEvent, render } from "@testing-library/react";
+import React from "react";
 
-import Tabs, { TABS } from "../Tabs";
+import AnswerEditionHeadBlockTabs, { TABS } from "../Tabs";
 
 describe.skip("[Contrib] blocks/AnswerEditionHead/<Tabs />", () => {
   const props = {
@@ -11,7 +11,7 @@ describe.skip("[Contrib] blocks/AnswerEditionHead/<Tabs />", () => {
     tagsCount: 12
   };
 
-  const { container, getByText } = render(<Tabs {...props} />);
+  const { container, getByText } = render(<AnswerEditionHeadBlockTabs {...props} />);
 
   it("should match snapshot", () => {
     expect(container).toMatchSnapshot();

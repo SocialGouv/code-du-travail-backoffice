@@ -1,14 +1,13 @@
-import App from "next/app";
+import getClient from "@socialgouv/cdtn-data-filler/src/kinto/client";
+import KintoContext from "@socialgouv/cdtn-data-filler/src/kinto/KintoContext";
 import withReduxSaga from "next-redux-saga";
 import withRedux from "next-redux-wrapper";
+import App from "next/app";
 import React from "react";
 import { Provider } from "react-redux";
 
-import KintoContext from "@socialgouv/cdtn-data-filler/src/kinto/KintoContext";
-import getClient from "@socialgouv/cdtn-data-filler/src/kinto/client";
-
-import cache from "../src/cache";
 import Login from "../src/blocks/Login";
+import cache from "../src/cache";
 import getMe from "../src/libs/getMe";
 import createStore from "../src/store";
 

@@ -2,21 +2,21 @@ import numeral from "numeral";
 
 if (numeral.locale() === "en") {
   numeral.register("locale", "fr", {
-    delimiters: {
-      thousands: " ",
-      decimal: ","
-    },
     abbreviations: {
-      thousand: "k",
-      million: "m",
       billion: "b",
+      million: "m",
+      thousand: "k",
       trillion: "t"
-    },
-    ordinal: function(number) {
-      return number === 1 ? "er" : "ème";
     },
     currency: {
       symbol: "€"
+    },
+    delimiters: {
+      decimal: ",",
+      thousands: " "
+    },
+    ordinal: function(number) {
+      return number === 1 ? "er" : "ème";
     }
   });
 

@@ -1,7 +1,7 @@
-import React from "react";
 import { render } from "@testing-library/react";
+import React from "react";
 
-import AnswerEditionHead from "..";
+import AnswerEditionHeadBlock from "..";
 import { TABS } from "../Tabs";
 
 describe("[Contrib] blocks/<AnswerEditionHead />", () => {
@@ -20,7 +20,7 @@ describe("[Contrib] blocks/<AnswerEditionHead />", () => {
     }
   };
 
-  const { container } = render(<AnswerEditionHead {...props} />);
+  const { container } = render(<AnswerEditionHeadBlock {...props} />);
 
   it("should match snapshot", () => {
     expect(container).toMatchSnapshot();

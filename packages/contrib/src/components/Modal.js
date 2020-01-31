@@ -1,8 +1,8 @@
+import styled from "@emotion/styled";
 import React from "react";
 import reactOnClickOutside from "react-onclickoutside";
 import { connect } from "react-redux";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
 import * as actions from "../actions";
 import Button from "../elements/Button";

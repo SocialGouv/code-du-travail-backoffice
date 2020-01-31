@@ -1,8 +1,8 @@
+import styled from "@emotion/styled";
 import React from "react";
 import { Flex, Text } from "rebass";
-import styled from "@emotion/styled";
 
-const Field = styled(Flex)`
+const Container = styled(Flex)`
   margin-bottom: 0.5rem;
 `;
 const Error = styled(Text)`
@@ -12,9 +12,11 @@ const Error = styled(Text)`
   height: 1rem;
 `;
 
-export default ({ children, error = null, ...props }) => (
-  <Field {...props}>
+const Field = ({ children, error = null, ...props }) => (
+  <Container {...props}>
     {children}
     {error !== null && <Error>{error}</Error>}
-  </Field>
+  </Container>
 );
+
+export default Field;

@@ -1,19 +1,19 @@
 import React from "react";
 
 import AdminForm from "../../../src/components/AdminForm";
-import AdminMain from "../../../src/layouts/AdminMain";
+import AdminMainLayout from "../../../src/layouts/AdminMain";
 import customAxios from "../../../src/libs/customAxios";
 
 const FIELDS = [
   {
-    type: "input",
+    label: "Nom",
     name: "name",
-    label: "Nom"
+    type: "input"
   },
   {
-    type: "input",
+    label: "IDCC",
     name: "idcc",
-    label: "IDCC"
+    type: "input"
   }
 ];
 
@@ -36,13 +36,13 @@ export default class AdminAgreementsNewPage extends React.Component {
       const fields = [
         ...FIELDS,
         {
-          type: "select",
-          name: "parent_id",
           label: "Convention parente",
+          name: "parent_id",
           options: agreements.map(({ id, idcc, name }) => ({
             label: `${idcc} - ${name}`,
             value: id
-          }))
+          })),
+          type: "select"
         }
       ];
 
@@ -56,7 +56,7 @@ export default class AdminAgreementsNewPage extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading) return <AdminMain isLoading />;
+    if (this.state.isLoading) return <AdminMainLayout isLoading />;
 
     return (
       <AdminForm

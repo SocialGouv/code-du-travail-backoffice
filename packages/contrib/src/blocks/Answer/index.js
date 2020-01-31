@@ -1,11 +1,10 @@
+import styled from "@emotion/styled";
 import React from "react";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
+import { ANSWER_GENERIC_REFERENCE, ANSWER_STATE } from "../../constants";
 import Idcc from "../../elements/Idcc";
 import Link from "../../elements/Link";
-
-import { ANSWER_STATE, ANSWER_GENERIC_REFERENCE } from "../../constants";
 
 const Content = styled(Flex)`
   background-color: white;
@@ -37,7 +36,7 @@ const Menu = styled(Flex)`
   min-width: 13rem;
 `;
 
-export default ({ data, onCancel, onClick, onFallback }) => {
+const AnswerBlock = ({ data, onCancel, onClick, onFallback }) => {
   const isDraft = data.state === ANSWER_STATE.DRAFT;
   const isTodo = data.state === ANSWER_STATE.TO_DO;
   const value = isDraft ? data.prevalue : data.value;
@@ -91,3 +90,5 @@ export default ({ data, onCancel, onClick, onFallback }) => {
     </Flex>
   );
 };
+
+export default AnswerBlock;

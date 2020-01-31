@@ -2,30 +2,29 @@ import * as R from "ramda";
 import React from "react";
 
 import AdminForm from "../../../src/components/AdminForm";
-import AdminMain from "../../../src/layouts/AdminMain";
-import customAxios from "../../../src/libs/customAxios";
-
 import { AREA_CATEGORY_LABEL } from "../../../src/constants";
+import AdminMainLayout from "../../../src/layouts/AdminMain";
+import customAxios from "../../../src/libs/customAxios";
 
 const FIELDS = [
   {
-    type: "input",
+    label: "Nom",
     name: "name",
-    label: "Nom"
+    type: "input"
   },
   {
-    type: "input",
+    label: "Code",
     name: "code",
-    label: "Code"
+    type: "input"
   },
   {
-    type: "select",
-    name: "category",
     label: "Type",
+    name: "category",
     options: R.pipe(
       R.toPairs,
       R.map(([value, label]) => ({ label, value }))
-    )(AREA_CATEGORY_LABEL)
+    )(AREA_CATEGORY_LABEL),
+    type: "select"
   }
 ];
 
@@ -49,13 +48,13 @@ export default class AdminAreasNewPage extends React.Component {
       const fields = [
         ...FIELDS,
         {
-          type: "select",
-          name: "parent_id",
           label: "Zone parente",
+          name: "parent_id",
           options: areas.map(({ category, code, id, name }) => ({
             label: `${name} [${AREA_CATEGORY_LABEL[category]} - ${code}]`,
             value: id
-          }))
+          })),
+          type: "select"
         }
       ];
 
@@ -69,7 +68,7 @@ export default class AdminAreasNewPage extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading) return <AdminMain isLoading />;
+    if (this.state.isLoading) return <AdminMainLayout isLoading />;
 
     return (
       <AdminForm

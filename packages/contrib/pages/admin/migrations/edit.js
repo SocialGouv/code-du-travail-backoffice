@@ -1,14 +1,14 @@
 import React from "react";
 
 import AdminForm from "../../../src/components/AdminForm";
-import AdminMain from "../../../src/layouts/AdminMain";
+import AdminMainLayout from "../../../src/layouts/AdminMain";
 import customAxios from "../../../src/libs/customAxios";
 
 const FIELDS = [
   {
-    type: "input",
+    label: "Nom",
     name: "name",
-    label: "Nom"
+    type: "input"
   }
 ];
 
@@ -43,7 +43,7 @@ export default class AdminQuestionsEditPage extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading) return <AdminMain isLoading />;
+    if (this.state.isLoading) return <AdminMainLayout isLoading />;
 
     const { name } = this.state.data;
 

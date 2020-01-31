@@ -17,7 +17,7 @@ const COLUMNS = [
   }
 ];
 
-export default () => (
+const AdminAgreementIndexPage = () => (
   <AdminIndex
     apiPath="/agreements"
     ariaLabels={{
@@ -37,3 +37,5 @@ export default () => (
     title="Conventions"
   />
 );
+
+export default AdminAgreementIndexPage;

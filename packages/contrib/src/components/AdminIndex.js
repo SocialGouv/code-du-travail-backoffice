@@ -1,13 +1,13 @@
+import styled from "@emotion/styled";
 import moment from "moment-timezone";
 import Router from "next/router";
 import React from "react";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
 import Table from "../components/Table";
 import Button from "../elements/Button";
 import Title from "../elements/Title";
-import AdminMain from "../layouts/AdminMain";
+import AdminMainLayout from "../layouts/AdminMain";
 import customAxios from "../libs/customAxios";
 import stringFrIncludes from "../libs/stringFrIncludes";
 import unspace from "../libs/unspace";
@@ -39,7 +39,7 @@ export default class AdminIndex extends React.Component {
 
     this.columns = [...columns];
 
-    if (!Boolean(this.props.noTimestamps)) {
+    if (!this.props.noTimestamps) {
       // this.columns.push({
       //   Header: "Créé le",
       //   accessor: data =>
@@ -65,7 +65,7 @@ export default class AdminIndex extends React.Component {
       });
     }
 
-    if (!Boolean(this.props.noEdit)) {
+    if (!this.props.noEdit) {
       this.columns.push({
         Cell: ({ value }) => (
           <Button
@@ -84,7 +84,7 @@ export default class AdminIndex extends React.Component {
       });
     }
 
-    if (!Boolean(this.props.noDelete)) {
+    if (!this.props.noDelete) {
       this.columns.push({
         Cell: ({ value }) => (
           <Button
@@ -102,13 +102,13 @@ export default class AdminIndex extends React.Component {
       });
     }
 
-    this.sortedBy = sortedBy !== undefined ? { ...sortedBy } : { id: "updatedAt", desc: true };
+    this.sortedBy = sortedBy !== undefined ? { ...sortedBy } : { desc: true, id: "updatedAt" };
 
     this.state = {
       confirmDeletion: false,
       data: [],
-      isLoading: true,
       isFetching: false,
+      isLoading: true,
       selectedId: ""
     };
   }
@@ -123,7 +123,7 @@ export default class AdminIndex extends React.Component {
     this.setState({ isFetching: true });
 
     try {
-      const uri = Boolean(this.props.noTimestamps)
+      const uri = this.props.noTimestamps
         ? this.apiGetPath
         : `${this.apiGetPath}${this.apiGetPath.includes("?") ? "&" : "?"}order=updated_at.desc`;
       const { data } = await this.axios.get(uri);
@@ -209,14 +209,14 @@ export default class AdminIndex extends React.Component {
   render() {
     const { confirmDeletion, data, isLoading, selectedId } = this.state;
 
-    if (isLoading) return <AdminMain isLoading />;
+    if (isLoading) return <AdminMainLayout isLoading />;
 
     return (
-      <AdminMain>
+      <AdminMainLayout>
         <Container flexDirection="column">
           <Head alignItems="flex-end" justifyContent="space-between">
             <Title>{this.props.title}</Title>
-            {!Boolean(this.props.noCreate) && (
+            {!this.props.noCreate && (
               <Button onClick={this.new} title={unspace(this.props.ariaLabels.newButton)}>
                 Nouveau
               </Button>
@@ -257,7 +257,7 @@ export default class AdminIndex extends React.Component {
             showPageSizeOptions={false}
           />
         </Container>
-      </AdminMain>
+      </AdminMainLayout>
     );
   }
 }

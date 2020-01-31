@@ -1,8 +1,8 @@
 import { put } from "redux-saga/effects";
 
 import { actionTypes, comments } from "../../actions";
-import getCurrentUser from "../../libs/getCurrentUser";
 import customPostgrester from "../../libs/customPostgrester";
+import getCurrentUser from "../../libs/getCurrentUser";
 import toast from "../../libs/toast";
 
 const API_PATH = "/answers_comments";

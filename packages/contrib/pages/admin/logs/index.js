@@ -8,7 +8,7 @@ import _Table from "../../../src/components/Table";
 import { LOG_ACTION_LABEL } from "../../../src/constants";
 import Input from "../../../src/elements/Input";
 import Title from "../../../src/elements/Title";
-import AdminMain from "../../../src/layouts/AdminMain";
+import AdminMainLayout from "../../../src/layouts/AdminMain";
 import moment from "../../../src/libs/customMoment";
 
 const Container = styled(Flex)`
@@ -36,15 +36,17 @@ const Danger = styled.span`
   font-weight: bold;
 `;
 
+// TODO Clean these columns.
+/* eslint-disable react/display-name */
 const COLUMNS = [
   {
-    Header: "Nom (ou email)",
     Cell: ({ value }) => (value !== null ? value.name : <Danger>Unknown</Danger>),
+    Header: "Nom (ou email)",
     accessor: "user"
   },
   {
-    Header: "Role",
     Cell: ({ value }) => (value !== null ? value.role : <Danger>Unknown</Danger>),
+    Header: "Role",
     accessor: "user"
   },
   {
@@ -52,8 +54,8 @@ const COLUMNS = [
     accessor: "ip"
   },
   {
-    Header: "Action",
     Cell: ({ value }) => LOG_ACTION_LABEL[value],
+    Header: "Action",
     accessor: "action"
   },
   {
@@ -61,11 +63,12 @@ const COLUMNS = [
     accessor: "url"
   },
   {
-    Header: "Date",
     Cell: ({ value }) => moment(value).format("L HH:mm:ss"),
+    Header: "Date",
     accessor: "created_at"
   }
 ];
+/* eslint-enable react/display-name */
 
 class AdminLogsIndexPage extends React.Component {
   get queryFilter() {
@@ -86,7 +89,7 @@ class AdminLogsIndexPage extends React.Component {
     const { logs } = this.props;
 
     return (
-      <AdminMain>
+      <AdminMainLayout>
         <Container flexDirection="column">
           <Title>Logs</Title>
           <Input
@@ -98,7 +101,7 @@ class AdminLogsIndexPage extends React.Component {
           <Table
             data={logs.data}
             columns={COLUMNS}
-            defaultSorted={[{ id: "created_at", desc: true }]}
+            defaultSorted={[{ desc: true, id: "created_at" }]}
             filterable={false}
             multiSort={false}
             pageSize={10}
@@ -107,7 +110,7 @@ class AdminLogsIndexPage extends React.Component {
             showPageSizeOptions={false}
           />
         </Container>
-      </AdminMain>
+      </AdminMainLayout>
     );
   }
 }

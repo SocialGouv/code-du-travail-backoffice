@@ -9,7 +9,7 @@ const COLUMNS = [
   }
 ];
 
-export default () => (
+const AdminTagsCategoriesIndexPage = () => (
   <AdminIndex
     apiPath="/tags_categories"
     ariaLabels={{
@@ -29,3 +29,5 @@ export default () => (
     title="Étiquettes > Catégories"
   />
 );
+
+export default AdminTagsCategoriesIndexPage;

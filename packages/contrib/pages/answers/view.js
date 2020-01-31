@@ -1,19 +1,18 @@
+import styled from "@emotion/styled";
 import React from "react";
 import Medixtor from "react-medixtor";
 import { connect } from "react-redux";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
 import * as actions from "../../src/actions";
 import Reference from "../../src/components/Reference";
+import { ANSWER_STATE } from "../../src/constants";
 import Hr from "../../src/elements/Hr";
 import Idcc from "../../src/elements/Idcc";
 import Subtitle from "../../src/elements/Subtitle";
 import Title from "../../src/elements/Title";
 import Main from "../../src/layouts/Main";
 import customAxios from "../../src/libs/customAxios";
-
-import { ANSWER_STATE } from "../../src/constants";
 
 const Container = styled(Main)`
   overflow-y: auto;
@@ -114,7 +113,7 @@ const AnswerEditor = styled(Medixtor)`
 
 const Strong = styled.p`
   font-weight: 600;
-  margin: ${props => (Boolean(props.isFirst) ? "0 0 0.5rem" : "1rem 0 0.5rem")};
+  margin: ${props => (props.isFirst ? "0 0 0.5rem" : "1rem 0 0.5rem")};
 `;
 
 class AnswersViewPage extends React.Component {
@@ -153,8 +152,8 @@ class AnswersViewPage extends React.Component {
       const { data: references } = await this.axios.get(referencesUri);
 
       this.setState({
-        references,
-        isLoading: false
+        isLoading: false,
+        references
       });
     } catch (err) {
       if (err !== undefined) console.warn(err);

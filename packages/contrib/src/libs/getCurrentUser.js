@@ -1,5 +1,4 @@
 import cache from "../cache";
-
 import { USER_ROLE } from "../constants";
 
 export default function getCurrentUser() {

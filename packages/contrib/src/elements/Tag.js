@@ -8,7 +8,7 @@ export default styled.span`
   cursor: pointer;
   font-size: 0.8rem;
   margin: 0 0.5rem 0.5rem 0;
-  opacity: ${p => (Boolean(p.isDisabled) ? 0.25 : 1)};
+  opacity: ${p => (p.isDisabled ? 0.25 : 1)};
   padding: 0.25rem 0.75rem;
   white-space: nowrap;
 `;

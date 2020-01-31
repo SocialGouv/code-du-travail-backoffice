@@ -1,16 +1,9 @@
 extends:
-  - "@socialgouv/eslint-config-react"
+  - "@socialgouv/eslint-config-react-strict"
 
 rules:
   no-console: ["error", { allow: ["info", "error", "warn"] }]
-  no-extra-boolean-cast: [0]
-
   jest/no-disabled-tests: off
-
-  jsx-a11y/anchor-is-valid: off
-  jsx-a11y/no-redundant-roles: off
-
-  react/display-name: off
   react/prop-types: off
 
 overrides:

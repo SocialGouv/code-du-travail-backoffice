@@ -1,19 +1,18 @@
+import styled from "@emotion/styled";
 import Router from "next/router";
 import React from "react";
 import { connect } from "react-redux";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
 import * as actions from "../../../src/actions";
-import AdminAnswer from "../../../src/blocks/AdminAnswer";
+import AdminAnswerBlock from "../../../src/blocks/AdminAnswer";
 import Pagination from "../../../src/components/Pagination";
+import { ANSWER_STATE_OPTIONS } from "../../../src/constants";
 import Button from "../../../src/elements/Button";
 import Input from "../../../src/elements/Input";
 import Select from "../../../src/elements/Select";
 import Title from "../../../src/elements/Title";
-import AdminMain from "../../../src/layouts/AdminMain";
-
-import { ANSWER_STATE_OPTIONS } from "../../../src/constants";
+import AdminMainLayout from "../../../src/layouts/AdminMain";
 import T from "../../../src/texts";
 
 const Container = styled(Flex)`
@@ -128,7 +127,7 @@ export class AdminAnswersIndexPage extends React.Component {
     }
 
     return data.map(answer => (
-      <AdminAnswer
+      <AdminAnswerBlock
         data={answer}
         isChecked={checked.includes(answer.id)}
         key={answer.id}
@@ -155,7 +154,7 @@ export class AdminAnswersIndexPage extends React.Component {
     const stateActionOptions = ANSWER_STATE_OPTIONS.filter(({ value }) => value !== answers.state);
 
     return (
-      <AdminMain hasBareContent>
+      <AdminMainLayout hasBareContent>
         <Container flexDirection="column">
           <Top alignItems="baseline" justifyContent="space-between">
             <Title>{`Réponses${isGeneric ? " génériques" : ""}`}</Title>
@@ -222,7 +221,7 @@ export class AdminAnswersIndexPage extends React.Component {
             />
           )}
         </Container>
-      </AdminMain>
+      </AdminMainLayout>
     );
   }
 }

@@ -11,8 +11,8 @@ export default function* toggleCheck({ meta: { ids } }) {
     const newChecked = R.symmetricDifference(checkedIds, ids);
 
     yield put({
-      type: actionTypes.ANSWERS_TOGGLE_CHECK_SUCESS,
-      payload: { checked: newChecked }
+      payload: { checked: newChecked },
+      type: actionTypes.ANSWERS_TOGGLE_CHECK_SUCESS
     });
   } catch (err) {
     toast.error(err.message);

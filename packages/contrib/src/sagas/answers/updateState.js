@@ -1,10 +1,9 @@
 import { put } from "redux-saga/effects";
 
 import { answers } from "../../actions";
+import { ANSWER_STATE, ANSWER_STATE_LABEL } from "../../constants";
 import customPostgrester from "../../libs/customPostgrester";
 import toast from "../../libs/toast";
-
-import { ANSWER_STATE, ANSWER_STATE_LABEL } from "../../constants";
 import { pluralize } from "../../texts";
 
 export default function* updateState({ meta: { ids, next, state } }) {

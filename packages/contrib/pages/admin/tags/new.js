@@ -1,14 +1,14 @@
 import React from "react";
 
 import AdminForm from "../../../src/components/AdminForm";
-import AdminMain from "../../../src/layouts/AdminMain";
+import AdminMainLayout from "../../../src/layouts/AdminMain";
 import customAxios from "../../../src/libs/customAxios";
 
 const FIELDS = [
   {
-    type: "input",
+    label: "Intitulé",
     name: "value",
-    label: "Intitulé"
+    type: "input"
   }
 ];
 
@@ -31,13 +31,13 @@ export default class AdminTagsNewPage extends React.Component {
       const fields = [
         ...FIELDS,
         {
-          type: "select",
-          name: "tag_category_id",
           label: "Catégorie",
+          name: "tag_category_id",
           options: tagsCategories.map(({ id: value, value: label }) => ({
             label,
             value
-          }))
+          })),
+          type: "select"
         }
       ];
 
@@ -53,7 +53,7 @@ export default class AdminTagsNewPage extends React.Component {
   render() {
     const { fields, isLoading } = this.state;
 
-    if (isLoading) return <AdminMain isLoading />;
+    if (isLoading) return <AdminMainLayout isLoading />;
 
     return (
       <AdminForm

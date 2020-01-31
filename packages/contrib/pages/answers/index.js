@@ -1,18 +1,17 @@
+import styled from "@emotion/styled";
 import debounce from "lodash.debounce";
 import Router, { withRouter } from "next/router";
 import React from "react";
 import { connect } from "react-redux";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
 import * as actions from "../../src/actions";
-import Answer from "../../src/blocks/Answer";
+import AnswerBlock from "../../src/blocks/Answer";
 import Pagination from "../../src/components/Pagination";
+import { ANSWER_STATE } from "../../src/constants";
 import Input from "../../src/elements/Input";
 import Subtitle from "../../src/elements/Subtitle";
 import Main from "../../src/layouts/Main";
-
-import { ANSWER_STATE } from "../../src/constants";
 import T from "../../src/texts";
 
 const Content = styled(Flex)`
@@ -166,7 +165,7 @@ class AnswersIndexPage extends React.Component {
     }
 
     return data.map(answer => [
-      <Answer
+      <AnswerBlock
         data={answer}
         key={answer.id}
         onCancel={this.cancel.bind(this)}

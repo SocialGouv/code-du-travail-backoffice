@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import css from "styled-jsx/css";
 import { Flex } from "rebass";
+import css from "styled-jsx/css";
 
 export const Brand = styled(Flex)`
   cursor: pointer;

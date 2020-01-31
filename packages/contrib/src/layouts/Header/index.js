@@ -1,10 +1,9 @@
 import Router from "next/router";
 import React from "react";
 
-import Marianne from "../../svgs/Marianne";
-import Menu from "../Menu";
 import cache from "../../cache";
-
+import MarianneSvg from "../../svgs/Marianne";
+import Menu from "../Menu";
 import styles, { Brand } from "./styles";
 
 export default class Header extends React.PureComponent {
@@ -28,7 +27,7 @@ export default class Header extends React.PureComponent {
           role="button"
           tabIndex="0"
         >
-          <Marianne className="BrandLogo" />
+          <MarianneSvg className="BrandLogo" />
           <div className="BrandText">
             <span className="BrandTextTitle">Code du travail numérique</span>
             <span className="BrandTextSubtitle">Outil de contribution</span>

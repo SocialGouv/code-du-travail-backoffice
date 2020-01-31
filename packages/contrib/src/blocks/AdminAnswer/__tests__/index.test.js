@@ -1,9 +1,8 @@
+import { fireEvent, render } from "@testing-library/react";
 import moment from "moment-timezone";
 import React from "react";
-import { fireEvent, render } from "@testing-library/react";
 
-import AdminAnswer from "..";
-
+import AdminAnswerBlock from "..";
 import { ANSWER_STATE } from "../../../constants";
 
 // Ignore styled-wrapped ReactTooltip className prop warning
@@ -11,27 +10,27 @@ console.warn = jest.fn();
 
 const PROPS = {
   data: {
-    id: "12345678-9abc-4def-0123-456789abcdef",
+    agreement_idcc: "1234",
+    agreement_name: "An Agreement Name",
     generic_reference: null,
-    state: ANSWER_STATE.DRAFT,
-    updated_at: moment()
-      .subtract(2, "hours")
-      .tz("Europe/Paris"),
+    id: "12345678-9abc-4def-0123-456789abcdef",
     prevalue: `Il m'est arrivé de sentir que tout allait bien pour moi, que<br>
             tout le monde était gai, et aussitôt l'idée me traversait<br>
             l'esprit qu'il ne se passerait plus rien et que tout était<br>
             absurde`,
+    question_index: 12,
+    question_value: "A Question Value",
+    state: ANSWER_STATE.DRAFT,
+    updated_at: moment()
+      .subtract(2, "hours")
+      .tz("Europe/Paris"),
+    user: {
+      name: "A User Name"
+    },
     value: `Il m'est arrivé de sentir que tout allait bien pour moi, que<br>
             tout le monde était gai, et aussitôt l'idée me traversait<br>
             l'esprit qu'il ne se passerait plus rien et que tout était<br>
-            absurde.`,
-    agreement_idcc: "1234",
-    agreement_name: "An Agreement Name",
-    question_index: 12,
-    question_value: "A Question Value",
-    user: {
-      name: "A User Name"
-    }
+            absurde.`
   },
   onCheck: jest.fn(),
   onClick: jest.fn()
@@ -39,7 +38,7 @@ const PROPS = {
 
 describe.skip("[Contrib] blocks/<AdminAnswer /> (Draft)", () => {
   const props = { ...PROPS };
-  const λ = render(<AdminAnswer {...props} />);
+  const λ = render(<AdminAnswerBlock {...props} />);
 
   it("should match snapshot", () => {
     expect(λ.container).toMatchSnapshot();
@@ -70,7 +69,7 @@ describe.skip("[Contrib] blocks/<AdminAnswer /> (Draft falling back to LC)", () 
       value: ""
     }
   };
-  const λ = render(<AdminAnswer {...props} />);
+  const λ = render(<AdminAnswerBlock {...props} />);
 
   it("should match snapshot", () => {
     expect(λ.container).toMatchSnapshot();
@@ -87,7 +86,7 @@ describe.skip("[Contrib] blocks/<AdminAnswer /> (Draft falling back to NA)", () 
       value: ""
     }
   };
-  const λ = render(<AdminAnswer {...props} />);
+  const λ = render(<AdminAnswerBlock {...props} />);
 
   it("should match snapshot", () => {
     expect(λ.container).toMatchSnapshot();
@@ -99,7 +98,7 @@ describe.skip("[Contrib] blocks/<AdminAnswer /> (Checked draft)", () => {
     ...PROPS,
     isChecked: true
   };
-  const λ = render(<AdminAnswer {...props} />);
+  const λ = render(<AdminAnswerBlock {...props} />);
 
   it("should match snapshot", () => {
     expect(λ.container).toMatchSnapshot();
@@ -111,7 +110,7 @@ describe.skip("[Contrib] blocks/<AdminAnswer /> (Unchecked draft)", () => {
     ...PROPS,
     isChecked: false
   };
-  const λ = render(<AdminAnswer {...props} />);
+  const λ = render(<AdminAnswerBlock {...props} />);
 
   it("should match snapshot", () => {
     expect(λ.container).toMatchSnapshot();
@@ -132,7 +131,7 @@ describe.skip("[Contrib] blocks/<AdminAnswer /> (To Do)", () => {
       state: ANSWER_STATE.TO_DO
     }
   };
-  const λ = render(<AdminAnswer {...props} />);
+  const λ = render(<AdminAnswerBlock {...props} />);
 
   it("should match snapshot", () => {
     expect(λ.container).toMatchSnapshot();
@@ -147,7 +146,7 @@ describe.skip("[Contrib] blocks/<AdminAnswer /> (Pending Review)", () => {
       state: ANSWER_STATE.PENDING_REVIEW
     }
   };
-  const λ = render(<AdminAnswer {...props} />);
+  const λ = render(<AdminAnswerBlock {...props} />);
 
   it("should match snapshot", () => {
     expect(λ.container).toMatchSnapshot();
@@ -162,7 +161,7 @@ describe.skip("[Contrib] blocks/<AdminAnswer /> (Under Review)", () => {
       state: ANSWER_STATE.UNDER_REVIEW
     }
   };
-  const λ = render(<AdminAnswer {...props} />);
+  const λ = render(<AdminAnswerBlock {...props} />);
 
   it("should match snapshot", () => {
     expect(λ.container).toMatchSnapshot();
@@ -177,7 +176,7 @@ describe.skip("[Contrib] blocks/<AdminAnswer /> (Validated)", () => {
       state: ANSWER_STATE.VALIDATED
     }
   };
-  const λ = render(<AdminAnswer {...props} />);
+  const λ = render(<AdminAnswerBlock {...props} />);
 
   it("should match snapshot", () => {
     expect(λ.container).toMatchSnapshot();

@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 
-import React from "react";
 import styled from "@emotion/styled";
+import React from "react";
 
 import _Icon from "./Icon";
 
@@ -16,7 +16,7 @@ const Icon = styled(_Icon)`
   }
 `;
 
-export default ({ onChange, options, ...props }) => (
+const Radio = ({ onChange, options, ...props }) => (
   <div role="radiogroup">
     {options.map(({ isSelected = false, label, value }, index) => (
       <div key={index}>
@@ -35,3 +35,5 @@ export default ({ onChange, options, ...props }) => (
     ))}
   </div>
 );
+
+export default Radio;

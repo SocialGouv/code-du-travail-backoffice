@@ -1,9 +1,9 @@
+import styled from "@emotion/styled";
 import React from "react";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
-import Idcc from "../../elements/Idcc";
 import _Checkbox from "../../elements/Checkbox";
+import Idcc from "../../elements/Idcc";
 import excerpt from "../../helpers/excerpt";
 import customMoment from "../../libs/customMoment";
 
@@ -60,7 +60,7 @@ const ContentExtractRed = styled(ContentExtract)`
 
 import { ANSWER_STATE, ANSWER_STATE_LABEL } from "../../constants";
 
-export default ({ data, isChecked, onCheck, onClick }) => {
+const AdminAnswerBlock = ({ data, isChecked, onCheck, onClick }) => {
   const {
     agreement_idcc,
     agreement_name,
@@ -123,3 +123,5 @@ export default ({ data, isChecked, onCheck, onClick }) => {
     </Container>
   );
 };
+
+export default AdminAnswerBlock;

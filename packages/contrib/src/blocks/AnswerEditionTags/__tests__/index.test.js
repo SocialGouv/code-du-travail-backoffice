@@ -1,7 +1,7 @@
-import React from "react";
 import { fireEvent, render } from "@testing-library/react";
+import React from "react";
 
-import AnswerEditionTags from "..";
+import AnswerEditionTagsBlock from "..";
 
 describe.skip("[Contrib] blocks/<AnswerEditionTags />", () => {
   const props = {
@@ -9,19 +9,19 @@ describe.skip("[Contrib] blocks/<AnswerEditionTags />", () => {
     selectedTags: ["da68fa2d-4bfc-4b5b-bea3-f39f44719650"],
     tags: [
       {
+        category: "contract_type",
         id: "da68fa2d-4bfc-4b5b-bea3-f39f44719650",
-        value: "A Tag",
-        category: "contract_type"
+        value: "A Tag"
       },
       {
+        category: "target",
         id: "d7d54d79-b389-416c-9e06-43eb36a5ab30",
-        value: "Another Tag",
-        category: "target"
+        value: "Another Tag"
       }
     ]
   };
 
-  const { container, getByText } = render(<AnswerEditionTags {...props} />);
+  const { container, getByText } = render(<AnswerEditionTagsBlock {...props} />);
 
   it("should match snapshot", () => {
     expect(container).toMatchSnapshot();

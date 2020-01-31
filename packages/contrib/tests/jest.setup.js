@@ -20,15 +20,11 @@ expect.extend(matchers);
 // Polyfill "MutationObserver"
 // https://github.com/megawac/MutationObserver.js
 import "mutationobserver-shim";
-
 // Mock "next/router"
 import "./mocks/nextRouter";
-
 // Mock "axios"
 import "./mocks/axios";
-
 // Mock "../src/libs/customAxios"
 import "./mocks/customAxios";
-
 // Globalize render() helper
 import "./globals/testRender";

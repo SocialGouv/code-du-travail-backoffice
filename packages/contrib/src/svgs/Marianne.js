@@ -1,6 +1,6 @@
 import React from "react";
 
-export default () => (
+const MarianneSvg = () => (
   <svg viewBox="0 0 245 130">
     <defs>
       <rect id="marianne2-a" width="245.808" height="130" />
@@ -40,3 +40,5 @@ export default () => (
     </g>
   </svg>
 );
+
+export default MarianneSvg;

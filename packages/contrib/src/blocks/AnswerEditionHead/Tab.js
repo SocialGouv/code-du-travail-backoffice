@@ -1,6 +1,6 @@
+import styled from "@emotion/styled";
 import React from "react";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
 const Container = styled(Flex)`
   border-bottom: ${props => (props.isActive ? "solid 0.25rem var(--color-blue-sapphire)" : 0)};
@@ -13,8 +13,10 @@ const Container = styled(Flex)`
   width: 12rem;
 `;
 
-export default ({ children, isActive, onClick }) => (
+const AnswerEditionHeadBlockTab = ({ children, isActive, onClick }) => (
   <Container alignItems="center" isActive={isActive} justifyContent="center" onClick={onClick}>
     {children}
   </Container>
 );
+
+export default AnswerEditionHeadBlockTab;

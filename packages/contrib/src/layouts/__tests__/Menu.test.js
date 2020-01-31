@@ -1,12 +1,11 @@
-import React from "react";
 import { fireEvent, render } from "@testing-library/react";
+import React from "react";
 
 global.open = jest.fn();
 
-import Menu from "../Menu";
-
 import { ANSWER_STATE } from "../../constants";
 import T from "../../texts";
+import Menu from "../Menu";
 
 describe.skip("[Contrib] layouts/<Menu /> (Contributor)", () => {
   const props = {

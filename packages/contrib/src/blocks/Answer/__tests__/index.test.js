@@ -1,8 +1,7 @@
-import React from "react";
 import { cleanup, fireEvent, render } from "@testing-library/react";
+import React from "react";
 
-import Answer from "..";
-
+import AnswerBlock from "..";
 import { ANSWER_STATE } from "../../../constants";
 
 // Ignore styled-wrapped ReactTooltip className prop warning
@@ -11,9 +10,9 @@ console.warn = jest.fn();
 describe.skip("[Contrib] blocks/<Answer /> (Todo)", () => {
   const props = {
     data: {
-      id: "12345678-9abc-4def-0123-456789abcdef",
       agreement_idcc: "1234",
       agreement_name: "A Labor Agreement Name",
+      id: "12345678-9abc-4def-0123-456789abcdef",
       question_index: 12,
       question_value: "Who knows?",
       state: ANSWER_STATE.TO_DO
@@ -23,7 +22,7 @@ describe.skip("[Contrib] blocks/<Answer /> (Todo)", () => {
     onFallback: jest.fn()
   };
 
-  const γ = render(<Answer {...props} />);
+  const γ = render(<AnswerBlock {...props} />);
 
   it("should match snapshot", () => {
     expect(γ.container).toMatchSnapshot();
@@ -51,12 +50,12 @@ describe.skip("[Contrib] blocks/<Answer /> (Todo)", () => {
 describe.skip("[Contrib] blocks/<Answer /> (Draft)", () => {
   const props = {
     data: {
-      id: "12345678-9abc-4def-0123-456789abcdef",
       agreement_idcc: "1234",
       agreement_name: "A Labor Agreement Name",
-      question_value: "Who knows?",
       generic_reference: null,
+      id: "12345678-9abc-4def-0123-456789abcdef",
       prevalue: "A prevalue",
+      question_value: "Who knows?",
       state: ANSWER_STATE.DRAFT,
       value: "A value"
     },
@@ -69,7 +68,7 @@ describe.skip("[Contrib] blocks/<Answer /> (Draft)", () => {
   it("should match snapshot", () => {
     cleanup();
 
-    γ = render(<Answer {...props} />);
+    γ = render(<AnswerBlock {...props} />);
 
     expect(γ.container).toMatchSnapshot();
   });
@@ -92,7 +91,7 @@ describe.skip("[Contrib] blocks/<Answer /> (Draft)", () => {
       }
     };
 
-    const γ = render(<Answer {...newProps} />);
+    const γ = render(<AnswerBlock {...newProps} />);
 
     expect(γ.container).toMatchSnapshot();
   });
@@ -110,7 +109,7 @@ describe.skip("[Contrib] blocks/<Answer /> (Draft)", () => {
 
     cleanup();
 
-    const γ = render(<Answer {...newProps} />);
+    const γ = render(<AnswerBlock {...newProps} />);
 
     expect(γ.container).toMatchSnapshot();
   });

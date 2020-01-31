@@ -1,7 +1,6 @@
 import React from "react";
 
 import AdminIndex from "../../../src/components/AdminIndex";
-
 import { AREA_CATEGORY_LABEL } from "../../../src/constants";
 
 const COLUMNS = [
@@ -22,7 +21,7 @@ const COLUMNS = [
   }
 ];
 
-export default () => (
+const AdminAreasIndexPage = () => (
   <AdminIndex
     apiPath="/areas"
     ariaLabels={{
@@ -37,3 +36,5 @@ export default () => (
     title="Zones"
   />
 );
+
+export default AdminAreasIndexPage;

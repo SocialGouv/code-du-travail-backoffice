@@ -1,6 +1,6 @@
+import styled from "@emotion/styled";
 import React from "react";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
 import _Icon from "../elements/Icon";
 
@@ -90,7 +90,7 @@ const RightBubble = styled(Bubble)`
   }
 `;
 
-export default ({ isMe = false, isPrivate, onRemove, value }) => {
+const Comment = ({ isMe = false, isPrivate, onRemove, value }) => {
   if (isMe)
     return (
       <Container alignItems="center">
@@ -105,3 +105,5 @@ export default ({ isMe = false, isPrivate, onRemove, value }) => {
     </Container>
   );
 };
+
+export default Comment;

@@ -1,8 +1,8 @@
+import styled from "@emotion/styled";
 import React from "react";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
-import Tab from "./Tab";
+import AnswerEditionHeadBlockTab from "./Tab";
 
 const Container = styled(Flex)`
   margin-top: 0.5rem;
@@ -14,13 +14,21 @@ export const TABS = {
   TAGS: 2
 };
 
-export default ({ currentTab, onChange, referencesCount }) => (
+const AnswerEditionHeadBlockTabs = ({ currentTab, onChange, referencesCount }) => (
   <Container>
-    <Tab isActive={currentTab === TABS.EDITOR} onClick={() => onChange(TABS.EDITOR)}>
+    <AnswerEditionHeadBlockTab
+      isActive={currentTab === TABS.EDITOR}
+      onClick={() => onChange(TABS.EDITOR)}
+    >
       Édition
-    </Tab>
-    <Tab isActive={currentTab === TABS.REFERENCES} onClick={() => onChange(TABS.REFERENCES)}>
+    </AnswerEditionHeadBlockTab>
+    <AnswerEditionHeadBlockTab
+      isActive={currentTab === TABS.REFERENCES}
+      onClick={() => onChange(TABS.REFERENCES)}
+    >
       {`Références juridiques (${referencesCount})`}
-    </Tab>
+    </AnswerEditionHeadBlockTab>
   </Container>
 );
+
+export default AnswerEditionHeadBlockTabs;

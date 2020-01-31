@@ -27,8 +27,8 @@ const styles = {
   menu: s => ({
     ...s,
     border: "solid 1px var(--color-border)",
-    borderTop: 0,
     borderRadius: 0,
+    borderTop: 0,
     boxShadow: "none",
     margin: 0
   }),

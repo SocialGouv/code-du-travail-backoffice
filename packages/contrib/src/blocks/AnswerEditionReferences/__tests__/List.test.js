@@ -1,11 +1,11 @@
-import React from "react";
-import { fireEvent, render } from "@testing-library/react";
-
 import "../../../../tests/globals/waitFor";
+
+import { fireEvent, render } from "@testing-library/react";
+import React from "react";
 
 global.open = jest.fn();
 
-import List from "../List";
+import AnswerEditionReferencesBlockList from "../List";
 
 describe.skip("[Contrib] blocks/AnswerEditionReferences/<List />", () => {
   const props = {
@@ -30,7 +30,7 @@ describe.skip("[Contrib] blocks/AnswerEditionReferences/<List />", () => {
     ]
   };
 
-  const γ = render(<List {...props} />);
+  const γ = render(<AnswerEditionReferencesBlockList {...props} />);
 
   it("should match snapshot", () => {
     expect(γ.container).toMatchSnapshot();

@@ -1,8 +1,8 @@
-import React from "react";
-import { cleanup, fireEvent, render } from "@testing-library/react";
-
 import "../../../tests/globals/console";
 import "../../../tests/globals/waitFor";
+
+import { cleanup, fireEvent, render } from "@testing-library/react";
+import React from "react";
 
 jest.mock("react-redux", () => ({
   connect: () => component => {
@@ -29,56 +29,56 @@ describe.skip("[Contrib] components/<AdminForm /> (create)", () => {
     },
     fields: [
       {
-        type: "input",
+        label: "A Default Input",
         name: "defaultInput",
-        label: "A Default Input"
+        type: "input"
       },
       {
-        type: "input",
-        name: "inputWithButton",
-        label: "An Input With Button",
         button: {
           ariaLabel: "An Input Button",
-          icon: "sync",
-          handler: jest.fn(r => r + " that has been transformed")
-        }
+          handler: jest.fn(r => r + " that has been transformed"),
+          icon: "sync"
+        },
+        label: "An Input With Button",
+        name: "inputWithButton",
+        type: "input"
       },
       {
-        type: "select",
-        name: "defaultSelect",
         label: "A Default Select",
+        name: "defaultSelect",
         options: [
           { label: "First Option", value: "first_option" },
           { label: "Second Option", value: "second_option" }
-        ]
+        ],
+        type: "select"
       },
       {
-        type: "tags",
-        name: "defaultTags",
+        ariaName: "le tag",
         label: "A Default Tags",
+        name: "defaultTags",
         tags: [
           { id: "02dea6e4-3bf0-46a8-9144-9bd324ddcf08", value: "First A Tag" },
           { id: "ced5cec0-a7ff-4803-853e-026926426830", value: "Second A Tag" }
         ],
-        ariaName: "le tag"
+        type: "tags"
       },
       {
-        type: "text",
+        label: "A Default Textarea",
         name: "defaultText",
-        label: "A Default Textarea"
+        type: "text"
       },
       {
-        type: "tags",
-        name: "tagsWithCustomApiPath",
+        apiPath: "/a-custom-api-path",
+        ariaName: "la collection",
         label: "A Tags With Custom API Path",
+        name: "tagsWithCustomApiPath",
+        singleName: "acollection",
         tags: [
           { id: "f64defb3-00d9-44c3-b620-4a05db71329d", value: "First B Tag" },
           { id: "c4d0aec3-c426-4bba-89db-9e89a92c163e", value: "Second B Tag" },
           { id: "056cbd22-00d1-4606-aea5-94dbd1042e0d", value: "Third B Tag" }
         ],
-        ariaName: "la collection",
-        apiPath: "/a-custom-api-path",
-        singleName: "acollection"
+        type: "tags"
       }
     ],
     indexPath: "/an-index-path",
@@ -194,12 +194,12 @@ describe.skip("[Contrib] components/<AdminForm /> (create)", () => {
     const field5 = props.fields[5];
     const expectedCustomData = [
       {
-        anitem_id: itemId,
-        acollection_id: field5.tags[1].id
+        acollection_id: field5.tags[1].id,
+        anitem_id: itemId
       },
       {
-        anitem_id: itemId,
-        acollection_id: field5.tags[2].id
+        acollection_id: field5.tags[2].id,
+        anitem_id: itemId
       }
     ];
     fireEvent.input(γ.getByPlaceholderText(`Commencez à taper le nom de la collection`), {
@@ -235,56 +235,56 @@ describe.skip("[Contrib] components/<AdminForm /> (edit)", () => {
     },
     fields: [
       {
-        type: "input",
+        label: "A Default Input",
         name: "defaultInput",
-        label: "A Default Input"
+        type: "input"
       },
       {
-        type: "input",
-        name: "inputWithButton",
-        label: "An Input With Button",
         button: {
           ariaLabel: "An Input Button",
-          icon: "sync",
-          handler: jest.fn(r => r + " that has been transformed")
-        }
+          handler: jest.fn(r => r + " that has been transformed"),
+          icon: "sync"
+        },
+        label: "An Input With Button",
+        name: "inputWithButton",
+        type: "input"
       },
       {
-        type: "select",
-        name: "defaultSelect",
         label: "A Default Select",
+        name: "defaultSelect",
         options: [
           { label: "First Option", value: "first_option" },
           { label: "Second Option", value: "second_option" }
-        ]
+        ],
+        type: "select"
       },
       {
-        type: "tags",
-        name: "defaultTags",
+        ariaName: "le tag",
         label: "A Default Tags",
+        name: "defaultTags",
         tags: [
           { id: "02dea6e4-3bf0-46a8-9144-9bd324ddcf08", value: "First A Tag" },
           { id: "ced5cec0-a7ff-4803-853e-026926426830", value: "Second A Tag" }
         ],
-        ariaName: "le tag"
+        type: "tags"
       },
       {
-        type: "text",
+        label: "A Default Textarea",
         name: "defaultText",
-        label: "A Default Textarea"
+        type: "text"
       },
       {
-        type: "tags",
-        name: "tagsWithCustomApiPath",
+        apiPath: "/a-custom-api-path",
+        ariaName: "la collection",
         label: "A Tags With Custom API Path",
+        name: "tagsWithCustomApiPath",
+        singleName: "acollection",
         tags: [
           { id: "f64defb3-00d9-44c3-b620-4a05db71329d", value: "First B Tag" },
           { id: "c4d0aec3-c426-4bba-89db-9e89a92c163e", value: "Second B Tag" },
           { id: "056cbd22-00d1-4606-aea5-94dbd1042e0d", value: "Third B Tag" }
         ],
-        ariaName: "la collection",
-        apiPath: "/a-custom-api-path",
-        singleName: "acollection"
+        type: "tags"
       }
     ],
     id: "110f8f6a-d714-45f1-8469-c5adeae60551",
@@ -304,12 +304,12 @@ describe.skip("[Contrib] components/<AdminForm /> (edit)", () => {
   const field5 = props.fields[5];
   const expectedCustomData = [
     {
-      anitem_id: props.id,
-      acollection_id: field5.tags[1].id
+      acollection_id: field5.tags[1].id,
+      anitem_id: props.id
     },
     {
-      anitem_id: props.id,
-      acollection_id: field5.tags[2].id
+      acollection_id: field5.tags[2].id,
+      anitem_id: props.id
     }
   ];
 
@@ -358,10 +358,10 @@ describe.skip("[Contrib] components/<AdminForm /> (create / NO custom API)", () 
     },
     fields: [
       {
-        type: "input",
-        name: "defaultInput",
+        inputType: "number",
         label: "A Default Input",
-        inputType: "number"
+        name: "defaultInput",
+        type: "input"
       }
     ],
     indexPath: "/an-index-path",
@@ -421,10 +421,10 @@ describe.skip("[Contrib] components/<AdminForm /> (edit / NO custom API)", () =>
     },
     fields: [
       {
-        type: "input",
-        name: "defaultInput",
+        inputType: "number",
         label: "A Default Input",
-        inputType: "number"
+        name: "defaultInput",
+        type: "input"
       }
     ],
     id: "110f8f6a-d714-45f1-8469-c5adeae60551",
@@ -474,10 +474,10 @@ describe.skip("[Contrib] components/<AdminForm /> (edit / isApiFunction)", () =>
     },
     fields: [
       {
-        type: "input",
-        name: "defaultInput",
+        inputType: "number",
         label: "A Default Input",
-        inputType: "number"
+        name: "defaultInput",
+        type: "input"
       }
     ],
     id: "110f8f6a-d714-45f1-8469-c5adeae60551",
