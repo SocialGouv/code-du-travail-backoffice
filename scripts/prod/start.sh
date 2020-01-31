@@ -73,12 +73,13 @@ docker-compose up -d web
 
 while [[ "$(curl -s -o /dev/null -w %{http_code} ${WEB_URI})" != "200" ]]; do sleep 5; done
 while [[ "$(curl -s -o /dev/null -w %{http_code} ${API_URI})" != "200" ]]; do sleep 5; done
+
 echo "🚀 The server is up and running!"
 
 if [ "$NODE_ENV" = "production" ] && [ "$CI" != "true" ]; then
   echo "🗑 Cleaning unused containers, networks, images and build cache…"
   docker system prune -af
   yarn cache clean
-fi
 
-echo "✔ Cache cleaned."
+  echo "✔ Cache cleaned."
+fi
