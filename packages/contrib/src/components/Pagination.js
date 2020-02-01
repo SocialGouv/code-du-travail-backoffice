@@ -1,7 +1,7 @@
+import styled from "@emotion/styled";
 import React from "react";
 import ReactPaginate from "react-paginate";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
 const Container = styled(Flex)`
   user-select: none;
@@ -40,8 +40,7 @@ const Container = styled(Flex)`
     }
   }
 `;
-
-export default ({ initialPage, onPageChange, pageCount }) => (
+const Pagination = ({ initialPage, onPageChange, pageCount }) => (
   <Container justifyContent="center">
     <ReactPaginate
       disableInitialCallback={true}
@@ -55,3 +54,5 @@ export default ({ initialPage, onPageChange, pageCount }) => (
     />
   </Container>
 );
+
+export default Pagination;

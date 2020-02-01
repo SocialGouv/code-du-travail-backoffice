@@ -1,6 +1,6 @@
+import styled from "@emotion/styled";
 import React from "react";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
 import _Button from "../../elements/Button";
 import Icon from "../../elements/Icon";
@@ -18,7 +18,7 @@ const Button = styled(_Button)`
   padding: 0 0 0 0.5rem;
 `;
 
-export default class List extends React.PureComponent {
+export default class AnswerEditionReferencesBlockList extends React.PureComponent {
   openUrl(url) {
     window.open(url, "_blank");
   }

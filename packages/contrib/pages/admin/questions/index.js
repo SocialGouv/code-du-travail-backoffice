@@ -15,7 +15,7 @@ const COLUMNS = [
   }
 ];
 
-export default () => (
+const QuestionsIndexPage = () => (
   <AdminIndex
     apiPath="/questions"
     ariaLabels={{
@@ -35,3 +35,5 @@ export default () => (
     title="Questions"
   />
 );
+
+export default QuestionsIndexPage;

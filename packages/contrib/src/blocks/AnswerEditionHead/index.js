@@ -1,11 +1,11 @@
+import styled from "@emotion/styled";
 import React from "react";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
 import _Idcc from "../../elements/Idcc";
 import Title from "../../elements/Title";
-import Actions from "./Actions";
-import Tabs from "./Tabs";
+import AnswerEditionHeadBlockActions from "./Actions";
+import AnswerEditionHeadBlockTabs from "./Tabs";
 
 const Container = styled(Flex)`
   background-color: white;
@@ -17,7 +17,7 @@ const Idcc = styled(_Idcc)`
   /* margin-top: 0.375rem; */
 `;
 
-export default ({
+const AnswerEditionHeadBlock = ({
   agreement,
   currentTab,
   onCancel,
@@ -33,13 +33,15 @@ export default ({
         <Idcc code={agreement.idcc} name={agreement.name} />
         <Title isFirst>{`${question.index}) ${question.value}`}</Title>
       </Flex>
-      <Tabs
+      <AnswerEditionHeadBlockTabs
         currentTab={currentTab}
         onChange={onTabChange}
         referencesCount={referencesCount}
         tagsCount={tagsCount}
       />
     </Flex>
-    <Actions onCancel={onCancel} onSubmit={onSubmit} />
+    <AnswerEditionHeadBlockActions onCancel={onCancel} onSubmit={onSubmit} />
   </Container>
 );
+
+export default AnswerEditionHeadBlock;

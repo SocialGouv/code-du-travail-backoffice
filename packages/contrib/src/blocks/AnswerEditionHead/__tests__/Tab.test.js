@@ -1,7 +1,7 @@
-import React from "react";
 import { fireEvent, render } from "@testing-library/react";
+import React from "react";
 
-import Tab from "../Tab";
+import AnswerEditionHeadBlockTab from "../Tab";
 
 describe.skip("[Contrib] blocks/AnswerEditionHead/<Tab />", () => {
   const props = {
@@ -11,7 +11,7 @@ describe.skip("[Contrib] blocks/AnswerEditionHead/<Tab />", () => {
     onClick: jest.fn()
   };
 
-  const { asFragment, container, getByText } = render(<Tab {...props} />);
+  const { asFragment, container, getByText } = render(<AnswerEditionHeadBlockTab {...props} />);
   const firstRender = asFragment();
 
   it("should match snapshot", () => {
@@ -25,7 +25,7 @@ describe.skip("[Contrib] blocks/AnswerEditionHead/<Tab />", () => {
   });
 
   it("should match snapshot diff with `isActive` prop", () => {
-    const { asFragment } = render(<Tab {...props} isActive />);
+    const { asFragment } = render(<AnswerEditionHeadBlockTab {...props} isActive />);
 
     expect(firstRender).toMatchDiffSnapshot(asFragment());
   });

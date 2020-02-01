@@ -23,8 +23,8 @@ export default (state = initialState, { payload, type }) => {
     case actionTypes.COMMENT_CREATE_ONE_FAILURE:
       return {
         ...state,
-        error: payload.message,
-        currentIsLoading: false
+        currentIsLoading: false,
+        error: payload.message
       };
 
     case actionTypes.COMMENT_CREATE_ONE_SUCCESS:

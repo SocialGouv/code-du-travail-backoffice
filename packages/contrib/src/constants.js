@@ -5,16 +5,16 @@ export const ANSWER_GENERIC_REFERENCE = {
   NATIONAL_AGREEMENT: "national_agreement"
 };
 export const ANSWER_STATE = {
-  TO_DO: "todo",
   DRAFT: "draft",
   PENDING_REVIEW: "pending_review",
+  TO_DO: "todo",
   UNDER_REVIEW: "under_review",
   VALIDATED: "validated"
 };
 export const ANSWER_STATE_LABEL = {
-  todo: "à rédiger",
   draft: "en cours de rédaction",
   pending_review: "en attente de validation",
+  todo: "à rédiger",
   under_review: "en cours de validation",
   validated: "validée"
 };

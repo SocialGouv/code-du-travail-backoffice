@@ -1,6 +1,6 @@
+import styled from "@emotion/styled";
 import React from "react";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
 const Container = styled(Flex)`
   background-color: lightgray;
@@ -30,7 +30,7 @@ const Button = styled.img`
   }
 `;
 
-export default class extends React.PureComponent {
+export default class Tag extends React.PureComponent {
   openUrl(url) {
     window.open(url, "_blank");
   }

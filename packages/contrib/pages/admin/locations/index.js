@@ -9,7 +9,7 @@ const COLUMNS = [
   }
 ];
 
-export default () => (
+const AdminLocationsIndexPage = () => (
   <AdminIndex
     apiPath="/locations"
     ariaLabels={{
@@ -29,3 +29,5 @@ export default () => (
     title="Unités"
   />
 );
+
+export default AdminLocationsIndexPage;

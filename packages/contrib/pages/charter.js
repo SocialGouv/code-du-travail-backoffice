@@ -1,6 +1,6 @@
-import React from "react";
 // import { Flex } from "rebass";
 import styled from "@emotion/styled";
+import React from "react";
 
 import Main from "../src/layouts/Main";
 
@@ -8,7 +8,7 @@ const IFrame = styled.iframe`
   flex-grow: 1;
 `;
 
-export default class extends React.Component {
+export default class CharterPage extends React.Component {
   constructor(props) {
     super(props);
 

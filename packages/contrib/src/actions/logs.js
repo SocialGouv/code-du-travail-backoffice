@@ -3,23 +3,23 @@ import actionTypes from "./types";
 /* MULTIPLE LOGS ―――――――――――――――――――― */
 
 export const load = (meta = {}) => ({
-  type: actionTypes.LOGS_LOAD,
   meta: {
     ...{
       pageIndex: -1,
       query: ""
     },
     ...meta
-  }
+  },
+  type: actionTypes.LOGS_LOAD
 });
 export const loadFailure = error => ({
-  type: actionTypes.LOGS_LOAD_FAILURE,
   error: true,
   payload: {
     message: error.message
-  }
+  },
+  type: actionTypes.LOGS_LOAD_FAILURE
 });
 export const loadSuccess = payload => ({
-  type: actionTypes.LOGS_LOAD_SUCCESS,
-  payload
+  payload,
+  type: actionTypes.LOGS_LOAD_SUCCESS
 });

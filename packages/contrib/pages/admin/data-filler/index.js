@@ -1,6 +1,5 @@
-import React from "react";
-
 import DataFillerIndexPage from "@socialgouv/cdtn-data-filler/pages";
+import React from "react";
 
 import DataFillerMain from "../../../src/layouts/DataFillerMain";
 

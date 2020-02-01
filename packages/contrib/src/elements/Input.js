@@ -1,6 +1,6 @@
+import styled from "@emotion/styled";
 import { omit } from "ramda";
 import React from "react";
-import styled from "@emotion/styled";
 
 import Icon from "./Icon";
 
@@ -11,7 +11,7 @@ const InputWithIconWrapper = styled.div`
 const _Input = styled.input`
   -webkit-appearance: none;
   background-color: white;
-  border: solid 1px var(${p => (Boolean(p.hasError) ? "--color-text-red" : "--color-border")});
+  border: solid 1px var(${p => (p.hasError ? "--color-text-red" : "--color-border")});
   color: inherit;
   flex-grow: 1;
   font-family: inherit;
@@ -19,7 +19,7 @@ const _Input = styled.input`
   font-size: 0.875rem;
   height: 2rem;
   line-height: 1;
-  opacity: ${p => (Boolean(p.disabled) ? 0.25 : 1)};
+  opacity: ${p => (p.disabled ? 0.25 : 1)};
   padding: 0.5rem 0.6rem 0.55rem ${p => (p.hasIcon ? "2rem" : "0.6rem")};
   width: 100%;
 

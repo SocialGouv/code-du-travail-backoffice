@@ -1,11 +1,11 @@
-import React from "react";
-import { fireEvent, render } from "@testing-library/react";
-
 import "../../../../tests/globals/waitFor";
 
-import AnswerEditionReferences from "..";
+import { fireEvent, render } from "@testing-library/react";
+import React from "react";
 
-describe.skip("[Contrib] blocks/<AnswerEditionReferences />", () => {
+import AnswerEditionReferencesBlock from "..";
+
+describe.skip("[Contrib] blocks/<AnswerEditionReferencesBlock />", () => {
   const props = {
     // eslint-disable-next-line max-len
     laborCodeReferences: require("../../../../static/data/labor-law-references.json"),
@@ -30,7 +30,7 @@ describe.skip("[Contrib] blocks/<AnswerEditionReferences />", () => {
     ]
   };
 
-  const γ = render(<AnswerEditionReferences {...props} />);
+  const γ = render(<AnswerEditionReferencesBlock {...props} />);
 
   it("should match snapshot", () => {
     expect(γ.container).toMatchSnapshot();

@@ -1,5 +1,5 @@
-import showdown from "showdown";
 import sanitizeHtml from "sanitize-html";
+import showdown from "showdown";
 
 // https://github.com/showdownjs/showdown#valid-options
 const converter = new showdown.Converter({

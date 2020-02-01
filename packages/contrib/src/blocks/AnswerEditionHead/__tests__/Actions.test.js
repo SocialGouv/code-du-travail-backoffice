@@ -1,7 +1,7 @@
-import React from "react";
 import { fireEvent, render } from "@testing-library/react";
+import React from "react";
 
-import Actions from "../Actions";
+import AnswerEditionHeadBlockActions from "../Actions";
 
 describe.skip("[Contrib] blocks/AnswerEditionHead/<Actions />", () => {
   const props = {
@@ -9,7 +9,7 @@ describe.skip("[Contrib] blocks/AnswerEditionHead/<Actions />", () => {
     onSubmit: jest.fn()
   };
 
-  const { container, getByText } = render(<Actions {...props} />);
+  const { container, getByText } = render(<AnswerEditionHeadBlockActions {...props} />);
 
   it("should match snapshot", () => {
     expect(container).toMatchSnapshot();

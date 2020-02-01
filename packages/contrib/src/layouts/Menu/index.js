@@ -3,12 +3,10 @@ import Router from "next/router";
 import React from "react";
 
 import cache from "../../cache";
-import Icon from "../../elements/Icon";
-
-import { Container, Dropdown, DropdownLink, DropdownMenu, DropdownText } from "./styles";
-
 import { ANSWER_STATE } from "../../constants";
+import Icon from "../../elements/Icon";
 import T from "../../texts";
+import { Container, Dropdown, DropdownLink, DropdownMenu, DropdownText } from "./styles";
 
 export default class Menu extends React.PureComponent {
   goToAnswers(state) {

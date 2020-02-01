@@ -1,13 +1,9 @@
 import { takeLatest } from "redux-saga/effects";
 
 import { actionTypes } from "../../actions";
-
 /* ONE COMMENT ――――――――――――――――――――― */
-
 import createOne from "./createOne";
-
 /* MULTIPLE COMMENTS ――――――――――――――― */
-
 import _delete from "./delete";
 import load from "./load";
 

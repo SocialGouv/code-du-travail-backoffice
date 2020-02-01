@@ -3,19 +3,19 @@ import actionTypes from "./types";
 /* ONE COMMENT ――――――――――――――――――――― */
 
 export const addOne = (value, isPrivate, answerId) => ({
-  type: actionTypes.COMMENT_CREATE_ONE,
   meta: {
     answerId,
     isPrivate,
     value
-  }
+  },
+  type: actionTypes.COMMENT_CREATE_ONE
 });
 export const addOneFailure = error => ({
-  type: actionTypes.COMMENT_CREATE_ONE_FAILURE,
   error: true,
   payload: {
     message: error.message
-  }
+  },
+  type: actionTypes.COMMENT_CREATE_ONE_FAILURE
 });
 
 export const toggleOnePrivacy = () => ({
@@ -25,36 +25,36 @@ export const toggleOnePrivacy = () => ({
 /* MULTIPLE COMMENTS ――――――――――――――― */
 
 export const load = answerId => ({
-  type: actionTypes.COMMENTS_LOAD,
   meta: {
     answerId
-  }
+  },
+  type: actionTypes.COMMENTS_LOAD
 });
 export const loadFailure = error => ({
-  type: actionTypes.COMMENTS_LOAD_FAILURE,
   error: true,
   payload: {
     message: error.message
-  }
+  },
+  type: actionTypes.COMMENTS_LOAD_FAILURE
 });
 export const loadSuccess = data => ({
-  type: actionTypes.COMMENTS_LOAD_SUCCESS,
   payload: {
     data
-  }
+  },
+  type: actionTypes.COMMENTS_LOAD_SUCCESS
 });
 
 export const remove = (ids, answerId) => ({
-  type: actionTypes.COMMENTS_DELETE,
   meta: {
     answerId,
     ids
-  }
+  },
+  type: actionTypes.COMMENTS_DELETE
 });
 export const removeFailure = error => ({
-  type: actionTypes.COMMENTS_DELETE_FAILURE,
   error: true,
   payload: {
     message: error.message
-  }
+  },
+  type: actionTypes.COMMENTS_DELETE_FAILURE
 });

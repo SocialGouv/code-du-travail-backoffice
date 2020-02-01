@@ -1,7 +1,7 @@
+import styled from "@emotion/styled";
 import { omit } from "ramda";
 import React from "react";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
 import markdown from "../libs/markdown";
 import unspace from "../libs/unspace";
@@ -32,9 +32,7 @@ export default class Editor extends React.Component {
   /* istanbul ignore next */
   componentDidMount() {
     const quillOptions = {
-      theme: "snow",
       format: ["blockquote", "bold", "header", "italic", "link", "list", "underline"],
-
       modules: {
         toolbar: {
           container: this.$toolbar,
@@ -43,7 +41,9 @@ export default class Editor extends React.Component {
             undo: () => this.quill.history.undo()
           }
         }
-      }
+      },
+
+      theme: "snow"
     };
 
     // We have to load Quill here because of the global `document`

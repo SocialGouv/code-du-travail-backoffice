@@ -5,8 +5,8 @@ const initialState = {
   data: [],
   error: null,
   isLoading: true,
-  pagesLength: 0,
   pageIndex: 0,
+  pagesLength: 0,
   query: ""
 };
 
@@ -33,10 +33,10 @@ export default (state = initialState, { payload, type }) => {
         checked: [],
         data: payload.data,
         error: null,
-        pagesLength: payload.pagesLength,
+        isLoading: false,
         pageIndex: payload.pageIndex,
-        query: payload.query,
-        isLoading: false
+        pagesLength: payload.pagesLength,
+        query: payload.query
       };
 
     default:

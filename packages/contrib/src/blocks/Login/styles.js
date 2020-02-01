@@ -1,9 +1,9 @@
 // import Router from "next/router";
-import { Flex } from "rebass";
 import styled from "@emotion/styled";
+import { Flex } from "rebass";
 
-import _Title from "../../elements/Title";
 import _Subtitle from "../../elements/Subtitle";
+import _Title from "../../elements/Title";
 
 export const Left = styled(Flex)`
   padding: 5rem;

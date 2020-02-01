@@ -1,6 +1,6 @@
+import styled from "@emotion/styled";
 import React from "react";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
 import _Subtitle from "../../elements/Subtitle";
 import Tag from "../../elements/Tag";
@@ -15,7 +15,7 @@ const Subtitle = styled(_Subtitle)`
   font-weight: 700;
 `;
 
-export default class extends React.PureComponent {
+export default class AnswerEditionTagsBlock extends React.PureComponent {
   constructor(props) {
     super(props);
 

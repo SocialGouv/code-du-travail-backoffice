@@ -5,7 +5,7 @@ import Radio from "../Radio";
 describe("[Contrib] elements/<Radio />", () => {
   const COMMON_PROPS = {
     options: [
-      { label: "A Selected Label", value: "A Selected Value", isSelected: true },
+      { isSelected: true, label: "A Selected Label", value: "A Selected Value" },
       { label: "A Label", value: "A Value" },
       { label: "Another Label", value: "Another Value" }
     ]

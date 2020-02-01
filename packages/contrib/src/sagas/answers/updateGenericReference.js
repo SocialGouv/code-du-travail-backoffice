@@ -1,11 +1,10 @@
 import { put } from "redux-saga/effects";
 
 import { answers } from "../../actions";
-import getCurrentUser from "../../libs/getCurrentUser";
-import customPostgrester from "../../libs/customPostgrester";
-import toast from "../../libs/toast";
-
 import { ANSWER_STATE, USER_ROLE } from "../../constants";
+import customPostgrester from "../../libs/customPostgrester";
+import getCurrentUser from "../../libs/getCurrentUser";
+import toast from "../../libs/toast";
 
 /**
  * Update answers to make them generic or not.

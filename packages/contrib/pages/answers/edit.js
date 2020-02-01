@@ -1,23 +1,23 @@
+import styled from "@emotion/styled";
 import axios from "axios";
 import debounce from "lodash.debounce";
 import Router from "next/router";
 import React from "react";
 import { connect } from "react-redux";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
 import * as actions from "../../src/actions";
-import AnswerEditionContent from "../../src/blocks/AnswerEditionContent";
-import AnswerEditionHead from "../../src/blocks/AnswerEditionHead";
-import AnswerEditionReferences from "../../src/blocks/AnswerEditionReferences";
-import AnswerEditionTags from "../../src/blocks/AnswerEditionTags";
-import Main from "../../src/layouts/Main";
+import AnswerEditionContentBlock from "../../src/blocks/AnswerEditionContent";
+import AnswerEditionHeadBlock from "../../src/blocks/AnswerEditionHead";
+import { TABS } from "../../src/blocks/AnswerEditionHead/Tabs";
+import AnswerEditionReferencesBlock from "../../src/blocks/AnswerEditionReferences";
+import AnswerEditionTagsBlock from "../../src/blocks/AnswerEditionTags";
+import { ANSWER_STATE } from "../../src/constants";
 import SavingSpinner from "../../src/elements/SavingSpinner";
+import Main from "../../src/layouts/Main";
 import customAxios from "../../src/libs/customAxios";
 import getCurrentUser from "../../src/libs/getCurrentUser";
 import makeApiFilter from "../../src/libs/makeApiFilter";
-import { TABS } from "../../src/blocks/AnswerEditionHead/Tabs";
-import { ANSWER_STATE } from "../../src/constants";
 
 const Container = styled(Main)`
   overflow-x: hidden;
@@ -289,7 +289,7 @@ class AnswersEditPage extends React.Component {
     switch (this.state.currentTab) {
       case TABS.REFERENCES:
         return (
-          <AnswerEditionReferences
+          <AnswerEditionReferencesBlock
             laborCodeReferences={this.laborCodeReferences}
             onAdd={this.createReference.bind(this)}
             onRemove={this.deleteReference.bind(this)}
@@ -299,7 +299,7 @@ class AnswersEditPage extends React.Component {
 
       case TABS.TAGS:
         return (
-          <AnswerEditionTags
+          <AnswerEditionTagsBlock
             onToggle={this.toggleTag.bind(this)}
             selectedTags={tags}
             tags={this.allTags}
@@ -308,7 +308,7 @@ class AnswersEditPage extends React.Component {
 
       case TABS.EDITOR:
       default:
-        return <AnswerEditionContent defaultValue={prevalue} onChange={this.updatePrevalue} />;
+        return <AnswerEditionContentBlock defaultValue={prevalue} onChange={this.updatePrevalue} />;
     }
   }
 
@@ -325,7 +325,7 @@ class AnswersEditPage extends React.Component {
 
     return (
       <Container>
-        <AnswerEditionHead
+        <AnswerEditionHeadBlock
           agreement={agreement}
           currentTab={this.state.currentTab}
           idcc={agreement.idcc}

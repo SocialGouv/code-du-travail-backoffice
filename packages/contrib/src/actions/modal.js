@@ -1,13 +1,13 @@
 import actionTypes from "./types";
 
 export const open = (message, action) => ({
-  type: actionTypes.MODAL_OPEN,
   meta: {
     action
   },
   payload: {
     message
-  }
+  },
+  type: actionTypes.MODAL_OPEN
 });
 
 export const submit = () => ({

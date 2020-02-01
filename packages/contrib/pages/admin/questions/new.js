@@ -1,20 +1,20 @@
 import React from "react";
 
 import AdminForm from "../../../src/components/AdminForm";
-import AdminMain from "../../../src/layouts/AdminMain";
+import AdminMainLayout from "../../../src/layouts/AdminMain";
 import customAxios from "../../../src/libs/customAxios";
 
 const FIELDS = [
   {
-    type: "input",
-    name: "index",
+    inputType: "number",
     label: "Index",
-    inputType: "number"
+    name: "index",
+    type: "input"
   },
   {
-    type: "text",
+    label: "Intitulé",
     name: "value",
-    label: "Intitulé"
+    type: "text"
   }
 ];
 
@@ -37,13 +37,13 @@ export default class AdminQuestionsNewPage extends React.Component {
       const fields = [
         ...FIELDS,
         {
-          type: "tags",
-          name: "tags",
-          label: "Étiquettes",
-          tags: tags.map(({ id, value }) => ({ id, value })),
-          ariaName: "l'étiquette",
           apiPath: "/questions_tags",
-          singleName: "tag"
+          ariaName: "l'étiquette",
+          label: "Étiquettes",
+          name: "tags",
+          singleName: "tag",
+          tags: tags.map(({ id, value }) => ({ id, value })),
+          type: "tags"
         }
       ];
 
@@ -57,7 +57,7 @@ export default class AdminQuestionsNewPage extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading) return <AdminMain isLoading />;
+    if (this.state.isLoading) return <AdminMainLayout isLoading />;
 
     return (
       <AdminForm

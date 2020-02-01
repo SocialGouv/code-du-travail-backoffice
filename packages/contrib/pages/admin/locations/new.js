@@ -1,15 +1,15 @@
 import React from "react";
 
 import AdminForm from "../../../src/components/AdminForm";
-import AdminMain from "../../../src/layouts/AdminMain";
+import AdminMainLayout from "../../../src/layouts/AdminMain";
 import customAxios from "../../../src/libs/customAxios";
 import customPostgrester from "../../../src/libs/customPostgrester";
 
 const FIELDS = [
   {
-    type: "input",
+    label: "Nom",
     name: "name",
-    label: "Nom"
+    type: "input"
   }
 ];
 
@@ -37,25 +37,25 @@ export default class AdminLocationsNewPage extends React.Component {
       const fields = [
         ...FIELDS,
         {
-          type: "select",
-          name: "area_id",
           label: "Zone",
+          name: "area_id",
           options: areas.map(({ category, id: value, name }) => ({
             label: `[${category.substr(0, 3).toUpperCase()}] ${name}`,
             value
-          }))
+          })),
+          type: "select"
         },
         {
-          type: "tags",
-          name: "agreements",
+          apiPath: "/locations_agreements",
+          ariaName: "la convention",
           label: "Conventions",
+          name: "agreements",
+          singleName: "agreement",
           tags: agreements.map(({ id, idcc, name }) => ({
             id,
             value: `${idcc} - ${name}`
           })),
-          ariaName: "la convention",
-          apiPath: "/locations_agreements",
-          singleName: "agreement"
+          type: "tags"
         }
       ];
 
@@ -69,7 +69,7 @@ export default class AdminLocationsNewPage extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading) return <AdminMain isLoading />;
+    if (this.state.isLoading) return <AdminMainLayout isLoading />;
 
     return (
       <AdminForm

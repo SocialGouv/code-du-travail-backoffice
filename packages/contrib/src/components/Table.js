@@ -1,5 +1,5 @@
-import ReactTable from "react-table";
 import styled from "@emotion/styled";
+import ReactTable from "react-table";
 
 export default styled(ReactTable)`
   .rt-thead {

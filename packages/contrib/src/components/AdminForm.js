@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 
+import styled from "@emotion/styled";
 import Router from "next/router";
 import * as R from "ramda";
 import React from "react";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
 import Tags from "../components/Tags";
 import Button from "../elements/Button";
@@ -14,7 +14,7 @@ import Input from "../elements/Input";
 import Select from "../elements/Select";
 import Textarea from "../elements/Textarea";
 import Title from "../elements/Title";
-import AdminMain from "../layouts/AdminMain";
+import AdminMainLayout from "../layouts/AdminMain";
 import customAxios from "../libs/customAxios";
 import unspace from "../libs/unspace";
 
@@ -173,7 +173,7 @@ export default class AdminForm extends React.Component {
     // Most of the comments below are related to:
     // http://postgrest.org/en/latest/api.html#insertions-updates
     try {
-      if (this.props.id !== undefined && !Boolean(this.props.isApiFunction)) {
+      if (this.props.id !== undefined && !this.props.isApiFunction) {
         // PostgREST exposed api table updates are done via PATCH requests:
         const uri = `${this.props.apiPath}?id=eq.${this.props.id}`;
         await this.axios.patch(uri, data);
@@ -184,8 +184,8 @@ export default class AdminForm extends React.Component {
           for (const field of fieldsWithCustomApiPath) {
             const fieldIdName = `${field.singleName}_id`;
             const foreignData = fullData[field.name].map(foreignItemId => ({
-              [itemIdName]: this.props.id,
-              [fieldIdName]: foreignItemId
+              [fieldIdName]: foreignItemId,
+              [itemIdName]: this.props.id
             }));
 
             // The easier and faster strategy to update the collection field is
@@ -210,8 +210,8 @@ export default class AdminForm extends React.Component {
           for (const field of fieldsWithCustomApiPath) {
             const fieldIdName = `${field.singleName}_id`;
             const foreignData = fullData[field.name].map(foreignItemId => ({
-              [itemIdName]: itemId,
-              [fieldIdName]: foreignItemId
+              [fieldIdName]: foreignItemId,
+              [itemIdName]: itemId
             }));
             await this.axios.post(field.apiPath, foreignData);
           }
@@ -327,10 +327,10 @@ export default class AdminForm extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading) return <AdminMain isLoading />;
+    if (this.state.isLoading) return <AdminMainLayout isLoading />;
 
     return (
-      <AdminMain>
+      <AdminMainLayout>
         <Form flexDirection="row" onSubmit={this.submit} role="form">
           <Title isFirst>{this.props.title}</Title>
           {this.props.fields.map(this.getField)}
@@ -360,7 +360,7 @@ export default class AdminForm extends React.Component {
             </div>
           </Field>
         </Form>
-      </AdminMain>
+      </AdminMainLayout>
     );
   }
 }

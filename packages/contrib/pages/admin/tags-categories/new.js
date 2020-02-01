@@ -4,9 +4,9 @@ import AdminForm from "../../../src/components/AdminForm";
 
 const FIELDS = [
   {
-    type: "input",
+    label: "Intitulé",
     name: "value",
-    label: "Intitulé"
+    type: "input"
   }
 ];
 

@@ -3,7 +3,6 @@ import React from "react";
 
 import cache from "../../cache";
 import { USER_ROLE } from "../../constants";
-
 import styles, { Link, Subtitle } from "./styles";
 
 export default class AdminMenu extends React.PureComponent {

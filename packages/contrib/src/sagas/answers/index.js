@@ -1,15 +1,11 @@
 import { takeLatest } from "redux-saga/effects";
 
 import { actionTypes } from "../../actions";
-
-/* ONE ANSWER ―――――――――――――――――――――― */
-
-import loadOne from "./loadOne";
-
 /* MULTIPLE ANSWERS ―――――――――――――――― */
-
 import cancel from "./cancel";
 import load from "./load";
+/* ONE ANSWER ―――――――――――――――――――――― */
+import loadOne from "./loadOne";
 import setFilter from "./setFilter";
 import setFilters from "./setFilters";
 import toggleCheck from "./toggleCheck";

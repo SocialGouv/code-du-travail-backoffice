@@ -1,6 +1,6 @@
+import styled from "@emotion/styled";
 import React from "react";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
 import _Icon from "../elements/Icon";
 
@@ -34,7 +34,7 @@ const DEFAULT_PROPS = {
   isDisabled: false
 };
 
-export default class extends React.PureComponent {
+export default class Reference extends React.PureComponent {
   openUrl(url) {
     window.open(url, "_blank");
   }

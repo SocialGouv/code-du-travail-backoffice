@@ -6,7 +6,7 @@ import Field from "../../elements/Field";
 import Input from "../../elements/Input";
 import api from "../../libs/api";
 
-export default class Login extends React.PureComponent {
+export default class LoginBlockForm extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -60,8 +60,8 @@ export default class Login extends React.PureComponent {
 
     if (this.$password.value.length === 0) {
       this.setState({
-        passwordError: "Vous devez renseigner votre mot de passe.",
-        isLoading: false
+        isLoading: false,
+        passwordError: "Vous devez renseigner votre mot de passe."
       });
 
       return;
@@ -82,7 +82,7 @@ export default class Login extends React.PureComponent {
     const { emailError, isLoading, passwordError } = this.state;
 
     return (
-      <form onSubmit={this.submit.bind(this)} role="form">
+      <form onSubmit={this.submit.bind(this)}>
         <Field error={emailError} flexDirection="column">
           <Input
             disabled={this.state.isLoading}

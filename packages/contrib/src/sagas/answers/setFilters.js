@@ -25,8 +25,8 @@ export default function* setFilter({ meta: { filters } }) {
     jsCookie.set(lastFiltersCookieKey, JSON.stringify(nextFilters));
 
     yield put({
-      type: actionTypes.ANSWERS_SET_FILTERS_SUCCESS,
-      payload: { filters: nextFilters }
+      payload: { filters: nextFilters },
+      type: actionTypes.ANSWERS_SET_FILTERS_SUCCESS
     });
   } catch (err) {
     toast.error(err.message);

@@ -1,10 +1,10 @@
+import styled from "@emotion/styled";
 import React from "react";
 import { Button as _Button } from "rebass";
-import styled from "@emotion/styled";
 
 import Icon from "./Icon";
 
-const Button = styled(_Button)`
+const Container = styled(_Button)`
   background-color: ${p => (p.hasText ? p.color : "transparent")};
   border-radius: 0.125rem;
   color: ${p => (p.isLight ? "var(--color-eerie-black)" : "white")};
@@ -40,7 +40,7 @@ const COLOR = {
   warning: { isLight: false, value: "var(--color-lapis-lazuli)" }
 };
 
-export default ({
+const Button = ({
   children,
   color = "primary",
   disabled = false,
@@ -53,7 +53,7 @@ export default ({
 
   if (icon === undefined)
     return (
-      <Button
+      <Container
         color={COLOR[color].value}
         disabled={disabled}
         hasGroup={hasGroup}
@@ -63,14 +63,14 @@ export default ({
         {...props}
       >
         {children}
-      </Button>
+      </Container>
     );
 
   const hasText = children !== undefined;
 
   if (hasText) {
     return (
-      <Button
+      <Container
         color={COLOR[color].value}
         disabled={disabled}
         hasGroup={hasGroup}
@@ -81,12 +81,12 @@ export default ({
       >
         <Icon icon={icon} color={isLight ? "var(--color-eerie-black)" : "white"} />
         {children}
-      </Button>
+      </Container>
     );
   }
 
   return (
-    <Button
+    <Container
       disabled={disabled}
       hasGroup={hasGroup}
       hasText={false}
@@ -96,6 +96,8 @@ export default ({
     >
       <Icon icon={icon} color={COLOR[color].value} />
       {children}
-    </Button>
+    </Container>
   );
 };
+
+export default Button;

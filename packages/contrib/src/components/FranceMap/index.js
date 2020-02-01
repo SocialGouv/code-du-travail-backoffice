@@ -1,10 +1,12 @@
+import "react-svg-map/lib/index.css";
+
 import React from "react";
 import { RadioSVGMap } from "react-svg-map";
 
 import regions from "./regions.json";
 
-import "react-svg-map/lib/index.css";
-
-export default function({ onChange }) {
+const FranceMap = ({ onChange }) => {
   return <RadioSVGMap map={regions} onChange={node => onChange(node.id)} />;
-}
+};
+
+export default FranceMap;

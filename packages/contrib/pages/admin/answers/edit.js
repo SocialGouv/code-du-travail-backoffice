@@ -1,15 +1,15 @@
+import styled from "@emotion/styled";
 import debounce from "lodash.debounce";
 import React from "react";
 import Medixtor from "react-medixtor";
 import { connect } from "react-redux";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
 import * as actions from "../../../src/actions";
 import Comment from "../../../src/components/Comment";
 import LawReferences from "../../../src/components/LawReferences";
 import Reference from "../../../src/components/Reference";
-import AdminMain from "../../../src/layouts/AdminMain";
+import { ANSWER_STATE, ANSWER_STATE_LABEL, ANSWER_STATE_OPTIONS } from "../../../src/constants";
 import Button from "../../../src/elements/Button";
 import _Checkbox from "../../../src/elements/Checkbox";
 import Hr from "../../../src/elements/Hr";
@@ -22,10 +22,9 @@ import Subtitle from "../../../src/elements/Subtitle";
 import Textarea from "../../../src/elements/Textarea";
 import Title from "../../../src/elements/Title";
 import capitalize from "../../../src/helpers/capitalize";
+import AdminMainLayout from "../../../src/layouts/AdminMain";
 import customAxios from "../../../src/libs/customAxios";
 import makeApiFilter from "../../../src/libs/makeApiFilter";
-
-import { ANSWER_STATE, ANSWER_STATE_LABEL, ANSWER_STATE_OPTIONS } from "../../../src/constants";
 import T from "../../../src/texts";
 
 const STATES = Object.keys(ANSWER_STATE_LABEL);
@@ -169,7 +168,7 @@ const AnswerCorrection = styled(Editor)`
 `;
 const Strong = styled.p`
   font-weight: 600;
-  margin: ${props => (Boolean(props.isFirst) ? "0 0 0.5rem" : "1rem 0 0.5rem")};
+  margin: ${props => (props.isFirst ? "0 0 0.5rem" : "1rem 0 0.5rem")};
 `;
 const Form = styled.form`
   display: flex;
@@ -192,7 +191,7 @@ const Comments = styled(Flex)`
 `;
 const CommentEditor = styled(Textarea)`
   background: ${({ isPrivate }) =>
-    !Boolean(isPrivate)
+    !isPrivate
       ? "white"
       : `repeating-linear-gradient(
             45deg,
@@ -203,7 +202,7 @@ const CommentEditor = styled(Textarea)`
           )`};
   border-radius: 0.25rem;
   font-size: 0.75rem;
-  opacity: ${props => (Boolean(props.disabled) ? 0.25 : 1)};
+  opacity: ${props => (props.disabled ? 0.25 : 1)};
   margin-top: 1rem;
   max-height: 10rem;
   padding: 0.5rem;
@@ -226,13 +225,13 @@ export class AdminAnwsersEditPage extends React.Component {
 
     this.state = {
       agreementReferenceValueInputKey: 0,
-      isUpdating: false,
       isLoading: true,
+      isSidebarHidden: true,
+      isUpdating: false,
       otherReferenceUrlInputKey: 0,
       otherReferenceValueInputKey: 2,
       prevalue: null,
       references: [],
-      isSidebarHidden: true,
       value: ""
     };
 
@@ -290,8 +289,8 @@ export class AdminAnwsersEditPage extends React.Component {
       const { data: references } = await this.axios.get(referencesUri);
 
       this.setState({
-        references,
-        isUpdating: false
+        isUpdating: false,
+        references
       });
     } catch (err) {
       if (err !== undefined) console.warn(err);
@@ -557,14 +556,14 @@ export class AdminAnwsersEditPage extends React.Component {
     const { isLoading, prevalue, isSidebarHidden, value } = this.state;
 
     if (isLoading || answers.isLoading || prevalue === null || value === null) {
-      return <AdminMain isLoading />;
+      return <AdminMainLayout isLoading />;
     }
 
     const { agreement, generic_reference, is_published, question, state } = answers.data;
     const stateSelectValue = ANSWER_STATE_OPTIONS.find(({ value }) => value === state);
 
     return (
-      <AdminMain isScrollable={false}>
+      <AdminMainLayout isScrollable={false}>
         <Container>
           <Content flexDirection="column">
             <Flex alignItems="baseline" justifyContent="space-between">
@@ -673,19 +672,19 @@ export class AdminAnwsersEditPage extends React.Component {
                   onChange={this.updateGenericReference.bind(this)}
                   options={[
                     {
+                      isSelected: generic_reference === null,
                       label: "Aucun renvoi.",
-                      value: null,
-                      isSelected: generic_reference === null
+                      value: null
                     },
                     {
+                      isSelected: generic_reference === "labor_code",
                       label: "Renvoyée au texte Code du Travail.",
-                      value: "labor_code",
-                      isSelected: generic_reference === "labor_code"
+                      value: "labor_code"
                     },
                     {
+                      isSelected: generic_reference === "national_agreement",
                       label: "Renvoyée au texte de la CCN.",
-                      value: "national_agreement",
-                      isSelected: generic_reference === "national_agreement"
+                      value: "national_agreement"
                     }
                   ]}
                 />
@@ -746,7 +745,7 @@ export class AdminAnwsersEditPage extends React.Component {
             />
           </Sidebar>
         </Container>
-      </AdminMain>
+      </AdminMainLayout>
     );
   }
 }

@@ -1,5 +1,5 @@
-import { Flex } from "rebass";
 import styled from "@emotion/styled";
+import { Flex } from "rebass";
 
 export const Container = styled(Flex)`
   padding-top: 0.3rem;

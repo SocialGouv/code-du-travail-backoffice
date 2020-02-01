@@ -41,7 +41,7 @@ const ThirdSpinner = styled(Spinner)`
   animation-delay: -0.15s;
 `;
 
-export default ({ color = "white", size = 64, ...props }) => {
+const SavingSpinner = ({ color = "white", size = 64, ...props }) => {
   return (
     <Container size={size} {...props}>
       <FirstSpinner color={color} size={size} />
@@ -51,3 +51,5 @@ export default ({ color = "white", size = 64, ...props }) => {
     </Container>
   );
 };
+
+export default SavingSpinner;

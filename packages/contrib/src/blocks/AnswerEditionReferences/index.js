@@ -1,14 +1,14 @@
+import styled from "@emotion/styled";
 import { find, propEq } from "ramda";
 import React from "react";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
 import Tags from "../../components/Tags";
+import Button from "../../elements/Button";
 import Field from "../../elements/Field";
 import Input from "../../elements/Input";
 import Subtitle from "../../elements/Subtitle";
-import Button from "../../elements/Button";
-import List from "./List";
+import AnswerEditionReferencesBlockList from "./List";
 
 const Container = styled(Flex)`
   flex-grow: 1;
@@ -19,7 +19,7 @@ const Part = styled(Flex)`
   padding: 0.5rem;
 `;
 
-export default class extends React.PureComponent {
+export default class AnswerEditionReferencesBlock extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -28,11 +28,11 @@ export default class extends React.PureComponent {
       laborCodeReferences: props.laborCodeReferences.map(laborCodeReference => ({
         value: laborCodeReference
       })),
+      referenceFormKey: 0,
+      references: props.references,
       selectedLaborCodeReferences: props.references
         .filter(({ category }) => category === "labor_code")
-        .map(({ value }) => ({ value })),
-      referenceFormKey: 0,
-      references: props.references
+        .map(({ value }) => ({ value }))
     };
   }
 
@@ -141,7 +141,6 @@ export default class extends React.PureComponent {
             <form
               key={this.state.agreementReferenceFormKey}
               onSubmit={this.addAgreementReference.bind(this)}
-              role="form"
             >
               <Field>
                 <Input
@@ -162,7 +161,7 @@ export default class extends React.PureComponent {
               </Field>
             </form>
           </Flex>
-          <List
+          <AnswerEditionReferencesBlockList
             ariaName="la référence à la convention collective"
             onRemove={this.removeAgreementReference.bind(this)}
             references={agreementReferences}
@@ -184,7 +183,7 @@ export default class extends React.PureComponent {
               />
             </div>
           </Flex>
-          <List
+          <AnswerEditionReferencesBlockList
             ariaName="la référence au Code du travail"
             onRemove={this.removeLaborCodeReference.bind(this)}
             references={laborCodeReferences}
@@ -196,11 +195,7 @@ export default class extends React.PureComponent {
             <Subtitle isFirst>
               Autre référence juridique (décret, règlementation, circulaire, jurisprudence) :
             </Subtitle>
-            <form
-              key={this.state.referenceFormKey}
-              onSubmit={this.addReference.bind(this)}
-              role="form"
-            >
+            <form key={this.state.referenceFormKey} onSubmit={this.addReference.bind(this)}>
               <Field>
                 <Input
                   placeholder="Référence (ex: Décret n°82-447 du 28 mai 1982…)"
@@ -220,7 +215,7 @@ export default class extends React.PureComponent {
               </Field>
             </form>
           </Flex>
-          <List
+          <AnswerEditionReferencesBlockList
             ariaName="la référence juridique"
             onRemove={this.removeReference.bind(this)}
             references={otherReferences}

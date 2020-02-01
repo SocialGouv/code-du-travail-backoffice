@@ -2,16 +2,15 @@
 import React from "react";
 import { Flex, Text } from "rebass";
 
-import Form from "./Form";
 import Main from "../../layouts/Main";
-import Welcome from "../../svgs/Welcome";
-
+import WelcomeSvg from "../../svgs/Welcome";
+import LoginBlockForm from "./Form";
 import { HelpText, Left, Right, Subtitle, Title } from "./styles";
 
-export default ({ onLoggedIn }) => (
+const LoginBlock = ({ onLoggedIn }) => (
   <Main isHorizontal>
     <Left flexDirection="column" justifyContent="center" width={0.5}>
-      <Welcome />
+      <WelcomeSvg />
       <Title>Bienvenue sur l’outil de contribution au Code du travail numérique</Title>
       <Text>
         {`Un outil simple pour composer et éditer vos contributions au `}
@@ -28,7 +27,7 @@ export default ({ onLoggedIn }) => (
     <Right alignItems="center" justifyContent="center" width={0.5}>
       <Flex flexDirection="column">
         <Subtitle>Identifiez-vous pour accéder à votre compte :</Subtitle>
-        <Form onLoggedIn={onLoggedIn} />
+        <LoginBlockForm onLoggedIn={onLoggedIn} />
         <HelpText>
           <a href="mailto:codedutravail@beta.gouv.fr">
             Une question? Un problème pour vous connecter?
@@ -38,3 +37,5 @@ export default ({ onLoggedIn }) => (
     </Right>
   </Main>
 );
+
+export default LoginBlock;

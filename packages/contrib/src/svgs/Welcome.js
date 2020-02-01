@@ -1,6 +1,6 @@
 import React from "react";
 
-export default () => (
+const WelcomeSvg = () => (
   <svg viewBox="0 0 1155.41 796.48">
     <defs>
       <linearGradient
@@ -759,3 +759,5 @@ export default () => (
     />
   </svg>
 );
+
+export default WelcomeSvg;

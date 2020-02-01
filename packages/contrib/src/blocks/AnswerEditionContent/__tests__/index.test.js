@@ -1,7 +1,7 @@
-import React from "react";
 import { render } from "@testing-library/react";
+import React from "react";
 
-import AnswerEditionContent from "..";
+import AnswerEditionContentBlock from "..";
 
 // Polyfill "document.getSelection()""
 // https://gist.github.com/yckart/6435861
@@ -17,7 +17,7 @@ describe("[Contrib] blocks/<AnswerEditionContent />", () => {
     onChange: jest.fn()
   };
 
-  const λ = render(<AnswerEditionContent {...props} />);
+  const λ = render(<AnswerEditionContentBlock {...props} />);
 
   it("should match snapshot", () => {
     expect(λ.container).toMatchSnapshot();

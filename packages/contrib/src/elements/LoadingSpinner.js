@@ -38,7 +38,7 @@ const SpinnerNext = styled(Spinner)`
   animation-delay: -0.5s;
 `;
 
-export default ({ color = "white", ...props }) => {
+const LoadingSpinner = ({ color = "white", ...props }) => {
   return (
     <Container {...props}>
       <Spinner color={color} />
@@ -46,3 +46,5 @@ export default ({ color = "white", ...props }) => {
     </Container>
   );
 };
+
+export default LoadingSpinner;

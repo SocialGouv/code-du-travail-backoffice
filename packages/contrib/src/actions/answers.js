@@ -3,145 +3,145 @@ import actionTypes from "./types";
 /* ONE ANSWER ―――――――――――――――――――――― */
 
 export const loadOne = (id, meta = { withReferences: false, withTags: false }) => ({
-  type: actionTypes.ANSWER_LOAD_ONE,
   meta: {
     ...meta,
     id
-  }
+  },
+  type: actionTypes.ANSWER_LOAD_ONE
 });
 export const loadOneFailure = error => ({
-  type: actionTypes.ANSWER_LOAD_ONE_FAILURE,
   error: true,
   payload: {
     message: error.message
-  }
+  },
+  type: actionTypes.ANSWER_LOAD_ONE_FAILURE
 });
 export const loadOneSuccess = data => ({
-  type: actionTypes.ANSWER_LOAD_ONE_SUCCESS,
   payload: {
     data
-  }
+  },
+  type: actionTypes.ANSWER_LOAD_ONE_SUCCESS
 });
 
 /* MULTIPLE ANSWERS ―――――――――――――――― */
 
 export const cancel = (ids, next) => ({
-  type: actionTypes.ANSWERS_CANCEL,
   meta: {
     ids,
     next
-  }
+  },
+  type: actionTypes.ANSWERS_CANCEL
 });
 export const cancelFailure = error => ({
-  type: actionTypes.ANSWERS_CANCEL_FAILURE,
   error: true,
   payload: {
     message: error.message
-  }
+  },
+  type: actionTypes.ANSWERS_CANCEL_FAILURE
 });
 
 export const load = () => ({
   type: actionTypes.ANSWERS_LOAD
 });
 export const loadFailure = error => ({
-  type: actionTypes.ANSWERS_LOAD_FAILURE,
   error: true,
   payload: {
     message: error.message
-  }
+  },
+  type: actionTypes.ANSWERS_LOAD_FAILURE
 });
 export const loadSuccess = payload => ({
-  type: actionTypes.ANSWERS_LOAD_SUCCESS,
-  payload
+  payload,
+  type: actionTypes.ANSWERS_LOAD_SUCCESS
 });
 
 export const setFilter = (key, value) => ({
-  type: actionTypes.ANSWERS_SET_FILTER,
   meta: {
     key,
     value
-  }
+  },
+  type: actionTypes.ANSWERS_SET_FILTER
 });
 export const setFilterFailure = error => ({
-  type: actionTypes.ANSWERS_SET_FILTER_FAILURE,
   error: true,
   payload: {
     message: error.message
-  }
+  },
+  type: actionTypes.ANSWERS_SET_FILTER_FAILURE
 });
 
 export const setFilters = filters => ({
-  type: actionTypes.ANSWERS_SET_FILTERS,
   meta: {
     filters
-  }
+  },
+  type: actionTypes.ANSWERS_SET_FILTERS
 });
 export const setFiltersFailure = error => ({
-  type: actionTypes.ANSWERS_SET_FILTERS_FAILURE,
   error: true,
   payload: {
     message: error.message
-  }
+  },
+  type: actionTypes.ANSWERS_SET_FILTERS_FAILURE
 });
 
 export const toggleCheck = ids => ({
-  type: actionTypes.ANSWERS_TOGGLE_CHECK,
   meta: {
     ids
-  }
+  },
+  type: actionTypes.ANSWERS_TOGGLE_CHECK
 });
 export const toggleCheckFailure = error => ({
-  type: actionTypes.ANSWERS_TOGGLE_CHECK_FAILURE,
   error: true,
   payload: {
     message: error.message
-  }
+  },
+  type: actionTypes.ANSWERS_TOGGLE_CHECK_FAILURE
 });
 
 export const updateGenericReference = (ids, genericReference, next) => ({
-  type: actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE,
   meta: {
     genericReference,
     ids,
     next
-  }
+  },
+  type: actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE
 });
 export const updateGenericReferenceFailure = error => ({
-  type: actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE_FAILURE,
   error: true,
   payload: {
     message: error.message
-  }
+  },
+  type: actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE_FAILURE
 });
 
 export const updateIsPublished = (ids, is, next) => ({
-  type: actionTypes.ANSWERS_UPDATE_IS_PUBLISHED_REFERENCE,
   meta: {
     ids,
     is,
     next
-  }
+  },
+  type: actionTypes.ANSWERS_UPDATE_IS_PUBLISHED_REFERENCE
 });
 export const updateIsPublishedFailure = error => ({
-  type: actionTypes.ANSWERS_UPDATE_IS_PUBLISHED_REFERENCE_FAILURE,
   error: true,
   payload: {
     message: error.message
-  }
+  },
+  type: actionTypes.ANSWERS_UPDATE_IS_PUBLISHED_REFERENCE_FAILURE
 });
 
 export const updateState = (ids, state, next) => ({
-  type: actionTypes.ANSWERS_UPDATE_STATE,
   meta: {
     ids,
     next,
     state
-  }
+  },
+  type: actionTypes.ANSWERS_UPDATE_STATE
 });
 export const updateStateFailure = error => ({
-  type: actionTypes.ANSWERS_UPDATE_STATE_FAILURE,
   error: true,
   payload: {
     message: error.message
-  }
+  },
+  type: actionTypes.ANSWERS_UPDATE_STATE_FAILURE
 });

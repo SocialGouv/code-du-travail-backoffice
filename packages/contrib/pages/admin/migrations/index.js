@@ -25,7 +25,7 @@ const COLUMNS = [
   }
 ];
 
-export default () => (
+const AdminMigrationsIndexPage = () => (
   <AdminIndex
     apiPath="/administrator_migrations?order=migration_time.desc"
     ariaLabels={{
@@ -40,3 +40,5 @@ export default () => (
     title="Migrations"
   />
 );
+
+export default AdminMigrationsIndexPage;

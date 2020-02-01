@@ -23,7 +23,7 @@ const COLUMNS = [
   }
 ];
 
-export default () => (
+const AdminUsersIndexPage = () => (
   <AdminIndex
     apiDeletePath="/rpc/delete_user"
     apiGetPath="/administrator_users"
@@ -44,3 +44,5 @@ export default () => (
     title="Utilisateurs"
   />
 );
+
+export default AdminUsersIndexPage;

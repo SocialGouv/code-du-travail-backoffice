@@ -1,60 +1,61 @@
+import styled from "@emotion/styled";
 import React from "react";
 import { Flex } from "rebass";
-import styled from "@emotion/styled";
 
 import FranceMap from "../../src/components/FranceMap";
 import _Table from "../../src/components/Table";
+import { ANSWER_STATE } from "../../src/constants";
 import Button from "../../src/elements/Button";
 import ContentTitle from "../../src/elements/ContentTitle";
+import Icon from "../../src/elements/Icon";
 import Subtitle from "../../src/elements/Subtitle";
 import Title from "../../src/elements/Title";
 import shortenAgreementName from "../../src/helpers/shortenAgreementName";
-import AdminMain from "../../src/layouts/AdminMain";
-import customPostgrester from "../../src/libs/customPostgrester";
+import AdminMainLayout from "../../src/layouts/AdminMain";
 import numeral from "../../src/libs/customNumeral";
+import customPostgrester from "../../src/libs/customPostgrester";
 
-import { ANSWER_STATE } from "../../src/constants";
-import Icon from "../../src/elements/Icon";
-
+// TODO Clean these columns.
+/* eslint-disable react/display-name */
 const COLUMNS = [
   {
-    Header: "Nom",
     Cell: ({ value }) => <span title={value}>{value}</span>,
+    Header: "Nom",
     accessor: "name"
   },
   {
-    Header: "À rédiger",
     Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
+    Header: "À rédiger",
     accessor: "todo"
   },
   {
-    Header: "En cours de rédaction",
     Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
+    Header: "En cours de rédaction",
     accessor: "draft"
   },
   {
-    Header: "À valider",
     Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
+    Header: "À valider",
     accessor: "pendingReview"
   },
   {
-    Header: "En cours de validation",
     Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
+    Header: "En cours de validation",
     accessor: "underReview"
   },
   {
-    Header: "Validées",
     Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
+    Header: "Validées",
     accessor: "validated"
   },
   {
-    Header: "Publiées",
     Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
+    Header: "Publiées",
     accessor: "published"
   },
   {
-    Header: "Total",
     Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
+    Header: "Total",
     accessor: "total"
   }
 ];
@@ -90,6 +91,7 @@ const PERCENTAGE_COLUMNS = [
     sortable: false
   }
 ];
+/* eslint-enable react/display-name */
 
 const Container = styled(Flex)`
   margin: 0 1rem 1rem;
@@ -139,20 +141,20 @@ const StatsTable = ({ data, isPercentage, ...props }) => (
   />
 );
 
-export default class Index extends React.Component {
+export default class AdminIndexPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       agreementsStats: [],
-      selectedRegionIsCalculating: false,
-      selectedRegionName: "",
-      selectedRegionStats: [],
       globalStats: [],
       isCalculating: true,
       isLoading: true,
       isPercentage: true,
-      regionalStats: []
+      regionalStats: [],
+      selectedRegionIsCalculating: false,
+      selectedRegionName: "",
+      selectedRegionStats: []
     };
   }
 
@@ -210,14 +212,14 @@ export default class Index extends React.Component {
       const location = regionalLocations.find(({ area_id }) => area_id === id);
 
       return {
-        locationName: location.name,
-        locationId: location.id,
-        agreements: location.agreements,
-        // We do the mapping in advance for the sake of repeated performance:
         agreementIds: location.agreements.map(({ id }) => id),
+        agreements: location.agreements,
         areaCode: code,
+        // We do the mapping in advance for the sake of repeated performance:
         areaId: id,
-        areaName: name
+        areaName: name,
+        locationId: location.id,
+        locationName: location.name
       };
     });
 
@@ -414,26 +416,26 @@ export default class Index extends React.Component {
 
     if (isCalculating) {
       return {
-        name,
-        todo: -1,
         draft: -1,
+        name,
         pendingReview: -1,
-        underReview: -1,
-        validated: -1,
         published: -1,
-        total: -1
+        todo: -1,
+        total: -1,
+        underReview: -1,
+        validated: -1
       };
     }
 
     return {
-      name,
-      todo: isPercentage ? stats[0] / stats[6] : stats[0],
       draft: isPercentage ? stats[1] / stats[6] : stats[1],
+      name,
       pendingReview: isPercentage ? stats[2] / stats[6] : stats[2],
-      underReview: isPercentage ? stats[3] / stats[6] : stats[3],
-      validated: isPercentage ? stats[4] / stats[6] : stats[4],
       published: isPercentage ? stats[5] / stats[6] : stats[5],
-      total: isPercentage ? 1 : stats[6]
+      todo: isPercentage ? stats[0] / stats[6] : stats[0],
+      total: isPercentage ? 1 : stats[6],
+      underReview: isPercentage ? stats[3] / stats[6] : stats[3],
+      validated: isPercentage ? stats[4] / stats[6] : stats[4]
     };
   }
 
@@ -453,7 +455,7 @@ export default class Index extends React.Component {
     return (
       <StatsTable
         data={data}
-        defaultSorted={[{ id: "published", desc: false }]}
+        defaultSorted={[{ desc: false, id: "published" }]}
         isPercentage={isPercentage}
       />
     );
@@ -468,7 +470,7 @@ export default class Index extends React.Component {
     return (
       <StatsTable
         data={data}
-        defaultSorted={[{ id: "validated", desc: false }]}
+        defaultSorted={[{ desc: false, id: "validated" }]}
         isPercentage={isPercentage}
       />
     );
@@ -483,7 +485,7 @@ export default class Index extends React.Component {
     return (
       <StatsTable
         data={data}
-        defaultSorted={[{ id: "name", desc: false }]}
+        defaultSorted={[{ desc: false, id: "name" }]}
         isPercentage={isPercentage}
       />
     );
@@ -493,7 +495,7 @@ export default class Index extends React.Component {
     const { isLoading, isPercentage, selectedRegionName } = this.state;
 
     return (
-      <AdminMain>
+      <AdminMainLayout>
         <Container flexDirection="column">
           <Flex alignItems="baseline" justifyContent="space-between">
             <Title>Tableau de bord</Title>
@@ -536,7 +538,7 @@ export default class Index extends React.Component {
             </>
           )}
         </Container>
-      </AdminMain>
+      </AdminMainLayout>
     );
   }
 }
