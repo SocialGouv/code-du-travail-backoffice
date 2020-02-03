@@ -18,7 +18,7 @@ services:
 
   # TODO Secure Kinto in prod.
   kinto:
-    image: kinto/kinto-server:13.6.2
+    image: kinto/kinto-server:13.6.3
     restart: always
     environment:
       KINTO_STORAGE_BACKEND: kinto.core.storage.postgresql
