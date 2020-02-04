@@ -1,5 +1,5 @@
 {
-  "name": "@socialgouv/cdtn-api",
+  "name": "@socialgouv/code-du-travail-backoffice__api",
   "version": "0.0.0",
   "license": "Apache-2.0",
   "description": "Proxify and log PostgREST-based API.",

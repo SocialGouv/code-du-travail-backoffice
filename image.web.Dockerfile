@@ -1,4 +1,4 @@
-# Web Container (including contrib & data-filler packages)
+# Web Container (including app & data-filler packages)
 
 FROM node:12.14.1-alpine
 
@@ -31,8 +31,8 @@ RUN yarn --pure-lockfile
 # Otherwise, we have a fatal error:
 # "Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory"
 # https://stackoverflow.com/a/55547893/2736233
-RUN node --max-old-space-size=2048 ./node_modules/.bin/next build ./packages/contrib
+RUN node --max-old-space-size=2048 ./node_modules/.bin/next build ./packages/app
 
-WORKDIR /app/packages/contrib
+WORKDIR /app/packages/app
 
 ENTRYPOINT ["yarn", "start"]

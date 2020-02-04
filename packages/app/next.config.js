@@ -1,5 +1,7 @@
 const withCss = require("@zeit/next-css");
-const withTranspileModules = require("next-transpile-modules")(["@socialgouv/cdtn-data-filler"]);
+const withTranspileModules = require("next-transpile-modules")([
+  "@socialgouv/code-du-travail-backoffice_data-filler"
+]);
 
 const {
   API_DOMAIN,

@@ -12,6 +12,6 @@ const lawRefs = data
   .filter((item, pos, ary) => !pos || item != ary[pos - 1]);
 
 fs.writeFileSync(
-  `${__dirname}/../../packages/contrib/src/data/labor-law-references.json`,
+  `${__dirname}/../../packages/app/src/data/labor-law-references.json`,
   JSON.stringify(lawRefs, null, 2)
 );

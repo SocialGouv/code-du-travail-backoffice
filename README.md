@@ -60,7 +60,7 @@ Le site devrait être accessible à l'adresse http://localhost:3100.
       "changeProcessCWD": true
     },
     {
-      "directory": "./packages/contrib",
+      "directory": "./packages/app",
       "changeProcessCWD": true
     },
     {

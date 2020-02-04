@@ -1,5 +1,5 @@
 {
-  "name": "@socialgouv/cdtn-contrib",
+  "name": "@socialgouv/code-du-travail-backoffice__app",
   "version": "0.0.0",
   "license": "Apache-2.0",
   "description": "Application de contributions aux données du code du travail numérique.",

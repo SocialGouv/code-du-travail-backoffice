@@ -7,7 +7,7 @@ cache:
   directories:
     - nodes_modules
     - packages/api/nodes_modules
-    - packages/contrib/nodes_modules
+    - packages/app/nodes_modules
     - packages/data-filler/nodes_modules
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
     - stage: Test
       name: Unit Tests
       install:
-        - cd packages/contrib
+        - cd packages/app
         - yarn --frozen-lockfile
       script:
         - yarn test --coverage --silent
