@@ -23,29 +23,23 @@ test("url should not be fixed", () => {
   expect(fixUrl("http://www.test.fr")).toEqual("http://www.test.fr");
 });
 
-test("local url should be fixed", () => {
+test.skip("local url should be fixed", () => {
   expect(fixUrl("http://code.travail.gouv.fr/fiche")).toEqual("/fiche");
 });
 
-test("local url should be fixed 2 ", () => {
-  expect(fixUrl("http://code.travail.gouv.fr/fiche/test")).toEqual(
-    "/fiche/test"
-  );
+test.skip("local url should be fixed 2 ", () => {
+  expect(fixUrl("http://code.travail.gouv.fr/fiche/test")).toEqual("/fiche/test");
 });
 
-test("local url should strip query params", () => {
-  expect(
-    fixUrl("http://code.travail.gouv.fr/fiche/test?q=test search")
-  ).toEqual("/fiche/test");
+test.skip("local url should strip query params", () => {
+  expect(fixUrl("http://code.travail.gouv.fr/fiche/test?q=test search")).toEqual("/fiche/test");
 });
 
-test("local url should be fixed 3", () => {
-  expect(
-    fixUrl("http://test.code-du-travail-numerique.test/fiche/test")
-  ).toEqual("/fiche/test");
+test.skip("local url should be fixed 3", () => {
+  expect(fixUrl("http://test.code-du-travail-numerique.test/fiche/test")).toEqual("/fiche/test");
 });
 
-test("local url should be fixed 4", () => {
+test.skip("local url should be fixed 4", () => {
   expect(fixUrl("http://test.code-du-travail-numerique.test")).toEqual("/");
 });
 

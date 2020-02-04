@@ -1,7 +1,7 @@
+const pack = require("./package");
+
 module.exports = {
-  collectCoverage: true,
-  // https://github.com/facebook/jest/issues/7331
-  collectCoverageFrom: ["<rootDir>/src/**/*.js"],
+  displayName: pack.name,
   moduleNameMapper: {
     "\\.(jpg|jpeg|png|gif|eot|svg|ttf|woff|woff2)$": "<rootDir>/tests/mappers/fileTransformer.js",
     "\\.css$": "identity-obj-proxy"

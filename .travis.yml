@@ -15,10 +15,9 @@ jobs:
     - stage: Test
       name: Unit Tests
       install:
-        - cd packages/app
         - yarn --frozen-lockfile
       script:
-        - yarn test --coverage --silent
+        - yarn test
       after_script:
         # Push tests coverage data to Coveralls:
         - ./node_modules/.bin/coveralls < ./coverage/lcov.info
