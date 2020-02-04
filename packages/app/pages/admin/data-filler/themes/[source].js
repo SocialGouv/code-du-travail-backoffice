@@ -1,4 +1,4 @@
-import DataFillerSourcePage from "@socialgouv/cdtn-data-filler/pages/themes/[source]";
+import DataFillerSourcePage from "@socialgouv/code-du-travail-backoffice__data-filler/pages/themes/[source]";
 import React from "react";
 
 import DataFillerMain from "../../../../src/layouts/DataFillerMain";

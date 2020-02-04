@@ -1,4 +1,4 @@
-# datafiller
+# @socialgouv/code-du-travail-backoffice__data-filler
 
 Custom React forms to edit random data collections.
 

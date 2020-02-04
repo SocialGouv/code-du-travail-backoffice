@@ -4,9 +4,9 @@ const dotenv = require("dotenv");
 const puppeteer = require("puppeteer");
 
 dotenv.config({ path: `${__dirname}/../../../.env` });
-const { CI, WEB_DOMAIN, WEB_PORT_PUBLIC, WEB_SCHEME } = process.env;
+const { CI, APP_DOMAIN, APP_PORT_PUBLIC, APP_SCHEME } = process.env;
 
-const WEB_URI = `${WEB_SCHEME}://${WEB_DOMAIN}:${WEB_PORT_PUBLIC}`;
+const APP_URI = `${APP_SCHEME}://${APP_DOMAIN}:${APP_PORT_PUBLIC}`;
 
 // Increase default cucumber timeout from 5s to 30s:
 setDefaultTimeout(30000);
@@ -55,7 +55,7 @@ class World {
   }
 
   async goToHome() {
-    await this.page.goto(WEB_URI);
+    await this.page.goto(APP_URI);
   }
 
   async login() {
