@@ -56,11 +56,11 @@ services:
     depends_on:
       - postgrest
 
-  web:
+  app:
     restart: always
     build:
       context: .
-      dockerfile: image.web.Dockerfile
+      dockerfile: image.app.Dockerfile
       args:
         API_DOMAIN: ${API_DOMAIN}
         API_PORT_PUBLIC: ${API_PORT_PUBLIC}
@@ -71,9 +71,9 @@ services:
         NODE_ENV: ${NODE_ENV}
         KINTO_BUCKET: ${KINTO_BUCKET}
         KINTO_URI: http://kinto:8888
-        WEB_PORT: ${WEB_PORT}
+        APP_PORT: ${APP_PORT}
     ports:
-      - ${WEB_PORT}:${WEB_PORT}
+      - ${APP_PORT}:${APP_PORT}
     depends_on:
       - api
       - kinto

@@ -1,7 +1,7 @@
 {
-  "name": "@socialgouv/cdtn-data-filler",
-  "version": "1.0.0",
+  "name": "@socialgouv/code-du-travail-backoffice__data-filler",
   "description": "",
+  "version": "0.0.0",
   "license": "Apache-2.0",
   "private": true,
   "scripts": {

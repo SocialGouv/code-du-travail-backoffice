@@ -1,8 +1,8 @@
 {
-  "name": "@socialgouv/cdtn-contrib",
+  "name": "@socialgouv/code-du-travail-backoffice__app",
+  "description": "Application de contributions aux données du code du travail numérique.",
   "version": "0.0.0",
   "license": "Apache-2.0",
-  "description": "Application de contributions aux données du code du travail numérique.",
   "private": true,
   "scripts": {
     "build": "rimraf ./.next && next build",

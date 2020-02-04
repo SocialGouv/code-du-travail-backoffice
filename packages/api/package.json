@@ -1,9 +1,9 @@
 {
-  "name": "@socialgouv/cdtn-api",
+  "name": "@socialgouv/code-du-travail-backoffice__api",
+  "description": "Proxify and log PostgREST-based API.",
   "version": "0.0.0",
   "license": "Apache-2.0",
-  "description": "Proxify and log PostgREST-based API.",
-  "main": "./src/index.js",
+  "private": true,
   "scripts": {
     "dev": "cross-env nodemon --exec \"node -r dotenv/config ./src dotenv_config_path=../../.env\"",
     "start": "node ./src",

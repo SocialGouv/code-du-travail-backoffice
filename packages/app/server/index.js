@@ -8,7 +8,7 @@ const withPostgres = require("./middlewares/withPostgres");
 const routes = require("./routes");
 
 const NODE_ENV = process.env.NODE_ENV !== undefined ? process.env.NODE_ENV : "development";
-const { WEB_PORT } = process.env;
+const { APP_PORT } = process.env;
 
 const nextApp = next({ dev: NODE_ENV === "development" });
 
@@ -29,10 +29,10 @@ async function start() {
   // Attach routes:
   koaApp.use(routes(nextApp));
 
-  koaApp.listen(WEB_PORT, err => {
+  koaApp.listen(APP_PORT, err => {
     if (err) throw err;
 
-    console.info(`> Website ready on port ${WEB_PORT} (${NODE_ENV}).`);
+    console.info(`> Website ready on port ${APP_PORT} (${NODE_ENV}).`);
   });
 }
 

@@ -11,15 +11,15 @@ set -e
 export $(egrep -v '^#' .env | xargs)
 
 API_URI="${API_SCHEME}://${API_DOMAIN}:${API_PORT_PUBLIC}"
-WEB_URI="${WEB_SCHEME}://${WEB_DOMAIN}:${WEB_PORT_PUBLIC}"
+APP_URI="${APP_SCHEME}://${APP_DOMAIN}:${APP_PORT_PUBLIC}"
 
 echo "⏳ Checking variables…"
-if [ -z "$API_URI" ] || [ -z "$WEB_URI" ]; then
-  echo "Error: \$API_URI and/or \$WEB_URI is/are empty."
+if [ -z "$API_URI" ] || [ -z "$APP_URI" ]; then
+  echo "Error: \$API_URI and/or \$APP_URI is/are empty."
   exit 1
 else
   echo "API_URI=${API_URI}"
-  echo "WEB_URI=${WEB_URI}"
+  echo "APP_URI=${APP_URI}"
 fi
 
 if [ "$NODE_ENV" = "production" ] && [ "$CI" != "true" ]; then
@@ -52,8 +52,8 @@ docker-compose stop master
 echo "⏳ Building api container…"
 docker-compose build api
 
-echo "⏳ Building web container…"
-docker-compose build web
+echo "⏳ Building app container…"
+docker-compose build app
 
 # Seed databases for non-production environments:
 if [ "$CI" = "true" ] || [ "$NODE_ENV" != "production" ]; then
@@ -68,10 +68,10 @@ fi
 echo "⏳ Starting kinto container…"
 docker-compose up -d kinto
 
-echo "⏳ Starting postgrest, api and web containers…"
-docker-compose up -d web
+echo "⏳ Starting postgrest, api and app containers…"
+docker-compose up -d app
 
-while [[ "$(curl -s -o /dev/null -w %{http_code} ${WEB_URI})" != "200" ]]; do sleep 5; done
+while [[ "$(curl -s -o /dev/null -w %{http_code} ${APP_URI})" != "200" ]]; do sleep 5; done
 while [[ "$(curl -s -o /dev/null -w %{http_code} ${API_URI})" != "200" ]]; do sleep 5; done
 
 echo "🚀 The server is up and running!"

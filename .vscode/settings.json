@@ -11,7 +11,7 @@
       "changeProcessCWD": true
     },
     {
-      "directory": "./packages/contrib",
+      "directory": "./packages/app",
       "changeProcessCWD": true
     },
     {

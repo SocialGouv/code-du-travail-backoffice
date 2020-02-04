@@ -1,4 +1,4 @@
-import DataFillerRecordPage from "@socialgouv/cdtn-data-filler/pages/bucket/[bucket]/collection/[collection]/record/[record]";
+import DataFillerRecordPage from "@socialgouv/code-du-travail-backoffice__data-filler/pages/bucket/[bucket]/collection/[collection]/record/[record]";
 import React from "react";
 
 import DataFillerMain from "../../../../../../../../src/layouts/DataFillerMain";
