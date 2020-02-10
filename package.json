@@ -30,8 +30,8 @@
     "test:watch": "lerna run test:watch --parallel"
   },
   "dependencies": {
-    "@testing-library/jest-dom": "5.1.0",
-    "@types/jest": "25.1.1",
+    "@testing-library/jest-dom": "5.1.1",
+    "@types/jest": "25.1.2",
     "axios": "0.19.2",
     "boxen": "4.2.0",
     "chai": "4.2.0",
@@ -41,12 +41,12 @@
     "dotenv": "8.2.0",
     "dumdum": "1.0.0-alpha.5",
     "imgur": "0.3.1",
-    "knex": "0.20.8",
+    "knex": "0.20.9",
     "lerna": "3.20.2",
     "moment": "2.24.0",
     "ora": "4.0.3",
     "pg": "7.18.1",
-    "puppeteer": "2.1.0",
+    "puppeteer": "2.1.1",
     "shelljs": "0.8.3"
   },
   "workspaces": [
