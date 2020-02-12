@@ -10,15 +10,6 @@ export default class AdminMenu extends React.PureComponent {
     Router.push(`/admin${resource}`);
   }
 
-  isActive() {
-    return false;
-    // const { pathname } = window.location;
-    // const regexp =
-    //   path.length > 0 ? new RegExp(`^/admin${path}(?=/|$)`) : /^\/admin$/;
-
-    // return regexp.test(pathname);
-  }
-
   render() {
     const me = cache.get("me");
 
@@ -37,7 +28,6 @@ export default class AdminMenu extends React.PureComponent {
         <div className="Container">
           <style jsx>{styles}</style>
           <Link
-            isActive={this.isActive("")}
             onClick={() => this.goTo("")}
             onKeyPress={() => this.goTo("")}
             role="link"
@@ -53,7 +43,6 @@ export default class AdminMenu extends React.PureComponent {
       <div className="Container">
         <style jsx>{styles}</style>
         <Link
-          isActive={this.isActive("")}
           onClick={() => this.goTo("")}
           onKeyPress={() => this.goTo("")}
           role="link"
@@ -62,7 +51,6 @@ export default class AdminMenu extends React.PureComponent {
           Tableau de bord
         </Link>
         <Link
-          isActive={this.isActive("/agreements")}
           onClick={() => this.goTo("/agreements")}
           onKeyPress={() => this.goTo("/agreements")}
           role="link"
@@ -71,7 +59,6 @@ export default class AdminMenu extends React.PureComponent {
           Conventions
         </Link>
         <Link
-          isActive={this.isActive("/tags")}
           onClick={() => this.goTo("/tags")}
           onKeyPress={() => this.goTo("/tags")}
           role="link"
@@ -80,7 +67,6 @@ export default class AdminMenu extends React.PureComponent {
           Étiquettes
         </Link>
         <Link
-          isActive={this.isActive("/tags-categories")}
           onClick={() => this.goTo("/tags-categories")}
           onKeyPress={() => this.goTo("/tags-categories")}
           role="link"
@@ -89,7 +75,6 @@ export default class AdminMenu extends React.PureComponent {
           └ Catégories
         </Link>
         <Link
-          isActive={this.isActive("/questions")}
           onClick={() => this.goTo("/questions")}
           onKeyPress={() => this.goTo("/questions")}
           role="link"
@@ -98,7 +83,6 @@ export default class AdminMenu extends React.PureComponent {
           Questions
         </Link>
         <Link
-          isActive={this.isActive("/answers")}
           onClick={() => this.goTo("/answers")}
           onKeyPress={() => this.goTo("/answers")}
           role="link"
@@ -107,7 +91,6 @@ export default class AdminMenu extends React.PureComponent {
           Réponses
         </Link>
         <Link
-          isActive={this.isActive("/generic-answers")}
           onClick={() => this.goTo("/generic-answers")}
           onKeyPress={() => this.goTo("/generic-answers")}
           role="link"
@@ -116,7 +99,6 @@ export default class AdminMenu extends React.PureComponent {
           Réponses génériques
         </Link>
         <Link
-          isActive={this.isActive("/locations")}
           onClick={() => this.goTo("/locations")}
           onKeyPress={() => this.goTo("/locations")}
           role="link"
@@ -125,7 +107,6 @@ export default class AdminMenu extends React.PureComponent {
           Unités
         </Link>
         <Link
-          isActive={this.isActive("/users")}
           onClick={() => this.goTo("/users")}
           onKeyPress={() => this.goTo("/users")}
           role="link"
@@ -134,7 +115,6 @@ export default class AdminMenu extends React.PureComponent {
           Utilisateurs
         </Link>
         <Link
-          isActive={this.isActive("/areas")}
           onClick={() => this.goTo("/areas")}
           onKeyPress={() => this.goTo("/areas")}
           role="link"
@@ -143,9 +123,34 @@ export default class AdminMenu extends React.PureComponent {
           Zones
         </Link>
 
+        <Subtitle>Data Filler</Subtitle>
+        <Link
+          onClick={() => this.goTo("/themes")}
+          onKeyPress={() => this.goTo("/themes")}
+          role="link"
+          tabIndex="0"
+        >
+          Thèmes
+        </Link>
+        <Link
+          onClick={() => this.goTo("/requests")}
+          onKeyPress={() => this.goTo("/requests")}
+          role="link"
+          tabIndex="0"
+        >
+          Requêtes
+        </Link>
+        <Link
+          onClick={() => this.goTo("/terms")}
+          onKeyPress={() => this.goTo("/terms")}
+          role="link"
+          tabIndex="0"
+        >
+          Glossaire
+        </Link>
+
         <Subtitle>Maintenance</Subtitle>
         <Link
-          isActive={this.isActive("/data-filler")}
           onClick={() => this.goTo("/data-filler")}
           onKeyPress={() => this.goTo("/data-filler")}
           role="link"
@@ -154,8 +159,7 @@ export default class AdminMenu extends React.PureComponent {
           Data Filler
         </Link>
         <Link
-          isActive={this.isActive("/logs")}
-          onClick={() => (window.location.href = "/admin/logs")}
+          onClick={() => this.goTo("/logs")}
           onKeyPress={() => this.goTo("/logs")}
           role="link"
           tabIndex="0"
@@ -163,7 +167,6 @@ export default class AdminMenu extends React.PureComponent {
           Logs
         </Link>
         <Link
-          isActive={this.isActive("/migrations")}
           onClick={() => this.goTo("/migrations")}
           onKeyPress={() => this.goTo("/migrations")}
           role="link"
