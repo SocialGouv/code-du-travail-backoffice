@@ -1,5 +1,5 @@
 ---
-name: 🚀 Propositon de fonctionnalité
+name: 🚀 Proposition de fonctionnalité
 about: Proposer une nouvelle fonctionnalité.
 assignees: ivangabriele
 labels: ':pushpin: new feature'
