@@ -2275,10 +2275,10 @@
     eslint-plugin-simple-import-sort "^5.0.1"
     eslint-plugin-sort-keys-fix "^1.1.0"
 
-"@socialgouv/kali-data@1.3.5":
-  version "1.3.5"
-  resolved "https://registry.yarnpkg.com/@socialgouv/kali-data/-/kali-data-1.3.5.tgz#13a7d7e6c180ae50ad43f58d770215984d212608"
-  integrity sha512-cuHg4dJ9KwOLJb3SB1FCG6u3RDhlYtfWCqu76aYeVLHTBxQgNTgXacB2J7KoSfca9sldu/gAg+TzgXZK3pSfIQ==
+"@socialgouv/kali-data@1.3.9":
+  version "1.3.9"
+  resolved "https://registry.yarnpkg.com/@socialgouv/kali-data/-/kali-data-1.3.9.tgz#c304f8894c159465388212b0f7e79e0ca8b986fa"
+  integrity sha512-bPcNqXA+8iCoZfKIeVFEfEBl8oJtYI9KvW7WZLEdrC5B2FUP1WjvNhUT4wVnOk1+ebwBva95TywdErgpLS1xyw==
   dependencies:
     "@socialgouv/dila-api-client" "^1.1.0"
     p-map "^3.0.0"
@@ -2474,6 +2474,13 @@
   dependencies:
     "@types/events" "*"
     "@types/minimatch" "*"
+    "@types/node" "*"
+
+"@types/http-proxy@^1.17.3":
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/@types/http-proxy/-/http-proxy-1.17.3.tgz#348e1b808ff9585423cb909e9992d89ccdbf4c14"
+  integrity sha512-wIPqXANye5BbORbuh74exbwNzj+UWCwWyeEFJzUQ7Fq3W2NSAy+7x7nX1fgbEypr2/TdKqpeuxLnXWgzN533/Q==
+  dependencies:
     "@types/node" "*"
 
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0", "@types/istanbul-lib-coverage@^2.0.1":
@@ -3332,13 +3339,6 @@ aws4@^1.8.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.9.1.tgz#7e33d8f7d449b3f673cd72deb9abdc552dbe528e"
   integrity sha512-wMHVg2EOHaMRxbzgFJ9gtjOOCrI80OHLG14rxi28XwOW8ux6IiEbRCGGGqCtdAIg4FQCbW20k9RsT4y3gJlFug==
-
-axios@0.19.1:
-  version "0.19.1"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.1.tgz#8a6a04eed23dfe72747e1dd43c604b8f1677b5aa"
-  integrity sha512-Yl+7nfreYKaLRvAvjNPkvfjnQHJM1yLBY3zhqAwcJSwR/6ETkanUgylgtIvkvz0xJ+p/vZuNw8X7Hnb7Whsbpw==
-  dependencies:
-    follow-redirects "1.5.10"
 
 axios@0.19.2:
   version "0.19.2"
@@ -4649,10 +4649,10 @@ cp-file@^7.0.0:
     nested-error-stacks "^2.0.0"
     p-event "^4.1.0"
 
-cpy-cli@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/cpy-cli/-/cpy-cli-3.0.0.tgz#429eb6a5ee2d4805bfe454d9d86a3eb72df20e26"
-  integrity sha512-fxNNpGrnuVMbaDBpHdgwReMy48BelhAoS6OUUX6Zv5nMwSPZOMxL/kB5VxM9xQoB1vvw38zG9drLRS8gvavxeg==
+cpy-cli@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/cpy-cli/-/cpy-cli-3.1.0.tgz#da33fb65f663c45812f0e9a68523b4a73144e741"
+  integrity sha512-LJhHvFragWvIsJH1kjhzZwGSagukewJZ5nV5yjMc5TILs+Z/CbZSvX0W9t9XC26Mw32j56UHjR3co5kAXaeTwg==
   dependencies:
     cpy "^8.0.0"
     meow "^5.0.0"
@@ -7077,17 +7077,18 @@ http-proxy-agent@^2.1.0:
     agent-base "4"
     debug "3.1.0"
 
-http-proxy-middleware@0.20.0:
-  version "0.20.0"
-  resolved "https://registry.yarnpkg.com/http-proxy-middleware/-/http-proxy-middleware-0.20.0.tgz#5b128f7207985c4ea91b53fab8ad897a48c690d6"
-  integrity sha512-dNJAk71nEJhPiAczQH9hGvE/MT9kEs+zn2Dh+Hi94PGZe1GluQirC7mw5rdREUtWx6qGS1Gu0bZd4qEAg+REgw==
+http-proxy-middleware@0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/http-proxy-middleware/-/http-proxy-middleware-0.21.0.tgz#c6b1ca05174b5fbc57bee9485ffa0fa2f0dabeb0"
+  integrity sha512-4Arcl5QQ6pRMRJmtM1WVHKHkFAQn5uvw83XuNeqnMTOikDiCoTxv5/vdudhKQsF+1mtaAawrK2SEB1v2tYecdQ==
   dependencies:
-    http-proxy "^1.17.0"
+    "@types/http-proxy" "^1.17.3"
+    http-proxy "^1.18.0"
     is-glob "^4.0.1"
-    lodash "^4.17.14"
+    lodash "^4.17.15"
     micromatch "^4.0.2"
 
-http-proxy@1.18.0, http-proxy@^1.17.0:
+http-proxy@1.18.0, http-proxy@^1.18.0:
   version "1.18.0"
   resolved "https://registry.yarnpkg.com/http-proxy/-/http-proxy-1.18.0.tgz#dbe55f63e75a347db7f3d99974f2692a314a6a3a"
   integrity sha512-84I2iJM/n1d4Hdgc6y2+qY5mDaz2PUVjlg9znE9byl+q0uC3DeByqBGReQu5tpLK0TAqTIXScRUV+dg7+bUPpQ==
@@ -8617,10 +8618,10 @@ kleur@^3.0.3:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
-knex@0.20.9:
-  version "0.20.9"
-  resolved "https://registry.yarnpkg.com/knex/-/knex-0.20.9.tgz#48ab69e992f8e4c782de11f86259dfddb716a08b"
-  integrity sha512-Vv2OTcJSZ8z3G5wXZfeLRgdaf+bab2lpKgLBgRJCaVfFX/fPmrP4M1p/ciLR0fZtHpYFtOBUggs9cSjWuj8rAw==
+knex@0.20.10:
+  version "0.20.10"
+  resolved "https://registry.yarnpkg.com/knex/-/knex-0.20.10.tgz#48c22abe38fdc6856b5e9d948685ca009b3fbd77"
+  integrity sha512-07D6fvY5NdvrfRPmkLLG+OrHvmAy55OX7eXkN8TMiOOI5lWJh1dC2zKjeEQJqUILMOsTnZCGqTKGaRm4t1E9xg==
   dependencies:
     bluebird "^3.7.2"
     colorette "1.1.0"
@@ -8666,10 +8667,10 @@ koa-convert@^1.2.0:
     co "^4.6.0"
     koa-compose "^3.0.0"
 
-koa-router@8.0.7:
-  version "8.0.7"
-  resolved "https://registry.yarnpkg.com/koa-router/-/koa-router-8.0.7.tgz#40a6a7ca95f17e3809181d93f5d6d8f2ec39f206"
-  integrity sha512-g1nwr0nAQ/WgtY68IAx0bh2Z8eOX8dKypG55StMAYc0vs+1m87/fUrFKi0quJNAATzMhsQ5GFEC1XaAFvGB37g==
+koa-router@8.0.8:
+  version "8.0.8"
+  resolved "https://registry.yarnpkg.com/koa-router/-/koa-router-8.0.8.tgz#f0b70f90dae275db8c71a41e1efb625581fb3b5a"
+  integrity sha512-2rNF2cgu/EWi/NV8GlBE5+H/QBoaof83X6Z0dULmalkbt7W610/lyP2EOLVqVrUUFfjsVWL/Ju5TVBcGJDY9XQ==
   dependencies:
     debug "^4.1.1"
     http-errors "^1.7.3"
@@ -11218,12 +11219,12 @@ postgres-interval@^1.1.0:
   dependencies:
     xtend "^4.0.0"
 
-postgrester@1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/postgrester/-/postgrester-1.0.5.tgz#5ba21b5a5ff8f5e610dde3fecdc142f1b0cd2ebc"
-  integrity sha512-sNF/BzpM7EPF5Qttd1kkDemmhnd0ibE8OdL4OBZgcbE5TYkDeW6G7SpqkhKKAoYO2sdLXGboYI9vHHt5s+G+5A==
+postgrester@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/postgrester/-/postgrester-1.1.1.tgz#8746e8666dbb7f2b06628c106ed0c95e33fedb46"
+  integrity sha512-quH0T8MVCaGx4Plj4rV+dX3zjyGDrhRpgHS/CtdhTe0d+lFrHZzW+Kc54pmukgOmdKYzhn/zHaY9zhLDUhpzag==
   dependencies:
-    axios "0.19.1"
+    axios "0.19.2"
 
 prelude-ls@~1.1.2:
   version "1.1.2"
@@ -11687,10 +11688,10 @@ react-feather@2.0.3:
   dependencies:
     prop-types "^15.7.2"
 
-react-fetch-hook@1.7.2:
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/react-fetch-hook/-/react-fetch-hook-1.7.2.tgz#5aaddea774746f8e19fc3157248575d140d92108"
-  integrity sha512-hgEBSzqIm3ZhTnmP0QrfDdVQJ4Gzc+EXGTxd1yHEC40QE3r1mHF7HKzJBiS4VNNdmFdOZ/bAZ5XmK4apW4JCFA==
+react-fetch-hook@1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/react-fetch-hook/-/react-fetch-hook-1.8.0.tgz#90f0bed39096ae3ee52ed3c070b73ae64fe476e3"
+  integrity sha512-DAbCvBCmncXqZrLTxlERITea21UJ1WuvHZN+m0uq2wBl8zcVTCAUJfX5XKQDW1tceD3qv2OkNt5zHR5bbr2CIg==
 
 react-input-autosize@^2.2.2:
   version "2.2.2"
