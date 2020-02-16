@@ -1,6 +1,6 @@
 # Web Container (including app & data-filler packages)
 
-FROM node:12.14.1-alpine
+FROM node:12.16.0-alpine
 
 ARG API_DOMAIN
 ARG API_PORT_PUBLIC
