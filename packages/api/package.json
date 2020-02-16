@@ -13,7 +13,7 @@
   "dependencies": {
     "http-proxy": "1.18.0",
     "jsonwebtoken": "8.5.1",
-    "knex": "0.20.9",
+    "knex": "0.20.10",
     "pg": "7.18.1"
   },
   "devDependencies": {
