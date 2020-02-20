@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<Textarea /> should match snapshot 1`] = `
+exports[`elements/<Textarea /> should match snapshot 1`] = `
 .emotion-0 {
   -webkit-appearance: none;
-  background-color: transparent;
+  background-color: white;
   border: solid 1px var(--color-border);
   color: inherit;
   -webkit-box-flex: 1;

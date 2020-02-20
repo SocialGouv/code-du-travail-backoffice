@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<Button /> should have a transparent background with {icon} = "sync" and no children 1`] = `
+exports[`elements/<Button /> should have a transparent background with {icon} = "sync" and no children 1`] = `
 .emotion-0 {
   cursor: default;
   width: 1rem !important;
@@ -82,7 +82,7 @@ exports[`[Contrib] elements/<Button /> should have a transparent background with
 </button>
 `;
 
-exports[`[Contrib] elements/<Button /> should pass 1`] = `
+exports[`elements/<Button /> should pass 1`] = `
 .emotion-1 {
   box-sizing: border-box;
   margin: 0;
@@ -143,7 +143,7 @@ exports[`[Contrib] elements/<Button /> should pass 1`] = `
 </button>
 `;
 
-exports[`[Contrib] elements/<Button /> should pass with {icon} = "sync" 1`] = `
+exports[`elements/<Button /> should pass with {icon} = "sync" 1`] = `
 .emotion-3 {
   box-sizing: border-box;
   margin: 0;

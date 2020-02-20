@@ -4,7 +4,7 @@ import React from "react";
 import AnswerEditionHeadBlock from "..";
 import { TABS } from "../Tabs";
 
-describe("[Contrib] blocks/<AnswerEditionHead />", () => {
+describe("blocks/<AnswerEditionHead />", () => {
   const onTabChange = jest.fn();
 
   const props = {

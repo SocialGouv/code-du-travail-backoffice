@@ -46,23 +46,16 @@ export default class AdminLocationsEditPage extends AdminLocationsNewPage {
   render() {
     if (this.state.isLoadingOverwrite) return <AdminMainLayout isLoading />;
 
-    const { name } = this.state.data;
-
     return (
       <AdminForm
         apiPath="/locations"
-        ariaLabels={{
-          cancelButton: `Bouton redirigeant vers la liste des unités`,
-          createOrEditButton: `Bouton mettant à jour l'unité "${name}" dans
-                              la base de données à partir des données du
-                              formulaire`
-        }}
         defaultData={this.state.data}
         fields={this.state.fields}
+        i18nIsFeminine
+        i18nSubject="unité"
         id={this.props.id}
         indexPath="/locations"
         name="location"
-        title={`Modifier l'unité « ${this.state.data.name} »`}
       />
     );
   }

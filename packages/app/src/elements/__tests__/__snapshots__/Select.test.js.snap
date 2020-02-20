@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<Select /> should pass 1`] = `
+exports[`elements/<Select /> should pass 1`] = `
 .emotion-8 {
   position: relative;
   box-sizing: border-box;

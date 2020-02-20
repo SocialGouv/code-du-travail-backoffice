@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export default styled.textarea`
   -webkit-appearance: none;
-  background-color: transparent;
+  background-color: white;
   border: solid 1px var(--color-border);
   color: inherit;
   flex-grow: 1;

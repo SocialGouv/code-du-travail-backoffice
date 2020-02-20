@@ -30,7 +30,7 @@ jest.mock("react-redux", () => ({
 
 import Main from "../Main";
 
-describe.skip("[Contrib] layouts/<Main /> (contributor)", () => {
+describe.skip("layouts/<Main /> (contributor)", () => {
   const γ = render(<Main />);
   const firstRender = γ.asFragment();
 

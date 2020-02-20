@@ -2,12 +2,10 @@ import styled from "@emotion/styled";
 import React from "react";
 import { Flex } from "rebass";
 
-import FranceMap from "../../src/components/FranceMap";
 import _Table from "../../src/components/Table";
 import { ANSWER_STATE } from "../../src/constants";
 import Button from "../../src/elements/Button";
 import ContentTitle from "../../src/elements/ContentTitle";
-import Icon from "../../src/elements/Icon";
 import Subtitle from "../../src/elements/Subtitle";
 import Title from "../../src/elements/Title";
 import shortenAgreementName from "../../src/helpers/shortenAgreementName";
@@ -96,13 +94,6 @@ const PERCENTAGE_COLUMNS = [
 const Container = styled(Flex)`
   margin: 0 1rem 1rem;
 `;
-const FranceMapContainer = styled(Flex)`
-  margin-bottom: 1rem;
-
-  svg {
-    width: 20rem;
-  }
-`;
 const Table = styled(_Table)`
   font-size: 0.875rem;
 
@@ -151,10 +142,7 @@ export default class AdminIndexPage extends React.Component {
       isCalculating: true,
       isLoading: true,
       isPercentage: true,
-      regionalStats: [],
-      selectedRegionIsCalculating: false,
-      selectedRegionName: "",
-      selectedRegionStats: []
+      regionalStats: []
     };
   }
 
@@ -342,75 +330,6 @@ export default class AdminIndexPage extends React.Component {
     setTimeout(this.updateStats.bind(this), REFRESH_DELAY);
   }
 
-  async updateSelectedRegionStats(areaCode) {
-    const { regionalStats } = this.state;
-    const region = regionalStats.find(entry => entry.areaCode === areaCode);
-
-    const newSelectedRegionStats = region.agreements.map(({ id, idcc, name }) => ({
-      agreementId: id,
-      agreementIdcc: idcc,
-      agreementName: `[${idcc}] ${name}`,
-      totals: [0, 0, 0, 0, 0, 0, 0]
-    }));
-
-    this.setState({
-      selectedRegionIsCalculating: true,
-      selectedRegionName: region.areaName,
-      selectedRegionStats: newSelectedRegionStats
-    });
-
-    const answers = await this.fetchAnswersForAgreements(region.agreementIds);
-
-    const nextSelectedRegionStats = newSelectedRegionStats.map(entry => {
-      const totals = answers
-        .filter(({ agreement_id }) => agreement_id === entry.agreementId)
-        .reduce(
-          (totals, { is_published, state }) => {
-            switch (state) {
-              case ANSWER_STATE.TO_DO:
-                totals[0] += 1;
-                break;
-
-              case ANSWER_STATE.DRAFT:
-                totals[1] += 1;
-                break;
-
-              case ANSWER_STATE.PENDING_REVIEW:
-                totals[2] += 1;
-                break;
-
-              case ANSWER_STATE.UNDER_REVIEW:
-                totals[3] += 1;
-                break;
-
-              case ANSWER_STATE.VALIDATED:
-                totals[4] += 1;
-                break;
-            }
-
-            if (is_published) {
-              totals[5] += 1;
-            }
-
-            totals[6] += 1;
-
-            return totals;
-          },
-          [0, 0, 0, 0, 0, 0, 0]
-        );
-
-      return {
-        ...entry,
-        totals
-      };
-    });
-
-    this.setState({
-      selectedRegionIsCalculating: false,
-      selectedRegionStats: nextSelectedRegionStats
-    });
-  }
-
   generateDataRow(name, stats, isCalculating) {
     const { isPercentage } = this.state;
 
@@ -461,21 +380,6 @@ export default class AdminIndexPage extends React.Component {
     );
   }
 
-  getSelectedRegionStats() {
-    const { isPercentage, selectedRegionIsCalculating, selectedRegionStats } = this.state;
-    const data = selectedRegionStats.map(({ agreementName, totals }) =>
-      this.generateDataRow(agreementName, totals, selectedRegionIsCalculating)
-    );
-
-    return (
-      <StatsTable
-        data={data}
-        defaultSorted={[{ desc: false, id: "validated" }]}
-        isPercentage={isPercentage}
-      />
-    );
-  }
-
   getAgreementsStats(isNational = false) {
     const { agreementsStats, isCalculating, isPercentage } = this.state;
     const data = agreementsStats
@@ -492,7 +396,7 @@ export default class AdminIndexPage extends React.Component {
   }
 
   render() {
-    const { isLoading, isPercentage, selectedRegionName } = this.state;
+    const { isLoading, isPercentage } = this.state;
 
     return (
       <AdminMainLayout>
@@ -515,28 +419,6 @@ export default class AdminIndexPage extends React.Component {
           {isLoading ? <p>Calcul en cours…</p> : this.getAgreementsStats(true)}
           <ContentTitle>Conventions locales</ContentTitle>
           {isLoading ? <p>Calcul en cours…</p> : this.getAgreementsStats()}
-
-          <Subtitle>Par région (détaillée)</Subtitle>
-          {isLoading ? (
-            <p>Calcul en cours…</p>
-          ) : (
-            <>
-              <FranceMapContainer justifyContent="center" style={{ marginTop: "1rem" }}>
-                <FranceMap onChange={this.updateSelectedRegionStats.bind(this)} />
-              </FranceMapContainer>
-              {selectedRegionName.length === 0 ? (
-                <Flex alignItems="baseline" justifyContent="center" style={{ marginTop: "1rem" }}>
-                  <Icon icon="arrow-up" style={{ marginRight: "1rem" }} />
-                  Cliquez sur une région pour voir le détail.
-                </Flex>
-              ) : (
-                <>
-                  <ContentTitle>{selectedRegionName}</ContentTitle>
-                  {this.getSelectedRegionStats()}
-                </>
-              )}
-            </>
-          )}
         </Container>
       </AdminMainLayout>
     );

@@ -8,14 +8,14 @@ import toast from "../../libs/toast";
 
 export default function* load({ meta: { pageIndex, query } }) {
   try {
-    let request = customPostgrester();
+    const request = customPostgrester();
 
     if (pageIndex !== -1) {
-      request = request.page(pageIndex);
+      request.page(pageIndex);
     }
 
     if (query.length > 0) {
-      request = request.or.ilike("name", query);
+      request.or.ilike("name", query);
     }
 
     const { data, pagesLength } = yield request.get("/agreements", true);

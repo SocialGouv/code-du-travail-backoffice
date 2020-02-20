@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<LoadingSpinner /> should pass 1`] = `
+exports[`elements/<LoadingSpinner /> should pass 1`] = `
 @keyframes animation-0 {
   0% {
     height: 0;

@@ -2,7 +2,7 @@ import React from "react";
 
 import excerpt from "../excerpt";
 
-describe("[Contrib] helpers/excerpt()", () => {
+describe("helpers/excerpt()", () => {
   it("should return the expected message when the text is empty", () => {
     expect(excerpt("")).toStrictEqual(<em>Aucun contenu.</em>);
     expect(excerpt(" ")).toStrictEqual(<em>Aucun contenu.</em>);

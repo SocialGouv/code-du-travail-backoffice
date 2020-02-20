@@ -1,6 +1,6 @@
 import shortenAgreementName from "../shortenAgreementName";
 
-describe("[Contrib] helpers/shortenAgreementName()", () => {
+describe("helpers/shortenAgreementName()", () => {
   it("should return the expected name for a national agreement", () => {
     expect(shortenAgreementName("convention collective nationale de la métallurgie")).toStrictEqual(
       "CCN de la métallurgie"

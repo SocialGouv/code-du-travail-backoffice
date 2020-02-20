@@ -62,15 +62,11 @@ export default class AdminQuestionsNewPage extends React.Component {
     return (
       <AdminForm
         apiPath="/questions"
-        ariaLabels={{
-          cancelButton: `Bouton redirigeant vers la liste des questions`,
-          createOrEditButton: `Bouton créant une nouvelle question dans la base
-                              de données à partir des données du formulaire`
-        }}
         fields={this.state.fields}
+        i18nIsFeminine
+        i18nSubject="question"
         indexPath="/questions"
         name="question"
-        title="Nouvelle question"
       />
     );
   }

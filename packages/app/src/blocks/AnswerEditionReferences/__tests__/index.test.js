@@ -5,7 +5,7 @@ import React from "react";
 
 import AnswerEditionReferencesBlock from "..";
 
-describe.skip("[Contrib] blocks/<AnswerEditionReferencesBlock />", () => {
+describe.skip("blocks/<AnswerEditionReferencesBlock />", () => {
   const props = {
     // eslint-disable-next-line max-len
     laborCodeReferences: require("../../../../static/data/labor-law-references.json"),

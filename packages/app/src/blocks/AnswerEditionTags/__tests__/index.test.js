@@ -3,7 +3,7 @@ import React from "react";
 
 import AnswerEditionTagsBlock from "..";
 
-describe.skip("[Contrib] blocks/<AnswerEditionTags />", () => {
+describe.skip("blocks/<AnswerEditionTags />", () => {
   const props = {
     onToggle: jest.fn(),
     selectedTags: ["da68fa2d-4bfc-4b5b-bea3-f39f44719650"],

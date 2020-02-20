@@ -2,7 +2,7 @@ import React from "react";
 
 import Tag from "../Tag";
 
-describe("[Contrib] elements/<Tag />", () => {
+describe("elements/<Tag />", () => {
   it(`should pass`, () => {
     const $tag = testRender(<Tag />);
 

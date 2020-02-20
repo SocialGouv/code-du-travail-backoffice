@@ -27,17 +27,14 @@ const COLUMNS = [
 
 const AdminMigrationsIndexPage = () => (
   <AdminIndex
-    apiPath="/administrator_migrations?order=migration_time.desc"
-    ariaLabels={{
-      editButton: `Bouton redirigeant vers le formulaire d'édition des données
-                  de cette migration`
-    }}
+    apiPath="/administrator_migrations"
     columns={COLUMNS}
+    i18nIsFeminine
+    i18nSubject="migration"
     noCreate
+    noEdit
     noDelete
     noTimestamps
-    slug="migration"
-    title="Migrations"
   />
 );
 

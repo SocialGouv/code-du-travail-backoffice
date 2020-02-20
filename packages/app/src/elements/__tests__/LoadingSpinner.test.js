@@ -2,7 +2,7 @@ import React from "react";
 
 import LoadingSpinner from "../LoadingSpinner";
 
-describe("[Contrib] elements/<LoadingSpinner />", () => {
+describe("elements/<LoadingSpinner />", () => {
   it(`should pass`, () => {
     const $loadingSpinner = testRender(<LoadingSpinner size="8rem" />);
     const $spinner = $loadingSpinner.children[0];

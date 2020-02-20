@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<Input /> should pass 1`] = `
+exports[`elements/<Input /> should pass 1`] = `
 .emotion-0 {
   -webkit-appearance: none;
   background-color: white;
@@ -42,7 +42,7 @@ exports[`[Contrib] elements/<Input /> should pass 1`] = `
 />
 `;
 
-exports[`[Contrib] elements/<Input /> should pass with a {icon} = "search" 1`] = `
+exports[`elements/<Input /> should pass with a {icon} = "search" 1`] = `
 .emotion-5 {
   margin-top: -1.375rem;
 }

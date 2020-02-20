@@ -3,7 +3,7 @@ import React from "react";
 
 import AnswerEditionHeadBlockActions from "../Actions";
 
-describe.skip("[Contrib] blocks/AnswerEditionHead/<Actions />", () => {
+describe.skip("blocks/AnswerEditionHead/<Actions />", () => {
   const props = {
     onCancel: jest.fn(),
     onSubmit: jest.fn()

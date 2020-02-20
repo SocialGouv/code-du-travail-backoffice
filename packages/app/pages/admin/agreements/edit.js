@@ -38,23 +38,16 @@ export default class AdminAgreementsEditPage extends AdminAgreementsNewPage {
   render() {
     if (this.state.isLoadingOverwrite) return <AdminMainLayout isLoading />;
 
-    const { name } = this.state.data;
-
     return (
       <AdminForm
         apiPath="/agreements"
-        ariaLabels={{
-          cancelButton: `Bouton redirigeant vers la liste des conventions`,
-          createOrEditButton: `Bouton mettant à jour la convention "${name}"
-                              dans la base de données à partir des données du
-                              formulaire`
-        }}
         defaultData={this.state.data}
         fields={this.state.fields}
+        i18nIsFeminine
+        i18nSubject="convention"
         id={this.props.id}
         indexPath="/agreements"
         name="agreement"
-        title={`Modifier la convention « ${name} »`}
       />
     );
   }

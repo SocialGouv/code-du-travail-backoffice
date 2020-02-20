@@ -1,6 +1,6 @@
 import isNode from "../isNode";
 
-describe("[Contrib] helpers/isNode()", () => {
+describe("helpers/isNode()", () => {
   it("should return FALSE when running on client side", () => {
     expect(isNode()).toStrictEqual(false);
   });

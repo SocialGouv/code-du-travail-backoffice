@@ -45,23 +45,16 @@ export default class AdminQuestionsEditPage extends React.Component {
   render() {
     if (this.state.isLoading) return <AdminMainLayout isLoading />;
 
-    const { name } = this.state.data;
-
     return (
       <AdminForm
         apiPath="/administrator_migrations"
-        ariaLabels={{
-          cancelButton: `Bouton redirigeant vers la liste des migrations`,
-          createOrEditButton: `Bouton mettant à jour la migration ${name} dans
-                              la base de données à partir des données du
-                              formulaire`
-        }}
         defaultData={this.state.data}
         fields={FIELDS}
+        i18nIsFeminine
+        i18nSubject="migration"
         id={this.props.id}
         indexPath="/migrations"
         name="migration"
-        title={`Modifier la migration « ${name} »`}
       />
     );
   }

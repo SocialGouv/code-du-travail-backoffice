@@ -3,7 +3,7 @@ import React from "react";
 
 import AnswerEditionHeadBlockTabs, { TABS } from "../Tabs";
 
-describe.skip("[Contrib] blocks/AnswerEditionHead/<Tabs />", () => {
+describe.skip("blocks/AnswerEditionHead/<Tabs />", () => {
   const props = {
     currentTab: TABS.EDITOR,
     onChange: jest.fn(),

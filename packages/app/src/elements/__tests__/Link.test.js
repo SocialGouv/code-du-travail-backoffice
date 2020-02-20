@@ -2,7 +2,7 @@ import React from "react";
 
 import Link from "../Link";
 
-describe("[Contrib] elements/<Link />", () => {
+describe("elements/<Link />", () => {
   const TEXT = "A Link";
 
   it(`should pass`, () => {

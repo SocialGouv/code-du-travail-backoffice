@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<Title /> should pass 1`] = `
+exports[`elements/<Title /> should pass 1`] = `
 .emotion-0 {
   color: black;
   font-size: 1.3rem;

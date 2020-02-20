@@ -74,15 +74,11 @@ export default class AdminLocationsNewPage extends React.Component {
     return (
       <AdminForm
         apiPath="/locations"
-        ariaLabels={{
-          cancelButton: `Bouton redirigeant vers la liste des unités`,
-          createOrEditButton: `Bouton créant une nouvelle unité dans la base
-                              de données à partir des données du formulaire`
-        }}
         fields={this.state.fields}
+        i18nIsFeminine
+        i18nSubject="unité"
         indexPath="/locations"
         name="location"
-        title="Nouvelle unité"
       />
     );
   }

@@ -47,23 +47,15 @@ export default class AdminUsersEditPage extends AdminUsersNewPage {
   render() {
     if (this.state.isLoadingOverwrite) return <AdminMainLayout isLoading />;
 
-    const { name } = this.state.data;
-
     return (
       <AdminForm
         apiPath="/rpc/update_user"
-        ariaLabels={{
-          cancelButton: `Bouton redirigeant vers la liste des utilisateurs`,
-          createOrEditButton: `Bouton mettant à jour l'utilisateur ${name} dans
-                              la base de données à partir des données du
-                              formulaire`
-        }}
         defaultData={this.state.data}
         fields={this.state.fields}
+        i18nSubject="utilisateur"
         id={this.props.id}
         indexPath="/users"
         isApiFunction
-        title={`Modifier l'utilisateur « ${name} »`}
       />
     );
   }

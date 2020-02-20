@@ -7,7 +7,7 @@ import { ANSWER_STATE } from "../../../constants";
 // Ignore styled-wrapped ReactTooltip className prop warning
 console.warn = jest.fn();
 
-describe.skip("[Contrib] blocks/<Answer /> (Todo)", () => {
+describe.skip("blocks/<Answer /> (Todo)", () => {
   const props = {
     data: {
       agreement_idcc: "1234",
@@ -47,7 +47,7 @@ describe.skip("[Contrib] blocks/<Answer /> (Todo)", () => {
   });
 });
 
-describe.skip("[Contrib] blocks/<Answer /> (Draft)", () => {
+describe.skip("blocks/<Answer /> (Draft)", () => {
   const props = {
     data: {
       agreement_idcc: "1234",

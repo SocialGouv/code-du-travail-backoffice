@@ -23,7 +23,7 @@ numérique][link-cdtn].
 git clone https://github.com/SocialGouv/code-du-travail-backoffice.git
 cd code-du-travail-backoffice
 yarn
-# Build, migrate and seed the database (PostgreSQL), as well as the apis (PostgREST & Kinto):
+# Build, migrate and seed the database (PostgreSQL), as well as the api (PostgREST):
 yarn setup
 # Start the containers and run packages code in dev mode (with watch & hot reload):
 yarn dev
@@ -61,10 +61,6 @@ Le site devrait être accessible à l'adresse http://localhost:3100.
     },
     {
       "directory": "./packages/app",
-      "changeProcessCWD": true
-    },
-    {
-      "directory": "./packages/data-filler",
       "changeProcessCWD": true
     }
   ]

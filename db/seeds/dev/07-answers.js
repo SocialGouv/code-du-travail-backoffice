@@ -1,6 +1,6 @@
 const DumDum = require("dumdum");
 
-const LABOR_LAW_REFERENCES = require("../../../packages/contrib/src/data/labor-law-references.json");
+const LABOR_LAW_REFERENCES = require("../../../packages/app/src/data/labor-law-references.json");
 
 const dumdum = DumDum.create({ locale: "fr" });
 

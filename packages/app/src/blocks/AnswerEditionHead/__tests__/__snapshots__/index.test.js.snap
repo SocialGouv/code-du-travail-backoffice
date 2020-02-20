@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] blocks/<AnswerEditionHead /> should match snapshot 1`] = `
+exports[`blocks/<AnswerEditionHead /> should match snapshot 1`] = `
 .emotion-18 {
   box-sizing: border-box;
   margin: 0;

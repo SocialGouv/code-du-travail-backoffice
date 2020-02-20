@@ -2,7 +2,7 @@ import React from "react";
 
 import Checkbox from "../Checkbox";
 
-describe("[Contrib] elements/<Checkbox />", () => {
+describe("elements/<Checkbox />", () => {
   it(`should pass`, () => {
     const $button = testRender(<Checkbox />);
     const $icon = $button.findByType("svg");

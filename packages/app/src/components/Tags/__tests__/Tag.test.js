@@ -5,7 +5,7 @@ import Tag from "../Tag";
 
 global.open = jest.fn();
 
-describe.skip("[Contrib] components/Tags/<Tag />", () => {
+describe.skip("components/Tags/<Tag />", () => {
   const props = {
     ariaName: "le tag",
     id: "da68fa2d-4bfc-4b5b-bea3-f39f44719650",

@@ -7,17 +7,17 @@ import toast from "../../libs/toast";
 
 export default function* load({ meta: { pageIndex, query } }) {
   try {
-    let request = customPostgrester()
+    const request = customPostgrester()
       .select("*")
       .select("user(*)")
       .orderBy("created_at", true);
 
     if (pageIndex !== -1) {
-      request = request.page(pageIndex);
+      request.page(pageIndex);
     }
 
     if (query.length > 0) {
-      request = request.or.ilike("url", query);
+      request.or.ilike("url", query);
     }
 
     const { data, pagesLength } = yield request.get("/logs", true);

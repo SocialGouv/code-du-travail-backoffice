@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<Radio /> should pass 1`] = `
+exports[`elements/<Radio /> should pass 1`] = `
 .emotion-1 {
   cursor: default;
   width: 1rem !important;

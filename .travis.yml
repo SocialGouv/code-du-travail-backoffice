@@ -8,7 +8,6 @@ cache:
     - nodes_modules
     - packages/api/nodes_modules
     - packages/app/nodes_modules
-    - packages/data-filler/nodes_modules
 
 jobs:
   include:

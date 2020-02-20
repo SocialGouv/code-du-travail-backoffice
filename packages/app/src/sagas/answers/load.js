@@ -14,47 +14,47 @@ export default function* load() {
     const { agreements: userAgreements, id: userId, role: userRole } = getCurrentUser();
     const filters = yield select(getAnswersFilters);
 
-    let request = customPostgrester();
+    const request = customPostgrester();
 
-    request = request.page(filters.page, filters.pageLength);
+    request.page(filters.page, filters.pageLength);
 
     if (!filters.isGeneric) {
       const states =
         filters.states.length > 0 ? filters.states.map(({ value }) => value) : ANSWER_STATES;
-      request = request.in("state", states).orderBy("question_index");
+      request.in("state", states).orderBy("question_index");
 
-      request = request.orderBy("agreement_idcc");
+      request.orderBy("agreement_idcc");
 
       if (userRole === USER_ROLE.ADMINISTRATOR) {
-        request = request.select("*").select("user(name)");
+        request.select("*").select("user(name)");
       }
 
       if (userRole === USER_ROLE.CONTRIBUTOR) {
-        request = request.in("agreement_id", userAgreements, true);
+        request.in("agreement_id", userAgreements, true);
 
         if (!states.includes(ANSWER_STATE.TO_DO)) {
-          request = request.eq("user_id", userId);
+          request.eq("user_id", userId);
         }
       }
 
       if (filters.agreements.length > 0) {
         const agreementIds = filters.agreements.map(({ value }) => value);
-        request = request.in("agreement_id", agreementIds, true);
+        request.in("agreement_id", agreementIds, true);
       }
 
       if (filters.questions.length > 0) {
         const questionIds = filters.questions.map(({ value }) => value);
-        request = request.in("question_id", questionIds, true);
+        request.in("question_id", questionIds, true);
       }
 
       if (filters.query.length > 0) {
-        request = request.or
+        request.or
           .ilike("question_value", filters.query)
           .ilike("prevalue", filters.query)
           .ilike("value", filters.query);
       }
     } else {
-      request = request.orderBy("question_index");
+      request.orderBy("question_index");
     }
 
     const uri = filters.isGeneric ? "/generic_answers" : "/full_answers";

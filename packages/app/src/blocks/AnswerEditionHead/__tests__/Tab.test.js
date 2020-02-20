@@ -3,7 +3,7 @@ import React from "react";
 
 import AnswerEditionHeadBlockTab from "../Tab";
 
-describe.skip("[Contrib] blocks/AnswerEditionHead/<Tab />", () => {
+describe.skip("blocks/AnswerEditionHead/<Tab />", () => {
   const props = {
     children: "A Tab Text",
     icon: "book",

@@ -3,7 +3,7 @@ import React from "react";
 
 import Pagination from "../Pagination";
 
-describe.skip("[Contrib] components/<Pagination />", () => {
+describe.skip("components/<Pagination />", () => {
   const props = {
     initialPage: 2,
     onPageChange: jest.fn(),
