@@ -25,15 +25,15 @@ const PROPS = {
       .subtract(2, "hours")
       .tz("Europe/Paris"),
     user: {
-      name: "A User Name"
+      name: "A User Name",
     },
     value: `Il m'est arrivé de sentir que tout allait bien pour moi, que<br>
             tout le monde était gai, et aussitôt l'idée me traversait<br>
             l'esprit qu'il ne se passerait plus rien et que tout était<br>
-            absurde.`
+            absurde.`,
   },
   onCheck: jest.fn(),
-  onClick: jest.fn()
+  onClick: jest.fn(),
 };
 
 describe.skip("blocks/<AdminAnswer /> (Draft)", () => {
@@ -52,7 +52,7 @@ describe.skip("blocks/<AdminAnswer /> (Draft)", () => {
 
   it("should have called onClick() with the expected param", () => {
     fireEvent.click(
-      λ.getAllByText(`${props.data.question_index}) ${props.data.question_value}`)[0]
+      λ.getAllByText(`${props.data.question_index}) ${props.data.question_value}`)[0],
     );
 
     expect(props.onClick).toHaveBeenCalledWith(props.data.id);
@@ -66,8 +66,8 @@ describe.skip("blocks/<AdminAnswer /> (Draft falling back to LC)", () => {
     data: {
       ...PROPS.data,
       generic_reference: "labor_code",
-      value: ""
-    }
+      value: "",
+    },
   };
   const λ = render(<AdminAnswerBlock {...props} />);
 
@@ -83,8 +83,8 @@ describe.skip("blocks/<AdminAnswer /> (Draft falling back to NA)", () => {
     data: {
       ...PROPS.data,
       generic_reference: "national_agreement",
-      value: ""
-    }
+      value: "",
+    },
   };
   const λ = render(<AdminAnswerBlock {...props} />);
 
@@ -96,7 +96,7 @@ describe.skip("blocks/<AdminAnswer /> (Draft falling back to NA)", () => {
 describe.skip("blocks/<AdminAnswer /> (Checked draft)", () => {
   const props = {
     ...PROPS,
-    isChecked: true
+    isChecked: true,
   };
   const λ = render(<AdminAnswerBlock {...props} />);
 
@@ -108,7 +108,7 @@ describe.skip("blocks/<AdminAnswer /> (Checked draft)", () => {
 describe.skip("blocks/<AdminAnswer /> (Unchecked draft)", () => {
   const props = {
     ...PROPS,
-    isChecked: false
+    isChecked: false,
   };
   const λ = render(<AdminAnswerBlock {...props} />);
 
@@ -128,8 +128,8 @@ describe.skip("blocks/<AdminAnswer /> (To Do)", () => {
     ...PROPS,
     data: {
       ...PROPS.data,
-      state: ANSWER_STATE.TO_DO
-    }
+      state: ANSWER_STATE.TO_DO,
+    },
   };
   const λ = render(<AdminAnswerBlock {...props} />);
 
@@ -143,8 +143,8 @@ describe.skip("blocks/<AdminAnswer /> (Pending Review)", () => {
     ...PROPS,
     data: {
       ...PROPS.data,
-      state: ANSWER_STATE.PENDING_REVIEW
-    }
+      state: ANSWER_STATE.PENDING_REVIEW,
+    },
   };
   const λ = render(<AdminAnswerBlock {...props} />);
 
@@ -158,8 +158,8 @@ describe.skip("blocks/<AdminAnswer /> (Under Review)", () => {
     ...PROPS,
     data: {
       ...PROPS.data,
-      state: ANSWER_STATE.UNDER_REVIEW
-    }
+      state: ANSWER_STATE.UNDER_REVIEW,
+    },
   };
   const λ = render(<AdminAnswerBlock {...props} />);
 
@@ -173,8 +173,8 @@ describe.skip("blocks/<AdminAnswer /> (Validated)", () => {
     ...PROPS,
     data: {
       ...PROPS.data,
-      state: ANSWER_STATE.VALIDATED
-    }
+      state: ANSWER_STATE.VALIDATED,
+    },
   };
   const λ = render(<AdminAnswerBlock {...props} />);
 

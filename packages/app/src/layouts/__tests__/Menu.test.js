@@ -10,7 +10,7 @@ import Menu from "../Menu";
 describe.skip("layouts/<Menu /> (Contributor)", () => {
   const props = {
     me: { payload: { name: "John Doe" } },
-    router: { pathname: "/" }
+    router: { pathname: "/" },
   };
 
   const JWT = "A Fake Token";
@@ -67,7 +67,7 @@ describe.skip("layouts/<Menu /> (Contributor)", () => {
     expect(sessionStorage.getItem("me")).toBe(ME);
     expect(global.open).toHaveBeenCalledWith(
       "https://jean-rene-duscher.gitbook.io/code-du-travail-numerique/",
-      "_blank"
+      "_blank",
     );
   });
 
@@ -86,7 +86,7 @@ describe.skip("layouts/<Menu /> (Contributor)", () => {
     expect(sessionStorage.getItem("me")).toBe(ME);
     expect(global.open).toHaveBeenCalledWith(
       "/static/docs/Proposition-de-reponse-types-CC-metallurgie-locales.docx",
-      "_blank"
+      "_blank",
     );
   });
 
@@ -97,7 +97,7 @@ describe.skip("layouts/<Menu /> (Contributor)", () => {
     expect(sessionStorage.getItem("me")).toBe(ME);
     expect(global.open).toHaveBeenCalledWith(
       "/static/docs/Reformulation-des-intitules-de-question.xlsx",
-      "_blank"
+      "_blank",
     );
   });
 
@@ -108,7 +108,7 @@ describe.skip("layouts/<Menu /> (Contributor)", () => {
     expect(sessionStorage.getItem("me")).toBe(ME);
     expect(global.open).toHaveBeenCalledWith(
       "/static/docs/Premiers-retours-sur-la-validation-des-contributions.docx",
-      "_blank"
+      "_blank",
     );
   });
 
@@ -123,7 +123,7 @@ describe.skip("layouts/<Menu /> (Contributor)", () => {
   it("should match snapshot diff when the path has changed", () => {
     const newProps = {
       ...props,
-      router: { pathname: "/chart" }
+      router: { pathname: "/chart" },
     };
 
     const { asFragment } = render(<Menu {...newProps} />);
@@ -136,7 +136,7 @@ describe.skip("layouts/<Menu /> (Admin)", () => {
   const props = {
     isAdmin: true,
     me: { payload: { name: "John Doe" } },
-    router: { pathname: "/" }
+    router: { pathname: "/" },
   };
 
   const JWT = "A Fake Token";

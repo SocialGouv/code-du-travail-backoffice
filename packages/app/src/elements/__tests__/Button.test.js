@@ -24,7 +24,7 @@ describe("elements/<Button />", () => {
     const $button = testRender(
       <Button color="danger" icon={ICON}>
         {TEXT}
-      </Button>
+      </Button>,
     );
     const $icon = $button.findByType("svg");
 
@@ -37,7 +37,7 @@ describe("elements/<Button />", () => {
     const $button = testRender(
       <Button color="info" icon={ICON}>
         {TEXT}
-      </Button>
+      </Button>,
     );
     const $icon = $button.findByType("svg");
 
@@ -50,7 +50,7 @@ describe("elements/<Button />", () => {
     const $button = testRender(
       <Button color="primary" icon={ICON}>
         {TEXT}
-      </Button>
+      </Button>,
     );
     const $icon = $button.findByType("svg");
 
@@ -63,7 +63,7 @@ describe("elements/<Button />", () => {
     const $button = testRender(
       <Button color="secondary" icon={ICON}>
         {TEXT}
-      </Button>
+      </Button>,
     );
     const $icon = $button.findByType("svg");
 
@@ -76,7 +76,7 @@ describe("elements/<Button />", () => {
     const $button = testRender(
       <Button color="warning" icon={ICON}>
         {TEXT}
-      </Button>
+      </Button>,
     );
     const $icon = $button.findByType("svg");
 

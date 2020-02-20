@@ -13,7 +13,7 @@ export default class CharterPage extends React.Component {
     super(props);
 
     this.state = {
-      isLoading: true
+      isLoading: true,
     };
   }
 
@@ -28,8 +28,8 @@ export default class CharterPage extends React.Component {
       <Main>
         <IFrame
           frameBorder="0"
-          src="/static/docs/Charte-Redactionnelle-v2019.05.pdf"
           scrolling="no"
+          src="/static/docs/Charte-Redactionnelle-v2019.05.pdf"
           title="Charte rédactionnelle"
         />
       </Main>

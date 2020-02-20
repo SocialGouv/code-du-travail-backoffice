@@ -16,8 +16,8 @@ moment.updateLocale("en", {
     s: "quelques secondes",
     ss: "%d secondes",
     y: "un an",
-    yy: "%d ans"
-  }
+    yy: "%d ans",
+  },
 });
 
 export default moment;

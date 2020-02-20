@@ -11,5 +11,5 @@ export default [
   takeLatest(actionTypes.COMMENT_CREATE_ONE, createOne),
 
   takeLatest(actionTypes.COMMENTS_DELETE, _delete),
-  takeLatest(actionTypes.COMMENTS_LOAD, load)
+  takeLatest(actionTypes.COMMENTS_LOAD, load),
 ];

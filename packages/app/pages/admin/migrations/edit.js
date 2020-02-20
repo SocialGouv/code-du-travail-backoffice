@@ -8,8 +8,8 @@ const FIELDS = [
   {
     label: "Nom",
     name: "name",
-    type: "input"
-  }
+    type: "input",
+  },
 ];
 
 export default class AdminQuestionsEditPage extends React.Component {
@@ -17,7 +17,7 @@ export default class AdminQuestionsEditPage extends React.Component {
     super(props);
 
     this.state = {
-      isLoading: true
+      isLoading: true,
     };
   }
 
@@ -35,7 +35,7 @@ export default class AdminQuestionsEditPage extends React.Component {
 
       this.setState({
         data: migrations[0],
-        isLoading: false
+        isLoading: false,
       });
     } catch (err) {
       if (err !== undefined) console.warn(err);

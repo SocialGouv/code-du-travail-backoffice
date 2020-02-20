@@ -22,7 +22,7 @@ Ceci est très **important**.
     `,
     label: "A label",
     onChange: jest.fn(),
-    onTagsClicked: jest.fn()
+    onTagsClicked: jest.fn(),
   };
 
   const γ = render(<Editor {...props} />);

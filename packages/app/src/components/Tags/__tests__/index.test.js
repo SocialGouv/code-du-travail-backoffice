@@ -12,7 +12,7 @@ describe.skip("components/<Tags />", () => {
     onAdd: jest.fn(),
     onRemove: jest.fn(),
     selectedTags: [{ value: "A Tag" }, { value: "Another Tag" }],
-    tags: [{ value: "A Tag" }, { value: "Another Tag" }, { value: "Yet Another Tag" }]
+    tags: [{ value: "A Tag" }, { value: "Another Tag" }, { value: "Yet Another Tag" }],
   };
 
   const γ = render(<Tags {...props} />);
@@ -26,7 +26,7 @@ describe.skip("components/<Tags />", () => {
 
   it("should show the expected suggestion", () => {
     fireEvent.input(γ.getByPlaceholderText(`Commencez à taper le nom du tag`), {
-      target: { value: "yet" }
+      target: { value: "yet" },
     });
 
     expect(γ.queryByText(props.tags[2].value)).toBeInTheDocument();
@@ -41,7 +41,7 @@ describe.skip("components/<Tags />", () => {
     expect(γ.queryByText(props.tags[1].value)).toBeInTheDocument();
     expect(γ.queryByText(props.tags[2].value)).toBeInTheDocument();
     expect(
-      γ.queryByAltText(`Bouton supprimant ${props.ariaName} ${props.tags[2].value}`)
+      γ.queryByAltText(`Bouton supprimant ${props.ariaName} ${props.tags[2].value}`),
     ).toBeInTheDocument();
   });
 
@@ -56,7 +56,7 @@ describe.skip("components/<Tags />", () => {
 
   it("should show the expected suggestions", () => {
     fireEvent.input(γ.getByPlaceholderText(`Commencez à taper le nom du tag`), {
-      target: { value: "a" }
+      target: { value: "a" },
     });
 
     expect(γ.getByPlaceholderText(`Commencez à taper le nom du tag`).value).toBe("a");
@@ -65,7 +65,7 @@ describe.skip("components/<Tags />", () => {
 
   it("should hide the suggestion when the input is emptied", () => {
     fireEvent.input(γ.getByPlaceholderText(`Commencez à taper le nom du tag`), {
-      target: { value: "" }
+      target: { value: "" },
     });
 
     expect(γ.getByPlaceholderText(`Commencez à taper le nom du tag`).value).toBe("");
@@ -77,7 +77,7 @@ describe.skip("components/<Tags /> without optional props", () => {
   const props = {
     isEditable: true,
     onAdd: jest.fn(),
-    onRemove: jest.fn()
+    onRemove: jest.fn(),
   };
 
   let γ;
@@ -96,7 +96,7 @@ describe.skip("components/<Tags /> without `isEditable`", () => {
     onAdd: jest.fn(),
     onRemove: jest.fn(),
     selectedTags: [{ value: "A Tag" }, { value: "Another Tag" }],
-    tags: [{ value: "A Tag" }, { value: "Another Tag" }, { value: "Yet Another Tag" }]
+    tags: [{ value: "A Tag" }, { value: "Another Tag" }, { value: "Yet Another Tag" }],
   };
 
   let γ;

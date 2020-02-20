@@ -5,8 +5,8 @@ import AdminIndex from "../../../src/components/AdminIndex";
 const COLUMNS = [
   {
     Header: "Titre",
-    accessor: "title"
-  }
+    accessor: "title",
+  },
 ];
 
 const AdminThemesIndexPage = () => (

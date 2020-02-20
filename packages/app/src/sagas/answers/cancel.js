@@ -17,7 +17,7 @@ export default function* cancel({ meta: { ids, next } }) {
       prevalue: "",
       state: ANSWER_STATE.TO_DO,
       user_id: null,
-      value: ""
+      value: "",
     };
 
     yield customPostgrester()
@@ -35,7 +35,7 @@ export default function* cancel({ meta: { ids, next } }) {
     toast.success(
       ids.length === 1
         ? `La réponse ${ids[0]} a été annulée.`
-        : `Les réponses ${ids.join(", ")} ont été annulées.`
+        : `Les réponses ${ids.join(", ")} ont été annulées.`,
     );
 
     next();

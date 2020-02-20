@@ -11,7 +11,7 @@ describe.skip("components/Tags/<Tag />", () => {
     id: "da68fa2d-4bfc-4b5b-bea3-f39f44719650",
     onRemove: jest.fn(),
     url: "https://example.com",
-    value: "A Tag"
+    value: "A Tag",
   };
 
   const γ = render(<Tag {...props} />);
@@ -21,10 +21,10 @@ describe.skip("components/Tags/<Tag />", () => {
 
     expect(γ.queryByText(props.value)).toBeInTheDocument();
     expect(
-      γ.queryByAltText(`Bouton supprimant ${props.ariaName} ${props.value}`)
+      γ.queryByAltText(`Bouton supprimant ${props.ariaName} ${props.value}`),
     ).toBeInTheDocument();
     expect(
-      γ.queryByAltText(`Bouton ouvrant l'url de ${props.ariaName} ${props.value}`)
+      γ.queryByAltText(`Bouton ouvrant l'url de ${props.ariaName} ${props.value}`),
     ).toBeInTheDocument();
   });
 
@@ -50,7 +50,7 @@ describe.skip("components/Tags/<Tag />", () => {
     expect(γ.queryByText(props.value)).toBeInTheDocument();
     expect(γ.queryByAltText(`Bouton supprimant l'étiquette ${props.value}`)).toBeInTheDocument();
     expect(
-      γ.queryByAltText(`Bouton ouvrant l'url de l'étiquette ${props.value}`)
+      γ.queryByAltText(`Bouton ouvrant l'url de l'étiquette ${props.value}`),
     ).toBeInTheDocument();
   });
 });

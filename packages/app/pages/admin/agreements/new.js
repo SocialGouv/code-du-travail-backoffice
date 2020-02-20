@@ -1,72 +1,45 @@
-import React from "react";
+import withAdminNew from "../../../src/templates/withAdminNew";
 
-import AdminForm from "../../../src/components/AdminForm";
-import AdminMainLayout from "../../../src/layouts/AdminMain";
-import customAxios from "../../../src/libs/customAxios";
-
-const FIELDS = [
+export const FIELDS = [
   {
     label: "Nom",
     name: "name",
-    type: "input"
+    type: "input",
   },
   {
     label: "IDCC",
     name: "idcc",
-    type: "input"
-  }
+    type: "input",
+  },
 ];
 
-export default class AdminAgreementsNewPage extends React.Component {
-  constructor(props) {
-    super(props);
+const componentDidMount = async api => {
+  const { data: agreements } = await api.get("/agreements");
 
-    this.state = {
-      fields: FIELDS,
-      isLoading: true
-    };
-  }
+  const fields = [
+    ...FIELDS,
+    {
+      label: "Convention parente",
+      name: "parent_id",
+      options: agreements.map(({ id, idcc, name }) => ({
+        label: `${idcc} - ${name}`,
+        value: id,
+      })),
+      type: "select",
+    },
+  ];
 
-  async componentDidMount() {
-    this.axios = customAxios();
+  return { fields };
+};
 
-    try {
-      const { data: agreements } = await this.axios.get("/agreements");
+const AdminAgreementsNewPage = withAdminNew(
+  {
+    apiPath: "/agreements",
+    i18nIsFeminine: true,
+    i18nSubject: "convention",
+    indexPath: "/agreements",
+  },
+  componentDidMount,
+);
 
-      const fields = [
-        ...FIELDS,
-        {
-          label: "Convention parente",
-          name: "parent_id",
-          options: agreements.map(({ id, idcc, name }) => ({
-            label: `${idcc} - ${name}`,
-            value: id
-          })),
-          type: "select"
-        }
-      ];
-
-      this.setState({
-        fields,
-        isLoading: false
-      });
-    } catch (err) {
-      if (err !== undefined) console.warn(err);
-    }
-  }
-
-  render() {
-    if (this.state.isLoading) return <AdminMainLayout isLoading />;
-
-    return (
-      <AdminForm
-        apiPath="/agreements"
-        fields={this.state.fields}
-        i18nIsFeminine
-        i18nSubject="convention"
-        indexPath="/agreements"
-        name="agreement"
-      />
-    );
-  }
-}
+export default AdminAgreementsNewPage;

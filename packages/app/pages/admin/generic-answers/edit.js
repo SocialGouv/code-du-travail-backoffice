@@ -7,5 +7,5 @@ class AdminGenericAnwsersEditPage extends AdminAnwsersEditPage {}
 export default connect(({ answers, comments }) => ({
   answers,
   comments,
-  isGeneric: true
+  isGeneric: true,
 }))(AdminGenericAnwsersEditPage);

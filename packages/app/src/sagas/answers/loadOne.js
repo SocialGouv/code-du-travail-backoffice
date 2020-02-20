@@ -19,7 +19,7 @@ export default function* loadOne({ meta: { id, withReferences, withTags } }) {
     if (answer.agreement !== null) {
       answer.agreement = {
         ...data[0].agreement,
-        name: shortenAgreementName(data[0].agreement.name)
+        name: shortenAgreementName(data[0].agreement.name),
       };
     }
 
@@ -33,7 +33,7 @@ export default function* loadOne({ meta: { id, withReferences, withTags } }) {
 
       answer = {
         ...answer,
-        references: answerRefs
+        references: answerRefs,
       };
     }
 
@@ -47,7 +47,7 @@ export default function* loadOne({ meta: { id, withReferences, withTags } }) {
 
       answer = {
         ...answer,
-        tags: answerTags
+        tags: answerTags,
       };
     }
 

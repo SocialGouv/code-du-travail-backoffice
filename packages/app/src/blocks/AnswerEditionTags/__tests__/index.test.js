@@ -11,14 +11,14 @@ describe.skip("blocks/<AnswerEditionTags />", () => {
       {
         category: "contract_type",
         id: "da68fa2d-4bfc-4b5b-bea3-f39f44719650",
-        value: "A Tag"
+        value: "A Tag",
       },
       {
         category: "target",
         id: "d7d54d79-b389-416c-9e06-43eb36a5ab30",
-        value: "Another Tag"
-      }
-    ]
+        value: "Another Tag",
+      },
+    ],
   };
 
   const { container, getByText } = render(<AnswerEditionTagsBlock {...props} />);

@@ -42,7 +42,7 @@ export default {
     `Bouton redirigeant vers le formulaire de création d'${un$nouveau$(_S, _F)} ${_S}`,
   ADMIN_COMMON_BUTTON_UPDATE_TITLE: (_S, _F, name) =>
     `Bouton mettant à jour ${le$(_S, _F)}${_S} ${name} à partir des données du formulaire`,
-  ADMIN_COMMON_FORM_EDIT_TITLE: (_S, _F, name) => `Edition ${du$(_S, _F)}${_S} « ${name} »`,
+  ADMIN_COMMON_FORM_EDIT_TITLE: (_S, _F, name) => `Édition ${du$(_S, _F)}${_S} « ${name} »`,
   ADMIN_COMMON_FORM_NEW_TITLE: (_S, _F) => `${capitalize(nouveau$(_S, _F))} ${_S}`,
   ADMIN_COMMON_INDEX_TITLE: _S => `Liste des ${pluralize(_S)}`,
 
@@ -51,5 +51,5 @@ export default {
   ANSWERS_INDEX_INFO_NO_SEARCH_RESULT: `Cette recherche n'a retournée aucun résultat.`,
   ANSWERS_INDEX_MODAL_CANCEL: `Êtes-vous sûr d'annuler cette réponse (son contenu sera supprimé) ?`,
   ANSWERS_INDEX_SEARCH_PLACEHOLDER: `Rechercher par intitulé de question ou IDCC…`,
-  ANSWERS_INDEX_TITLE: state => `Réponses ${ANSWER_STATE_LABEL[state]}`
+  ANSWERS_INDEX_TITLE: state => `Réponses ${ANSWER_STATE_LABEL[state]}`,
 };

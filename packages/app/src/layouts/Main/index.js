@@ -17,7 +17,7 @@ const MainLayout = ({ isHorizontal = false, isLoading = false, ...props }) => (
     <Head>
       <title>Outil de contribution au Code du travail numérique</title>
     </Head>
-    <style jsx global>
+    <style global jsx>
       {globalStyles}
     </style>
     <style jsx>{styles}</style>

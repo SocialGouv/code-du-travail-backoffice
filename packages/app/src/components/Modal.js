@@ -64,5 +64,5 @@ const ModalWrapper = ({ isVisible, ...props }) => {
 
 export default connect(({ modal: { isVisible, message } }) => ({
   isVisible,
-  message
+  message,
 }))(ModalWrapper);

@@ -37,12 +37,12 @@ export default class Editor extends React.Component {
           container: this.$toolbar,
           handlers: {
             redo: () => this.quill.history.redo(),
-            undo: () => this.quill.history.undo()
-          }
-        }
+            undo: () => this.quill.history.undo(),
+          },
+        },
       },
 
-      theme: "snow"
+      theme: "snow",
     };
 
     // We have to load Quill here because of the global `document`
@@ -73,7 +73,7 @@ export default class Editor extends React.Component {
   render() {
     const props = omit(
       ["defaultValue", "onChange", "onReferencesClicked", "onTagsClicked"],
-      this.props
+      this.props,
     );
 
     return (

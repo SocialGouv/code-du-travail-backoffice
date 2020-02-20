@@ -13,7 +13,6 @@ services:
     volumes:
       - postgre-data:/var/lib/postgresql/data
       - ./backups:/backups
-      - ./scripts/docker/db:/scripts
 
   # https://postgrest.org/en/stable/install.html#containerized-postgrest-and-db-with-docker-compose
   postgrest:

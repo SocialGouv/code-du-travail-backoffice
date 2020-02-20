@@ -5,12 +5,12 @@ import showdown from "showdown";
 const converter = new showdown.Converter({
   noHeaderId: true,
   simplifiedAutoLink: true,
-  underline: true
+  underline: true,
 });
 
 // https://github.com/punkave/sanitize-html#node-recommended
 const ALLOWED_ATTRS = {
-  a: ["href"]
+  a: ["href"],
 };
 const ALLOWED_TAGS = [
   "a",
@@ -26,7 +26,7 @@ const ALLOWED_TAGS = [
   "p",
   "strong",
   "u",
-  "ul"
+  "ul",
 ];
 
 /**
@@ -48,7 +48,7 @@ class Markdown {
   _cleanHtmlSource(htmlSource) {
     return sanitizeHtml(htmlSource, {
       allowedAttributes: ALLOWED_ATTRS,
-      allowedTags: ALLOWED_TAGS
+      allowedTags: ALLOWED_TAGS,
     });
   }
 

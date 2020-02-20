@@ -7,5 +7,5 @@ global.console = {
   info: jest.fn(),
   // eslint-disable-next-line no-console
   log: console.log,
-  warn: jest.fn()
+  warn: jest.fn(),
 };

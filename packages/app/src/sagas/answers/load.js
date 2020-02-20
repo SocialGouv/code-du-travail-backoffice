@@ -65,7 +65,7 @@ export default function* load() {
       ? [...data]
       : data.map(({ agreement_name, ...props }) => ({
           ...props,
-          agreement_name: shortenAgreementName(agreement_name)
+          agreement_name: shortenAgreementName(agreement_name),
         }));
 
     const referencesRequest = customPostgrester()
@@ -77,26 +77,14 @@ export default function* load() {
 
     fullData = fullData.map(answer => ({
       ...answer,
-      references: answersRefs.filter(({ answer_id }) => answer_id === answer.id)
-    }));
-
-    const tagsRequest = customPostgrester()
-      .select("*")
-      .select("tag(*)")
-      .in("answer_id", answerIds);
-
-    const { data: answersTags } = yield tagsRequest.get("/answers_tags");
-
-    fullData = fullData.map(answer => ({
-      ...answer,
-      tags: answersTags.filter(({ answer_id }) => answer_id === answer.id)
+      references: answersRefs.filter(({ answer_id }) => answer_id === answer.id),
     }));
 
     yield put(
       answers.loadSuccess({
         data: fullData,
-        pagesLength
-      })
+        pagesLength,
+      }),
     );
   } catch (err) {
     if (err.response.status === 416) {
@@ -105,7 +93,7 @@ export default function* load() {
           {`Cette page est hors de portée.`}
           <br />
           {`Redirection vers la première page…`}
-        </span>
+        </span>,
       );
 
       return yield put(answers.setFilter("page", 0));

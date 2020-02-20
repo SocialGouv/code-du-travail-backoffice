@@ -1,53 +1,23 @@
-import React from "react";
+import withAdminEdit from "../../../src/templates/withAdminEdit";
+import { FIELDS } from "./new";
 
-import AdminForm from "../../../src/components/AdminForm";
-import AdminMainLayout from "../../../src/layouts/AdminMain";
-import customPostgrester from "../../../src/libs/customPostgrester";
-import AdminDefinitionsNewPage from "./new";
+const componentDidMount = async (api, id) => {
+  const { data: definitions } = await api.eq("id", id).get("/definitions");
 
-export default class AdminDefinitionsEditPage extends AdminDefinitionsNewPage {
-  constructor(props) {
-    super(props);
+  return {
+    defaultData: definitions[0],
+    fields: FIELDS,
+  };
+};
 
-    this.state = {
-      data: {},
-      isLoading: true
-    };
-  }
+const AdminDefinitionsEditPage = withAdminEdit(
+  {
+    apiPath: "/definitions",
+    i18nIsFeminine: true,
+    i18nSubject: "définition",
+    indexPath: "/definitions",
+  },
+  componentDidMount,
+);
 
-  static getInitialProps({ query: { id } }) {
-    return { id };
-  }
-
-  async componentDidMount() {
-    const { id } = this.props;
-
-    const { data: definitions } = await customPostgrester()
-      .eq("id", id)
-      .get("/definitions");
-
-    this.setState({
-      data: definitions[0],
-      isLoading: false
-    });
-  }
-
-  render() {
-    const { id } = this.props;
-    const { data, isLoading } = this.state;
-
-    if (isLoading) return <AdminMainLayout isLoading />;
-
-    return (
-      <AdminForm
-        apiPath="/definitions"
-        defaultData={data}
-        fields={this.fields}
-        i18nIsFeminine
-        i18nSubject="définition"
-        id={id}
-        indexPath="/definitions"
-      />
-    );
-  }
-}
+export default AdminDefinitionsEditPage;

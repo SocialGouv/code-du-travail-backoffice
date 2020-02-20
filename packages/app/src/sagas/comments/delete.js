@@ -14,6 +14,6 @@ export default function* _delete({ meta: { answerId, ids } }) {
     yield put(comments.load(answerId));
   } catch (err) {
     toast.error(err.message);
-    yield put(comments.removeFailure({ message: null }));
+    yield put(comments.deleteFailure({ message: null }));
   }
 }

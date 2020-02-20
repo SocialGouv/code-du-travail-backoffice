@@ -81,123 +81,85 @@ module.exports = function(nextApp) {
   });
   withErrorAndAuth(nextApp, "/admin/agreements/:id", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/agreements/edit", {
-      ...ctx.params
+      ...ctx.params,
     });
   });
 
   withErrorAndAuth(nextApp, "/admin/answers/print", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/answers/print", {});
   });
-
   withErrorAndAuth(nextApp, "/admin/answers/:id", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/answers/edit", {
-      ...ctx.params
+      ...ctx.params,
     });
   });
 
   withErrorAndAuth(nextApp, "/admin/definitions/new", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/definitions/new", {});
   });
-
   withErrorAndAuth(nextApp, "/admin/definitions/:id", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/definitions/edit", {
-      ...ctx.params
+      ...ctx.params,
     });
   });
 
   withErrorAndAuth(nextApp, "/admin/generic-answers/print", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/generic-answers/print", {});
   });
-
   withErrorAndAuth(nextApp, "/admin/generic-answers/:id", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/generic-answers/edit", {
-      ...ctx.params
+      ...ctx.params,
     });
   });
 
   withErrorAndAuth(nextApp, "/admin/locations/new", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/locations/new", {});
   });
-
   withErrorAndAuth(nextApp, "/admin/locations/:id", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/locations/edit", {
-      ...ctx.params
+      ...ctx.params,
     });
   });
 
   withErrorAndAuth(nextApp, "/admin/questions/new", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/questions/new", {});
   });
-
   withErrorAndAuth(nextApp, "/admin/questions/:id", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/questions/edit", {
-      ...ctx.params
+      ...ctx.params,
     });
   });
 
   withErrorAndAuth(nextApp, "/admin/migrations/:id", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/migrations/edit", {
-      ...ctx.params
+      ...ctx.params,
     });
   });
 
   withErrorAndAuth(nextApp, "/admin/requests/new", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/requests/new", {});
   });
-
   withErrorAndAuth(nextApp, "/admin/requests/:id", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/requests/edit", {
-      ...ctx.params
+      ...ctx.params,
     });
   });
 
   withErrorAndAuth(nextApp, "/admin/themes/new", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/themes/new", {});
   });
-
   withErrorAndAuth(nextApp, "/admin/themes/:id", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/themes/edit", {
-      ...ctx.params
-    });
-  });
-
-  withErrorAndAuth(nextApp, "/admin/tags/new", async ctx => {
-    await nextApp.render(ctx.req, ctx.res, "/admin/tags/new", {});
-  });
-
-  withErrorAndAuth(nextApp, "/admin/tags/:id", async ctx => {
-    await nextApp.render(ctx.req, ctx.res, "/admin/tags/edit", {
-      ...ctx.params
-    });
-  });
-
-  withErrorAndAuth(nextApp, "/admin/tags-categories/new", async ctx => {
-    await nextApp.render(ctx.req, ctx.res, "/admin/tags-categories/new", {});
-  });
-
-  withErrorAndAuth(nextApp, "/admin/tags-categories/:id", async ctx => {
-    await nextApp.render(ctx.req, ctx.res, "/admin/tags-categories/edit", {
-      ...ctx.params
+      ...ctx.params,
     });
   });
 
   withErrorAndAuth(nextApp, "/admin/users/new", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/users/new", {});
   });
-
   withErrorAndAuth(nextApp, "/admin/users/:id", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/users/edit", {
-      ...ctx.params
-    });
-  });
-
-  withErrorAndAuth(nextApp, "/admin/areas/new", async ctx => {
-    await nextApp.render(ctx.req, ctx.res, "/admin/areas/new", {});
-  });
-
-  withErrorAndAuth(nextApp, "/admin/areas/:id", async ctx => {
-    await nextApp.render(ctx.req, ctx.res, "/admin/areas/edit", {
-      ...ctx.params
+      ...ctx.params,
     });
   });
 

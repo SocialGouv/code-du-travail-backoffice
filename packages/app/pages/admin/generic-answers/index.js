@@ -8,5 +8,5 @@ export default connect(({ agreements, answers, questions }) => ({
   agreements,
   answers,
   isGeneric: true,
-  questions
+  questions,
 }))(AdminGenericAnswersIndexPage);

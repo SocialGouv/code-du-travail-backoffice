@@ -11,10 +11,10 @@ const initialState = {
     pageLength: 10,
     query: "",
     questions: [],
-    states: []
+    states: [],
   },
   isLoading: true,
-  pagesLength: 0
+  pagesLength: 0,
 };
 
 export default (state = initialState, { payload, type }) => {
@@ -23,21 +23,21 @@ export default (state = initialState, { payload, type }) => {
     case actionTypes.ANSWER_LOAD_ONE:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       };
 
     case actionTypes.ANSWER_LOAD_ONE_FAILURE:
       return {
         ...state,
         error: payload.message,
-        isLoading: false
+        isLoading: false,
       };
 
     case actionTypes.ANSWER_LOAD_ONE_SUCCESS:
       return {
         ...state,
         data: payload.data,
-        isLoading: false
+        isLoading: false,
       };
 
     /* MULTIPLE ANSWERS ―――――――――――――――― */
@@ -51,7 +51,7 @@ export default (state = initialState, { payload, type }) => {
     case actionTypes.ANSWERS_UPDATE_STATE:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       };
 
     case actionTypes.ANSWERS_CANCEL_FAILURE:
@@ -65,7 +65,7 @@ export default (state = initialState, { payload, type }) => {
       return {
         ...state,
         error: payload.message,
-        isLoading: false
+        isLoading: false,
       };
 
     case actionTypes.ANSWERS_LOAD_SUCCESS:
@@ -75,20 +75,20 @@ export default (state = initialState, { payload, type }) => {
         data: payload.data,
         error: null,
         isLoading: false,
-        pagesLength: payload.pagesLength
+        pagesLength: payload.pagesLength,
       };
 
     case actionTypes.ANSWERS_SET_FILTER_SUCCESS:
     case actionTypes.ANSWERS_SET_FILTERS_SUCCESS:
       return {
         ...state,
-        filters: payload.filters
+        filters: payload.filters,
       };
 
     case actionTypes.ANSWERS_TOGGLE_CHECK_SUCESS:
       return {
         ...state,
-        checked: payload.checked
+        checked: payload.checked,
       };
 
     default:

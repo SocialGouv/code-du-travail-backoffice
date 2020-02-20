@@ -122,7 +122,7 @@ class AnswersViewPage extends React.Component {
 
     this.state = {
       isLoading: true,
-      references: []
+      references: [],
     };
   }
 
@@ -153,7 +153,7 @@ class AnswersViewPage extends React.Component {
 
       this.setState({
         isLoading: false,
-        references
+        references,
       });
     } catch (err) {
       if (err !== undefined) console.warn(err);
@@ -162,7 +162,7 @@ class AnswersViewPage extends React.Component {
 
   renderReferences(category = null) {
     const references = this.state.references.filter(
-      ({ category: _category }) => _category === category
+      ({ category: _category }) => _category === category,
     );
 
     if (references.length === 0) {
@@ -212,7 +212,7 @@ class AnswersViewPage extends React.Component {
           {
             labor_code: "Renvoyée au texte Code du Travail.",
             national_agreement: "Renvoyée au texte de la CCN.",
-            null: "Aucun renvoi."
+            null: "Aucun renvoi.",
           }[String(generic_reference)]
         }
       </Container>

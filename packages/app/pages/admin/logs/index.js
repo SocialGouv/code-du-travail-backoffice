@@ -6,7 +6,7 @@ import { Flex } from "rebass";
 import * as actions from "../../../src/actions";
 import _Table from "../../../src/components/Table";
 import { LOG_ACTION_LABEL } from "../../../src/constants";
-import Input from "../../../src/elements/Input";
+import Button from "../../../src/elements/Button";
 import Title from "../../../src/elements/Title";
 import AdminMainLayout from "../../../src/layouts/AdminMain";
 import moment from "../../../src/libs/customMoment";
@@ -15,10 +15,12 @@ const Container = styled(Flex)`
   flex-grow: 1;
   margin: 0 1rem 1rem;
 `;
-const Table = styled(_Table)`
-  font-size: 0.875rem;
-  margin-top: 1rem;
 
+export const Head = styled(Flex)`
+  margin-bottom: 1rem;
+`;
+
+const Table = styled(_Table)`
   .rt-tr > .rt-th,
   .rt-tr > .rt-td {
     width: 15% !important;
@@ -31,6 +33,7 @@ const Table = styled(_Table)`
     }
   }
 `;
+
 const Danger = styled.span`
   color: red;
   font-weight: bold;
@@ -42,47 +45,41 @@ const COLUMNS = [
   {
     Cell: ({ value }) => (value !== null ? value.name : <Danger>Unknown</Danger>),
     Header: "Nom (ou email)",
-    accessor: "user"
+    accessor: "user",
   },
   {
     Cell: ({ value }) => (value !== null ? value.role : <Danger>Unknown</Danger>),
     Header: "Role",
-    accessor: "user"
+    accessor: "user",
   },
   {
     Header: "IP",
-    accessor: "ip"
+    accessor: "ip",
   },
   {
     Cell: ({ value }) => LOG_ACTION_LABEL[value],
     Header: "Action",
-    accessor: "action"
+    accessor: "action",
   },
   {
     Header: "Path",
-    accessor: "url"
+    accessor: "url",
   },
   {
     Cell: ({ value }) => moment(value).format("L HH:mm:ss"),
     Header: "Date",
-    accessor: "created_at"
-  }
+    accessor: "created_at",
+  },
 ];
 /* eslint-enable react/display-name */
 
 class AdminLogsIndexPage extends React.Component {
-  get queryFilter() {
-    return this.$queryFilter !== undefined && this.$queryFilter !== null
-      ? this.$queryFilter.value
-      : "";
-  }
-
   componentDidMount() {
     this.props.dispatch(actions.logs.load({ pageIndex: -1 }));
   }
 
-  setQueryFilter() {
-    this.props.dispatch(actions.logs.load({ query: this.queryFilter }));
+  deleteOlderThanOneWeek() {
+    this.props.dispatch(actions.logs.deleteOlderThanOneWeek());
   }
 
   render() {
@@ -91,23 +88,26 @@ class AdminLogsIndexPage extends React.Component {
     return (
       <AdminMainLayout>
         <Container flexDirection="column">
-          <Title>Logs</Title>
-          <Input
-            defaultValue={logs.query}
-            icon="search"
-            onChange={this.setQueryFilter.bind(this)}
-            ref={node => (this.$queryFilter = node)}
-          />
+          <Head alignItems="flex-end" justifyContent="space-between">
+            <Title>Logs</Title>
+            <Button
+              color="danger"
+              onClick={this.deleteOlderThanOneWeek.bind(this)}
+              title="Bouton effaçant l'ensemble de logs dépassant une semaine d'ancienneté"
+            >
+              Purger
+            </Button>
+          </Head>
           <Table
-            data={logs.data}
             columns={COLUMNS}
+            data={logs.data}
             defaultSorted={[{ desc: true, id: "created_at" }]}
-            filterable={false}
+            filterable={true}
             multiSort={false}
             pageSize={10}
             resizable={false}
-            showPagination={true}
             showPageSizeOptions={false}
+            showPagination={true}
           />
         </Container>
       </AdminMainLayout>
@@ -116,5 +116,5 @@ class AdminLogsIndexPage extends React.Component {
 }
 
 export default connect(({ logs }) => ({
-  logs
+  logs,
 }))(AdminLogsIndexPage);

@@ -28,5 +28,5 @@ function* submit() {
 
 export default [
   takeLatest(actionTypes.MODAL_OPEN, open),
-  takeLatest(actionTypes.MODAL_SUBMIT, submit)
+  takeLatest(actionTypes.MODAL_SUBMIT, submit),
 ];

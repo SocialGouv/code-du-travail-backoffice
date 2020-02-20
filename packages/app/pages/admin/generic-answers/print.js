@@ -6,5 +6,5 @@ class AdminGenericAnswersPrintPage extends AdminAnswersPrintPage {}
 
 export default connect(({ answers }) => ({
   answers,
-  isGeneric: true
+  isGeneric: true,
 }))(AdminGenericAnswersPrintPage);

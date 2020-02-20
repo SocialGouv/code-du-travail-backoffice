@@ -54,7 +54,7 @@ class AnswersIndexPage extends React.Component {
     super(props);
 
     this.state = {
-      me: null
+      me: null,
     };
 
     this.load = debounce(this._load.bind(this), 500);
@@ -67,13 +67,13 @@ class AnswersIndexPage extends React.Component {
   componentDidUpdate(prevProps) {
     const {
       router: {
-        query: { page: prevPage, state: prevState }
-      }
+        query: { page: prevPage, state: prevState },
+      },
     } = prevProps;
     const {
       router: {
-        query: { page, state }
-      }
+        query: { page, state },
+      },
     } = this.props;
 
     if (page !== prevPage || state !== prevState) {
@@ -84,8 +84,8 @@ class AnswersIndexPage extends React.Component {
   _load() {
     const {
       router: {
-        query: { page, state }
-      }
+        query: { page, state },
+      },
     } = this.props;
 
     const pageIndex = Number(page) - 1;
@@ -97,7 +97,7 @@ class AnswersIndexPage extends React.Component {
     const meta = {
       pageIndex,
       query: this.query,
-      states
+      states,
     };
 
     this.props.dispatch(actions.answers.load(meta));
@@ -106,8 +106,8 @@ class AnswersIndexPage extends React.Component {
   goToPage({ selected }) {
     const {
       router: {
-        query: { state }
-      }
+        query: { state },
+      },
     } = this.props;
 
     const href = `/answers?state=${state}&page=${selected + 1}`;
@@ -123,15 +123,15 @@ class AnswersIndexPage extends React.Component {
 
   updateGenericReference(id, genericReference) {
     this.props.dispatch(
-      actions.answers.updateGenericReference([id], genericReference, this.load.bind(this))
+      actions.answers.updateGenericReference([id], genericReference, this.load.bind(this)),
     );
   }
 
   openAnswer(id) {
     const {
       router: {
-        query: { state }
-      }
+        query: { state },
+      },
     } = this.props;
 
     if ([ANSWER_STATE.TO_DO, ANSWER_STATE.DRAFT].includes(state)) {
@@ -147,8 +147,8 @@ class AnswersIndexPage extends React.Component {
     const {
       answers,
       router: {
-        query: { state }
-      }
+        query: { state },
+      },
     } = this.props;
     const { data, error } = answers;
 
@@ -171,7 +171,7 @@ class AnswersIndexPage extends React.Component {
         onCancel={this.cancel.bind(this)}
         onClick={this.openAnswer.bind(this)}
         onFallback={this.updateGenericReference.bind(this)}
-      />
+      />,
     ]);
   }
 
@@ -179,8 +179,8 @@ class AnswersIndexPage extends React.Component {
     const {
       answers,
       router: {
-        query: { state }
-      }
+        query: { state },
+      },
     } = this.props;
     const { data, isLoading, pageIndex, pagesLength } = answers;
 
@@ -223,5 +223,5 @@ class AnswersIndexPage extends React.Component {
 }
 
 export default connect(({ answers }) => ({
-  answers
+  answers,
 }))(withRouter(AnswersIndexPage));

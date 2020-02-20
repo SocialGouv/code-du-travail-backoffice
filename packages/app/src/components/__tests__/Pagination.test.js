@@ -7,7 +7,7 @@ describe.skip("components/<Pagination />", () => {
   const props = {
     initialPage: 2,
     onPageChange: jest.fn(),
-    pageCount: 12
+    pageCount: 12,
   };
 
   const { container, getByText } = render(<Pagination {...props} />);

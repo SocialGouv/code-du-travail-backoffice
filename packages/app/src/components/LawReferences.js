@@ -57,14 +57,14 @@ export default class LawReferences extends React.PureComponent {
     this.references = props.references.map(({ value }) => value);
 
     this.state = {
-      suggestions: this.getSuggestions()
+      suggestions: this.getSuggestions(),
     };
   }
 
   getSuggestions() {
     return LAW_REFERENCES.filter(value => !this.references.includes(value)).map(value => ({
       id: value,
-      name: value
+      name: value,
     }));
   }
 
@@ -74,13 +74,13 @@ export default class LawReferences extends React.PureComponent {
 
     await this.props.onAdd({
       category: "labor_code",
-      value
+      value,
     });
 
     this.references.push(value);
     this.setState({
       isLoading: false,
-      suggestions: this.getSuggestions()
+      suggestions: this.getSuggestions(),
     });
   }
 
@@ -90,13 +90,13 @@ export default class LawReferences extends React.PureComponent {
 
     await this.props.onRemove({
       category: "labor_code",
-      value
+      value,
     });
 
     this.references = this.references.filter(name => name !== value);
     this.setState({
       isLoading: false,
-      suggestions: this.getSuggestions()
+      suggestions: this.getSuggestions(),
     });
   }
 

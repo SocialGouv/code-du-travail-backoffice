@@ -8,6 +8,6 @@ module.exports = withCss({
   // https://nextjs.org/docs#build-time-configuration
   env: {
     API_URI,
-    API_URI_DOCKER
-  }
+    API_URI_DOCKER,
+  },
 });

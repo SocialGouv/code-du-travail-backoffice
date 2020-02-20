@@ -6,11 +6,11 @@ import AdminIndex from "../../../src/components/AdminIndex";
 const COLUMNS = [
   {
     Header: "Index",
-    accessor: "id"
+    accessor: "id",
   },
   {
     Header: "Nom",
-    accessor: "name"
+    accessor: "name",
   },
   {
     Header: "Créé le",
@@ -21,8 +21,8 @@ const COLUMNS = [
     filterable: false,
     id: "createdAt",
     style: { textAlign: "center" },
-    width: 160
-  }
+    width: 160,
+  },
 ];
 
 const AdminMigrationsIndexPage = () => (
@@ -32,8 +32,8 @@ const AdminMigrationsIndexPage = () => (
     i18nIsFeminine
     i18nSubject="migration"
     noCreate
-    noEdit
     noDelete
+    noEdit
     noTimestamps
   />
 );

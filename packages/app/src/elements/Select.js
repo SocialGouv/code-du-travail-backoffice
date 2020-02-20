@@ -5,24 +5,24 @@ const styles = {
   container: s => ({
     ...s,
     fontSize: "0.875rem",
-    width: "15rem"
+    width: "15rem",
   }),
   control: s => ({
     ...s,
     borderRadius: 0,
-    minHeight: 0
+    minHeight: 0,
   }),
   dropdownIndicator: s => ({
     ...s,
-    padding: "0.325rem"
+    padding: "0.325rem",
   }),
   indicatorSeparator: s => ({
     ...s,
-    margin: "0.325rem 0"
+    margin: "0.325rem 0",
   }),
   input: s => ({
     ...s,
-    padding: 0
+    padding: 0,
   }),
   menu: s => ({
     ...s,
@@ -30,12 +30,12 @@ const styles = {
     borderRadius: 0,
     borderTop: 0,
     boxShadow: "none",
-    margin: 0
+    margin: 0,
   }),
   menuList: s => ({
     ...s,
-    padding: 0
-  })
+    padding: 0,
+  }),
 };
 
 const Select = (props, ref) => <ReactSelect ref={ref} styles={styles} {...props} />;

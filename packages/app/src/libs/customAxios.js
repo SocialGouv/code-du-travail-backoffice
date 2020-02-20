@@ -4,7 +4,7 @@ import Router from "next/router";
 import cache from "../cache";
 
 const instance = axios.create({
-  baseURL: process.env.API_URI
+  baseURL: process.env.API_URI,
 });
 
 // We can't possibly test this interceptor since we would need to partially
@@ -25,7 +25,7 @@ instance.interceptors.response.use(
     }
 
     throw error;
-  }
+  },
 );
 
 export default function() {

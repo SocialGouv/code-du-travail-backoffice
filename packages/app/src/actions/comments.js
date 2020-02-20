@@ -6,55 +6,55 @@ export const addOne = (value, isPrivate, answerId) => ({
   meta: {
     answerId,
     isPrivate,
-    value
+    value,
   },
-  type: actionTypes.COMMENT_CREATE_ONE
+  type: actionTypes.COMMENT_CREATE_ONE,
 });
 export const addOneFailure = error => ({
   error: true,
   payload: {
-    message: error.message
+    message: error.message,
   },
-  type: actionTypes.COMMENT_CREATE_ONE_FAILURE
+  type: actionTypes.COMMENT_CREATE_ONE_FAILURE,
 });
 
 export const toggleOnePrivacy = () => ({
-  type: actionTypes.COMMENT_TOGGLE_PRIVACY
+  type: actionTypes.COMMENT_TOGGLE_PRIVACY,
 });
 
 /* MULTIPLE COMMENTS ――――――――――――――― */
 
 export const load = answerId => ({
   meta: {
-    answerId
+    answerId,
   },
-  type: actionTypes.COMMENTS_LOAD
+  type: actionTypes.COMMENTS_LOAD,
 });
 export const loadFailure = error => ({
   error: true,
   payload: {
-    message: error.message
+    message: error.message,
   },
-  type: actionTypes.COMMENTS_LOAD_FAILURE
+  type: actionTypes.COMMENTS_LOAD_FAILURE,
 });
 export const loadSuccess = data => ({
   payload: {
-    data
+    data,
   },
-  type: actionTypes.COMMENTS_LOAD_SUCCESS
+  type: actionTypes.COMMENTS_LOAD_SUCCESS,
 });
 
-export const remove = (ids, answerId) => ({
+export const _delete = (ids, answerId) => ({
   meta: {
     answerId,
-    ids
+    ids,
   },
-  type: actionTypes.COMMENTS_DELETE
+  type: actionTypes.COMMENTS_DELETE,
 });
-export const removeFailure = error => ({
+export const deleteFailure = error => ({
   error: true,
   payload: {
-    message: error.message
+    message: error.message,
   },
-  type: actionTypes.COMMENTS_DELETE_FAILURE
+  type: actionTypes.COMMENTS_DELETE_FAILURE,
 });

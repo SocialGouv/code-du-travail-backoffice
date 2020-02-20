@@ -9,23 +9,22 @@ import cache from "../src/cache";
 import getMe from "../src/libs/getMe";
 import createStore from "../src/store";
 
+// https://github.com/zeit/next.js/blob/canary/examples/with-redux-saga/pages/_app.js
 class MainApp extends App {
-  static async getInitialProps(appContext) {
-    const { ctx } = appContext;
+  static async getInitialProps({ Component, ctx }) {
+    const pageProps = Component.getInitialProps ? await Component.getInitialProps({ ctx }) : {};
+    pageProps.id = ctx.query.id;
+    pageProps.me = await getMe(ctx);
 
-    const appProps = await App.getInitialProps(appContext);
-    const me = await getMe(ctx);
-
-    return {
-      ...appProps,
-      me
-    };
+    return { pageProps };
   }
 
   constructor(props) {
     super(props);
 
-    const { me } = props;
+    const {
+      pageProps: { me },
+    } = props;
 
     cache.set("me", me);
   }

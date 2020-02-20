@@ -15,19 +15,19 @@ describe.skip("blocks/<AnswerEditionReferencesBlock />", () => {
       {
         category: "labor_code",
         url: null,
-        value: "L1234-5"
+        value: "L1234-5",
       },
       {
         category: null,
         url: "https://example.com",
-        value: "An Uncategorized Reference"
+        value: "An Uncategorized Reference",
       },
       {
         category: "agreement",
         url: null,
-        value: "An Agreement Reference"
-      }
-    ]
+        value: "An Agreement Reference",
+      },
+    ],
   };
 
   const γ = render(<AnswerEditionReferencesBlock {...props} />);
@@ -43,14 +43,14 @@ describe.skip("blocks/<AnswerEditionReferencesBlock />", () => {
     const newReference = {
       category: "labor_code",
       url: null,
-      value: "L1234-6"
+      value: "L1234-6",
     };
 
     fireEvent.input(
       γ.getByPlaceholderText("Commencez à taper le nom de la référence au Code du travail"),
       {
-        target: { value: newReference.value }
-      }
+        target: { value: newReference.value },
+      },
     );
     await waitFor(0);
     fireEvent.click(γ.queryByText(newReference.value));
@@ -63,8 +63,8 @@ describe.skip("blocks/<AnswerEditionReferencesBlock />", () => {
   it("should remove the expected Labor Code reference", async () => {
     fireEvent.click(
       γ.getByTitle(
-        `Bouton supprimant la référence au Code du travail ` + `"${props.references[0].value}"`
-      )
+        `Bouton supprimant la référence au Code du travail ` + `"${props.references[0].value}"`,
+      ),
     );
     await waitFor(0);
 
@@ -76,11 +76,11 @@ describe.skip("blocks/<AnswerEditionReferencesBlock />", () => {
     const newAgreementReference = {
       category: "agreement",
       url: null,
-      value: "A New Agreement Reference"
+      value: "A New Agreement Reference",
     };
 
     fireEvent.input(γ.getByPlaceholderText("Ex: Article 7, Texte sur les salaires de 1984…"), {
-      target: { value: newAgreementReference.value }
+      target: { value: newAgreementReference.value },
     });
     await waitFor(0);
     fireEvent.click(γ.getByTitle("Ajouter la référence à la convention collective"));
@@ -94,8 +94,8 @@ describe.skip("blocks/<AnswerEditionReferencesBlock />", () => {
     fireEvent.click(
       γ.getByTitle(
         `Bouton supprimant la référence à la convention collective ` +
-          `"${props.references[2].value}"`
-      )
+          `"${props.references[2].value}"`,
+      ),
     );
     await waitFor(0);
 
@@ -109,7 +109,7 @@ describe.skip("blocks/<AnswerEditionReferencesBlock />", () => {
     expect(γ.queryAllByText(duplicateAgreementReferenceValue).length).toBe(1);
 
     fireEvent.input(γ.getByPlaceholderText("Ex: Article 7, Texte sur les salaires de 1984…"), {
-      target: { value: duplicateAgreementReferenceValue }
+      target: { value: duplicateAgreementReferenceValue },
     });
     await waitFor(0);
     fireEvent.click(γ.getByTitle("Ajouter la référence à la convention collective"));
@@ -122,7 +122,7 @@ describe.skip("blocks/<AnswerEditionReferencesBlock />", () => {
     expect(γ.queryAllByTitle(/Bouton supprimant/).length).toBe(3);
 
     fireEvent.input(γ.getByPlaceholderText("Ex: Article 7, Texte sur les salaires de 1984…"), {
-      target: { value: " " }
+      target: { value: " " },
     });
     await waitFor(0);
     fireEvent.click(γ.getByTitle("Ajouter la référence à la convention collective"));
@@ -135,15 +135,15 @@ describe.skip("blocks/<AnswerEditionReferencesBlock />", () => {
     const newReference = {
       category: null,
       url: "https://example.com/other",
-      value: "A New Uncategorized Reference"
+      value: "A New Uncategorized Reference",
     };
 
     fireEvent.input(γ.getByPlaceholderText("Référence (ex: Décret n°82-447 du 28 mai 1982…)"), {
-      target: { value: newReference.value }
+      target: { value: newReference.value },
     });
     await waitFor(0);
     fireEvent.input(γ.getByPlaceholderText("URL (ex: https://www.legifrance.gouv.fr/…)"), {
-      target: { value: newReference.url }
+      target: { value: newReference.url },
     });
     await waitFor(0);
     fireEvent.click(γ.getByTitle("Ajouter la référence juridique"));
@@ -155,7 +155,7 @@ describe.skip("blocks/<AnswerEditionReferencesBlock />", () => {
 
   it("should remove the expected uncategorized reference", async () => {
     fireEvent.click(
-      γ.getByTitle(`Bouton supprimant la référence juridique ` + `"${props.references[1].value}"`)
+      γ.getByTitle(`Bouton supprimant la référence juridique ` + `"${props.references[1].value}"`),
     );
     await waitFor(0);
 
@@ -169,7 +169,7 @@ describe.skip("blocks/<AnswerEditionReferencesBlock />", () => {
     expect(γ.queryAllByText(duplicateReferenceValue).length).toBe(1);
 
     fireEvent.input(γ.getByPlaceholderText("Référence (ex: Décret n°82-447 du 28 mai 1982…)"), {
-      target: { value: duplicateReferenceValue }
+      target: { value: duplicateReferenceValue },
     });
     await waitFor(0);
     fireEvent.click(γ.getByTitle("Ajouter la référence juridique"));
@@ -182,7 +182,7 @@ describe.skip("blocks/<AnswerEditionReferencesBlock />", () => {
     expect(γ.queryAllByTitle(/Bouton supprimant/).length).toBe(3);
 
     fireEvent.input(γ.getByPlaceholderText("Référence (ex: Décret n°82-447 du 28 mai 1982…)"), {
-      target: { value: " " }
+      target: { value: " " },
     });
     await waitFor(0);
     fireEvent.click(γ.getByTitle("Ajouter la référence juridique"));
@@ -195,18 +195,18 @@ describe.skip("blocks/<AnswerEditionReferencesBlock />", () => {
     const newReferenceWithEmptyUrl = {
       category: null,
       url: " ",
-      value: "A New Uncategorized Reference With An Empty URL"
+      value: "A New Uncategorized Reference With An Empty URL",
     };
 
     expect(γ.queryAllByTitle(/Bouton supprimant/).length).toBe(3);
     expect(γ.queryAllByTitle(/Bouton ouvrant le lien/).length).toBe(1);
 
     fireEvent.input(γ.getByPlaceholderText("Référence (ex: Décret n°82-447 du 28 mai 1982…)"), {
-      target: { value: newReferenceWithEmptyUrl.value }
+      target: { value: newReferenceWithEmptyUrl.value },
     });
     await waitFor(0);
     fireEvent.input(γ.getByPlaceholderText("URL (ex: https://www.legifrance.gouv.fr/…)"), {
-      target: { value: newReferenceWithEmptyUrl.url }
+      target: { value: newReferenceWithEmptyUrl.url },
     });
     await waitFor(0);
     fireEvent.click(γ.getByTitle("Ajouter la référence juridique"));

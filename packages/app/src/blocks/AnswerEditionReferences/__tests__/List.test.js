@@ -15,19 +15,19 @@ describe.skip("blocks/AnswerEditionReferences/<List />", () => {
       {
         category: "labor_code",
         url: null,
-        value: "L1234-5"
+        value: "L1234-5",
       },
       {
         category: null,
         url: "https://example.com",
-        value: "An Uncategorized Reference"
+        value: "An Uncategorized Reference",
       },
       {
         category: "agreement",
         url: null,
-        value: "An Agreement Reference"
-      }
-    ]
+        value: "An Agreement Reference",
+      },
+    ],
   };
 
   const γ = render(<AnswerEditionReferencesBlockList {...props} />);
@@ -41,7 +41,7 @@ describe.skip("blocks/AnswerEditionReferences/<List />", () => {
 
   it("should call `onRemove()` prop with the expected param", async () => {
     fireEvent.click(
-      γ.getByTitle(`Bouton supprimant ${props.ariaName} "${props.references[0].value}"`)
+      γ.getByTitle(`Bouton supprimant ${props.ariaName} "${props.references[0].value}"`),
     );
 
     expect(props.onRemove).toHaveBeenCalledWith(props.references[0].value);
@@ -50,8 +50,8 @@ describe.skip("blocks/AnswerEditionReferences/<List />", () => {
   it("should call `window.open()` with the expected params", async () => {
     fireEvent.click(
       γ.getByTitle(
-        `Bouton ouvrant le lien associé à ${props.ariaName} ` + `"${props.references[1].value}"`
-      )
+        `Bouton ouvrant le lien associé à ${props.ariaName} ` + `"${props.references[1].value}"`,
+      ),
     );
 
     expect(global.open).toHaveBeenCalledWith(props.references[1].url, "_blank");

@@ -18,7 +18,7 @@ export default function* updateState({ meta: { ids, next, state } }) {
           prevalue: "",
           state,
           user_id: null,
-          value: ""
+          value: "",
         };
         yield customPostgrester()
           .in("answer_id", ids, true)
@@ -33,7 +33,7 @@ export default function* updateState({ meta: { ids, next, state } }) {
       case ANSWER_STATE.UNDER_REVIEW:
         data = {
           is_published: false,
-          state
+          state,
         };
         break;
 
@@ -52,7 +52,7 @@ export default function* updateState({ meta: { ids, next, state } }) {
     toast.success(
       ids.length === 1
         ? `La réponse ${ids[0]} est maintenant ${ANSWER_STATE_LABEL[state]}.`
-        : `Les réponses ${ids.join(", ")} sont maintenant ${pluralize(ANSWER_STATE_LABEL[state])}.`
+        : `Les réponses ${ids.join(", ")} sont maintenant ${pluralize(ANSWER_STATE_LABEL[state])}.`,
     );
 
     next();

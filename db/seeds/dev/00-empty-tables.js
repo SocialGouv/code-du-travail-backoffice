@@ -16,18 +16,19 @@ exports.seed = async knex => {
   await knex("api.answers_comments").del();
   global.spinner.start(`Emptying tables: api.answers_references`);
   await knex("api.answers_references").del();
-  global.spinner.start(`Emptying tables: api.answers_tags`);
-  await knex("api.answers_tags").del();
-  global.spinner.start(`Emptying tables: api.questions_tags`);
-  await knex("api.questions_tags").del();
-  global.spinner.start(`Emptying tables: api.tags`);
-  await knex("api.tags").del();
-  global.spinner.start(`Emptying tables: api.tags_categories`);
-  await knex("api.tags_categories").del();
   global.spinner.start(`Emptying tables: api.answers`);
   await knex("api.answers").del();
   global.spinner.start(`Emptying tables: api.questions`);
   await knex("api.questions").del();
+
+  global.spinner.start(`Emptying tables: api.definitions`);
+  await knex("api.logs").del();
+  global.spinner.start(`Emptying tables: api.requests`);
+  await knex("api.logs").del();
+  global.spinner.start(`Emptying tables: api.themes`);
+  await knex("api.logs").del();
+  global.spinner.start(`Emptying tables: api.references`);
+  await knex("api.logs").del();
 
   global.spinner.start(`Emptying tables: api.logs`);
   await knex("api.logs").del();
@@ -43,8 +44,6 @@ exports.seed = async knex => {
   await knex("api.locations").del();
   global.spinner.start(`Emptying tables: api.agreements`);
   await knex("api.agreements").del();
-  global.spinner.start(`Emptying tables: api.areas`);
-  await knex("api.areas").del();
 
   global.spinner.succeed(`Tables emptied.`);
 };

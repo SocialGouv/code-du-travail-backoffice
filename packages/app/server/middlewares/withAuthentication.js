@@ -18,7 +18,7 @@ async function getMe(ctx) {
 
   return {
     isAdmin,
-    isAuthenticated: true
+    isAuthenticated: true,
   };
 }
 

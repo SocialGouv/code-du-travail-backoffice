@@ -6,7 +6,7 @@ import AnswerEditionHeadBlockActions from "../Actions";
 describe.skip("blocks/AnswerEditionHead/<Actions />", () => {
   const props = {
     onCancel: jest.fn(),
-    onSubmit: jest.fn()
+    onSubmit: jest.fn(),
   };
 
   const { container, getByText } = render(<AnswerEditionHeadBlockActions {...props} />);

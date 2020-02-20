@@ -10,7 +10,7 @@ const LABOR_LAW_REFERENCES_LENGTH = LABOR_LAW_REFERENCES.length;
 function getRandomAnswerReference(answerId, category) {
   const answerReference = {
     answer_id: answerId,
-    category
+    category,
   };
 
   switch (category) {
@@ -18,21 +18,21 @@ function getRandomAnswerReference(answerId, category) {
       return {
         ...answerReference,
         value: dumdum.text([12, 120]),
-        url: Math.random() < 0.5 ? "https://example.com" : null
+        url: Math.random() < 0.5 ? "https://example.com" : null,
       };
 
     case ANSWER_REFERENCE_CATEGORY[1]:
       return {
         ...answerReference,
         value: `Article ${Math.ceil(Math.random() * 99)}`,
-        url: null
+        url: null,
       };
 
     case ANSWER_REFERENCE_CATEGORY[2]:
       return {
         ...answerReference,
         value: LABOR_LAW_REFERENCES[Math.floor(Math.random() * LABOR_LAW_REFERENCES_LENGTH)],
-        url: null
+        url: null,
       };
   }
 }
@@ -51,32 +51,14 @@ function getRandomAnswerReferences(answerId) {
   return answerReferences;
 }
 
-function getRandomAnswerTags(tags, answerId) {
-  const answerTags = [];
-  let i = Math.floor(Math.random() * 5);
-
-  while (i-- > 0) {
-    const tagIndex = Math.floor(Math.random() * tags.length);
-    const tag = tags[tagIndex];
-
-    answerTags.push({
-      answer_id: answerId,
-      tag_id: tag.id
-    });
-  }
-
-  return answerTags;
-}
-
 exports.seed = async knex => {
   global.spinner.start(`Generating answers...`);
 
   const questions = await knex("api.questions");
   const agreements = await knex("api.agreements");
   const activeAgreementIds = await knex("api.locations_agreements").map(
-    ({ agreement_id }) => agreement_id
+    ({ agreement_id }) => agreement_id,
   );
-  const tags = await knex("api.tags");
 
   for (let question of questions) {
     global.spinner.start(`Generating answers: ${question.value}`);
@@ -86,7 +68,7 @@ exports.seed = async knex => {
       prevalue: "",
       value: dumdum.text([260, 620]),
       question_id: question.id,
-      agreement_id: null
+      agreement_id: null,
     };
 
     await knex("api.answers").insert([genericAnswer]);
@@ -100,7 +82,7 @@ exports.seed = async knex => {
           prevalue: "",
           value: "",
           question_id: question.id,
-          agreement_id: agreement.id
+          agreement_id: agreement.id,
         };
       }
 
@@ -113,7 +95,7 @@ exports.seed = async knex => {
             prevalue: "",
             value: "",
             question_id: question.id,
-            agreement_id: agreement.id
+            agreement_id: agreement.id,
           };
 
         case dice < diceBalance[1]:
@@ -123,7 +105,7 @@ exports.seed = async knex => {
             value: "",
             question_id: question.id,
             agreement_id: agreement.id,
-            user_id: "00000000-0000-4000-8000-000000000402"
+            user_id: "00000000-0000-4000-8000-000000000402",
           };
 
         case dice < diceBalance[2]:
@@ -133,7 +115,7 @@ exports.seed = async knex => {
             value: "",
             question_id: question.id,
             agreement_id: agreement.id,
-            user_id: "00000000-0000-4000-8000-000000000402"
+            user_id: "00000000-0000-4000-8000-000000000402",
           };
 
         case dice < diceBalance[3]:
@@ -143,7 +125,7 @@ exports.seed = async knex => {
             value: dumdum.text([260, 620]),
             question_id: question.id,
             agreement_id: agreement.id,
-            user_id: "00000000-0000-4000-8000-000000000402"
+            user_id: "00000000-0000-4000-8000-000000000402",
           };
 
         default:
@@ -154,7 +136,7 @@ exports.seed = async knex => {
             question_id: question.id,
             agreement_id: agreement.id,
             user_id: "00000000-0000-4000-8000-000000000402",
-            is_published: Math.random() < 0.75
+            is_published: Math.random() < 0.75,
           };
       }
     });
@@ -167,19 +149,10 @@ exports.seed = async knex => {
 
     const answersReferences = answerIds.reduce(
       (prev, answerId) => [...prev, ...getRandomAnswerReferences(answerId)],
-      []
+      [],
     );
-
-    global.spinner.start(`Generating answers tags...`);
 
     await knex("api.answers_references").insert(answersReferences);
-
-    const answersTags = answerIds.reduce(
-      (prev, answerId) => [...prev, ...getRandomAnswerTags(tags, answerId)],
-      []
-    );
-
-    await knex("api.answers_tags").insert(answersTags);
   }
 
   global.spinner.succeed(`Answers generated.`);

@@ -7,7 +7,7 @@ import api from "./api";
 const ANOMNYMOUS_RESPONSE = {
   data: null,
   isAuthenticated: false,
-  token: null
+  token: null,
 };
 
 export default async function getMe(ctx) {
@@ -23,14 +23,14 @@ export default async function getMe(ctx) {
     if (!isAuthenticated) return ANOMNYMOUS_RESPONSE;
 
     const isAdmin = [USER_ROLE.ADMINISTRATOR, USER_ROLE.REGIONAL_ADMINISTRATOR].includes(
-      data[0].payload.role
+      data[0].payload.role,
     );
 
     return {
       data: isAuthenticated ? data[0].payload : null,
       isAdmin,
       isAuthenticated,
-      token
+      token,
     };
   } catch (err) {
     console.error(`[libs/getMe()] Error: ${err.message}`);

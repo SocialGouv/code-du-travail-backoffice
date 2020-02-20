@@ -7,12 +7,12 @@ const COLUMNS = [
     Header: "Index",
     accessor: "index",
     style: { textAlign: "right" },
-    width: 80
+    width: 80,
   },
   {
     Header: "Intitulé",
-    accessor: "value"
-  }
+    accessor: "value",
+  },
 ];
 
 const QuestionsIndexPage = () => (

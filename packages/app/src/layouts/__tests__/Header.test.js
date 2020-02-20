@@ -9,8 +9,8 @@ const ME = { payload: { name: "A Name" } };
 describe.skip("layouts/<Header />", () => {
   const props = {
     router: {
-      pathname: "/"
-    }
+      pathname: "/",
+    },
   };
 
   const γ = render(<Header {...props} />);
@@ -26,7 +26,7 @@ describe.skip("layouts/<Header />", () => {
 
     const newProps = {
       ...props,
-      hasContribMenu: true
+      hasContribMenu: true,
     };
 
     const Γ = render(<Header {...newProps} />);
@@ -45,7 +45,7 @@ describe.skip("layouts/<Header />", () => {
     const newProps = {
       ...props,
       hasContribMenu: true,
-      isAdmin: true
+      isAdmin: true,
     };
 
     const Γ = render(<Header {...newProps} />);

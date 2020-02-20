@@ -15,11 +15,11 @@ describe.skip("blocks/<Answer /> (Todo)", () => {
       id: "12345678-9abc-4def-0123-456789abcdef",
       question_index: 12,
       question_value: "Who knows?",
-      state: ANSWER_STATE.TO_DO
+      state: ANSWER_STATE.TO_DO,
     },
     label: "A label",
     onClick: jest.fn(),
-    onFallback: jest.fn()
+    onFallback: jest.fn(),
   };
 
   const γ = render(<AnswerBlock {...props} />);
@@ -57,10 +57,10 @@ describe.skip("blocks/<Answer /> (Draft)", () => {
       prevalue: "A prevalue",
       question_value: "Who knows?",
       state: ANSWER_STATE.DRAFT,
-      value: "A value"
+      value: "A value",
     },
     label: "A label",
-    onCancel: jest.fn()
+    onCancel: jest.fn(),
   };
 
   let γ;
@@ -87,8 +87,8 @@ describe.skip("blocks/<Answer /> (Draft)", () => {
       data: {
         ...props.data,
         generic_reference: "labor_code",
-        value: ""
-      }
+        value: "",
+      },
     };
 
     const γ = render(<AnswerBlock {...newProps} />);
@@ -103,8 +103,8 @@ describe.skip("blocks/<Answer /> (Draft)", () => {
       data: {
         ...props.data,
         generic_reference: "national_agreement",
-        value: ""
-      }
+        value: "",
+      },
     };
 
     cleanup();

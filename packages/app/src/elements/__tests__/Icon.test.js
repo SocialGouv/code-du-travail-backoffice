@@ -4,7 +4,7 @@ import Icon from "../Icon";
 
 describe("elements/<Icon />", () => {
   const COMMON_PROPS = {
-    icon: "book"
+    icon: "book",
   };
 
   it(`should pass`, () => {

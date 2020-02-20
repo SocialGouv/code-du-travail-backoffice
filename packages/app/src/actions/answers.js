@@ -5,22 +5,22 @@ import actionTypes from "./types";
 export const loadOne = (id, meta = { withReferences: false, withTags: false }) => ({
   meta: {
     ...meta,
-    id
+    id,
   },
-  type: actionTypes.ANSWER_LOAD_ONE
+  type: actionTypes.ANSWER_LOAD_ONE,
 });
 export const loadOneFailure = error => ({
   error: true,
   payload: {
-    message: error.message
+    message: error.message,
   },
-  type: actionTypes.ANSWER_LOAD_ONE_FAILURE
+  type: actionTypes.ANSWER_LOAD_ONE_FAILURE,
 });
 export const loadOneSuccess = data => ({
   payload: {
-    data
+    data,
   },
-  type: actionTypes.ANSWER_LOAD_ONE_SUCCESS
+  type: actionTypes.ANSWER_LOAD_ONE_SUCCESS,
 });
 
 /* MULTIPLE ANSWERS ―――――――――――――――― */
@@ -28,120 +28,120 @@ export const loadOneSuccess = data => ({
 export const cancel = (ids, next) => ({
   meta: {
     ids,
-    next
+    next,
   },
-  type: actionTypes.ANSWERS_CANCEL
+  type: actionTypes.ANSWERS_CANCEL,
 });
 export const cancelFailure = error => ({
   error: true,
   payload: {
-    message: error.message
+    message: error.message,
   },
-  type: actionTypes.ANSWERS_CANCEL_FAILURE
+  type: actionTypes.ANSWERS_CANCEL_FAILURE,
 });
 
 export const load = () => ({
-  type: actionTypes.ANSWERS_LOAD
+  type: actionTypes.ANSWERS_LOAD,
 });
 export const loadFailure = error => ({
   error: true,
   payload: {
-    message: error.message
+    message: error.message,
   },
-  type: actionTypes.ANSWERS_LOAD_FAILURE
+  type: actionTypes.ANSWERS_LOAD_FAILURE,
 });
 export const loadSuccess = payload => ({
   payload,
-  type: actionTypes.ANSWERS_LOAD_SUCCESS
+  type: actionTypes.ANSWERS_LOAD_SUCCESS,
 });
 
 export const setFilter = (key, value) => ({
   meta: {
     key,
-    value
+    value,
   },
-  type: actionTypes.ANSWERS_SET_FILTER
+  type: actionTypes.ANSWERS_SET_FILTER,
 });
 export const setFilterFailure = error => ({
   error: true,
   payload: {
-    message: error.message
+    message: error.message,
   },
-  type: actionTypes.ANSWERS_SET_FILTER_FAILURE
+  type: actionTypes.ANSWERS_SET_FILTER_FAILURE,
 });
 
 export const setFilters = filters => ({
   meta: {
-    filters
+    filters,
   },
-  type: actionTypes.ANSWERS_SET_FILTERS
+  type: actionTypes.ANSWERS_SET_FILTERS,
 });
 export const setFiltersFailure = error => ({
   error: true,
   payload: {
-    message: error.message
+    message: error.message,
   },
-  type: actionTypes.ANSWERS_SET_FILTERS_FAILURE
+  type: actionTypes.ANSWERS_SET_FILTERS_FAILURE,
 });
 
 export const toggleCheck = ids => ({
   meta: {
-    ids
+    ids,
   },
-  type: actionTypes.ANSWERS_TOGGLE_CHECK
+  type: actionTypes.ANSWERS_TOGGLE_CHECK,
 });
 export const toggleCheckFailure = error => ({
   error: true,
   payload: {
-    message: error.message
+    message: error.message,
   },
-  type: actionTypes.ANSWERS_TOGGLE_CHECK_FAILURE
+  type: actionTypes.ANSWERS_TOGGLE_CHECK_FAILURE,
 });
 
 export const updateGenericReference = (ids, genericReference, next) => ({
   meta: {
     genericReference,
     ids,
-    next
+    next,
   },
-  type: actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE
+  type: actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE,
 });
 export const updateGenericReferenceFailure = error => ({
   error: true,
   payload: {
-    message: error.message
+    message: error.message,
   },
-  type: actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE_FAILURE
+  type: actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE_FAILURE,
 });
 
 export const updateIsPublished = (ids, is, next) => ({
   meta: {
     ids,
     is,
-    next
+    next,
   },
-  type: actionTypes.ANSWERS_UPDATE_IS_PUBLISHED_REFERENCE
+  type: actionTypes.ANSWERS_UPDATE_IS_PUBLISHED_REFERENCE,
 });
 export const updateIsPublishedFailure = error => ({
   error: true,
   payload: {
-    message: error.message
+    message: error.message,
   },
-  type: actionTypes.ANSWERS_UPDATE_IS_PUBLISHED_REFERENCE_FAILURE
+  type: actionTypes.ANSWERS_UPDATE_IS_PUBLISHED_REFERENCE_FAILURE,
 });
 
 export const updateState = (ids, state, next) => ({
   meta: {
     ids,
     next,
-    state
+    state,
   },
-  type: actionTypes.ANSWERS_UPDATE_STATE
+  type: actionTypes.ANSWERS_UPDATE_STATE,
 });
 export const updateStateFailure = error => ({
   error: true,
   payload: {
-    message: error.message
+    message: error.message,
   },
-  type: actionTypes.ANSWERS_UPDATE_STATE_FAILURE
+  type: actionTypes.ANSWERS_UPDATE_STATE_FAILURE,
 });
