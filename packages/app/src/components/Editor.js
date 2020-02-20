@@ -4,7 +4,6 @@ import React from "react";
 import { Flex } from "rebass";
 
 import markdown from "../libs/markdown";
-import unspace from "../libs/unspace";
 
 const TextButton = styled.button`
   color: #444444;
@@ -121,22 +120,19 @@ export default class Editor extends React.Component {
             />
             <button
               className="ql-blockquote"
-              title={unspace(`Bouton formattant le paragraphe sélectionné au
-                             format citation`)}
+              title={`Bouton formattant le paragraphe sélectionné au format citation`}
               type="button"
             />
           </span>
           <span className="ql-formats">
             <button
               className="ql-list"
-              title={unspace(`Bouton formattant le paragraphe sélectionné au
-                             format liste ordonnée`)}
+              title={`Bouton formattant le paragraphe sélectionné au format liste ordonnée`}
               value="ordered"
             />
             <button
               className="ql-list"
-              title={unspace(`Bouton formattant le paragraphe sélectionné au
-                             format liste numérotée`)}
+              title={`Bouton formattant le paragraphe sélectionné au format liste numérotée`}
               value="bullet"
             />
           </span>

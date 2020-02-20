@@ -7,7 +7,7 @@ global.open = jest.fn();
 
 import AnswerEditionReferencesBlockList from "../List";
 
-describe.skip("[Contrib] blocks/AnswerEditionReferences/<List />", () => {
+describe.skip("blocks/AnswerEditionReferences/<List />", () => {
   const props = {
     ariaName: "A Reference Type",
     onRemove: jest.fn(),

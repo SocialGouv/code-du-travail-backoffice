@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<Checkbox /> should pass 1`] = `
+exports[`elements/<Checkbox /> should pass 1`] = `
 .emotion-3 {
   box-sizing: border-box;
   margin: 0;

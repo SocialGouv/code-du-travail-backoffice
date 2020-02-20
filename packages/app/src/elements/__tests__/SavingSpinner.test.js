@@ -2,7 +2,7 @@ import React from "react";
 
 import SavingSpinner from "../SavingSpinner";
 
-describe("[Contrib] elements/<SavingSpinner />", () => {
+describe("elements/<SavingSpinner />", () => {
   it(`should pass`, () => {
     const $savingSpinner = testRender(<SavingSpinner />);
     const $spinner = $savingSpinner.children[3];

@@ -96,16 +96,11 @@ export default class AdminUsersNewPage extends React.Component {
     return (
       <AdminForm
         apiPath="/rpc/create_user"
-        ariaLabels={{
-          cancelButton: `Bouton redirigeant vers la liste des utilisateurs`,
-          createOrEditButton: `Bouton créant un nouvel utilisateur dans la base
-                              de données à partir des données du formulaire`
-        }}
         defaultData={{ password: generatePassword(PASSWORD_LENGTH) }}
         fields={this.state.fields}
+        i18nSubject="utilisateur"
         indexPath="/users"
         isApiFunction
-        title="Nouvel utilisateur"
       />
     );
   }

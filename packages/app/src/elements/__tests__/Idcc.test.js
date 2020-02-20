@@ -2,7 +2,7 @@ import React from "react";
 
 import Idcc from "../Idcc";
 
-describe("[Contrib] elements/<Idcc />", () => {
+describe("elements/<Idcc />", () => {
   const COMMON_PROPS = {
     name: "A Labor Agreement"
   };

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<Hr /> should pass 1`] = `
+exports[`elements/<Hr /> should pass 1`] = `
 .emotion-0 {
   border: 0;
   border-top: solid 1px var(--color-border);

@@ -11,7 +11,7 @@ Object.defineProperty(document, "getSelection", {
   }
 });
 
-describe("[Contrib] blocks/<AnswerEditionContent />", () => {
+describe("blocks/<AnswerEditionContent />", () => {
   const props = {
     defaultValue: "Hello World!",
     onChange: jest.fn()

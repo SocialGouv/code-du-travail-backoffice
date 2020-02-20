@@ -65,9 +65,6 @@ if [ "$CI" = "true" ] || [ "$NODE_ENV" != "production" ]; then
   yarn db:snapshot:restore
 fi
 
-echo "⏳ Starting kinto container…"
-docker-compose up -d kinto
-
 echo "⏳ Starting postgrest, api and app containers…"
 docker-compose up -d app
 

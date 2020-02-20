@@ -2,7 +2,7 @@ import React from "react";
 
 import Title from "../Title";
 
-describe("[Contrib] elements/<Title />", () => {
+describe("elements/<Title />", () => {
   const TEXT = "A Title";
 
   it(`should pass`, () => {

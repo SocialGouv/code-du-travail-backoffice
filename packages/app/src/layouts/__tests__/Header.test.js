@@ -6,7 +6,7 @@ import Header from "../Header";
 const JWT = "aFakeJWT";
 const ME = { payload: { name: "A Name" } };
 
-describe.skip("[Contrib] layouts/<Header />", () => {
+describe.skip("layouts/<Header />", () => {
   const props = {
     router: {
       pathname: "/"

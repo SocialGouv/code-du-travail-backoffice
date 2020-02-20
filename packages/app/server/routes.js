@@ -95,6 +95,16 @@ module.exports = function(nextApp) {
     });
   });
 
+  withErrorAndAuth(nextApp, "/admin/definitions/new", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/admin/definitions/new", {});
+  });
+
+  withErrorAndAuth(nextApp, "/admin/definitions/:id", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/admin/definitions/edit", {
+      ...ctx.params
+    });
+  });
+
   withErrorAndAuth(nextApp, "/admin/generic-answers/print", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/generic-answers/print", {});
   });
@@ -127,6 +137,26 @@ module.exports = function(nextApp) {
 
   withErrorAndAuth(nextApp, "/admin/migrations/:id", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/migrations/edit", {
+      ...ctx.params
+    });
+  });
+
+  withErrorAndAuth(nextApp, "/admin/requests/new", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/admin/requests/new", {});
+  });
+
+  withErrorAndAuth(nextApp, "/admin/requests/:id", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/admin/requests/edit", {
+      ...ctx.params
+    });
+  });
+
+  withErrorAndAuth(nextApp, "/admin/themes/new", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/admin/themes/new", {});
+  });
+
+  withErrorAndAuth(nextApp, "/admin/themes/:id", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/admin/themes/edit", {
       ...ctx.params
     });
   });

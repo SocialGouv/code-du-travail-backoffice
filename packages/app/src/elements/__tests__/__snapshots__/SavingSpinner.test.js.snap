@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<SavingSpinner /> should pass 1`] = `
+exports[`elements/<SavingSpinner /> should pass 1`] = `
 @keyframes animation-0 {
   0% {
     -webkit-transform: rotate(0deg);

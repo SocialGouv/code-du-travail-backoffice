@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<Tag /> should pass 1`] = `
+exports[`elements/<Tag /> should pass 1`] = `
 .emotion-0 {
   background-color: transparent;
   border-radius: 0.8rem;

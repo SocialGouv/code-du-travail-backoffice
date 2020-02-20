@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<Idcc /> should pass 1`] = `
+exports[`elements/<Idcc /> should pass 1`] = `
 .emotion-0 {
   background-color: var(--color-label-background);
   border: solid 1px var(--color-black-leather-jacket);

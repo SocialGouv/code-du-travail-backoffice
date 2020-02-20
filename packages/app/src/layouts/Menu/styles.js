@@ -6,6 +6,7 @@ export const Container = styled(Flex)`
 `;
 
 export const Dropdown = styled(Flex)`
+  align-items: center;
   color: var(--color-dark-slate-gray);
   cursor: pointer;
   font-size: 0.875rem;

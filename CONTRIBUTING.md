@@ -82,7 +82,6 @@ The following is the list of supported scopes:
 - **db**
 - **admin**
 - **contrib**
-- **data-filler**
 
 There are currently a few exceptions to the "use package name" rule:
 

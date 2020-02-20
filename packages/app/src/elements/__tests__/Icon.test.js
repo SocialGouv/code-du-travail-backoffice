@@ -2,7 +2,7 @@ import React from "react";
 
 import Icon from "../Icon";
 
-describe("[Contrib] elements/<Icon />", () => {
+describe("elements/<Icon />", () => {
   const COMMON_PROPS = {
     icon: "book"
   };

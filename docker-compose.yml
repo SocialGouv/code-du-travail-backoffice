@@ -8,27 +8,12 @@ services:
       # The JWT secret is used whithin the api.login() function:
       PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
       POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_KINTO_DB: ${POSTGRES_KINTO_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - postgre-data:/var/lib/postgresql/data
       - ./backups:/backups
       - ./scripts/docker/db:/scripts
-
-  # TODO Secure Kinto in prod.
-  kinto:
-    image: kinto/kinto-server:13.6.3
-    restart: always
-    environment:
-      KINTO_STORAGE_BACKEND: kinto.core.storage.postgresql
-      KINTO_STORAGE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_KINTO_DB}
-      KINTO_PERMISSION_BACKEND: kinto.core.permission.postgresql
-      KINTO_PERMISSION_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_KINTO_DB}
-      KINTO_BUCKET_CREATE_PRINCIPALS: system.Everyone
-      KINTO_BUCKET_READ_PRINCIPALS: system.Everyone
-    depends_on:
-      - db
 
   # https://postgrest.org/en/stable/install.html#containerized-postgrest-and-db-with-docker-compose
   postgrest:
@@ -66,17 +51,13 @@ services:
         API_PORT_PUBLIC: ${API_PORT_PUBLIC}
         API_SCHEME: ${API_SCHEME}
         API_URI_DOCKER: http://api:${API_PORT}
-        DATA_FILLER_PATH: ${DATA_FILLER_PATH}
         DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
         NODE_ENV: ${NODE_ENV}
-        KINTO_BUCKET: ${KINTO_BUCKET}
-        KINTO_URI: http://kinto:8888
         APP_PORT: ${APP_PORT}
     ports:
       - ${APP_PORT}:${APP_PORT}
     depends_on:
       - api
-      - kinto
 
   master:
     # Keep the container up:

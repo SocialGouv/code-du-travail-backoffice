@@ -2,7 +2,7 @@ import React from "react";
 
 import Select from "../Select";
 
-describe("[Contrib] elements/<Select />", () => {
+describe("elements/<Select />", () => {
   it(`should pass`, () => {
     const $select = testRender(<Select />);
 

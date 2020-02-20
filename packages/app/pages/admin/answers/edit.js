@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import debounce from "lodash.debounce";
 import React from "react";
-import Medixtor from "react-medixtor";
 import { connect } from "react-redux";
 import { Flex } from "rebass";
 
@@ -16,6 +15,7 @@ import Hr from "../../../src/elements/Hr";
 import Icon from "../../../src/elements/Icon";
 import Idcc from "../../../src/elements/Idcc";
 import Input from "../../../src/elements/Input";
+import MarkdownEditor from "../../../src/elements/MarkdownEditor";
 import Radio from "../../../src/elements/Radio";
 import _Select from "../../../src/elements/Select";
 import Subtitle from "../../../src/elements/Subtitle";
@@ -53,92 +53,9 @@ const StateSelect = styled(_Select)`
   margin-right: 1rem;
 `;
 
-const Editor = styled(Medixtor)`
-  border: solid 1px var(--color-border) !important;
-  flex-grow: unset;
-  min-height: 30rem;
-
-  .editor {
-    color: var(--color-black-leather-jacket);
-  }
-  .editor-menu-container button {
-    display: inline-flex;
-  }
-
-  .preview {
-    line-height: 1.4;
-    padding-top: 0 !important;
-
-    a {
-      color: #0053b3;
-
-      :after {
-        content: "";
-        position: relative;
-        top: 1px;
-        display: inline-block;
-        width: 15px;
-        height: 15px;
-        margin-left: 5px;
-        background: url("/static/assets/icons/external-link.svg") 100% 50% / 15px no-repeat;
-      }
-
-      :hover {
-        text-decoration: none;
-      }
-    }
-
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      color: #006ab2;
-    }
-    h2 {
-      font-size: 1.875rem;
-    }
-    h3 {
-      font-size: 1.625rem;
-    }
-    h4 {
-      font-size: 1.375rem;
-    }
-    h5 {
-      font-size: 1.125rem;
-    }
-    h6 {
-      font-size: 1rem;
-    }
-
-    p {
-      color: #434956;
-      margin-block-start: 1em;
-      margin-block-end: 1em;
-      margin-inline-start: 0;
-      margin-inline-end: 0;
-    }
-
-    ul {
-      list-style-type: disc;
-      margin-block-start: 1em;
-      margin-block-end: 1em;
-      margin-inline-start: 0px;
-      margin-inline-end: 0px;
-      padding-inline-start: 20px;
-
-      li {
-        display: list-item;
-      }
-
-      ul {
-        list-style-type: circle;
-      }
-    }
-  }
-`;
-const AnswerProposal = styled(Editor)`
+const AnswerProposal = styled(MarkdownEditor)`
   border-right: 0 !important;
+  min-height: 30rem;
 
   .editor {
     background-color: rgba(0, 0, 0, 0.025);
@@ -153,17 +70,11 @@ const AnswerProposal = styled(Editor)`
     background-color: rgba(0, 0, 0, 0.025);
   }
 `;
-const AnswerCorrection = styled(Editor)`
-  .editor {
-    background-color: white;
-    border: 0 !important;
-  }
-  .editor-status {
-    min-height: 1.5rem;
-  }
+const AnswerCorrection = styled(MarkdownEditor)`
+  min-height: 30rem;
 
-  .preview {
-    background-color: white;
+  .editor {
+    border: 0 !important;
   }
 `;
 const Strong = styled.p`

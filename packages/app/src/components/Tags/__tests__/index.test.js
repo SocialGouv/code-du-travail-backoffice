@@ -5,7 +5,7 @@ import React from "react";
 
 import Tags from "..";
 
-describe.skip("[Contrib] components/<Tags />", () => {
+describe.skip("components/<Tags />", () => {
   const props = {
     ariaName: "le tag",
     isEditable: true,
@@ -73,7 +73,7 @@ describe.skip("[Contrib] components/<Tags />", () => {
   });
 });
 
-describe.skip("[Contrib] components/<Tags /> without optional props", () => {
+describe.skip("components/<Tags /> without optional props", () => {
   const props = {
     isEditable: true,
     onAdd: jest.fn(),
@@ -91,7 +91,7 @@ describe.skip("[Contrib] components/<Tags /> without optional props", () => {
   });
 });
 
-describe.skip("[Contrib] components/<Tags /> without `isEditable`", () => {
+describe.skip("components/<Tags /> without `isEditable`", () => {
   const props = {
     onAdd: jest.fn(),
     onRemove: jest.fn(),

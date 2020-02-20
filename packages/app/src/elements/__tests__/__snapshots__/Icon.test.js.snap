@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<Icon /> should pass 1`] = `
+exports[`elements/<Icon /> should pass 1`] = `
 .emotion-0 {
   cursor: default;
   width: 1rem !important;

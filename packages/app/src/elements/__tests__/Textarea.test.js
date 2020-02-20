@@ -3,7 +3,7 @@ import React from "react";
 
 import Textarea from "../Textarea";
 
-describe("[Contrib] elements/<Textarea />", () => {
+describe("elements/<Textarea />", () => {
   it("should match snapshot", () => {
     const { container } = render(<Textarea />);
 

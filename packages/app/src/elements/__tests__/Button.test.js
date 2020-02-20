@@ -2,7 +2,7 @@ import React from "react";
 
 import Button from "../Button";
 
-describe("[Contrib] elements/<Button />", () => {
+describe("elements/<Button />", () => {
   const ICON = "sync";
   const TEXT = "A Button";
 

@@ -3,7 +3,7 @@ import React from "react";
 
 import AdminMenu from "../AdminMenu";
 
-describe.skip("[Contrib] layouts/<AdminMenu />", () => {
+describe.skip("layouts/<AdminMenu />", () => {
   // https://github.com/facebook/jest/issues/890#issuecomment-415202799
   window.history.pushState({}, "", "/admin");
 
@@ -24,18 +24,6 @@ describe.skip("[Contrib] layouts/<AdminMenu />", () => {
     fireEvent.click(getByText("Conventions"));
 
     expect(global.nextRouter.push).toHaveBeenCalledWith("/admin/agreements");
-  });
-
-  it("should redirect to the tags path", () => {
-    fireEvent.click(getByText("Étiquettes"));
-
-    expect(global.nextRouter.push).toHaveBeenCalledWith("/admin/tags");
-  });
-
-  it("should redirect to the tags categories path", () => {
-    fireEvent.click(getByText("└ Catégories"));
-
-    expect(global.nextRouter.push).toHaveBeenCalledWith("/admin/tags-categories");
   });
 
   it("should redirect to the questions path", () => {
@@ -66,12 +54,6 @@ describe.skip("[Contrib] layouts/<AdminMenu />", () => {
     fireEvent.click(getByText("Utilisateurs"));
 
     expect(global.nextRouter.push).toHaveBeenCalledWith("/admin/users");
-  });
-
-  it("should redirect to the areas path", () => {
-    fireEvent.click(getByText("Zones"));
-
-    expect(global.nextRouter.push).toHaveBeenCalledWith("/admin/areas");
   });
 
   it("should redirect to the migrations path", () => {

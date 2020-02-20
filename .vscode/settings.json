@@ -18,5 +18,6 @@
       "directory": "./packages/data-filler",
       "changeProcessCWD": true
     }
-  ]
+  ],
+  "eslint.enable": true
 }

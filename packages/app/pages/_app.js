@@ -1,5 +1,3 @@
-import getClient from "@socialgouv/code-du-travail-backoffice__data-filler/src/kinto/client";
-import KintoContext from "@socialgouv/code-du-travail-backoffice__data-filler/src/kinto/KintoContext";
 import withReduxSaga from "next-redux-saga";
 import withRedux from "next-redux-wrapper";
 import App from "next/app";
@@ -37,7 +35,6 @@ class MainApp extends App {
   }
 
   render() {
-    const kintoClient = getClient();
     const me = cache.get("me");
     const { Component, pageProps, store } = this.props;
     const { statusCode } = pageProps;
@@ -47,9 +44,7 @@ class MainApp extends App {
     return (
       <Provider store={store}>
         {hasError || me.isAuthenticated ? (
-          <KintoContext.Provider value={{ client: kintoClient }}>
-            <Component {...pageProps} />
-          </KintoContext.Provider>
+          <Component {...pageProps} />
         ) : (
           <Login onLoggedIn={this.login.bind(this)} />
         )}

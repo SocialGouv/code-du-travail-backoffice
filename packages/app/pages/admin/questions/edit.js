@@ -48,23 +48,16 @@ export default class AdminQuestionsEditPage extends AdminQuestionsNewPage {
   render() {
     if (this.state.isLoadingOverwrite) return <AdminMainLayout isLoading />;
 
-    const { value } = this.state.data;
-
     return (
       <AdminForm
         apiPath="/questions"
-        ariaLabels={{
-          cancelButton: `Bouton redirigeant vers la liste des questions`,
-          createOrEditButton: `Bouton mettant à jour la question ${value} dans
-                              la base de données à partir des données du
-                              formulaire`
-        }}
         defaultData={this.state.data}
         fields={this.state.fields}
+        i18nIsFeminine
+        i18nSubject="question"
         id={this.props.id}
         indexPath="/questions"
         name="question"
-        title={`Modifier la question « ${value} »`}
       />
     );
   }

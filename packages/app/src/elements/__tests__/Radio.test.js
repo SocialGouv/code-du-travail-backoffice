@@ -2,7 +2,7 @@ import React from "react";
 
 import Radio from "../Radio";
 
-describe("[Contrib] elements/<Radio />", () => {
+describe("elements/<Radio />", () => {
   const COMMON_PROPS = {
     options: [
       { isSelected: true, label: "A Selected Label", value: "A Selected Value" },

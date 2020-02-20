@@ -10,7 +10,6 @@ Feature: Login
     And I should see the subtitle "Global"
     And I should see the subtitle "Par région"
     And I should see the subtitle "Par convention collective"
-    And I should see the subtitle "Par région (détaillée)"
 
   Scenario: Successfully login as a contributor
     Given I am a registered "contributor"

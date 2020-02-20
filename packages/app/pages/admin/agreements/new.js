@@ -61,16 +61,11 @@ export default class AdminAgreementsNewPage extends React.Component {
     return (
       <AdminForm
         apiPath="/agreements"
-        ariaLabels={{
-          cancelButton: `Bouton redirigeant vers la liste des conventions`,
-          createOrEditButton: `Bouton créant une nouvelle convention dans la
-                              base de données à partir des données du
-                              formulaire`
-        }}
         fields={this.state.fields}
+        i18nIsFeminine
+        i18nSubject="convention"
         indexPath="/agreements"
         name="agreement"
-        title="Nouvelle convention"
       />
     );
   }

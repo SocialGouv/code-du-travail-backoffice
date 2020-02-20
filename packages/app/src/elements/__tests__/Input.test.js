@@ -2,7 +2,7 @@ import React from "react";
 
 import Input from "../Input";
 
-describe("[Contrib] elements/<Input />", () => {
+describe("elements/<Input />", () => {
   it(`should pass`, () => {
     const $input = testRender(<Input />);
 

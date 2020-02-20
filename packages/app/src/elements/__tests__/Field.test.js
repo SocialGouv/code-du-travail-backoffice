@@ -2,7 +2,7 @@ import React from "react";
 
 import Field from "../Field";
 
-describe("[Contrib] elements/<Field />", () => {
+describe("elements/<Field />", () => {
   it(`should pass`, () => {
     const $field = testRender(<Field />);
 

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Contrib] elements/<Field /> should pass 1`] = `
+exports[`elements/<Field /> should pass 1`] = `
 .emotion-0 {
   box-sizing: border-box;
   margin: 0;
@@ -17,7 +17,7 @@ exports[`[Contrib] elements/<Field /> should pass 1`] = `
 />
 `;
 
-exports[`[Contrib] elements/<Field /> should pass with {error} 1`] = `
+exports[`elements/<Field /> should pass with {error} 1`] = `
 .emotion-2 {
   box-sizing: border-box;
   margin: 0;
