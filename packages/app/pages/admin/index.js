@@ -19,75 +19,75 @@ const COLUMNS = [
   {
     Cell: ({ value }) => <span title={value}>{value}</span>,
     Header: "Nom",
-    accessor: "name"
+    accessor: "name",
   },
   {
     Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
     Header: "À rédiger",
-    accessor: "todo"
+    accessor: "todo",
   },
   {
     Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
     Header: "En cours de rédaction",
-    accessor: "draft"
+    accessor: "draft",
   },
   {
     Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
     Header: "À valider",
-    accessor: "pendingReview"
+    accessor: "pendingReview",
   },
   {
     Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
     Header: "En cours de validation",
-    accessor: "underReview"
+    accessor: "underReview",
   },
   {
     Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
     Header: "Validées",
-    accessor: "validated"
+    accessor: "validated",
   },
   {
     Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
     Header: "Publiées",
-    accessor: "published"
+    accessor: "published",
   },
   {
     Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
     Header: "Total",
-    accessor: "total"
-  }
+    accessor: "total",
+  },
 ];
 const PERCENTAGE_COLUMNS = [
   { ...COLUMNS[0] },
   {
     ...COLUMNS[1],
-    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%"))
+    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%")),
   },
   {
     ...COLUMNS[2],
-    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%"))
+    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%")),
   },
   {
     ...COLUMNS[3],
-    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%"))
+    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%")),
   },
   {
     ...COLUMNS[4],
-    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%"))
+    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%")),
   },
   {
     ...COLUMNS[5],
-    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%"))
+    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%")),
   },
   {
     ...COLUMNS[6],
-    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%"))
+    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%")),
   },
   {
     ...COLUMNS[7],
     Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%")),
-    sortable: false
-  }
+    sortable: false,
+  },
 ];
 /* eslint-enable react/display-name */
 
@@ -121,8 +121,8 @@ const REFRESH_DELAY = 30000;
 
 const StatsTable = ({ data, isPercentage, ...props }) => (
   <Table
-    data={data}
     columns={isPercentage ? PERCENTAGE_COLUMNS : COLUMNS}
+    data={data}
     filterable={false}
     multiSort={false}
     pageSize={data.length}
@@ -142,7 +142,7 @@ export default class AdminIndexPage extends React.Component {
       isCalculating: true,
       isLoading: true,
       isPercentage: true,
-      regionalStats: []
+      locationsStats: [],
     };
   }
 
@@ -153,21 +153,16 @@ export default class AdminIndexPage extends React.Component {
     await this.updateStats();
   }
 
-  async fetchRegions() {
-    const { data: regions } = await this.postgrest
-      .eq("category", "region")
-      .not.in("code", ["01", "02", "03", "04", "06"])
-      .orderBy("name")
-      .get("/areas");
+  componentWillUnmount() {
+    if (this.timeout === undefined) return;
 
-    return regions;
+    clearTimeout(this.timeout);
   }
 
-  async fetchRegionalLocations() {
+  async fetchLocations() {
     const { data: locations } = await this.postgrest
       .select("*")
       .select("agreements(id,idcc,name,parent_id)")
-      .not.is("area_id", null)
       .get("/locations");
 
     return locations;
@@ -184,56 +179,47 @@ export default class AdminIndexPage extends React.Component {
   }
 
   async initializeStats() {
-    const regions = await this.fetchRegions();
-    const regionalLocations = await this.fetchRegionalLocations();
+    const locations = await this.fetchLocations();
 
-    const agreementsStats = regionalLocations
+    const agreementsStats = locations
       .reduce((prev, { agreements }) => [...prev, ...agreements], [])
       .map(({ id, idcc, name, parent_id }) => ({
         id,
         isNational: parent_id === null,
         name: `[${idcc}] ${shortenAgreementName(name)}`,
-        totals: [0, 0, 0, 0, 0, 0, 0]
+        totals: [0, 0, 0, 0, 0, 0, 0],
       }));
 
-    const regionalStats = regions.map(({ code, id, name }) => {
-      const location = regionalLocations.find(({ area_id }) => area_id === id);
-
-      return {
-        agreementIds: location.agreements.map(({ id }) => id),
-        agreements: location.agreements,
-        areaCode: code,
-        // We do the mapping in advance for the sake of repeated performance:
-        areaId: id,
-        areaName: name,
-        locationId: location.id,
-        locationName: location.name
-      };
-    });
+    const locationsStats = locations.map(location => ({
+      agreementIds: location.agreements.map(({ id }) => id),
+      agreements: location.agreements,
+      locationId: location.id,
+      locationName: location.name,
+    }));
 
     this.setState({
       agreementsStats,
       isLoading: false,
-      regionalStats
+      locationsStats,
     });
   }
 
   async updateStats() {
-    const { agreementsStats, regionalStats } = this.state;
+    const { agreementsStats, locationsStats } = this.state;
 
     const nextAgreementsStats = agreementsStats.map(agreementsStatsEntry => ({
       ...agreementsStatsEntry,
-      totals: [0, 0, 0, 0, 0, 0, 0]
+      totals: [0, 0, 0, 0, 0, 0, 0],
     }));
 
-    const nextRegionalStats = await Promise.all(
-      regionalStats.map(async regionalStatsEntry => {
-        const { agreementIds } = regionalStatsEntry;
+    const nextlocationsStats = await Promise.all(
+      locationsStats.map(async locationsStatsEntry => {
+        const { agreementIds } = locationsStatsEntry;
         const answers = await this.fetchAnswersForAgreements(agreementIds);
 
         answers.forEach(({ agreement_id, is_published, state }) => {
           const agreementsStatsIndex = nextAgreementsStats.findIndex(
-            ({ id }) => id === agreement_id
+            ({ id }) => id === agreement_id,
           );
 
           switch (state) {
@@ -297,17 +283,17 @@ export default class AdminIndexPage extends React.Component {
 
             return totals;
           },
-          [0, 0, 0, 0, 0, 0, 0]
+          [0, 0, 0, 0, 0, 0, 0],
         );
 
         return {
-          ...regionalStatsEntry,
-          totals
+          ...locationsStatsEntry,
+          totals,
         };
-      })
+      }),
     );
 
-    const nextGlobalStats = nextRegionalStats.reduce(
+    const nextGlobalStats = nextlocationsStats.reduce(
       (globalTotals, { totals }) => [
         globalTotals[0] + totals[0],
         globalTotals[1] + totals[1],
@@ -315,19 +301,19 @@ export default class AdminIndexPage extends React.Component {
         globalTotals[3] + totals[3],
         globalTotals[4] + totals[4],
         globalTotals[5] + totals[5],
-        globalTotals[6] + totals[6]
+        globalTotals[6] + totals[6],
       ],
-      [0, 0, 0, 0, 0, 0, 0]
+      [0, 0, 0, 0, 0, 0, 0],
     );
 
     this.setState({
       agreementsStats: nextAgreementsStats,
       globalStats: nextGlobalStats,
       isCalculating: false,
-      regionalStats: nextRegionalStats
+      locationsStats: nextlocationsStats,
     });
 
-    setTimeout(this.updateStats.bind(this), REFRESH_DELAY);
+    this.timeout = setTimeout(this.updateStats.bind(this), REFRESH_DELAY);
   }
 
   generateDataRow(name, stats, isCalculating) {
@@ -342,7 +328,7 @@ export default class AdminIndexPage extends React.Component {
         todo: -1,
         total: -1,
         underReview: -1,
-        validated: -1
+        validated: -1,
       };
     }
 
@@ -354,7 +340,7 @@ export default class AdminIndexPage extends React.Component {
       todo: isPercentage ? stats[0] / stats[6] : stats[0],
       total: isPercentage ? 1 : stats[6],
       underReview: isPercentage ? stats[3] / stats[6] : stats[3],
-      validated: isPercentage ? stats[4] / stats[6] : stats[4]
+      validated: isPercentage ? stats[4] / stats[6] : stats[4],
     };
   }
 
@@ -365,10 +351,10 @@ export default class AdminIndexPage extends React.Component {
     return <StatsTable data={data} isPercentage={isPercentage} sortable={false} />;
   }
 
-  getRegionalStats() {
-    const { isCalculating, isPercentage, regionalStats } = this.state;
-    const data = regionalStats.map(({ areaName, totals }) =>
-      this.generateDataRow(areaName, totals, isCalculating)
+  getLocationsStats() {
+    const { isCalculating, isPercentage, locationsStats } = this.state;
+    const data = locationsStats.map(({ locationName, totals }) =>
+      this.generateDataRow(locationName, totals, isCalculating),
     );
 
     return (
@@ -411,8 +397,8 @@ export default class AdminIndexPage extends React.Component {
           <Subtitle isFirst>Global</Subtitle>
           {isLoading ? <p>Calcul en cours…</p> : this.getGlobalStats()}
 
-          <Subtitle>Par région</Subtitle>
-          {isLoading ? <p>Calcul en cours…</p> : this.getRegionalStats()}
+          <Subtitle>Par unité régionale</Subtitle>
+          {isLoading ? <p>Calcul en cours…</p> : this.getLocationsStats()}
 
           <Subtitle>Par convention collective</Subtitle>
           <ContentTitle isFirst>Conventions nationales</ContentTitle>

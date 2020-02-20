@@ -6,12 +6,12 @@ jest.mock("next/router", () => ({
     component.defaultProps = {
       ...component.defaultProps,
       router: {
-        pathname: "/"
-      }
+        pathname: "/",
+      },
     };
 
     return component;
-  }
+  },
 }));
 
 jest.mock("react-redux", () => ({
@@ -20,12 +20,12 @@ jest.mock("react-redux", () => ({
       ...component.defaultProps,
       modal: {
         isVisible: false,
-        message: ""
-      }
+        message: "",
+      },
     };
 
     return component;
-  }
+  },
 }));
 
 import Main from "../Main";

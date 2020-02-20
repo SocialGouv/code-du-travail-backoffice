@@ -1,48 +1,36 @@
-import React from "react";
+import withAdminNew from "../../../src/templates/withAdminNew";
 
-import AdminForm from "../../../src/components/AdminForm";
-
-const FIELDS = [
+export const FIELDS = [
   {
     label: "Nom",
     name: "name",
-    type: "input"
+    type: "input",
   },
   {
     helpText: "Une par ligne.",
     label: "Abbréviations",
     name: "abbreviations",
-    type: "text"
+    type: "text",
   },
   {
     helpText: "Une par ligne.",
     label: "Variantes",
     name: "variations",
-    type: "text"
+    type: "text",
   },
   {
     label: "Définition",
     name: "value",
-    type: "markdown"
-  }
+    type: "markdown",
+  },
 ];
 
-export default class AdminDefinitionsNewPage extends React.Component {
-  constructor(props) {
-    super(props);
+const AdminDefinitionsNewPage = withAdminNew({
+  apiPath: "/definitions",
+  fields: FIELDS,
+  i18nIsFeminine: true,
+  i18nSubject: "définition",
+  indexPath: "/definitions",
+});
 
-    this.fields = FIELDS;
-  }
-
-  render() {
-    return (
-      <AdminForm
-        apiPath="/definitions"
-        fields={this.fields}
-        i18nIsFeminine
-        i18nSubject="définition"
-        indexPath="/definitions"
-      />
-    );
-  }
-}
+export default AdminDefinitionsNewPage;

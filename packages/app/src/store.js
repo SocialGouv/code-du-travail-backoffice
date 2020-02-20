@@ -20,7 +20,7 @@ export default initialState => {
   const store = createStore(
     combineReducers(reducers),
     initialState,
-    bindMiddleware([sagaMiddleware])
+    bindMiddleware([sagaMiddleware]),
   );
 
   store.sagaTask = sagaMiddleware.run(rootSaga);

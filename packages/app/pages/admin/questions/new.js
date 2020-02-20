@@ -1,73 +1,25 @@
-import React from "react";
+import withAdminNew from "../../../src/templates/withAdminNew";
 
-import AdminForm from "../../../src/components/AdminForm";
-import AdminMainLayout from "../../../src/layouts/AdminMain";
-import customAxios from "../../../src/libs/customAxios";
-
-const FIELDS = [
+export const FIELDS = [
   {
     inputType: "number",
     label: "Index",
     name: "index",
-    type: "input"
+    type: "input",
   },
   {
     label: "Intitulé",
     name: "value",
-    type: "text"
-  }
+    type: "text",
+  },
 ];
 
-export default class AdminQuestionsNewPage extends React.Component {
-  constructor(props) {
-    super(props);
+const AdminQuestionsNewPage = withAdminNew({
+  apiPath: "/questions",
+  fields: FIELDS,
+  i18nIsFeminine: true,
+  i18nSubject: "question",
+  indexPath: "/questions",
+});
 
-    this.state = {
-      fields: [],
-      isLoading: true
-    };
-  }
-
-  async componentDidMount() {
-    this.axios = customAxios();
-
-    try {
-      const { data: tags } = await this.axios.get("/tags");
-
-      const fields = [
-        ...FIELDS,
-        {
-          apiPath: "/questions_tags",
-          ariaName: "l'étiquette",
-          label: "Étiquettes",
-          name: "tags",
-          singleName: "tag",
-          tags: tags.map(({ id, value }) => ({ id, value })),
-          type: "tags"
-        }
-      ];
-
-      this.setState({
-        fields,
-        isLoading: false
-      });
-    } catch (err) {
-      if (err !== undefined) console.warn(err);
-    }
-  }
-
-  render() {
-    if (this.state.isLoading) return <AdminMainLayout isLoading />;
-
-    return (
-      <AdminForm
-        apiPath="/questions"
-        fields={this.state.fields}
-        i18nIsFeminine
-        i18nSubject="question"
-        indexPath="/questions"
-        name="question"
-      />
-    );
-  }
-}
+export default AdminQuestionsNewPage;

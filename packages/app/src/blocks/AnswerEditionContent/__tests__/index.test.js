@@ -8,13 +8,13 @@ import AnswerEditionContentBlock from "..";
 Object.defineProperty(document, "getSelection", {
   value: () => {
     return document.selection && document.selection.createRange().text;
-  }
+  },
 });
 
 describe("blocks/<AnswerEditionContent />", () => {
   const props = {
     defaultValue: "Hello World!",
-    onChange: jest.fn()
+    onChange: jest.fn(),
   };
 
   const λ = render(<AnswerEditionContentBlock {...props} />);

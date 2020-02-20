@@ -4,7 +4,7 @@ import Idcc from "../Idcc";
 
 describe("elements/<Idcc />", () => {
   const COMMON_PROPS = {
-    name: "A Labor Agreement"
+    name: "A Labor Agreement",
   };
 
   it(`should pass`, () => {

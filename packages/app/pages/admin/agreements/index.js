@@ -7,14 +7,14 @@ const COLUMNS = [
   {
     Header: "Nom",
     accessor: ({ name }) => shortenAgreementName(name),
-    id: "name"
+    id: "name",
   },
   {
     Header: "IDCC",
     accessor: "idcc",
     style: { textAlign: "center" },
-    width: 64
-  }
+    width: 64,
+  },
 ];
 
 const AdminAgreementIndexPage = () => (

@@ -31,7 +31,7 @@ const Icon = styled(_Icon)`
 `;
 
 const DEFAULT_PROPS = {
-  isDisabled: false
+  isDisabled: false,
 };
 
 export default class Reference extends React.PureComponent {
@@ -42,7 +42,7 @@ export default class Reference extends React.PureComponent {
   render() {
     const { isDisabled, onRemove, url, value } = {
       ...DEFAULT_PROPS,
-      ...this.props
+      ...this.props,
     };
 
     return (

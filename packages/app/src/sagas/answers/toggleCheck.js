@@ -12,7 +12,7 @@ export default function* toggleCheck({ meta: { ids } }) {
 
     yield put({
       payload: { checked: newChecked },
-      type: actionTypes.ANSWERS_TOGGLE_CHECK_SUCESS
+      type: actionTypes.ANSWERS_TOGGLE_CHECK_SUCESS,
     });
   } catch (err) {
     toast.error(err.message);

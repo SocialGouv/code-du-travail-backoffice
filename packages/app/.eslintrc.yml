@@ -4,16 +4,20 @@ extends:
 rules:
   no-console: ["error", { allow: ["info", "error", "warn"] }]
   jest/no-disabled-tests: off
+  react/jsx-sort-props: error
   react/prop-types: off
 
 overrides:
   - files:
       - "jest.setup.js"
       - "*.test.js"
-
     env:
       jest: true
-
     globals:
       testRender: true
       waitFor: true
+
+  - files:
+      - "./src/templates/**/*.js"
+    rules:
+      react/prop-types: error

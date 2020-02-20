@@ -10,7 +10,7 @@ const AdminMainLayout = ({
   children,
   hasBareContent = false,
   isLoading = false,
-  isScrollable = true
+  isScrollable = true,
 }) => {
   if (isLoading) {
     return (

@@ -143,15 +143,11 @@ export class AdminAnwsersEditPage extends React.Component {
       otherReferenceValueInputKey: 2,
       prevalue: null,
       references: [],
-      value: ""
+      value: "",
     };
 
     this.isGeneric = Boolean(props.isGeneric);
     this.updateAnswerValue = debounce(this._updateAnswerValue.bind(this), 500);
-  }
-
-  static getInitialProps({ query: { id } }) {
-    return { id };
   }
 
   async componentDidMount() {
@@ -175,7 +171,7 @@ export class AdminAnwsersEditPage extends React.Component {
 
         this.setState({
           prevalue,
-          value
+          value,
         });
       }
     }
@@ -201,7 +197,7 @@ export class AdminAnwsersEditPage extends React.Component {
 
       this.setState({
         isUpdating: false,
-        references
+        references,
       });
     } catch (err) {
       if (err !== undefined) console.warn(err);
@@ -240,53 +236,8 @@ export class AdminAnwsersEditPage extends React.Component {
     const { dispatch, id } = this.props;
 
     dispatch(
-      actions.answers.updateGenericReference([id], generic_reference, this.fetchAnswer.bind(this))
+      actions.answers.updateGenericReference([id], generic_reference, this.fetchAnswer.bind(this)),
     );
-  }
-
-  async createTag(tagId) {
-    try {
-      const { state } = this.props.answers.data;
-      const answersUri = `/answers?id=eq.${this.props.id}`;
-
-      // An answer can't have a custom tag and be generic at the same time:
-      const answersData = {
-        generic_reference: null
-      };
-
-      // An answer can't have a "to do" state with a tag:
-      if (state === ANSWER_STATE.TO_DO) {
-        answersData.state = ANSWER_STATE.UNDER_REVIEW;
-      }
-
-      const answersTagsUri = `/answers_tags`;
-      const answersTagsData = {
-        answer_id: this.props.id,
-        tag_id: tagId
-      };
-
-      await this.axios.patch(answersUri, answersData);
-      await this.axios.post(answersTagsUri, answersTagsData);
-    } catch (err) {
-      console.warn(err);
-    }
-
-    await this.fetchTags();
-  }
-
-  async deleteTag(tagId) {
-    try {
-      const uri = makeApiFilter("/answers_tags", {
-        answer_id: this.props.id,
-        tag_id: tagId
-      });
-
-      await this.axios.delete(uri);
-    } catch (err) {
-      console.warn(err);
-    }
-
-    await this.fetchTags();
   }
 
   async createReference(reference) {
@@ -298,7 +249,7 @@ export class AdminAnwsersEditPage extends React.Component {
 
       // An answer can't have a reference and be generic at the same time:
       const answersData = {
-        generic_reference: null
+        generic_reference: null,
       };
 
       // An answer can't have a "to do" state with a reference:
@@ -309,7 +260,7 @@ export class AdminAnwsersEditPage extends React.Component {
       const answersReferencesUri = `/answers_references`;
       const answersReferencesData = {
         answer_id: this.props.id,
-        ...reference
+        ...reference,
       };
 
       await this.axios.patch(answersUri, answersData);
@@ -343,23 +294,23 @@ export class AdminAnwsersEditPage extends React.Component {
     if (category === "agreement") {
       reference = {
         category,
-        value: this.$agreementReferenceValueInput.value.trim()
+        value: this.$agreementReferenceValueInput.value.trim(),
       };
 
       this.setState({
-        agreementReferenceValueInputKey: this.state.agreementReferenceValueInputKey + 1
+        agreementReferenceValueInputKey: this.state.agreementReferenceValueInputKey + 1,
       });
     } else {
       const url = this.$otherReferenceUrlInput.value.trim();
       reference = {
         category,
         url: url.length !== 0 ? url : null,
-        value: this.$otherReferenceValueInput.value.trim()
+        value: this.$otherReferenceValueInput.value.trim(),
       };
 
       this.setState({
         otherReferenceUrlInputKey: this.state.otherReferenceUrlInputKey + 1,
-        otherReferenceValueInputKey: this.state.otherReferenceValueInputKey + 1
+        otherReferenceValueInputKey: this.state.otherReferenceValueInputKey + 1,
       });
     }
 
@@ -377,10 +328,10 @@ export class AdminAnwsersEditPage extends React.Component {
         () =>
           this.setState({
             isUpdating: false,
-            savingSpinnerTimeout: 0
+            savingSpinnerTimeout: 0,
           }),
-        500
-      )
+        500,
+      ),
     });
   }
 
@@ -388,21 +339,11 @@ export class AdminAnwsersEditPage extends React.Component {
     this.setState({ isSidebarHidden: !this.state.isSidebarHidden });
   }
 
-  toggleTag(id, isAdded) {
-    this.setState({ isUpdating: true });
-
-    if (isAdded) {
-      this.createTag(id);
-    } else {
-      this.deleteTag(id);
-    }
-  }
-
   toggleIsPublished() {
     const { id, is_published } = this.props.answers.data;
 
     this.props.dispatch(
-      actions.answers.updateIsPublished([id], !is_published, this.fetchAnswer.bind(this))
+      actions.answers.updateIsPublished([id], !is_published, this.fetchAnswer.bind(this)),
     );
   }
 
@@ -421,18 +362,18 @@ export class AdminAnwsersEditPage extends React.Component {
 
     if (event.ctrlKey) {
       this.props.dispatch(
-        actions.comments.addOne(value, this.props.comments.currentIsPrivate, this.props.id)
+        actions.comments.addOne(value, this.props.comments.currentIsPrivate, this.props.id),
       );
     }
   }
 
   removeComment(id) {
-    this.props.dispatch(actions.comments.remove([id], this.props.id));
+    this.props.dispatch(actions.comments._delete([id], this.props.id));
   }
 
   renderReferences(category, isDisabled) {
     const references = this.state.references.filter(
-      ({ category: _category }) => _category === category
+      ({ category: _category }) => _category === category,
     );
 
     if (this.props.answers.data.state === ANSWER_STATE.VALIDATED && references.length === 0) {
@@ -542,7 +483,7 @@ export class AdminAnwsersEditPage extends React.Component {
                     onAdd={this.createReference.bind(this)}
                     onRemove={this.deleteReference.bind(this)}
                     references={this.state.references.filter(
-                      ({ category }) => category === "labor_code"
+                      ({ category }) => category === "labor_code",
                     )}
                   />
                 </Flex>
@@ -585,18 +526,18 @@ export class AdminAnwsersEditPage extends React.Component {
                     {
                       isSelected: generic_reference === null,
                       label: "Aucun renvoi.",
-                      value: null
+                      value: null,
                     },
                     {
                       isSelected: generic_reference === "labor_code",
                       label: "Renvoyée au texte Code du Travail.",
-                      value: "labor_code"
+                      value: "labor_code",
                     },
                     {
                       isSelected: generic_reference === "national_agreement",
                       label: "Renvoyée au texte de la CCN.",
-                      value: "national_agreement"
-                    }
+                      value: "national_agreement",
+                    },
                   ]}
                 />
               </Flex>
@@ -621,7 +562,7 @@ export class AdminAnwsersEditPage extends React.Component {
                   {
                     labor_code: "Renvoyée au texte Code du Travail.",
                     national_agreement: "Renvoyée au texte de la CCN.",
-                    null: "Aucun renvoi."
+                    null: "Aucun renvoi.",
                   }[String(generic_reference)]
                 }
                 <Hr />
@@ -663,5 +604,5 @@ export class AdminAnwsersEditPage extends React.Component {
 
 export default connect(({ answers, comments }) => ({
   answers,
-  comments
+  comments,
 }))(AdminAnwsersEditPage);

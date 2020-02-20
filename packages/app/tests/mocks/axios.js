@@ -6,7 +6,7 @@ jest.mock("axios", () => {
     get: async () => void 0,
     patch: async () => void 0,
     post: async () => void 0,
-    put: async () => void 0
+    put: async () => void 0,
   };
 
   jest.spyOn(axios, "delete");
@@ -17,6 +17,6 @@ jest.mock("axios", () => {
 
   return {
     ...axios,
-    create: () => axios
+    create: () => axios,
   };
 });

@@ -55,8 +55,8 @@ export class AdminAnswersIndexPage extends React.Component {
     this.props.dispatch(
       actions.answers.setFilters({
         isGeneric,
-        pageLength: 10
-      })
+        pageLength: 10,
+      }),
     );
   }
 
@@ -92,7 +92,9 @@ export class AdminAnswersIndexPage extends React.Component {
     const { value } = this.$newState.state.value;
 
     this.props.dispatch(
-      actions.answers.updateState(checked, value, () => this.props.dispatch(actions.answers.load()))
+      actions.answers.updateState(checked, value, () =>
+        this.props.dispatch(actions.answers.load()),
+      ),
     );
   }
 
@@ -145,11 +147,11 @@ export class AdminAnswersIndexPage extends React.Component {
       : agreements.isLoading || answers.isLoading || questions.isLoading;
     const stateFilterAgreements = agreements.data.map(({ id, idcc, name }) => ({
       label: `[${idcc}] ${name}`,
-      value: id
+      value: id,
     }));
     const stateFilterQuestions = questions.data.map(({ id, index, value }) => ({
       label: `${index}) ${value}`,
-      value: id
+      value: id,
     }));
     const stateActionOptions = ANSWER_STATE_OPTIONS.filter(({ value }) => value !== answers.state);
 
@@ -206,7 +208,7 @@ export class AdminAnswersIndexPage extends React.Component {
           {!isLoading && answers.checked.length > 0 && (
             <Flex alignItems="center" justifyContent="space-between">
               <Flex>
-                <Select ref={node => (this.$newState = node)} options={stateActionOptions} />
+                <Select options={stateActionOptions} ref={node => (this.$newState = node)} />
                 <Button onClick={this.setCheckedAnswersState.bind(this)}>Appliquer</Button>
               </Flex>
             </Flex>
@@ -230,5 +232,5 @@ export default connect(({ agreements, answers, questions }) => ({
   agreements,
   answers,
   isGeneric: false,
-  questions
+  questions,
 }))(AdminAnswersIndexPage);

@@ -13,7 +13,7 @@ export default class LoginBlockForm extends React.PureComponent {
     this.state = {
       emailError: "",
       isLoading: false,
-      passwordError: ""
+      passwordError: "",
     };
   }
 
@@ -29,7 +29,7 @@ export default class LoginBlockForm extends React.PureComponent {
   async check() {
     const data = await api.post("/rpc/login", {
       email: this.$email.value,
-      password: this.$password.value
+      password: this.$password.value,
     });
     const token = data[0].token;
 
@@ -46,13 +46,13 @@ export default class LoginBlockForm extends React.PureComponent {
     this.setState({
       emailError: "",
       isLoading: true,
-      passwordError: ""
+      passwordError: "",
     });
 
     if (this.$email.value.length === 0) {
       this.setState({
         emailError: "Vous devez renseigner votre e-mail.",
-        isLoading: false
+        isLoading: false,
       });
 
       return;
@@ -61,7 +61,7 @@ export default class LoginBlockForm extends React.PureComponent {
     if (this.$password.value.length === 0) {
       this.setState({
         isLoading: false,
-        passwordError: "Vous devez renseigner votre mot de passe."
+        passwordError: "Vous devez renseigner votre mot de passe.",
       });
 
       return;
@@ -73,7 +73,7 @@ export default class LoginBlockForm extends React.PureComponent {
     } catch (e) {
       this.setState({
         emailError: "E-mail et/ou mot de passe non reconnu(s).",
-        isLoading: false
+        isLoading: false,
       });
     }
   }

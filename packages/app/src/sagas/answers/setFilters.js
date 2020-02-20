@@ -26,7 +26,7 @@ export default function* setFilter({ meta: { filters } }) {
 
     yield put({
       payload: { filters: nextFilters },
-      type: actionTypes.ANSWERS_SET_FILTERS_SUCCESS
+      type: actionTypes.ANSWERS_SET_FILTERS_SUCCESS,
     });
   } catch (err) {
     toast.error(err.message);

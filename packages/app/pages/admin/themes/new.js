@@ -1,8 +1,4 @@
-import React from "react";
-
-import AdminForm from "../../../src/components/AdminForm";
-import AdminMainLayout from "../../../src/layouts/AdminMain";
-import customPostgrester from "../../../src/libs/customPostgrester";
+import withAdminNew from "../../../src/templates/withAdminNew";
 
 export const FIELDS = [
   {
@@ -10,80 +6,61 @@ export const FIELDS = [
     isReadOnly: true,
     label: "Position",
     name: "position",
-    type: "input"
+    type: "input",
   },
   {
     label: "Titre",
     name: "title",
-    type: "input"
+    type: "input",
   },
   {
     label: "Sous-titre",
     name: "subtitle",
-    type: "input"
+    type: "input",
   },
   {
     helpText: "Une par ligne.",
     label: "Questions-types",
     name: "variations",
-    type: "text"
+    type: "text",
   },
   {
     label: "Introduction",
     name: "introduction",
-    type: "markdown"
-  }
+    type: "markdown",
+  },
 ];
 
-export default class AdminDefinitionsNewPage extends React.Component {
-  constructor(props) {
-    super(props);
+const componentDidMount = async api => {
+  const { data: parents } = await api.orderBy("title").get("/themes");
 
-    this.state = {
-      fields: [],
-      isLoading: true,
-      position: 0
-    };
-  }
+  const defaultData = {
+    position: parents.length,
+  };
 
-  async componentDidMount() {
-    const { data: parents } = await customPostgrester()
-      .orderBy("title")
-      .get("/themes");
+  const fields = [
+    {
+      label: "Thème parent",
+      name: "parent_id",
+      options: parents.map(({ id: value, title: label }) => ({
+        label,
+        value,
+      })),
+      type: "select",
+    },
+    ...FIELDS,
+  ];
 
-    const fields = [
-      {
-        label: "Thème parent",
-        name: "parent_id",
-        options: parents.map(({ id: value, title: label }) => ({
-          label,
-          value
-        })),
-        type: "select"
-      },
-      ...FIELDS
-    ];
+  return { defaultData, fields };
+};
 
-    this.setState({
-      fields,
-      isLoading: false,
-      position: parents.length
-    });
-  }
+const AdminThemesNewPage = withAdminNew(
+  {
+    apiPath: "/themes",
+    i18nSubject: "thème",
+    indexPath: "/themes",
+  },
+  componentDidMount,
+);
 
-  render() {
-    const { fields, isLoading, position } = this.state;
-
-    if (isLoading) return <AdminMainLayout isLoading />;
-
-    return (
-      <AdminForm
-        apiPath="/themes"
-        defaultData={{ position }}
-        fields={fields}
-        i18nSubject="thème"
-        indexPath="/themes"
-      />
-    );
-  }
-}
+export default AdminThemesNewPage;

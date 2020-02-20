@@ -8,7 +8,7 @@ describe.skip("blocks/AnswerEditionHead/<Tabs />", () => {
     currentTab: TABS.EDITOR,
     onChange: jest.fn(),
     referencesCount: 2,
-    tagsCount: 12
+    tagsCount: 12,
   };
 
   const { container, getByText } = render(<AnswerEditionHeadBlockTabs {...props} />);

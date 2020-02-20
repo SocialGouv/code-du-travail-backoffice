@@ -1,17 +1,13 @@
-import React from "react";
-
-import AdminForm from "../../../src/components/AdminForm";
-import AdminMainLayout from "../../../src/layouts/AdminMain";
-import customAxios from "../../../src/libs/customAxios";
 import generatePassword from "../../../src/libs/generatePassword";
+import withAdminNew from "../../../src/templates/withAdminNew";
 
 const PASSWORD_LENGTH = 16;
 
-const FIELDS = [
+export const FIELDS = [
   {
     label: "Nom",
     name: "name",
-    type: "input"
+    type: "input",
   },
   {
     label: "Rôle",
@@ -19,89 +15,69 @@ const FIELDS = [
     options: [
       { label: "Administrateur", value: "administrator" },
       { label: "Administrateur régional", value: "regional_administrator" },
-      { label: "Contributeur", value: "contributor" }
+      { label: "Contributeur", value: "contributor" },
     ],
-    type: "select"
+    type: "select",
   },
   {
     inputType: "email",
     label: "E-mail",
     name: "email",
-    type: "input"
+    type: "input",
   },
   {
     button: {
-      ariaLabel: "Bouton générant un mot de passe aléatoire",
       handler: () => generatePassword(PASSWORD_LENGTH),
-      icon: "sync"
+      icon: "sync",
+      title: "Bouton générant un mot de passe aléatoire",
     },
     label: "Mot-de-passe",
     name: "password",
-    type: "input"
-  }
+    type: "input",
+  },
 ];
 
-export default class AdminUsersNewPage extends React.Component {
-  constructor(props) {
-    super(props);
+const componentDidMount = async api => {
+  const { data: agreements } = await api.get("/agreements");
+  const { data: locations } = await api.get("/locations");
 
-    this.state = {
-      fields: [],
-      isLoading: true
-    };
-  }
+  const defaultData = {
+    password: generatePassword(PASSWORD_LENGTH),
+  };
 
-  async componentDidMount() {
-    this.axios = customAxios();
+  const fields = [
+    ...FIELDS,
+    {
+      label: "Unité",
+      name: "location_id",
+      options: locations.map(({ id: value, name: label }) => ({
+        label,
+        value,
+      })),
+      type: "select",
+    },
+    {
+      ariaName: "la convention",
+      label: "Conventions",
+      name: "agreements",
+      tags: agreements.map(({ id, idcc, name }) => ({
+        id,
+        value: `${idcc} - ${name}`,
+      })),
+      type: "tags",
+    },
+  ];
 
-    try {
-      const { data: agreements } = await this.axios.get("/agreements");
-      const { data: locations } = await this.axios.get("/locations");
+  return { defaultData, fields };
+};
 
-      const fields = [
-        ...FIELDS,
-        {
-          label: "Unité",
-          name: "location_id",
-          options: locations.map(({ id: value, name: label }) => ({
-            label,
-            value
-          })),
-          type: "select"
-        },
-        {
-          ariaName: "la convention",
-          label: "Conventions",
-          name: "agreements",
-          tags: agreements.map(({ id, idcc, name }) => ({
-            id,
-            value: `${idcc} - ${name}`
-          })),
-          type: "tags"
-        }
-      ];
+const AdminUsersNewPage = withAdminNew(
+  {
+    apiPath: "/rpc/create_user",
+    i18nSubject: "utilisateur",
+    indexPath: "/users",
+  },
+  componentDidMount,
+);
 
-      this.setState({
-        fields,
-        isLoading: false
-      });
-    } catch (err) {
-      if (err !== undefined) console.warn(err);
-    }
-  }
-
-  render() {
-    if (this.state.isLoading) return <AdminMainLayout isLoading />;
-
-    return (
-      <AdminForm
-        apiPath="/rpc/create_user"
-        defaultData={{ password: generatePassword(PASSWORD_LENGTH) }}
-        fields={this.state.fields}
-        i18nSubject="utilisateur"
-        indexPath="/users"
-        isApiFunction
-      />
-    );
-  }
-}
+export default AdminUsersNewPage;

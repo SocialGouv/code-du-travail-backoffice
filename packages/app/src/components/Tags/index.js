@@ -45,7 +45,7 @@ export default class Tags extends React.PureComponent {
     const tags =
       props.tags !== undefined
         ? this.sortByValue(
-            props.tags.filter(({ value }) => !any(propEq("value", value))(props.selectedTags))
+            props.tags.filter(({ value }) => !any(propEq("value", value))(props.selectedTags)),
           )
         : [];
 
@@ -54,7 +54,7 @@ export default class Tags extends React.PureComponent {
       isLoading: true,
       selectedTags: props.selectedTags !== undefined ? this.sortByValue(props.selectedTags) : [],
       suggestedTags: [],
-      tags
+      tags,
     };
 
     this.ariaName = this.props.ariaName !== undefined ? this.props.ariaName : "l'étiquette";
@@ -75,7 +75,7 @@ export default class Tags extends React.PureComponent {
       inputKey: this.state.inputKey + 1,
       selectedTags: this.sortByValue([...this.state.selectedTags, tag]),
       suggestedTags: [],
-      tags: this.state.tags.filter(({ value }) => value !== _value)
+      tags: this.state.tags.filter(({ value }) => value !== _value),
     });
 
     this.props.onAdd(tag);
@@ -86,7 +86,7 @@ export default class Tags extends React.PureComponent {
 
     this.setState({
       selectedTags: this.state.selectedTags.filter(({ value: _value }) => _value !== value),
-      tags: this.sortByValue([...this.state.tags, tag])
+      tags: this.sortByValue([...this.state.tags, tag]),
     });
 
     this.props.onRemove(tag);
@@ -102,7 +102,7 @@ export default class Tags extends React.PureComponent {
     this.setState({
       suggestedTags: this.state.tags
         .filter(({ value }) => stringFrIncludes(this.$input.value, value))
-        .slice(0, 9)
+        .slice(0, 9),
     });
   }
 

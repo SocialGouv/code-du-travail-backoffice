@@ -13,6 +13,7 @@ import Textarea from "../../elements/Textarea";
 import Title from "../../elements/Title";
 import AdminMainLayout from "../../layouts/AdminMain";
 import customAxios from "../../libs/customAxios";
+import customPostgrester from "../../libs/customPostgrester";
 import T from "../../texts";
 import { Error, Form, HelpText, LabelContainer } from "./styles";
 
@@ -21,6 +22,7 @@ export default class AdminForm extends React.Component {
     super(props);
     const { fields } = props;
 
+    this.api = customPostgrester();
     this.defaultData = this.initDefaultData();
 
     this.state = {
@@ -30,7 +32,7 @@ export default class AdminForm extends React.Component {
         .filter(({ button }) => button !== undefined)
         .reduce((prev, { name }) => ({ ...prev, [name]: 0 }), {}),
       isLoading: true,
-      isSubmitting: false
+      isSubmitting: false,
     };
 
     this.renderField = this.renderField.bind(this);
@@ -56,9 +58,9 @@ export default class AdminForm extends React.Component {
       (prev, { name, type }) => ({
         ...prev,
         [name]:
-          newDefaultData[name] !== undefined ? newDefaultData[name] : type === "tags" ? [] : ""
+          newDefaultData[name] !== undefined ? newDefaultData[name] : type === "tags" ? [] : "",
       }),
-      {}
+      {},
     );
   }
 
@@ -97,8 +99,8 @@ export default class AdminForm extends React.Component {
       // Force the related field to rebuild the component taking the new default value into account:
       inputKeys: {
         ...this.state.inputKeys,
-        [field.name]: this.state.inputKeys[field.name] + 1
-      }
+        [field.name]: this.state.inputKeys[field.name] + 1,
+      },
     });
   }
 
@@ -114,7 +116,7 @@ export default class AdminForm extends React.Component {
    */
   removeTag(fieldName, { id: _id }) {
     this.setState({
-      [fieldName]: this.state[fieldName].filter(({ id }) => id !== _id)
+      [fieldName]: this.state[fieldName].filter(({ id }) => id !== _id),
     });
   }
 
@@ -124,11 +126,9 @@ export default class AdminForm extends React.Component {
   async submit(event) {
     event.preventDefault();
     if (this.state.isSubmitting) return;
-
-    this.setState({
-      error: null,
-      isSubmitting: true
-    });
+    this.setState({ error: null, isSubmitting: true });
+    const { apiPath } = this.props;
+    const isApiFunction = apiPath.startsWith("/rpc/");
 
     // Remove non-data properties from the state:
     const rawData = R.omit(["error", "inputKeys", "isLoading", "isSubmitting"], this.state);
@@ -144,56 +144,64 @@ export default class AdminForm extends React.Component {
       R.toPairs,
       // Nullify select fields with an empty string value:
       R.map(([fieldName, value]) =>
-        selectFields.includes(fieldName) && value === "" ? [fieldName, null] : [fieldName, value]
+        selectFields.includes(fieldName) && value === "" ? [fieldName, null] : [fieldName, value],
       ),
       // Clean tag fields by transforming their array of objects into an array of ids:
       R.map(([fieldName, value]) =>
-        tagFields.includes(fieldName) ? [fieldName, value.map(({ id }) => id)] : [fieldName, value]
+        tagFields.includes(fieldName) ? [fieldName, value.map(({ id }) => id)] : [fieldName, value],
       ),
-      R.fromPairs
+      R.fromPairs,
     )(rawData);
 
     // If it's an edition (= an id prop was provided) and we are calling a
     // custom PostgREST function, we need to insert the id of the edited item:
     const fullData =
-      Boolean(this.props.isApiFunction) && this.props.id !== undefined
+      isApiFunction && this.props.id !== undefined
         ? { id: this.props.id, ...rawDataWithTags }
         : rawDataWithTags;
 
     const fieldsWithCustomApiPath = this.props.fields.filter(
-      ({ apiPath }) => apiPath !== undefined
+      ({ apiPath }) => apiPath !== undefined,
     );
 
     // Remove the fields with a custom apiPath property from the main data:
     const data = R.omit(
       fieldsWithCustomApiPath.map(({ name }) => name),
-      fullData
+      fullData,
     );
 
     // Most of the comments below are related to:
     // http://postgrest.org/en/latest/api.html#insertions-updates
     try {
-      if (this.props.id !== undefined && !this.props.isApiFunction) {
+      if (this.props.id !== undefined && !isApiFunction) {
         // PostgREST exposed api table updates are done via PATCH requests:
         const uri = `${this.props.apiPath}?id=eq.${this.props.id}`;
         await this.axios.patch(uri, data);
 
         if (fieldsWithCustomApiPath.length > 0) {
-          const itemIdName = `${this.props.name}_id`;
+          const itemIdName = `${this.props.name.replace(/s$/, "")}_id`;
 
           for (const field of fieldsWithCustomApiPath) {
-            const fieldIdName = `${field.singleName}_id`;
-            const foreignData = fullData[field.name].map(foreignItemId => ({
-              [fieldIdName]: foreignItemId,
-              [itemIdName]: this.props.id
-            }));
-
             // The easier and faster strategy to update the collection field is
             // to first delete all the foreign collection for the current item,
             // then re-create all the foreign collection from the current data:
             const uri = `${field.apiPath}?${itemIdName}=eq.${this.props.id}`;
             await this.axios.delete(uri);
-            await this.axios.post(field.apiPath, foreignData);
+
+            const { data: foreignData } = await this.api
+              .orderBy("id", true)
+              .page(0, 1)
+              .get(field.apiPath);
+            let foreignDataId = foreignData.length !== 0 ? foreignData[0].id : 0;
+
+            const fieldIdName = `${field.name.replace(/s$/, "")}_id`;
+            const newForeignData = fullData[field.name].map(foreignItemId => ({
+              [fieldIdName]: foreignItemId,
+              id: ++foreignDataId,
+              [itemIdName]: this.props.id,
+            }));
+
+            await this.axios.post(field.apiPath, newForeignData);
           }
         }
       } else {
@@ -205,15 +213,23 @@ export default class AdminForm extends React.Component {
           // The PostgREST response includes a Location header describing where
           // to find the inserted item:
           const itemId = /[0-9a-f-]+$/.exec(headers.location)[0];
-          const itemIdName = `${this.props.name}_id`;
+          const itemIdName = `${this.props.name.replace(/s$/, "")}_id`;
 
           for (const field of fieldsWithCustomApiPath) {
-            const fieldIdName = `${field.singleName}_id`;
-            const foreignData = fullData[field.name].map(foreignItemId => ({
+            const { data: foreignData } = await this.api
+              .orderBy("id", true)
+              .page(0, 1)
+              .get(field.apiPath);
+            let foreignDataId = foreignData.length !== 0 ? foreignData[0].id : 0;
+
+            const fieldIdName = `${field.name.replace(/s$/, "")}_id`;
+            const newForeignData = fullData[field.name].map(foreignItemId => ({
               [fieldIdName]: foreignItemId,
-              [itemIdName]: itemId
+              id: ++foreignDataId,
+              [itemIdName]: itemId,
             }));
-            await this.axios.post(field.apiPath, foreignData);
+
+            await this.axios.post(field.apiPath, newForeignData);
           }
         }
       }
@@ -228,7 +244,7 @@ export default class AdminForm extends React.Component {
       ) {
         this.setState({
           error: `Erreur: ${err.response.data.message}.`,
-          isSubmitting: false
+          isSubmitting: false,
         });
       } else {
         this.setState({ isSubmitting: false });
@@ -308,32 +324,41 @@ export default class AdminForm extends React.Component {
   renderField(field) {
     const labelId = `label_${field.name}`;
 
-    if (field.button === undefined)
-      return (
-        <Field key={field.name}>
-          <LabelContainer>
-            <label htmlFor={field.name} id={labelId}>
-              {field.label} :
-            </label>
-            {field.helpText !== undefined && <HelpText>{field.helpText}</HelpText>}
-          </LabelContainer>
+    return (
+      <Field key={field.name}>
+        <LabelContainer>
+          <label htmlFor={field.name} id={labelId}>
+            {field.label} :
+          </label>
+          {field.helpText !== undefined && <HelpText>{field.helpText}</HelpText>}
+        </LabelContainer>
 
-          {/* Link input to the button "click" event if there is one: */}
-          {field.button !== undefined ? (
-            <Flex style={{ flexGrow: 1 }}>
-              {this.renderInput(field, this.state.inputKeys[field.name])}
-              <Button
-                icon={field.button.icon}
-                onClick={() => this.programmaticallyUpdateFormData(field)}
-                title={field.button.ariaLabel}
-                type="button"
-              />
-            </Flex>
-          ) : (
-            this.renderInput(field)
-          )}
-        </Field>
-      );
+        {/* Link input to the button "click" event if there is one: */}
+        {field.button !== undefined ? (
+          <Flex style={{ flexGrow: 1 }}>
+            {this.renderInput(field, this.state.inputKeys[field.name])}
+            <Button
+              icon={field.button.icon}
+              onClick={() => this.programmaticallyUpdateFormData(field)}
+              title={field.button.title}
+              type="button"
+            />
+          </Flex>
+        ) : (
+          this.renderInput(field)
+        )}
+      </Field>
+    );
+  }
+
+  /**
+   * TODO Find a better way to guess the name.
+   */
+  guessName() {
+    const { id } = this.props;
+    const { index, name, question, title } = this.defaultData;
+
+    return name || title || question || index || id;
   }
 
   render() {
@@ -342,14 +367,13 @@ export default class AdminForm extends React.Component {
       i18nIsFeminine = false,
       i18nSubject = "MISSING_SUBJECT",
       id,
-      indexPath
+      indexPath,
     } = this.props;
     const { error, isLoading, isSubmitting } = this.state;
 
     if (isLoading) return <AdminMainLayout isLoading />;
 
-    // TODO Find a better way to guess the name.
-    const i18nName = this.defaultData.name || this.defaultData.title || id;
+    const i18nName = this.guessName();
     const isEdition = id !== undefined;
 
     return (

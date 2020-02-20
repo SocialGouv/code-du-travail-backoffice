@@ -9,7 +9,7 @@ export default function makeApiFilter(uri, data) {
   const queryString = compose(
     removeFirstChar,
     reduce((acc, [key, value]) => `${acc}&${key}=eq.${value}`, ""),
-    toPairs
+    toPairs,
   )(data);
 
   return `${uri}?${queryString}`;

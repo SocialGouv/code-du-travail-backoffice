@@ -8,7 +8,7 @@ describe.skip("blocks/AnswerEditionHead/<Tab />", () => {
     children: "A Tab Text",
     icon: "book",
     isActive: false,
-    onClick: jest.fn()
+    onClick: jest.fn(),
   };
 
   const { asFragment, container, getByText } = render(<AnswerEditionHeadBlockTab {...props} />);

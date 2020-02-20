@@ -71,7 +71,7 @@ const AdminAnswerBlock = ({ data, isChecked, onCheck, onClick }) => {
     question_value,
     state,
     updated_at,
-    user
+    user,
   } = data;
 
   const isTodo = state === ANSWER_STATE.TO_DO;

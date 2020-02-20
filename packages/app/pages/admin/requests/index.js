@@ -5,8 +5,8 @@ import AdminIndex from "../../../src/components/AdminIndex";
 const COLUMNS = [
   {
     Header: "Question usager",
-    accessor: "question"
-  }
+    accessor: "question",
+  },
 ];
 
 const AdminRequestsIndexPage = () => (

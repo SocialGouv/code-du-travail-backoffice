@@ -23,7 +23,7 @@ export default class AdminIndex extends React.Component {
       i18nSubject = "MISSING_SUBJECT",
       noDelete = false,
       noEdit = false,
-      noTimestamps = false
+      noTimestamps = false,
     } = props;
 
     this.columns = [...columns];
@@ -38,7 +38,7 @@ export default class AdminIndex extends React.Component {
         filterable: false,
         id: "updatedAt",
         style: { textAlign: "center" },
-        width: 160
+        width: 160,
       });
     }
 
@@ -57,7 +57,7 @@ export default class AdminIndex extends React.Component {
         headerStyle: { maxWidth: "2rem" },
         sortable: false,
         style: { textAlign: "center" },
-        width: 40
+        width: 40,
       });
     }
 
@@ -75,7 +75,7 @@ export default class AdminIndex extends React.Component {
         filterable: false,
         sortable: false,
         style: { textAlign: "center" },
-        width: 40
+        width: 40,
       });
     }
 
@@ -84,7 +84,7 @@ export default class AdminIndex extends React.Component {
       data: [],
       isFetching: false,
       isLoading: true,
-      selectedId: ""
+      selectedId: "",
     };
   }
 
@@ -107,7 +107,7 @@ export default class AdminIndex extends React.Component {
     this.setState({
       data,
       isFetching: false,
-      isLoading: false
+      isLoading: false,
     });
   }
 
@@ -119,23 +119,23 @@ export default class AdminIndex extends React.Component {
     Router.push(
       {
         pathname: `${window.location.pathname}/edit`,
-        query: { id }
+        query: { id },
       },
-      `${window.location.pathname}/${id}`
+      `${window.location.pathname}/${id}`,
     );
   }
 
   confirmDeletion(id) {
     this.setState({
       confirmDeletion: true,
-      selectedId: id
+      selectedId: id,
     });
   }
 
   cancelDeletion() {
     this.setState({
       confirmDeletion: false,
-      selectedId: ""
+      selectedId: "",
     });
   }
 
@@ -153,7 +153,7 @@ export default class AdminIndex extends React.Component {
     this.setState({
       confirmDeletion: false,
       isFetching: false,
-      selectedId: ""
+      selectedId: "",
     });
   }
 
@@ -215,16 +215,16 @@ export default class AdminIndex extends React.Component {
             </Confirmation>
           )}
           <Table
+            columns={this.columns}
             data={data}
             defaultFilterMethod={this.customFilter}
             defaultPageSize={PAGE_SIZE}
             defaultSorted={[{ desc: true, id: "updatedAt" }]}
-            columns={this.columns}
             filterable
             multiSort={false}
             resizable={false}
-            showPagination={data.length > PAGE_SIZE}
             showPageSizeOptions={false}
+            showPagination={data.length > PAGE_SIZE}
           />
         </Container>
       </AdminMainLayout>

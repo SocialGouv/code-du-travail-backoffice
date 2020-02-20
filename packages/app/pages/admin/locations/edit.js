@@ -1,62 +1,49 @@
-import React from "react";
+import withAdminEdit from "../../../src/templates/withAdminEdit";
+import { FIELDS } from "./new";
 
-import AdminForm from "../../../src/components/AdminForm";
-import AdminMainLayout from "../../../src/layouts/AdminMain";
-import AdminLocationsNewPage from "./new";
+const componentDidMount = async (api, id) => {
+  const { data: locations } = await api
+    .eq("id", id)
+    .select("*")
+    .select("agreements(*)")
+    .get("/locations");
+  const { data: agreements } = await api.get("/agreements");
 
-export default class AdminLocationsEditPage extends AdminLocationsNewPage {
-  constructor(props) {
-    super(props);
+  const defaultData = {
+    ...locations[0],
+    agreements: locations[0].agreements.map(agreement => ({
+      id: agreement.id,
+      value: `${agreement.idcc} - ${agreement.name}`,
+    })),
+  };
 
-    this.state = {
-      ...this.state,
-      data: {},
-      isLoadingOverwrite: true
-    };
-  }
+  const fields = [
+    ...FIELDS,
+    {
+      apiPath: "/locations_agreements",
+      ariaName: "la convention",
+      label: "Conventions",
+      name: "agreements",
+      tags: agreements.map(({ id, idcc, name }) => ({
+        id,
+        value: `${idcc} - ${name}`,
+      })),
+      type: "tags",
+    },
+  ];
 
-  static getInitialProps({ query: { id } }) {
-    return { id };
-  }
+  return { defaultData, fields };
+};
 
-  async componentDidMount() {
-    await super.componentDidMount();
+const AdminLocationsEditPage = withAdminEdit(
+  {
+    apiPath: "/locations",
+    i18nIsFeminine: true,
+    i18nSubject: "unité",
+    indexPath: "/locations",
+    name: "locations",
+  },
+  componentDidMount,
+);
 
-    try {
-      const uri = `/locations?select=*,agreements(*)&id=eq.${this.props.id}`;
-      const { data: locations } = await this.axios.get(uri);
-
-      const data = {
-        ...locations[0],
-        agreements: locations[0].agreements.map(agreement => ({
-          id: agreement.id,
-          value: `${agreement.idcc} - ${agreement.name}`
-        }))
-      };
-
-      this.setState({
-        data,
-        isLoadingOverwrite: false
-      });
-    } catch (err) {
-      if (err !== undefined) console.warn(err);
-    }
-  }
-
-  render() {
-    if (this.state.isLoadingOverwrite) return <AdminMainLayout isLoading />;
-
-    return (
-      <AdminForm
-        apiPath="/locations"
-        defaultData={this.state.data}
-        fields={this.state.fields}
-        i18nIsFeminine
-        i18nSubject="unité"
-        id={this.props.id}
-        indexPath="/locations"
-        name="location"
-      />
-    );
-  }
-}
+export default AdminLocationsEditPage;

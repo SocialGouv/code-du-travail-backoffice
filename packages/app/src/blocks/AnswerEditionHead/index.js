@@ -25,7 +25,7 @@ const AnswerEditionHeadBlock = ({
   onTabChange,
   question,
   referencesCount,
-  tagsCount
+  tagsCount,
 }) => (
   <Container justifyContent="space-between">
     <Flex flexDirection="column">

@@ -20,14 +20,14 @@ export default class AnswerEditionTagsBlock extends React.PureComponent {
     super(props);
 
     this.state = {
-      selectedTags: this.props.selectedTags
+      selectedTags: this.props.selectedTags,
     };
   }
 
   toggleTag(id) {
     if (this.state.selectedTags.includes(id)) {
       this.setState({
-        selectedTags: this.state.selectedTags.filter(_id => _id !== id)
+        selectedTags: this.state.selectedTags.filter(_id => _id !== id),
       });
       this.props.onToggle(id, false);
 

@@ -10,14 +10,14 @@ describe("blocks/<AnswerEditionHead />", () => {
   const props = {
     agreement: {
       idcc: "0123",
-      name: "An Agreement Name"
+      name: "An Agreement Name",
     },
     currentTab: TABS.EDITOR,
     onTabChange,
     question: {
       index: 123,
-      value: "A Question Value"
-    }
+      value: "A Question Value",
+    },
   };
 
   const { container } = render(<AnswerEditionHeadBlock {...props} />);

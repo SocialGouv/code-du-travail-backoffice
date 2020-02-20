@@ -41,8 +41,8 @@ export class AdminAnswersPrintPage extends React.Component {
       actions.answers.setFilters({
         isGeneric,
         page: 0,
-        pageLength: 100
-      })
+        pageLength: 100,
+      }),
     );
   }
 
@@ -92,5 +92,5 @@ export class AdminAnswersPrintPage extends React.Component {
 
 export default connect(({ answers }) => ({
   answers,
-  isGeneric: false
+  isGeneric: false,
 }))(AdminAnswersPrintPage);

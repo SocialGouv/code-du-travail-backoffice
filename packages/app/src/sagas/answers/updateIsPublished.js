@@ -10,7 +10,7 @@ import toast from "../../libs/toast";
 export default function* updateIsPublished({ meta: { ids, is, next } }) {
   try {
     const data = {
-      is_published: is
+      is_published: is,
     };
 
     yield customPostgrester()
@@ -20,7 +20,7 @@ export default function* updateIsPublished({ meta: { ids, is, next } }) {
     toast.success(
       ids.length === 1
         ? `La réponse ${ids[0]} a été ${is ? "" : "dé"}publiée.`
-        : `Les réponses ${ids.join(", ")} ont été ${is ? "" : "dé"}publiées.`
+        : `Les réponses ${ids.join(", ")} ont été ${is ? "" : "dé"}publiées.`,
     );
 
     next();

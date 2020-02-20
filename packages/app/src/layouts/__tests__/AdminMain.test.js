@@ -6,12 +6,12 @@ jest.mock("next/router", () => ({
     component.defaultProps = {
       ...component.defaultProps,
       router: {
-        pathname: "/admin"
-      }
+        pathname: "/admin",
+      },
     };
 
     return component;
-  }
+  },
 }));
 
 jest.mock("react-redux", () => ({
@@ -20,12 +20,12 @@ jest.mock("react-redux", () => ({
       ...component.defaultProps,
       modal: {
         isVisible: false,
-        message: ""
-      }
+        message: "",
+      },
     };
 
     return component;
-  }
+  },
 }));
 
 import AdminMain from "../AdminMain";
@@ -36,7 +36,7 @@ describe.skip("layouts/<AdminMain />", () => {
 
   const props = {
     children: "Some Content Text",
-    isLoading: false
+    isLoading: false,
   };
 
   const γ = render(<AdminMain {...props} />);
@@ -49,7 +49,7 @@ describe.skip("layouts/<AdminMain />", () => {
   it("should match snapshot diff with `hasBareContent` prop", () => {
     const newProps = {
       ...props,
-      hasBareContent: true
+      hasBareContent: true,
     };
 
     const Γ = render(<AdminMain {...newProps} />);
@@ -60,7 +60,7 @@ describe.skip("layouts/<AdminMain />", () => {
   it("should match snapshot diff with `isLoading` prop", () => {
     const newProps = {
       ...props,
-      isLoading: true
+      isLoading: true,
     };
 
     const Γ = render(<AdminMain {...newProps} />);

@@ -5,22 +5,22 @@ import AdminIndex from "../../../src/components/AdminIndex";
 const COLUMNS = [
   {
     Header: "Nom",
-    accessor: "name"
+    accessor: "name",
   },
   {
     Header: "E-mail",
-    accessor: "email"
+    accessor: "email",
   },
   {
-    Header: "Role",
-    accessor: "role"
+    Header: "Rôle",
+    accessor: "role",
   },
   {
-    Header: "IDCCs",
+    Header: "Conventions",
     accessor: data => data.agreements.map(({ idcc }) => idcc).join(", "),
     id: "idccs",
-    width: 160
-  }
+    width: 160,
+  },
 ];
 
 const AdminUsersIndexPage = () => (

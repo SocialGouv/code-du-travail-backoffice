@@ -16,7 +16,7 @@ export default function* createOne({ meta: { answerId, isPrivate, value } }) {
       answer_id: answerId,
       is_private: isPrivate,
       user_id: me.id,
-      value
+      value,
     };
 
     yield request.post(API_PATH, data);

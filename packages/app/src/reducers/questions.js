@@ -7,7 +7,7 @@ const initialState = {
   isLoading: true,
   pageIndex: 0,
   pagesLength: 0,
-  query: ""
+  query: "",
 };
 
 export default (state = initialState, { payload, type }) => {
@@ -17,14 +17,14 @@ export default (state = initialState, { payload, type }) => {
     case actionTypes.QUESTIONS_LOAD:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       };
 
     case actionTypes.QUESTIONS_LOAD_FAILURE:
       return {
         ...state,
         error: payload.message,
-        isLoading: false
+        isLoading: false,
       };
 
     case actionTypes.QUESTIONS_LOAD_SUCCESS:
@@ -36,7 +36,7 @@ export default (state = initialState, { payload, type }) => {
         isLoading: false,
         pageIndex: payload.pageIndex,
         pagesLength: payload.pagesLength,
-        query: payload.query
+        query: payload.query,
       };
 
     default:

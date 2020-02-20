@@ -10,12 +10,12 @@ jest.mock("react-redux", () => ({
       ...component.defaultProps,
       modal: {
         isVisible: false,
-        message: ""
-      }
+        message: "",
+      },
     };
 
     return component;
-  }
+  },
 }));
 
 import AdminIndex from "..";
@@ -26,8 +26,8 @@ const DATA = [
     anotherDataProp: "First Other Data Prop Value",
     created_at: 0,
     id: "b864ea83-cdbd-45f5-bca4-75efbb6b8954",
-    updated_at: 0
-  }
+    updated_at: 0,
+  },
 ];
 const PROPS = {
   apiPath: "/an-api-get-uri",
@@ -36,14 +36,14 @@ const PROPS = {
     confirmDeletionButton: `An aria label for the delete button`,
     deleteButton: `An aria label for the remove button`,
     editButton: `An aria label for the edit button`,
-    newButton: `An aria label for the new button`
+    newButton: `An aria label for the new button`,
   },
   columns: [
     {
       Header: "A Default Column",
-      accessor: "aDataProp"
-    }
-  ]
+      accessor: "aDataProp",
+    },
+  ],
 };
 
 describe.skip("components/<AdminIndex />", () => {
@@ -59,8 +59,8 @@ describe.skip("components/<AdminIndex />", () => {
       anotherDataProp: "Second Other Data Prop Value",
       created_at: 0,
       id: "631e6a28-2c7d-4bb5-983a-16962caae1e4",
-      updated_at: 0
-    }
+      updated_at: 0,
+    },
   ];
 
   const props = {
@@ -70,9 +70,9 @@ describe.skip("components/<AdminIndex />", () => {
       {
         Header: "A Custom Accessor Column",
         accessor: jest.fn(item => item.anotherDataProp),
-        id: "anotherDataProp"
-      }
-    ]
+        id: "anotherDataProp",
+      },
+    ],
   };
 
   let γ;
@@ -99,9 +99,9 @@ describe.skip("components/<AdminIndex />", () => {
     expect(global.nextRouter.push).toHaveBeenCalledWith(
       {
         pathname: `${locationPathname}/edit`,
-        query: { id: data[0].id }
+        query: { id: data[0].id },
       },
-      `${locationPathname}/${data[0].id}`
+      `${locationPathname}/${data[0].id}`,
     );
   });
 
@@ -148,14 +148,14 @@ describe.skip("components/<AdminIndex /> (custom API paths)", () => {
       confirmDeletionButton: `An aria label for the delete button`,
       deleteButton: `An aria label for the remove button`,
       editButton: `An aria label for the edit button`,
-      newButton: `An aria label for the new button`
+      newButton: `An aria label for the new button`,
     },
     columns: [
       {
         Header: "A Default Column",
-        accessor: "aDataProp"
-      }
-    ]
+        accessor: "aDataProp",
+      },
+    ],
   };
 
   it("should behave as expected when confirming deletion", async () => {
@@ -175,7 +175,7 @@ describe.skip("components/<AdminIndex /> (custom API paths)", () => {
     await waitFor(0);
 
     expect(global.axios.post).toHaveBeenCalledWith(props.apiPath, {
-      id: DATA[0].id
+      id: DATA[0].id,
     });
     expect(global.axios.get).toHaveBeenCalledWith(`${props.apiPath}?order=updated_at.desc`);
   });
@@ -189,7 +189,7 @@ describe.skip("components/<AdminIndex /> (noTimestamps)", () => {
 
   const props = {
     ...PROPS,
-    noTimestamps: true
+    noTimestamps: true,
   };
 
   it("should call the expected URI after rendering", async () => {
@@ -213,7 +213,7 @@ describe.skip("components/<AdminIndex /> (noEdit)", () => {
 
   const props = {
     ...PROPS,
-    noEdit: true
+    noEdit: true,
   };
 
   it("should not show the remove button", async () => {
@@ -237,7 +237,7 @@ describe.skip("components/<AdminIndex /> (noDelete)", () => {
 
   const props = {
     ...PROPS,
-    noDelete: true
+    noDelete: true,
   };
 
   it("should not show the remove button", async () => {
@@ -261,7 +261,7 @@ describe.skip("components/<AdminIndex /> (errors)", () => {
 
   const props = {
     ...PROPS,
-    columns: []
+    columns: [],
   };
 
   it("should behave as expected with API errors", async () => {

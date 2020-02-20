@@ -11,7 +11,7 @@ if (NODE_ENV !== "production") {
 
 const knexClient = knex({
   client: "pg",
-  connection: DB_URI
+  connection: DB_URI,
 });
 
 async function logActions(proxyReq, req) {
@@ -42,7 +42,7 @@ async function logActions(proxyReq, req) {
       ip,
       action: method.toLowerCase(),
       url,
-      user_id
+      user_id,
     };
 
     await knexClient("api.logs").insert([log]);

@@ -1,62 +1,55 @@
-import React from "react";
+import withAdminEdit from "../../../src/templates/withAdminEdit";
+import { FIELDS } from "./new";
 
-import AdminForm from "../../../src/components/AdminForm";
-import AdminMainLayout from "../../../src/layouts/AdminMain";
-import AdminUsersNewPage from "./new";
+const componentDidMount = async (api, id) => {
+  const { data: users } = await api.eq("id", id).get("/administrator_users");
+  const { data: agreements } = await api.get("/agreements");
+  const { data: locations } = await api.get("/locations");
 
-export default class AdminUsersEditPage extends AdminUsersNewPage {
-  constructor(props) {
-    super(props);
+  const defaultData = {
+    ...users[0],
+    agreements: users[0].agreements.map(agreement => ({
+      id: agreement.id,
+      value: `${agreement.idcc} - ${agreement.name}`,
+    })),
+  };
 
-    this.state = {
-      ...this.state,
-      data: {},
-      isLoadingOverwrite: true
-    };
-  }
+  const fields = [
+    ...FIELDS,
+    {
+      label: "Unité",
+      name: "location_id",
+      options: locations.map(({ id: value, name: label }) => ({
+        label,
+        value,
+      })),
+      type: "select",
+    },
+    {
+      ariaName: "la convention",
+      label: "Conventions",
+      name: "agreements",
+      tags: agreements.map(({ id, idcc, name }) => ({
+        id,
+        value: `${idcc} - ${name}`,
+      })),
+      type: "tags",
+    },
+  ];
 
-  static getInitialProps({ query: { id } }) {
-    return { id };
-  }
+  return {
+    defaultData,
+    fields,
+  };
+};
 
-  async componentDidMount() {
-    await super.componentDidMount();
+const AdminUsersEditPage = withAdminEdit(
+  {
+    apiPath: "/rpc/update_user",
+    i18nSubject: "utilisateur",
+    indexPath: "/users",
+  },
+  componentDidMount,
+);
 
-    try {
-      const uri = `/administrator_users?id=eq.${this.props.id}`;
-
-      const { data: users } = await this.axios.get(uri);
-
-      const data = {
-        ...users[0],
-        agreements: users[0].agreements.map(agreement => ({
-          id: agreement.id,
-          value: `${agreement.idcc} - ${agreement.name}`
-        }))
-      };
-
-      this.setState({
-        data,
-        isLoadingOverwrite: false
-      });
-    } catch (err) {
-      if (err !== undefined) console.warn(err);
-    }
-  }
-
-  render() {
-    if (this.state.isLoadingOverwrite) return <AdminMainLayout isLoading />;
-
-    return (
-      <AdminForm
-        apiPath="/rpc/update_user"
-        defaultData={this.state.data}
-        fields={this.state.fields}
-        i18nSubject="utilisateur"
-        id={this.props.id}
-        indexPath="/users"
-        isApiFunction
-      />
-    );
-  }
-}
+export default AdminUsersEditPage;

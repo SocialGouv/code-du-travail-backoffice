@@ -6,18 +6,18 @@ if (numeral.locale() === "en") {
       billion: "b",
       million: "m",
       thousand: "k",
-      trillion: "t"
+      trillion: "t",
     },
     currency: {
-      symbol: "€"
+      symbol: "€",
     },
     delimiters: {
       decimal: ",",
-      thousands: " "
+      thousands: " ",
     },
     ordinal: function(number) {
       return number === 1 ? "er" : "ème";
-    }
+    },
   });
 
   numeral.locale("fr");

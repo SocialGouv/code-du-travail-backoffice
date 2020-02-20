@@ -25,8 +25,8 @@ export default function* load({ meta: { pageIndex, query } }) {
         data: data.map(({ name, ...props }) => ({ name: shortenAgreementName(name), ...props })),
         pageIndex,
         pagesLength,
-        query
-      })
+        query,
+      }),
     );
   } catch (err) {
     if (err.response.status === 416) {
@@ -37,7 +37,7 @@ export default function* load({ meta: { pageIndex, query } }) {
           {`Cette page est hors de portée.`}
           <br />
           {`Redirection vers la page n° ${pageIndex + 1}…`}
-        </span>
+        </span>,
       );
 
       return yield load({ meta: { pageIndex, query } });

@@ -47,7 +47,7 @@ class AnswersEditPage extends React.Component {
       me: null,
       references: [],
       savingSpinnerTimeout: 0,
-      tags: []
+      tags: [],
     };
 
     this.allTags = [];
@@ -85,7 +85,7 @@ class AnswersEditPage extends React.Component {
         isLoading: false,
         me,
         references,
-        tags
+        tags,
       });
     } catch (err) {
       console.warn(err);
@@ -122,8 +122,8 @@ class AnswersEditPage extends React.Component {
     this.props.dispatch(
       actions.modal.open(
         `Êtes-vous sûr d'annuler cette réponse (son contenu sera supprimé) ?`,
-        () => actions.answers.cancel([this.props.id], () => Router.push("/answers/draft/1"))
-      )
+        () => actions.answers.cancel([this.props.id], () => Router.push("/answers/draft/1")),
+      ),
     );
   }
 
@@ -133,9 +133,9 @@ class AnswersEditPage extends React.Component {
     this.props.dispatch(
       actions.modal.open(`Êtes-vous sûr d'envoyer cette réponse en validation ?`, () =>
         actions.answers.updateState([this.props.id], ANSWER_STATE.PENDING_REVIEW, () =>
-          Router.push("/answers/draft/1")
-        )
-      )
+          Router.push("/answers/draft/1"),
+        ),
+      ),
     );
   }
 
@@ -148,7 +148,7 @@ class AnswersEditPage extends React.Component {
       const data = {
         prevalue: value,
         state: "draft",
-        user_id: this.state.me.id
+        user_id: this.state.me.id,
       };
 
       await this.axios.patch(uri, data);
@@ -167,12 +167,12 @@ class AnswersEditPage extends React.Component {
       const answersUri = `/answers?id=eq.${this.props.id}`;
       const answersData = {
         state: "draft",
-        user_id: this.state.me.id
+        user_id: this.state.me.id,
       };
       const answersTagsUri = `/answers_tags`;
       const answersTagsData = {
         answer_id: this.props.id,
-        tag_id: tagId
+        tag_id: tagId,
       };
 
       await this.axios.patch(answersUri, answersData);
@@ -183,7 +183,7 @@ class AnswersEditPage extends React.Component {
 
     this.setState({
       isSaving: false,
-      tags: [...this.state.tags, tagId]
+      tags: [...this.state.tags, tagId],
     });
   }
 
@@ -193,7 +193,7 @@ class AnswersEditPage extends React.Component {
     try {
       const uri = makeApiFilter("/answers_tags", {
         answer_id: this.props.id,
-        tag_id: tagId
+        tag_id: tagId,
       });
 
       await this.axios.delete(uri);
@@ -203,7 +203,7 @@ class AnswersEditPage extends React.Component {
 
     this.setState({
       isSaving: false,
-      tags: this.state.tags.filter(id => id !== tagId)
+      tags: this.state.tags.filter(id => id !== tagId),
     });
   }
 
@@ -214,12 +214,12 @@ class AnswersEditPage extends React.Component {
       const answersUri = `/answers?id=eq.${this.props.id}`;
       const answersData = {
         state: "draft",
-        user_id: this.state.me.id
+        user_id: this.state.me.id,
       };
       const answersReferencesUri = `/answers_references`;
       const answersReferencesData = {
         answer_id: this.props.id,
-        ...reference
+        ...reference,
       };
 
       await this.axios.patch(answersUri, answersData);
@@ -230,7 +230,7 @@ class AnswersEditPage extends React.Component {
 
     this.setState({
       isSaving: false,
-      references: [...this.state.references, reference]
+      references: [...this.state.references, reference],
     });
   }
 
@@ -240,7 +240,7 @@ class AnswersEditPage extends React.Component {
     try {
       const uri = makeApiFilter("/answers_references", {
         answer_id: this.props.id,
-        value: _value
+        value: _value,
       });
 
       await this.axios.delete(uri);
@@ -250,7 +250,7 @@ class AnswersEditPage extends React.Component {
 
     this.setState({
       isSaving: false,
-      references: this.state.references.filter(({ value }) => value !== _value)
+      references: this.state.references.filter(({ value }) => value !== _value),
     });
   }
 
@@ -265,10 +265,10 @@ class AnswersEditPage extends React.Component {
         () =>
           this.setState({
             hasSavingSpinner: false,
-            savingSpinnerTimeout: 0
+            savingSpinnerTimeout: 0,
           }),
-        2000
-      )
+        2000,
+      ),
     });
   }
 

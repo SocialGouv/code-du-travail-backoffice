@@ -1,71 +1,37 @@
-import React from "react";
-
-import AdminForm from "../../../src/components/AdminForm";
-import AdminMainLayout from "../../../src/layouts/AdminMain";
-import customPostgrester from "../../../src/libs/customPostgrester";
+import withAdminEdit from "../../../src/templates/withAdminEdit";
 import { FIELDS } from "./new";
 
-export default class AdminThemesEditPage extends React.Component {
-  constructor(props) {
-    super(props);
+const componentDidMount = async (api, id) => {
+  const { data: requests } = await api.eq("id", id).get("/requests");
+  const { data: themes } = await api.orderBy("title").get("/themes");
 
-    this.state = {
-      ...this.state,
-      data: {},
-      isLoading: true
-    };
-  }
+  const fields = [
+    {
+      label: "Thème",
+      name: "theme_id",
+      options: themes.map(({ id: value, title: label }) => ({
+        label,
+        value,
+      })),
+      type: "select",
+    },
+    ...FIELDS,
+  ];
 
-  static getInitialProps({ query: { id } }) {
-    return { id };
-  }
+  return {
+    defaultData: requests[0],
+    fields,
+  };
+};
 
-  async componentDidMount() {
-    const { id } = this.props;
+const AdminThemesEditPage = withAdminEdit(
+  {
+    apiPath: "/requests",
+    i18nIsFeminine: true,
+    i18nSubject: "requête",
+    indexPath: "/requests",
+  },
+  componentDidMount,
+);
 
-    const { data: themes } = await customPostgrester()
-      .orderBy("title")
-      .get("/themes");
-    const { data: requests } = await customPostgrester()
-      .eq("id", id)
-      .get(`/requests`);
-
-    const fields = [
-      {
-        label: "Thème",
-        name: "theme_id",
-        options: themes.map(({ id: value, title: label }) => ({
-          label,
-          value
-        })),
-        type: "select"
-      },
-      ...FIELDS
-    ];
-
-    this.setState({
-      data: requests[0],
-      fields,
-      isLoading: false
-    });
-  }
-
-  render() {
-    const { id } = this.props;
-    const { data, fields, isLoading } = this.state;
-
-    if (isLoading) return <AdminMainLayout isLoading />;
-
-    return (
-      <AdminForm
-        apiPath="/requests"
-        defaultData={data}
-        fields={fields}
-        i18nIsFeminine
-        i18nSubject="requête"
-        id={id}
-        indexPath="/requests"
-      />
-    );
-  }
-}
+export default AdminThemesEditPage;

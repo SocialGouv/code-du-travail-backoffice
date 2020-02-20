@@ -2,7 +2,7 @@ import { actionTypes } from "../actions/index";
 
 const initialState = {
   isVisible: false,
-  message: ""
+  message: "",
 };
 
 export default (state = initialState, { payload, type }) => {
@@ -11,13 +11,13 @@ export default (state = initialState, { payload, type }) => {
       return {
         ...state,
         isVisible: true,
-        message: payload.message
+        message: payload.message,
       };
 
     case actionTypes.MODAL_CLOSE:
     case actionTypes.MODAL_SUBMIT:
       return {
-        ...initialState
+        ...initialState,
       };
 
     default:

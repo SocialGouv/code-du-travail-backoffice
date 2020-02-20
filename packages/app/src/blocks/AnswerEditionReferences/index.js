@@ -26,13 +26,13 @@ export default class AnswerEditionReferencesBlock extends React.PureComponent {
     this.state = {
       agreementReferenceFormKey: 0,
       laborCodeReferences: props.laborCodeReferences.map(laborCodeReference => ({
-        value: laborCodeReference
+        value: laborCodeReference,
       })),
       referenceFormKey: 0,
       references: props.references,
       selectedLaborCodeReferences: props.references
         .filter(({ category }) => category === "labor_code")
-        .map(({ value }) => ({ value }))
+        .map(({ value }) => ({ value })),
     };
   }
 
@@ -40,11 +40,11 @@ export default class AnswerEditionReferencesBlock extends React.PureComponent {
     const reference = {
       category: "labor_code",
       url: null,
-      value: value.trim()
+      value: value.trim(),
     };
 
     this.setState({
-      references: [...this.state.references, reference]
+      references: [...this.state.references, reference],
     });
 
     this.props.onAdd(reference);
@@ -52,7 +52,7 @@ export default class AnswerEditionReferencesBlock extends React.PureComponent {
 
   removeLaborCodeReference(value) {
     this.setState({
-      references: this.state.references.filter(({ value: _value }) => _value !== value)
+      references: this.state.references.filter(({ value: _value }) => _value !== value),
     });
 
     this.props.onRemove(value);
@@ -72,12 +72,12 @@ export default class AnswerEditionReferencesBlock extends React.PureComponent {
     const reference = {
       category: "agreement",
       url: url.length !== 0 ? url : null,
-      value
+      value,
     };
 
     this.setState({
       agreementReferenceFormKey: this.state.agreementReferenceFormKey + 1,
-      references: [...this.state.references, reference]
+      references: [...this.state.references, reference],
     });
 
     this.props.onAdd(reference);
@@ -85,7 +85,7 @@ export default class AnswerEditionReferencesBlock extends React.PureComponent {
 
   removeAgreementReference(value) {
     this.setState({
-      references: this.state.references.filter(({ value: _value }) => _value !== value)
+      references: this.state.references.filter(({ value: _value }) => _value !== value),
     });
 
     this.props.onRemove(value);
@@ -105,12 +105,12 @@ export default class AnswerEditionReferencesBlock extends React.PureComponent {
     const reference = {
       category: null,
       url: url.trim().length !== 0 ? url : null,
-      value
+      value,
     };
 
     this.setState({
       referenceFormKey: this.state.referenceFormKey + 1,
-      references: [...this.state.references, reference]
+      references: [...this.state.references, reference],
     });
 
     this.props.onAdd(reference);
@@ -118,7 +118,7 @@ export default class AnswerEditionReferencesBlock extends React.PureComponent {
 
   removeReference(value) {
     this.setState({
-      references: this.state.references.filter(({ value: _value }) => _value !== value)
+      references: this.state.references.filter(({ value: _value }) => _value !== value),
     });
 
     this.props.onRemove(value);
@@ -126,10 +126,10 @@ export default class AnswerEditionReferencesBlock extends React.PureComponent {
 
   render() {
     const agreementReferences = this.state.references.filter(
-      ({ category }) => category === "agreement"
+      ({ category }) => category === "agreement",
     );
     const laborCodeReferences = this.state.references.filter(
-      ({ category }) => category === "labor_code"
+      ({ category }) => category === "labor_code",
     );
     const otherReferences = this.state.references.filter(({ category }) => category === null);
 

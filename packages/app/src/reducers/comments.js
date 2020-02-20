@@ -7,7 +7,7 @@ const initialState = {
   currentKey: 0,
   data: [],
   error: null,
-  isLoading: true
+  isLoading: true,
 };
 
 export default (state = initialState, { payload, type }) => {
@@ -17,14 +17,14 @@ export default (state = initialState, { payload, type }) => {
     case actionTypes.COMMENT_CREATE_ONE:
       return {
         ...state,
-        currentIsLoading: true
+        currentIsLoading: true,
       };
 
     case actionTypes.COMMENT_CREATE_ONE_FAILURE:
       return {
         ...state,
         currentIsLoading: false,
-        error: payload.message
+        error: payload.message,
       };
 
     case actionTypes.COMMENT_CREATE_ONE_SUCCESS:
@@ -32,13 +32,13 @@ export default (state = initialState, { payload, type }) => {
         ...state,
         currentIsLoading: false,
         currentIsPrivate: false,
-        currentKey: state.currentKey + 1
+        currentKey: state.currentKey + 1,
       };
 
     case actionTypes.COMMENT_TOGGLE_PRIVACY:
       return {
         ...state,
-        currentIsPrivate: !state.currentIsPrivate
+        currentIsPrivate: !state.currentIsPrivate,
       };
 
     /* MULTIPLE COMMENTS ――――――――――――――― */
@@ -47,7 +47,7 @@ export default (state = initialState, { payload, type }) => {
     case actionTypes.COMMENTS_LOAD:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       };
 
     case actionTypes.COMMENTS_DELETE_FAILURE:
@@ -55,7 +55,7 @@ export default (state = initialState, { payload, type }) => {
       return {
         ...state,
         error: payload.message,
-        isLoading: false
+        isLoading: false,
       };
 
     case actionTypes.COMMENTS_LOAD_SUCCESS:
@@ -63,7 +63,7 @@ export default (state = initialState, { payload, type }) => {
         ...state,
         data: payload.data,
         error: null,
-        isLoading: false
+        isLoading: false,
       };
 
     /* DEFAULT ――――――――――――――――――――――――― */

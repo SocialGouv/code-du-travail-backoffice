@@ -62,24 +62,24 @@ const AnswerBlock = ({ data, onCancel, onClick, onFallback }) => {
           <ContentExtractRed>Renvoyé à la convention collective nationale.</ContentExtractRed>
         )}
       </Content>
-      <Menu alignItems="start" justifyContent="space-evenly" flexDirection="column">
+      <Menu alignItems="start" flexDirection="column" justifyContent="space-evenly">
         {isTodo && [
           <Link
             disabled={data.generic_reference === ANSWER_GENERIC_REFERENCE.LABOR_CODE}
-            key="0"
             isSmall
+            key="0"
             onClick={() => onFallback(data.id, ANSWER_GENERIC_REFERENCE.LABOR_CODE)}
           >
             Renvoi au Code du travail
           </Link>,
           <Link
             disabled={data.generic_reference === ANSWER_GENERIC_REFERENCE.NATIONAL_AGREEMENT}
-            key="1"
             isSmall
+            key="1"
             onClick={() => onFallback(data.id, ANSWER_GENERIC_REFERENCE.NATIONAL_AGREEMENT)}
           >
             Renvoi à la CC nationale
-          </Link>
+          </Link>,
         ]}
         {isDraft && (
           <Link isSmall onClick={() => onCancel(data.id)}>

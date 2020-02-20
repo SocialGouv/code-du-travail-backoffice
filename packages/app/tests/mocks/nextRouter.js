@@ -7,12 +7,12 @@ global.nextRouter = {
     component.defaultProps = {
       ...component.defaultProps,
       router: {
-        pathname: "/admin"
-      }
+        pathname: "/admin",
+      },
     };
 
     return component;
-  }
+  },
 };
 
 jest.mock("next/router", () => global.nextRouter);

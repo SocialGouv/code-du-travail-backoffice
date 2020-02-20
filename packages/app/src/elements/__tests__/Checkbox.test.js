@@ -62,7 +62,7 @@ describe("elements/<Checkbox />", () => {
 
   it(`should call {onClick}`, () => {
     const props = {
-      onClick: jest.fn()
+      onClick: jest.fn(),
     };
     const $button = testRender(<Checkbox {...props} />);
 

@@ -7,8 +7,8 @@ describe("elements/<Radio />", () => {
     options: [
       { isSelected: true, label: "A Selected Label", value: "A Selected Value" },
       { label: "A Label", value: "A Value" },
-      { label: "Another Label", value: "Another Value" }
-    ]
+      { label: "Another Label", value: "Another Value" },
+    ],
   };
 
   it(`should pass`, () => {
@@ -32,7 +32,7 @@ describe("elements/<Radio />", () => {
 
   it(`should not call {onChange} when the selected radio is clicked`, () => {
     const props = {
-      onChange: jest.fn()
+      onChange: jest.fn(),
     };
     const $radio = testRender(<Radio {...props} {...COMMON_PROPS} />);
     const $firstSvg = $radio.children[0].findByType("svg");
@@ -43,7 +43,7 @@ describe("elements/<Radio />", () => {
 
   it(`should call {onChange} when a unselected radio is clicked`, () => {
     const props = {
-      onChange: jest.fn()
+      onChange: jest.fn(),
     };
     const $radio = testRender(<Radio {...props} {...COMMON_PROPS} />);
     const $secondSvg = $radio.children[1].findByType("svg");

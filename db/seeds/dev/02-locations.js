@@ -5,9 +5,7 @@ exports.seed = async knex => {
 
   await knex("api.locations").insert(locations);
 
-  const { data: locationsAgreements } = await global.axios.get(
-    "/locations_agreements"
-  );
+  const { data: locationsAgreements } = await global.axios.get("/locations_agreements");
 
   await knex("api.locations_agreements").insert(locationsAgreements);
 

@@ -37,7 +37,7 @@ const COLOR = {
   info: { isLight: false, value: "var(--color-misty-moss)" },
   primary: { isLight: false, value: "var(--color-lapis-lazuli)" },
   secondary: { isLight: true, value: "var(--color-periwinkle)" },
-  warning: { isLight: false, value: "var(--color-lapis-lazuli)" }
+  warning: { isLight: false, value: "var(--color-lapis-lazuli)" },
 };
 
 const Button = ({
@@ -79,7 +79,7 @@ const Button = ({
         isSmall={isSmall}
         {...props}
       >
-        <Icon icon={icon} color={isLight ? "var(--color-eerie-black)" : "white"} />
+        <Icon color={isLight ? "var(--color-eerie-black)" : "white"} icon={icon} />
         {children}
       </Container>
     );
@@ -94,7 +94,7 @@ const Button = ({
       isSmall={isSmall}
       {...props}
     >
-      <Icon icon={icon} color={COLOR[color].value} />
+      <Icon color={COLOR[color].value} icon={icon} />
       {children}
     </Container>
   );

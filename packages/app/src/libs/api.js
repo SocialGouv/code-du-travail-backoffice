@@ -25,13 +25,13 @@ class Api {
           credentials: "include",
           headers: {
             ...headers,
-            Authorization: jwt
-          }
+            Authorization: jwt,
+          },
         };
     const options = {
       ...headersOptions,
       body,
-      method
+      method,
     };
 
     const res = await _fetch(`${apiUri}${path}`, options);
@@ -48,18 +48,18 @@ class Api {
   async post(path, data, skipAuth = false) {
     return await this._fetch("POST", path, JSON.stringify(data), {
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      skipAuth
+      skipAuth,
     });
   }
 
   async patch(path, data, skipAuth = false) {
     return await this._fetch("PATCH", path, JSON.stringify(data), {
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      skipAuth
+      skipAuth,
     });
   }
 
