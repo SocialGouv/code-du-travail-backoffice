@@ -7,8 +7,14 @@ import { Flex } from "rebass";
 import * as actions from "../../../src/actions";
 import Comment from "../../../src/components/Comment";
 import LawReferences from "../../../src/components/LawReferences";
+import LegalReferences from "../../../src/components/LegalReferences";
 import Reference from "../../../src/components/Reference";
-import { ANSWER_STATE, ANSWER_STATE_LABEL, ANSWER_STATE_OPTIONS } from "../../../src/constants";
+import {
+  ANSWER_STATE,
+  ANSWER_STATE_LABEL,
+  ANSWER_STATE_OPTIONS,
+  LEGAL_REFERENCE_TYPE,
+} from "../../../src/constants";
 import Button from "../../../src/elements/Button";
 import _Checkbox from "../../../src/elements/Checkbox";
 import Hr from "../../../src/elements/Hr";
@@ -136,32 +142,23 @@ export class AdminAnwsersEditPage extends React.Component {
 
     this.state = {
       agreementReferenceValueInputKey: 0,
-      isLoading: true,
       isSidebarHidden: true,
       isUpdating: false,
       otherReferenceUrlInputKey: 0,
       otherReferenceValueInputKey: 2,
       prevalue: null,
-      references: [],
       value: "",
     };
 
     this.isGeneric = Boolean(props.isGeneric);
     this.updateAnswerValue = debounce(this._updateAnswerValue.bind(this), 500);
+    this.loadLegalReference = debounce(this._loadLegalReference.bind(this), 250);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.axios = customAxios();
 
-    try {
-      this.fetchAnswer();
-      await this.loadReferences();
-      this.props.dispatch(actions.comments.load(this.props.id));
-
-      this.setState({ isLoading: false });
-    } catch (err) {
-      if (err !== undefined) console.warn(err);
-    }
+    this.load();
   }
 
   componentDidUpdate() {
@@ -176,32 +173,16 @@ export class AdminAnwsersEditPage extends React.Component {
       }
     }
 
-    if (!this.state.isLoading && !this.props.answers.isLoading && !this.props.comments.isLoading) {
-      this.$commentsContainer.scrollTo(0, this.$commentsContainer.scrollHeight);
-    }
+    // if (!this.props.answers.isLoading && !this.props.comments.isLoading) {
+    //   this.$commentsContainer.scrollTo(0, this.$commentsContainer.scrollHeight);
+    // }
   }
 
-  fetchAnswer() {
-    const { dispatch, id } = this.props;
+  load() {
+    const { dispatch, id: answerId } = this.props;
 
-    dispatch(actions.answers.loadOne(id));
-  }
-
-  async loadReferences() {
-    try {
-      const referencesSelect = `select=*`;
-      const referencesWhere = `answer_id=eq.${this.props.id}`;
-      /* eslint-disable-next-line max-len */
-      const referencesUri = `/answers_references?${referencesSelect}&${referencesWhere}`;
-      const { data: references } = await this.axios.get(referencesUri);
-
-      this.setState({
-        isUpdating: false,
-        references,
-      });
-    } catch (err) {
-      if (err !== undefined) console.warn(err);
-    }
+    dispatch(actions.answers.loadOne(answerId));
+    dispatch(actions.comments.load(answerId));
   }
 
   async _updateAnswerValue({ source }) {
@@ -269,7 +250,7 @@ export class AdminAnwsersEditPage extends React.Component {
       console.warn(err);
     }
 
-    await this.loadReferences();
+    await this.load();
   }
 
   async deleteReference(id) {
@@ -283,7 +264,7 @@ export class AdminAnwsersEditPage extends React.Component {
       console.warn(err);
     }
 
-    await this.loadReferences();
+    await this.load();
   }
 
   submitReference(event, category = null) {
@@ -371,16 +352,53 @@ export class AdminAnwsersEditPage extends React.Component {
     this.props.dispatch(actions.comments._delete([id], this.props.id));
   }
 
+  _loadLegalReference(type, query) {
+    const {
+      answers,
+      legalReferences: { isLoading },
+    } = this.props;
+    if (isLoading || query.trim().length === 0) return;
+
+    if (type === LEGAL_REFERENCE_TYPE.AGREEMENT) {
+      const { agreement } = answers.data;
+
+      this.props.dispatch(actions.legalReferences.load(type, query, agreement.idcc));
+
+      return;
+    }
+
+    this.props.dispatch(actions.legalReferences.load(type, query));
+  }
+
+  addReference(type, { id: dilaId }) {
+    const { id: answerId } = this.props;
+    const reference = {
+      answer_id: answerId,
+      category: type,
+      dila_id: dilaId,
+      value: dilaId,
+    };
+
+    this.props.dispatch(actions.answers.addReferences([reference], this.load.bind(this)));
+  }
+
+  removeReference(answerReferenceId) {
+    this.props.dispatch(actions.legalReferences.delete([answerReferenceId], this.load.bind(this)));
+  }
+
   renderReferences(category, isDisabled) {
-    const references = this.state.references.filter(
+    const { answers } = this.props;
+    const { references } = answers.data;
+
+    const filteredReferences = references.filter(
       ({ category: _category }) => _category === category,
     );
 
-    if (this.props.answers.data.state === ANSWER_STATE.VALIDATED && references.length === 0) {
+    if (answers.data.state === ANSWER_STATE.VALIDATED && filteredReferences.length === 0) {
       return <span>Aucune référence.</span>;
     }
 
-    return references.map(({ id, url, value }, index) => (
+    return filteredReferences.map(({ id, url, value }, index) => (
       <Reference
         isDisabled={isDisabled}
         key={index}
@@ -404,10 +422,13 @@ export class AdminAnwsersEditPage extends React.Component {
   }
 
   render() {
-    const { answers, comments } = this.props;
-    const { isLoading, prevalue, isSidebarHidden, value } = this.state;
+    const { answers, comments, legalReferences } = this.props;
+    const { prevalue, isSidebarHidden, value } = this.state;
 
-    if (isLoading || answers.isLoading || prevalue === null || value === null) {
+    const isLoading =
+      answers.isLoading || comments.isLoading || prevalue === null || value === null;
+
+    if (isLoading) {
       return <AdminMainLayout isLoading />;
     }
 
@@ -475,6 +496,40 @@ export class AdminAnwsersEditPage extends React.Component {
                 </Flex>
                 <Hr />
 
+                <Subtitle isFirst>Références juridiques [BETA]</Subtitle>
+                <Flex flexDirection="column">
+                  <Strong isFirst>Code du travail :</Strong>
+                  <LegalReferences
+                    data={
+                      legalReferences.type === LEGAL_REFERENCE_TYPE.LABOR_CODE
+                        ? legalReferences.data
+                        : []
+                    }
+                    label="D1234, L1234, R1234…"
+                    onAdd={data => this.addReference(LEGAL_REFERENCE_TYPE.LABOR_CODE, data)}
+                    onInput={query =>
+                      this.loadLegalReference(LEGAL_REFERENCE_TYPE.LABOR_CODE, query)
+                    }
+                    onRemove={data => this.removeReference(LEGAL_REFERENCE_TYPE.LABOR_CODE, data)}
+                  />
+                </Flex>
+                <Flex flexDirection="column">
+                  <Strong>Convention collective :</Strong>
+                  <LegalReferences
+                    data={
+                      legalReferences.type === LEGAL_REFERENCE_TYPE.AGREEMENT
+                        ? legalReferences.data
+                        : []
+                    }
+                    onAdd={data => this.addReference(LEGAL_REFERENCE_TYPE.AGREEMENT, data)}
+                    onInput={query =>
+                      this.loadLegalReference(LEGAL_REFERENCE_TYPE.AGREEMENT, query)
+                    }
+                    onRemove={data => this.removeReference(LEGAL_REFERENCE_TYPE.AGREEMENT, data)}
+                  />
+                </Flex>
+                <Hr />
+
                 <Subtitle isFirst>Références juridiques</Subtitle>
                 <Flex flexDirection="column">
                   <Strong isFirst>Articles du Code du travail</Strong>
@@ -482,7 +537,7 @@ export class AdminAnwsersEditPage extends React.Component {
                     isDisabled={this.state.isUpdating}
                     onAdd={this.createReference.bind(this)}
                     onRemove={this.deleteReference.bind(this)}
-                    references={this.state.references.filter(
+                    references={this.props.answers.data.references.filter(
                       ({ category }) => category === "labor_code",
                     )}
                   />
@@ -602,7 +657,8 @@ export class AdminAnwsersEditPage extends React.Component {
   }
 }
 
-export default connect(({ answers, comments }) => ({
+export default connect(({ answers, comments, legalReferences }) => ({
   answers,
   comments,
+  legalReferences,
 }))(AdminAnwsersEditPage);

@@ -1,11 +1,11 @@
 import { takeLatest } from "redux-saga/effects";
 
 import { actionTypes } from "../../actions";
-/* MULTIPLE ANSWERS ―――――――――――――――― */
+import addReferences from "./addReferences";
 import cancel from "./cancel";
 import load from "./load";
-/* ONE ANSWER ―――――――――――――――――――――― */
 import loadOne from "./loadOne";
+import removeReferences from "./removeReferences";
 import setFilter from "./setFilter";
 import setFilters from "./setFilters";
 import toggleCheck from "./toggleCheck";
@@ -16,8 +16,10 @@ import updateState from "./updateState";
 export default [
   takeLatest(actionTypes.ANSWER_LOAD_ONE, loadOne),
 
+  takeLatest(actionTypes.ANSWERS_ADD_REFERENCES, addReferences),
   takeLatest(actionTypes.ANSWERS_CANCEL, cancel),
   takeLatest(actionTypes.ANSWERS_LOAD, load),
+  takeLatest(actionTypes.ANSWERS_REMOVE_REFERENCES, removeReferences),
   takeLatest(actionTypes.ANSWERS_SET_FILTER, setFilter),
   takeLatest(actionTypes.ANSWERS_SET_FILTER_SUCCESS, load),
   takeLatest(actionTypes.ANSWERS_SET_FILTERS, setFilters),

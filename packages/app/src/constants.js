@@ -36,6 +36,11 @@ export const AREA_CATEGORY_LABEL = {
   sui_generis_collectivity: "Collectivité Sui Generis",
 };
 
+export const LEGAL_REFERENCE_TYPE = {
+  AGREEMENT: "agreement",
+  LABOR_CODE: "labor_code",
+};
+
 export const LOG_ACTION_LABEL = {
   delete: "SUPPRESSION",
   patch: "MODIFICATION",

@@ -5,15 +5,15 @@ import shortenAgreementName from "../../helpers/shortenAgreementName";
 import customPostgrester from "../../libs/customPostgrester";
 import toast from "../../libs/toast";
 
-export default function* loadOne({ meta: { id, withReferences, withTags } }) {
+export default function* loadOne({ meta: { id } }) {
   try {
-    const request = customPostgrester()
+    const answersRequest = customPostgrester()
       .select("*")
       .select("agreement(idcc,name)")
       .select("question(index,value)")
       .eq("id", id);
 
-    const { data } = yield request.get("/answers");
+    const { data } = yield answersRequest.get("/answers");
 
     let answer = data[0];
     if (answer.agreement !== null) {
@@ -23,33 +23,17 @@ export default function* loadOne({ meta: { id, withReferences, withTags } }) {
       };
     }
 
-    if (withReferences) {
-      const request = customPostgrester()
-        .eq("answer_id", answer.id)
-        .orderBy("category")
-        .orderBy("value");
+    const answerReferencesRequest = customPostgrester()
+      .eq("answer_id", answer.id)
+      .orderBy("category")
+      .orderBy("value");
 
-      const { data: answerRefs } = yield request.get("/answers_references");
+    const { data: references } = yield answerReferencesRequest.get("/answers_references");
 
-      answer = {
-        ...answer,
-        references: answerRefs,
-      };
-    }
-
-    if (withTags) {
-      const request = customPostgrester()
-        .select("*")
-        .select("tag(*)")
-        .eq("answer_id", answer.id);
-
-      const { data: answerTags } = yield request.get("/answers_tags");
-
-      answer = {
-        ...answer,
-        tags: answerTags,
-      };
-    }
+    answer = {
+      ...answer,
+      references,
+    };
 
     yield put(answers.loadOneSuccess(answer));
   } catch (err) {

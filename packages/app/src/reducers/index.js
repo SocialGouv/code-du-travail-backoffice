@@ -1,8 +1,9 @@
 import agreements from "./agreements";
 import answers from "./answers";
 import comments from "./comments";
+import legalReferences from "./legal-references";
 import logs from "./logs";
 import modal from "./modal";
 import questions from "./questions";
 
-export { agreements, answers, comments, logs, modal, questions };
+export { agreements, answers, comments, legalReferences, logs, modal, questions };

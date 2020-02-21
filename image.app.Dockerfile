@@ -2,7 +2,7 @@
 #
 # TODO Move this image back to its own package?
 
-FROM node:12.16.0-alpine
+FROM node:12.16.1-alpine
 
 ARG API_DOMAIN
 ARG API_PORT_PUBLIC
