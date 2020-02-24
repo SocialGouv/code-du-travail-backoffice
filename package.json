@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "build": "lerna run --scope \"@socialgouv/code-du-travail-backoffice__app\" build",
+    "data:generate": "node ./scripts/data/generateLaborCodeArticles.js",
     "db:backup": "node -r dotenv/config ./scripts/db/backup.js",
     "db:migrate": "knex migrate:latest",
     "db:migrate:make": "node ./scripts/db/generateMigration.js",
@@ -25,6 +26,7 @@
     "test:e2e": "cucumber-js",
     "test:lint": "lerna run test:lint",
     "test:unit": "jest",
+    "test:type": "lerna run test:type",
     "test:update": "lerna run --scope \"@socialgouv/code-du-travail-backoffice__app\" test:update",
     "test:watch": "lerna run test:watch --parallel"
   },

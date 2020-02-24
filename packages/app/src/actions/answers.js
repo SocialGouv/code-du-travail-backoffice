@@ -2,9 +2,8 @@ import actionTypes from "./types";
 
 /* ONE ANSWER ―――――――――――――――――――――― */
 
-export const loadOne = (id, meta = { withReferences: false, withTags: false }) => ({
+export const loadOne = id => ({
   meta: {
-    ...meta,
     id,
   },
   type: actionTypes.ANSWER_LOAD_ONE,
@@ -24,6 +23,21 @@ export const loadOneSuccess = data => ({
 });
 
 /* MULTIPLE ANSWERS ―――――――――――――――― */
+
+export const addReferences = (data, next) => ({
+  meta: {
+    data,
+  },
+  next,
+  type: actionTypes.ANSWERS_ADD_REFERENCES,
+});
+export const addReferencesFailure = error => ({
+  error: true,
+  payload: {
+    message: error.message,
+  },
+  type: actionTypes.ANSWERS_ADD_REFERENCES_FAILURE,
+});
 
 export const cancel = (ids, next) => ({
   meta: {
@@ -53,6 +67,21 @@ export const loadFailure = error => ({
 export const loadSuccess = payload => ({
   payload,
   type: actionTypes.ANSWERS_LOAD_SUCCESS,
+});
+
+export const removeReferences = (ids, next) => ({
+  meta: {
+    ids,
+  },
+  next,
+  type: actionTypes.ANSWERS_REMOVE_REFERENCES,
+});
+export const removeReferencesFailure = error => ({
+  error: true,
+  payload: {
+    message: error.message,
+  },
+  type: actionTypes.ANSWERS_REMOVE_REFERENCES_FAILURE,
 });
 
 export const setFilter = (key, value) => ({
