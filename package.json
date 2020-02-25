@@ -22,7 +22,7 @@
     "setup:env": "cpy --rename=\".env\" ./.env.example .",
     "start": "lerna run --scope \"@socialgouv/code-du-travail-backoffice__api\" --scope \"@socialgouv/code-du-travail-backoffice__app\" start",
     "start:prod": "NODE_ENV=production ./scripts/prod/start.sh",
-    "test": "yarn test:unit --coverage --silent && yarn test:lint",
+    "test": "yarn test:lint && yarn test:type && yarn test:unit --silent",
     "test:e2e": "cucumber-js",
     "test:lint": "lerna run test:lint",
     "test:unit": "jest",
