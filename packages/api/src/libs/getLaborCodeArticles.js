@@ -28,8 +28,8 @@ function getLaborCodeArticles(query) {
   /** @type {import("fuse.js").FuseOptions<LaborCodeArticle>} */
   const fuseJsOptions = {
     keys: [
-      { name: "num", weight: 0.75 },
-      { name: "content", weight: 0.5 },
+      { name: "num", weight: 0.9 },
+      { name: "content", weight: 0.1 },
     ],
   };
 

@@ -5,7 +5,7 @@ const flatFilter = require("unist-util-flat-filter");
 const FuseJs = require("fuse.js");
 
 const cache = require("../helpers/cache");
-const { LEGAL_REFERENCE_CATEGORY, LEGAL_REFERENCE_TYPE } = require("../constants");
+const { LEGAL_REFERENCE_TYPE } = require("../constants");
 
 /**
  * @typedef {"PERIME" | "REMPLACE" | "VIGUEUR" | "VIGUEUR_ETEN" | "VIGUEUR_NON_ETEN"} AgreementState
@@ -104,7 +104,7 @@ function getAgreementId(idcc) {
  */
 function getAgreement(idcc) {
   const id = getAgreementId(idcc);
-  const cacheKey = `${LEGAL_REFERENCE_TYPE.AGREEMENT}-${LEGAL_REFERENCE_CATEGORY.ARTICLE}-${id}`;
+  const cacheKey = `${LEGAL_REFERENCE_TYPE.AGREEMENT}-${id}`;
 
   // Use cache instead of require if it exists:
   const maybeCachedRawData = cache.get(cacheKey);
@@ -122,7 +122,7 @@ function getAgreement(idcc) {
   }
 
   /** @type {* | { type: string, children: AgreementArticle[] }} */
-  const flatAgreementArticles = flatFilter(agreement, LEGAL_REFERENCE_CATEGORY.ARTICLE);
+  const flatAgreementArticles = flatFilter(agreement, "article");
 
   /** @type {AgreementArticleData[]} */
   const agreementArticles = flatAgreementArticles.children.map(article => article.data);
@@ -147,8 +147,8 @@ function getAgreementArticles(idcc, query) {
     /** @type {import("fuse.js").FuseOptions<AgreementArticleData>} */
     const fuseJsOptions = {
       keys: [
-        { name: "num", weight: 0.75 },
-        { name: "content", weight: 0.5 },
+        { name: "num", weight: 0.7 },
+        { name: "content", weight: 0.3 },
       ],
     };
 
