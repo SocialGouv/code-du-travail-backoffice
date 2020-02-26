@@ -67,6 +67,7 @@ class LegalReferencesMigrationIndex extends React.Component {
         .eq("answer_id", answer.id)
         .in("category", ANSWER_REFERENCE_CATEGORIES)
         .is("dila_id", null)
+        .is("is_skipped", false)
         .get("/answers_references");
 
       if (answerReferences.length > 0) {
@@ -193,6 +194,25 @@ class LegalReferencesMigrationIndex extends React.Component {
       ({ id }) => id === answerReferenceId,
     );
     reference.value = reference.dila_id;
+    delete reference.created_at;
+    delete reference.updated_at;
+
+    dispatch(actions.answers.updateReferences([reference], this.load.bind(this)));
+
+    this.setState({ answersWithReferences });
+  }
+
+  skipReference(answersWithReferencesIndex, answerReferenceId) {
+    const { dispatch } = this.props;
+    const { answersWithReferences } = this.state;
+
+    const reference = answersWithReferences[answersWithReferencesIndex].references.find(
+      ({ id }) => id === answerReferenceId,
+    );
+    reference.dila_id = null;
+    reference.is_skipped = true;
+    delete reference.created_at;
+    delete reference.updated_at;
 
     dispatch(actions.answers.updateReferences([reference], this.load.bind(this)));
 
@@ -225,9 +245,17 @@ class LegalReferencesMigrationIndex extends React.Component {
               style={{ flexGrow: 1 }}
             />
             <Button
+              color="danger"
+              disabled={dila_id === null}
+              hasGroup
+              onClick={() => this.skipReference(answersWithReferencesIndex, id)}
+              style={{ marginLeft: "1rem" }}
+            >
+              PASSER
+            </Button>
+            <Button
               disabled={dila_id === null}
               onClick={() => this.migrateReference(answersWithReferencesIndex, id)}
-              style={{ marginLeft: "1rem" }}
             >
               MIGRER
             </Button>
