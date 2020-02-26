@@ -68,10 +68,10 @@ fi
 echo "⏳ Starting postgrest, api and app containers…"
 docker-compose up -d app
 
-while [[ "$(curl -s -o /dev/null -w %{http_code} ${APP_URI})" != "200" ]]; do sleep 5; done
-while [[ "$(curl -s -o /dev/null -w %{http_code} ${API_URI})" != "200" ]]; do sleep 5; done
+# while [[ "$(curl -s -o /dev/null -w %{http_code} ${APP_URI})" != "200" ]]; do sleep 5; done
+# while [[ "$(curl -s -o /dev/null -w %{http_code} ${API_URI})" != "200" ]]; do sleep 5; done
 
-echo "🚀 The server is up and running!"
+echo "🚀 The server is (should be) up and running!"
 
 if [ "$NODE_ENV" = "production" ] && [ "$CI" != "true" ]; then
   echo "🗑 Cleaning unused containers, networks, images and build cache…"
