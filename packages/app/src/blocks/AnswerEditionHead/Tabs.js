@@ -11,7 +11,6 @@ const Container = styled(Flex)`
 export const TABS = {
   EDITOR: 0,
   REFERENCES: 1,
-  TAGS: 2,
 };
 
 const AnswerEditionHeadBlockTabs = ({ currentTab, onChange, referencesCount }) => (

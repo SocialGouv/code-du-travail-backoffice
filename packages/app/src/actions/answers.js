@@ -159,6 +159,21 @@ export const updateIsPublishedFailure = error => ({
   type: actionTypes.ANSWERS_UPDATE_IS_PUBLISHED_REFERENCE_FAILURE,
 });
 
+export const updateReferences = (data, next) => ({
+  meta: {
+    data,
+  },
+  next,
+  type: actionTypes.ANSWERS_UPDATE_REFERENCES,
+});
+export const updateReferencesFailure = error => ({
+  error: true,
+  payload: {
+    message: error.message,
+  },
+  type: actionTypes.ANSWERS_UPDATE_REFERENCES_FAILURE,
+});
+
 export const updateState = (ids, state, next) => ({
   meta: {
     ids,

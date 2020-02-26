@@ -6,7 +6,7 @@ import excerpt from "../../helpers/excerpt";
 import customAxios from "../../libs/customAxios";
 import toast from "../../libs/toast";
 
-export default function* load({ meta: { idcc, query, type } }) {
+export default function* load({ meta: { category, idcc, query } }) {
   try {
     if (query.length === 0) {
       yield put(legalReferences.loadSuccess({ data: [], query }));
@@ -15,7 +15,7 @@ export default function* load({ meta: { idcc, query, type } }) {
     }
 
     const { data: rawData } = yield customAxios().get(
-      `/legal-references?idcc=${idcc}&type=${type}&query=${query}`,
+      `/legal-references?category=${category}&idcc=${idcc}&query=${query}`,
     );
 
     const data = rawData.map(({ content, id, num }) => ({
@@ -23,7 +23,7 @@ export default function* load({ meta: { idcc, query, type } }) {
       name: `[${num !== null ? num : "N/A"}] ${excerpt(convertHtmlToPlainText(content))}`,
     }));
 
-    yield put(legalReferences.loadSuccess({ data, query, type }));
+    yield put(legalReferences.loadSuccess({ category, data, query }));
   } catch (err) {
     toast.error(err.message);
     yield put(legalReferences.loadFailure({ message: null }));

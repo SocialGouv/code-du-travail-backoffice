@@ -8,7 +8,6 @@ Feature: Login
     When I log into the application
     Then I should see the title "Tableau de bord"
     And I should see the subtitle "Global"
-    And I should see the subtitle "Par unité régionale"
     And I should see the subtitle "Par convention collective"
 
   Scenario: Successfully login as a contributor
@@ -21,5 +20,4 @@ Feature: Login
     When I log into the application
     Then I should see the title "Tableau de bord"
     And I should see the subtitle "Global"
-    And I should see the subtitle "Par unité régionale"
     And I should see the subtitle "Par convention collective"

@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "build": "lerna run --scope \"@socialgouv/code-du-travail-backoffice__app\" build",
-    "data:generate": "node ./scripts/data/generateLaborCodeArticles.js",
+    "data:generate": "node ./scripts/data/generateLaborCodeArticles.js && node ./scripts/data/generateIndex.js",
     "db:backup": "node -r dotenv/config ./scripts/db/backup.js",
     "db:migrate": "knex migrate:latest",
     "db:migrate:make": "node ./scripts/db/generateMigration.js",
@@ -31,6 +31,7 @@
     "test:watch": "lerna run test:watch --parallel"
   },
   "dependencies": {
+    "@socialgouv/kali-data": "1.3.12",
     "@testing-library/jest-dom": "5.1.1",
     "@types/jest": "25.1.3",
     "axios": "0.19.2",
@@ -47,8 +48,10 @@
     "moment": "2.24.0",
     "ora": "4.0.3",
     "pg": "7.18.2",
+    "postgrester": "1.3.0",
     "puppeteer": "2.1.1",
-    "shelljs": "0.8.3"
+    "shelljs": "0.8.3",
+    "unist-util-flat-filter": "1.0.0"
   },
   "workspaces": [
     "packages/*"

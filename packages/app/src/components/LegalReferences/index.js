@@ -3,26 +3,36 @@ import React from "react";
 import ReactTagAutocomplete from "react-tag-autocomplete";
 import { Flex } from "rebass";
 
-import Tag from "../Tags/Tag";
+import { LEGAL_REFERENCE_TYPE } from "../../constants";
 import { Container } from "./styles";
+import Tag from "./Tag";
 
-export function getReferences(references, onRemove) {
+export function getReferences(references, onRemove, isReadOnly) {
   return references.map(({ id, value }, index) => (
-    <Tag key={index} onRemove={() => onRemove(id)} value={value} />
+    <Tag
+      id={id}
+      key={index}
+      onRemove={!isReadOnly ? () => onRemove(id) : undefined}
+      value={value}
+    />
   ));
 }
 
 function LegalReferences({
+  category,
   data = [],
   isReadOnly = false,
-  label = "",
   onAdd = () => undefined,
   onInput = () => undefined,
   onRemove = () => undefined,
   references = [],
+  ...props
 }) {
+  const placeholder =
+    category === LEGAL_REFERENCE_TYPE.AGREEMENT ? "12, 36.3, 05.07.6…" : "D1234, L1234, R1234…";
+
   return (
-    <Container>
+    <Container {...props}>
       {!isReadOnly && (
         <ReactTagAutocomplete
           autofocus={false}
@@ -32,12 +42,12 @@ function LegalReferences({
           handleValidate={() => true}
           maxSuggestionsLength={10}
           minQueryLength={1}
-          placeholder={label}
+          placeholder={placeholder}
           suggestions={data}
           suggestionsFilter={() => true}
         />
       )}
-      <Flex flexWrap="wrap">{getReferences(references, onRemove)}</Flex>
+      <Flex flexWrap="wrap">{getReferences(references, onRemove, isReadOnly)}</Flex>
     </Container>
   );
 }

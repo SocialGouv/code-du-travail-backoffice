@@ -1,11 +1,11 @@
 const DumDum = require("dumdum");
 
-const LABOR_LAW_REFERENCES = require("../../../packages/app/src/data/labor-law-references.json");
+const LABOR_LAW_ARTICLES = require("../../../packages/api/data/labor-code.json");
 
 const dumdum = DumDum.create({ locale: "fr" });
 
 const ANSWER_REFERENCE_CATEGORY = [null, "agreement", "labor_code"];
-const LABOR_LAW_REFERENCES_LENGTH = LABOR_LAW_REFERENCES.length;
+const LABOR_LAW_ARTICLES_LENGTH = LABOR_LAW_ARTICLES.length;
 
 function getRandomAnswerReference(answerId, category) {
   const answerReference = {
@@ -31,7 +31,8 @@ function getRandomAnswerReference(answerId, category) {
     case ANSWER_REFERENCE_CATEGORY[2]:
       return {
         ...answerReference,
-        value: LABOR_LAW_REFERENCES[Math.floor(Math.random() * LABOR_LAW_REFERENCES_LENGTH)],
+        dila_id: LABOR_LAW_ARTICLES[Math.floor(Math.random() * LABOR_LAW_ARTICLES_LENGTH)].id,
+        value: LABOR_LAW_ARTICLES[Math.floor(Math.random() * LABOR_LAW_ARTICLES_LENGTH)].id,
         url: null,
       };
   }
@@ -39,7 +40,7 @@ function getRandomAnswerReference(answerId, category) {
 
 function getRandomAnswerReferences(answerId) {
   const answerReferences = [];
-  let i = Math.floor(Math.random() * 5);
+  let i = Math.floor(Math.random() * 10);
 
   while (i-- > 0) {
     const categoryIndex = Math.floor(Math.random() * 3);
@@ -51,18 +52,73 @@ function getRandomAnswerReferences(answerId) {
   return answerReferences;
 }
 
+function getRandomAnswer(diceBalance, question_id, agreement_id) {
+  const dice = Math.random();
+
+  switch (true) {
+    case dice < diceBalance[0]:
+      return {
+        state: "todo",
+        prevalue: "",
+        value: "",
+        question_id,
+        agreement_id,
+      };
+
+    case dice < diceBalance[1]:
+      return {
+        state: "draft",
+        prevalue: dumdum.text([260, 620]),
+        value: "",
+        question_id,
+        agreement_id,
+        user_id: "00000000-0000-4000-8000-000000000402",
+      };
+
+    case dice < diceBalance[2]:
+      return {
+        state: "pending_review",
+        prevalue: dumdum.text([260, 620]),
+        value: "",
+        question_id,
+        agreement_id,
+        user_id: "00000000-0000-4000-8000-000000000402",
+      };
+
+    case dice < diceBalance[3]:
+      return {
+        state: "under_review",
+        prevalue: dumdum.text([260, 620]),
+        value: dumdum.text([260, 620]),
+        question_id,
+        agreement_id,
+        user_id: "00000000-0000-4000-8000-000000000402",
+      };
+
+    default:
+      return {
+        state: "validated",
+        prevalue: dumdum.text([260, 620]),
+        value: dumdum.text([260, 620]),
+        question_id,
+        agreement_id,
+        user_id: "00000000-0000-4000-8000-000000000402",
+        is_published: Math.random() < 0.75,
+      };
+  }
+}
+
 exports.seed = async knex => {
   global.spinner.start(`Generating answers...`);
 
-  const questions = await knex("api.questions");
-  const agreements = await knex("api.agreements");
+  const questions = await knex("api.questions").orderBy("index");
+  const allAgreements = await knex("api.agreements").orderBy("idcc");
   const activeAgreementIds = await knex("api.locations_agreements").map(
     ({ agreement_id }) => agreement_id,
   );
+  const agreements = allAgreements.filter(({ id }) => activeAgreementIds.includes(id));
 
   for (let question of questions) {
-    global.spinner.start(`Generating answers: ${question.value}`);
-
     const genericAnswer = {
       state: "pending_review",
       prevalue: "",
@@ -73,87 +129,51 @@ exports.seed = async knex => {
 
     await knex("api.answers").insert([genericAnswer]);
 
+    const answers = [];
+    let answersReferences = [];
     const diceBalance = [Math.random(), Math.random(), Math.random(), Math.random()].sort();
 
-    const answers = agreements.map(agreement => {
-      if (!activeAgreementIds.includes(agreement.id)) {
-        return {
-          state: "todo",
-          prevalue: "",
-          value: "",
-          question_id: question.id,
-          agreement_id: agreement.id,
-        };
+    for (let agreement of agreements) {
+      global.spinner.text = `Generating answers: [${agreement.idcc}] ${question.index}) ${question.value}`;
+
+      const { data: foundAnswers } = await global.postgresterClient
+        .eq("question_id", question.id)
+        .eq("agreement_id", agreement.id)
+        .get("/public_answers");
+
+      if (foundAnswers.length !== 0) {
+        const answer = foundAnswers[0];
+        answers.push({
+          ...answer,
+          state: "validated",
+        });
+
+        const { data: foundAnswerReferences } = await global.postgresterClient
+          .eq("answer_id", answer.id)
+          .get("/answers_references");
+
+        answersReferences = answersReferences.concat(foundAnswerReferences);
+
+        continue;
       }
 
-      const dice = Math.random();
+      answers.push(getRandomAnswer(diceBalance, question.id, agreement.id));
+    }
 
-      switch (true) {
-        case dice < diceBalance[0]:
-          return {
-            state: "todo",
-            prevalue: "",
-            value: "",
-            question_id: question.id,
-            agreement_id: agreement.id,
-          };
-
-        case dice < diceBalance[1]:
-          return {
-            state: "draft",
-            prevalue: dumdum.text([260, 620]),
-            value: "",
-            question_id: question.id,
-            agreement_id: agreement.id,
-            user_id: "00000000-0000-4000-8000-000000000402",
-          };
-
-        case dice < diceBalance[2]:
-          return {
-            state: "pending_review",
-            prevalue: dumdum.text([260, 620]),
-            value: "",
-            question_id: question.id,
-            agreement_id: agreement.id,
-            user_id: "00000000-0000-4000-8000-000000000402",
-          };
-
-        case dice < diceBalance[3]:
-          return {
-            state: "under_review",
-            prevalue: dumdum.text([260, 620]),
-            value: dumdum.text([260, 620]),
-            question_id: question.id,
-            agreement_id: agreement.id,
-            user_id: "00000000-0000-4000-8000-000000000402",
-          };
-
-        default:
-          return {
-            state: "validated",
-            prevalue: dumdum.text([260, 620]),
-            value: dumdum.text([260, 620]),
-            question_id: question.id,
-            agreement_id: agreement.id,
-            user_id: "00000000-0000-4000-8000-000000000402",
-            is_published: Math.random() < 0.75,
-          };
-      }
-    });
-
-    global.spinner.start(`Generating answers references...`);
-
-    const answerIds = await knex("api.answers")
-      .returning("id")
-      .insert(answers);
-
-    const answersReferences = answerIds.reduce(
-      (prev, answerId) => [...prev, ...getRandomAnswerReferences(answerId)],
-      [],
-    );
-
+    await knex("api.answers").insert(answers);
     await knex("api.answers_references").insert(answersReferences);
   }
+
+  // const answerIds = await knex("api.answers").map(({ id }) => id);
+
+  // global.spinner.text = `Generating answers references...`;
+
+  // const randomAnswersReferences = answerIds.reduce(
+  //   (prev, answerId) => [...prev, ...getRandomAnswerReferences(answerId)],
+  //   [],
+  // );
+
+  // await knex("api.answers_references").insert(randomAnswersReferences);
 
   global.spinner.succeed(`Answers generated.`);
 };

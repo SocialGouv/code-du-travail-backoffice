@@ -11,7 +11,6 @@ import AnswerEditionContentBlock from "../../src/blocks/AnswerEditionContent";
 import AnswerEditionHeadBlock from "../../src/blocks/AnswerEditionHead";
 import { TABS } from "../../src/blocks/AnswerEditionHead/Tabs";
 import AnswerEditionReferencesBlock from "../../src/blocks/AnswerEditionReferences";
-import AnswerEditionTagsBlock from "../../src/blocks/AnswerEditionTags";
 import { ANSWER_STATE } from "../../src/constants";
 import SavingSpinner from "../../src/elements/SavingSpinner";
 import Main from "../../src/layouts/Main";
@@ -47,17 +46,13 @@ class AnswersEditPage extends React.Component {
       me: null,
       references: [],
       savingSpinnerTimeout: 0,
-      tags: [],
     };
 
-    this.allTags = [];
     this.prevalue = null;
     this.newPrevalue = null;
 
     this.createReference = debounce(this._createReference.bind(this), 500);
     this.deleteReference = debounce(this._deleteReference.bind(this), 500);
-    this.createTag = debounce(this._createTag.bind(this), 500);
-    this.deleteTag = debounce(this._deleteTag.bind(this), 500);
     this.updatePrevalue = debounce(this._updatePrevalue.bind(this), 500);
   }
 
@@ -74,18 +69,14 @@ class AnswersEditPage extends React.Component {
 
     try {
       const { data: references } = await this.axios.get(`/answers_references?answer_id=eq.${id}`);
-      const { data: tags } = await this.axios.get(`/answers_tags`);
-      const { data: allTags } = await this.axios.get(`/tags`);
       const laborCodeReferences = await axios.get(`/static/data/labor-law-references.json`);
 
-      this.allTags = allTags;
       this.laborCodeReferences = laborCodeReferences.data;
 
       this.setState({
         isLoading: false,
         me,
         references,
-        tags,
       });
     } catch (err) {
       console.warn(err);
@@ -106,14 +97,6 @@ class AnswersEditPage extends React.Component {
     const { dispatch, id } = this.props;
 
     dispatch(actions.answers.loadOne(id));
-  }
-
-  toggleTag(id, isAdded) {
-    if (isAdded) {
-      this.createTag(id);
-    } else {
-      this.deleteTag(id);
-    }
   }
 
   async cancel() {
@@ -158,53 +141,6 @@ class AnswersEditPage extends React.Component {
     }
 
     this.setState({ isSaving: false });
-  }
-
-  async _createTag(tagId) {
-    this.setState({ isSaving: true });
-
-    try {
-      const answersUri = `/answers?id=eq.${this.props.id}`;
-      const answersData = {
-        state: "draft",
-        user_id: this.state.me.id,
-      };
-      const answersTagsUri = `/answers_tags`;
-      const answersTagsData = {
-        answer_id: this.props.id,
-        tag_id: tagId,
-      };
-
-      await this.axios.patch(answersUri, answersData);
-      await this.axios.post(answersTagsUri, answersTagsData);
-    } catch (err) {
-      console.warn(err);
-    }
-
-    this.setState({
-      isSaving: false,
-      tags: [...this.state.tags, tagId],
-    });
-  }
-
-  async _deleteTag(tagId) {
-    this.setState({ isSaving: true });
-
-    try {
-      const uri = makeApiFilter("/answers_tags", {
-        answer_id: this.props.id,
-        tag_id: tagId,
-      });
-
-      await this.axios.delete(uri);
-    } catch (err) {
-      console.warn(err);
-    }
-
-    this.setState({
-      isSaving: false,
-      tags: this.state.tags.filter(id => id !== tagId),
-    });
   }
 
   async _createReference(reference) {
@@ -284,7 +220,7 @@ class AnswersEditPage extends React.Component {
 
   renderTab() {
     const { prevalue } = this;
-    const { references, tags } = this.state;
+    const { references } = this.state;
 
     switch (this.state.currentTab) {
       case TABS.REFERENCES:
@@ -297,15 +233,6 @@ class AnswersEditPage extends React.Component {
           />
         );
 
-      case TABS.TAGS:
-        return (
-          <AnswerEditionTagsBlock
-            onToggle={this.toggleTag.bind(this)}
-            selectedTags={tags}
-            tags={this.allTags}
-          />
-        );
-
       case TABS.EDITOR:
       default:
         return <AnswerEditionContentBlock defaultValue={prevalue} onChange={this.updatePrevalue} />;
@@ -315,7 +242,7 @@ class AnswersEditPage extends React.Component {
   render() {
     const { prevalue } = this;
     const { answers } = this.props;
-    const { isLoading, references, tags } = this.state;
+    const { isLoading, references } = this.state;
 
     if (isLoading || answers.isLoading || prevalue === null) {
       return <Main isLoading />;
@@ -335,7 +262,6 @@ class AnswersEditPage extends React.Component {
           onTabChange={this.switchTab.bind(this)}
           question={question}
           referencesCount={references.length}
-          tagsCount={tags.length}
         />
         <Content>
           {this.state.hasSavingSpinner && (
