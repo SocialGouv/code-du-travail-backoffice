@@ -127,11 +127,11 @@ class LegalReferencesMigrationIndex extends React.Component {
 
   async isReferenced(idcc) {
     try {
-      await customAxios().get(
+      const { data } = await customAxios().get(
         `/legal-references?idcc=${idcc}&category=${LEGAL_REFERENCE_TYPE.AGREEMENT}&query=1`,
       );
 
-      return true;
+      return data.length !== 0;
     } catch (err) {
       return false;
     }
