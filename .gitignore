@@ -126,7 +126,7 @@ Temporary Items
 ########################################
 # Visual Studio Code
 
-.vscode/*
+# .vscode/*
 # !.vscode/settings.json
 # !.vscode/tasks.json
 # !.vscode/launch.json
@@ -139,18 +139,15 @@ Temporary Items
 ########################################
 # Custom
 
-/.vscode/settings.json
-/builds
+/.vscode
 
-/.env
+# Docker shared backups volume:
+/.shadow/*
+!/.shadow/.gitkeep
 
-# Docker shared volume
+# Shadow directory used to compare file changes between builds in production:
 /backups/*
 !/backups/.gitkeep
-
-# Manual data imports
-/*.csv
-/*.sql
 
 # Prevent any script to be pushed whithin the production database seeds:
 /db/seeds/prod/*
