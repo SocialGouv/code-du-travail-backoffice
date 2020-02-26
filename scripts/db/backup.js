@@ -3,7 +3,7 @@ const shell = require("shelljs");
 
 const { POSTGRES_DB, POSTGRES_USER } = process.env;
 
-const NOW = process.argv[2] === "--dev" ? "snapshot" : new Date().toISOString();
+const NOW = process.argv[2] === "--dev" ? "snapshot" : new Date().toISOString().replace(/:/g, "-");
 
 const BACKUPS_DIRECTORY = process.argv[2] === "--dev" ? "./db" : "./backups";
 const DB_SERVICE_NAME = "db";
