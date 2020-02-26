@@ -7,8 +7,6 @@
   "scripts": {
     "dev": "cross-env nodemon --exec \"node -r dotenv/config ./src dotenv_config_path=../../.env\"",
     "start": "node ./src",
-    "test": "yarn test:lint && yarn test:type",
-    "test:lint": "eslint .",
     "test:type": "tsc -p ./tsconfig.json"
   },
   "dependencies": {
@@ -24,16 +22,10 @@
     "unist-util-flat-filter": "1.0.0"
   },
   "devDependencies": {
-    "@socialgouv/eslint-config-strict": "0.16.0",
     "@types/node": "13.7.4",
     "cross-env": "7.0.0",
     "dotenv": "8.2.0",
-    "eslint": "6.8.0",
-    "eslint-config-prettier": "6.10.0",
-    "eslint-plugin-prettier": "3.1.2",
-    "eslint-plugin-sort-requires": "2.1.0",
     "nodemon": "2.0.2",
-    "prettier": "1.19.1",
     "typescript": "3.8.2"
   }
 }

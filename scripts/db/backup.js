@@ -1,10 +1,9 @@
 require("colors");
-const moment = require("moment");
 const shell = require("shelljs");
 
 const { POSTGRES_DB, POSTGRES_USER } = process.env;
 
-const NOW = process.argv[2] === "--dev" ? "snapshot" : moment().format("YYYYMMDDHHmmss");
+const NOW = process.argv[2] === "--dev" ? "snapshot" : new Date().toISOString();
 
 const BACKUPS_DIRECTORY = process.argv[2] === "--dev" ? "./db" : "./backups";
 const DB_SERVICE_NAME = "db";
@@ -31,7 +30,7 @@ function run(command) {
 
 try {
   run(
-    `docker-compose exec -T ${DB_SERVICE_NAME} pg_dump -cC -Fc --if-exists -f /${MAIN_DB_FILENAME} -U ${POSTGRES_USER} ${POSTGRES_DB}`
+    `docker-compose exec -T ${DB_SERVICE_NAME} pg_dump -cC -Fc --if-exists -f /${MAIN_DB_FILENAME} -U ${POSTGRES_USER} ${POSTGRES_DB}`,
   );
   const output = run(`docker-compose ps -q ${DB_SERVICE_NAME}`);
   const dockerDbContainerId = output.stdout.trim();

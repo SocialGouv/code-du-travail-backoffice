@@ -25,13 +25,13 @@ fi
 if [ "$NODE_ENV" = "production" ] && [ "$CI" != "true" ]; then
   echo "⏳ Dumping current databases…"
   yarn db:backup
+
+  echo "⏳ Stopping all existing containers…"
+  docker-compose down
+
+  echo "⏳ Installing dependencies…"
+  yarn --pure-lockfile
 fi
-
-echo "⏳ Stopping all existing containers…"
-docker-compose down
-
-echo "⏳ Installing dependencies…"
-yarn --pure-lockfile
 
 # We take the opportunity of the first "docker-compose" up to remove potential left orphans:
 echo "⏳ Starting db container…"
@@ -76,7 +76,6 @@ echo "🚀 The server is (should be) up and running!"
 if [ "$NODE_ENV" = "production" ] && [ "$CI" != "true" ]; then
   echo "🗑 Cleaning unused containers, networks, images and build cache…"
   docker system prune -af
-  yarn cache clean
 
   echo "✔ Cache cleaned."
 fi

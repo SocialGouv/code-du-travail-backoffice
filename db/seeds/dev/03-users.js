@@ -7,60 +7,60 @@ exports.seed = async knex => {
 
   global.users = [
     {
-      id: "00000000-0000-4000-8000-000000000401",
       email: "doris@sea.com",
-      password: "Azerty123",
+      id: "00000000-0000-4000-8000-000000000401",
+      location_id: locationIds[0],
       name: "Doris L'Administratrice",
+      password: "Azerty123",
       role: "administrator",
-      location_id: locationIds[0]
     },
     {
-      id: "00000000-0000-4000-8000-000000000402",
       email: "nemo@sea.com",
-      password: "Azerty123",
+      id: "00000000-0000-4000-8000-000000000402",
+      location_id: locationIds[1],
       name: "Nemo Le Contributeur",
+      password: "Azerty123",
       role: "contributor",
-      location_id: locationIds[1]
     },
     {
-      id: "00000000-0000-4000-8000-000000000403",
       email: "astrid@sea.com",
-      password: "Azerty123",
+      id: "00000000-0000-4000-8000-000000000403",
+      location_id: locationIds[2],
       name: "Astrid La Contributrice",
+      password: "Azerty123",
       role: "contributor",
-      location_id: locationIds[2]
     },
     {
-      id: "00000000-0000-4000-8000-000000000404",
       email: "marin@sea.com",
-      password: "Azerty123",
+      id: "00000000-0000-4000-8000-000000000404",
+      location_id: locationIds[3],
       name: "Marin Le Contributeur",
+      password: "Azerty123",
       role: "contributor",
-      location_id: locationIds[3]
     },
     {
-      id: "00000000-0000-4000-8000-000000000405",
       email: "deb@sea.com",
-      password: "Azerty123",
+      id: "00000000-0000-4000-8000-000000000405",
+      location_id: locationIds[3],
       name: "Deb L'Administratrice Régionale",
+      password: "Azerty123",
       role: "regional_administrator",
-      location_id: locationIds[3]
-    }
+    },
   ];
 
-  await knex("auth.users").insert(users);
+  await knex("auth.users").insert(global.users);
 
   await knex("users_agreements").insert(
     (await knex("api.agreements").limit(3)).map(({ id: agreement_id }) => ({
+      agreement_id,
       user_id: "00000000-0000-4000-8000-000000000402",
-      agreement_id
-    }))
+    })),
   );
   await knex("users_agreements").insert(
     (await knex("api.agreements").limit(3)).map(({ id: agreement_id }) => ({
+      agreement_id,
       user_id: "00000000-0000-4000-8000-000000000403",
-      agreement_id
-    }))
+    })),
   );
   await knex("users_agreements").insert(
     (
@@ -68,9 +68,9 @@ exports.seed = async knex => {
         .limit(2)
         .offset(3)
     ).map(({ id: agreement_id }) => ({
+      agreement_id,
       user_id: "00000000-0000-4000-8000-000000000404",
-      agreement_id
-    }))
+    })),
   );
 
   global.spinner.succeed(`Users generated.`);

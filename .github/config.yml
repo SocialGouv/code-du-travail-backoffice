@@ -1,4 +1,5 @@
 # https://github.com/JasonEtco/todo#configuring-for-your-project
 todo:
   autoAssign: "ivangabriele"
+  caseSensitive: true
   label: ":label: todo"

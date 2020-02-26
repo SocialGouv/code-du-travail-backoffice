@@ -1,56 +1,56 @@
 const DumDum = require("dumdum");
 
-const LABOR_LAW_ARTICLES = require("../../../packages/api/data/labor-code.json");
+// const LABOR_LAW_ARTICLES = require("../../../packages/api/data/labor-code.json");
 
 const dumdum = DumDum.create({ locale: "fr" });
 
-const ANSWER_REFERENCE_CATEGORY = [null, "agreement", "labor_code"];
-const LABOR_LAW_ARTICLES_LENGTH = LABOR_LAW_ARTICLES.length;
+// const ANSWER_REFERENCE_CATEGORY = [null, "agreement", "labor_code"];
+// const LABOR_LAW_ARTICLES_LENGTH = LABOR_LAW_ARTICLES.length;
 
-function getRandomAnswerReference(answerId, category) {
-  const answerReference = {
-    answer_id: answerId,
-    category,
-  };
+// function getRandomAnswerReference(answerId, category) {
+//   const answerReference = {
+//     answer_id: answerId,
+//     category,
+//   };
 
-  switch (category) {
-    case ANSWER_REFERENCE_CATEGORY[0]:
-      return {
-        ...answerReference,
-        value: dumdum.text([12, 120]),
-        url: Math.random() < 0.5 ? "https://example.com" : null,
-      };
+//   switch (category) {
+//     case ANSWER_REFERENCE_CATEGORY[0]:
+//       return {
+//         ...answerReference,
+//         url: Math.random() < 0.5 ? "https://example.com" : null,
+//         value: dumdum.text([12, 120]),
+//       };
 
-    case ANSWER_REFERENCE_CATEGORY[1]:
-      return {
-        ...answerReference,
-        value: `Article ${Math.ceil(Math.random() * 99)}`,
-        url: null,
-      };
+//     case ANSWER_REFERENCE_CATEGORY[1]:
+//       return {
+//         ...answerReference,
+//         url: null,
+//         value: `Article ${Math.ceil(Math.random() * 99)}`,
+//       };
 
-    case ANSWER_REFERENCE_CATEGORY[2]:
-      return {
-        ...answerReference,
-        dila_id: LABOR_LAW_ARTICLES[Math.floor(Math.random() * LABOR_LAW_ARTICLES_LENGTH)].id,
-        value: LABOR_LAW_ARTICLES[Math.floor(Math.random() * LABOR_LAW_ARTICLES_LENGTH)].id,
-        url: null,
-      };
-  }
-}
+//     case ANSWER_REFERENCE_CATEGORY[2]:
+//       return {
+//         ...answerReference,
+//         dila_id: LABOR_LAW_ARTICLES[Math.floor(Math.random() * LABOR_LAW_ARTICLES_LENGTH)].id,
+//         url: null,
+//         value: LABOR_LAW_ARTICLES[Math.floor(Math.random() * LABOR_LAW_ARTICLES_LENGTH)].id,
+//       };
+//   }
+// }
 
-function getRandomAnswerReferences(answerId) {
-  const answerReferences = [];
-  let i = Math.floor(Math.random() * 10);
+// function getRandomAnswerReferences(answerId) {
+//   const answerReferences = [];
+//   let i = Math.floor(Math.random() * 10);
 
-  while (i-- > 0) {
-    const categoryIndex = Math.floor(Math.random() * 3);
-    const category = ANSWER_REFERENCE_CATEGORY[categoryIndex];
+//   while (i-- > 0) {
+//     const categoryIndex = Math.floor(Math.random() * 3);
+//     const category = ANSWER_REFERENCE_CATEGORY[categoryIndex];
 
-    answerReferences.push(getRandomAnswerReference(answerId, category));
-  }
+//     answerReferences.push(getRandomAnswerReference(answerId, category));
+//   }
 
-  return answerReferences;
-}
+//   return answerReferences;
+// }
 
 function getRandomAnswer(diceBalance, question_id, agreement_id) {
   const dice = Math.random();
@@ -58,52 +58,52 @@ function getRandomAnswer(diceBalance, question_id, agreement_id) {
   switch (true) {
     case dice < diceBalance[0]:
       return {
-        state: "todo",
-        prevalue: "",
-        value: "",
-        question_id,
         agreement_id,
+        prevalue: "",
+        question_id,
+        state: "todo",
+        value: "",
       };
 
     case dice < diceBalance[1]:
       return {
-        state: "draft",
-        prevalue: dumdum.text([260, 620]),
-        value: "",
-        question_id,
         agreement_id,
+        prevalue: dumdum.text([260, 620]),
+        question_id,
+        state: "draft",
         user_id: "00000000-0000-4000-8000-000000000402",
+        value: "",
       };
 
     case dice < diceBalance[2]:
       return {
-        state: "pending_review",
-        prevalue: dumdum.text([260, 620]),
-        value: "",
-        question_id,
         agreement_id,
+        prevalue: dumdum.text([260, 620]),
+        question_id,
+        state: "pending_review",
         user_id: "00000000-0000-4000-8000-000000000402",
+        value: "",
       };
 
     case dice < diceBalance[3]:
       return {
-        state: "under_review",
-        prevalue: dumdum.text([260, 620]),
-        value: dumdum.text([260, 620]),
-        question_id,
         agreement_id,
+        prevalue: dumdum.text([260, 620]),
+        question_id,
+        state: "under_review",
         user_id: "00000000-0000-4000-8000-000000000402",
+        value: dumdum.text([260, 620]),
       };
 
     default:
       return {
-        state: "validated",
-        prevalue: dumdum.text([260, 620]),
-        value: dumdum.text([260, 620]),
-        question_id,
         agreement_id,
-        user_id: "00000000-0000-4000-8000-000000000402",
         is_published: Math.random() < 0.75,
+        prevalue: dumdum.text([260, 620]),
+        question_id,
+        state: "validated",
+        user_id: "00000000-0000-4000-8000-000000000402",
+        value: dumdum.text([260, 620]),
       };
   }
 }
@@ -118,13 +118,13 @@ exports.seed = async knex => {
   );
   const agreements = allAgreements.filter(({ id }) => activeAgreementIds.includes(id));
 
-  for (let question of questions) {
+  for (const question of questions) {
     const genericAnswer = {
-      state: "pending_review",
-      prevalue: "",
-      value: dumdum.text([260, 620]),
-      question_id: question.id,
       agreement_id: null,
+      prevalue: "",
+      question_id: question.id,
+      state: "pending_review",
+      value: dumdum.text([260, 620]),
     };
 
     await knex("api.answers").insert([genericAnswer]);
@@ -133,7 +133,7 @@ exports.seed = async knex => {
     let answersReferences = [];
     const diceBalance = [Math.random(), Math.random(), Math.random(), Math.random()].sort();
 
-    for (let agreement of agreements) {
+    for (const agreement of agreements) {
       global.spinner.text = `Generating answers: [${agreement.idcc}] ${question.index}) ${question.value}`;
 
       const { data: foundAnswers } = await global.postgresterClient

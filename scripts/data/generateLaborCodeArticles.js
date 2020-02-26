@@ -30,13 +30,13 @@ const rawLaborCodeArticles = require("./code-du-travail-20190701.json");
 
 /** @type LaborCodeArticle[] */
 const laborCodeArticles = rawLaborCodeArticles.map(({ id, cid, num, bloc_textuel, titre }) => ({
-  id,
   cid,
-  num,
-  intOrdre: 0,
-  title: titre,
   content: bloc_textuel,
   etat: "VIGUEUR",
+  id,
+  intOrdre: 0,
+  num,
+  title: titre,
 }));
 
 /** @type LaborCodeArticle[] */

@@ -1,8 +1,6 @@
 let { DB_URI } = process.env;
-
 if (DB_URI === undefined) {
   const dotenv = require("dotenv");
-
   dotenv.config();
   const { DEV_DB_PORT, POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_USER } = process.env;
 
@@ -15,11 +13,11 @@ module.exports = {
     connection: DB_URI,
     migrations: {
       directory: `${__dirname}/db/migrations/knex`,
-      tableName: "migrations"
+      tableName: "migrations",
     },
     seeds: {
-      directory: `${__dirname}/db/seeds/dev`
-    }
+      directory: `${__dirname}/db/seeds/dev`,
+    },
   },
 
   production: {
@@ -27,10 +25,10 @@ module.exports = {
     connection: DB_URI,
     migrations: {
       directory: `${__dirname}/db/migrations/knex`,
-      tableName: "migrations"
+      tableName: "migrations",
     },
     seeds: {
-      directory: `${__dirname}/db/seeds/prod`
-    }
-  }
+      directory: `${__dirname}/db/seeds/prod`,
+    },
+  },
 };

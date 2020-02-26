@@ -1,4 +1,4 @@
-# Master Container for db migrations
+# Master Image
 
 FROM igabriele/knex-pg:12.0.7.0
 

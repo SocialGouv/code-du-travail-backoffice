@@ -1,6 +1,4 @@
-# Web Image
-#
-# TODO Move this image back to its own package?
+# Application Image
 
 FROM node:12.16.1-alpine
 
@@ -24,11 +22,6 @@ WORKDIR /app
 COPY . .
 
 RUN yarn --pure-lockfile
-# Otherwise, we have a fatal error:
-# "Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory"
-# https://stackoverflow.com/a/55547893/2736233
-RUN node --max-old-space-size=2048 ./node_modules/.bin/next build ./packages/app
-
-WORKDIR /app/packages/app
+RUN yarn build
 
 ENTRYPOINT ["yarn", "start"]

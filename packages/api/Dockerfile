@@ -1,4 +1,4 @@
-# API Proxy Container
+# API Image
 
 FROM node:12.16.1-alpine
 

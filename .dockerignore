@@ -1,10 +1,11 @@
-__tests__/
 .next/
+__tests__/
 coverage/
 node_modules/
 tests/
 
-.env
+*.md
 
-/db/seeds
-/features
+.env
+jest.config.js
+LICENSE
