@@ -43,8 +43,7 @@ services:
   app:
     restart: always
     build:
-      context: .
-      dockerfile: image.app.Dockerfile
+      context: ./packages/app
       args:
         API_DOMAIN: ${API_DOMAIN}
         API_PORT_PUBLIC: ${API_PORT_PUBLIC}
@@ -64,7 +63,6 @@ services:
     tty: true
     build:
       context: .
-      dockerfile: image.master.Dockerfile
     environment:
       DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
       NODE_ENV: ${NODE_ENV}

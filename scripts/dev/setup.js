@@ -7,7 +7,7 @@ const { DEV_DB_PORT, NODE_ENV, POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_USER } =
 
 if (NODE_ENV === "production") {
   shell.echo(
-    "[script/dev/setup] Error: You can't run this script in a production environment!.".red
+    "[script/dev/setup] Error: You can't run this script in a production environment!.".red,
   );
 
   shell.exit(1);
@@ -27,7 +27,7 @@ const DB_URI = `postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${D
 
 const knexClient = knex({
   client: "pg",
-  connection: DB_URI
+  connection: DB_URI,
 });
 
 function run(command) {
@@ -47,6 +47,7 @@ async function waitForDb() {
 (async () => {
   try {
     fs.appendFileSync(".env", "\nNODE_ENV=development\n");
+    run(`lerna link`);
     run(`docker-compose down --remove-orphans -v`);
     run(`docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d db`);
     shell.echo(`Waiting for db to be up and ready…`.blue);

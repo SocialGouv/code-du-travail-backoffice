@@ -9,7 +9,7 @@ class MigrationQuery {
 
     this.queries = sqlSource
       .split(/-+ DOWN -+/)
-      .map((s, i) => i === 0 ? s.replace(/-+ UP -+/, "") : s);
+      .map((s, i) => (i === 0 ? s.replace(/-+ UP -+/, "") : s));
   }
 
   up() {

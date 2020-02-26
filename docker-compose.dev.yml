@@ -8,6 +8,3 @@ services:
   postgrest:
     ports:
       - ${DEV_POSTGREST_PORT}:3000
-
-volumes:
-  postgre-data:

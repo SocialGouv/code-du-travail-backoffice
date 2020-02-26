@@ -1,33 +1,149 @@
 # Contributing
 
 We would love for you to contribute to the backoffice of [Code du travail numérique][link-cdtn] and
-help make it even better than it is today! As a contributor, here are the guidelines we would like
-you to follow:
+help make it even better than it is today!
 
-- [Contributing](#contributing)
-  - [Code Naming Guidelines](#code-naming-guidelines)
-    - [API-related Actions](#api-related-actions)
-    - [React Component Actions](#react-component-actions)
-  - [Commit Message Guidelines](#commit-message-guidelines)
-    - [Revert](#revert)
-    - [Type](#type)
-    - [Scope](#scope)
-    - [Subject](#subject)
+- [Contribute](#contribute)
+  - [Prerequisites](#prerequisites)
+  - [Get Started](#get-started)
+  - [Test](#test)
+  - [Recommended IDE Settings](#recommended-ide-settings)
+  - [VS Code](#vs-code)
+  - [Known Issues](#known-issues)
+    - [Docker Compose](#docker-compose)
+    - [Jest Watch](#jest-watch)
+- [Naming Guidelines](#naming-guidelines)
+  - [API-related Actions](#api-related-actions)
+  - [React Component Actions](#react-component-actions)
+- [Commit Message Guidelines](#commit-message-guidelines)
+  - [Revert](#revert)
+  - [Type](#type)
+  - [Scope](#scope)
+  - [Subject](#subject)
 
-## Code Naming Guidelines
+## Contribute
+
+### Prerequisites
+
+- Docker v19+
+- Docker Compose v1.25+
+- Node v12+
+- Yarn v1.22+
+
+You must be able to run `docker` and `docker-compose` [without `sudo`][link-docker-no-sudo].
+
+### Get Started
+
+```bash
+git clone https://github.com/SocialGouv/code-du-travail-backoffice.git
+cd code-du-travail-backoffice
+yarn
+yarn setup
+yarn dev
+```
+
+The website should now be available at: http://localhost:3100.
+
+5 sample users have been generated during setup:
+
+- Administrator:
+  - Email: `doris@sea.com`<br>
+    Mot de passe: `Azerty123`
+- Regional Administrator:
+  - Email: `deb@sea.com`<br>
+    Mot de passe: `Azerty123`
+- Contributors:
+  - Email: `nemo@sea.com`<br>
+    Mot de passe: `Azerty123`
+  - Email: `astrid@sea.com`<br>
+    Mot de passe: `Azerty123`
+  - Email: `marin@sea.com`<br>
+    Mot de passe: `Azerty123`
+
+### Test
+
+- All Tests: `yarn test`
+- Lint Tests: `yarn test:lint`
+- Type Tests: `yarn test:type`
+- Unit Tests: `yarn test:unit`
+- Unit Tests (watch): `yarn test:watch`
+- E2E Tests: `yarn test:e2e`
+
+### Recommended IDE Settings
+
+### VS Code
+
+`settings.json`
+
+```json
+{
+  "coverage-gutters.coverageReportFileName": "packages/contrib/coverage/**/index.html",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": true,
+  "editor.rulers": [100],
+  "eslint.enable": true
+}
+```
+
+`extensions.json`
+
+```json
+{
+  "recommendations": [
+    "alexkrechik.cucumberautocomplete",
+    "dbaeumer.vscode-eslint",
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "jpoissonnier.vscode-styled-components",
+    "mikestead.dotenv",
+    "ms-azuretools.vscode-docker",
+    "ryanluker.vscode-coverage-gutters"
+  ]
+}
+```
+
+### Known Issues
+
+#### Docker Compose
+
+Under Ubuntu, if you encounter the error `double free or corruption (out)`, the [current
+solution][link-issue-1] is to force-remove the related dependency:
+
+```bash
+dpkg -r --force-depends golang-docker-credential-helpers
+```
+
+#### Jest Watch
+
+Under Ubuntu, if you encounter the error
+`Error: ENOSPC: System limit for number of file watchers reached`, the [current
+solution][link-issue-2] is to increase the number of file system watchers:
+
+```bash
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+```
+
+---
+
+## Naming Guidelines
 
 ### API-related Actions
 
-This includes react components methods as well as redux actions, action types and sagas:
+This includes React components methods as well as Redux actions, action types and sagas:
 
 - Any `GET` call-related method should start with the verb **load**.
-- Any `POST` call-related method should start with the verb **create**.
+- Any `POST` call-related method should start with the verb **create**, or **add** if it targets a
+  foreign entity (i.e.: `addAnswerComment()`).
 - Any `PATCH` call-related method should start with the verb **update**.
-- Any `DELETE` call-related method should start with the verb **delete** (or **\_delete**).
+- Any `DELETE` call-related method should start with the verb **delete** (or **\_delete**), or
+  **remove** if it targets a foreign entity (i.e.: `removeAnswerComment()`).
 
 ### React Component Actions
 
-- Any method generating components should start with the verb **render**.
+- Any method returning a JSX value should start with the verb **render**.
+
+---
 
 ## Commit Message Guidelines
 
@@ -46,7 +162,7 @@ to read on GitHub as well as in various git tools.
 
 - `docs(changelog): update changelog to 1.12.5`
 - `fix(release): need to depend on latest rxjs and zone.js`
-- `ci: configure dependabot`
+- `ci(codecov): configure dependabot`
 
 Do not hesitate check [existing commits][link-cdtb-commits] to get a better understanding.
 
@@ -79,19 +195,7 @@ changelog generated from commit messages.
 The following is the list of supported scopes:
 
 - **api**
-- **db**
-- **admin**
-- **contrib**
-
-There are currently a few exceptions to the "use package name" rule:
-
-- **packaging**: Used for changes that change the npm package layout in all of our packages, e.g.
-  public path changes, package.json changes done to all packages, d.ts file/format changes, changes
-  to bundles, etc.
-- **changelog**: Used for updating the release notes in CHANGELOG.md
-- none/empty string: useful for `style`, `test` and `refactor` changes that are done across all
-  packages (e.g. `style: add missing semicolons`) and for docs changes that are not related to a
-  specific package (e.g. `docs: fix typo in tutorial`).
+- **app**
 
 ### Subject
 
@@ -104,4 +208,7 @@ The subject contains a succinct description of the change:
 ---
 
 [link-cdtb-commits]: https://github.com/SocialGouv/code-du-travail-backoffice/commits/master
-[link-cdtn]: https://codedutravail.num.social.gouv.fr
+[link-cdtn]: https://code.travail.gouv.fr
+[link-docker-no-sudo]: https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user
+[link-issue-1]: https://github.com/docker/docker-credential-helpers/issues/103#issuecomment-421822269
+[link-issue-2]: https://github.com/facebook/jest/issues/3254#issuecomment-297214395

@@ -39,8 +39,8 @@ try {
   const dockerDbContainerId = output.stdout.trim();
   run(`docker cp ${BACKUPS_DIRECTORY}/${MAIN_DB_FILENAME} ${dockerDbContainerId}:/ `);
 
-  let start = `docker-compose exec -T ${DB_SERVICE_NAME} pg_restore -ae --disable-triggers -d ${POSTGRES_DB} -j 8 -U ${POSTGRES_USER}`;
-  let end = `/${MAIN_DB_FILENAME}`;
+  const start = `docker-compose exec -T ${DB_SERVICE_NAME} pg_restore -ae --disable-triggers -d ${POSTGRES_DB} -j 8 -U ${POSTGRES_USER}`;
+  const end = `/${MAIN_DB_FILENAME}`;
   run(`${start} -N public ${end}`);
   run(`${start} -n public -t users_agreements ${end}`);
 

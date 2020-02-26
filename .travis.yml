@@ -14,11 +14,10 @@ jobs:
     - stage: Test
       name: Unit Tests
       install:
-        - yarn --frozen-lockfile
+        - yarn --frozen-lockfile --ignore-scripts
       script:
         - yarn test
-      after_script:
-        # Push tests coverage data to Codecov:
+      after_success:
         - npx codecov
 
     - stage: Test
@@ -27,15 +26,15 @@ jobs:
         - NODE_ENV=production
       services:
         - docker
+      install:
+        - yarn --frozen-lockfile --production=false --pure-lockfile
       before_script:
         # Copy default environment variables:
-        - cp ./.env.example ./.env
+        - yarn setup:env
         # Stop Travis out-of-the-box PostgreSQL services:
         - sudo service postgresql stop
-        # Give execution rights to production script (used by "ci:test:e2e"):
-        - sudo chmod +x ./scripts/prod/start.sh
         # Run production script:
-        - ./scripts/prod/start.sh
+        - yarn start:prod
       script:
         - yarn test:e2e
 

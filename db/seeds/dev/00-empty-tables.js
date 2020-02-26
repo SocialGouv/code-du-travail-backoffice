@@ -1,6 +1,6 @@
 const axios = require("axios");
-const postgrester = require("postgrester");
 const ora = require("ora");
+const postgrester = require("postgrester");
 
 global.axios = axios.create({
   baseURL: "https://contributions-api.codedutravail.fabrique.social.gouv.fr",

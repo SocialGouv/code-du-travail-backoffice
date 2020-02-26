@@ -14,8 +14,8 @@ const articlesIndex = AGREEMENTS_INDEX.reduce((prev, { id: agreementId }) => {
 
   const articles = flatArticles.children.map(article => article.data);
   const index = articles.map(({ id }) => ({
-    id,
     agreementId,
+    id,
   }));
 
   return [...prev, ...index];

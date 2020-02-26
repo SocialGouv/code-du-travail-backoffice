@@ -19,7 +19,7 @@ export default function(length) {
     NUMERALS_DISTINGUISHABLE,
     LOWER_ALPHA_DISTINGUISHABLE,
     UPPER_ALPHA_DISTINGUISHABLE,
-    SYMBOLS
+    SYMBOLS,
   ]
     .join("")
     .replace(/\W/, "\\$1");

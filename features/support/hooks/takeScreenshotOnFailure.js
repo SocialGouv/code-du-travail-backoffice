@@ -1,6 +1,6 @@
 const boxen = require("boxen");
-const { Status } = require("cucumber");
 const imgur = require("imgur");
+const { Status } = require("cucumber");
 
 imgur.setAPIUrl("https://api.imgur.com/3/");
 
@@ -14,12 +14,12 @@ module.exports = async (testCase, world) => {
     // https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pagescreenshotoptions
     const screenshotImageBase64 = await world.page.screenshot({
       encoding: "base64",
-      fullPage: true
+      fullPage: true,
     });
 
     // Upload it to imgur:
     const {
-      data: { link }
+      data: { link },
     } = await imgur.uploadBase64(screenshotImageBase64);
 
     const message =
@@ -28,14 +28,14 @@ module.exports = async (testCase, world) => {
       `Assertion: ${result.exception.message}\n` +
       `Screenshot: ${link}`;
 
-    console.log();
-    console.log(boxen(message, { padding: 1 }));
+    console.error();
+    console.error(boxen(message, { padding: 1 }));
   } catch (err) {
-    console.log(err);
-    console.log(`\n\nError: ${err.message}`);
+    console.error(err);
+    console.error(`\n\nError: ${err.message}`);
 
     if (err.response !== undefined) {
-      console.log(`Output:\n${JSON.stringify(err.response.data, null, 2)}`);
+      console.error(`Output:\n${JSON.stringify(err.response.data, null, 2)}`);
     }
   }
 };

@@ -1,0 +1,71 @@
+{
+  "root": true,
+  "extends": ["@socialgouv/eslint-config-strict", "prettier"],
+  "plugins": ["sort-requires", "prettier"],
+  "env": {
+    "browser": false,
+    "node": true
+  },
+  "rules": {
+    "no-console": ["error", { "allow": ["info", "error", "warn"] }],
+    "prettier/prettier": "error",
+    "sort-requires/sort-requires": "error"
+  },
+  "overrides": [
+    {
+      "files": ["packages/app/pages/**/*.js", "packages/app/src/**/*.js"],
+      "extends": ["@socialgouv/eslint-config-react-strict", "prettier"],
+      "env": {
+        "browser": true,
+        "node": true
+      },
+      "rules": {
+        "jest/no-disabled-tests": "off",
+        "react/jsx-sort-props": "error",
+        "react/prop-types": "off"
+      }
+    },
+    {
+      "files": ["packages/app/src/templates/**/*.js"],
+      "extends": ["@socialgouv/eslint-config-react-strict", "prettier"],
+      "env": {
+        "browser": true,
+        "node": true
+      },
+      "rules": {
+        "jest/no-disabled-tests": "off",
+        "react/jsx-sort-props": "error",
+        "react/prop-types": "error"
+      }
+    },
+    {
+      "files": ["jest.setup.js", "*.test.js"],
+      "env": {
+        "jest": true
+      }
+    },
+    {
+      "files": ["features/**/*.js"],
+      "extends": ["plugin:chai-expect/recommended"],
+      "plugins": ["chai-expect"],
+      "env": {
+        "browser": true,
+        "node": true
+      },
+      "rules": {
+        "jest/no-standalone-expect": "off",
+        "jest/valid-expect": "off"
+      }
+    },
+    {
+      "files": ["packages/app/src/**/*.test.js"],
+      "env": {
+        "jest": true
+      },
+      "globals": {
+        "testRender": false,
+        "waitFor": false
+      }
+    }
+  ]
+}

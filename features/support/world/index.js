@@ -1,7 +1,7 @@
-const { setDefaultTimeout, setWorldConstructor } = require("cucumber");
-const { expect } = require("chai");
 const dotenv = require("dotenv");
 const puppeteer = require("puppeteer");
+const { expect } = require("chai");
+const { setDefaultTimeout, setWorldConstructor } = require("cucumber");
 
 dotenv.config({ path: `${__dirname}/../../../.env` });
 const { CI, APP_DOMAIN, APP_PORT_PUBLIC, APP_SCHEME } = process.env;
@@ -15,9 +15,9 @@ class World {
   async start() {
     this.browser = await puppeteer.launch({
       args: ["--disable-setuid-sandbox", "--no-sandbox", `--window-size=1600,1024`],
-      defaultViewport: { width: 1280, height: 768 },
+      defaultViewport: { height: 768, width: 1280 },
       devtools: CI !== "true",
-      headless: CI === "true"
+      headless: CI === "true",
     });
     this.page = (await this.browser.pages())[0];
     this.extendPage();
@@ -34,21 +34,21 @@ class World {
       case "administrator":
         this.user = {
           email: "doris@sea.com",
-          password: "Azerty123"
+          password: "Azerty123",
         };
         break;
 
       case "contributor":
         this.user = {
           email: "nemo@sea.com",
-          password: "Azerty123"
+          password: "Azerty123",
         };
         break;
 
       case "regional administrator":
         this.user = {
           email: "deb@sea.com",
-          password: "Azerty123"
+          password: "Azerty123",
         };
         break;
     }
@@ -78,7 +78,7 @@ class World {
     const subtitleTexts = await this.page.evaluate(
       subtitleSelector =>
         [...document.querySelectorAll(subtitleSelector)].map(({ innerText }) => innerText),
-      subtitleSelector
+      subtitleSelector,
     );
 
     expect(subtitleTexts).to.include(text);
@@ -90,7 +90,7 @@ class World {
 
     const titleText = await this.page.evaluate(
       titleSelector => document.querySelector(titleSelector).innerText,
-      titleSelector
+      titleSelector,
     );
 
     expect(titleText).to.eql(text);

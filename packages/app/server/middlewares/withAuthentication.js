@@ -1,5 +1,5 @@
-const { USER_ROLE } = require("../constants");
 const reportError = require("../libs/reportError");
+const { USER_ROLE } = require("../constants");
 
 async function getMe(ctx) {
   const jwt = ctx.cookies.get("jwt");
