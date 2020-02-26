@@ -9,7 +9,7 @@ const API_PATH = "/answers_references";
 // TODO Integrate UPSERT in @socialgouv/postgrester.
 export default function* updateReferences({ meta: { data }, next }) {
   try {
-    yield customAxios().patch(API_PATH, data, {
+    yield customAxios().post(API_PATH, data, {
       headers: {
         Prefer: "resolution=merge-duplicates",
       },
