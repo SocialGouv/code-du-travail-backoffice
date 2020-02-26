@@ -42,8 +42,10 @@ export default (state = initialState, { payload, type }) => {
 
     /* MULTIPLE ANSWERS ―――――――――――――――― */
 
+    case actionTypes.ANSWERS_ADD_REFERENCES:
     case actionTypes.ANSWERS_CANCEL:
     case actionTypes.ANSWERS_LOAD:
+    case actionTypes.ANSWERS_REMOVE_REFERENCES:
     case actionTypes.ANSWERS_SET_FILTER:
     case actionTypes.ANSWERS_SET_FILTERS:
     case actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE:
@@ -54,13 +56,16 @@ export default (state = initialState, { payload, type }) => {
         isLoading: true,
       };
 
+    case actionTypes.ANSWERS_ADD_REFERENCES_FAILURE:
     case actionTypes.ANSWERS_CANCEL_FAILURE:
     case actionTypes.ANSWERS_LOAD_FAILURE:
+    case actionTypes.ANSWERS_REMOVE_REFERENCES_FAILURE:
     case actionTypes.ANSWERS_SET_FILTER_FAILURE:
     case actionTypes.ANSWERS_SET_FILTERS_FAILURE:
     case actionTypes.ANSWERS_TOGGLE_CHECK_FAILURE:
     case actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE_FAILURE:
     case actionTypes.ANSWERS_UPDATE_IS_PUBLISHED_REFERENCE_FAILURE:
+    case actionTypes.ANSWERS_UPDATE_REFERENCES_FAILURE:
     case actionTypes.ANSWERS_UPDATE_STATE_FAILURE:
       return {
         ...state,

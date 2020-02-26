@@ -1,11 +1,14 @@
 // @ts-check
-// TODO Check and describe types.
 
-const FuseJs = require("fuse.js");
+const htmlToText = require("html-to-text");
 const unistUtilFlatFilter = require("unist-util-flat-filter");
 
 const cache = require("../helpers/cache");
 const { LEGAL_REFERENCE_TYPE } = require("../constants");
+
+const INDEX = require("../../data/index.json");
+/** @type {*} */
+const LABOR_CODE_ARTICLES = require("../../data/labor-code.json");
 
 /**
  * @typedef {"PERIME" | "REMPLACE" | "VIGUEUR" | "VIGUEUR_ETEN" | "VIGUEUR_NON_ETEN"} AgreementState
@@ -59,53 +62,19 @@ const { LEGAL_REFERENCE_TYPE } = require("../constants");
  * @property {string=} historique - Article history note.
  */
 
-/**
- * @typedef {object} AgreementIndex
- * @property {boolean=} active
- * @property {string=} date_publi - ISO Date.
- * @property {number=} effectif
- * @property {string=} etat
- * @property {string} id - KALI Agreement `id`.
- * @property {number=} mtime
- * @property {string} nature
- * @property {number} num - IDCC.
- * @property {string} shortTitle
- * @property {string=} texte_de_base
- * @property {string} title
- * @property {string=} url
- */
-
 const CACHE_TTL = 4 * 60 * 60; // => 4h
-/** @type {AgreementIndex[]} */
-const AGREEMENTS_INDEX = require("@socialgouv/kali-data/data/index.json");
-
-/**
- * Get an agreement KALI id from its IDCC.
- *
- * @param {string} idcc
- *
- * @returns {string}
- */
-function getAgreementId(idcc) {
-  const maybeAgreementIndex = AGREEMENTS_INDEX.find(({ num }) => num === Number(idcc));
-
-  if (maybeAgreementIndex === undefined) {
-    throw new Error(`There is no agreement for this IDCC (${idcc}).`);
-  }
-
-  return maybeAgreementIndex.id;
-}
 
 /**
  * Get an agreement raw data from dependencies or cache.
  *
- * @param {string} idcc
+ * @param {string} articleId
  *
  * @returns {AgreementArticleData[]}
+ *
+ * TODO Dry that with getAgreementArticles().
  */
-function getAgreement(idcc) {
-  const id = getAgreementId(idcc);
-  const cacheKey = `${LEGAL_REFERENCE_TYPE.AGREEMENT}-${id}`;
+function getAgreement(articleId) {
+  const cacheKey = `${LEGAL_REFERENCE_TYPE.AGREEMENT}-${articleId}`;
 
   // Use cache instead of require if it exists:
   const maybeCachedRawData = cache.get(cacheKey);
@@ -114,7 +83,7 @@ function getAgreement(idcc) {
   }
 
   /** @type {Agreement} */
-  const agreement = require(`@socialgouv/kali-data/data/${id}.json`);
+  const agreement = require(`@socialgouv/kali-data/data/${articleId}.json`);
 
   if (agreement.children.length === 0) {
     cache.set(cacheKey, [], CACHE_TTL);
@@ -137,32 +106,37 @@ function getAgreement(idcc) {
 }
 
 /**
- * @param {string} idcc
- * @param {string} query
+ * @param {string} articleId
  *
- * @returns {AgreementArticleData[]}
+ * @returns {string}
  */
-function getAgreementArticles(idcc, query) {
-  const rawData = getAgreement(idcc);
+function getArticleContent(articleId) {
+  let maybeArticle;
 
-  /** @type {import("fuse.js").FuseOptions<AgreementArticleData>} */
-  const fuseJsOptions = {
-    keys: [
-      { name: "num", weight: 0.5 },
-      { name: "surtitre", weight: 0.5 },
-      { name: "content", weight: 0.5 },
-    ],
-  };
+  if (articleId.startsWith("LEGIARTI")) {
+    const articles = LABOR_CODE_ARTICLES;
+    maybeArticle = articles.find(({ id }) => id === articleId);
+    if (typeof maybeArticle === "undefined") {
+      throw new Error(`This article "${articleId}" could not be found in Labor Code.`);
+    }
+  } else {
+    const maybeIndex = INDEX.find(({ id }) => id === articleId);
+    if (typeof maybeIndex === "undefined") {
+      throw new Error(`This article "${articleId}" is not indexed.`);
+    }
 
-  const fuseJs = new FuseJs(rawData, fuseJsOptions);
-  /** @type {*} */
-  const results = fuseJs.search(query);
-  /** @type {AgreementArticleData[]} */
-  const filteredData = results;
+    const { agreementId } = maybeIndex;
+    const articles = getAgreement(agreementId);
+    maybeArticle = articles.find(({ id }) => id === articleId);
+    if (typeof maybeArticle === "undefined") {
+      throw new Error(`This article "${articleId}" could not be found in "${agreementId}".`);
+    }
+  }
 
-  const data = filteredData.slice(0, 10);
-
-  return data;
+  return htmlToText
+    .fromString(maybeArticle.content, { wordwrap: 60 })
+    .trim()
+    .replace(/\n{3,}/g, "\n\n");
 }
 
-module.exports = getAgreementArticles;
+module.exports = getArticleContent;

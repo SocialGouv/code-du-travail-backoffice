@@ -4,8 +4,8 @@ import ReactTooltip from "react-tooltip";
 
 const Container = styled.div`
   background-color: var(--color-label-background);
-  border: solid 1px var(--color-black-leather-jacket);
-  border-radius: 1rem;
+  border: solid 1px var(--color-border);
+  border-radius: 0.25rem;
   cursor: help;
   font-size: 0.8rem;
   font-weight: 600;
@@ -27,9 +27,13 @@ const Tooltip = styled(ReactTooltip)`
 `;
 
 const Idcc = ({ code, name, ...props }) => (
-  <Container data-tip={code === undefined ? "Code du travail" : name} {...props}>
+  <Container
+    data-for={`idcc-${code}`}
+    data-tip={code === undefined ? "Code du travail" : name}
+    {...props}
+  >
     {code === undefined ? "CDT" : `IDCC: ${code}`}
-    <Tooltip />
+    <Tooltip id={`idcc-${code}`} />
   </Container>
 );
 

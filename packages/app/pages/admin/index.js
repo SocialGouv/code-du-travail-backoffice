@@ -351,21 +351,6 @@ export default class AdminIndexPage extends React.Component {
     return <StatsTable data={data} isPercentage={isPercentage} sortable={false} />;
   }
 
-  getLocationsStats() {
-    const { isCalculating, isPercentage, locationsStats } = this.state;
-    const data = locationsStats.map(({ locationName, totals }) =>
-      this.generateDataRow(locationName, totals, isCalculating),
-    );
-
-    return (
-      <StatsTable
-        data={data}
-        defaultSorted={[{ desc: false, id: "published" }]}
-        isPercentage={isPercentage}
-      />
-    );
-  }
-
   getAgreementsStats(isNational = false) {
     const { agreementsStats, isCalculating, isPercentage } = this.state;
     const data = agreementsStats
@@ -396,9 +381,6 @@ export default class AdminIndexPage extends React.Component {
 
           <Subtitle isFirst>Global</Subtitle>
           {isLoading ? <p>Calcul en cours…</p> : this.getGlobalStats()}
-
-          <Subtitle>Par unité régionale</Subtitle>
-          {isLoading ? <p>Calcul en cours…</p> : this.getLocationsStats()}
 
           <Subtitle>Par convention collective</Subtitle>
           <ContentTitle isFirst>Conventions nationales</ContentTitle>

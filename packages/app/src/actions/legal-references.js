@@ -1,10 +1,10 @@
 import actionTypes from "./types";
 
-const load = (type, query, idcc) => ({
+const load = (category, query, idcc) => ({
   meta: {
+    category,
     idcc,
     query,
-    type,
   },
   type: actionTypes.LEGAL_REFERENCES_LOAD,
 });

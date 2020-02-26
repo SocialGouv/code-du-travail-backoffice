@@ -3,8 +3,8 @@
 exports[`elements/<Idcc /> should pass 1`] = `
 .emotion-0 {
   background-color: var(--color-label-background);
-  border: solid 1px var(--color-black-leather-jacket);
-  border-radius: 1rem;
+  border: solid 1px var(--color-border);
+  border-radius: 0.25rem;
   cursor: help;
   font-size: 0.8rem;
   font-weight: 600;
@@ -24,12 +24,14 @@ exports[`elements/<Idcc /> should pass 1`] = `
 
 <div
   className="emotion-0 emotion-1"
+  data-for="idcc-undefined"
   data-tip="Code du travail"
 >
   CDT
   <div
     className="__react_component_tooltip place-top type-dark"
     data-id="tooltip"
+    id="idcc-undefined"
   />
 </div>
 `;

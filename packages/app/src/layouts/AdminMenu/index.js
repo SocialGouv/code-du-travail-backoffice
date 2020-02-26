@@ -125,6 +125,16 @@ export default class AdminMenu extends React.PureComponent {
           Thèmes
         </Link>
 
+        <Subtitle>Scripts</Subtitle>
+        <Link
+          onClick={() => this.goTo("/legal-references-migration")}
+          onKeyPress={() => this.goTo("/legal-references-migration")}
+          role="link"
+          tabIndex="0"
+        >
+          Migrer les références
+        </Link>
+
         <Subtitle>Maintenance</Subtitle>
         <Link
           onClick={() => this.goTo("/logs")}

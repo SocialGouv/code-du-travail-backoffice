@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
 
 export const Container = styled.div`
+  .react-tags {
+    position: relative;
+  }
+
   .react-tags__selected > button {
     border: solid 1px var(--color-border);
   }
@@ -26,6 +30,8 @@ export const Container = styled.div`
   .react-tags__suggestions > ul {
     list-style: none;
     padding: 0;
+    position: absolute;
+    z-index: 2;
 
     li {
       background-color: var(--color-alice-blue);
@@ -33,6 +39,10 @@ export const Container = styled.div`
       border-top: 0;
       cursor: pointer;
       padding: 0.25rem 0.5rem;
+
+      &:hover {
+        background-color: var(--color-periwinkle);
+      }
 
       &.is-active {
         background-color: var(--color-cadet-grey);

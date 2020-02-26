@@ -11,6 +11,7 @@ import setFilters from "./setFilters";
 import toggleCheck from "./toggleCheck";
 import updateGenericReference from "./updateGenericReference";
 import updateIsPublished from "./updateIsPublished";
+import updateReferences from "./updateReferences";
 import updateState from "./updateState";
 
 export default [
@@ -27,5 +28,6 @@ export default [
   takeLatest(actionTypes.ANSWERS_TOGGLE_CHECK, toggleCheck),
   takeLatest(actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE, updateGenericReference),
   takeLatest(actionTypes.ANSWERS_UPDATE_IS_PUBLISHED_REFERENCE, updateIsPublished),
+  takeLatest(actionTypes.ANSWERS_UPDATE_REFERENCES, updateReferences),
   takeLatest(actionTypes.ANSWERS_UPDATE_STATE, updateState),
 ];

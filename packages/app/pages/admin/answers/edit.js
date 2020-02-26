@@ -6,7 +6,6 @@ import { Flex } from "rebass";
 
 import * as actions from "../../../src/actions";
 import Comment from "../../../src/components/Comment";
-import LawReferences from "../../../src/components/LawReferences";
 import LegalReferences from "../../../src/components/LegalReferences";
 import Reference from "../../../src/components/Reference";
 import {
@@ -41,7 +40,7 @@ const Container = styled(Flex)`
 const Content = styled(Flex)`
   flex-grow: 1;
   overflow-y: scroll;
-  padding: 1rem;
+  padding: 1rem 1rem 12rem;
 `;
 const Sidebar = styled(Flex)`
   display: ${({ isHidden }) => (isHidden ? "none" : "flex")};
@@ -152,7 +151,7 @@ export class AdminAnwsersEditPage extends React.Component {
 
     this.isGeneric = Boolean(props.isGeneric);
     this.updateAnswerValue = debounce(this._updateAnswerValue.bind(this), 500);
-    this.loadLegalReference = debounce(this._loadLegalReference.bind(this), 250);
+    this.loadLegalReferences = debounce(this._loadLegalReferences.bind(this), 250);
   }
 
   componentDidMount() {
@@ -352,29 +351,29 @@ export class AdminAnwsersEditPage extends React.Component {
     this.props.dispatch(actions.comments._delete([id], this.props.id));
   }
 
-  _loadLegalReference(type, query) {
+  _loadLegalReferences(category, query) {
     const {
       answers,
       legalReferences: { isLoading },
     } = this.props;
-    if (isLoading || query.trim().length === 0) return;
+    if (isLoading) return;
 
-    if (type === LEGAL_REFERENCE_TYPE.AGREEMENT) {
+    if (category === LEGAL_REFERENCE_TYPE.AGREEMENT) {
       const { agreement } = answers.data;
 
-      this.props.dispatch(actions.legalReferences.load(type, query, agreement.idcc));
+      this.props.dispatch(actions.legalReferences.load(category, query, agreement.idcc));
 
       return;
     }
 
-    this.props.dispatch(actions.legalReferences.load(type, query));
+    this.props.dispatch(actions.legalReferences.load(category, query));
   }
 
-  addReference(type, { id: dilaId }) {
+  addReference(category, { id: dilaId }) {
     const { id: answerId } = this.props;
     const reference = {
       answer_id: answerId,
-      category: type,
+      category,
       dila_id: dilaId,
       value: dilaId,
     };
@@ -383,7 +382,9 @@ export class AdminAnwsersEditPage extends React.Component {
   }
 
   removeReference(answerReferenceId) {
-    this.props.dispatch(actions.legalReferences.delete([answerReferenceId], this.load.bind(this)));
+    this.props.dispatch(
+      actions.answers.removeReferences([answerReferenceId], this.load.bind(this)),
+    );
   }
 
   renderReferences(category, isDisabled) {
@@ -500,61 +501,43 @@ export class AdminAnwsersEditPage extends React.Component {
                 <Flex flexDirection="column">
                   <Strong isFirst>Code du travail :</Strong>
                   <LegalReferences
+                    category={LEGAL_REFERENCE_TYPE.LABOR_CODE}
                     data={
-                      legalReferences.type === LEGAL_REFERENCE_TYPE.LABOR_CODE
+                      legalReferences.category === LEGAL_REFERENCE_TYPE.LABOR_CODE
                         ? legalReferences.data
                         : []
                     }
-                    label="D1234, L1234, R1234…"
                     onAdd={data => this.addReference(LEGAL_REFERENCE_TYPE.LABOR_CODE, data)}
                     onInput={query =>
-                      this.loadLegalReference(LEGAL_REFERENCE_TYPE.LABOR_CODE, query)
+                      this.loadLegalReferences(LEGAL_REFERENCE_TYPE.LABOR_CODE, query)
                     }
-                    onRemove={data => this.removeReference(LEGAL_REFERENCE_TYPE.LABOR_CODE, data)}
+                    onRemove={this.removeReference.bind(this)}
+                    references={this.props.answers.data.references.filter(
+                      ({ category }) => category === LEGAL_REFERENCE_TYPE.LABOR_CODE,
+                    )}
                   />
                 </Flex>
                 <Flex flexDirection="column">
                   <Strong>Convention collective :</Strong>
                   <LegalReferences
+                    category={LEGAL_REFERENCE_TYPE.AGREEMENT}
                     data={
-                      legalReferences.type === LEGAL_REFERENCE_TYPE.AGREEMENT
+                      legalReferences.category === LEGAL_REFERENCE_TYPE.AGREEMENT
                         ? legalReferences.data
                         : []
                     }
                     onAdd={data => this.addReference(LEGAL_REFERENCE_TYPE.AGREEMENT, data)}
                     onInput={query =>
-                      this.loadLegalReference(LEGAL_REFERENCE_TYPE.AGREEMENT, query)
+                      this.loadLegalReferences(LEGAL_REFERENCE_TYPE.AGREEMENT, query)
                     }
-                    onRemove={data => this.removeReference(LEGAL_REFERENCE_TYPE.AGREEMENT, data)}
-                  />
-                </Flex>
-                <Hr />
-
-                <Subtitle isFirst>Références juridiques</Subtitle>
-                <Flex flexDirection="column">
-                  <Strong isFirst>Articles du Code du travail</Strong>
-                  <LawReferences
-                    isDisabled={this.state.isUpdating}
-                    onAdd={this.createReference.bind(this)}
-                    onRemove={this.deleteReference.bind(this)}
+                    onRemove={this.removeReference.bind(this)}
                     references={this.props.answers.data.references.filter(
-                      ({ category }) => category === "labor_code",
+                      ({ category }) => category === LEGAL_REFERENCE_TYPE.AGREEMENT,
                     )}
                   />
                 </Flex>
-                <Form onSubmit={event => this.submitReference(event, "agreement")}>
-                  <Strong>Articles de la Convention collective</Strong>
-                  <Input
-                    disabled={this.state.isUpdating}
-                    key={this.state.agreementReferenceValueInputKey}
-                    placeholder="Ex: Article 7, Texte sur les salaires de 1984…"
-                    ref={node => (this.$agreementReferenceValueInput = node)}
-                  />
-                  <Flex flexWrap="wrap">{this.renderReferences("agreement")}</Flex>
-                  <FormHiddenSubmit type="submit" />
-                </Form>
                 <Form onSubmit={this.submitReference.bind(this)}>
-                  <Strong>Autres références juridiques</Strong>
+                  <Strong>Autres :</Strong>
                   <Input
                     disabled={this.state.isUpdating}
                     key={this.state.otherReferenceValueInputKey}
@@ -567,6 +550,7 @@ export class AdminAnwsersEditPage extends React.Component {
                     key={this.state.otherReferenceUrlInputKey}
                     placeholder="URL (ex: https://www.legifrance.gouv.fr/…)"
                     ref={node => (this.$otherReferenceUrlInput = node)}
+                    style={{ marginTop: "0.5rem" }}
                   />
                   <Flex flexWrap="wrap">{this.renderReferences(null)}</Flex>
                   <FormHiddenSubmit type="submit" />
@@ -605,7 +589,15 @@ export class AdminAnwsersEditPage extends React.Component {
 
                 <Subtitle>Références juridiques</Subtitle>
                 <Strong>Convention collective</Strong>
-                <Flex flexWrap="wrap">{this.renderReferences("agreement", true)}</Flex>
+                <Flex flexWrap="wrap">
+                  <LegalReferences
+                    category={LEGAL_REFERENCE_TYPE.LABOR_CODE}
+                    isReadOnly
+                    references={this.props.answers.data.references.filter(
+                      ({ category }) => category === LEGAL_REFERENCE_TYPE.AGREEMENT,
+                    )}
+                  />
+                </Flex>
                 <Strong>Code du travail</Strong>
                 <Flex flexWrap="wrap">{this.renderReferences("labor_code", true)}</Flex>
                 <Strong>Autres</Strong>

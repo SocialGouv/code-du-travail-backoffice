@@ -10,12 +10,17 @@ function route(req, res) {
   try {
     switch (true) {
       case /^\/legal-references($|\?)/.test(req.url) && req.method === "OPTIONS":
+      case /^\/legal-references\/[0-9a-z]+/i.test(req.url) && req.method === "OPTIONS":
         res.writeHead(200, COMMON_HEADERS);
         res.end();
         return true;
 
       case /^\/legal-references($|\?)/.test(req.url) && req.method === "GET":
         LegalReference.index(req, res);
+        return true;
+
+      case /^\/legal-references\/[0-9a-z]+/i.test(req.url) && req.method === "GET":
+        LegalReference.get(req, res);
         return true;
 
       default:

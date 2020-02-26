@@ -1,11 +1,11 @@
 import { actionTypes } from "../actions/index";
 
 const initialState = {
+  category: null,
   data: [],
   error: null,
   isLoading: false,
   query: "",
-  type: null,
 };
 
 export default (state = initialState, { payload, type }) => {
@@ -21,20 +21,20 @@ export default (state = initialState, { payload, type }) => {
     case actionTypes.LEGAL_REFERENCES_LOAD_FAILURE:
       return {
         ...state,
+        category: null,
         data: [],
         error: payload.message,
         isLoading: false,
-        type: null,
       };
 
     case actionTypes.LEGAL_REFERENCES_LOAD_SUCCESS:
       return {
         ...state,
+        category: payload.category,
         data: payload.data,
         error: null,
         isLoading: false,
         query: payload.query,
-        type: payload.type,
       };
 
     default:

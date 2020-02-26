@@ -95,7 +95,6 @@ const Button = ({
       {...props}
     >
       <Icon color={COLOR[color].value} icon={icon} />
-      {children}
     </Container>
   );
 };
