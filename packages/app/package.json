@@ -70,7 +70,7 @@
     "react-test-renderer": "16.13.0",
     "rimraf": "3.0.2",
     "snapshot-diff": "0.7.0",
-    "uuid": "3.4.0",
+    "uuid": "7.0.1",
     "zxcvbn": "4.4.2"
   }
 }
