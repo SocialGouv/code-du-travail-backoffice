@@ -24,11 +24,6 @@ export const ANSWER_STATE_OPTIONS = ANSWER_STATES.map(state => ({
   value: state,
 }));
 
-export const ANSWER_REFERENCE_CATEGORY = {
-  AGREEMENT: "agreement",
-  LABOR_CODE: "labor_code",
-};
-
 export const AREA_CATEGORY_LABEL = {
   department: "Département",
   overseas_collectivity: "Collectivité d'Outre-Mer",
@@ -36,7 +31,7 @@ export const AREA_CATEGORY_LABEL = {
   sui_generis_collectivity: "Collectivité Sui Generis",
 };
 
-export const LEGAL_REFERENCE_TYPE = {
+export const LEGAL_REFERENCE_CATEGORY = {
   AGREEMENT: "agreement",
   LABOR_CODE: "labor_code",
 };

@@ -13270,18 +13270,6 @@ unique-string@^1.0.0:
   dependencies:
     crypto-random-string "^1.0.0"
 
-unist-util-flat-filter@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/unist-util-flat-filter/-/unist-util-flat-filter-1.0.0.tgz#44972de80c889462c444da8878f5576568a113c6"
-  integrity sha512-zjTmbMgyL1V7iUCnFaGLms9HtGbqK4d3YINqzu+wiMbau93GdiDGtJiB8lMhAyxAaxIAK2rOCeBCldF0FUreKQ==
-  dependencies:
-    unist-util-is "^4.0.0"
-
-unist-util-is@^4.0.0:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/unist-util-is/-/unist-util-is-4.0.2.tgz#c7d1341188aa9ce5b3cff538958de9895f14a5de"
-  integrity sha512-Ofx8uf6haexJwI1gxWMGg6I/dLnF2yE+KibhD3/diOqY2TinLcqHXCV6OI5gFVn3xQqDH+u0M625pfKwIwgBKQ==
-
 universal-cookie@^4.0.2:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/universal-cookie/-/universal-cookie-4.0.3.tgz#c2fa59127260e6ad21ef3e0cdd66ad453cbc41f6"

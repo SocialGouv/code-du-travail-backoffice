@@ -4,7 +4,7 @@ const DumDum = require("dumdum");
 
 const dumdum = DumDum.create({ locale: "fr" });
 
-// const ANSWER_REFERENCE_CATEGORY = [null, "agreement", "labor_code"];
+// const LEGAL_REFERENCE_CATEGORY = [null, "agreement", "labor_code"];
 // const LABOR_LAW_ARTICLES_LENGTH = LABOR_LAW_ARTICLES.length;
 
 // function getRandomAnswerReference(answerId, category) {
@@ -14,21 +14,21 @@ const dumdum = DumDum.create({ locale: "fr" });
 //   };
 
 //   switch (category) {
-//     case ANSWER_REFERENCE_CATEGORY[0]:
+//     case LEGAL_REFERENCE_CATEGORY[0]:
 //       return {
 //         ...answerReference,
 //         url: Math.random() < 0.5 ? "https://example.com" : null,
 //         value: dumdum.text([12, 120]),
 //       };
 
-//     case ANSWER_REFERENCE_CATEGORY[1]:
+//     case LEGAL_REFERENCE_CATEGORY[1]:
 //       return {
 //         ...answerReference,
 //         url: null,
 //         value: `Article ${Math.ceil(Math.random() * 99)}`,
 //       };
 
-//     case ANSWER_REFERENCE_CATEGORY[2]:
+//     case LEGAL_REFERENCE_CATEGORY[2]:
 //       return {
 //         ...answerReference,
 //         dila_id: LABOR_LAW_ARTICLES[Math.floor(Math.random() * LABOR_LAW_ARTICLES_LENGTH)].id,
@@ -44,7 +44,7 @@ const dumdum = DumDum.create({ locale: "fr" });
 
 //   while (i-- > 0) {
 //     const categoryIndex = Math.floor(Math.random() * 3);
-//     const category = ANSWER_REFERENCE_CATEGORY[categoryIndex];
+//     const category = LEGAL_REFERENCE_CATEGORY[categoryIndex];
 
 //     answerReferences.push(getRandomAnswerReference(answerId, category));
 //   }

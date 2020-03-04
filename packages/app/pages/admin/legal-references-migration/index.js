@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
+import * as R from "ramda";
 import React from "react";
 import { connect } from "react-redux";
 import { Flex } from "rebass";
 
 import * as actions from "../../../src/actions";
 import LegalReferences from "../../../src/components/LegalReferences";
-import { ANSWER_REFERENCE_CATEGORY, LEGAL_REFERENCE_TYPE } from "../../../src/constants";
+import { LEGAL_REFERENCE_CATEGORY } from "../../../src/constants";
 import Button from "../../../src/elements/Button";
 import Hr from "../../../src/elements/Hr";
 import Idcc from "../../../src/elements/Idcc";
@@ -22,7 +23,7 @@ const AnswerTitle = styled(Flex)`
   margin: 1rem 0 0.5rem;
 `;
 
-const ANSWER_REFERENCE_CATEGORIES = Object.values(ANSWER_REFERENCE_CATEGORY);
+const ANSWER_REFERENCE_CATEGORIES = Object.values(LEGAL_REFERENCE_CATEGORY);
 
 class LegalReferencesMigrationIndex extends React.Component {
   constructor(props) {
@@ -30,12 +31,10 @@ class LegalReferencesMigrationIndex extends React.Component {
 
     this.state = {
       answersWithReferences: [],
-      countMigrable: 0,
-      countTotal: 0,
       currentReferenceId: null,
       isLoading: true,
-      loadingIdcc: "",
-      loadingIndex: "",
+      loadingIdcc: null,
+      loadingIndex: null,
     };
   }
 
@@ -48,19 +47,45 @@ class LegalReferencesMigrationIndex extends React.Component {
     const answersWithReferences = [];
     const request = customPostgrester();
 
-    const { data: locationsAgreements } = await request.get("/locations_agreements");
-    const locationsAgreementIds = locationsAgreements.map(({ agreement_id }) => agreement_id);
+    const { data: allLocationsAgreements } = await request.get("/locations_agreements");
+    const allLocationsAgreementIds = allLocationsAgreements.map(({ agreement_id }) => agreement_id);
+    const { data: allAgreements } = await customPostgrester()
+      .in("id", allLocationsAgreementIds)
+      .orderBy("idcc")
+      .get(`/agreements`);
+    const filteredAgreements = [];
+    for (const agreement of allAgreements) {
+      this.setState({
+        loadingIdcc: agreement.idcc,
+      });
+
+      if (await this.isReferenced(agreement)) {
+        filteredAgreements.push(agreement);
+      }
+    }
+    const filteredAgreementIds = filteredAgreements.map(({ id }) => id);
     const { data: answers } = await request
       .select("*")
       .select("agreement(*)")
       .select("question(*)")
-      .in("agreement_id", locationsAgreementIds)
+      .in("agreement_id", filteredAgreementIds)
       .get("/answers");
 
-    for (const answer of answers) {
+    const sortedAnswers = R.sortWith([
+      R.ascend(R.prop("agreementIdcc")),
+      R.ascend(R.prop("questionIndex")),
+    ])(
+      answers.map(answer => ({
+        ...answer,
+        agreementIdcc: answer.agreement.idcc,
+        questionIndex: answer.question.index,
+      })),
+    );
+
+    for (const answer of sortedAnswers) {
       this.setState({
-        loadingIdcc: answer.agreement.idcc,
-        loadingIndex: answer.question.index,
+        loadingIdcc: answer.agreementIdcc,
+        loadingIndex: answer.questionIndex,
       });
 
       const { data: answerReferences } = await request
@@ -71,33 +96,15 @@ class LegalReferencesMigrationIndex extends React.Component {
         .get("/answers_references");
 
       if (answerReferences.length > 0) {
-        if (!(await this.isReferenced(answer.agreement.idcc))) {
-          this.setState({
-            countTotal: this.state.countTotal + answerReferences.length,
-          });
-
-          continue;
-        }
-
-        this.setState({
-          countMigrable: this.state.countMigrable + answerReferences.length,
-          countTotal: this.state.countTotal + answerReferences.length,
-        });
-
-        if (!this.state.isLoading) continue;
-
         let i = answerReferences.length;
         while (--i >= 0) {
           const { category, value } = answerReferences[i];
 
           let foundReferences;
-          if (category === LEGAL_REFERENCE_TYPE.AGREEMENT) {
-            const extracts = /(\d+\.?)+/.exec(value);
-            if (extracts === null) continue;
-
+          if (category === LEGAL_REFERENCE_CATEGORY.AGREEMENT) {
             foundReferences = await this.findReferences(
               category,
-              extracts[0],
+              value.replace(/article\s+?/i, ""),
               answer.agreement.idcc,
             );
           } else {
@@ -113,9 +120,7 @@ class LegalReferencesMigrationIndex extends React.Component {
           ...answer,
           references: answerReferences,
         });
-      }
 
-      if (answersWithReferences.length === 1) {
         this.setState({
           answersWithReferences,
           isLoading: false,
@@ -126,10 +131,10 @@ class LegalReferencesMigrationIndex extends React.Component {
     }
   }
 
-  async isReferenced(idcc) {
+  async isReferenced({ idcc }) {
     try {
       const { data } = await customAxios().get(
-        `/legal-references?idcc=${idcc}&category=${LEGAL_REFERENCE_TYPE.AGREEMENT}&query=1`,
+        `/legal-references?idcc=${idcc}&category=${LEGAL_REFERENCE_CATEGORY.AGREEMENT}&query=1`,
       );
 
       return data.length !== 0;
@@ -159,7 +164,7 @@ class LegalReferencesMigrationIndex extends React.Component {
 
     this.setState({ currentReferenceId: id });
 
-    if (category === LEGAL_REFERENCE_TYPE.AGREEMENT) {
+    if (category === LEGAL_REFERENCE_CATEGORY.AGREEMENT) {
       this.props.dispatch(actions.legalReferences.load(category, query, idcc));
 
       return;
@@ -249,13 +254,14 @@ class LegalReferencesMigrationIndex extends React.Component {
               disabled={dila_id === null}
               hasGroup
               onClick={() => this.skipReference(answersWithReferencesIndex, id)}
-              style={{ marginLeft: "1rem" }}
+              style={{ marginLeft: "1rem", minWidth: "5.75rem" }}
             >
               PASSER
             </Button>
             <Button
               disabled={dila_id === null}
               onClick={() => this.migrateReference(answersWithReferencesIndex, id)}
+              style={{ minWidth: "5.75rem" }}
             >
               MIGRER
             </Button>
@@ -287,14 +293,18 @@ class LegalReferencesMigrationIndex extends React.Component {
   }
 
   render() {
-    const { countMigrable, countTotal, isLoading, loadingIdcc, loadingIndex } = this.state;
+    const { isLoading, loadingIdcc, loadingIndex } = this.state;
 
     if (isLoading) {
       return (
         <AdminMainLayout>
           <Container>
-            <Title>{`Migrations des références juriques (${countMigrable} / ${countTotal})`}</Title>
-            <div>{`Vérification en cours des références de la réponse à la question n° ${loadingIndex} pour la convention n° ${loadingIdcc}…`}</div>
+            <Title>Migrations des références juriques</Title>
+            <div>
+              {loadingIndex === null
+                ? `Vérification en cours de la convention n° ${loadingIdcc}…`
+                : `Vérification en cours des références de la réponse à la question n° ${loadingIndex} pour la convention n° ${loadingIdcc}…`}
+            </div>
           </Container>
         </AdminMainLayout>
       );
@@ -303,7 +313,7 @@ class LegalReferencesMigrationIndex extends React.Component {
     return (
       <AdminMainLayout>
         <Container>
-          <Title>{`Migrations des références juriques (${countMigrable} / ${countTotal})`}</Title>
+          <Title>Migrations des références juriques</Title>
           {this.renderAnswersWithReferences()}
         </Container>
       </AdminMainLayout>
