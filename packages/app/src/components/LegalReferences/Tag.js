@@ -1,6 +1,5 @@
 import React from "react";
 
-import { LEGAL_REFERENCE_CATEGORY } from "../../constants";
 import customAxios from "../../libs/customAxios";
 import { Button, Container, Index, Label, Tooltip } from "./Tag.style";
 
@@ -45,17 +44,16 @@ export default class Tag extends React.PureComponent {
   }
 
   renderLabel() {
-    const { category, value } = this.props;
+    const { value } = this.props;
     const { index, title } = this.state;
+    const label = title !== null ? title : value;
     const parts = [];
 
     if (index !== null) {
       parts.push(<Index key="index">{index}</Index>);
     }
 
-    if (category === LEGAL_REFERENCE_CATEGORY.AGREEMENT) {
-      const label = title !== null ? title : value;
-
+    if (!value.startsWith("LEGI")) {
       parts.push(<Label key="label">{label}</Label>);
     }
 

@@ -510,7 +510,7 @@ export class AdminAnwsersEditPage extends React.Component {
                 </Flex>
                 <Hr />
 
-                <Subtitle isFirst>Références juridiques [BETA]</Subtitle>
+                <Subtitle isFirst>Références juridiques</Subtitle>
                 <Flex flexDirection="column">
                   <Strong isFirst>Code du travail :</Strong>
                   <LegalReferences
@@ -525,7 +525,7 @@ export class AdminAnwsersEditPage extends React.Component {
                       this.loadLegalReferences(LEGAL_REFERENCE_CATEGORY.LABOR_CODE, query)
                     }
                     onRemove={this.removeReference.bind(this)}
-                    references={agreementReferences}
+                    references={laborCodeReferences}
                   />
                 </Flex>
                 <Flex flexDirection="column">
@@ -542,7 +542,7 @@ export class AdminAnwsersEditPage extends React.Component {
                       this.loadLegalReferences(LEGAL_REFERENCE_CATEGORY.AGREEMENT, query)
                     }
                     onRemove={this.removeReference.bind(this)}
-                    references={laborCodeReferences}
+                    references={agreementReferences}
                   />
                 </Flex>
                 <Form onSubmit={this.submitReference.bind(this)}>
@@ -561,7 +561,7 @@ export class AdminAnwsersEditPage extends React.Component {
                     ref={node => (this.$otherReferenceUrlInput = node)}
                     style={{ marginTop: "0.5rem" }}
                   />
-                  <Flex flexWrap="wrap">{this.renderReferences(null)}</Flex>
+                  <Flex flexWrap="wrap">{$otherReferences}</Flex>
                   <FormHiddenSubmit type="submit" />
                 </Form>
                 <Hr />

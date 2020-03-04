@@ -9,7 +9,7 @@ const htmlToText = require("html-to-text");
  */
 function convertHtmlToPlainText(source) {
   return htmlToText
-    .fromString(source, { wordwrap: 60 })
+    .fromString(source.replace(/\n+?\[[^\]]+\]\n+?/g, ""), { wordwrap: 60 })
     .trim()
     .replace(/\n{3,}/g, "\n\n");
 }
