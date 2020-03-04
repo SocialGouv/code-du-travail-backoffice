@@ -18,8 +18,7 @@
     "jsonwebtoken": "8.5.1",
     "knex": "0.20.10",
     "node-cache": "5.1.0",
-    "pg": "7.18.2",
-    "unist-util-flat-filter": "1.0.0"
+    "pg": "7.18.2"
   },
   "devDependencies": {
     "@types/node": "13.7.7",

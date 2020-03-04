@@ -12,7 +12,7 @@ import {
   ANSWER_STATE,
   ANSWER_STATE_LABEL,
   ANSWER_STATE_OPTIONS,
-  LEGAL_REFERENCE_TYPE,
+  LEGAL_REFERENCE_CATEGORY,
 } from "../../../src/constants";
 import Button from "../../../src/elements/Button";
 import _Checkbox from "../../../src/elements/Checkbox";
@@ -358,7 +358,7 @@ export class AdminAnwsersEditPage extends React.Component {
     } = this.props;
     if (isLoading) return;
 
-    if (category === LEGAL_REFERENCE_TYPE.AGREEMENT) {
+    if (category === LEGAL_REFERENCE_CATEGORY.AGREEMENT) {
       const { agreement } = answers.data;
 
       this.props.dispatch(actions.legalReferences.load(category, query, agreement.idcc));
@@ -389,14 +389,14 @@ export class AdminAnwsersEditPage extends React.Component {
 
   renderReferences(category, isDisabled) {
     const { answers } = this.props;
-    const { references } = answers.data;
+    const { references, state } = answers.data;
 
     const filteredReferences = references.filter(
       ({ category: _category }) => _category === category,
     );
 
-    if (answers.data.state === ANSWER_STATE.VALIDATED && filteredReferences.length === 0) {
-      return <span>Aucune référence.</span>;
+    if (state === ANSWER_STATE.VALIDATED && filteredReferences.length === 0) {
+      return;
     }
 
     return filteredReferences.map(({ id, url, value }, index) => (
@@ -433,8 +433,23 @@ export class AdminAnwsersEditPage extends React.Component {
       return <AdminMainLayout isLoading />;
     }
 
-    const { agreement, generic_reference, is_published, question, state } = answers.data;
+    const {
+      agreement,
+      generic_reference,
+      is_published,
+      question,
+      references,
+      state,
+    } = answers.data;
     const stateSelectValue = ANSWER_STATE_OPTIONS.find(({ value }) => value === state);
+
+    const laborCodeReferences = references.filter(
+      ({ category }) => category === LEGAL_REFERENCE_CATEGORY.LABOR_CODE,
+    );
+    const agreementReferences = references.filter(
+      ({ category }) => category === LEGAL_REFERENCE_CATEGORY.AGREEMENT,
+    );
+    const $otherReferences = this.renderReferences(null, true);
 
     return (
       <AdminMainLayout isScrollable={false}>
@@ -501,39 +516,35 @@ export class AdminAnwsersEditPage extends React.Component {
                 <Flex flexDirection="column">
                   <Strong isFirst>Code du travail :</Strong>
                   <LegalReferences
-                    category={LEGAL_REFERENCE_TYPE.LABOR_CODE}
+                    category={LEGAL_REFERENCE_CATEGORY.LABOR_CODE}
                     data={
-                      legalReferences.category === LEGAL_REFERENCE_TYPE.LABOR_CODE
+                      legalReferences.category === LEGAL_REFERENCE_CATEGORY.LABOR_CODE
                         ? legalReferences.data
                         : []
                     }
-                    onAdd={data => this.addReference(LEGAL_REFERENCE_TYPE.LABOR_CODE, data)}
+                    onAdd={data => this.addReference(LEGAL_REFERENCE_CATEGORY.LABOR_CODE, data)}
                     onInput={query =>
-                      this.loadLegalReferences(LEGAL_REFERENCE_TYPE.LABOR_CODE, query)
+                      this.loadLegalReferences(LEGAL_REFERENCE_CATEGORY.LABOR_CODE, query)
                     }
                     onRemove={this.removeReference.bind(this)}
-                    references={this.props.answers.data.references.filter(
-                      ({ category }) => category === LEGAL_REFERENCE_TYPE.LABOR_CODE,
-                    )}
+                    references={agreementReferences}
                   />
                 </Flex>
                 <Flex flexDirection="column">
                   <Strong>Convention collective :</Strong>
                   <LegalReferences
-                    category={LEGAL_REFERENCE_TYPE.AGREEMENT}
+                    category={LEGAL_REFERENCE_CATEGORY.AGREEMENT}
                     data={
-                      legalReferences.category === LEGAL_REFERENCE_TYPE.AGREEMENT
+                      legalReferences.category === LEGAL_REFERENCE_CATEGORY.AGREEMENT
                         ? legalReferences.data
                         : []
                     }
-                    onAdd={data => this.addReference(LEGAL_REFERENCE_TYPE.AGREEMENT, data)}
+                    onAdd={data => this.addReference(LEGAL_REFERENCE_CATEGORY.AGREEMENT, data)}
                     onInput={query =>
-                      this.loadLegalReferences(LEGAL_REFERENCE_TYPE.AGREEMENT, query)
+                      this.loadLegalReferences(LEGAL_REFERENCE_CATEGORY.AGREEMENT, query)
                     }
                     onRemove={this.removeReference.bind(this)}
-                    references={this.props.answers.data.references.filter(
-                      ({ category }) => category === LEGAL_REFERENCE_TYPE.AGREEMENT,
-                    )}
+                    references={laborCodeReferences}
                   />
                 </Flex>
                 <Form onSubmit={this.submitReference.bind(this)}>
@@ -588,20 +599,32 @@ export class AdminAnwsersEditPage extends React.Component {
                 <AnswerCorrection defaultValue={value} disabled headersOffset={2} isSingleView />
 
                 <Subtitle>Références juridiques</Subtitle>
-                <Strong>Convention collective</Strong>
-                <Flex flexWrap="wrap">
-                  <LegalReferences
-                    category={LEGAL_REFERENCE_TYPE.LABOR_CODE}
-                    isReadOnly
-                    references={this.props.answers.data.references.filter(
-                      ({ category }) => category === LEGAL_REFERENCE_TYPE.AGREEMENT,
-                    )}
-                  />
-                </Flex>
-                <Strong>Code du travail</Strong>
-                <Flex flexWrap="wrap">{this.renderReferences("labor_code", true)}</Flex>
-                <Strong>Autres</Strong>
-                <Flex flexWrap="wrap">{this.renderReferences(null, true)}</Flex>
+                {laborCodeReferences.length !== 0 && (
+                  <>
+                    <Strong isFirst>Code du travail</Strong>
+                    <LegalReferences
+                      category={LEGAL_REFERENCE_CATEGORY.LABOR_CODE}
+                      isReadOnly
+                      references={laborCodeReferences}
+                    />
+                  </>
+                )}
+                {agreementReferences.length !== 0 && (
+                  <>
+                    <Strong isFirst>Convention collective</Strong>
+                    <LegalReferences
+                      category={LEGAL_REFERENCE_CATEGORY.AGREEMENT}
+                      isReadOnly
+                      references={agreementReferences}
+                    />
+                  </>
+                )}
+                {$otherReferences !== undefined && (
+                  <>
+                    <Strong isFirst>Autres</Strong>
+                    {$otherReferences}
+                  </>
+                )}
                 <Hr />
 
                 <Subtitle isFirst>Renvoi</Subtitle>

@@ -3,15 +3,16 @@ import React from "react";
 import ReactTagAutocomplete from "react-tag-autocomplete";
 import { Flex } from "rebass";
 
-import { LEGAL_REFERENCE_TYPE } from "../../constants";
-import { Container } from "./styles";
+import { LEGAL_REFERENCE_CATEGORY } from "../../constants";
+import { Container } from "./index.style";
 import Tag from "./Tag";
 
-export function getReferences(references, onRemove, isReadOnly) {
-  return references.map(({ id, value }, index) => (
+export function getReferences({ category, isReadOnly, onRemove, references }) {
+  return references.map(({ id, value }) => (
     <Tag
+      category={category}
       id={id}
-      key={index}
+      key={id}
       onRemove={!isReadOnly ? () => onRemove(id) : undefined}
       value={value}
     />
@@ -29,7 +30,7 @@ function LegalReferences({
   ...props
 }) {
   const placeholder =
-    category === LEGAL_REFERENCE_TYPE.AGREEMENT ? "12, 36.3, 05.07.6…" : "D1234, L1234, R1234…";
+    category === LEGAL_REFERENCE_CATEGORY.AGREEMENT ? "12, 36.3, 05.07.6…" : "D1234, L1234, R1234…";
 
   return (
     <Container {...props}>
@@ -47,7 +48,7 @@ function LegalReferences({
           suggestionsFilter={() => true}
         />
       )}
-      <Flex flexWrap="wrap">{getReferences(references, onRemove, isReadOnly)}</Flex>
+      <Flex flexWrap="wrap">{getReferences({ category, isReadOnly, onRemove, references })}</Flex>
     </Container>
   );
 }

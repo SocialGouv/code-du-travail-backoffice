@@ -1,103 +1,109 @@
-import styled from "@emotion/styled";
 import React from "react";
-import ReactTooltip from "react-tooltip";
-import { Flex } from "rebass";
 
+import { LEGAL_REFERENCE_CATEGORY } from "../../constants";
 import customAxios from "../../libs/customAxios";
+import { Button, Container, Index, Label, Tooltip } from "./Tag.style";
 
-const Container = styled(Flex)`
-  background-color: var(--color-alice-blue);
-  border: solid 1px var(--color-border);
-  cursor: help;
-  font-size: 0.875rem;
-  margin: 0.5rem 0.5rem 0 0;
-  max-width: 32rem;
-  padding: 0.2rem 0.4rem;
-  user-select: none;
-
-  :hover {
-    background-color: var(--color-periwinkle);
-  }
-`;
-
-const Tooltip = styled(ReactTooltip)`
-  background-color: white !important;
-  border: solid 1px var(--color-border);
-  box-shadow: 0 0 0.25rem var(--color-border);
-  max-height: 40%;
-  max-width: 34rem;
-  opacity: 1 !important;
-  overflow-y: auto;
-  padding: 0.25rem 0.5rem 0.45rem;
-  white-space: pre;
-`;
-
-const Text = styled.span`
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`;
-
-const Button = styled.img`
-  cursor: pointer;
-  height: 0.75rem;
-  margin-left: 0.5rem;
-  opacity: 0.5;
-  vertical-align: 2px;
-  width: 0.75rem;
-
-  :hover {
-    opacity: 1;
-  }
-`;
-
-const BASE_URL = "https://beta.legifrance.gouv.fr/conv_coll/id/";
+const BASE_URL = {
+  agreement: "https://beta.legifrance.gouv.fr/conv_coll/id/",
+  labor_code: "https://beta.legifrance.gouv.fr/codes/article_lc/",
+};
 
 export default class Tag extends React.PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-      tip: "",
+      content: null,
+      index: null,
+      title: null,
     };
   }
 
   componentDidMount() {
     const { value } = this.props;
 
-    if (value.startsWith("KALIARTI") || value.startsWith("LEGIARTI")) {
-      this.loadTip();
+    if (value.startsWith("KALI") || value.startsWith("LEGI")) {
+      this.loadContent();
     }
   }
 
-  openUrl() {
+  async loadContent() {
     const { value } = this.props;
 
-    window.open(`${BASE_URL}${value}`, "_blank");
+    const {
+      data: { content, index, title },
+    } = await customAxios().get(`/legal-references/${value}`);
+
+    this.setState({ content, index, title });
   }
 
-  async loadTip() {
-    const { value } = this.props;
+  openUrl() {
+    const { category, value } = this.props;
 
-    const { data: tip } = await customAxios().get(`/legal-references/${value}`);
+    window.open(`${BASE_URL[category]}${value}`, "_blank");
+  }
 
-    this.setState({ tip });
+  renderLabel() {
+    const { category, value } = this.props;
+    const { index, title } = this.state;
+    const parts = [];
+
+    if (index !== null) {
+      parts.push(<Index key="index">{index}</Index>);
+    }
+
+    if (category === LEGAL_REFERENCE_CATEGORY.AGREEMENT) {
+      const label = title !== null ? title : value;
+
+      parts.push(<Label key="label">{label}</Label>);
+    }
+
+    return parts;
+  }
+
+  renderButtons() {
+    const { id, onRemove } = this.props;
+    const { content } = this.state;
+
+    const hasContent = content !== null && content.length !== 0;
+    const parts = [];
+
+    if (hasContent) {
+      parts.push(
+        <Button alignItems="center" key="link" onClick={this.openUrl.bind(this)}>
+          <img alt="" src="/static/images/link.svg" />
+        </Button>,
+      );
+    }
+
+    if (onRemove !== undefined) {
+      parts.push(
+        <Button
+          alignItems="center"
+          key="delete"
+          onClick={() => onRemove(id)}
+          src="/static/images/delete.svg"
+        >
+          <img alt="" src="/static/images/delete.svg" />
+        </Button>,
+      );
+    }
+
+    return parts;
   }
 
   render() {
-    const { id, onRemove, value } = this.props;
-    const { tip } = this.state;
+    const { id } = this.props;
+    const { content } = this.state;
+
+    const hasContent = content !== null && content.length !== 0;
 
     return (
-      <Container alignItems="center" data-for={id} data-tip={tip}>
-        <Text>{value}</Text>
-        {tip.length !== 0 && (
-          <Button onClick={this.openUrl.bind(this)} src="/static/images/link.svg" />
-        )}
-        {onRemove !== undefined && (
-          <Button onClick={() => onRemove(value)} src="/static/images/delete.svg" />
-        )}
-        {tip.length !== 0 && (
+      <Container alignItems="center" data-for={id} data-tip={content}>
+        {this.renderLabel()}
+        {this.renderButtons()}
+        {hasContent && (
           <Tooltip
             clickable={true}
             delayHide={250}
