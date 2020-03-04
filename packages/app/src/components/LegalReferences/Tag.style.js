@@ -63,5 +63,6 @@ export const Tooltip = styled(ReactTooltip)`
   opacity: 1 !important;
   overflow-y: auto;
   padding: 0.25rem 0.5rem 0.45rem;
+  user-select: text;
   white-space: pre-wrap;
 `;
