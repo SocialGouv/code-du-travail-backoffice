@@ -215,9 +215,7 @@ export class AdminAnwsersEditPage extends React.Component {
   updateGenericReference(generic_reference) {
     const { dispatch, id } = this.props;
 
-    dispatch(
-      actions.answers.updateGenericReference([id], generic_reference, this.fetchAnswer.bind(this)),
-    );
+    dispatch(actions.answers.updateGenericReference([id], generic_reference, this.load.bind(this)));
   }
 
   async createReference(reference) {
@@ -323,7 +321,7 @@ export class AdminAnwsersEditPage extends React.Component {
     const { id, is_published } = this.props.answers.data;
 
     this.props.dispatch(
-      actions.answers.updateIsPublished([id], !is_published, this.fetchAnswer.bind(this)),
+      actions.answers.updateIsPublished([id], !is_published, this.load.bind(this)),
     );
   }
 
