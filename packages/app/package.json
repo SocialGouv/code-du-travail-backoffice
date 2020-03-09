@@ -15,10 +15,10 @@
     "@emotion/styled": "10.0.27",
     "@fortawesome/fontawesome-svg-core": "1.2.27",
     "@fortawesome/free-solid-svg-icons": "5.12.1",
-    "@fortawesome/react-fontawesome": "0.1.8",
+    "@fortawesome/react-fontawesome": "0.1.9",
     "@zeit/next-css": "1.0.1",
     "axios": "0.19.2",
-    "babel-plugin-emotion": "10.0.28",
+    "babel-plugin-emotion": "10.0.29",
     "isomorphic-unfetch": "3.0.0",
     "js-cookie": "2.2.1",
     "koa": "2.11.0",
@@ -46,7 +46,7 @@
     "react-table": "6.11.5",
     "react-tag-autocomplete": "5.12.1",
     "react-toastify": "5.5.0",
-    "react-tooltip": "4.0.3",
+    "react-tooltip": "4.1.0",
     "rebass": "4.0.7",
     "redux": "4.0.5",
     "redux-devtools-extension": "2.13.8",
@@ -56,9 +56,9 @@
     "ua-parser-js": "0.7.21"
   },
   "devDependencies": {
-    "@babel/core": "7.8.6",
+    "@babel/core": "7.8.7",
     "@testing-library/jest-dom": "5.1.1",
-    "@testing-library/react": "9.4.1",
+    "@testing-library/react": "9.5.0",
     "@types/react-test-renderer": "16.9.2",
     "babel-eslint": "10.1.0",
     "babel-jest": "25.1.0",
@@ -70,7 +70,7 @@
     "react-test-renderer": "16.13.0",
     "rimraf": "3.0.2",
     "snapshot-diff": "0.7.0",
-    "uuid": "7.0.1",
+    "uuid": "7.0.2",
     "zxcvbn": "4.4.2"
   }
 }
