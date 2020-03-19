@@ -21,7 +21,7 @@ export default function* load({ meta: { category, idcc, query } }) {
       id,
       name:
         category === LEGAL_REFERENCE_CATEGORY.AGREEMENT
-          ? `${index !== null ? `[${index}] ` : ""}${title}`
+          ? `${index !== null ? `[Article ${index}] ` : ""}${title}`
           : index,
     }));
 

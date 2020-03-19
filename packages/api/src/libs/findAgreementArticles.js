@@ -18,23 +18,35 @@ const Agreement = require("../services/Agreement");
 function findAgreementArticles(idcc, query) {
   const allArticles = Agreement.getArticles(idcc);
 
+  let cleanQuery = query
+    .replace(/\s+-|-\s+/g, " ")
+    .replace(/[^a-z0-9áâàäéêèëíîìïóôòöúûùüç\s-]/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLocaleLowerCase();
+  cleanQuery = "'" + cleanQuery.replace(/\s/g, " '");
+  if (!cleanQuery.includes("article") && /'\d{1,2}$/.test(cleanQuery)) {
+    cleanQuery = cleanQuery.replace(/'(\d{1,2}$)/, " '» 'Article $1$");
+  }
+
   /** @type {Fuse.FuseOptions<import("../types").Article>} */
   const fuseJsOptions = {
-    distance: 100,
+    caseSensitive: false,
+    distance: 999,
+    findAllMatches: false,
+    includeMatches: false,
     includeScore: true,
     keys: ["fullText"],
-    matchAllTokens: true,
-    maxPatternLength: 32,
-    minMatchCharLength: 2,
+    minMatchCharLength: 1,
     shouldSort: true,
-    threshold: 0.6,
-    tokenize: true,
+    threshold: 0.5,
+    useExtendedSearch: true,
   };
 
   const fuseJs = new FuseJs(allArticles, fuseJsOptions);
   const foundArticles =
     /** @type {Fuse.FuseResultWithScore<import("../types").Article>[]} */
-    (fuseJs.search(query));
+    (fuseJs.search(cleanQuery));
 
   const foundArticlesWithScore = foundArticles
     .slice(0, 10)

@@ -43,6 +43,14 @@ export default class Tag extends React.PureComponent {
     window.open(`${BASE_URL[category]}${value}`, "_blank");
   }
 
+  getContent() {
+    const { value } = this.props;
+    const { content, index, title } = this.state;
+    const label = `${title !== null ? title : value}${index !== null ? ` » Article ${index}` : ""}`;
+
+    return `${label}\n\n${content}`;
+  }
+
   renderLabel() {
     const { value } = this.props;
     const { index, title } = this.state;
@@ -98,7 +106,7 @@ export default class Tag extends React.PureComponent {
     const hasContent = content !== null && content.length !== 0;
 
     return (
-      <Container alignItems="center" data-for={id} data-tip={content}>
+      <Container alignItems="center" data-for={id} data-tip={this.getContent()}>
         {this.renderLabel()}
         {this.renderButtons()}
         {hasContent && (
