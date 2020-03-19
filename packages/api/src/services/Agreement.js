@@ -22,7 +22,7 @@ const { LEGAL_REFERENCE_CATEGORY } = require("../constants");
  * @typedef {object} AgreementSection
  * @property {"section"} type
  * @property {AgreementSectionData} data
- * @property {(AgreementArticle | AgreementSection)[]} children
+ * @property {(AgreementArticle & AgreementSection)[]} children
  */
 /**
  * @typedef {object} AgreementSectionData
@@ -69,47 +69,32 @@ const CACHE_TTL = 4 * 60 * 60; // => 4h
 const AGREEMENTS_INDEX = require("@socialgouv/kali-data/data/index.json");
 
 /**
- * @param {[import("../types").Article[], import("../types").Article]} prev
+ * @param {[import("../types").Article[], string | undefined]} prev
  * @param {AgreementArticle & AgreementSection} articleOrSection
  *
- * @returns {[import("../types").Article[], import("../types").Article | undefined]}
+ * @returns {[import("../types").Article[], string | undefined]}
  */
-function normalizeArticles([normalizedArticle, lastNormalizedSection], articleOrSection) {
+function normalizeMainArticles([normalizedArticles, lastSectionTitle], articleOrSection) {
   const { type } = articleOrSection;
 
   if (type === "section") {
-    const { etat, id } = articleOrSection.data;
-    const index = null;
-    const state = etat;
-    const subtitle = null;
-    const title = articleOrSection.data.title.trim();
+    const { title } = articleOrSection.data;
 
-    const content = title;
-    const fullText = title;
+    const sectionTitle = title.trim();
 
-    /** @type {import("../types").Article} */
-    const section = {
-      content,
-      fullText,
-      id,
-      index,
-      state,
-      subtitle,
-      title,
-      type,
-    };
-
-    return [[...normalizedArticle, section], section];
+    return [normalizedArticles, sectionTitle];
   }
 
   const { etat, id, num, surtitre } = articleOrSection.data;
   const content = convertHtmlToPlainText(articleOrSection.data.content);
   const index = num !== null ? num : null;
-  const title = lastNormalizedSection !== undefined ? lastNormalizedSection.title : null;
+  const title = lastSectionTitle !== undefined ? lastSectionTitle : null;
   const state = etat;
   const subtitle = surtitre !== undefined ? surtitre.trim() : null;
 
-  const fullText = `${index !== null ? `${index} ` : ""}${title !== null ? title : ""}`;
+  const fullText = `${index !== null ? `Article ${index}` : ""}${
+    title !== null ? ` (${title})` : ""
+  }`;
 
   /** @type {import("../types").Article} */
   const article = {
@@ -117,13 +102,90 @@ function normalizeArticles([normalizedArticle, lastNormalizedSection], articleOr
     fullText,
     id,
     index,
+    isAnnex: false,
     state,
     subtitle,
     title,
     type,
   };
 
-  return [[...normalizedArticle, article], lastNormalizedSection];
+  return [[...normalizedArticles, article], lastSectionTitle];
+}
+
+/**
+ * @param {AgreementArticle & AgreementSection} articleOrSection
+ * @param {string[]} path
+ *
+ * @returns {import("../types").Article[]}
+ */
+function normalizeAdditionalSectionArticles(articleOrSection, path) {
+  const { type } = articleOrSection;
+
+  if (type === "section") {
+    const {
+      children,
+      data: { title },
+    } = /** @type {AgreementSection} */ articleOrSection;
+
+    path.push(title);
+
+    return children.reduce(
+      (prev, articleOrSection) => [
+        ...prev,
+        ...normalizeAdditionalSectionArticles(articleOrSection, path),
+      ],
+      [],
+    );
+  }
+
+  const { data } = /** @type {AgreementArticle} */ articleOrSection;
+
+  const { etat, id, num, surtitre } = data;
+  const content = convertHtmlToPlainText(data.content);
+  const index = num !== null ? num : null;
+  const title = path.join(" » ");
+  const state = etat;
+  const subtitle = surtitre !== undefined ? surtitre.trim() : null;
+
+  const fullText = `${title}${index !== null ? ` » Article ${index}` : ""}`;
+
+  /** @type {import("../types").Article} */
+  const article = {
+    content,
+    fullText,
+    id,
+    index,
+    isAnnex: true,
+    state,
+    subtitle,
+    title,
+    type,
+  };
+
+  return [article];
+}
+
+/**
+ * @param {import("../types").Article[]} normalizedArticles
+ * @param {AgreementSection} section
+ *
+ * @returns {import("../types").Article[]}
+ */
+function flattenAdditionalArticles(normalizedArticles, section) {
+  const {
+    children,
+    data: { title },
+  } = section;
+
+  const newNormalizedArticles = children.reduce(
+    (prev, articleOrSection) => [
+      ...prev,
+      ...normalizeAdditionalSectionArticles(articleOrSection, [title]),
+    ],
+    [],
+  );
+
+  return [...normalizedArticles, ...newNormalizedArticles];
 }
 
 /**
@@ -132,14 +194,14 @@ function normalizeArticles([normalizedArticle, lastNormalizedSection], articleOr
  * @description
  * Also removes duplicated ids.
  *
- * @param {(AgreementArticle & AgreementSection)[]} tree
+ * @param {AgreementArticle[]} tree
  * @param {AgreementArticle & AgreementSection} articleOrSection
  *
- * @returns {(AgreementArticle & AgreementSection)[]}
+ * @returns {AgreementArticle[]}
  *
  * @see https://github.com/syntax-tree/unist
  */
-function flattenChildren(tree, articleOrSection) {
+function flattenMainArticles(tree, articleOrSection) {
   const { id } = articleOrSection.data;
 
   // Skip duplicates:
@@ -151,7 +213,10 @@ function flattenChildren(tree, articleOrSection) {
     return [...tree, articleOrSection];
   }
 
-  return [...tree, articleOrSection, ...articleOrSection.children.reduce(flattenChildren, [])];
+  const section = { ...articleOrSection };
+  delete section.children;
+
+  return [...tree, section, ...articleOrSection.children.reduce(flattenMainArticles, [])];
 }
 
 /**
@@ -199,8 +264,15 @@ function getArticles(agreementIdOrIdcc) {
     return [];
   }
 
-  const flatArticles = agreement.children.reduce(flattenChildren, []);
-  const [normalizedArticles] = flatArticles.reduce(normalizeArticles, [[], undefined]);
+  const flatMainArticles = agreement.children[0].children.reduce(flattenMainArticles, []);
+  const [normalizedMainArticles] = flatMainArticles.reduce(normalizeMainArticles, [[], undefined]);
+
+  const normalizedAdditionalArticles =
+    agreement.children.length > 1
+      ? agreement.children.slice(1).reduce(flattenAdditionalArticles, [])
+      : [];
+
+  const normalizedArticles = [...normalizedMainArticles, ...normalizedAdditionalArticles];
 
   cache.set(cacheKey, normalizedArticles, CACHE_TTL);
 

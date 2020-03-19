@@ -38,6 +38,7 @@ function normalizeArticle(rawArticle) {
     fullText,
     id,
     index,
+    isAnnex: false,
     state,
     subtitle,
     title,

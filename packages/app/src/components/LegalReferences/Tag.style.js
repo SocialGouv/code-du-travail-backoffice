@@ -24,7 +24,7 @@ export const Index = styled.span`
 `;
 
 export const Label = styled.span`
-  max-width: 10rem;
+  max-width: 20rem;
   overflow: hidden;
   padding: 0.2rem 0.4rem;
   text-overflow: ellipsis;
