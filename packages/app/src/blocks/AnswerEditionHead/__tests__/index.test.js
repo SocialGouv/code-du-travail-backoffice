@@ -1,6 +1,8 @@
 import { render } from "@testing-library/react";
 import React from "react";
 
+jest.mock("../../../elements/Idcc", () => () => null);
+
 import AnswerEditionHeadBlock from "..";
 import { TABS } from "../Tabs";
 
