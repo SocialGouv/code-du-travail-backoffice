@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`blocks/<AnswerEditionHead /> should match snapshot 1`] = `
-.emotion-18 {
+.emotion-15 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -22,7 +22,7 @@ exports[`blocks/<AnswerEditionHead /> should match snapshot 1`] = `
   user-select: none;
 }
 
-.emotion-12 {
+.emotion-9 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -35,7 +35,7 @@ exports[`blocks/<AnswerEditionHead /> should match snapshot 1`] = `
   display: flex;
 }
 
-.emotion-5 {
+.emotion-2 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -49,28 +49,7 @@ exports[`blocks/<AnswerEditionHead /> should match snapshot 1`] = `
   display: flex;
 }
 
-.emotion-1 {
-  background-color: var(--color-label-background);
-  border: solid 1px var(--color-border);
-  border-radius: 0.25rem;
-  cursor: help;
-  font-size: 0.8rem;
-  font-weight: 600;
-  margin-right: 0.75rem;
-  opacity: 0.75;
-  padding: 0.25rem 0.5rem;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  white-space: nowrap;
-}
-
-.emotion-1:hover {
-  opacity: 1;
-}
-
-.emotion-3 {
+.emotion-0 {
   color: black;
   font-size: 1.3rem;
   font-weight: 600;
@@ -81,7 +60,7 @@ exports[`blocks/<AnswerEditionHead /> should match snapshot 1`] = `
   user-select: none;
 }
 
-.emotion-10 {
+.emotion-7 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -92,7 +71,7 @@ exports[`blocks/<AnswerEditionHead /> should match snapshot 1`] = `
   margin-top: 0.5rem;
 }
 
-.emotion-6 {
+.emotion-3 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -117,7 +96,7 @@ exports[`blocks/<AnswerEditionHead /> should match snapshot 1`] = `
   width: 12rem;
 }
 
-.emotion-8 {
+.emotion-5 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -142,7 +121,7 @@ exports[`blocks/<AnswerEditionHead /> should match snapshot 1`] = `
   width: 12rem;
 }
 
-.emotion-14 {
+.emotion-11 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -182,11 +161,11 @@ exports[`blocks/<AnswerEditionHead /> should match snapshot 1`] = `
   white-space: nowrap;
 }
 
-.emotion-14:hover {
+.emotion-11:hover {
   opacity: 1;
 }
 
-.emotion-14 svg {
+.emotion-11 svg {
   cursor: pointer;
   height: 1rem;
   margin-right: 0.25rem;
@@ -194,7 +173,7 @@ exports[`blocks/<AnswerEditionHead /> should match snapshot 1`] = `
   width: 1rem;
 }
 
-.emotion-16 {
+.emotion-13 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -234,11 +213,11 @@ exports[`blocks/<AnswerEditionHead /> should match snapshot 1`] = `
   white-space: nowrap;
 }
 
-.emotion-16:hover {
+.emotion-13:hover {
   opacity: 1;
 }
 
-.emotion-16 svg {
+.emotion-13 svg {
   cursor: pointer;
   height: 1rem;
   margin-right: 0.25rem;
@@ -248,58 +227,45 @@ exports[`blocks/<AnswerEditionHead /> should match snapshot 1`] = `
 
 <div>
   <div
-    class="emotion-18 emotion-19"
+    class="emotion-15 emotion-16"
   >
     <div
-      class="emotion-12"
+      class="emotion-9"
     >
       <div
-        class="emotion-5"
+        class="emotion-2"
       >
-        <div
-          class="emotion-0 emotion-1 emotion-2"
-          currentitem="false"
-          data-for="idcc-0123"
-          data-tip="An Agreement Name"
-        >
-          IDCC: 0123
-          <div
-            class="__react_component_tooltip-304517788 __react_component_tooltip place-top type-dark"
-            data-id="tooltip"
-            id="idcc-0123"
-          />
-        </div>
         <h1
-          class="emotion-3 emotion-4"
+          class="emotion-0 emotion-1"
         >
           123) A Question Value
         </h1>
       </div>
       <div
-        class="emotion-10 emotion-11"
+        class="emotion-7 emotion-8"
       >
         <div
-          class="emotion-6 emotion-7"
+          class="emotion-3 emotion-4"
         >
           Édition
         </div>
         <div
-          class="emotion-8 emotion-7"
+          class="emotion-5 emotion-4"
         >
           Références juridiques (undefined)
         </div>
       </div>
     </div>
     <div
-      class="emotion-5"
+      class="emotion-2"
     >
       <button
-        class="emotion-13 emotion-14"
+        class="emotion-10 emotion-11"
       >
         Annuler ma réponse
       </button>
       <button
-        class="emotion-13 emotion-16"
+        class="emotion-10 emotion-13"
       >
         Demander la validation
       </button>
