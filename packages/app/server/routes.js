@@ -55,7 +55,7 @@ function withErrorAndAuth(nextApp, route, callback) {
   });
 }
 
-module.exports = function(nextApp) {
+module.exports = function (nextApp) {
   const handle = nextApp.getRequestHandler();
 
   router.redirect("/login", "/");

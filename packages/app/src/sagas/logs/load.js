@@ -7,10 +7,7 @@ import toast from "../../libs/toast";
 
 export default function* load({ meta: { pageIndex, query } }) {
   try {
-    const request = customPostgrester()
-      .select("*")
-      .select("user(*)")
-      .orderBy("created_at", true);
+    const request = customPostgrester().select("*").select("user(*)").orderBy("created_at", true);
 
     if (pageIndex !== -1) {
       request.page(pageIndex);

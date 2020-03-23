@@ -21,9 +21,7 @@ const PROPS = {
     question_index: 12,
     question_value: "A Question Value",
     state: ANSWER_STATE.DRAFT,
-    updated_at: moment()
-      .subtract(2, "hours")
-      .tz("Europe/Paris"),
+    updated_at: moment().subtract(2, "hours").tz("Europe/Paris"),
     user: {
       name: "A User Name",
     },

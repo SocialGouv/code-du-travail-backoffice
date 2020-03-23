@@ -28,7 +28,7 @@ instance.interceptors.response.use(
   },
 );
 
-export default function() {
+export default function () {
   const { token } = cache.get("me");
 
   const authorization = `Bearer ${token}`;

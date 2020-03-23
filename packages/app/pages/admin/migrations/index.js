@@ -14,10 +14,7 @@ const COLUMNS = [
   },
   {
     Header: "Créé le",
-    accessor: data =>
-      moment(data.migration_time)
-        .tz("Europe/Paris")
-        .format("YYYY-MM-DD HH:mm"),
+    accessor: data => moment(data.migration_time).tz("Europe/Paris").format("YYYY-MM-DD HH:mm"),
     filterable: false,
     id: "createdAt",
     style: { textAlign: "center" },

@@ -14,7 +14,7 @@ const SYMBOLS = "!'#$%&\"()*+,-./:;<=>?@[\\]^_`{|}~";
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues
  * @see https://github.com/bermi/password-generator#password-generator
  */
-export default function(length) {
+export default function (length) {
   const pattern = [
     NUMERALS_DISTINGUISHABLE,
     LOWER_ALPHA_DISTINGUISHABLE,

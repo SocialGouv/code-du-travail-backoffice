@@ -31,10 +31,7 @@ export default class AdminIndex extends React.Component {
     if (!noTimestamps) {
       this.columns.push({
         Header: "Modifié le",
-        accessor: data =>
-          moment(data.updated_at)
-            .tz("Europe/Paris")
-            .format("YYYY-MM-DD HH:mm"),
+        accessor: data => moment(data.updated_at).tz("Europe/Paris").format("YYYY-MM-DD HH:mm"),
         filterable: false,
         id: "updatedAt",
         style: { textAlign: "center" },
@@ -144,9 +141,7 @@ export default class AdminIndex extends React.Component {
     const { apiPath } = this.props;
     const { selectedId: id } = this.state;
 
-    await customPostgrester()
-      .eq("id", id)
-      .delete(apiPath);
+    await customPostgrester().eq("id", id).delete(apiPath);
 
     await this.fetchData();
 

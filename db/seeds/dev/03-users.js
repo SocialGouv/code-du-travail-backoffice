@@ -63,11 +63,7 @@ exports.seed = async knex => {
     })),
   );
   await knex("users_agreements").insert(
-    (
-      await knex("api.agreements")
-        .limit(2)
-        .offset(3)
-    ).map(({ id: agreement_id }) => ({
+    (await knex("api.agreements").limit(2).offset(3)).map(({ id: agreement_id }) => ({
       agreement_id,
       user_id: "00000000-0000-4000-8000-000000000404",
     })),

@@ -29,9 +29,7 @@ export default function* updateGenericReference({ meta: { genericReference, ids,
             user_id: userId,
           };
 
-    yield customPostgrester()
-      .in("id", ids, true)
-      .patch("/answers", data);
+    yield customPostgrester().in("id", ids, true).patch("/answers", data);
 
     toast.success(
       ids.length === 1
