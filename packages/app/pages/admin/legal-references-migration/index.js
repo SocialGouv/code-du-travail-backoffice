@@ -68,7 +68,8 @@ class LegalReferencesMigrationIndex extends React.Component {
       .select("*")
       .select("agreement(*)")
       .select("question(*)")
-      .in("agreement_id", filteredAgreementIds)
+      .and.in("agreement_id", filteredAgreementIds)
+      .is("is_published", true)
       .get("/answers");
 
     const sortedAnswers = R.sortWith([
