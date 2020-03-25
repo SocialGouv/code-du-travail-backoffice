@@ -2,7 +2,7 @@
  * Check if a <text> string contains the <searchString> value including the
  * French commonly accented and special characters.
  */
-export default function(searchString, text) {
+export default function (searchString, text) {
   const searchPattern = searchString
     .replace(/([.*+?^${}()|[\]\\])/gi, "\\$&")
     .replace(/a/gi, "[aáâàä]")

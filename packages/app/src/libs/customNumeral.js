@@ -15,7 +15,7 @@ if (numeral.locale() === "en") {
       decimal: ",",
       thousands: " ",
     },
-    ordinal: function(number) {
+    ordinal: function (number) {
       return number === 1 ? "er" : "ème";
     },
   });

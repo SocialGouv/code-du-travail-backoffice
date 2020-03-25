@@ -95,9 +95,7 @@ const AdminAnswerBlock = ({ data, isChecked, onCheck, onClick }) => {
                 {[ANSWER_STATE.PENDING_REVIEW, ANSWER_STATE.UNDER_REVIEW].includes(state) &&
                   `Proposée par : ${user.name}`}
                 {state !== ANSWER_STATE.UNDER_REVIEW &&
-                  `, ${customMoment(updated_at)
-                    .tz("Europe/Paris")
-                    .fromNow()}`}
+                  `, ${customMoment(updated_at).tz("Europe/Paris").fromNow()}`}
               </TopAuthor>
             )}
           {state === ANSWER_STATE.VALIDATED && (

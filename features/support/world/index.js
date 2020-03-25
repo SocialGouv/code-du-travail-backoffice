@@ -24,7 +24,7 @@ class World {
   }
 
   extendPage() {
-    this.page.waitForSelectors = function(selectors) {
+    this.page.waitForSelectors = function (selectors) {
       return Promise.all(selectors.map(selector => this.waitForSelector(selector)));
     }.bind(this.page);
   }

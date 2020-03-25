@@ -2,10 +2,7 @@ import withAdminEdit from "../../../src/templates/withAdminEdit";
 import { FIELDS } from "./new";
 
 const componentDidMount = async (api, id) => {
-  const { data: parents } = await api.not
-    .eq("id", id)
-    .orderBy("title")
-    .get("/themes");
+  const { data: parents } = await api.not.eq("id", id).orderBy("title").get("/themes");
   const { data: themes } = await api.eq("id", id).get(`/themes`);
 
   const fields = [

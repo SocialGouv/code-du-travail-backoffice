@@ -13,9 +13,7 @@ export default function* updateIsPublished({ meta: { ids, is, next } }) {
       is_published: is,
     };
 
-    yield customPostgrester()
-      .in("id", ids, true)
-      .patch("/answers", data);
+    yield customPostgrester().in("id", ids, true).patch("/answers", data);
 
     toast.success(
       ids.length === 1

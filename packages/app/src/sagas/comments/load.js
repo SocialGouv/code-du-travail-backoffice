@@ -8,9 +8,7 @@ const API_PATH = "/answers_comments";
 
 export default function* load({ meta: { answerId } }) {
   try {
-    const request = customPostgrester()
-      .eq("answer_id", answerId)
-      .orderBy("created_at");
+    const request = customPostgrester().eq("answer_id", answerId).orderBy("created_at");
 
     const { data } = yield request.get(API_PATH);
     yield put(comments.loadSuccess(data));

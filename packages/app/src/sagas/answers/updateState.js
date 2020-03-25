@@ -20,12 +20,8 @@ export default function* updateState({ meta: { ids, next, state } }) {
           user_id: null,
           value: "",
         };
-        yield customPostgrester()
-          .in("answer_id", ids, true)
-          .delete("/answers_references");
-        yield customPostgrester()
-          .in("answer_id", ids, true)
-          .delete("/answers_tags");
+        yield customPostgrester().in("answer_id", ids, true).delete("/answers_references");
+        yield customPostgrester().in("answer_id", ids, true).delete("/answers_tags");
         break;
 
       case ANSWER_STATE.DRAFT:
@@ -45,9 +41,7 @@ export default function* updateState({ meta: { ids, next, state } }) {
         throw new Error(`Ce changement d'état est impossible.`);
     }
 
-    yield customPostgrester()
-      .in("id", ids, true)
-      .patch("/answers", data);
+    yield customPostgrester().in("id", ids, true).patch("/answers", data);
 
     toast.success(
       ids.length === 1
