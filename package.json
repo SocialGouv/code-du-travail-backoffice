@@ -62,6 +62,9 @@
     "prettier": "2.0.2",
     "puppeteer": "2.1.1"
   },
+  "resolutions": {
+    "@babel/preset-react": "^7.9.4"
+  },
   "workspaces": [
     "packages/*"
   ]
