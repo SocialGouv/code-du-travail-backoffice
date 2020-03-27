@@ -23,4 +23,3 @@ GRANT SELECT ON api.logs TO administrator;
 DROP TABLE api.logs;
 
 DROP TYPE log_action;
-
