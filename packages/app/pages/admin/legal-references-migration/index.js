@@ -10,6 +10,7 @@ import { LEGAL_REFERENCE_CATEGORY } from "../../../src/constants";
 import Button from "../../../src/elements/Button";
 import Hr from "../../../src/elements/Hr";
 import Idcc from "../../../src/elements/Idcc";
+import Select from "../../../src/elements/Select";
 import Title from "../../../src/elements/Title";
 import AdminMainLayout from "../../../src/layouts/AdminMain";
 import customAxios from "../../../src/libs/customAxios";
@@ -24,6 +25,7 @@ const AnswerTitle = styled(Flex)`
 `;
 
 const ANSWER_REFERENCE_CATEGORIES = Object.values(LEGAL_REFERENCE_CATEGORY);
+let AGREEMENT_SELECT_OPTIONS = [];
 
 class LegalReferencesMigrationIndex extends React.Component {
   constructor(props) {
@@ -32,19 +34,20 @@ class LegalReferencesMigrationIndex extends React.Component {
     this.state = {
       answersWithReferences: [],
       currentReferenceId: null,
-      isLoading: true,
+      isLoading: false,
       loadingIdcc: null,
       loadingIndex: null,
+      selectedAgreementId: null,
     };
   }
 
   componentDidMount() {
-    this.load();
+    if (AGREEMENT_SELECT_OPTIONS.length === 0) {
+      this.loadAgreements();
+    }
   }
 
-  async load() {
-    this.setState({ isLoading: true });
-    const answersWithReferences = [];
+  async loadAgreements() {
     const request = customPostgrester();
 
     const { data: allLocationsAgreements } = await request.get("/locations_agreements");
@@ -53,22 +56,25 @@ class LegalReferencesMigrationIndex extends React.Component {
       .in("id", allLocationsAgreementIds)
       .orderBy("idcc")
       .get(`/agreements`);
-    const filteredAgreements = [];
-    for (const agreement of allAgreements) {
-      this.setState({
-        loadingIdcc: agreement.idcc,
-      });
 
-      if (await this.isReferenced(agreement)) {
-        filteredAgreements.push(agreement);
-      }
-    }
-    const filteredAgreementIds = filteredAgreements.map(({ id }) => id);
+    AGREEMENT_SELECT_OPTIONS = allAgreements.map(({ id, idcc, name }) => ({
+      label: `[${idcc}] ${name}`,
+      value: id,
+    }));
+
+    this.forceUpdate();
+  }
+
+  async loadSelectedAgreementReferences(selectedAgreementId) {
+    this.setState({ isLoading: true, selectedAgreementId });
+    const answersWithReferences = [];
+    const request = customPostgrester();
+
     const { data: answers } = await request
       .select("*")
       .select("agreement(*)")
       .select("question(*)")
-      .and.in("agreement_id", filteredAgreementIds)
+      .and.eq("agreement_id", selectedAgreementId)
       .is("is_published", true)
       .get("/answers");
 
@@ -194,7 +200,7 @@ class LegalReferencesMigrationIndex extends React.Component {
 
   migrateReference(answersWithReferencesIndex, answerReferenceId) {
     const { dispatch } = this.props;
-    const { answersWithReferences } = this.state;
+    const { answersWithReferences, selectedAgreementId } = this.state;
 
     const reference = answersWithReferences[answersWithReferencesIndex].references.find(
       ({ id }) => id === answerReferenceId,
@@ -203,14 +209,18 @@ class LegalReferencesMigrationIndex extends React.Component {
     delete reference.created_at;
     delete reference.updated_at;
 
-    dispatch(actions.answers.updateReferences([reference], this.load.bind(this)));
+    dispatch(
+      actions.answers.updateReferences([reference], () =>
+        this.loadSelectedAgreementReferences(selectedAgreementId),
+      ),
+    );
 
     this.setState({ answersWithReferences });
   }
 
   skipReference(answersWithReferencesIndex, answerReferenceId) {
     const { dispatch } = this.props;
-    const { answersWithReferences } = this.state;
+    const { answersWithReferences, selectedAgreementId } = this.state;
 
     const reference = answersWithReferences[answersWithReferencesIndex].references.find(
       ({ id }) => id === answerReferenceId,
@@ -220,13 +230,21 @@ class LegalReferencesMigrationIndex extends React.Component {
     delete reference.created_at;
     delete reference.updated_at;
 
-    dispatch(actions.answers.updateReferences([reference], this.load.bind(this)));
+    dispatch(
+      actions.answers.updateReferences([reference], () =>
+        this.loadSelectedAgreementReferences(selectedAgreementId),
+      ),
+    );
 
     this.setState({ answersWithReferences });
   }
 
   goTo(path) {
     window.open(path, "_blank");
+  }
+
+  async selectAgreement({ value }) {
+    await this.loadSelectedAgreementReferences(value);
   }
 
   renderReferences(references, idcc, answersWithReferencesIndex) {
@@ -294,28 +312,28 @@ class LegalReferencesMigrationIndex extends React.Component {
   }
 
   render() {
-    const { isLoading, loadingIdcc, loadingIndex } = this.state;
-
-    if (isLoading) {
-      return (
-        <AdminMainLayout>
-          <Container>
-            <Title>Migrations des références juriques</Title>
-            <div>
-              {loadingIndex === null
-                ? `Vérification en cours de la convention n° ${loadingIdcc}…`
-                : `Vérification en cours des références de la réponse à la question n° ${loadingIndex} pour la convention n° ${loadingIdcc}…`}
-            </div>
-          </Container>
-        </AdminMainLayout>
-      );
-    }
+    const { isLoading, loadingIdcc, loadingIndex, selectedAgreementId } = this.state;
 
     return (
       <AdminMainLayout>
         <Container>
           <Title>Migrations des références juriques</Title>
-          {this.renderAnswersWithReferences()}
+          <div>
+            {AGREEMENT_SELECT_OPTIONS.length !== 0 ? (
+              <Select
+                onChange={this.selectAgreement.bind(this)}
+                options={AGREEMENT_SELECT_OPTIONS}
+              />
+            ) : (
+              `Chargement des conventions…`
+            )}
+            {selectedAgreementId !== null && isLoading && (
+              <div>
+                {`Vérification en cours des références de la réponse à la question n° ${loadingIndex} pour la convention n° ${loadingIdcc}…`}
+              </div>
+            )}
+            {selectedAgreementId !== null && !isLoading && this.renderAnswersWithReferences()}
+          </div>
         </Container>
       </AdminMainLayout>
     );
