@@ -113,7 +113,7 @@ exports.seed = async knex => {
 
   const questions = await knex("api.questions").orderBy("index");
   const allAgreements = await knex("api.agreements").orderBy("idcc");
-  const activeAgreementIds = await knex("api.locations_agreements").map(
+  const activeAgreementIds = (await knex("api.locations_agreements")).map(
     ({ agreement_id }) => agreement_id,
   );
   const agreements = allAgreements.filter(({ id }) => activeAgreementIds.includes(id));

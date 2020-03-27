@@ -1,9 +1,7 @@
 exports.seed = async knex => {
   global.spinner.start(`Generating users...`);
 
-  const locationIds = await knex("api.locations")
-    .select("id")
-    .map(({ id }) => id);
+  const locationIds = (await knex("api.locations").select("id")).map(({ id }) => id);
 
   global.users = [
     {
