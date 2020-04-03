@@ -12,5 +12,5 @@
     "sourceMap": true,
     "strictNullChecks": true
   },
-  "exclude": ["node_modules", "**/*.test.js"]
+  "exclude": [".next", "db", "coverage", "features", "node_modules", "scripts", "**/*.test.js"]
 }

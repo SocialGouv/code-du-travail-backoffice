@@ -5,6 +5,17 @@ import legalReferences from "./legal-references";
 import * as logs from "./logs";
 import * as modal from "./modal";
 import * as questions from "./questions";
+import resources from "./resources";
 import actionTypes from "./types";
 
-export { actionTypes, agreements, answers, comments, legalReferences, logs, modal, questions };
+export {
+  actionTypes,
+  agreements,
+  answers,
+  comments,
+  legalReferences,
+  logs,
+  modal,
+  questions,
+  resources,
+};

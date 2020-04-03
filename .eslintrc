@@ -46,8 +46,8 @@
     },
     {
       "files": ["features/**/*.js"],
-      "extends": ["plugin:chai-expect/recommended"],
-      "plugins": ["chai-expect"],
+      "extends": ["@socialgouv/eslint-config-strict", "plugin:chai-expect/recommended", "prettier"],
+      "plugins": ["chai-expect", "prettier"],
       "env": {
         "browser": true,
         "node": true
@@ -65,6 +65,9 @@
       "globals": {
         "testRender": false,
         "waitFor": false
+      },
+      "rules": {
+        "jest/expect-expect": ["warn", { "assertFunctionNames": ["expect", "expectSaga"] }]
       }
     }
   ]

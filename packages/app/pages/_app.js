@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/browser";
 import withReduxSaga from "next-redux-saga";
 import withRedux from "next-redux-wrapper";
 import App from "next/app";
@@ -22,11 +23,37 @@ class MainApp extends App {
   constructor(props) {
     super(props);
 
+    // https://docs.sentry.io/error-reporting/quickstart/?platform=browsernpm#configure-the-sdk
+    Sentry.init({
+      dsn: "https://bfc08097bb1142d1b1069e63cf34dcd8@sentry.fabrique.social.gouv.fr/32",
+    });
+
     const {
       pageProps: { me },
     } = props;
 
     cache.set("me", me);
+  }
+
+  static getDerivedStateFromProps() {
+    const me = cache.get("me");
+
+    if (me.isAuthenticated) {
+      const { id, role, name: username } = me.data;
+
+      Sentry.configureScope(scope => {
+        scope.setTag("scope", "app");
+        scope.setTag("side", "client");
+        scope.setUser({ id, role, username });
+      });
+    } else {
+      Sentry.configureScope(scope => {
+        scope.setTag("scope", "app");
+        scope.setTag("side", "client");
+      });
+    }
+
+    return null;
   }
 
   async login() {

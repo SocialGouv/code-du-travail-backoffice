@@ -5,5 +5,6 @@ import legalReferences from "./legal-references";
 import logs from "./logs";
 import modal from "./modal";
 import questions from "./questions";
+import resources from "./resources";
 
-export { agreements, answers, comments, legalReferences, logs, modal, questions };
+export { agreements, answers, comments, legalReferences, logs, modal, questions, resources };
