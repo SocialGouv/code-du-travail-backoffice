@@ -96,7 +96,6 @@ describe.skip("blocks/<Answer /> (Draft)", () => {
     expect(γ.container).toMatchSnapshot();
   });
 
-  // eslint-disable-next-line max-len
   it("should match snapshot diff with a National Agreement generic reference", () => {
     const newProps = {
       ...props,

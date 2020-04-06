@@ -109,11 +109,7 @@ class LegalReferencesMigrationIndex extends React.Component {
 
           let foundReferences;
           if (category === LEGAL_REFERENCE_CATEGORY.AGREEMENT) {
-            foundReferences = await this.findReferences(
-              category,
-              value.replace(/article\s+?/i, ""),
-              answer.agreement.idcc,
-            );
+            foundReferences = await this.findReferences(category, value, answer.agreement.idcc);
           } else {
             foundReferences = await this.findReferences(category, value);
           }

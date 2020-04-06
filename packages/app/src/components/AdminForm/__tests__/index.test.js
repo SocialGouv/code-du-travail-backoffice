@@ -346,7 +346,6 @@ describe.skip("components/<AdminForm /> (edit)", () => {
   });
 });
 
-// eslint-disable-next-line max-len
 describe.skip("components/<AdminForm /> (create / NO custom API)", () => {
   const props = {
     apiPath: "/an-api-path",
@@ -409,7 +408,6 @@ describe.skip("components/<AdminForm /> (create / NO custom API)", () => {
   });
 });
 
-// eslint-disable-next-line max-len
 describe.skip("components/<AdminForm /> (edit / NO custom API)", () => {
   const props = {
     apiPath: "/an-api-path",
@@ -462,7 +460,6 @@ describe.skip("components/<AdminForm /> (edit / NO custom API)", () => {
   });
 });
 
-// eslint-disable-next-line max-len
 describe.skip("components/<AdminForm /> (edit / isApiFunction)", () => {
   const props = {
     apiPath: "/an-api-path",

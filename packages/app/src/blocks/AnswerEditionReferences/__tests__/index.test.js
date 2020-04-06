@@ -7,7 +7,6 @@ import AnswerEditionReferencesBlock from "..";
 
 describe.skip("blocks/<AnswerEditionReferencesBlock />", () => {
   const props = {
-    // eslint-disable-next-line max-len
     laborCodeReferences: require("../../../../static/data/labor-law-references.json"),
     onAdd: jest.fn(),
     onRemove: jest.fn(),
