@@ -29,7 +29,7 @@ function findAgreementArticles(idcc, query) {
     cleanQuery = cleanQuery.replace(/'(\d{1,2}$)/, " '» 'Article $1$");
   }
 
-  /** @type {Fuse.FuseOptions<import("../types").Article>} */
+  /** @type {Fuse.IFuseOptions<import("../types").Article>} */
   const fuseJsOptions = {
     caseSensitive: false,
     distance: 999,
@@ -45,7 +45,7 @@ function findAgreementArticles(idcc, query) {
 
   const fuseJs = new FuseJs(allArticles, fuseJsOptions);
   const foundArticles =
-    /** @type {Fuse.FuseResultWithScore<import("../types").Article>[]} */
+    /** @type {Fuse.FuseResult<import("../types").Article>[]} */
     (fuseJs.search(cleanQuery));
 
   const foundArticlesWithScore = foundArticles
