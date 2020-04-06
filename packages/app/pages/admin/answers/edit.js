@@ -550,7 +550,6 @@ export class AdminAnwsersEditPage extends React.Component {
                   <Input
                     disabled={this.state.isUpdating}
                     key={this.state.otherReferenceValueInputKey}
-                    // eslint-disable-next-line max-len
                     placeholder="Référence (ex: Décret n°82-447 du 28 mai 1982…)"
                     ref={node => (this.$otherReferenceValueInput = node)}
                   />

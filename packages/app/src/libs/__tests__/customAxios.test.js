@@ -1,7 +1,6 @@
 jest.unmock("../customAxios");
 
 describe.skip("libs/customAxios()", () => {
-  // eslint-disable-next-line max-len
   it("should redirect to /login with no JWT in session", () => {
     jest.unmock("axios");
     const customAxios = require("../customAxios").default;
@@ -13,7 +12,6 @@ describe.skip("libs/customAxios()", () => {
     expect(global.nextRouter.push).toHaveBeenCalledWith("/login?redirectTo=/a-path");
   });
 
-  // eslint-disable-next-line max-len
   it(`should return an non-authenticated "axios" instance with no JWT in session`, () => {
     jest.unmock("axios");
     const customAxios = require("../customAxios").default;
@@ -27,7 +25,6 @@ describe.skip("libs/customAxios()", () => {
     expect(sessionStorage.getItem("jwt")).toBe(null);
   });
 
-  // eslint-disable-next-line max-len
   it(`should return an authenticated "axios" instance with a JWT in session`, async () => {
     jest.unmock("axios");
     const customAxios = require("../customAxios").default;

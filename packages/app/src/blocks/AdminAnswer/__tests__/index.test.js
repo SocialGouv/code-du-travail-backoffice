@@ -57,7 +57,6 @@ describe.skip("blocks/<AdminAnswer /> (Draft)", () => {
   });
 });
 
-// eslint-disable-next-line max-len
 describe.skip("blocks/<AdminAnswer /> (Draft falling back to LC)", () => {
   const props = {
     ...PROPS,
@@ -74,7 +73,6 @@ describe.skip("blocks/<AdminAnswer /> (Draft falling back to LC)", () => {
   });
 });
 
-// eslint-disable-next-line max-len
 describe.skip("blocks/<AdminAnswer /> (Draft falling back to NA)", () => {
   const props = {
     ...PROPS,

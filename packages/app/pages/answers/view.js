@@ -147,7 +147,6 @@ class AnswersViewPage extends React.Component {
     try {
       const referencesSelect = `select=*`;
       const referencesWhere = `answer_id=eq.${this.props.id}`;
-      /* eslint-disable-next-line max-len */
       const referencesUri = `/answers_references?${referencesSelect}&${referencesWhere}`;
       const { data: references } = await this.axios.get(referencesUri);
 

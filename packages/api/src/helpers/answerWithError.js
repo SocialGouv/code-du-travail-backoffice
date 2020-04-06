@@ -8,7 +8,11 @@ const { COMMON_HEADERS } = require("../constants");
  * @param {import("http").ServerResponse=} res
  */
 function answerWithError(path, error, res) {
-  const bodyJson = { errors: [] };
+  const bodyJson = {
+    /** @type {string[]} */
+    errors: [],
+  };
+
   switch (true) {
     case typeof error === "string":
       bodyJson.errors.push(error);
