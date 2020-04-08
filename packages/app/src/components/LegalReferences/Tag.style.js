@@ -16,26 +16,19 @@ export const Container = styled(Flex)`
   }
 `;
 
-export const Index = styled.span`
-  background-color: var(--color-shadow);
-  color: white;
-  font-weight: 700;
+export const Label = styled.div`
   padding: 0.2rem 0.4rem;
 `;
 
-export const Label = styled.span`
-  max-width: 20rem;
-  overflow: hidden;
-  padding: 0.2rem 0.4rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+export const ButtonsContainer = styled(Flex)`
+  min-width: auto;
+  padding: 0.4rem 0.5rem 0;
 `;
 
-export const Button = styled(Flex)`
-  background-color: var(--color-periwinkle);
+export const Button = styled.div`
   cursor: pointer;
   min-height: 100%;
-  padding: 0 0.4rem;
+  margin-left: 0.75rem;
 
   > img {
     height: 0.75rem;
@@ -45,8 +38,6 @@ export const Button = styled(Flex)`
   }
 
   :hover {
-    background-color: var(--color-alice-blue);
-
     > img {
       opacity: 1;
     }
