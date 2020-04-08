@@ -8,12 +8,14 @@ import { Container } from "./index.style";
 import Tag from "./Tag";
 
 export function getReferences({ category, isReadOnly, onRemove, references }) {
-  return references.map(({ id, value }) => (
+  return references.map(({ dila_id, id, url, value }, index) => (
     <Tag
       category={category}
+      dila_id={dila_id}
       id={id}
-      key={id}
+      key={String(index)}
       onRemove={!isReadOnly ? () => onRemove(id) : undefined}
+      url={url}
       value={value}
     />
   ));
@@ -48,7 +50,9 @@ function LegalReferences({
           suggestionsFilter={() => true}
         />
       )}
-      <Flex flexWrap="wrap">{getReferences({ category, isReadOnly, onRemove, references })}</Flex>
+      <Flex flexDirection="column">
+        {getReferences({ category, isReadOnly, onRemove, references })}
+      </Flex>
     </Container>
   );
 }

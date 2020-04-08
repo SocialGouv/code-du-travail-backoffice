@@ -8,6 +8,7 @@ module.exports = {
     "\\.css$": "identity-obj-proxy",
   },
   rootDir: "../..",
+  roots: [`<rootDir>/packages/app`],
   // https://github.com/facebook/create-react-app/issues/2007#issuecomment-296694661
   setupFilesAfterEnv: ["<rootDir>/packages/app/tests/jest.setup.js"],
   snapshotSerializers: ["jest-emotion"],

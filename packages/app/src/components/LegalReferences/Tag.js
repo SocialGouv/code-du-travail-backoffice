@@ -1,7 +1,7 @@
 import React from "react";
 
-import customAxios from "../../libs/customAxios";
-import { Button, Container, Index, Label, Tooltip } from "./Tag.style";
+import getLabelAndContent from "./getLabelAndContent";
+import { Button, ButtonsContainer, Container, Label, Tooltip } from "./Tag.style";
 
 const BASE_URL = {
   agreement: "https://beta.legifrance.gouv.fr/conv_coll/id/",
@@ -14,68 +14,45 @@ export default class Tag extends React.PureComponent {
 
     this.state = {
       content: null,
-      index: null,
-      title: null,
+      isLoading: true,
+      label: null,
     };
   }
 
   componentDidMount() {
-    const { value } = this.props;
-
-    if (value.startsWith("KALI") || value.startsWith("LEGI")) {
-      this.loadContent();
-    }
+    this.loadLabelAndContent();
   }
 
-  async loadContent() {
-    const { value } = this.props;
+  async loadLabelAndContent() {
+    const { dila_id, value } = this.props;
 
-    const {
-      data: { content, index, title },
-    } = await customAxios().get(`/legal-references/${value}`);
+    const [label, content] = await getLabelAndContent(value, dila_id);
 
-    this.setState({ content, index, title });
+    this.setState({
+      content,
+      isLoading: false,
+      label,
+    });
   }
 
   openUrl() {
-    const { category, value } = this.props;
+    const { category, dila_id, url } = this.props;
 
-    window.open(`${BASE_URL[category]}${value}`, "_blank");
-  }
+    if (url !== null) {
+      window.open(url, "_blank");
 
-  getContent() {
-    const { value } = this.props;
-    const { content, index, title } = this.state;
-    const label = `${title !== null ? title : value}${index !== null ? ` » Article ${index}` : ""}`;
-
-    return `${label}\n\n${content}`;
-  }
-
-  renderLabel() {
-    const { value } = this.props;
-    const { index, title } = this.state;
-    const label = title !== null ? title : value;
-    const parts = [];
-
-    if (index !== null) {
-      parts.push(<Index key="index">{index}</Index>);
+      return;
     }
 
-    if (!value.startsWith("LEGI")) {
-      parts.push(<Label key="label">{label}</Label>);
-    }
-
-    return parts;
+    window.open(`${BASE_URL[category]}${dila_id}`, "_blank");
   }
 
   renderButtons() {
-    const { id, onRemove } = this.props;
-    const { content } = this.state;
+    const { dila_id, id, onRemove, url } = this.props;
 
-    const hasContent = content !== null && content.length !== 0;
     const parts = [];
 
-    if (hasContent) {
+    if (dila_id !== null || url !== null) {
       parts.push(
         <Button alignItems="center" key="link" onClick={this.openUrl.bind(this)}>
           <img alt="" src="/static/images/link.svg" />
@@ -96,18 +73,22 @@ export default class Tag extends React.PureComponent {
       );
     }
 
-    return parts;
+    return <ButtonsContainer>{parts}</ButtonsContainer>;
   }
 
   render() {
     const { id } = this.props;
-    const { content } = this.state;
+    const { content, isLoading, label } = this.state;
+
+    if (isLoading) {
+      return <Container alignItems="center">…</Container>;
+    }
 
     const hasContent = content !== null && content.length !== 0;
 
     return (
-      <Container alignItems="center" data-for={id} data-tip={this.getContent()}>
-        {this.renderLabel()}
+      <Container alignItems="start" data-for={id} data-tip={content} justifyContent="space-between">
+        <Label key="label">{label}</Label>
         {this.renderButtons()}
         {hasContent && (
           <Tooltip

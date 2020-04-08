@@ -201,7 +201,6 @@ class LegalReferencesMigrationIndex extends React.Component {
     const reference = answersWithReferences[answersWithReferencesIndex].references.find(
       ({ id }) => id === answerReferenceId,
     );
-    reference.value = reference.dila_id;
     delete reference.created_at;
     delete reference.updated_at;
 
@@ -247,10 +246,10 @@ class LegalReferencesMigrationIndex extends React.Component {
     const { currentReferenceId } = this.state;
     return references.map(({ category, dila_id, id, value }) => {
       const data = id === currentReferenceId ? this.props.legalReferences.data : [];
-      const referencesList = dila_id !== null ? [{ id: dila_id, value: dila_id }] : [];
+      const referencesList = dila_id !== null ? [{ dila_id, value }] : [];
 
       return (
-        <Flex alignItems="center" key={id} style={{ minHeight: "5.5rem" }}>
+        <Flex alignItems="baseline" key={id} style={{ marginBottom: "1.5rem" }}>
           <Flex width={0.4}>
             <strong>{value}</strong>
           </Flex>
