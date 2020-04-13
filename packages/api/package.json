@@ -11,20 +11,20 @@
   },
   "dependencies": {
     "@inspired-beings/log": "1.2.0",
-    "@socialgouv/kali-data": "1.7.0",
+    "@socialgouv/kali-data": "1.13.0",
     "fuse.js": "5.1.0",
     "html-to-text": "5.1.1",
     "http-proxy": "1.18.0",
     "jsonwebtoken": "8.5.1",
     "knex": "0.20.13",
     "node-cache": "5.1.0",
-    "pg": "8.0.0"
+    "pg": "8.0.2"
   },
   "devDependencies": {
-    "@types/node": "13.11.0",
+    "@types/node": "13.11.1",
     "cross-env": "7.0.2",
     "dotenv": "8.2.0",
-    "nodemon": "2.0.2",
+    "nodemon": "2.0.3",
     "typescript": "3.8.3"
   }
 }
