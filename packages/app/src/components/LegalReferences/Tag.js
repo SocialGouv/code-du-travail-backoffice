@@ -1,14 +1,16 @@
+import PropTypes from "prop-types";
 import React from "react";
 
+import Button from "../../elements/Button";
 import getLabelAndContent from "./getLabelAndContent";
-import { Button, ButtonsContainer, Container, Label, Tooltip } from "./Tag.style";
+import { ButtonsContainer, Container, Label, Tooltip } from "./Tag.style";
 
 const BASE_URL = {
   agreement: "https://beta.legifrance.gouv.fr/conv_coll/id/",
   labor_code: "https://beta.legifrance.gouv.fr/codes/article_lc/",
 };
 
-export default class Tag extends React.PureComponent {
+class Tag extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -48,28 +50,23 @@ export default class Tag extends React.PureComponent {
   }
 
   renderButtons() {
-    const { dila_id, id, onRemove, url } = this.props;
+    const { dila_id, id, isReadOnly, onChange, onRemove, url } = this.props;
 
     const parts = [];
 
     if (dila_id !== null || url !== null) {
       parts.push(
-        <Button alignItems="center" key="link" onClick={this.openUrl.bind(this)}>
-          <img alt="" src="/static/images/link.svg" />
-        </Button>,
+        <Button icon="link" isSmall isTransparent key="1" onClick={this.openUrl.bind(this)} />,
       );
     }
 
-    if (onRemove !== undefined) {
+    if (!isReadOnly) {
       parts.push(
-        <Button
-          alignItems="center"
-          key="delete"
-          onClick={() => onRemove(id)}
-          src="/static/images/delete.svg"
-        >
-          <img alt="" src="/static/images/delete.svg" />
-        </Button>,
+        <Button icon="pen" isSmall isTransparent key="2" onClick={() => console.log("edit")} />,
+      );
+
+      parts.push(
+        <Button icon="trash" isSmall isTransparent key="3" onClick={() => onRemove(id)} />,
       );
     }
 
@@ -77,7 +74,7 @@ export default class Tag extends React.PureComponent {
   }
 
   render() {
-    const { id } = this.props;
+    const { category, dila_id, id } = this.props;
     const { content, isLoading, label } = this.state;
 
     if (isLoading) {
@@ -85,9 +82,16 @@ export default class Tag extends React.PureComponent {
     }
 
     const hasContent = content !== null && content.length !== 0;
+    const isLegacy = category !== null && dila_id === null;
 
     return (
-      <Container alignItems="start" data-for={id} data-tip={content} justifyContent="space-between">
+      <Container
+        alignItems="start"
+        data-for={id}
+        data-tip={content}
+        isLegacy={isLegacy}
+        justifyContent="space-between"
+      >
         <Label key="label">{label}</Label>
         {this.renderButtons()}
         {hasContent && (
@@ -104,3 +108,16 @@ export default class Tag extends React.PureComponent {
     );
   }
 }
+
+Tag.propTypes = {
+  category: PropTypes.string,
+  dila_id: PropTypes.string,
+  id: PropTypes.string,
+  isReadOnly: PropTypes.bool,
+  onChange: PropTypes.func,
+  onRemove: PropTypes.func,
+  url: PropTypes.string,
+  value: PropTypes.string,
+};
+
+export default Tag;

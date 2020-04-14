@@ -6,6 +6,7 @@ const Checkbox = ({ color = "primary", isChecked = false, onClick, ...props }) =
   <Button
     color={color}
     icon={isChecked ? "check-square" : "square"}
+    isTransparent
     onClick={onClick}
     role="checkbox"
     {...props}

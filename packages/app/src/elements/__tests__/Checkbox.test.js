@@ -7,7 +7,6 @@ describe("elements/<Checkbox />", () => {
     const $button = testRender(<Checkbox />);
     const $icon = $button.findByType("svg");
 
-    expect($button).toMatchSnapshot();
     expect($button).toHaveStyleRule("background-color", "transparent");
     expect($icon.props).toHaveProperty("data-icon", "square");
     expect($icon.props).toHaveProperty("color", "var(--color-lapis-lazuli)");

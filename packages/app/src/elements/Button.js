@@ -5,9 +5,9 @@ import { Button as _Button } from "rebass";
 import Icon from "./Icon";
 
 const Container = styled(_Button)`
-  background-color: ${p => (p.hasText ? p.color : "transparent")};
+  background-color: ${p => p.backgroundColor};
   border-radius: 0.125rem;
-  color: ${p => (p.isLight ? "var(--color-eerie-black)" : "white")};
+  color: ${p => p.foregroundColor};
   cursor: ${p => (p.disabled ? "not-allowed" : "pointer")};
   display: flex;
   font-size: 0.9375rem;
@@ -15,8 +15,8 @@ const Container = styled(_Button)`
   margin-right: ${p => (p.hasGroup ? "1rem" : 0)};
   min-height: 1.25rem;
   min-width: 1.25rem;
-  opacity: ${p => (p.disabled ? 0.25 : 1)};
-  padding: ${p => (p.isSmall ? "0.1rem 0.5rem 0.15rem" : "0.3rem 1rem 0.3rem")};
+  opacity: ${p => (p.disabled ? 0.25 : 0.75)};
+  padding: ${p => (p.isSmall ? "0.1rem 0.4rem 0.15rem" : "0.3rem 1rem 0.3rem")};
   white-space: nowrap;
 
   :hover {
@@ -47,54 +47,30 @@ const Button = ({
   hasGroup = false,
   icon,
   isSmall = false,
+  isTransparent = false,
   ...props
 }) => {
-  const isLight = COLOR[color].isLight;
-
-  if (icon === undefined)
-    return (
-      <Container
-        color={COLOR[color].value}
-        disabled={disabled}
-        hasGroup={hasGroup}
-        hasText
-        isLight={isLight}
-        isSmall={isSmall}
-        {...props}
-      >
-        {children}
-      </Container>
-    );
-
   const hasText = children !== undefined;
-
-  if (hasText) {
-    return (
-      <Container
-        color={COLOR[color].value}
-        disabled={disabled}
-        hasGroup={hasGroup}
-        hasText
-        isLight={isLight}
-        isSmall={isSmall}
-        {...props}
-      >
-        <Icon color={isLight ? "var(--color-eerie-black)" : "white"} icon={icon} />
-        {children}
-      </Container>
-    );
-  }
+  const isLight = COLOR[color].isLight;
+  const backgroundColor = isTransparent ? "transparent" : COLOR[color].value;
+  const foregroundColor = isTransparent
+    ? COLOR[color].value
+    : isLight
+    ? "var(--color-eerie-black)"
+    : "white";
 
   return (
     <Container
+      backgroundColor={backgroundColor}
       disabled={disabled}
+      foregroundColor={foregroundColor}
       hasGroup={hasGroup}
-      hasText={false}
-      isLight={isLight}
+      hasText={hasText}
       isSmall={isSmall}
       {...props}
     >
-      <Icon color={COLOR[color].value} icon={icon} />
+      {icon !== undefined && <Icon color={foregroundColor} icon={icon} />}
+      {children}
     </Container>
   );
 };

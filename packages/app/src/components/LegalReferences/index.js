@@ -7,16 +7,16 @@ import { LEGAL_REFERENCE_CATEGORY } from "../../constants";
 import { Container } from "./index.style";
 import Tag from "./Tag";
 
-export function getReferences({ category, isReadOnly, onRemove, references }) {
+export function getReferences({ category, references, ...props }) {
   return references.map(({ dila_id, id, url, value }, index) => (
     <Tag
       category={category}
       dila_id={dila_id}
       id={id}
       key={String(index)}
-      onRemove={!isReadOnly ? () => onRemove(id) : undefined}
       url={url}
       value={value}
+      {...props}
     />
   ));
 }
@@ -26,6 +26,7 @@ function LegalReferences({
   data = [],
   isReadOnly = false,
   onAdd = () => undefined,
+  onChange = () => undefined,
   onInput = () => undefined,
   onRemove = () => undefined,
   references = [],
@@ -51,17 +52,20 @@ function LegalReferences({
         />
       )}
       <Flex flexDirection="column">
-        {getReferences({ category, isReadOnly, onRemove, references })}
+        {getReferences({ category, isReadOnly, onChange, onRemove, references })}
       </Flex>
     </Container>
   );
 }
 
 LegalReferences.propTypes = {
+  category: PropTypes.string,
   data: PropTypes.array,
   isReadOnly: PropTypes.bool,
   label: PropTypes.string,
   onAdd: PropTypes.func,
+  onChange: PropTypes.func,
+  onInput: PropTypes.func,
   onRemove: PropTypes.func,
   references: PropTypes.array,
 };

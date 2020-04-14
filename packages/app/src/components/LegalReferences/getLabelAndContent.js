@@ -1,5 +1,11 @@
 import customAxios from "../../libs/customAxios";
 
+/**
+ * Generate a legal reference tag label and content.
+ *
+ * @param {string} value
+ * @param {string | null} dila_id
+ */
 export default async function getLabelAndContent(value, dila_id) {
   if (dila_id === null) return [value, null];
 

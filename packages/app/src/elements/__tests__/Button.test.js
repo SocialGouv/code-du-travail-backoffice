@@ -9,12 +9,11 @@ describe("elements/<Button />", () => {
   it(`should pass`, () => {
     const $button = testRender(<Button>{TEXT}</Button>);
 
-    expect($button).toMatchSnapshot();
     expect($button).toHaveStyleRule("background-color", "var(--color-lapis-lazuli)");
     expect($button).toHaveStyleRule("color", "white");
     expect($button).toHaveStyleRule("cursor", "pointer");
     expect($button).toHaveStyleRule("margin-right", "0");
-    expect($button).toHaveStyleRule("opacity", "1");
+    expect($button).toHaveStyleRule("opacity", "0.75");
     expect($button).toHaveStyleRule("padding", "0.3rem 1rem 0.3rem");
     expect($button).toHaveStyleRule("opacity", "1", { target: ":hover" });
     expect($button).toHaveStyleRule("cursor", "pointer", { target: "svg" });
@@ -28,9 +27,9 @@ describe("elements/<Button />", () => {
     );
     const $icon = $button.findByType("svg");
 
-    expect($icon.props).toHaveProperty("color", "white");
     expect($button).toHaveStyleRule("background-color", "var(--color-shadow)");
     expect($button).toHaveStyleRule("color", "white");
+    expect($icon.props).toHaveProperty("color", "white");
   });
 
   it(`should pass with {color} = "info"`, () => {
@@ -41,9 +40,9 @@ describe("elements/<Button />", () => {
     );
     const $icon = $button.findByType("svg");
 
-    expect($icon.props).toHaveProperty("color", "white");
     expect($button).toHaveStyleRule("background-color", "var(--color-misty-moss)");
     expect($button).toHaveStyleRule("color", "white");
+    expect($icon.props).toHaveProperty("color", "white");
   });
 
   it(`should pass with {color} = "primary"`, () => {
@@ -54,9 +53,9 @@ describe("elements/<Button />", () => {
     );
     const $icon = $button.findByType("svg");
 
-    expect($icon.props).toHaveProperty("color", "white");
     expect($button).toHaveStyleRule("background-color", "var(--color-lapis-lazuli)");
     expect($button).toHaveStyleRule("color", "white");
+    expect($icon.props).toHaveProperty("color", "white");
   });
 
   it(`should pass with {color} = "secondary"`, () => {
@@ -67,9 +66,9 @@ describe("elements/<Button />", () => {
     );
     const $icon = $button.findByType("svg");
 
-    expect($icon.props).toHaveProperty("color", "var(--color-eerie-black)");
     expect($button).toHaveStyleRule("background-color", "var(--color-periwinkle)");
     expect($button).toHaveStyleRule("color", "var(--color-eerie-black)");
+    expect($icon.props).toHaveProperty("color", "var(--color-eerie-black)");
   });
 
   it(`should pass with {color} = "warning"`, () => {
@@ -80,9 +79,9 @@ describe("elements/<Button />", () => {
     );
     const $icon = $button.findByType("svg");
 
-    expect($icon.props).toHaveProperty("color", "white");
     expect($button).toHaveStyleRule("background-color", "var(--color-lapis-lazuli)");
     expect($button).toHaveStyleRule("color", "white");
+    expect($icon.props).toHaveProperty("color", "white");
   });
 
   it(`should pass with {disabled}`, () => {
@@ -103,17 +102,25 @@ describe("elements/<Button />", () => {
   it(`should pass with {icon} = "sync"`, () => {
     const $button = testRender(<Button icon={ICON}>{TEXT}</Button>);
 
-    expect($button).toMatchSnapshot();
     expect($button).toHaveStyleRule("background-color", "var(--color-lapis-lazuli)");
     expect($button).toHaveStyleRule("margin-right", "0.25rem", { target: "svg" });
     expect($button).toHaveStyleRule("padding-top", "0.125rem", { target: "svg" });
   });
 
-  it(`should have a transparent background with {icon} = "sync" and no children`, () => {
+  it(`should pass with {icon} = "sync" and no children`, () => {
     const $button = testRender(<Button icon={ICON} />);
 
-    expect($button).toMatchSnapshot();
-    expect($button).toHaveStyleRule("background-color", "transparent");
+    expect($button).toHaveStyleRule("background-color", "var(--color-lapis-lazuli)");
+    expect($button).toHaveStyleRule("margin-right", "0", { target: "svg" });
+    expect($button).toHaveStyleRule("padding-top", "0", { target: "svg" });
+  });
+
+  it(`should pass with {icon} = "sync", no children and {disabled}`, () => {
+    const $button = testRender(<Button disabled icon={ICON} />);
+
+    expect($button).toHaveStyleRule("background-color", "var(--color-lapis-lazuli)");
+    expect($button).toHaveStyleRule("cursor", "not-allowed");
+    expect($button).toHaveStyleRule("cursor", "not-allowed", { target: "svg" });
     expect($button).toHaveStyleRule("margin-right", "0", { target: "svg" });
     expect($button).toHaveStyleRule("padding-top", "0", { target: "svg" });
   });
@@ -121,6 +128,13 @@ describe("elements/<Button />", () => {
   it(`should pass with {isSmall}`, () => {
     const $button = testRender(<Button isSmall>{TEXT}</Button>);
 
-    expect($button).toHaveStyleRule("padding", "0.1rem 0.5rem 0.15rem");
+    expect($button).toHaveStyleRule("padding", "0.1rem 0.4rem 0.15rem");
+  });
+
+  it(`should pass with {isTransparent}`, () => {
+    const $button = testRender(<Button isTransparent>{TEXT}</Button>);
+
+    expect($button).toHaveStyleRule("background-color", "transparent");
+    expect($button).toHaveStyleRule("color", "var(--color-lapis-lazuli)");
   });
 });
