@@ -203,6 +203,7 @@ class LegalReferencesMigrationIndex extends React.Component {
     );
     delete reference.created_at;
     delete reference.updated_at;
+    reference.value = "";
 
     dispatch(
       actions.answers.updateReferences([reference], () =>
@@ -244,37 +245,39 @@ class LegalReferencesMigrationIndex extends React.Component {
 
   renderReferences(references, idcc, answersWithReferencesIndex) {
     const { currentReferenceId } = this.state;
-    return references.map(({ category, dila_id, id, value }) => {
-      const data = id === currentReferenceId ? this.props.legalReferences.data : [];
-      const referencesList = dila_id !== null ? [{ dila_id, value }] : [];
+    return references.map(reference => {
+      const data = reference.id === currentReferenceId ? this.props.legalReferences.data : [];
+      const referencesList = reference.dila_id !== null ? [reference] : [];
 
       return (
-        <Flex alignItems="baseline" key={id} style={{ marginBottom: "1.5rem" }}>
+        <Flex alignItems="baseline" key={reference.id} style={{ marginBottom: "1.5rem" }}>
           <Flex width={0.4}>
-            <strong>{value}</strong>
+            <strong>{reference.value}</strong>
           </Flex>
           <Flex alignItems="flex-start" justifyContent="flex-end" width={0.6}>
             <LegalReferences
-              category={category}
+              category={reference.category}
               data={data}
-              onAdd={data => this.updateReference(answersWithReferencesIndex, id, data)}
-              onInput={query => this.loadLegalReferences(id, category, query, idcc)}
-              onRemove={() => this.updateReference(answersWithReferencesIndex, id)}
+              onAdd={data => this.updateReference(answersWithReferencesIndex, reference.id, data)}
+              onInput={query =>
+                this.loadLegalReferences(reference.id, reference.category, query, idcc)
+              }
+              onRemove={() => this.updateReference(answersWithReferencesIndex, reference.id)}
               references={referencesList}
               style={{ flexGrow: 1 }}
             />
             <Button
               color="danger"
-              disabled={dila_id === null}
+              disabled={reference.dila_id === null}
               hasGroup
-              onClick={() => this.skipReference(answersWithReferencesIndex, id)}
+              onClick={() => this.skipReference(answersWithReferencesIndex, reference.id)}
               style={{ marginLeft: "1rem", minWidth: "5.75rem" }}
             >
               PASSER
             </Button>
             <Button
-              disabled={dila_id === null}
-              onClick={() => this.migrateReference(answersWithReferencesIndex, id)}
+              disabled={reference.dila_id === null}
+              onClick={() => this.migrateReference(answersWithReferencesIndex, reference.id)}
               style={{ minWidth: "5.75rem" }}
             >
               MIGRER
