@@ -1,5 +1,11 @@
 import customAxios from "../../libs/customAxios";
 
+/**
+ * Generate a legal reference tag label and content.
+ *
+ * @param {string} value
+ * @param {string | null} dila_id
+ */
 export default async function getLabelAndContent(value, dila_id) {
   if (dila_id === null) return [value, null];
 
@@ -8,11 +14,9 @@ export default async function getLabelAndContent(value, dila_id) {
   } = await customAxios().get(`/legal-references/${dila_id}`);
 
   const labelChunks = [];
-  if (index !== null) {
-    labelChunks.push(`[${index}]`);
-  }
 
-  if (/^(KALI|LEGI)/.test(value)) {
+  if (value.trim().length === 0 || /^(KALI|LEGI)/.test(value)) {
+    labelChunks.push(`[${index}]`);
     labelChunks.push(title);
   } else {
     labelChunks.push(value);

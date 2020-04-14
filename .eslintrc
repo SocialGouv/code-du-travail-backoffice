@@ -26,7 +26,10 @@
       }
     },
     {
-      "files": ["packages/app/src/templates/**/*.js"],
+      "files": [
+        "packages/app/src/components/LegalReferences/**/*.js",
+        "packages/app/src/templates/**/*.js"
+      ],
       "extends": ["@socialgouv/eslint-config-react-strict", "prettier"],
       "env": {
         "browser": true,

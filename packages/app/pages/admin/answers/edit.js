@@ -326,7 +326,7 @@ export class AdminAnwsersEditPage extends React.Component {
   }
 
   handleCommentField(event) {
-    if (event.charCode !== 13) return;
+    if (event.key !== "Enter") return;
 
     if (event.shiftKey) {
       event.preventDefault();
@@ -377,6 +377,10 @@ export class AdminAnwsersEditPage extends React.Component {
     };
 
     this.props.dispatch(actions.answers.addReferences([reference], this.load.bind(this)));
+  }
+
+  updateReference(data) {
+    this.props.dispatch(actions.answers.updateReferences([data], this.load.bind(this)));
   }
 
   removeReference(answerReferenceId) {
@@ -537,7 +541,9 @@ export class AdminAnwsersEditPage extends React.Component {
                         ? legalReferences.data
                         : []
                     }
+                    isEditable
                     onAdd={data => this.addReference(LEGAL_REFERENCE_CATEGORY.AGREEMENT, data)}
+                    onChange={this.updateReference.bind(this)}
                     onInput={query =>
                       this.loadLegalReferences(LEGAL_REFERENCE_CATEGORY.AGREEMENT, query)
                     }

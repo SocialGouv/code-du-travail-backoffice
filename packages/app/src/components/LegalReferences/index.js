@@ -7,25 +7,19 @@ import { LEGAL_REFERENCE_CATEGORY } from "../../constants";
 import { Container } from "./index.style";
 import Tag from "./Tag";
 
-export function getReferences({ category, isReadOnly, onRemove, references }) {
-  return references.map(({ dila_id, id, url, value }, index) => (
-    <Tag
-      category={category}
-      dila_id={dila_id}
-      id={id}
-      key={String(index)}
-      onRemove={!isReadOnly ? () => onRemove(id) : undefined}
-      url={url}
-      value={value}
-    />
+export function getReferences({ references, ...globalProps }) {
+  return references.map((props, index) => (
+    <Tag key={String(index)} {...{ ...globalProps, ...props }} />
   ));
 }
 
 function LegalReferences({
   category,
   data = [],
+  isEditable = false,
   isReadOnly = false,
   onAdd = () => undefined,
+  onChange = () => undefined,
   onInput = () => undefined,
   onRemove = () => undefined,
   references = [],
@@ -51,19 +45,22 @@ function LegalReferences({
         />
       )}
       <Flex flexDirection="column">
-        {getReferences({ category, isReadOnly, onRemove, references })}
+        {getReferences({ isEditable, isReadOnly, onChange, onRemove, references })}
       </Flex>
     </Container>
   );
 }
 
 LegalReferences.propTypes = {
+  category: PropTypes.string,
   data: PropTypes.array,
+  isEditable: PropTypes.bool,
   isReadOnly: PropTypes.bool,
-  label: PropTypes.string,
   onAdd: PropTypes.func,
+  onChange: PropTypes.func,
+  onInput: PropTypes.func,
   onRemove: PropTypes.func,
-  references: PropTypes.array,
+  references: PropTypes.arrayOf(PropTypes.shape(Tag.propTypes)),
 };
 
 export default LegalReferences;
