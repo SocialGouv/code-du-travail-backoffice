@@ -2,15 +2,10 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import Button from "../../elements/Button";
+import LegalReferenceProps from "../../props/LegalReference";
 import getLabelAndContent from "./getLabelAndContent";
-import {
-  ButtonsContainer,
-  Container,
-  ContainerEditable,
-  Label,
-  LabelEditable,
-  Tooltip,
-} from "./Tag.style";
+import { ButtonsContainer, Container, Label, Tooltip } from "./Tag.style";
+import TagEditor from "./TagEditor";
 
 const BASE_URL = {
   agreement: "https://beta.legifrance.gouv.fr/conv_coll/id/",
@@ -25,49 +20,19 @@ class Tag extends React.PureComponent {
 
     this.state = {
       content: null,
-      isInput: false,
+      isEditing: false,
       isLoading: true,
       label: null,
     };
 
-    this.enableEdition = this._enableEdition.bind(this);
-    this.openUrl = this._openUrl.bind(this);
-    this.onDocumentKeyUp = this._onDocumentKeyUp.bind(this);
-    this.onKeyPress = this._onKeyPress.bind(this);
+    this.edit = this.edit.bind(this);
+    this.open = this.open.bind(this);
+    this.unedit = this.unedit.bind(this);
+    this.update = this.update.bind(this);
   }
 
   componentDidMount() {
     this.loadLabelAndContent();
-  }
-
-  componentDidUpdate() {
-    if (this.$input !== null) {
-      document.addEventListener("keyup", this.onDocumentKeyUp);
-
-      this.$input.el.current.addEventListener("keypress", this.onKeyPress);
-      this.$input.el.current.focus();
-    }
-  }
-
-  componentWillUnmount() {
-    const { isInput } = this.state;
-
-    if (isInput) {
-      this.disableEdition();
-    }
-  }
-
-  _onDocumentKeyUp(event) {
-    if (event.key !== "Escape") return;
-
-    this.disableEdition(true);
-  }
-
-  _onKeyPress(event) {
-    if (event.key !== "Enter") return;
-    event.preventDefault();
-
-    this.update();
   }
 
   async loadLabelAndContent() {
@@ -82,21 +47,16 @@ class Tag extends React.PureComponent {
     });
   }
 
-  _enableEdition() {
-    this.setState({ isInput: true });
+  edit() {
+    this.setState({ isEditing: true });
   }
 
-  disableEdition(andGoBack = false) {
-    document.removeEventListener("keyup", this.onDocumentKeyUp);
-
-    if (andGoBack) {
-      this.setState({ isInput: false });
-    }
+  unedit() {
+    this.setState({ isEditing: false });
   }
 
-  update() {
-    this.disableEdition();
-    const { answer_id, id, category, dila_id, onChange, url } = this.props;
+  update(value, url) {
+    const { answer_id, id, category, dila_id, onChange } = this.props;
 
     const data = {
       answer_id,
@@ -104,13 +64,13 @@ class Tag extends React.PureComponent {
       dila_id,
       id,
       url,
-      value: this.$input.lastHtml,
+      value,
     };
 
     onChange(data);
   }
 
-  _openUrl() {
+  open() {
     const { category, dila_id, url } = this.props;
 
     if (url !== null) {
@@ -128,11 +88,11 @@ class Tag extends React.PureComponent {
     const parts = [];
 
     if (dila_id !== null || url !== null) {
-      parts.push(<Button icon="link" isSmall isTransparent key="1" onClick={this.openUrl} />);
+      parts.push(<Button icon="link" isSmall isTransparent key="1" onClick={this.open} />);
     }
 
     if (isEditable) {
-      parts.push(<Button icon="pen" isSmall isTransparent key="2" onClick={this.enableEdition} />);
+      parts.push(<Button icon="pen" isSmall isTransparent key="2" onClick={this.edit} />);
     }
 
     if (!isReadOnly) {
@@ -145,22 +105,20 @@ class Tag extends React.PureComponent {
   }
 
   render() {
-    const { category, dila_id, id } = this.props;
-    const { content, isInput, isLoading, label } = this.state;
+    const { category, dila_id, id, url } = this.props;
+    const { content, isEditing, isLoading, label } = this.state;
 
     if (isLoading) {
       return <Container alignItems="center">…</Container>;
     }
 
-    if (isInput) {
+    const maybeUrl = category === null ? url : undefined;
+
+    if (isEditing) {
       return (
-        <ContainerEditable isLegacy={isLegacy}>
-          <LabelEditable
-            html={label}
-            onBlur={() => this.disableEdition(true)}
-            ref={$node => (this.$input = $node)}
-          />
-        </ContainerEditable>
+        <Container isEditing>
+          <TagEditor onCancel={this.unedit} onSubmit={this.update} url={maybeUrl} value={label} />
+        </Container>
       );
     }
 
@@ -193,16 +151,11 @@ class Tag extends React.PureComponent {
 }
 
 Tag.propTypes = {
-  answer_id: PropTypes.string.isRequired,
-  category: PropTypes.oneOf(["agreement", "labor_code", null]).isRequired,
-  dila_id: PropTypes.string,
-  id: PropTypes.string.isRequired,
+  ...LegalReferenceProps,
   isEditable: PropTypes.bool,
   isReadOnly: PropTypes.bool,
   onChange: PropTypes.func,
   onRemove: PropTypes.func,
-  url: PropTypes.string,
-  value: PropTypes.string.isRequired,
 };
 
 export default Tag;

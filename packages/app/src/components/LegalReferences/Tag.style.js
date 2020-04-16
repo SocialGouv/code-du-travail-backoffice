@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
-import ReactContentEditable from "react-contenteditable";
 import ReactTooltip from "react-tooltip";
 import { Flex } from "rebass";
 
 export const Container = styled(Flex)`
-  background-color: var(${({ isLegacy }) => (isLegacy ? "--color-pearl" : "--color-alice-blue")});
+  background-color: ${({ isEditing, isLegacy }) =>
+    isEditing ? "transparent" : isLegacy ? "var(--color-pearl)" : "var(--color-alice-blue)"};
   border: solid 1px var(--color-border);
-  cursor: help;
+  cursor: ${({ isEditing }) => (isEditing ? "auto" : "help")};
   font-size: 0.875rem;
   margin: 0.5rem 0.5rem 0 0;
   min-width: 34rem;
@@ -14,23 +14,11 @@ export const Container = styled(Flex)`
   user-select: none;
 
   :hover {
-    background-color: var(--color-periwinkle);
-  }
-`;
-export const ContainerEditable = styled(Container)`
-  background-color: white;
-  cursor: auto;
-
-  :hover {
-    background-color: white;
+    background-color: ${({ isEditing }) => (isEditing ? "white" : "var(--color-periwinkle)")};
   }
 `;
 
 export const Label = styled.div`
-  padding: 0.2rem 0.4rem;
-`;
-export const LabelEditable = styled(ReactContentEditable)`
-  flex-grow: 1;
   padding: 0.2rem 0.4rem;
 `;
 

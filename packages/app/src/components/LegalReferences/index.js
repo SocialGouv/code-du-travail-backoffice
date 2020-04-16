@@ -3,11 +3,16 @@ import React from "react";
 import ReactTagAutocomplete from "react-tag-autocomplete";
 import { Flex } from "rebass";
 
-import { LEGAL_REFERENCE_CATEGORY } from "../../constants";
+import LegalReferenceProps from "../../props/LegalReference";
 import { Container } from "./index.style";
 import Tag from "./Tag";
 
-export function getReferences({ references, ...globalProps }) {
+const LEGAL_REFERENCE_CATEGORY_PLACEHOLDER = {
+  agreement: "12, 36.3, 05.07.6…",
+  labor_code: "D1234, L1234, R1234…",
+};
+
+export function renderReferences({ references, ...globalProps }) {
   return references.map((props, index) => (
     <Tag key={String(index)} {...{ ...globalProps, ...props }} />
   ));
@@ -17,6 +22,7 @@ function LegalReferences({
   category,
   data = [],
   isEditable = false,
+  isLoading = false,
   isReadOnly = false,
   onAdd = () => undefined,
   onChange = () => undefined,
@@ -25,8 +31,21 @@ function LegalReferences({
   references = [],
   ...props
 }) {
-  const placeholder =
-    category === LEGAL_REFERENCE_CATEGORY.AGREEMENT ? "12, 36.3, 05.07.6…" : "D1234, L1234, R1234…";
+  if (isLoading) {
+    return <Container {...props}>…</Container>;
+  }
+
+  if (category === null) {
+    return (
+      <Container {...props}>
+        <Flex flexDirection="column">
+          {renderReferences({ isEditable, isReadOnly, onChange, onRemove, references })}
+        </Flex>
+      </Container>
+    );
+  }
+
+  const placeholder = LEGAL_REFERENCE_CATEGORY_PLACEHOLDER[category];
 
   return (
     <Container {...props}>
@@ -45,22 +64,23 @@ function LegalReferences({
         />
       )}
       <Flex flexDirection="column">
-        {getReferences({ isEditable, isReadOnly, onChange, onRemove, references })}
+        {renderReferences({ isEditable, isReadOnly, onChange, onRemove, references })}
       </Flex>
     </Container>
   );
 }
 
 LegalReferences.propTypes = {
-  category: PropTypes.string,
+  category: LegalReferenceProps.category,
   data: PropTypes.array,
   isEditable: PropTypes.bool,
+  isLoading: PropTypes.bool,
   isReadOnly: PropTypes.bool,
   onAdd: PropTypes.func,
   onChange: PropTypes.func,
   onInput: PropTypes.func,
   onRemove: PropTypes.func,
-  references: PropTypes.arrayOf(PropTypes.shape(Tag.propTypes)),
+  references: PropTypes.arrayOf(PropTypes.shape(LegalReferenceProps)),
 };
 
 export default LegalReferences;
