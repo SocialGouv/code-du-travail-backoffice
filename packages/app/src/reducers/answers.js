@@ -50,6 +50,7 @@ export default (state = initialState, { payload, type }) => {
     case actionTypes.ANSWERS_SET_FILTERS:
     case actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE:
     case actionTypes.ANSWERS_UPDATE_IS_PUBLISHED:
+    case actionTypes.ANSWERS_UPDATE_REFERENCES:
     case actionTypes.ANSWERS_UPDATE_STATE:
       return {
         ...state,

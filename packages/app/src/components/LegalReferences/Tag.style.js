@@ -4,7 +4,7 @@ import { Flex } from "rebass";
 
 export const Container = styled(Flex)`
   background-color: ${({ isEditing, isLegacy }) =>
-    isEditing ? "transparent" : isLegacy ? "var(--color-pearl)" : "var(--color-alice-blue)"};
+    isEditing ? "transparent" : isLegacy ? "var(--color-text-red)" : "var(--color-alice-blue)"};
   border: solid 1px var(--color-border);
   cursor: ${({ isEditing }) => (isEditing ? "auto" : "help")};
   font-size: 0.875rem;
@@ -14,7 +14,8 @@ export const Container = styled(Flex)`
   user-select: none;
 
   :hover {
-    background-color: ${({ isEditing }) => (isEditing ? "white" : "var(--color-periwinkle)")};
+    background-color: ${({ isEditing, isLegacy }) =>
+      isEditing ? "white" : isLegacy ? "var(--color-text-red)" : "var(--color-periwinkle)"};
   }
 `;
 

@@ -134,6 +134,14 @@ export default class AdminMenu extends React.PureComponent {
         >
           Migrer les références
         </Link>
+        <Link
+          onClick={() => this.goTo("/legal-references-migration-fix")}
+          onKeyPress={() => this.goTo("/legal-references-migration-fix")}
+          role="link"
+          tabIndex="0"
+        >
+          Différences (26/02/2020)
+        </Link>
 
         <Subtitle>Maintenance</Subtitle>
         <Link
