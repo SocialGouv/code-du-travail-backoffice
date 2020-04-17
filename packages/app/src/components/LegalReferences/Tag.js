@@ -15,7 +15,9 @@ const BASE_URL = {
 class Tag extends React.PureComponent {
   constructor(props) {
     super(props);
+    const { category, dila_id } = props;
 
+    this.isLegacy = category !== null && dila_id === null;
     this.$input = null;
 
     this.state = {
@@ -105,7 +107,7 @@ class Tag extends React.PureComponent {
   }
 
   render() {
-    const { category, dila_id, id, url } = this.props;
+    const { category, id, noContent, url } = this.props;
     const { content, isEditing, isLoading, label } = this.state;
 
     if (isLoading) {
@@ -123,19 +125,18 @@ class Tag extends React.PureComponent {
     }
 
     const hasContent = content !== null && content.length !== 0;
-    const isLegacy = category !== null && dila_id === null;
 
     return (
       <Container
         alignItems="start"
         data-for={id}
         data-tip={content}
-        isLegacy={isLegacy}
+        isLegacy={this.isLegacy}
         justifyContent="space-between"
       >
         <Label>{label}</Label>
         {this.renderButtons()}
-        {hasContent && (
+        {!noContent && hasContent && (
           <Tooltip
             clickable={true}
             delayHide={250}
@@ -154,6 +155,7 @@ Tag.propTypes = {
   ...LegalReferenceProps,
   isEditable: PropTypes.bool,
   isReadOnly: PropTypes.bool,
+  noContent: PropTypes.bool,
   onChange: PropTypes.func,
   onRemove: PropTypes.func,
 };

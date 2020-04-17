@@ -24,6 +24,7 @@ function LegalReferences({
   isEditable = false,
   isLoading = false,
   isReadOnly = false,
+  noContent = false,
   onAdd = () => undefined,
   onChange = () => undefined,
   onInput = () => undefined,
@@ -64,7 +65,14 @@ function LegalReferences({
         />
       )}
       <Flex flexDirection="column">
-        {renderReferences({ isEditable, isReadOnly, onChange, onRemove, references })}
+        {renderReferences({
+          isEditable,
+          isReadOnly,
+          noContent,
+          onChange,
+          onRemove,
+          references,
+        })}
       </Flex>
     </Container>
   );
@@ -76,6 +84,7 @@ LegalReferences.propTypes = {
   isEditable: PropTypes.bool,
   isLoading: PropTypes.bool,
   isReadOnly: PropTypes.bool,
+  noContent: PropTypes.bool,
   onAdd: PropTypes.func,
   onChange: PropTypes.func,
   onInput: PropTypes.func,
