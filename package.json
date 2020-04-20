@@ -60,7 +60,7 @@
     "ora": "4.0.3",
     "postgrester": "1.3.1",
     "prettier": "2.0.4",
-    "puppeteer": "2.1.1"
+    "puppeteer": "3.0.0"
   },
   "resolutions": {
     "@babel/preset-react": "^7.9.4"
