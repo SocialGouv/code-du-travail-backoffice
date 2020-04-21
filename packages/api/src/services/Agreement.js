@@ -85,7 +85,7 @@ function normalizeMainArticles([normalizedArticles, lastSectionTitle], articleOr
     return [normalizedArticles, sectionTitle];
   }
 
-  const { etat, id, num, surtitre } = articleOrSection.data;
+  const { cid, etat, id, num, surtitre } = articleOrSection.data;
   const content = convertHtmlToPlainText(articleOrSection.data.content);
   const index = num !== null ? num : null;
   const title = lastSectionTitle !== undefined ? lastSectionTitle : null;
@@ -98,6 +98,7 @@ function normalizeMainArticles([normalizedArticles, lastSectionTitle], articleOr
 
   /** @type {import("../types").Article} */
   const article = {
+    cid,
     content,
     fullText,
     id,
@@ -140,7 +141,7 @@ function normalizeAdditionalSectionArticles(articleOrSection, path) {
 
   const { data } = /** @type {AgreementArticle} */ articleOrSection;
 
-  const { etat, id, num, surtitre } = data;
+  const { cid, etat, id, num, surtitre } = data;
   const content = convertHtmlToPlainText(data.content);
   const index = num !== null ? num : null;
   const title = path.join(" » ");
@@ -151,6 +152,7 @@ function normalizeAdditionalSectionArticles(articleOrSection, path) {
 
   /** @type {import("../types").Article} */
   const article = {
+    cid,
     content,
     fullText,
     id,
@@ -241,7 +243,7 @@ function getAgreementId(idcc) {
  *
  * @param {string} agreementIdOrIdcc
  *
- * @returns {import("../types").Article[]}
+ * @returns {import("../types").ArticleWithContainerId[]}
  */
 function getArticles(agreementIdOrIdcc) {
   const agreementId = agreementIdOrIdcc.startsWith("KALICONT")
@@ -272,7 +274,10 @@ function getArticles(agreementIdOrIdcc) {
       ? agreement.children.slice(1).reduce(flattenAdditionalArticles, [])
       : [];
 
-  const normalizedArticles = [...normalizedMainArticles, ...normalizedAdditionalArticles];
+  const normalizedArticles = [
+    ...normalizedMainArticles,
+    ...normalizedAdditionalArticles,
+  ].map(article => ({ ...article, agreementId }));
 
   cache.set(cacheKey, normalizedArticles, CACHE_TTL);
 
