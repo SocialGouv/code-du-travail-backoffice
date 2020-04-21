@@ -28,6 +28,7 @@ import Textarea from "../../../src/elements/Textarea";
 import Title from "../../../src/elements/Title";
 import capitalize from "../../../src/helpers/capitalize";
 import AdminMainLayout from "../../../src/layouts/AdminMain";
+import api from "../../../src/libs/api";
 import customAxios from "../../../src/libs/customAxios";
 import makeApiFilter from "../../../src/libs/makeApiFilter";
 import T from "../../../src/texts";
@@ -372,16 +373,22 @@ export class AdminAnwsersEditPage extends React.Component {
     this.props.dispatch(actions.legalReferences.load(category, query));
   }
 
-  addReference(category, { id: dilaId }) {
+  async addReference(category, { id: dilaId }) {
     const { id: answerId } = this.props;
-    const reference = {
+
+    const uri = `/legal-references/${dilaId}`;
+    const { agreementId, cid } = await api.get(uri);
+
+    const data = {
       answer_id: answerId,
       category,
+      dila_cid: cid,
+      dila_container_id: agreementId,
       dila_id: dilaId,
-      value: dilaId,
+      value: "",
     };
 
-    this.props.dispatch(actions.answers.addReferences([reference], this.load.bind(this)));
+    this.props.dispatch(actions.answers.addReferences([data], this.load.bind(this)));
   }
 
   updateReference(data) {

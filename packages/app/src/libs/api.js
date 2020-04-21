@@ -21,18 +21,19 @@ class Api {
     const headersOptions = skipAuth
       ? { headers }
       : {
-          // https://github.com/developit/unfetch#fetchurl-string-options-object
-          credentials: "include",
           headers: {
             ...headers,
             Authorization: jwt,
           },
         };
+
     const options = {
       ...headersOptions,
-      body,
       method,
     };
+    if (["PATCH", "POST"].includes(method)) {
+      options.body = body;
+    }
 
     const res = await _fetch(`${apiUri}${path}`, options);
     const data = await res.json();
@@ -42,7 +43,7 @@ class Api {
   }
 
   async get(path, skipAuth = false) {
-    return await this._fetch("GET", path, "", { skipAuth });
+    return await this._fetch("GET", path, undefined, { skipAuth });
   }
 
   async post(path, data, skipAuth = false) {
@@ -64,7 +65,7 @@ class Api {
   }
 
   async delete(path, skipAuth = false) {
-    return await this._fetch("DELETE", path, "", { skipAuth });
+    return await this._fetch("DELETE", path, undefined, { skipAuth });
   }
 }
 

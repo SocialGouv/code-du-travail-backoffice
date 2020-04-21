@@ -21,10 +21,10 @@ const CACHE_TTL = 4 * 60 * 60; // => 4h
 /**
  * @param {LaborCodeArticle} rawArticle
  *
- * @returns {import("../types").Article}
+ * @returns {import("../types").ArticleWithContainerId}
  */
 function normalizeArticle(rawArticle) {
-  const { etat, id, num, title } = rawArticle;
+  const { cid, etat, id, num, title } = rawArticle;
   const content = convertHtmlToPlainText(rawArticle.content);
   const index = num;
   const state = etat;
@@ -34,6 +34,8 @@ function normalizeArticle(rawArticle) {
   const fullText = `${index} ${title}`;
 
   return {
+    agreementId: null,
+    cid,
     content,
     fullText,
     id,
@@ -49,7 +51,7 @@ function normalizeArticle(rawArticle) {
 /**
  * Get an agreement normalized list of articles.
  *
- * @returns {import("../types").Article[]}
+ * @returns {import("../types").ArticleWithContainerId[]}
  */
 function getArticles() {
   const cacheKey = LEGAL_REFERENCE_CATEGORY.LABOR_CODE;

@@ -115,6 +115,8 @@ class LegalReferencesMigrationIndex extends React.Component {
           }
 
           if (foundReferences.length !== 0) {
+            answerReferences[i].dila_cid = foundReferences[0].cid;
+            answerReferences[i].dila_container_id = foundReferences[0].agreementId;
             answerReferences[i].dila_id = foundReferences[0].id;
           }
         }
@@ -186,8 +188,12 @@ class LegalReferencesMigrationIndex extends React.Component {
     );
 
     if (typeof data === "undefined") {
+      answerWithReferences.references[referenceIndex].dila_cid = null;
+      answerWithReferences.references[referenceIndex].dila_container_id = null;
       answerWithReferences.references[referenceIndex].dila_id = null;
     } else {
+      answerWithReferences.references[referenceIndex].dila_cid = data.cid;
+      answerWithReferences.references[referenceIndex].dila_container_id = data.agreementId;
       answerWithReferences.references[referenceIndex].dila_id = data.id;
     }
 
@@ -221,6 +227,8 @@ class LegalReferencesMigrationIndex extends React.Component {
     const reference = answersWithReferences[answersWithReferencesIndex].references.find(
       ({ id }) => id === answerReferenceId,
     );
+    reference.dila_cid = null;
+    reference.dila_container_id = null;
     reference.dila_id = null;
     reference.is_skipped = true;
     delete reference.created_at;

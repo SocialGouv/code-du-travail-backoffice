@@ -58,11 +58,13 @@ class Tag extends React.PureComponent {
   }
 
   update(value, url) {
-    const { answer_id, id, category, dila_id, onChange } = this.props;
+    const { answer_id, id, category, dila_cid, dila_container_id, dila_id, onChange } = this.props;
 
     const data = {
       answer_id,
       category,
+      dila_cid,
+      dila_container_id,
       dila_id,
       id,
       url,
@@ -73,7 +75,7 @@ class Tag extends React.PureComponent {
   }
 
   open() {
-    const { category, dila_id, url } = this.props;
+    const { category, dila_container_id, dila_id, url } = this.props;
 
     if (url !== null) {
       window.open(url, "_blank");
@@ -81,7 +83,11 @@ class Tag extends React.PureComponent {
       return;
     }
 
-    window.open(`${BASE_URL[category]}${dila_id}`, "_blank");
+    const legifranceUriExtra =
+      dila_container_id !== null ? `/?idConteneur=${dila_container_id}` : "";
+    const legifranceUri = `${BASE_URL[category]}${dila_id}${legifranceUriExtra}`;
+
+    window.open(legifranceUri, "_blank");
   }
 
   renderButtons() {
