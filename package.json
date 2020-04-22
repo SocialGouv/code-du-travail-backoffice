@@ -41,7 +41,7 @@
   "devDependencies": {
     "@socialgouv/eslint-config-react-strict": "0.20.0",
     "@socialgouv/eslint-config-strict": "0.20.0",
-    "@socialgouv/kali-data": "1.21.0",
+    "@socialgouv/kali-data": "socialgouv/kali-data#kali-with-all-version",
     "@testing-library/jest-dom": "5.5.0",
     "@types/jest": "25.2.1",
     "axios": "0.19.2",

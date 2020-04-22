@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@inspired-beings/log": "1.2.0",
-    "@socialgouv/kali-data": "1.21.0",
+    "@socialgouv/kali-data": "socialgouv/kali-data#kali-with-all-version",
     "fuse.js": "5.1.0",
     "html-to-text": "5.1.1",
     "http-proxy": "1.18.0",

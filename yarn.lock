@@ -2337,10 +2337,9 @@
     eslint-plugin-simple-import-sort "^5.0.2"
     eslint-plugin-sort-keys-fix "^1.1.0"
 
-"@socialgouv/kali-data@1.21.0":
-  version "1.21.0"
-  resolved "https://registry.yarnpkg.com/@socialgouv/kali-data/-/kali-data-1.21.0.tgz#31699fc78d7ab30a1ff9a309b2e6235461a3b2a8"
-  integrity sha512-hGvDwREMjk/bWHoc5BUDLosB9pw0UHaXQf4A+0S46TdkAjhLm27OcWEKD9tB7UsdQ6Ha/0/0D8ARzQm1s/fRlA==
+"@socialgouv/kali-data@socialgouv/kali-data#kali-with-all-version":
+  version "1.3.36"
+  resolved "https://codeload.github.com/socialgouv/kali-data/tar.gz/e77bae15f774806c41a52f0c7aacde448e1269fa"
   dependencies:
     "@socialgouv/dila-api-client" "^1.1.0"
     p-pipe "^3.0.0"
