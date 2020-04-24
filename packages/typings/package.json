@@ -1,0 +1,8 @@
+{
+  "name": "@socialgouv/code-du-travail-backoffice__typings",
+  "description": "Shared typings.",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "private": true,
+  "types": "./index.d.ts"
+}

@@ -9,6 +9,7 @@ import AdminAnswerBlock from "../../../src/blocks/AdminAnswer";
 import Pagination from "../../../src/components/Pagination";
 import { ANSWER_STATE_OPTIONS } from "../../../src/constants";
 import Button from "../../../src/elements/Button";
+import Checkbox from "../../../src/elements/Checkbox";
 import Input from "../../../src/elements/Input";
 import Select from "../../../src/elements/Select";
 import Title from "../../../src/elements/Title";
@@ -29,8 +30,18 @@ const List = styled(Flex)`
 const Top = styled(Flex)`
   margin-bottom: 0.75rem;
 `;
+const FiltersContainer = styled(Flex)`
+  border-bottom: solid 1px var(--color-border);
+  border-top: solid 1px var(--color-border);
+  padding: 0.5rem 0;
+`;
 const FilterSelect = styled(Select)`
   margin-left: 1rem;
+`;
+const ActionsContainer = styled(Flex)`
+  background-color: var(--color-alice-blue);
+  border-bottom: solid 1px var(--color-border);
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
 `;
 
 const Text = styled.p`
@@ -83,8 +94,21 @@ export class AdminAnswersIndexPage extends React.Component {
     this.props.dispatch(actions.answers.setFilter("states", states));
   }
 
-  checkAnswer(id) {
+  check(id) {
     this.props.dispatch(actions.answers.toggleCheck([id]));
+  }
+
+  checkAll() {
+    const { dispatch, answers } = this.props;
+    const ids = answers.data.map(({ id }) => id).filter(id => !answers.checked.includes(id));
+
+    dispatch(actions.answers.toggleCheck(ids));
+  }
+
+  uncheckAll() {
+    const { dispatch, answers } = this.props;
+
+    dispatch(actions.answers.toggleCheck(answers.checked));
   }
 
   setCheckedAnswersState() {
@@ -133,7 +157,7 @@ export class AdminAnswersIndexPage extends React.Component {
         data={answer}
         isChecked={checked.includes(answer.id)}
         key={answer.id}
-        onCheck={this.checkAnswer.bind(this)}
+        onCheck={this.check.bind(this)}
         onClick={this.editAnswer.bind(this)}
       />
     ));
@@ -168,7 +192,7 @@ export class AdminAnswersIndexPage extends React.Component {
 
           {/* Filters */}
           {!isGeneric && (
-            <Flex alignItems="center">
+            <FiltersContainer alignItems="flex-start">
               <Input
                 defaultValue={answers.filters.query}
                 icon="search"
@@ -201,18 +225,34 @@ export class AdminAnswersIndexPage extends React.Component {
                 options={stateFilterQuestions}
                 value={answers.filters.questions}
               />
-            </Flex>
+            </FiltersContainer>
           )}
 
           {/* Actions */}
-          {!isLoading && answers.checked.length > 0 && (
-            <Flex alignItems="center" justifyContent="space-between">
-              <Flex>
-                <Select options={stateActionOptions} ref={node => (this.$newState = node)} />
-                <Button onClick={this.setCheckedAnswersState.bind(this)}>Appliquer</Button>
-              </Flex>
+          <ActionsContainer alignItems="center" justifyContent="space-between">
+            <Checkbox
+              icon={answers.checked.length > 0 ? "check-square" : "square"}
+              isDisabled={isLoading}
+              onClick={
+                answers.checked.length > 0 ? this.uncheckAll.bind(this) : this.checkAll.bind(this)
+              }
+            />
+            <Flex>
+              <Select
+                isDisabled={isLoading || answers.checked.length === 0}
+                isLoading={isLoading}
+                options={stateActionOptions}
+                ref={node => (this.$newState = node)}
+              />
+              <Button
+                isDisabled={isLoading || answers.checked.length === 0}
+                onClick={this.setCheckedAnswersState.bind(this)}
+                withLeftMargin
+              >
+                {`Appliquer (${answers.checked.length})`}
+              </Button>
             </Flex>
-          )}
+          </ActionsContainer>
 
           <List flexDirection="column">{this.renderAnswersList()}</List>
           {!isLoading && answers.pagesLength > 0 && (

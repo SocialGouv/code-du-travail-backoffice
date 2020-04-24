@@ -1,5 +1,7 @@
+const AnswerController = require("../controllers/Answer");
 const answerWithError = require("../helpers/answerWithError");
-const LegalReference = require("../controllers/LegalReference");
+const LegalReferenceController = require("../controllers/LegalReference");
+
 const { COMMON_HEADERS } = require("../constants");
 
 /**
@@ -9,18 +11,23 @@ const { COMMON_HEADERS } = require("../constants");
 function route(req, res) {
   try {
     switch (true) {
+      case /^\/answers($|\?)/.test(req.url) && req.method === "OPTIONS":
       case /^\/legal-references($|\?)/.test(req.url) && req.method === "OPTIONS":
       case /^\/legal-references\/[0-9a-z]+/i.test(req.url) && req.method === "OPTIONS":
         res.writeHead(200, COMMON_HEADERS);
         res.end();
         return true;
 
+      case /^\/answers($|\?)/.test(req.url) && req.method === "GET":
+        AnswerController.index(req, res);
+        return true;
+
       case /^\/legal-references($|\?)/.test(req.url) && req.method === "GET":
-        LegalReference.index(req, res);
+        LegalReferenceController.index(req, res);
         return true;
 
       case /^\/legal-references\/[0-9a-z]+/i.test(req.url) && req.method === "GET":
-        LegalReference.get(req, res);
+        LegalReferenceController.get(req, res);
         return true;
 
       default:

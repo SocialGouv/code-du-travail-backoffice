@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import React from "react";
 import { Flex } from "rebass";
 
-import _Checkbox from "../../elements/Checkbox";
+import Checkbox from "../../elements/Checkbox";
 import Idcc from "../../elements/Idcc";
 import excerpt from "../../helpers/excerpt";
 import customMoment from "../../libs/customMoment";
@@ -12,14 +12,11 @@ const Container = styled(Flex)`
   user-select: none;
 `;
 
-const Checkbox = styled(_Checkbox)`
-  margin-top: 1.75rem;
-`;
-
 const Top = styled(Flex)`
   font-size: 0.75rem;
   font-weight: 700;
   margin-bottom: 0.25rem;
+  padding-left: 3.25rem;
   text-transform: uppercase;
 `;
 const TopState = styled.span`
@@ -62,50 +59,54 @@ import { ANSWER_STATE, ANSWER_STATE_LABEL } from "../../constants";
 
 const AdminAnswerBlock = ({ data, isChecked, onCheck, onClick }) => {
   const {
-    agreement_idcc,
-    agreement_name,
+    agreement,
     generic_reference,
     id,
     is_published,
-    question_index,
-    question_value,
+    question,
     state,
     updated_at,
     user,
   } = data;
 
+  const isGeneric = agreement === null;
   const isTodo = state === ANSWER_STATE.TO_DO;
   const value = [ANSWER_STATE.DRAFT, ANSWER_STATE.PENDING_REVIEW].includes(state)
     ? data.prevalue
     : data.value;
 
   return (
-    <Container alignItems="center">
-      {isChecked !== undefined && (
-        <Checkbox icon={isChecked ? "check-square" : "square"} onClick={() => onCheck(id)} />
-      )}
-      <Flex flexDirection="column" width={1}>
-        <Top justifyContent="space-between">
-          <TopState>{ANSWER_STATE_LABEL[state]}</TopState>
-          {![ANSWER_STATE.TO_DO, ANSWER_STATE.VALIDATED].includes(state) &&
-            user !== undefined &&
-            user !== null && (
-              <TopAuthor>
-                {state === ANSWER_STATE.DRAFT && `Rédigée par : ${user.name}`}
-                {[ANSWER_STATE.PENDING_REVIEW, ANSWER_STATE.UNDER_REVIEW].includes(state) &&
-                  `Proposée par : ${user.name}`}
-                {state !== ANSWER_STATE.UNDER_REVIEW &&
-                  `, ${customMoment(updated_at).tz("Europe/Paris").fromNow()}`}
-              </TopAuthor>
-            )}
-          {state === ANSWER_STATE.VALIDATED && (
-            <TopPublished disabled={!is_published}>Publiée</TopPublished>
+    <Container flexDirection="column">
+      <Top justifyContent="space-between">
+        <TopState>{ANSWER_STATE_LABEL[state]}</TopState>
+        {![ANSWER_STATE.TO_DO, ANSWER_STATE.VALIDATED].includes(state) &&
+          user !== undefined &&
+          user !== null && (
+            <TopAuthor>
+              {state === ANSWER_STATE.DRAFT && `Rédigée par : ${user.name}`}
+              {[ANSWER_STATE.PENDING_REVIEW, ANSWER_STATE.UNDER_REVIEW].includes(state) &&
+                `Proposée par : ${user.name}`}
+              {state !== ANSWER_STATE.UNDER_REVIEW &&
+                `, ${customMoment(updated_at).tz("Europe/Paris").fromNow()}`}
+            </TopAuthor>
           )}
-        </Top>
+        {state === ANSWER_STATE.VALIDATED && (
+          <TopPublished disabled={!is_published}>Publiée</TopPublished>
+        )}
+      </Top>
+      <Flex>
+        {isChecked !== undefined && (
+          <Checkbox
+            isChecked={isChecked}
+            onClick={() => onCheck(id)}
+            withLeftMargin
+            withRightMargin
+          />
+        )}
         <Content flexDirection="column" onClick={() => onClick(id)}>
           <Flex alignItems="baseline">
-            <Idcc code={agreement_idcc} name={agreement_name} />
-            <ContentQuestion>{`${question_index}) ${question_value}`}</ContentQuestion>
+            {!isGeneric ? <Idcc code={agreement.idcc} name={agreement.name} /> : <Idcc />}
+            <ContentQuestion>{`${question.index}) ${question.value}`}</ContentQuestion>
           </Flex>
           {!isTodo && generic_reference === null && (
             <ContentExtract>{excerpt(value)}</ContentExtract>

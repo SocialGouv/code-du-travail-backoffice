@@ -277,9 +277,9 @@ class LegalReferencesMigrationIndex extends React.Component {
             <Button
               color="danger"
               disabled={reference.dila_id === null}
-              hasGroup
               onClick={() => this.skipReference(answersWithReferencesIndex, reference.id)}
               style={{ marginLeft: "1rem", minWidth: "5.75rem" }}
+              withRightMargin
             >
               PASSER
             </Button>

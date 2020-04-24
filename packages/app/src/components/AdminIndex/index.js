@@ -193,9 +193,9 @@ export default class AdminIndex extends React.Component {
               <Flex justifyContent="flex-end">
                 <Button
                   color="danger"
-                  hasGroup
                   onClick={() => this.delete()}
                   title={T.ADMIN_COMMON_BUTTON_CONFIRM_DELETION_TITLE(i18nSubject, i18nIsFeminine)}
+                  withRightMargin
                 >
                   Supprimer
                 </Button>

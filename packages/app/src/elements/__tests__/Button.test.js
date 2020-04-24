@@ -12,6 +12,7 @@ describe("elements/<Button />", () => {
     expect($button).toHaveStyleRule("background-color", "var(--color-lapis-lazuli)");
     expect($button).toHaveStyleRule("color", "white");
     expect($button).toHaveStyleRule("cursor", "pointer");
+    expect($button).toHaveStyleRule("margin-left", "0");
     expect($button).toHaveStyleRule("margin-right", "0");
     expect($button).toHaveStyleRule("opacity", "0.75");
     expect($button).toHaveStyleRule("padding", "0.3rem 1rem 0.3rem");
@@ -84,21 +85,6 @@ describe("elements/<Button />", () => {
     expect($icon.props).toHaveProperty("color", "white");
   });
 
-  it(`should pass with {disabled}`, () => {
-    const $button = testRender(<Button disabled>{TEXT}</Button>);
-
-    expect($button).toHaveStyleRule("cursor", "not-allowed");
-    expect($button).toHaveStyleRule("opacity", "0.25");
-    expect($button).toHaveStyleRule("opacity", "0.25", { target: ":hover" });
-    expect($button).toHaveStyleRule("cursor", "not-allowed", { target: "svg" });
-  });
-
-  it(`should pass with {hasGroup}`, () => {
-    const $button = testRender(<Button hasGroup>{TEXT}</Button>);
-
-    expect($button).toHaveStyleRule("margin-right", "1rem");
-  });
-
   it(`should pass with {icon} = "sync"`, () => {
     const $button = testRender(<Button icon={ICON}>{TEXT}</Button>);
 
@@ -125,6 +111,15 @@ describe("elements/<Button />", () => {
     expect($button).toHaveStyleRule("padding-top", "0", { target: "svg" });
   });
 
+  it(`should pass with {isDisabled}`, () => {
+    const $button = testRender(<Button isDisabled>{TEXT}</Button>);
+
+    expect($button).toHaveStyleRule("cursor", "not-allowed");
+    expect($button).toHaveStyleRule("opacity", "0.25");
+    expect($button).toHaveStyleRule("opacity", "0.25", { target: ":hover" });
+    expect($button).toHaveStyleRule("cursor", "not-allowed", { target: "svg" });
+  });
+
   it(`should pass with {isSmall}`, () => {
     const $button = testRender(<Button isSmall>{TEXT}</Button>);
 
@@ -136,5 +131,19 @@ describe("elements/<Button />", () => {
 
     expect($button).toHaveStyleRule("background-color", "transparent");
     expect($button).toHaveStyleRule("color", "var(--color-lapis-lazuli)");
+  });
+
+  it(`should pass with {withLefttMargin}`, () => {
+    const $button = testRender(<Button withLefttMargin>{TEXT}</Button>);
+
+    expect($button).toHaveStyleRule("margin-left", "1rem");
+    expect($button).toHaveStyleRule("margin-right", "0");
+  });
+
+  it(`should pass with {withRightMargin}`, () => {
+    const $button = testRender(<Button withRightMargin>{TEXT}</Button>);
+
+    expect($button).toHaveStyleRule("margin-left", "0");
+    expect($button).toHaveStyleRule("margin-right", "1rem");
   });
 });
