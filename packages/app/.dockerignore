@@ -3,6 +3,7 @@ __tests__/
 node_modules/
 tests/
 
+*.d.ts
 *.md
 
 jest.config.js
