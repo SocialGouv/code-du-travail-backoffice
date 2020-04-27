@@ -10,17 +10,17 @@
   },
   "dependencies": {
     "@inspired-beings/log": "1.2.0",
-    "@socialgouv/kali-data": "1.21.0",
+    "@socialgouv/kali-data": "1.25.0",
     "fuse.js": "5.1.0",
     "html-to-text": "5.1.1",
     "http-proxy": "1.18.0",
     "jsonwebtoken": "8.5.1",
     "knex": "0.21.0",
     "node-cache": "5.1.0",
-    "pg": "8.0.2"
+    "pg": "8.0.3"
   },
   "devDependencies": {
-    "@types/node": "13.13.2",
+    "@types/node": "13.13.4",
     "cross-env": "7.0.2",
     "dotenv": "8.2.0",
     "nodemon": "2.0.3"
