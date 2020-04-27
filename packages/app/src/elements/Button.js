@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import PropTypes from "prop-types";
 import React from "react";
 import { Button as _Button } from "rebass";
 
@@ -8,23 +9,24 @@ const Container = styled(_Button)`
   background-color: ${p => p.backgroundColor};
   border-radius: 0.125rem;
   color: ${p => p.foregroundColor};
-  cursor: ${p => (p.disabled ? "not-allowed" : "pointer")};
+  cursor: ${p => (p.isDisabled ? "not-allowed" : "pointer")};
   display: flex;
   font-size: 0.9375rem;
   font-weight: 600;
-  margin-right: ${p => (p.hasGroup ? "1rem" : 0)};
+  margin-left: ${p => (p.withLeftMargin ? "1rem" : 0)};
+  margin-right: ${p => (p.withRightMargin ? "1rem" : 0)};
   min-height: 1.25rem;
   min-width: 1.25rem;
-  opacity: ${p => (p.disabled ? 0.25 : 0.75)};
-  padding: ${p => (p.isSmall ? "0.1rem 0.4rem 0.15rem" : "0.3rem 1rem 0.3rem")};
+  opacity: ${p => (p.isDisabled ? 0.25 : 0.75)};
+  padding: ${p => (p.hasText ? (p.isSmall ? "0.1rem 0.4rem 0.15rem" : "0.3rem 1rem 0.3rem") : "0")};
   white-space: nowrap;
 
   :hover {
-    opacity: ${p => (p.disabled ? 0.25 : 1)};
+    opacity: ${p => (p.isDisabled ? 0.25 : 1)};
   }
 
   svg {
-    cursor: ${p => (p.disabled ? "not-allowed" : "pointer")};
+    cursor: ${p => (p.isDisabled ? "not-allowed" : "pointer")};
     height: 1rem;
     margin-right: ${p => (p.hasText ? "0.25rem" : 0)};
     padding-top: ${p => (p.hasText ? "0.125rem" : 0)};
@@ -43,11 +45,13 @@ const COLOR = {
 const Button = ({
   children,
   color = "primary",
-  disabled = false,
-  hasGroup = false,
   icon,
+  isDisabled = false,
   isSmall = false,
   isTransparent = false,
+  onClick = () => undefined,
+  withLeftMargin = false,
+  withRightMargin = false,
   ...props
 }) => {
   const hasText = children !== undefined;
@@ -62,17 +66,30 @@ const Button = ({
   return (
     <Container
       backgroundColor={backgroundColor}
-      disabled={disabled}
+      disabled={isDisabled}
       foregroundColor={foregroundColor}
-      hasGroup={hasGroup}
       hasText={hasText}
+      isDisabled={isDisabled}
       isSmall={isSmall}
+      onClick={isDisabled ? () => undefined : onClick}
+      withLeftMargin={withLeftMargin}
+      withRightMargin={withRightMargin}
       {...props}
     >
       {icon !== undefined && <Icon color={foregroundColor} icon={icon} />}
       {children}
     </Container>
   );
+};
+
+Button.propTypes = {
+  color: PropTypes.string,
+  icon: PropTypes.string,
+  isDisabled: PropTypes.bool,
+  isSmall: PropTypes.bool,
+  isTransparent: PropTypes.bool,
+  withLeftMargin: PropTypes.bool,
+  withRightMargin: PropTypes.bool,
 };
 
 export default Button;

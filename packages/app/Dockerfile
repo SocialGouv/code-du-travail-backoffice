@@ -21,7 +21,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN yarn --pure-lockfile
+RUN yarn --production --pure-lockfile
 RUN yarn build
 
 ENTRYPOINT ["yarn", "start"]

@@ -1,78 +1,19 @@
 // @ts-check
-// TODO Check and describe types.
 
 const cache = require("../helpers/cache");
 const convertHtmlToPlainText = require("../helpers/convertHtmlToPlainText");
 const { LEGAL_REFERENCE_CATEGORY } = require("../constants");
 
-/**
- * @typedef {object} Agreement
- * @property {"section"} type
- * @property {AgreementData} data
- * @property {AgreementSection[]} children
- */
-/**
- * @typedef {object} AgreementData
- * @property {string} id
- * @property {number} num
- * @property {string} shortTitle
- * @property {string[]} categorisation
- */
-/**
- * @typedef {object} AgreementSection
- * @property {"section"} type
- * @property {AgreementSectionData} data
- * @property {(AgreementArticle & AgreementSection)[]} children
- */
-/**
- * @typedef {object} AgreementSectionData
- * @property {number} intOrdre
- * @property {string} title
- * @property {string} id
- * @property {import("../types").ArticleState} etat
- */
-/**
- * @typedef {object} AgreementArticle
- * @property {"article"} type
- * @property {AgreementArticleData} data
- */
-/**
- * @typedef {object} AgreementArticleData
- * @property {string} id
- * @property {string} cid
- * @property {?string} num - Article index.
- * @property {number} intOrdre
- * @property {string} content - Article HTML content.
- * @property {import("../types").ArticleState} etat
- * @property {string=} surtitre
- * @property {string=} historique - Article history note.
- */
-
-/**
- * @typedef {object} AgreementIndex
- * @property {boolean=} active
- * @property {string=} date_publi - ISO Date.
- * @property {number=} effectif
- * @property {string=} etat
- * @property {string} id - KALI Agreement `id`.
- * @property {number=} mtime
- * @property {string} nature
- * @property {number} num - IDCC.
- * @property {string} shortTitle
- * @property {string=} texte_de_base
- * @property {string} title
- * @property {string=} url
- */
-
 const CACHE_TTL = 4 * 60 * 60; // => 4h
-/** @type {AgreementIndex[]} */
-const AGREEMENTS_INDEX = require("@socialgouv/kali-data/data/index.json");
+const AGREEMENTS_INDEX =
+  /** @type {import("@socialgouv/kali-data").IndexAgreement[]} */
+  require("@socialgouv/kali-data/data/index.json");
 
 /**
- * @param {[import("../types").Article[], string | undefined]} prev
- * @param {AgreementArticle & AgreementSection} articleOrSection
+ * @param {[LegalReference.Article[], string | undefined]} prev
+ * @param {import("@socialgouv/kali-data").AgreementArticleOrSection} articleOrSection
  *
- * @returns {[import("../types").Article[], string | undefined]}
+ * @returns {[LegalReference.Article[], string | undefined]}
  */
 function normalizeMainArticles([normalizedArticles, lastSectionTitle], articleOrSection) {
   const { type } = articleOrSection;
@@ -96,8 +37,9 @@ function normalizeMainArticles([normalizedArticles, lastSectionTitle], articleOr
     title !== null ? ` (${title})` : ""
   }`;
 
-  /** @type {import("../types").Article} */
+  /** @type {LegalReference.Article} */
   const article = {
+    agreementId: "",
     cid,
     content,
     fullText,
@@ -114,10 +56,10 @@ function normalizeMainArticles([normalizedArticles, lastSectionTitle], articleOr
 }
 
 /**
- * @param {AgreementArticle & AgreementSection} articleOrSection
+ * @param {import("@socialgouv/kali-data").AgreementArticleOrSection} articleOrSection
  * @param {string[]} path
  *
- * @returns {import("../types").Article[]}
+ * @returns {LegalReference.Article[]}
  */
 function normalizeAdditionalSectionArticles(articleOrSection, path) {
   const { type } = articleOrSection;
@@ -150,8 +92,9 @@ function normalizeAdditionalSectionArticles(articleOrSection, path) {
 
   const fullText = `${title}${index !== null ? ` » Article ${index}` : ""}`;
 
-  /** @type {import("../types").Article} */
+  /** @type {LegalReference.Article} */
   const article = {
+    agreementId: "",
     cid,
     content,
     fullText,
@@ -168,10 +111,10 @@ function normalizeAdditionalSectionArticles(articleOrSection, path) {
 }
 
 /**
- * @param {import("../types").Article[]} normalizedArticles
- * @param {AgreementSection} section
+ * @param {LegalReference.Article[]} normalizedArticles
+ * @param {import("@socialgouv/kali-data").AgreementSection} section
  *
- * @returns {import("../types").Article[]}
+ * @returns {LegalReference.Article[]}
  */
 function flattenAdditionalArticles(normalizedArticles, section) {
   const {
@@ -196,10 +139,10 @@ function flattenAdditionalArticles(normalizedArticles, section) {
  * @description
  * Also removes duplicated ids.
  *
- * @param {AgreementArticle[]} tree
- * @param {AgreementArticle & AgreementSection} articleOrSection
+ * @param {import("@socialgouv/kali-data").AgreementArticle[]} tree
+ * @param {import("@socialgouv/kali-data").AgreementArticleOrSection} articleOrSection
  *
- * @returns {AgreementArticle[]}
+ * @returns {import("@socialgouv/kali-data").AgreementArticle[]}
  *
  * @see https://github.com/syntax-tree/unist
  */
@@ -243,7 +186,7 @@ function getAgreementId(idcc) {
  *
  * @param {string} agreementIdOrIdcc
  *
- * @returns {import("../types").ArticleWithContainerId[]}
+ * @returns {LegalReference.Article[]}
  */
 function getArticles(agreementIdOrIdcc) {
   const agreementId = agreementIdOrIdcc.startsWith("KALICONT")
@@ -257,8 +200,9 @@ function getArticles(agreementIdOrIdcc) {
     return maybeCachedArticles;
   }
 
-  /** @type {Agreement} */
-  const agreement = require(`@socialgouv/kali-data/data/${agreementId}.json`);
+  const agreement =
+    /** @type {import("@socialgouv/kali-data").Agreement} */
+    require(`@socialgouv/kali-data/data/${agreementId}.json`);
 
   if (agreement.children.length === 0) {
     cache.set(cacheKey, [], CACHE_TTL);

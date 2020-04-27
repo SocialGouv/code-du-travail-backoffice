@@ -1,5 +1,6 @@
 const answerWithError = require("../helpers/answerWithError");
-const LegalReference = require("../controllers/LegalReference");
+const LegalReferenceController = require("../controllers/LegalReference");
+
 const { COMMON_HEADERS } = require("../constants");
 
 /**
@@ -16,11 +17,11 @@ function route(req, res) {
         return true;
 
       case /^\/legal-references($|\?)/.test(req.url) && req.method === "GET":
-        LegalReference.index(req, res);
+        LegalReferenceController.index(req, res);
         return true;
 
       case /^\/legal-references\/[0-9a-z]+/i.test(req.url) && req.method === "GET":
-        LegalReference.get(req, res);
+        LegalReferenceController.get(req, res);
         return true;
 
       default:

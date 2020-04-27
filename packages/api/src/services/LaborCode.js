@@ -13,7 +13,7 @@ const { LEGAL_REFERENCE_CATEGORY } = require("../constants");
  * @property {number} intOrdre
  * @property {string} title
  * @property {string} content - Article HTML content.
- * @property {import("../types").ArticleState} etat
+ * @property {import("@socialgouv/kali-data").State} etat
  */
 
 const CACHE_TTL = 4 * 60 * 60; // => 4h
@@ -21,7 +21,7 @@ const CACHE_TTL = 4 * 60 * 60; // => 4h
 /**
  * @param {LaborCodeArticle} rawArticle
  *
- * @returns {import("../types").ArticleWithContainerId}
+ * @returns {LegalReference.Article}
  */
 function normalizeArticle(rawArticle) {
   const { cid, etat, id, num, title } = rawArticle;
@@ -51,7 +51,7 @@ function normalizeArticle(rawArticle) {
 /**
  * Get an agreement normalized list of articles.
  *
- * @returns {import("../types").ArticleWithContainerId[]}
+ * @returns {LegalReference.Article[]}
  */
 function getArticles() {
   const cacheKey = LEGAL_REFERENCE_CATEGORY.LABOR_CODE;

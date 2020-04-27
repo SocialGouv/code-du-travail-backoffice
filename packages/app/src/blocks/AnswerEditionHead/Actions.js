@@ -5,7 +5,7 @@ import Button from "../../elements/Button";
 
 const AnswerEditionHeadBlockActions = ({ onCancel, onSubmit }) => (
   <Flex alignItems="baseline">
-    <Button color="secondary" hasGroup onClick={onCancel}>
+    <Button color="secondary" onClick={onCancel} withRightMargin>
       Annuler ma réponse
     </Button>
     <Button color="primary" onClick={onSubmit}>

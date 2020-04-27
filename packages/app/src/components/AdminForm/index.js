@@ -392,16 +392,16 @@ export default class AdminForm extends React.Component {
               <Flex>
                 <Button
                   color="secondary"
-                  disabled={isSubmitting}
-                  hasGroup
+                  isDisabled={isSubmitting}
                   onClick={() => Router.push(`/admin${indexPath}`)}
                   title={T.ADMIN_COMMON_BUTTON_CANCEL_FORM_TITLE(i18nSubject)}
                   type="button"
+                  withRightMargin
                 >
                   Annuler
                 </Button>
                 <Button
-                  disabled={isSubmitting}
+                  isDisabled={isSubmitting}
                   title={
                     isEdition
                       ? T.ADMIN_COMMON_BUTTON_UPDATE_TITLE(i18nSubject, i18nIsFeminine, i18nName)

@@ -45,7 +45,7 @@ node_modules/
 jspm_packages/
 
 # TypeScript v1 declaration files
-typings/
+# typings/
 
 # TypeScript cache
 *.tsbuildinfo
@@ -141,11 +141,11 @@ Temporary Items
 
 /.vscode
 
-# Docker shared backups volume:
+# Shadow directory used to compare file changes between builds in production:
 /.shadow/*
 !/.shadow/.gitkeep
 
-# Shadow directory used to compare file changes between builds in production:
+# Docker shared backups volume:
 /backups/*
 !/backups/.gitkeep
 
