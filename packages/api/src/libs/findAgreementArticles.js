@@ -5,7 +5,7 @@ const FuseJs = require("fuse.js");
 const Agreement = require("../services/Agreement");
 
 /**
- * @typedef {import("../types").Article} ArticleWithScore
+ * @typedef {LegalReference.Article} ArticleWithScore
  * @property {number} score
  */
 
@@ -29,7 +29,7 @@ function findAgreementArticles(idcc, query) {
     cleanQuery = cleanQuery.replace(/'(\d{1,2}$)/, " '» 'Article $1$");
   }
 
-  /** @type {Fuse.IFuseOptions<import("../types").Article>} */
+  /** @type {Fuse.IFuseOptions<LegalReference.Article>} */
   const fuseJsOptions = {
     caseSensitive: false,
     distance: 999,
@@ -45,7 +45,7 @@ function findAgreementArticles(idcc, query) {
 
   const fuseJs = new FuseJs(allArticles, fuseJsOptions);
   const foundArticles =
-    /** @type {Fuse.FuseResult<import("../types").Article>[]} */
+    /** @type {Fuse.FuseResult<LegalReference.Article>[]} */
     (fuseJs.search(cleanQuery));
 
   const foundArticlesWithScore = foundArticles

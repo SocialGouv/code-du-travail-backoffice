@@ -1,11 +1,10 @@
 .next/
 __tests__/
-coverage/
 node_modules/
 tests/
 
 *.md
 
-.env
 jest.config.js
 LICENSE
+tsconfig.json

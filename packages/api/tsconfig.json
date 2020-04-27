@@ -1,16 +1,4 @@
 {
-  "compilerOptions": {
-    "allowJs": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "Node",
-    "noEmit": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "resolveJsonModule": true,
-    "rootDir": "./src",
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "strictNullChecks": true
-  },
-  "exclude": ["node_modules", "**/*.test.js"]
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {}
 }

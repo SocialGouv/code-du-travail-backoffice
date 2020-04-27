@@ -1,3 +1,5 @@
+// @ts-check
+
 import { put } from "redux-saga/effects";
 
 import { legalReferences } from "../../actions";
@@ -13,6 +15,7 @@ export default function* load({ meta: { category, idcc, query } }) {
       return;
     }
 
+    /** @type {import("axios").AxiosResponse<LegalReference.Article[]>} */
     const { data: rawData } = yield customAxios().get(
       `/legal-references?category=${category}&idcc=${idcc}&query=${query}`,
     );

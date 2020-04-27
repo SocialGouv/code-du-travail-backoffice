@@ -1,7 +1,9 @@
+// @ts-check
+
 import React from "react";
 import { put, select } from "redux-saga/effects";
 
-import { answers } from "../../actions";
+import * as actions from "../../actions";
 import { ANSWER_STATE, ANSWER_STATES, USER_ROLE } from "../../constants";
 import shortenAgreementName from "../../helpers/shortenAgreementName";
 import customPostgrester from "../../libs/customPostgrester";
@@ -13,21 +15,19 @@ export default function* load() {
   try {
     const { agreements: userAgreements, id: userId, role: userRole } = getCurrentUser();
     const filters = yield select(getAnswersFilters);
-
     const request = customPostgrester();
 
-    request.page(filters.page, filters.pageLength);
+    request
+      .select("*")
+      .select("agreement(*)")
+      .select("question(*)")
+      .select("user(*)")
+      .page(filters.page, filters.pageLength);
 
     if (!filters.isGeneric) {
       const states =
         filters.states.length > 0 ? filters.states.map(({ value }) => value) : ANSWER_STATES;
-      request.in("state", states).orderBy("question_index");
-
-      request.orderBy("agreement_idcc");
-
-      if (userRole === USER_ROLE.ADMINISTRATOR) {
-        request.select("*").select("user(name)");
-      }
+      request.in("state", states).orderBy("question.index");
 
       if (userRole === USER_ROLE.CONTRIBUTOR) {
         request.in("agreement_id", userAgreements, true);
@@ -54,35 +54,53 @@ export default function* load() {
           .ilike("value", filters.query);
       }
     } else {
-      request.orderBy("question_index");
+      request.is("agreement_id", null);
     }
 
-    const uri = filters.isGeneric ? "/generic_answers" : "/full_answers";
-    const { data, pagesLength } = yield request.get(uri, true);
+    request.orderBy("agreement.idcc").orderBy("question.index");
 
-    const answerIds = data.map(({ id }) => id);
-    let fullData = filters.isGeneric
-      ? [...data]
-      : data.map(({ agreement_name, ...props }) => ({
-          ...props,
-          agreement_name: shortenAgreementName(agreement_name),
-        }));
+    /** @type {{ data: Answer.Answer[]; pagesLength: number; }} */
+    const { data: answers, pagesLength } = yield request.get("/answers", true);
+
+    const answerIds = answers.map(({ id }) => id);
 
     const referencesRequest = customPostgrester()
       .in("answer_id", answerIds)
       .orderBy("category")
       .orderBy("value");
 
-    const { data: answersRefs } = yield referencesRequest.get("/answers_references");
+    /** @type {{ data: Answer.Reference[]; }} */
+    const { data: answersReferences } = yield referencesRequest.get("/answers_references");
 
-    fullData = fullData.map(answer => ({
+    const answersWithReferences = answers.map(answer => ({
       ...answer,
-      references: answersRefs.filter(({ answer_id }) => answer_id === answer.id),
+      references: answersReferences.filter(({ answer_id }) => answer_id === answer.id),
     }));
 
+    if (filters.isGeneric) {
+      yield put(
+        actions.answers.loadSuccess({
+          data: answersWithReferences,
+          pagesLength,
+        }),
+      );
+
+      return;
+    }
+
+    const answersWithReferencesAndShortAgreementName = answersWithReferences.map(
+      ({ agreement, ...props }) => ({
+        ...props,
+        agreement: {
+          ...agreement,
+          name: shortenAgreementName(agreement.name),
+        },
+      }),
+    );
+
     yield put(
-      answers.loadSuccess({
-        data: fullData,
+      actions.answers.loadSuccess({
+        data: answersWithReferencesAndShortAgreementName,
         pagesLength,
       }),
     );
@@ -96,10 +114,10 @@ export default function* load() {
         </span>,
       );
 
-      return yield put(answers.setFilter("page", 0));
+      return yield put(actions.answers.setFilter("page", 0));
     }
 
     toast.error(err.message);
-    yield put(answers.loadFailure({ message: null }));
+    yield put(actions.answers.loadFailure({ message: null }));
   }
 }

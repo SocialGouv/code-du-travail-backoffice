@@ -153,6 +153,7 @@ exports[`blocks/<AnswerEditionHead /> should match snapshot 1`] = `
   display: flex;
   font-size: 0.9375rem;
   font-weight: 600;
+  margin-left: 0;
   margin-right: 1rem;
   min-height: 1.25rem;
   min-width: 1.25rem;
@@ -205,6 +206,7 @@ exports[`blocks/<AnswerEditionHead /> should match snapshot 1`] = `
   display: flex;
   font-size: 0.9375rem;
   font-weight: 600;
+  margin-left: 0;
   margin-right: 0;
   min-height: 1.25rem;
   min-width: 1.25rem;

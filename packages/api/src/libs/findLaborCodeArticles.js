@@ -5,7 +5,7 @@ const FuseJs = require("fuse.js");
 const LaborCode = require("../services/LaborCode");
 
 /**
- * @typedef {import("../types").Article} ArticleWithScore
+ * @typedef {LegalReference.Article} ArticleWithScore
  * @property {number} score
  */
 
@@ -17,7 +17,7 @@ const LaborCode = require("../services/LaborCode");
 function findLaborCodeArticles(query) {
   const allArticles = LaborCode.getArticles();
 
-  /** @type {Fuse.IFuseOptions<import("../types").Article>} */
+  /** @type {Fuse.IFuseOptions<LegalReference.Article>} */
   const fuseJsOptions = {
     distance: 0,
     includeScore: true,
@@ -27,7 +27,7 @@ function findLaborCodeArticles(query) {
 
   const fuseJs = new FuseJs(allArticles, fuseJsOptions);
   const foundArticles =
-    /** @type {Fuse.FuseResult<import("../types").Article>[]} */
+    /** @type {Fuse.FuseResult<LegalReference.Article>[]} */
     (fuseJs.search(query));
 
   const foundArticlesWithScore = foundArticles

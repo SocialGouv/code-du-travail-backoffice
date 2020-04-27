@@ -8,10 +8,10 @@ const INDEX = require("../../data/index.json");
 /**
  * @param {string} articleId
  *
- * @returns {import("../types").Article}
+ * @returns {LegalReference.Article}
  */
 function getArticleById(articleId) {
-  /** @type {import("../types").Article[]} */
+  /** @type {LegalReference.Article[]} */
   let articles;
 
   if (articleId.startsWith("KALI")) {

@@ -1,16 +1,15 @@
+import PropTypes from "prop-types";
 import React from "react";
 
 import Button from "./Button";
 
-const Checkbox = ({ color = "primary", isChecked = false, onClick, ...props }) => (
-  <Button
-    color={color}
-    icon={isChecked ? "check-square" : "square"}
-    isTransparent
-    onClick={onClick}
-    role="checkbox"
-    {...props}
-  />
+const Checkbox = ({ isChecked = false, ...props }) => (
+  <Button icon={isChecked ? "check-square" : "square"} isTransparent role="checkbox" {...props} />
 );
+
+Checkbox.propTypes = {
+  ...Button.propTypes,
+  isChecked: PropTypes.bool.isRequired,
+};
 
 export default Checkbox;

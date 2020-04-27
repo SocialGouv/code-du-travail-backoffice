@@ -1,0 +1,10 @@
+.next/
+__tests__/
+node_modules/
+tests/
+
+*.md
+
+jest.config.js
+LICENSE
+tsconfig.json
