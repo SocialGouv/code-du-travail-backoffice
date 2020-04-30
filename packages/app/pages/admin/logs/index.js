@@ -1,54 +1,26 @@
-import styled from "@emotion/styled";
 import React from "react";
 import { connect } from "react-redux";
-import { Flex } from "rebass";
 
 import * as actions from "../../../src/actions";
-import _Table from "../../../src/components/Table";
-import { LOG_ACTION_LABEL } from "../../../src/constants";
+import { Container, Head } from "../../../src/components/AdminIndex/styles";
+import Table from "../../../src/components/Table";
 import Button from "../../../src/elements/Button";
 import Title from "../../../src/elements/Title";
+import capitalize from "../../../src/helpers/capitalize";
+import humanizeLogAction from "../../../src/helpers/humanizeLogAction";
 import AdminMainLayout from "../../../src/layouts/AdminMain";
 import moment from "../../../src/libs/customMoment";
-
-const Container = styled(Flex)`
-  flex-grow: 1;
-  margin: 0 1rem 1rem;
-`;
-
-export const Head = styled(Flex)`
-  margin-bottom: 1rem;
-`;
-
-const Table = styled(_Table)`
-  .rt-tr > .rt-th,
-  .rt-tr > .rt-td {
-    width: 15% !important;
-
-    :first-of-type {
-      width: 15% !important;
-    }
-    :last-of-type {
-      width: 10% !important;
-    }
-  }
-`;
-
-const Danger = styled.span`
-  color: red;
-  font-weight: bold;
-`;
 
 // TODO Clean these columns.
 /* eslint-disable react/display-name */
 const COLUMNS = [
   {
-    Cell: ({ value }) => (value !== null ? value.name : <Danger>Unknown</Danger>),
-    Header: "Nom (ou email)",
+    Cell: ({ value }) => (value !== null ? value.name : "N/A"),
+    Header: "Nom",
     accessor: "user",
   },
   {
-    Cell: ({ value }) => (value !== null ? value.role : <Danger>Unknown</Danger>),
+    Cell: ({ value }) => (value !== null ? capitalize(value.role) : "N/A"),
     Header: "Role",
     accessor: "user",
   },
@@ -57,13 +29,18 @@ const COLUMNS = [
     accessor: "ip",
   },
   {
-    Cell: ({ value }) => LOG_ACTION_LABEL[value],
+    Cell: ({ original: { method, path } }) => humanizeLogAction(method, path),
     Header: "Action",
-    accessor: "action",
+    accessor: "method",
   },
   {
-    Header: "Path",
-    accessor: "url",
+    Header: "Chemin",
+    accessor: "path",
+  },
+  {
+    Cell: ({ value }) => (value !== null ? <code>{value}</code> : "N/A"),
+    Header: "Corps",
+    accessor: "body",
   },
   {
     Cell: ({ value }) => moment(value).format("L HH:mm:ss"),

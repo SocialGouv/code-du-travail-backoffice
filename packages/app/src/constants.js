@@ -36,10 +36,10 @@ export const LEGAL_REFERENCE_CATEGORY = {
   LABOR_CODE: "labor_code",
 };
 
-export const LOG_ACTION_LABEL = {
-  delete: "SUPPRESSION",
-  patch: "MODIFICATION",
-  post: "INSERTION",
+export const LOG_METHOD = {
+  DELETE: "delete",
+  PATCH: "patch",
+  POST: "post",
 };
 
 export const SESSION = {
