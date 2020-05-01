@@ -1,8 +1,13 @@
-/* eslint-disable max-len */
+/* eslint-disable simple-import-sort/sort */
+/* eslint-env browser */
 
 // Jest "dom" extension
 // https://github.com/gnapse/jest-dom#usage
 import "@testing-library/jest-dom/extend-expect";
+
+// Polyfill "MutationObserver"
+// https://github.com/megawac/MutationObserver.js
+import "mutationobserver-shim";
 
 // Jest "snapshot-diff" extension
 // https://github.com/jest-community/snapshot-diff#with-custom-matcher
@@ -17,14 +22,19 @@ expect.extend({ toMatchDiffSnapshot });
 import { matchers } from "jest-emotion";
 expect.extend(matchers);
 
-// Polyfill "MutationObserver"
-// https://github.com/megawac/MutationObserver.js
-import "mutationobserver-shim";
+// Custom matchers:
+import "./matchers/toHaveTestRenderedClass";
+import "./matchers/toHaveTestRenderedProp";
+
 // Mock "next/router"
 import "./mocks/nextRouter";
 // Mock "axios"
 import "./mocks/axios";
 // Mock "../src/libs/customAxios"
 import "./mocks/customAxios";
-// Globalize render() helper
+// Globalize console() overwriting
+import "./globals/console";
+// Globalize testRender() helper
 import "./globals/testRender";
+// Globalize waitFor() helper
+import "./globals/waitFor";

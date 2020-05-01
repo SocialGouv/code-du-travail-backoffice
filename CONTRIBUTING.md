@@ -13,8 +13,10 @@ help make it even better than it is today!
     - [Docker Compose](#docker-compose)
     - [Jest Watch](#jest-watch)
 - [Naming Guidelines](#naming-guidelines)
-  - [API-related Actions](#api-related-actions)
-  - [React Component Actions](#react-component-actions)
+  - [API-related methods](#api-related-methods)
+  - [React methods](#react-methods)
+  - [Redux states](#redux-states)
+  - [React variables](#react-variables)
 - [Commit Message Guidelines](#commit-message-guidelines)
   - [Revert](#revert)
   - [Type](#type)
@@ -128,20 +130,53 @@ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo s
 
 ## Naming Guidelines
 
-### API-related Actions
+### API-related methods
 
-This includes React components methods as well as Redux actions, action types and sagas:
+This includes React methods as well as Redux actions, action types and sagas:
 
-- Any `GET` call-related method should start with the verb **load**.
-- Any `POST` call-related method should start with the verb **create**, or **add** if it targets a
+- All `GET` call-related methods must start with the verb **load**.
+- All `POST` call-related methods must start with the verb **create**, or **add** if it targets a
   foreign entity (i.e.: `addAnswerComment()`).
-- Any `PATCH` call-related method should start with the verb **update**.
-- Any `DELETE` call-related method should start with the verb **delete** (or **\_delete**), or
+- All `PATCH` call-related methods must start with the verb **update**.
+- All `DELETE` call-related methods must start with the verb **delete** (or **\_delete**), or
   **remove** if it targets a foreign entity (i.e.: `removeAnswerComment()`).
 
-### React Component Actions
+### React methods
 
-- Any method returning a JSX value should start with the verb **render**.
+- All the methods returning a JSX value should start with the verb **render**.
+
+### Redux states
+
+A common state should look like:
+
+```ts
+interface {
+  /** Single entity data (creation, edition) */
+  data: Object | null;
+  error: Error | null;
+  /** Is it fetching data? */
+  isLoading: boolean;
+  /**
+    Total number of entities (listing)
+
+    @description
+    This represents the number of entities available on the API and should be higher than the list
+    length if there is more than one page.
+  */
+  length: number;
+  /** Multiple entities data (listing) */
+  list: Object[];
+  /** Current page index (listing) */
+  pagesIndex: number;
+  /** Total number of pages (listing) */
+  pagesLength: number;
+}
+```
+
+### React variables
+
+- All the variables referencing a component must start with **$**
+  (i.e.: `<Button ref={node => this.$button = node}>`).
 
 ---
 

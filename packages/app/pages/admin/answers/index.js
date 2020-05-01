@@ -1,16 +1,17 @@
 import styled from "@emotion/styled";
+import debounce from "lodash.debounce";
 import Router from "next/router";
 import React from "react";
 import { connect } from "react-redux";
 import { Flex } from "rebass";
 
 import * as actions from "../../../src/actions";
-import AdminAnswerBlock from "../../../src/blocks/AdminAnswer";
-import Pagination from "../../../src/components/Pagination";
-import { ANSWER_STATE_OPTIONS } from "../../../src/constants";
+import Answer from "../../../src/components/Answer";
+import * as C from "../../../src/constants";
 import Button from "../../../src/elements/Button";
 import Checkbox from "../../../src/elements/Checkbox";
 import Input from "../../../src/elements/Input";
+import LoadingSpinner from "../../../src/elements/LoadingSpinner";
 import Select from "../../../src/elements/Select";
 import Title from "../../../src/elements/Title";
 import AdminMainLayout from "../../../src/layouts/AdminMain";
@@ -20,35 +21,30 @@ const Container = styled(Flex)`
   flex-grow: 1;
   margin: 0 1rem 1rem;
 `;
+
 const List = styled(Flex)`
   flex-grow: 1;
   padding-right: 1rem;
   min-height: 0;
   overflow-y: auto;
 `;
-
-const Top = styled(Flex)`
-  margin-bottom: 0.75rem;
+const ListSpinner = styled(Flex)`
+  margin-top: 1rem;
 `;
+
 const FiltersContainer = styled(Flex)`
   border-bottom: solid 1px var(--color-border);
-  border-top: solid 1px var(--color-border);
   padding: 0.5rem 0;
+
+  > * {
+    flex-grow: 0.25;
+  }
 `;
-const FilterSelect = styled(Select)`
-  margin-left: 1rem;
-`;
+
 const ActionsContainer = styled(Flex)`
   background-color: var(--color-alice-blue);
   border-bottom: solid 1px var(--color-border);
   padding: 0.5rem 0.5rem 0.5rem 1rem;
-`;
-
-const Text = styled.p`
-  margin-bottom: 0.5rem;
-`;
-const HelpText = styled(Text)`
-  font-size: 0.875rem;
 `;
 
 export class AdminAnswersIndexPage extends React.Component {
@@ -56,6 +52,17 @@ export class AdminAnswersIndexPage extends React.Component {
     return this.$queryFilter !== undefined && this.$queryFilter !== null
       ? this.$queryFilter.value
       : "";
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.isListeningListScroll = false;
+
+    this.$list = null;
+
+    this.onListScroll = this.onListScroll.bind(this);
+    this.setQueryFilter = debounce(this.setQueryFilter, 250).bind(this);
   }
 
   componentDidMount() {
@@ -66,18 +73,39 @@ export class AdminAnswersIndexPage extends React.Component {
     this.props.dispatch(
       actions.answers.setFilters({
         isGeneric,
-        pageLength: 10,
+        pageLength: 53,
       }),
     );
+  }
+
+  componentDidUpdate() {
+    const { answers } = this.props;
+
+    if (this.$list === null || answers.isLoading || this.isListeningListScroll) return;
+
+    this.$list.addEventListener("scroll", this.onListScroll);
+    this.isListeningListScroll = true;
+  }
+
+  onListScroll() {
+    const { answers, dispatch } = this.props;
+    if (answers.isLoading || answers.pagesIndex >= answers.pagesLength - 1) return;
+
+    const scrollTopLimit = this.$list.scrollHeight - this.$list.clientHeight - 1600;
+    if (this.$list.scrollTop > scrollTopLimit) {
+      dispatch(actions.answers.load(answers.pagesIndex + 1));
+    }
+  }
+
+  getCheckableAnswerIds() {
+    const { answers } = this.props;
+
+    return answers.list.map(({ id }) => id).filter(id => !answers.checked.includes(id));
   }
 
   setAgreeementsFilter(selected) {
     const agreements = selected !== null ? selected : [];
     this.props.dispatch(actions.answers.setFilter("agreements", agreements));
-  }
-
-  setPageFilter({ selected }) {
-    this.props.dispatch(actions.answers.setFilter("page", selected));
   }
 
   setQuestionsFilter(selected) {
@@ -99,8 +127,8 @@ export class AdminAnswersIndexPage extends React.Component {
   }
 
   checkAll() {
-    const { dispatch, answers } = this.props;
-    const ids = answers.data.map(({ id }) => id).filter(id => !answers.checked.includes(id));
+    const { dispatch } = this.props;
+    const ids = this.getCheckableAnswerIds();
 
     dispatch(actions.answers.toggleCheck(ids));
   }
@@ -142,25 +170,34 @@ export class AdminAnswersIndexPage extends React.Component {
   }
 
   renderAnswersList() {
-    const { checked, data, isLoading } = this.props.answers;
+    const { checked, list, isLoading } = this.props.answers;
 
-    if (isLoading || !Array.isArray(data)) {
-      return <HelpText>Chargement…</HelpText>;
+    if (list.length === 0) {
+      return (
+        <List alignItems="center" justifyContent="center">
+          {isLoading ? <LoadingSpinner /> : T.ADMIN_ANSWERS_INFO_NO_DATA}
+        </List>
+      );
     }
 
-    if (data.length === 0) {
-      return <p>{T.ADMIN_ANSWERS_INFO_NO_DATA}</p>;
-    }
-
-    return data.map(answer => (
-      <AdminAnswerBlock
-        data={answer}
-        isChecked={checked.includes(answer.id)}
-        key={answer.id}
-        onCheck={this.check.bind(this)}
-        onClick={this.editAnswer.bind(this)}
-      />
-    ));
+    return (
+      <List flexDirection="column" ref={node => (this.$list = node)}>
+        {list.map(answer => (
+          <Answer
+            data={answer}
+            isChecked={checked.includes(answer.id)}
+            key={answer.id}
+            onCheck={this.check.bind(this)}
+            onClick={this.editAnswer.bind(this)}
+          />
+        ))}
+        {isLoading && (
+          <ListSpinner alignItems="center" justifyContent="center">
+            <LoadingSpinner />
+          </ListSpinner>
+        )}
+      </List>
+    );
   }
 
   render() {
@@ -169,26 +206,25 @@ export class AdminAnswersIndexPage extends React.Component {
     const isLoading = isGeneric
       ? answers.isLoading
       : agreements.isLoading || answers.isLoading || questions.isLoading;
-    const stateFilterAgreements = agreements.data.map(({ id, idcc, name }) => ({
+    const stateFilterAgreements = agreements.list.map(({ id, idcc, name }) => ({
       label: `[${idcc}] ${name}`,
       value: id,
     }));
-    const stateFilterQuestions = questions.data.map(({ id, index, value }) => ({
+    const stateFilterQuestions = questions.list.map(({ id, index, value }) => ({
       label: `${index}) ${value}`,
       value: id,
     }));
-    const stateActionOptions = ANSWER_STATE_OPTIONS.filter(({ value }) => value !== answers.state);
 
     return (
       <AdminMainLayout hasBareContent>
         <Container flexDirection="column">
-          <Top alignItems="baseline" justifyContent="space-between">
+          <Flex alignItems="center" justifyContent="space-between">
             <Title>{`Réponses${isGeneric ? " génériques" : ""}`}</Title>
 
             <Button disabled={isLoading} onClick={this.printAnswers.bind(this)}>
               Imprimer
             </Button>
-          </Top>
+          </Flex>
 
           {/* Filters */}
           {!isGeneric && (
@@ -196,34 +232,34 @@ export class AdminAnswersIndexPage extends React.Component {
               <Input
                 defaultValue={answers.filters.query}
                 icon="search"
-                onChange={this.setQueryFilter.bind(this)}
+                onChange={this.setQueryFilter}
                 ref={node => (this.$queryFilter = node)}
               />
-              {/* We must set the {instanceId} prop to avoid "Prop `id` did not match." warning. */}
-              {/* https://github.com/trezor/trezor-suite/issues/290#issuecomment-516349580 */}
-              <FilterSelect
+              <Select
                 instanceId="statesFilter"
-                isLoading={isLoading}
                 isMulti
                 onChange={this.setStatesFilter.bind(this)}
-                options={ANSWER_STATE_OPTIONS}
+                options={C.ANSWER_STATE_OPTIONS}
                 value={answers.filters.states}
+                withMarginLeft
               />
-              <FilterSelect
+              <Select
                 instanceId="agreementsFilter"
-                isLoading={isLoading}
+                isLoading={agreements.isLoading}
                 isMulti
                 onChange={this.setAgreeementsFilter.bind(this)}
                 options={stateFilterAgreements}
                 value={answers.filters.agreements}
+                withMarginLeft
               />
-              <FilterSelect
+              <Select
                 instanceId="questionsFilter"
-                isLoading={isLoading}
+                isLoading={questions.isLoading}
                 isMulti
                 onChange={this.setQuestionsFilter.bind(this)}
                 options={stateFilterQuestions}
                 value={answers.filters.questions}
+                withMarginLeft
               />
             </FiltersContainer>
           )}
@@ -231,37 +267,30 @@ export class AdminAnswersIndexPage extends React.Component {
           {/* Actions */}
           <ActionsContainer alignItems="center" justifyContent="space-between">
             <Checkbox
-              icon={answers.checked.length > 0 ? "check-square" : "square"}
-              isDisabled={isLoading}
+              isChecked={answers.checked.length > 0}
+              isDisabled={isLoading || answers.list.length === 0}
               onClick={
                 answers.checked.length > 0 ? this.uncheckAll.bind(this) : this.checkAll.bind(this)
               }
             />
             <Flex>
               <Select
+                instanceId="stateAction"
                 isDisabled={isLoading || answers.checked.length === 0}
-                isLoading={isLoading}
-                options={stateActionOptions}
+                options={C.ANSWER_STATE_OPTIONS}
                 ref={node => (this.$newState = node)}
               />
               <Button
                 isDisabled={isLoading || answers.checked.length === 0}
                 onClick={this.setCheckedAnswersState.bind(this)}
-                withLeftMargin
+                withMarginLeft
               >
                 {`Appliquer (${answers.checked.length})`}
               </Button>
             </Flex>
           </ActionsContainer>
 
-          <List flexDirection="column">{this.renderAnswersList()}</List>
-          {!isLoading && answers.pagesLength > 0 && (
-            <Pagination
-              initialPage={answers.filters.page}
-              onPageChange={this.setPageFilter.bind(this)}
-              pageCount={answers.pagesLength}
-            />
-          )}
+          {this.renderAnswersList()}
         </Container>
       </AdminMainLayout>
     );

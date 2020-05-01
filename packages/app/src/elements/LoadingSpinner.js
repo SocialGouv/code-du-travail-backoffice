@@ -2,6 +2,7 @@
 
 import { keyframes } from "@emotion/core";
 import styled from "@emotion/styled";
+import PropTypes from "prop-types";
 import React from "react";
 
 const Container = styled.div`
@@ -38,13 +39,17 @@ const SpinnerNext = styled(Spinner)`
   animation-delay: -0.5s;
 `;
 
-const LoadingSpinner = ({ color = "white", ...props }) => {
+const LoadingSpinner = ({ color = "var(--color-text-blue)", ...props }) => {
   return (
     <Container {...props}>
       <Spinner color={color} />
       <SpinnerNext color={color} />
     </Container>
   );
+};
+
+LoadingSpinner.propTypes = {
+  color: PropTypes.string,
 };
 
 export default LoadingSpinner;

@@ -4,7 +4,7 @@ import ReactTagAutocomplete from "react-tag-autocomplete";
 import { Flex } from "rebass";
 
 import LegalReferenceProps from "../../props/LegalReference";
-import { Container } from "./index.style";
+import { Container, Info } from "./index.style";
 import Tag from "./Tag";
 
 const LEGAL_REFERENCE_CATEGORY_PLACEHOLDER = {
@@ -13,6 +13,10 @@ const LEGAL_REFERENCE_CATEGORY_PLACEHOLDER = {
 };
 
 export function renderReferences({ references, ...globalProps }) {
+  if (references.length === 0 && globalProps.isReadOnly) {
+    return <Info>Aucune référence.</Info>;
+  }
+
   return references.map((props, index) => (
     <Tag key={String(index)} {...{ ...globalProps, ...props }} />
   ));
@@ -21,7 +25,6 @@ export function renderReferences({ references, ...globalProps }) {
 function LegalReferences({
   category,
   data = [],
-  isEditable = false,
   isLoading = false,
   isReadOnly = false,
   noContent = false,
@@ -40,7 +43,7 @@ function LegalReferences({
     return (
       <Container {...props}>
         <Flex flexDirection="column">
-          {renderReferences({ isEditable, isReadOnly, onChange, onRemove, references })}
+          {renderReferences({ isReadOnly, onChange, onRemove, references })}
         </Flex>
       </Container>
     );
@@ -66,7 +69,6 @@ function LegalReferences({
       )}
       <Flex flexDirection="column">
         {renderReferences({
-          isEditable,
           isReadOnly,
           noContent,
           onChange,
@@ -81,7 +83,6 @@ function LegalReferences({
 LegalReferences.propTypes = {
   category: LegalReferenceProps.category,
   data: PropTypes.array,
-  isEditable: PropTypes.bool,
   isLoading: PropTypes.bool,
   isReadOnly: PropTypes.bool,
   noContent: PropTypes.bool,
@@ -89,7 +90,7 @@ LegalReferences.propTypes = {
   onChange: PropTypes.func,
   onInput: PropTypes.func,
   onRemove: PropTypes.func,
-  references: PropTypes.arrayOf(PropTypes.shape(LegalReferenceProps)),
+  references: PropTypes.arrayOf(PropTypes.exact(LegalReferenceProps)),
 };
 
 export default LegalReferences;

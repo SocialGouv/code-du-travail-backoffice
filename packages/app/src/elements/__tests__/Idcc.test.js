@@ -2,26 +2,30 @@ import React from "react";
 
 import Idcc from "../Idcc";
 
-// TODO Unskip this tests once "react-tooltip" is fixed.
-// https://github.com/wwayne/react-tooltip/issues/562
-describe.skip("elements/<Idcc />", () => {
-  const COMMON_PROPS = {
-    name: "A Labor Agreement",
-  };
-
+describe("elements/<Idcc />", () => {
   it(`should pass`, () => {
-    const $idcc = testRender(<Idcc {...COMMON_PROPS} />);
+    const $idcc = testRender(<Idcc code="A Code" name="An Agreement" />);
+    const $tooltip = $idcc.findByType("div");
 
     expect($idcc).toMatchSnapshot();
-    expect($idcc.props).toHaveProperty("data-tip", "Code du travail");
-    expect($idcc.children[0]).toStrictEqual("CDT");
+
+    expect($idcc.text).toStrictEqual("A Code");
+    expect($tooltip.text).toStrictEqual("An Agreement");
   });
 
-  it(`should pass with {code} = 1234`, () => {
-    const CODE = 1234;
-    const $idcc = testRender(<Idcc code={CODE} {...COMMON_PROPS} />);
+  it(`should pass with {code} = null`, () => {
+    const $idcc = testRender(<Idcc code={null} name="An Agreement" />);
+    const $tooltip = $idcc.findByType("div");
 
-    expect($idcc.props).toHaveProperty("data-tip", COMMON_PROPS.name);
-    expect($idcc.children[0]).toStrictEqual(`IDCC: ${CODE}`);
+    expect($idcc.text).toStrictEqual("CDT");
+    expect($tooltip.text).toStrictEqual("An Agreement");
+  });
+
+  it(`should pass with {name} = null`, () => {
+    const $idcc = testRender(<Idcc code="A Code" name={null} />);
+    const $tooltip = $idcc.findByType("div");
+
+    expect($idcc.text).toStrictEqual("A Code");
+    expect($tooltip.text).toStrictEqual("Code du travail");
   });
 });

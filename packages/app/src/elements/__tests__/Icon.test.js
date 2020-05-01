@@ -11,28 +11,32 @@ describe("elements/<Icon />", () => {
     const $icon = testRender(<Icon {...COMMON_PROPS} />);
 
     expect($icon).toMatchSnapshot();
-    expect($icon.props).toHaveProperty("color", "var(--color-black-leather-jacket)");
-    expect($icon.props).toHaveProperty("role", "img");
+
+    expect($icon).toHaveTestRenderedProp("color", "var(--color-black-leather-jacket)");
+    expect($icon).toHaveTestRenderedProp("data-icon", COMMON_PROPS.icon);
+    expect($icon).toHaveTestRenderedProp("role", "img");
+
+    expect($icon).toHaveTestRenderedClass("fa-1x");
     expect($icon).toHaveStyleRule("cursor", "default");
-    expect($icon).toHaveStyleRule("width", "1rem !important");
   });
 
   it(`should pass with {color} = "red"`, () => {
-    const $icon = testRender(<Icon {...COMMON_PROPS} color="red" />);
+    const $icon = testRender(<Icon color="red" {...COMMON_PROPS} />);
 
-    expect($icon.props).toHaveProperty("color", "red");
+    expect($icon).toHaveTestRenderedProp("color", "red");
   });
 
   it(`should pass with {isSmall}`, () => {
-    const $icon = testRender(<Icon {...COMMON_PROPS} isSmall />);
+    const $icon = testRender(<Icon isSmall {...COMMON_PROPS} />);
 
-    expect($icon).toHaveStyleRule("width", "0.5rem !important");
+    expect($icon).toHaveTestRenderedClass("fa-sm");
   });
 
   it(`should pass with {role} = "button"`, () => {
     const $icon = testRender(<Icon {...COMMON_PROPS} role="button" />);
 
-    expect($icon.props).toHaveProperty("role", "button");
+    expect($icon).toHaveTestRenderedProp("role", "button");
+
     expect($icon).toHaveStyleRule("cursor", "pointer");
   });
 });

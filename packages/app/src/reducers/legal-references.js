@@ -2,9 +2,10 @@ import { actionTypes } from "../actions/index";
 
 const initialState = {
   category: null,
-  data: [],
+  data: null,
   error: null,
   isLoading: false,
+  list: [],
   query: "",
 };
 
@@ -22,18 +23,18 @@ export default (state = initialState, { payload, type }) => {
       return {
         ...state,
         category: null,
-        data: [],
         error: payload.message,
         isLoading: false,
+        list: [],
       };
 
     case actionTypes.LEGAL_REFERENCES_LOAD_SUCCESS:
       return {
         ...state,
         category: payload.category,
-        data: payload.data,
         error: null,
         isLoading: false,
+        list: payload.list,
         query: payload.query,
       };
 

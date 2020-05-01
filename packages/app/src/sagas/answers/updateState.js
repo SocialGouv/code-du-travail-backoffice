@@ -21,7 +21,6 @@ export default function* updateState({ meta: { ids, next, state } }) {
           value: "",
         };
         yield customPostgrester().in("answer_id", ids, true).delete("/answers_references");
-        yield customPostgrester().in("answer_id", ids, true).delete("/answers_tags");
         break;
 
       case ANSWER_STATE.DRAFT:

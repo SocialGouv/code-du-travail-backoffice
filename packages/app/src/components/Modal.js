@@ -40,7 +40,7 @@ class _Modal extends React.PureComponent {
       <Container flexDirection="column">
         <p>{message}</p>
         <Actions justifyContent="flex-end">
-          <Button color="secondary" onClick={() => dispatch(actions.modal.close())} withRightMargin>
+          <Button color="secondary" onClick={() => dispatch(actions.modal.close())} withMarginRight>
             Annuler
           </Button>
           <Button onClick={() => dispatch(actions.modal.submit())}>Confirmer</Button>

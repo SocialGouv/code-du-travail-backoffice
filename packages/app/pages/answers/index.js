@@ -7,7 +7,6 @@ import { Flex } from "rebass";
 
 import * as actions from "../../src/actions";
 import AnswerBlock from "../../src/blocks/Answer";
-import Pagination from "../../src/components/Pagination";
 import { ANSWER_STATE } from "../../src/constants";
 import Input from "../../src/elements/Input";
 import Subtitle from "../../src/elements/Subtitle";
@@ -150,13 +149,13 @@ class AnswersIndexPage extends React.Component {
         query: { state },
       },
     } = this.props;
-    const { data, error } = answers;
+    const { list, error } = answers;
 
     if (error !== null) {
       return <ErrorText>{error}</ErrorText>;
     }
 
-    if (data.length === 0) {
+    if (list.length === 0) {
       if (this.query.length !== 0) {
         return <InfoText>{T.ANSWERS_INDEX_INFO_NO_SEARCH_RESULT}</InfoText>;
       }
@@ -164,7 +163,7 @@ class AnswersIndexPage extends React.Component {
       return <InfoText>{T.ANSWERS_INDEX_INFO_NO_DATA(state)}</InfoText>;
     }
 
-    return data.map(answer => [
+    return list.map(answer => [
       <AnswerBlock
         data={answer}
         key={answer.id}
@@ -182,7 +181,7 @@ class AnswersIndexPage extends React.Component {
         query: { state },
       },
     } = this.props;
-    const { data, isLoading, pageIndex, pagesLength } = answers;
+    const { isLoading, list } = answers;
 
     return (
       <Main isHorizontal>
@@ -203,18 +202,11 @@ class AnswersIndexPage extends React.Component {
           )}
           {!isLoading && (
             <List flexDirection="column">
-              {state === ANSWER_STATE.TO_DO && data.length !== 0 && (
+              {state === ANSWER_STATE.TO_DO && list.length !== 0 && (
                 <HelpText>{T.ANSWERS_INDEX_HELP_TO_DO}</HelpText>
               )}
               {this.renderAnswers()}
             </List>
-          )}
-          {!isLoading && pagesLength !== 0 && (
-            <Pagination
-              initialPage={pageIndex}
-              onPageChange={this.goToPage.bind(this)}
-              pageCount={pagesLength}
-            />
           )}
         </Content>
       </Main>

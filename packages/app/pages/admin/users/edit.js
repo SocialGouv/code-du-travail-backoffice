@@ -26,12 +26,11 @@ const componentDidMount = async (api, id) => {
       type: "select",
     },
     {
-      ariaName: "la convention",
       label: "Conventions",
       name: "agreements",
       tags: agreements.map(({ id, idcc, name }) => ({
-        id,
-        value: `${idcc} - ${name}`,
+        label: `${idcc} - ${name}`,
+        value: id,
       })),
       type: "tags",
     },

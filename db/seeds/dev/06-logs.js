@@ -12,17 +12,17 @@ function getRandomIp() {
 }
 
 function getRandomLog() {
-  const ip = getRandomIp();
-  const action = ACTIONS[getRandomIntBetween(0, 2)];
-  const url = "/path";
   const created_at = new Date(Date.now() - getRandomIntBetween(0, 30 * 24 * 60 * 60 * 1000));
+  const ip = getRandomIp();
+  const method = ACTIONS[getRandomIntBetween(0, 2)];
+  const path = "/dummy-path";
   const user_id = `00000000-0000-4000-8000-00000000040${getRandomIntBetween(1, 5)}`;
 
   return {
-    action,
     created_at,
     ip,
-    url,
+    method,
+    path,
     user_id,
   };
 }
@@ -32,7 +32,7 @@ exports.seed = async knex => {
 
   const logs = Array.from({ length: 1000 }, getRandomLog);
 
-  await knex("api.logs").insert(logs);
+  await knex("public.logs").insert(logs);
 
   global.spinner.succeed(`Logs generated.`);
 };

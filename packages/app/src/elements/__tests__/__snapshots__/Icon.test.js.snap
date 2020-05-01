@@ -3,7 +3,6 @@
 exports[`elements/<Icon /> should pass 1`] = `
 .emotion-0 {
   cursor: default;
-  width: 1rem !important;
 }
 
 <svg

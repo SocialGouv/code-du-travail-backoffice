@@ -9,6 +9,7 @@ describe("elements/<Subtitle />", () => {
     const $subtitle = testRender(<Subtitle>{TEXT}</Subtitle>);
 
     expect($subtitle).toMatchSnapshot();
+
     expect($subtitle).toHaveStyleRule("margin", "1.5rem 0 0.5rem");
   });
 

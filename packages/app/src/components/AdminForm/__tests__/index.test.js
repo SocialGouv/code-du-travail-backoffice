@@ -1,6 +1,3 @@
-import "../../../../tests/globals/console";
-import "../../../../tests/globals/waitFor";
-
 import { cleanup, fireEvent, render } from "@testing-library/react";
 import React from "react";
 
@@ -57,8 +54,8 @@ describe.skip("components/<AdminForm /> (create)", () => {
         label: "A Default Tags",
         name: "defaultTags",
         tags: [
-          { id: "02dea6e4-3bf0-46a8-9144-9bd324ddcf08", value: "First A Tag" },
-          { id: "ced5cec0-a7ff-4803-853e-026926426830", value: "Second A Tag" },
+          { label: "First A Tag", value: "02dea6e4-3bf0-46a8-9144-9bd324ddcf08" },
+          { label: "Second A Tag", value: "ced5cec0-a7ff-4803-853e-026926426830" },
         ],
         type: "tags",
       },
@@ -73,9 +70,9 @@ describe.skip("components/<AdminForm /> (create)", () => {
         label: "A Tags With Custom API Path",
         name: "tagsWithCustomApiPath",
         tags: [
-          { id: "f64defb3-00d9-44c3-b620-4a05db71329d", value: "First B Tag" },
-          { id: "c4d0aec3-c426-4bba-89db-9e89a92c163e", value: "Second B Tag" },
-          { id: "056cbd22-00d1-4606-aea5-94dbd1042e0d", value: "Third B Tag" },
+          { label: "First B Tag", value: "f64defb3-00d9-44c3-b620-4a05db71329d" },
+          { label: "Second B Tag", value: "c4d0aec3-c426-4bba-89db-9e89a92c163e" },
+          { label: "Third B Tag", value: "056cbd22-00d1-4606-aea5-94dbd1042e0d" },
         ],
         type: "tags",
       },
@@ -262,8 +259,8 @@ describe.skip("components/<AdminForm /> (edit)", () => {
         label: "A Default Tags",
         name: "defaultTags",
         tags: [
-          { id: "02dea6e4-3bf0-46a8-9144-9bd324ddcf08", value: "First A Tag" },
-          { id: "ced5cec0-a7ff-4803-853e-026926426830", value: "Second A Tag" },
+          { label: "First A Tag", value: "02dea6e4-3bf0-46a8-9144-9bd324ddcf08" },
+          { label: "Second A Tag", value: "ced5cec0-a7ff-4803-853e-026926426830" },
         ],
         type: "tags",
       },
@@ -278,9 +275,9 @@ describe.skip("components/<AdminForm /> (edit)", () => {
         label: "A Tags With Custom API Path",
         name: "tagsWithCustomApiPath",
         tags: [
-          { id: "f64defb3-00d9-44c3-b620-4a05db71329d", value: "First B Tag" },
-          { id: "c4d0aec3-c426-4bba-89db-9e89a92c163e", value: "Second B Tag" },
-          { id: "056cbd22-00d1-4606-aea5-94dbd1042e0d", value: "Third B Tag" },
+          { label: "First B Tag", value: "f64defb3-00d9-44c3-b620-4a05db71329d" },
+          { label: "Second B Tag", value: "c4d0aec3-c426-4bba-89db-9e89a92c163e" },
+          { label: "Third B Tag", value: "056cbd22-00d1-4606-aea5-94dbd1042e0d" },
         ],
         type: "tags",
       },

@@ -9,6 +9,7 @@ export default css`
     display: flex;
     flex-direction: column;
     min-width: 13rem;
+    overflow-y: auto;
     width: 13rem;
   }
 `;

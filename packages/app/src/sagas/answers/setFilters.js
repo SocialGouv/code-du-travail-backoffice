@@ -20,14 +20,14 @@ export default function* setFilter({ meta: { filters } }) {
       lastFilters !== undefined ? JSON.parse(lastFilters) : yield select(getAnswersFilters);
 
     const nextFilters = { ...prevFilters, ...filters };
-    if (filters.isGeneric === undefined && filters.page === undefined) nextFilters.page = 0;
-
     jsCookie.set(lastFiltersCookieKey, JSON.stringify(nextFilters));
 
     yield put({
       payload: { filters: nextFilters },
       type: actionTypes.ANSWERS_SET_FILTERS_SUCCESS,
     });
+
+    yield put(answers.load(0));
   } catch (err) {
     toast.error(err.message);
     yield put(answers.setFiltersFailure({ message: null }));

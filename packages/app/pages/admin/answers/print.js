@@ -40,7 +40,6 @@ export class AdminAnswersPrintPage extends React.Component {
     this.props.dispatch(
       actions.answers.setFilters({
         isGeneric,
-        page: 0,
         pageLength: 100,
       }),
     );
@@ -57,9 +56,9 @@ export class AdminAnswersPrintPage extends React.Component {
   }
 
   renderAnswers() {
-    const { data } = this.props.answers;
+    const { list } = this.props.answers;
 
-    return data.map(({ agreement_idcc, id, question_index, question_value, references, value }) => (
+    return list.map(({ agreement_idcc, id, question_index, question_value, references, value }) => (
       <Answer key={id}>
         <h2>{`[IDCC: ${agreement_idcc}] ${question_index}) ${question_value}`}</h2>
         <h3>Réponse corrigée:</h3>

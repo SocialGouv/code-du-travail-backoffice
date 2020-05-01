@@ -30,7 +30,7 @@ const AnswerEditionHeadBlock = ({
     <Flex flexDirection="column">
       <Flex alignItems="baseline">
         <Idcc code={agreement.idcc} name={agreement.name} />
-        <Title isFirst>{`${question.index}) ${question.value}`}</Title>
+        <Title>{`${question.index}) ${question.value}`}</Title>
       </Flex>
       <AnswerEditionHeadBlockTabs
         currentTab={currentTab}

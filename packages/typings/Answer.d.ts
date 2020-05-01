@@ -1,8 +1,6 @@
 declare namespace Answer {
   interface Answer {
     /** Is `null` is it's a generic answer. */
-    agreement: Agreement | null;
-    /** Is `null` is it's a generic answer. */
     agreement_id: string | null;
     created_at: string;
     generic_reference: "labor_code" | "national_agreement" | null;
@@ -10,11 +8,9 @@ declare namespace Answer {
     is_published: boolean;
     parent_id: string | null;
     prevalue: string;
-    question: Question;
     question_id: string;
     state: "draft" | "pending_review" | "todo" | "under_review" | "validated";
     updated_at: string;
-    user: User.User;
     user_id: string;
     value: string;
   }
@@ -47,7 +43,7 @@ declare namespace Answer {
         value: string;
       };
 
-  interface WithReferences extends Answer {
-    references: Reference[];
+  interface WithReferences extends Answer.Answer {
+    references: Answer.Reference[];
   }
 }

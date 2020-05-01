@@ -4,19 +4,11 @@
     "esModuleInterop": true,
     "jsx": "preserve",
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "strict": false,
     "module": "esnext",
     "moduleResolution": "node",
     "isolatedModules": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ]
+  "include": ["next-env.d.ts", "typings-env.d.ts", "**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"]
 }

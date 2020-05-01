@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 
 import * as actions from "../../../src/actions";
 import { Container, Head } from "../../../src/components/AdminIndex/styles";
-import Table from "../../../src/components/Table";
 import Button from "../../../src/elements/Button";
+import Table from "../../../src/elements/Table";
 import Title from "../../../src/elements/Title";
 import capitalize from "../../../src/helpers/capitalize";
 import humanizeLogAction from "../../../src/helpers/humanizeLogAction";
@@ -77,7 +77,7 @@ class AdminLogsIndexPage extends React.Component {
           </Head>
           <Table
             columns={COLUMNS}
-            data={logs.data}
+            data={logs.list}
             defaultSorted={[{ desc: true, id: "created_at" }]}
             filterable={true}
             multiSort={false}

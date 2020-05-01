@@ -7,6 +7,7 @@ describe("elements/<Tag />", () => {
     const $tag = testRender(<Tag />);
 
     expect($tag).toMatchSnapshot();
+
     expect($tag).toHaveStyleRule("background-color", "transparent");
     expect($tag).toHaveStyleRule("color", "var(--color-lapis-lazuli)");
     expect($tag).toHaveStyleRule("opacity", "1");

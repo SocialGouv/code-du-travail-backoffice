@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import axios from "axios";
 import debounce from "lodash.debounce";
 import Router from "next/router";
 import React from "react";
@@ -56,10 +55,6 @@ class AnswersEditPage extends React.Component {
     this.updatePrevalue = debounce(this._updatePrevalue.bind(this), 500);
   }
 
-  static getInitialProps({ query: { id } }) {
-    return { id };
-  }
-
   async componentDidMount() {
     const { id } = this.props;
     const me = getCurrentUser();
@@ -69,9 +64,6 @@ class AnswersEditPage extends React.Component {
 
     try {
       const { data: references } = await this.axios.get(`/answers_references?answer_id=eq.${id}`);
-      const laborCodeReferences = await axios.get(`/static/data/labor-law-references.json`);
-
-      this.laborCodeReferences = laborCodeReferences.data;
 
       this.setState({
         isLoading: false,
@@ -226,7 +218,6 @@ class AnswersEditPage extends React.Component {
       case TABS.REFERENCES:
         return (
           <AnswerEditionReferencesBlock
-            laborCodeReferences={this.laborCodeReferences}
             onAdd={this.createReference.bind(this)}
             onRemove={this.deleteReference.bind(this)}
             references={references}

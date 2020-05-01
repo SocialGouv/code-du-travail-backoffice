@@ -1,10 +1,14 @@
 import styled from "@emotion/styled";
 
+export const Head = styled.div`
+  margin-bottom: 1rem;
+`;
+
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  margin: 1rem;
+  margin: 0 1rem 1rem;
 `;
 
 export const LabelContainer = styled.div`

@@ -3,7 +3,6 @@
 exports[`elements/<Radio /> should pass 1`] = `
 .emotion-1 {
   cursor: default;
-  width: 1rem !important;
   color: var(--color-text-blue);
   cursor: auto;
   margin-right: 0.5rem;
@@ -15,7 +14,6 @@ exports[`elements/<Radio /> should pass 1`] = `
 
 .emotion-4 {
   cursor: default;
-  width: 1rem !important;
   color: var(--color-text-blue);
   cursor: pointer;
   margin-right: 0.5rem;
@@ -37,7 +35,6 @@ exports[`elements/<Radio /> should pass 1`] = `
       data-icon="dot-circle"
       data-prefix="fas"
       focusable="false"
-      onClick={[Function]}
       role="radio"
       selected={true}
       style={Object {}}

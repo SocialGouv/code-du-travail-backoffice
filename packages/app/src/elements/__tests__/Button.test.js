@@ -28,9 +28,10 @@ describe("elements/<Button />", () => {
     );
     const $icon = $button.findByType("svg");
 
+    expect($icon).toHaveTestRenderedProp("color", "white");
+
     expect($button).toHaveStyleRule("background-color", "var(--color-shadow)");
     expect($button).toHaveStyleRule("color", "white");
-    expect($icon.props).toHaveProperty("color", "white");
   });
 
   it(`should pass with {color} = "info"`, () => {
@@ -41,9 +42,10 @@ describe("elements/<Button />", () => {
     );
     const $icon = $button.findByType("svg");
 
+    expect($icon).toHaveTestRenderedProp("color", "white");
+
     expect($button).toHaveStyleRule("background-color", "var(--color-misty-moss)");
     expect($button).toHaveStyleRule("color", "white");
-    expect($icon.props).toHaveProperty("color", "white");
   });
 
   it(`should pass with {color} = "primary"`, () => {
@@ -54,9 +56,10 @@ describe("elements/<Button />", () => {
     );
     const $icon = $button.findByType("svg");
 
+    expect($icon).toHaveTestRenderedProp("color", "white");
+
     expect($button).toHaveStyleRule("background-color", "var(--color-lapis-lazuli)");
     expect($button).toHaveStyleRule("color", "white");
-    expect($icon.props).toHaveProperty("color", "white");
   });
 
   it(`should pass with {color} = "secondary"`, () => {
@@ -67,9 +70,10 @@ describe("elements/<Button />", () => {
     );
     const $icon = $button.findByType("svg");
 
+    expect($icon).toHaveTestRenderedProp("color", "var(--color-eerie-black)");
+
     expect($button).toHaveStyleRule("background-color", "var(--color-periwinkle)");
     expect($button).toHaveStyleRule("color", "var(--color-eerie-black)");
-    expect($icon.props).toHaveProperty("color", "var(--color-eerie-black)");
   });
 
   it(`should pass with {color} = "warning"`, () => {
@@ -80,9 +84,10 @@ describe("elements/<Button />", () => {
     );
     const $icon = $button.findByType("svg");
 
+    expect($icon).toHaveTestRenderedProp("color", "white");
+
     expect($button).toHaveStyleRule("background-color", "var(--color-lapis-lazuli)");
     expect($button).toHaveStyleRule("color", "white");
-    expect($icon.props).toHaveProperty("color", "white");
   });
 
   it(`should pass with {icon} = "sync"`, () => {
@@ -133,15 +138,24 @@ describe("elements/<Button />", () => {
     expect($button).toHaveStyleRule("color", "var(--color-lapis-lazuli)");
   });
 
-  it(`should pass with {withLeftMargin}`, () => {
-    const $button = testRender(<Button withLeftMargin>{TEXT}</Button>);
+  it(`should pass with {onClick}`, () => {
+    const onClick = jest.fn();
+    const $button = testRender(<Button onClick={onClick}>{TEXT}</Button>);
+
+    $button.props.onClick();
+
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it(`should pass with {withMarginLeft}`, () => {
+    const $button = testRender(<Button withMarginLeft>{TEXT}</Button>);
 
     expect($button).toHaveStyleRule("margin-left", "1rem");
     expect($button).toHaveStyleRule("margin-right", "0");
   });
 
-  it(`should pass with {withRightMargin}`, () => {
-    const $button = testRender(<Button withRightMargin>{TEXT}</Button>);
+  it(`should pass with {withMarginRight}`, () => {
+    const $button = testRender(<Button withMarginRight>{TEXT}</Button>);
 
     expect($button).toHaveStyleRule("margin-left", "0");
     expect($button).toHaveStyleRule("margin-right", "1rem");

@@ -16,11 +16,11 @@ export default function* load({ meta: { category, idcc, query } }) {
     }
 
     /** @type {import("axios").AxiosResponse<LegalReference.Article[]>} */
-    const { data: rawData } = yield customAxios().get(
+    const { data } = yield customAxios().get(
       `/legal-references?category=${category}&idcc=${idcc}&query=${query}`,
     );
 
-    const data = rawData.map(({ id, index, title }) => ({
+    const list = data.map(({ id, index, title }) => ({
       id,
       name:
         category === LEGAL_REFERENCE_CATEGORY.AGREEMENT
@@ -28,7 +28,7 @@ export default function* load({ meta: { category, idcc, query } }) {
           : index,
     }));
 
-    yield put(legalReferences.loadSuccess({ category, data, query }));
+    yield put(legalReferences.loadSuccess({ category, list }));
   } catch (err) {
     toast.error(err.message);
     yield put(legalReferences.loadFailure({ message: null }));

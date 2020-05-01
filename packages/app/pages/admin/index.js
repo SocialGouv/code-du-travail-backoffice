@@ -2,11 +2,11 @@ import styled from "@emotion/styled";
 import React from "react";
 import { Flex } from "rebass";
 
-import _Table from "../../src/components/Table";
 import { ANSWER_STATE } from "../../src/constants";
 import Button from "../../src/elements/Button";
 import ContentTitle from "../../src/elements/ContentTitle";
 import Subtitle from "../../src/elements/Subtitle";
+import _Table from "../../src/elements/Table";
 import Title from "../../src/elements/Title";
 import shortenAgreementName from "../../src/helpers/shortenAgreementName";
 import AdminMainLayout from "../../src/layouts/AdminMain";
@@ -372,7 +372,7 @@ export default class AdminIndexPage extends React.Component {
     return (
       <AdminMainLayout>
         <Container flexDirection="column">
-          <Flex alignItems="baseline" justifyContent="space-between">
+          <Flex alignItems="center" justifyContent="space-between">
             <Title>Tableau de bord</Title>
             <Button onClick={() => this.setState({ isPercentage: !isPercentage })}>
               {isPercentage ? "Voir les nombres bruts" : "Voir les pourcentages"}

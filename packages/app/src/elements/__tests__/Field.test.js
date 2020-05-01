@@ -14,6 +14,7 @@ describe("elements/<Field />", () => {
     const $error = $field.findByType("div");
 
     expect($field).toMatchSnapshot();
+
     expect($error).not.toBeUndefined();
   });
 });

@@ -279,7 +279,7 @@ class LegalReferencesMigrationIndex extends React.Component {
               disabled={reference.dila_id === null}
               onClick={() => this.skipReference(answersWithReferencesIndex, reference.id)}
               style={{ marginLeft: "1rem", minWidth: "5.75rem" }}
-              withRightMargin
+              withMarginRight
             >
               PASSER
             </Button>
@@ -327,6 +327,7 @@ class LegalReferencesMigrationIndex extends React.Component {
           <div>
             {AGREEMENT_SELECT_OPTIONS.length !== 0 ? (
               <Select
+                instanceId="agreementFilter"
                 onChange={this.selectAgreement.bind(this)}
                 options={AGREEMENT_SELECT_OPTIONS}
               />

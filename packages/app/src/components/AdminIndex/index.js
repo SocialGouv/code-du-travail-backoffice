@@ -3,8 +3,8 @@ import Router from "next/router";
 import React from "react";
 import { Flex } from "rebass";
 
-import Table from "../../components/Table";
 import Button from "../../elements/Button";
+import Table from "../../elements/Table";
 import Title from "../../elements/Title";
 import AdminMainLayout from "../../layouts/AdminMain";
 import customPostgrester from "../../libs/customPostgrester";
@@ -45,6 +45,7 @@ export default class AdminIndex extends React.Component {
           <Button
             icon="edit"
             isSmall
+            isTransparent
             onClick={() => this.edit(value)}
             title={T.ADMIN_COMMON_BUTTON_EDIT_TITLE(i18nSubject, i18nIsFeminine)}
           />
@@ -64,6 +65,7 @@ export default class AdminIndex extends React.Component {
           <Button
             icon="trash"
             isSmall
+            isTransparent
             onClick={() => this.confirmDeletion(value)}
             title={T.ADMIN_COMMON_BUTTON_DELETE_TITLE(i18nSubject, i18nIsFeminine)}
           />
@@ -176,7 +178,7 @@ export default class AdminIndex extends React.Component {
     return (
       <AdminMainLayout>
         <Container flexDirection="column">
-          <Head alignItems="flex-end" justifyContent="space-between">
+          <Head alignItems="center" justifyContent="space-between">
             <Title>{T.ADMIN_COMMON_INDEX_TITLE(i18nSubject)}</Title>
             {!this.props.noCreate && (
               <Button
@@ -195,7 +197,7 @@ export default class AdminIndex extends React.Component {
                   color="danger"
                   onClick={() => this.delete()}
                   title={T.ADMIN_COMMON_BUTTON_CONFIRM_DELETION_TITLE(i18nSubject, i18nIsFeminine)}
-                  withRightMargin
+                  withMarginRight
                 >
                   Supprimer
                 </Button>

@@ -10,6 +10,7 @@ describe("elements/<SavingSpinner />", () => {
     expect($savingSpinner).toMatchSnapshot();
     expect($savingSpinner).toHaveStyleRule("height", "64px");
     expect($savingSpinner).toHaveStyleRule("width", "64px");
+
     expect($spinner).toHaveStyleRule("border", "6px solid white");
     expect($spinner).toHaveStyleRule("border-color", "white transparent transparent transparent");
     expect($spinner).toHaveStyleRule("height", "51px");
@@ -31,6 +32,7 @@ describe("elements/<SavingSpinner />", () => {
 
     expect($savingSpinner).toHaveStyleRule("height", "32px");
     expect($savingSpinner).toHaveStyleRule("width", "32px");
+
     expect($spinner).toHaveStyleRule("height", "26px");
     expect($spinner).toHaveStyleRule("margin", "3px");
     expect($spinner).toHaveStyleRule("width", "26px");

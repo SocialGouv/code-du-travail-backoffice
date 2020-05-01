@@ -15,7 +15,7 @@ export default function* loadOne({ meta: { id } }) {
 
     const { data } = yield answersRequest.get("/answers");
 
-    let answer = data[0];
+    const answer = data[0];
     if (answer.agreement !== null) {
       answer.agreement = {
         ...data[0].agreement,
@@ -30,10 +30,7 @@ export default function* loadOne({ meta: { id } }) {
 
     const { data: references } = yield answerReferencesRequest.get("/answers_references");
 
-    answer = {
-      ...answer,
-      references,
-    };
+    answer.references = references;
 
     yield put(answers.loadOneSuccess(answer));
   } catch (err) {

@@ -7,6 +7,7 @@ describe("elements/<Input />", () => {
     const $input = testRender(<Input />);
 
     expect($input).toMatchSnapshot();
+
     expect($input).toHaveStyleRule("border", "solid 1px var(--color-border)");
     expect($input).toHaveStyleRule("opacity", "1");
   });
@@ -28,6 +29,7 @@ describe("elements/<Input />", () => {
     const $icon = $input.findByType("div").findByType("svg");
 
     expect($input).toMatchSnapshot();
-    expect($icon.props).toHaveProperty("data-icon", "search");
+
+    expect($icon).toHaveTestRenderedProp("data-icon", "search");
   });
 });
