@@ -105,7 +105,7 @@ export default function* load() {
       }),
     );
   } catch (err) {
-    if (err.response.status === 416) {
+    if (err.response !== undefined && err.response.status === 416) {
       toast.error(
         <span>
           {`Cette page est hors de portée.`}
