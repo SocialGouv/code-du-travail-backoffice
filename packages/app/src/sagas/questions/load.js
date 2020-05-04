@@ -28,7 +28,7 @@ export default function* load({ meta: { pageIndex, query } }) {
       }),
     );
   } catch (err) {
-    if (err.response.status === 416) {
+    if (err.response !== undefined && err.response.status === 416) {
       const pageIndex = Math.floor(Number(err.response.headers["content-range"].substr(2)) / 10);
 
       toast.error(

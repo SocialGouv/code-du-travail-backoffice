@@ -14,11 +14,7 @@ const instance = axios.create({
 instance.interceptors.response.use(
   response => response,
   error => {
-    if (
-      error.response !== undefined &&
-      error.response.status !== undefined &&
-      error.response.status === 401
-    ) {
+    if (error.response !== undefined && error.response.status === 401) {
       Router.reload();
 
       return;
