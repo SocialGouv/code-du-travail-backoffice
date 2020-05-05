@@ -10,12 +10,12 @@
   },
   "dependencies": {
     "@inspired-beings/log": "1.2.0",
-    "@socialgouv/kali-data": "1.25.0",
-    "fuse.js": "5.1.0",
+    "@socialgouv/kali-data": "1.31.0",
+    "fuse.js": "5.2.3",
     "html-to-text": "5.1.1",
     "http-proxy": "1.18.0",
     "jsonwebtoken": "8.5.1",
-    "knex": "0.21.0",
+    "knex": "0.21.1",
     "node-cache": "5.1.0",
     "pg": "8.0.3"
   },

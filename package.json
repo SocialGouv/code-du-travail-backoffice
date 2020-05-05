@@ -33,7 +33,7 @@
   "dependencies": {
     "colors": "1.4.0",
     "dotenv": "8.2.0",
-    "knex": "0.21.0",
+    "knex": "0.21.1",
     "lerna": "3.20.2",
     "pg": "8.0.3",
     "shelljs": "0.8.4"
@@ -41,13 +41,13 @@
   "devDependencies": {
     "@socialgouv/eslint-config-react-strict": "0.20.0",
     "@socialgouv/eslint-config-strict": "0.20.0",
-    "@socialgouv/kali-data": "1.25.0",
+    "@socialgouv/kali-data": "1.31.0",
     "@testing-library/jest-dom": "5.5.0",
     "@types/jest": "25.2.1",
     "axios": "0.19.2",
     "boxen": "4.2.0",
     "chai": "4.2.0",
-    "cpy-cli": "3.1.0",
+    "cpy-cli": "3.1.1",
     "cucumber": "6.0.5",
     "dumdum": "1.0.0-alpha.5",
     "eslint": "6.8.0",
@@ -60,7 +60,7 @@
     "ora": "4.0.4",
     "postgrester": "1.4.0",
     "prettier": "2.0.5",
-    "puppeteer": "3.0.1",
+    "puppeteer": "3.0.2",
     "typescript": "3.8.3"
   },
   "resolutions": {
