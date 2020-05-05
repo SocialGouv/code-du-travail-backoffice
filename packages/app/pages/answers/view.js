@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Flex } from "rebass";
 
 import * as actions from "../../src/actions";
-import Reference from "../../src/components/Reference";
+import LegalReferences from "../../src/components/LegalReferences";
 import { ANSWER_STATE } from "../../src/constants";
 import Hr from "../../src/elements/Hr";
 import Idcc from "../../src/elements/Idcc";
@@ -126,10 +126,6 @@ class AnswersViewPage extends React.Component {
     };
   }
 
-  static getInitialProps({ query: { id } }) {
-    return { id };
-  }
-
   async componentDidMount() {
     this.axios = customAxios();
 
@@ -164,13 +160,7 @@ class AnswersViewPage extends React.Component {
       ({ category: _category }) => _category === category,
     );
 
-    if (references.length === 0) {
-      return <span>Aucune référence.</span>;
-    }
-
-    return references.map(({ url, value }, index) => (
-      <Reference key={index} onRemove={() => void 0} url={url} value={value} />
-    ));
+    return <LegalReferences category={category} isReadOnly references={references} />;
   }
 
   render() {

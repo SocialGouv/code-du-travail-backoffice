@@ -11,6 +11,7 @@ export const Container = styled(Flex)`
   margin: 0.5rem 0.5rem 0 0;
   min-width: 34rem;
   max-width: 34rem;
+  padding: 0.25rem 0.5rem 0.275rem;
   user-select: none;
 
   :hover {
@@ -20,12 +21,17 @@ export const Container = styled(Flex)`
 `;
 
 export const Label = styled.div`
-  padding: 0.2rem 0.4rem;
+  color: var(--color-japenese-indigo);
+  font-weight: 600;
 `;
 
-export const ButtonsContainer = styled(Flex)`
-  min-width: auto;
-  padding: 0.25rem 0 0;
+export const ButtonsContainer = styled.div`
+  margin: 1px 0 0 0.5rem;
+  white-space: nowrap;
+
+  > button {
+    margin-left: 0.5rem;
+  }
 `;
 
 export const Tooltip = styled(ReactTooltip)`

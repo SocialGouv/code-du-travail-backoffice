@@ -2,9 +2,10 @@ import { actionTypes } from "../actions/index";
 
 const initialState = {
   checked: [],
-  data: [],
+  data: null,
   error: null,
   isLoading: true,
+  list: [],
   pageIndex: 0,
   pagesLength: 0,
   query: "",
@@ -31,9 +32,9 @@ export default (state = initialState, { payload, type }) => {
       return {
         ...state,
         checked: [],
-        data: payload.data,
         error: null,
         isLoading: false,
+        list: payload.list,
         pageIndex: payload.pageIndex,
         pagesLength: payload.pagesLength,
         query: payload.query,

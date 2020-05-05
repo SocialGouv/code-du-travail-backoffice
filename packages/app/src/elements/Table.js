@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import ReactTable from "react-table";
 
-export default styled(ReactTable)`
+const Table = styled(ReactTable)`
   .rt-thead {
     background-color: rgba(0, 0, 0, 0.02);
     border-bottom: solid 1px rgba(0, 0, 0, 0.1);
@@ -43,3 +43,5 @@ export default styled(ReactTable)`
     }
   }
 `;
+
+export default Table;

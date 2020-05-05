@@ -1,14 +1,16 @@
 import styled from "@emotion/styled";
+import PropTypes from "prop-types";
 import { omit } from "ramda";
 import React from "react";
 
 import Icon from "./Icon";
 
 const InputWithIconWrapper = styled.div`
-  margin-top: -1.375rem;
+  /* margin-top: -1.375rem; */
+  position: relative;
 `;
 
-const _Input = styled.input`
+const StyledInput = styled.input`
   -webkit-appearance: none;
   background-color: white;
   border: solid 1px var(${p => (p.hasError ? "--color-text-red" : "--color-border")});
@@ -17,26 +19,32 @@ const _Input = styled.input`
   font-family: inherit;
   font-weight: inherit;
   font-size: 0.875rem;
-  height: 2rem;
   line-height: 1;
   opacity: ${p => (p.disabled ? 0.25 : 1)};
-  padding: 0.5rem 0.6rem 0.55rem ${p => (p.hasIcon ? "2rem" : "0.6rem")};
+  padding: 0.6rem ${p => (p.hasIcon ? "2.25rem" : "0.6rem")} 0.625rem 0.6rem;
   width: 100%;
 
   ::placeholder {
     color: var(--color-placeholder);
+    /* color: rgb(128, 128, 128); */
+  }
+
+  :focus {
+    box-shadow: 0 0 0 1px var(--color-text-blue) !important;
   }
 `;
 const InputIcon = styled(Icon)`
   color: var(--color-placeholder);
-  left: 0.625rem;
-  top: 1.775rem;
-  position: relative;
+  right: 0.8rem;
+  top: 0.725rem;
+  position: absolute;
 `;
 
-const Input = ({ disabled = false, icon, hasError, ...props }, ref) => {
+const Input = React.forwardRef(({ disabled = false, icon, hasError = false, ...props }, ref) => {
   if (icon === undefined) {
-    return <_Input disabled={disabled} hasError={hasError} hasIcon={false} ref={ref} {...props} />;
+    return (
+      <StyledInput disabled={disabled} hasError={hasError} hasIcon={false} ref={ref} {...props} />
+    );
   }
 
   const { className, style } = props;
@@ -46,11 +54,20 @@ const Input = ({ disabled = false, icon, hasError, ...props }, ref) => {
     <div className={className} style={style}>
       <InputWithIconWrapper>
         <InputIcon icon={icon} />
-        <_Input disabled={disabled} hasError={hasError} hasIcon ref={ref} {...inputProps} />
+        <StyledInput disabled={disabled} hasError={hasError} hasIcon ref={ref} {...inputProps} />
       </InputWithIconWrapper>
     </div>
   );
+});
+
+Input.propTypes = {
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  hasError: PropTypes.bool,
+  icon: PropTypes.string,
+  style: PropTypes.object,
 };
 
-// https://reactjs.org/docs/forwarding-refs.html
-export default React.forwardRef(Input);
+Input.displayName = "Input";
+
+export default Input;

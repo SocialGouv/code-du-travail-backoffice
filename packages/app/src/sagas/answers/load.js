@@ -11,23 +11,18 @@ import getCurrentUser from "../../libs/getCurrentUser";
 import toast from "../../libs/toast";
 import { getAnswersFilters } from "../../selectors";
 
-export default function* load() {
+export default function* load({ meta: { pagesIndex } }) {
   try {
     const { agreements: userAgreements, id: userId, role: userRole } = getCurrentUser();
     const filters = yield select(getAnswersFilters);
     const request = customPostgrester();
 
-    request
-      .select("*")
-      .select("agreement(*)")
-      .select("question(*)")
-      .select("user(*)")
-      .page(filters.page, filters.pageLength);
+    request.select("*").page(pagesIndex, filters.pageLength);
 
     if (!filters.isGeneric) {
       const states =
         filters.states.length > 0 ? filters.states.map(({ value }) => value) : ANSWER_STATES;
-      request.in("state", states).orderBy("question.index");
+      request.in("state", states);
 
       if (userRole === USER_ROLE.CONTRIBUTOR) {
         request.in("agreement_id", userAgreements, true);
@@ -57,10 +52,11 @@ export default function* load() {
       request.is("agreement_id", null);
     }
 
-    request.orderBy("agreement.idcc").orderBy("question.index");
+    request.orderBy("question_index");
+    request.orderBy("agreement_idcc");
 
-    /** @type {{ data: Answer.Answer[]; pagesLength: number; }} */
-    const { data: answers, pagesLength } = yield request.get("/answers", true);
+    /** @type {{ data: FullAnswer.Answer[]; pagesLength: number; totalLength: number; }} */
+    const { data: answers, pagesLength, totalLength } = yield request.get("/full_answers", true);
 
     const answerIds = answers.map(({ id }) => id);
 
@@ -72,35 +68,22 @@ export default function* load() {
     /** @type {{ data: Answer.Reference[]; }} */
     const { data: answersReferences } = yield referencesRequest.get("/answers_references");
 
-    const answersWithReferences = answers.map(answer => ({
-      ...answer,
-      references: answersReferences.filter(({ answer_id }) => answer_id === answer.id),
-    }));
-
-    if (filters.isGeneric) {
-      yield put(
-        actions.answers.loadSuccess({
-          data: answersWithReferences,
-          pagesLength,
-        }),
-      );
-
-      return;
-    }
-
-    const answersWithReferencesAndShortAgreementName = answersWithReferences.map(
-      ({ agreement, ...props }) => ({
+    /** @type {FullAnswer.WithReferences[]} */
+    const answersWithReferences = answers
+      .map(answer => ({
+        ...answer,
+        references: answersReferences.filter(({ answer_id }) => answer_id === answer.id),
+      }))
+      .map(({ agreement_name, ...props }) => ({
         ...props,
-        agreement: {
-          ...agreement,
-          name: shortenAgreementName(agreement.name),
-        },
-      }),
-    );
+        agreement_name: agreement_name !== null ? shortenAgreementName(agreement_name) : null,
+      }));
 
     yield put(
       actions.answers.loadSuccess({
-        data: answersWithReferencesAndShortAgreementName,
+        length: totalLength,
+        list: answersWithReferences,
+        pagesIndex,
         pagesLength,
       }),
     );

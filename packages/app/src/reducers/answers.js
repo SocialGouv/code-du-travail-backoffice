@@ -2,18 +2,20 @@ import { actionTypes } from "../actions/index";
 
 const initialState = {
   checked: [],
-  data: [],
+  data: null,
   error: null,
   filters: {
     agreements: [],
     isGeneric: false,
-    page: 0,
     pageLength: 10,
     query: "",
     questions: [],
     states: [],
   },
   isLoading: true,
+  length: 0,
+  list: [],
+  pagesIndex: 0,
   pagesLength: 0,
 };
 
@@ -78,9 +80,11 @@ export default (state = initialState, { payload, type }) => {
       return {
         ...state,
         checked: [],
-        data: payload.data,
         error: null,
         isLoading: false,
+        length: payload.length,
+        list: payload.pagesIndex > 0 ? [...state.list, ...payload.list] : payload.list,
+        pagesIndex: payload.pagesIndex,
         pagesLength: payload.pagesLength,
       };
 

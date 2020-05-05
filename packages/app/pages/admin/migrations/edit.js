@@ -21,10 +21,6 @@ export default class AdminQuestionsEditPage extends React.Component {
     };
   }
 
-  static getInitialProps({ query: { id } }) {
-    return { id };
-  }
-
   async componentDidMount() {
     const axios = customAxios();
 

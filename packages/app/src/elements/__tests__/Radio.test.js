@@ -4,6 +4,7 @@ import Radio from "../Radio";
 
 describe("elements/<Radio />", () => {
   const COMMON_PROPS = {
+    onChange: jest.fn(),
     options: [
       { isSelected: true, label: "A Selected Label", value: "A Selected Value" },
       { label: "A Label", value: "A Value" },
@@ -13,42 +14,40 @@ describe("elements/<Radio />", () => {
 
   it(`should pass`, () => {
     const $radio = testRender(<Radio {...COMMON_PROPS} />);
-    const $firstSvg = $radio.children[0].findByType("svg");
-    const $secondSvg = $radio.children[1].findByType("svg");
+    const $firstBullet = $radio.children[0].findByType("svg");
+    const $secondBullet = $radio.children[1].findByType("svg");
 
     expect($radio).toMatchSnapshot();
-    expect($radio.props).toHaveProperty("role", "radiogroup");
-    expect($firstSvg.props).toHaveProperty("aria-checked", "true");
-    expect($secondSvg.props).toHaveProperty("aria-hidden", "false");
-    expect($firstSvg.props).toHaveProperty("data-icon", "dot-circle");
-    expect($firstSvg.props).toHaveProperty("tabIndex", "0");
-    expect($firstSvg.props).toHaveProperty("role", "radio");
-    expect($secondSvg.props).toHaveProperty("aria-checked", "false");
-    expect($secondSvg.props).toHaveProperty("aria-hidden", "false");
-    expect($secondSvg.props).toHaveProperty("data-icon", "circle");
-    expect($secondSvg.props).toHaveProperty("tabIndex", "-1");
-    expect($secondSvg.props).toHaveProperty("role", "radio");
+
+    expect($radio).toHaveTestRenderedProp("role", "radiogroup");
+
+    expect($firstBullet).toHaveTestRenderedProp("aria-checked", "true");
+    expect($firstBullet).toHaveTestRenderedProp("aria-hidden", "false");
+    expect($firstBullet).toHaveTestRenderedProp("data-icon", "dot-circle");
+    expect($firstBullet).toHaveTestRenderedProp("tabIndex", "0");
+    expect($firstBullet).toHaveTestRenderedProp("role", "radio");
+
+    expect($secondBullet).toHaveTestRenderedProp("aria-checked", "false");
+    expect($secondBullet).toHaveTestRenderedProp("aria-hidden", "false");
+    expect($secondBullet).toHaveTestRenderedProp("data-icon", "circle");
+    expect($secondBullet).toHaveTestRenderedProp("tabIndex", "-1");
+    expect($secondBullet).toHaveTestRenderedProp("role", "radio");
   });
 
   it(`should not call {onChange} when the selected radio is clicked`, () => {
-    const props = {
-      onChange: jest.fn(),
-    };
-    const $radio = testRender(<Radio {...props} {...COMMON_PROPS} />);
-    const $firstSvg = $radio.children[0].findByType("svg");
+    const $radio = testRender(<Radio {...COMMON_PROPS} />);
+    const $firstBullet = $radio.children[0].findByType("svg");
 
-    $firstSvg.props.onClick();
-    expect(props.onChange).not.toHaveBeenCalled();
+    expect($firstBullet.onClick).toBeUndefined();
   });
 
-  it(`should call {onChange} when a unselected radio is clicked`, () => {
-    const props = {
-      onChange: jest.fn(),
-    };
-    const $radio = testRender(<Radio {...props} {...COMMON_PROPS} />);
-    const $secondSvg = $radio.children[1].findByType("svg");
+  it(`should call {onChange} when an unselected radio is clicked`, () => {
+    const $radio = testRender(<Radio {...COMMON_PROPS} />);
+    const $secondBullet = $radio.children[1].findByType("svg");
 
-    $secondSvg.props.onClick();
-    expect(props.onChange).toHaveBeenCalledWith("A Value");
+    $secondBullet.props.onClick();
+
+    expect(COMMON_PROPS.onChange).toHaveBeenCalledTimes(1);
+    expect(COMMON_PROPS.onChange).toHaveBeenCalledWith("A Value");
   });
 });

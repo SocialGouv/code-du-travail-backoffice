@@ -37,10 +37,8 @@ export const loadFailure = error => ({
   },
   type: actionTypes.COMMENTS_LOAD_FAILURE,
 });
-export const loadSuccess = data => ({
-  payload: {
-    data,
-  },
+export const loadSuccess = payload => ({
+  payload,
   type: actionTypes.COMMENTS_LOAD_SUCCESS,
 });
 

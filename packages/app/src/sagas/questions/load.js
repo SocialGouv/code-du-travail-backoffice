@@ -14,17 +14,18 @@ export default function* load({ meta: { pageIndex, query } }) {
     }
 
     if (query.length > 0) {
-      request.or.ilike("question_value", query);
+      request.or.ilike("value", query);
     }
 
-    const { data, pagesLength } = yield request.get("/questions", true);
+    request.orderBy("index");
+
+    const { data: list, pagesLength } = yield request.get("/questions", true);
 
     yield put(
       questions.loadSuccess({
-        data,
+        list,
         pageIndex,
         pagesLength,
-        query,
       }),
     );
   } catch (err) {

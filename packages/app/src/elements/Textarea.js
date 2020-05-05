@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export default styled.textarea`
+const Textarea = styled.textarea`
   -webkit-appearance: none;
   background-color: white;
   border: solid 1px var(--color-border);
@@ -13,3 +13,5 @@ export default styled.textarea`
   padding: 0.4rem 0.6rem 0.575rem;
   resize: none;
 `;
+
+export default Textarea;

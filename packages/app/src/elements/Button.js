@@ -9,28 +9,27 @@ const Container = styled(_Button)`
   background-color: ${p => p.backgroundColor};
   border-radius: 0.125rem;
   color: ${p => p.foregroundColor};
-  cursor: ${p => (p.isDisabled ? "not-allowed" : "pointer")};
-  display: flex;
+  cursor: ${p => (p.disabled ? "not-allowed" : "pointer")};
   font-size: 0.9375rem;
   font-weight: 600;
-  margin-left: ${p => (p.withLeftMargin ? "1rem" : 0)};
-  margin-right: ${p => (p.withRightMargin ? "1rem" : 0)};
-  min-height: 1.25rem;
-  min-width: 1.25rem;
-  opacity: ${p => (p.isDisabled ? 0.25 : 0.75)};
-  padding: ${p => (p.hasText ? (p.isSmall ? "0.1rem 0.4rem 0.15rem" : "0.3rem 1rem 0.3rem") : "0")};
+  line-height: ${p => (p.hasText ? 1.5 : 0)};
+  margin-left: ${p => (p.withMarginLeft ? "1rem" : 0)};
+  margin-right: ${p => (p.withMarginRight ? "1rem" : 0)};
+  min-width: auto;
+  opacity: ${p => (p.disabled ? 0.25 : 0.75)};
+  padding: ${p => (p.hasText ? (p.isSmall ? "0.1rem 0.4rem 0.15rem" : "0.3rem 1rem 0.3rem") : 0)};
   white-space: nowrap;
 
   :hover {
-    opacity: ${p => (p.isDisabled ? 0.25 : 1)};
+    opacity: ${p => (p.disabled ? 0.25 : 1)};
   }
 
   svg {
-    cursor: ${p => (p.isDisabled ? "not-allowed" : "pointer")};
+    cursor: ${p => (p.disabled ? "not-allowed" : "pointer")};
     height: 1rem;
     margin-right: ${p => (p.hasText ? "0.25rem" : 0)};
     padding-top: ${p => (p.hasText ? "0.125rem" : 0)};
-    width: 1rem;
+    /* width: 1rem; */
   }
 `;
 
@@ -49,9 +48,8 @@ const Button = ({
   isDisabled = false,
   isSmall = false,
   isTransparent = false,
-  onClick = () => undefined,
-  withLeftMargin = false,
-  withRightMargin = false,
+  withMarginLeft = false,
+  withMarginRight = false,
   ...props
 }) => {
   const hasText = children !== undefined;
@@ -69,11 +67,9 @@ const Button = ({
       disabled={isDisabled}
       foregroundColor={foregroundColor}
       hasText={hasText}
-      isDisabled={isDisabled}
       isSmall={isSmall}
-      onClick={isDisabled ? () => undefined : onClick}
-      withLeftMargin={withLeftMargin}
-      withRightMargin={withRightMargin}
+      withMarginLeft={withMarginLeft}
+      withMarginRight={withMarginRight}
       {...props}
     >
       {icon !== undefined && <Icon color={foregroundColor} icon={icon} />}
@@ -83,13 +79,14 @@ const Button = ({
 };
 
 Button.propTypes = {
+  children: PropTypes.node,
   color: PropTypes.string,
   icon: PropTypes.string,
   isDisabled: PropTypes.bool,
   isSmall: PropTypes.bool,
   isTransparent: PropTypes.bool,
-  withLeftMargin: PropTypes.bool,
-  withRightMargin: PropTypes.bool,
+  withMarginLeft: PropTypes.bool,
+  withMarginRight: PropTypes.bool,
 };
 
 export default Button;

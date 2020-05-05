@@ -3,7 +3,6 @@ import * as R from "ramda";
 import React from "react";
 import { Flex } from "rebass";
 
-import Tags from "../../components/Tags";
 import Button from "../../elements/Button";
 import Field from "../../elements/Field";
 import Input from "../../elements/Input";
@@ -15,7 +14,7 @@ import AdminMainLayout from "../../layouts/AdminMain";
 import customAxios from "../../libs/customAxios";
 import customPostgrester from "../../libs/customPostgrester";
 import T from "../../texts";
-import { Error, Form, HelpText, LabelContainer } from "./styles";
+import { Error, Form, Head, HelpText, LabelContainer } from "./styles";
 
 export default class AdminForm extends React.Component {
   constructor(props) {
@@ -37,7 +36,7 @@ export default class AdminForm extends React.Component {
 
     this.renderField = this.renderField.bind(this);
     this.submit = this.submit.bind(this);
-    this.updateFormData = this.updateFormData.bind(this);
+    this.updateFormDataViaEvent = this.updateFormDataViaEvent.bind(this);
   }
 
   componentDidMount() {
@@ -65,23 +64,16 @@ export default class AdminForm extends React.Component {
   }
 
   /**
-   * Update the related data property value when an `input` or a `textarea` is changed.
+   * Update the related data property value via a form event.
    */
-  updateFormData(event) {
+  updateFormDataViaEvent(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
 
   /**
-   * Update the related data property value when a `markdown` is changed.
+   * Update the related data property value via a value call.
    */
-  updateFormDataViaMarkdown(fieldName, value) {
-    this.setState({ [fieldName]: value });
-  }
-
-  /**
-   * Update the related data property value when a `select` is changed.
-   */
-  updateFormDataViaSelect(fieldName, value) {
+  updateFormDataViaValue(fieldName, value) {
     this.setState({ [fieldName]: value });
   }
 
@@ -101,22 +93,6 @@ export default class AdminForm extends React.Component {
         ...this.state.inputKeys,
         [field.name]: this.state.inputKeys[field.name] + 1,
       },
-    });
-  }
-
-  /**
-   * Handle the tag addition for the `tags` type fields.
-   */
-  addTag(fieldName, { id, value }) {
-    this.setState({ [fieldName]: [...this.state[fieldName], { id, value }] });
-  }
-
-  /**
-   * Handle the tag removal for the `tags` type fields.
-   */
-  removeTag(fieldName, { id: _id }) {
-    this.setState({
-      [fieldName]: this.state[fieldName].filter(({ id }) => id !== _id),
     });
   }
 
@@ -265,7 +241,7 @@ export default class AdminForm extends React.Component {
             id={field.name}
             key={key !== undefined ? key : 0}
             name={field.name}
-            onChange={this.updateFormData}
+            onChange={this.updateFormDataViaEvent}
             readOnly={field.isReadOnly === undefined ? false : field.isReadOnly}
             type={field.inputType === undefined ? "text" : field.inputType}
           />
@@ -276,7 +252,7 @@ export default class AdminForm extends React.Component {
           <MarkdownEditor
             defaultValue={this.defaultData[field.name]}
             // isSingleView
-            onChange={({ source }) => this.updateFormDataViaMarkdown(field.name, source)}
+            onChange={({ source }) => this.updateFormDataViaValue(field.name, source)}
             singleViewDefault="editor"
           />
         );
@@ -285,23 +261,20 @@ export default class AdminForm extends React.Component {
         return (
           <Select
             defaultValue={field.options.find(({ value }) => value === this.defaultData[field.name])}
-            id={field.name}
-            name={field.name}
-            onChange={({ value }) => this.updateFormDataViaSelect(field.name, value)}
+            instanceId={field.name}
+            onChange={({ value }) => this.updateFormDataViaValue(field.name, value)}
             options={field.options}
           />
         );
 
       case "tags":
         return (
-          <Tags
-            aria-labelledby={`label_${field.name}`}
-            ariaName={field.ariaName}
-            isEditable
-            onAdd={tag => this.addTag(field.name, tag)}
-            onRemove={tag => this.removeTag(field.name, tag)}
-            selectedTags={this.defaultData[field.name]}
-            tags={field.tags}
+          <Select
+            instanceId={field.name}
+            isMulti
+            onChange={tags => this.updateFormDataViaValue(field.name, tags !== null ? tags : [])}
+            options={field.tags}
+            // selectedTags={this.defaultData[field.name]}
           />
         );
 
@@ -379,11 +352,13 @@ export default class AdminForm extends React.Component {
     return (
       <AdminMainLayout>
         <Form flexDirection="row" onSubmit={this.submit} role="form">
-          <Title isFirst>
-            {isEdition
-              ? T.ADMIN_COMMON_FORM_EDIT_TITLE(i18nSubject, i18nIsFeminine, i18nName)
-              : T.ADMIN_COMMON_FORM_NEW_TITLE(i18nSubject, i18nIsFeminine)}
-          </Title>
+          <Head>
+            <Title>
+              {isEdition
+                ? T.ADMIN_COMMON_FORM_EDIT_TITLE(i18nSubject, i18nIsFeminine, i18nName)
+                : T.ADMIN_COMMON_FORM_NEW_TITLE(i18nSubject, i18nIsFeminine)}
+            </Title>
+          </Head>
           {fields.map(this.renderField)}
           <Field>
             <LabelContainer />
@@ -396,7 +371,7 @@ export default class AdminForm extends React.Component {
                   onClick={() => Router.push(`/admin${indexPath}`)}
                   title={T.ADMIN_COMMON_BUTTON_CANCEL_FORM_TITLE(i18nSubject)}
                   type="button"
-                  withRightMargin
+                  withMarginRight
                 >
                   Annuler
                 </Button>

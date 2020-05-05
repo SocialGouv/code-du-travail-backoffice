@@ -2,6 +2,7 @@
 
 import { keyframes } from "@emotion/core";
 import styled from "@emotion/styled";
+import PropTypes from "prop-types";
 import React from "react";
 
 const Container = styled.div`
@@ -50,6 +51,11 @@ const SavingSpinner = ({ color = "white", size = 64, ...props }) => {
       <Spinner color={color} size={size} />
     </Container>
   );
+};
+
+SavingSpinner.propTypes = {
+  color: PropTypes.string,
+  size: PropTypes.number,
 };
 
 export default SavingSpinner;

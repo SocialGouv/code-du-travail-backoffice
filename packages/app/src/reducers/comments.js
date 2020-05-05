@@ -5,9 +5,10 @@ const initialState = {
   currentIsLoading: false,
   currentIsPrivate: false,
   currentKey: 0,
-  data: [],
+  data: null,
   error: null,
   isLoading: true,
+  list: [],
 };
 
 export default (state = initialState, { payload, type }) => {
@@ -61,9 +62,9 @@ export default (state = initialState, { payload, type }) => {
     case actionTypes.COMMENTS_LOAD_SUCCESS:
       return {
         ...state,
-        data: payload.data,
         error: null,
         isLoading: false,
+        list: payload.list,
       };
 
     /* DEFAULT ――――――――――――――――――――――――― */

@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 
+import * as C from "../../constants";
 import Button from "../../elements/Button";
 import LegalReferenceProps from "../../props/LegalReference";
 import getLabelAndContent from "./getLabelAndContent";
@@ -91,7 +92,7 @@ class Tag extends React.PureComponent {
   }
 
   renderButtons() {
-    const { dila_id, id, isEditable, isReadOnly, onRemove, url } = this.props;
+    const { category, dila_id, id, isReadOnly, onRemove, url } = this.props;
 
     const parts = [];
 
@@ -99,7 +100,7 @@ class Tag extends React.PureComponent {
       parts.push(<Button icon="link" isSmall isTransparent key="1" onClick={this.open} />);
     }
 
-    if (isEditable) {
+    if (!isReadOnly && category !== C.LEGAL_REFERENCE_CATEGORY.LABOR_CODE) {
       parts.push(<Button icon="pen" isSmall isTransparent key="2" onClick={this.edit} />);
     }
 
@@ -134,7 +135,7 @@ class Tag extends React.PureComponent {
 
     return (
       <Container
-        alignItems="start"
+        alignItems="flex-start"
         data-for={id}
         data-tip={content}
         isLegacy={this.isLegacy}
@@ -159,7 +160,6 @@ class Tag extends React.PureComponent {
 
 Tag.propTypes = {
   ...LegalReferenceProps,
-  isEditable: PropTypes.bool,
   isReadOnly: PropTypes.bool,
   noContent: PropTypes.bool,
   onChange: PropTypes.func,

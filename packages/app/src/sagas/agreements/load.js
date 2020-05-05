@@ -18,14 +18,16 @@ export default function* load({ meta: { pageIndex, query } }) {
       request.or.ilike("name", query);
     }
 
+    request.orderBy("idcc");
+
     const { data, pagesLength } = yield request.get("/agreements", true);
+    const list = data.map(({ name, ...props }) => ({ name: shortenAgreementName(name), ...props }));
 
     yield put(
       agreements.loadSuccess({
-        data: data.map(({ name, ...props }) => ({ name: shortenAgreementName(name), ...props })),
+        list,
         pageIndex,
         pagesLength,
-        query,
       }),
     );
   } catch (err) {

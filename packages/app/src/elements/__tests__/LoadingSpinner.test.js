@@ -9,9 +9,11 @@ describe("elements/<LoadingSpinner />", () => {
     const $spinnerNext = $loadingSpinner.children[1];
 
     expect($loadingSpinner).toMatchSnapshot();
-    expect($spinner.props).toHaveProperty("color", "white");
-    expect($spinner).toHaveStyleRule("border", "4px solid white");
-    expect($spinnerNext.props).toHaveProperty("color", "white");
+
+    expect($spinner).toHaveTestRenderedProp("color", "var(--color-text-blue)");
+    expect($spinnerNext).toHaveTestRenderedProp("color", "var(--color-text-blue)");
+
+    expect($spinner).toHaveStyleRule("border", "4px solid var(--color-text-blue)");
   });
 
   it(`should pass with {color} = "red"`, () => {
@@ -19,8 +21,9 @@ describe("elements/<LoadingSpinner />", () => {
     const $spinner = $loadingSpinner.children[0];
     const $spinnerNext = $loadingSpinner.children[1];
 
-    expect($spinner.props).toHaveProperty("color", "red");
+    expect($spinner).toHaveTestRenderedProp("color", "red");
+    expect($spinnerNext).toHaveTestRenderedProp("color", "red");
+
     expect($spinner).toHaveStyleRule("border", "4px solid red");
-    expect($spinnerNext.props).toHaveProperty("color", "red");
   });
 });

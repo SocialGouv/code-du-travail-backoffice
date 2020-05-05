@@ -17,14 +17,13 @@ export default function* load({ meta: { pageIndex, query } }) {
       request.or.ilike("url", query);
     }
 
-    const { data, pagesLength } = yield request.get("/logs", true);
+    const { data: list, pagesLength } = yield request.get("/logs", true);
 
     yield put(
       logs.loadSuccess({
-        data,
+        list,
         pageIndex,
         pagesLength,
-        query,
       }),
     );
   } catch (err) {

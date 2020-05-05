@@ -54,7 +54,10 @@ export const cancelFailure = error => ({
   type: actionTypes.ANSWERS_CANCEL_FAILURE,
 });
 
-export const load = () => ({
+export const load = pagesIndex => ({
+  meta: {
+    pagesIndex,
+  },
   type: actionTypes.ANSWERS_LOAD,
 });
 export const loadFailure = error => ({

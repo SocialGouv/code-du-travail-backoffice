@@ -7,33 +7,24 @@ import { Flex } from "rebass";
 import * as actions from "../../../src/actions";
 import Comment from "../../../src/components/Comment";
 import LegalReferences from "../../../src/components/LegalReferences";
-import Reference from "../../../src/components/Reference";
-import {
-  ANSWER_STATE,
-  ANSWER_STATE_LABEL,
-  ANSWER_STATE_OPTIONS,
-  LEGAL_REFERENCE_CATEGORY,
-} from "../../../src/constants";
+import * as C from "../../../src/constants";
 import Button from "../../../src/elements/Button";
-import _Checkbox from "../../../src/elements/Checkbox";
+import Checkbox from "../../../src/elements/Checkbox";
 import Hr from "../../../src/elements/Hr";
 import Icon from "../../../src/elements/Icon";
 import Idcc from "../../../src/elements/Idcc";
 import Input from "../../../src/elements/Input";
+import LoadingSpinner from "../../../src/elements/LoadingSpinner";
 import MarkdownEditor from "../../../src/elements/MarkdownEditor";
 import Radio from "../../../src/elements/Radio";
-import _Select from "../../../src/elements/Select";
+import Select from "../../../src/elements/Select";
 import Subtitle from "../../../src/elements/Subtitle";
 import Textarea from "../../../src/elements/Textarea";
-import Title from "../../../src/elements/Title";
-import capitalize from "../../../src/helpers/capitalize";
 import AdminMainLayout from "../../../src/layouts/AdminMain";
 import api from "../../../src/libs/api";
 import customAxios from "../../../src/libs/customAxios";
 import makeApiFilter from "../../../src/libs/makeApiFilter";
 import T from "../../../src/texts";
-
-const STATES = Object.keys(ANSWER_STATE_LABEL);
 
 const Container = styled(Flex)`
   height: 100%;
@@ -41,7 +32,7 @@ const Container = styled(Flex)`
 const Content = styled(Flex)`
   flex-grow: 1;
   overflow-y: scroll;
-  padding: 1rem 1rem 12rem;
+  padding: 1rem;
 `;
 const Sidebar = styled(Flex)`
   display: ${({ isHidden }) => (isHidden ? "none" : "flex")};
@@ -51,15 +42,15 @@ const Sidebar = styled(Flex)`
   min-width: 23rem;
 `;
 
-const Question = styled(Title)`
+const Question = styled(Subtitle)`
   margin: 0;
   user-select: text;
 `;
-const StateSelect = styled(_Select)`
-  margin-right: 1rem;
-`;
 
-const AnswerProposal = styled(MarkdownEditor)`
+const Loaditor = styled(Flex)`
+  min-height: 30rem;
+`;
+const Preditor = styled(MarkdownEditor)`
   border-right: 0 !important;
   min-height: 30rem;
 
@@ -76,7 +67,7 @@ const AnswerProposal = styled(MarkdownEditor)`
     background-color: rgba(0, 0, 0, 0.025);
   }
 `;
-const AnswerCorrection = styled(MarkdownEditor)`
+const Editor = styled(MarkdownEditor)`
   min-height: 30rem;
 
   .editor {
@@ -96,15 +87,12 @@ const FormHiddenSubmit = styled.button`
   visibility: hidden;
   width: 1px;
 `;
-const Checkbox = styled(_Checkbox)`
-  padding-left: 0;
-`;
 
 const Comments = styled(Flex)`
   flex-grow: 1;
   margin-top: 0.5rem;
   max-height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 const CommentEditor = styled(Textarea)`
   background: ${({ isPrivate }) =>
@@ -128,7 +116,7 @@ const CommentEditor = styled(Textarea)`
 const CommentEditorIcon = styled(Icon)`
   align-self: flex-end;
   cursor: pointer;
-  margin: 0.25rem 0 1rem;
+  margin-top: 0.25rem;
   opacity: 0.25;
 
   :hover {
@@ -144,43 +132,44 @@ export class AdminAnwsersEditPage extends React.Component {
       agreementReferenceValueInputKey: 0,
       isFirstLoad: true,
       isSidebarHidden: true,
-      isUpdating: false,
       otherReferenceUrlInputKey: 0,
       otherReferenceValueInputKey: 2,
-      prevalue: null,
-      value: "",
     };
 
     this.isGeneric = Boolean(props.isGeneric);
+    this.originalPrevalue = "";
+    this.originalValue = "";
+
     this.updateAnswerValue = debounce(this._updateAnswerValue.bind(this), 500);
-    this.loadLegalReferences = debounce(this._loadLegalReferences.bind(this), 250);
+    this.loadLegalReferences = debounce(this.loadLegalReferences.bind(this), 250);
   }
 
   componentDidMount() {
     this.axios = customAxios();
 
-    this.load();
+    const { dispatch, id: answerId } = this.props;
+
+    dispatch(actions.answers.loadOne(answerId));
+    dispatch(actions.comments.load(answerId));
   }
 
   componentDidUpdate() {
-    const { answers } = this.props;
+    const { answers, comments } = this.props;
     const { isFirstLoad } = this.state;
 
     if (isFirstLoad && !answers.isLoading) {
-      if (this.state.prevalue === null || this.state.value === null) {
-        const { prevalue, value } = answers.data;
+      const { prevalue, value } = answers.data;
+      this.originalPrevalue = prevalue;
+      this.originalValue = value;
 
-        this.setState({
-          isFirstLoad: false,
-          prevalue,
-          value,
-        });
-      }
+      this.setState({
+        isFirstLoad: false,
+      });
     }
 
-    // if (!answers.isLoading && !comments.isLoading) {
-    //   this.$commentsContainer.scrollTo(0, this.$commentsContainer.scrollHeight);
-    // }
+    if (!answers.isLoading && !comments.isLoading) {
+      this.$commentsContainer.scrollTo(0, this.$commentsContainer.scrollHeight);
+    }
   }
 
   load() {
@@ -190,26 +179,32 @@ export class AdminAnwsersEditPage extends React.Component {
     dispatch(actions.comments.load(answerId));
   }
 
+  getReferences(category) {
+    const { answers } = this.props;
+
+    if (answers.isLoading) {
+      return [];
+    }
+
+    return answers.data.references.filter(reference => reference.category === category);
+  }
+
   async _updateAnswerValue({ source }) {
     try {
-      this.setState({ isUpdating: true });
-
       const value = source.trim();
       const { state } = this.props.answers.data;
       const uri = `/answers?id=eq.${this.props.id}`;
       const data = { value };
 
       // An answer can't have a "to do" state with a non-empty value:
-      if (state === ANSWER_STATE.TO_DO && value.length > 0) {
-        data.state = ANSWER_STATE.UNDER_REVIEW;
+      if (state === C.ANSWER_STATE.TO_DO && value.length > 0) {
+        data.state = C.ANSWER_STATE.UNDER_REVIEW;
       }
 
       await this.axios.patch(uri, data);
     } catch (err) {
       console.warn(err);
     }
-
-    this.setState({ isUpdating: false });
   }
 
   updateAnswerState({ value }) {
@@ -225,8 +220,6 @@ export class AdminAnwsersEditPage extends React.Component {
   }
 
   async createReference(reference) {
-    this.setState({ isUpdating: true });
-
     try {
       const { state } = this.props.answers.data;
       const answersUri = `/answers?id=eq.${this.props.id}`;
@@ -237,8 +230,8 @@ export class AdminAnwsersEditPage extends React.Component {
       };
 
       // An answer can't have a "to do" state with a reference:
-      if (state === ANSWER_STATE.TO_DO) {
-        answersData.state = ANSWER_STATE.UNDER_REVIEW;
+      if (state === C.ANSWER_STATE.TO_DO) {
+        answersData.state = C.ANSWER_STATE.UNDER_REVIEW;
       }
 
       const answersReferencesUri = `/answers_references`;
@@ -257,8 +250,6 @@ export class AdminAnwsersEditPage extends React.Component {
   }
 
   async deleteReference(id) {
-    this.setState({ isUpdating: true });
-
     try {
       const uri = makeApiFilter("/answers_references", { id });
 
@@ -272,7 +263,6 @@ export class AdminAnwsersEditPage extends React.Component {
 
   submitReference(event, category = null) {
     event.preventDefault();
-    this.setState({ isUpdating: true });
 
     let reference;
     if (category === "agreement") {
@@ -280,10 +270,6 @@ export class AdminAnwsersEditPage extends React.Component {
         category,
         value: this.$agreementReferenceValueInput.value.trim(),
       };
-
-      this.setState({
-        agreementReferenceValueInputKey: this.state.agreementReferenceValueInputKey + 1,
-      });
     } else {
       const url = this.$otherReferenceUrlInput.value.trim();
       reference = {
@@ -301,24 +287,6 @@ export class AdminAnwsersEditPage extends React.Component {
     this.createReference(reference);
   }
 
-  showSavingSpinner() {
-    if (this.state.isUpdating) {
-      clearTimeout(this.state.savingSpinnerTimeout);
-    }
-
-    this.setState({
-      isUpdating: true,
-      savingSpinnerTimeout: setTimeout(
-        () =>
-          this.setState({
-            isUpdating: false,
-            savingSpinnerTimeout: 0,
-          }),
-        500,
-      ),
-    });
-  }
-
   toggleSidebar() {
     this.setState({ isSidebarHidden: !this.state.isSidebarHidden });
   }
@@ -332,7 +300,7 @@ export class AdminAnwsersEditPage extends React.Component {
   }
 
   handleCommentField(event) {
-    if (event.key !== "Enter") return;
+    if (event.which !== 13) return;
 
     if (event.shiftKey) {
       event.preventDefault();
@@ -355,26 +323,23 @@ export class AdminAnwsersEditPage extends React.Component {
     this.props.dispatch(actions.comments._delete([id], this.props.id));
   }
 
-  _loadLegalReferences(category, query) {
-    const {
-      answers,
-      legalReferences: { isLoading },
-    } = this.props;
-    if (isLoading) return;
+  loadLegalReferences(category, query) {
+    const { answers, dispatch, legalReferences } = this.props;
+    if (legalReferences.isLoading) return;
 
-    if (category === LEGAL_REFERENCE_CATEGORY.AGREEMENT) {
+    if (category === C.LEGAL_REFERENCE_CATEGORY.AGREEMENT) {
       const { agreement } = answers.data;
 
-      this.props.dispatch(actions.legalReferences.load(category, query, agreement.idcc));
+      dispatch(actions.legalReferences.load(category, query, agreement.idcc));
 
       return;
     }
 
-    this.props.dispatch(actions.legalReferences.load(category, query));
+    dispatch(actions.legalReferences.load(category, query));
   }
 
   async addReference(category, { id: dilaId }) {
-    const { id: answerId } = this.props;
+    const { dispatch, id: answerId } = this.props;
 
     const uri = `/legal-references/${dilaId}`;
     const { agreementId, cid } = await api.get(uri);
@@ -388,44 +353,302 @@ export class AdminAnwsersEditPage extends React.Component {
       value: "",
     };
 
-    this.props.dispatch(actions.answers.addReferences([data], this.load.bind(this)));
+    dispatch(actions.answers.addReferences([data], this.load.bind(this)));
   }
 
   updateReference(data) {
-    this.props.dispatch(actions.answers.updateReferences([data], this.load.bind(this)));
+    const { dispatch } = this.props;
+
+    dispatch(actions.answers.updateReferences([data], this.load.bind(this)));
   }
 
   removeReference(answerReferenceId) {
-    this.props.dispatch(
-      actions.answers.removeReferences([answerReferenceId], this.load.bind(this)),
+    const { dispatch } = this.props;
+
+    dispatch(actions.answers.removeReferences([answerReferenceId], this.load.bind(this)));
+  }
+
+  renderTop() {
+    const { answers, comments } = this.props;
+    const { isFirstLoad } = this.state;
+
+    const stateActionDefaultValue = !isFirstLoad
+      ? C.ANSWER_STATE_OPTIONS.find(({ value }) => value === answers.data.state)
+      : undefined;
+
+    return (
+      <Flex justifyContent="space-between">
+        <Select
+          instanceId="stateAction"
+          isDisabled={answers.isLoading}
+          isLoading={isFirstLoad}
+          onChange={this.updateAnswerState.bind(this)}
+          options={C.ANSWER_STATE_OPTIONS}
+          value={stateActionDefaultValue}
+          withMarginRight
+        />
+
+        <Button
+          color="info"
+          icon="comments"
+          isDisabled={answers.isLoading}
+          onClick={this.toggleSidebar.bind(this)}
+        >
+          {!comments.isLoading ? comments.list.length : "…"}
+        </Button>
+      </Flex>
     );
   }
 
-  renderReferences(category, isDisabled) {
+  renderHead() {
     const { answers } = this.props;
-    const { references, state } = answers.data;
 
-    const filteredReferences = references.filter(
-      ({ category: _category }) => _category === category,
-    );
-
-    if (state === ANSWER_STATE.VALIDATED && filteredReferences.length === 0) {
-      return;
+    if (answers.isLoading) {
+      return (
+        <Flex alignItems="baseline">
+          <Idcc code="…" name="…" />
+          <Question>…</Question>
+        </Flex>
+      );
     }
 
-    return filteredReferences.map(({ id, url, value }, index) => (
-      <Reference
-        isDisabled={isDisabled}
-        key={index}
-        onRemove={() => this.deleteReference(id)}
-        url={url}
-        value={value}
-      />
-    ));
+    const { agreement, question } = answers.data;
+    const { idcc, name } = agreement !== null ? agreement : { idcc: null, name: null };
+
+    return (
+      <Flex alignItems="baseline">
+        <Idcc code={idcc} name={name} />
+        <Question>{`${question.index}) ${question.value}`}</Question>
+      </Flex>
+    );
+  }
+
+  renderEditor() {
+    const { answers } = this.props;
+    const { isFirstLoad } = this.state;
+
+    if (isFirstLoad) {
+      return (
+        <Flex flexDirection="column" width={1}>
+          <Subtitle isFirst>…</Subtitle>
+          <Loaditor alignItems="center" justifyContent="center">
+            <LoadingSpinner />
+          </Loaditor>
+        </Flex>
+      );
+    }
+
+    if (answers.data.state === C.ANSWER_STATE.VALIDATED) {
+      return (
+        <Flex flexDirection="column" width={1}>
+          <Subtitle isFirst>Réponse validée</Subtitle>
+          <Editor defaultValue={this.originalValue} disabled headersOffset={2} isSingleView />
+        </Flex>
+      );
+    }
+
+    return (
+      <Flex>
+        <Flex flexDirection="column" width={0.5}>
+          <Subtitle isFirst>Réponse proposée</Subtitle>
+          <Preditor defaultValue={this.originalPrevalue} disabled headersOffset={2} isSingleView />
+        </Flex>
+
+        <Flex flexDirection="column" width={0.5}>
+          <Subtitle isFirst>{this.isGeneric ? "Réponse générique" : "Réponse corrigée"}</Subtitle>
+          <Editor
+            defaultValue={this.originalValue}
+            headersOffset={2}
+            isSingleView
+            onChange={this.updateAnswerValue.bind(this)}
+            singleViewDefault="editor"
+          />
+        </Flex>
+      </Flex>
+    );
+  }
+
+  renderReferences() {
+    const { answers, legalReferences } = this.props;
+
+    const isReadOnly = answers.isLoading || answers.data.state === C.ANSWER_STATE.VALIDATED;
+
+    return (
+      <div>
+        <Subtitle isFirst>Références juridiques</Subtitle>
+        <Flex flexDirection="column">
+          <Strong isFirst>Convention collective :</Strong>
+          <LegalReferences
+            category={C.LEGAL_REFERENCE_CATEGORY.AGREEMENT}
+            data={
+              legalReferences.category === C.LEGAL_REFERENCE_CATEGORY.AGREEMENT
+                ? legalReferences.list
+                : []
+            }
+            isLoading={answers.isLoading}
+            isReadOnly={isReadOnly}
+            onAdd={data => this.addReference(C.LEGAL_REFERENCE_CATEGORY.AGREEMENT, data)}
+            onChange={this.updateReference.bind(this)}
+            onInput={query => this.loadLegalReferences(C.LEGAL_REFERENCE_CATEGORY.AGREEMENT, query)}
+            onRemove={this.removeReference.bind(this)}
+            references={this.getReferences(C.LEGAL_REFERENCE_CATEGORY.AGREEMENT)}
+          />
+        </Flex>
+        <Flex flexDirection="column">
+          <Strong>Code du travail :</Strong>
+          <LegalReferences
+            category={C.LEGAL_REFERENCE_CATEGORY.LABOR_CODE}
+            data={
+              legalReferences.category === C.LEGAL_REFERENCE_CATEGORY.LABOR_CODE
+                ? legalReferences.list
+                : []
+            }
+            isLoading={answers.isLoading}
+            isReadOnly={isReadOnly}
+            onAdd={data => this.addReference(C.LEGAL_REFERENCE_CATEGORY.LABOR_CODE, data)}
+            onInput={query =>
+              this.loadLegalReferences(C.LEGAL_REFERENCE_CATEGORY.LABOR_CODE, query)
+            }
+            onRemove={this.removeReference.bind(this)}
+            references={this.getReferences(C.LEGAL_REFERENCE_CATEGORY.LABOR_CODE)}
+          />
+        </Flex>
+        <Flex flexDirection="column">
+          <Strong>Autres :</Strong>
+          {!isReadOnly && (
+            <Form onSubmit={this.submitReference.bind(this)}>
+              <Input
+                key={this.state.otherReferenceValueInputKey}
+                placeholder="Référence (ex: Décret n°82-447 du 28 mai 1982…)"
+                ref={node => (this.$otherReferenceValueInput = node)}
+              />
+              <Input
+                key={this.state.otherReferenceUrlInputKey}
+                placeholder="URL (ex: https://www.legifrance.gouv.fr/…)"
+                ref={node => (this.$otherReferenceUrlInput = node)}
+                style={{ marginTop: "0.5rem" }}
+              />
+              <FormHiddenSubmit type="submit" />
+            </Form>
+          )}
+          <LegalReferences
+            category={null}
+            isLoading={answers.isLoading}
+            isReadOnly={isReadOnly}
+            onAdd={data => this.addReference(null, data)}
+            onChange={this.updateReference.bind(this)}
+            onRemove={this.removeReference.bind(this)}
+            references={this.getReferences(null)}
+          />
+        </Flex>
+      </div>
+    );
+  }
+
+  renderGenericReference() {
+    const { answers } = this.props;
+    const { isFirstLoad } = this.state;
+
+    if (isFirstLoad) {
+      return null;
+    }
+
+    const { data, isLoading } = answers;
+    const { state, generic_reference } = data;
+
+    if (state === C.ANSWER_STATE.VALIDATED && generic_reference === null) {
+      return null;
+    }
+
+    return (
+      <div>
+        <Hr />
+        <Subtitle isFirst>Renvoi</Subtitle>
+        {state !== C.ANSWER_STATE.VALIDATED && (
+          <Radio
+            disabled={isLoading}
+            onChange={this.updateGenericReference.bind(this)}
+            options={[
+              {
+                isSelected: generic_reference === null,
+                label: "Aucun renvoi.",
+                value: null,
+              },
+              {
+                isSelected: generic_reference === "labor_code",
+                label: "Renvoyée au texte Code du Travail.",
+                value: "labor_code",
+              },
+              {
+                isSelected: generic_reference === "national_agreement",
+                label: "Renvoyée au texte de la CCN.",
+                value: "national_agreement",
+              },
+            ]}
+          />
+        )}
+      </div>
+    );
+  }
+
+  renderPublication() {
+    const { answers } = this.props;
+    const { isFirstLoad } = this.state;
+
+    if (isFirstLoad || answers.data.state !== C.ANSWER_STATE.VALIDATED) {
+      return null;
+    }
+
+    return (
+      <div>
+        <Hr />
+        <Subtitle isFirst>Publication</Subtitle>
+        <Flex>
+          <Checkbox
+            isChecked={answers.data.is_published}
+            onClick={this.toggleIsPublished.bind(this)}
+            withMarginRight
+          />
+          Publiée sur le site du code du travail numérique.
+        </Flex>
+      </div>
+    );
+  }
+
+  renderSidebar() {
+    const { comments } = this.props;
+
+    const { isSidebarHidden } = this.state;
+
+    return (
+      <Sidebar flexDirection="column" isHidden={isSidebarHidden} justifyContent="space-between">
+        <Subtitle isFirst>Commentaires</Subtitle>
+        <Comments flexDirection="column" ref={node => (this.$commentsContainer = node)}>
+          {this.renderComments()}
+        </Comments>
+        <Flex alignContent="flex-end" flexDirection="column">
+          <CommentEditor
+            disabled={comments.currentIsLoading}
+            isPrivate={comments.currentIsPrivate}
+            key={comments.currentKey}
+            onKeyPressCapture={this.handleCommentField.bind(this)}
+            placeholder={T.ADMIN_ANSWERS_COMMENT_PLACEHOLDER}
+            ref={node => (this.$commentTextarea = node)}
+            rows={10}
+          />
+          <CommentEditorIcon
+            icon={comments.currentIsPrivate ? "lock" : "unlock"}
+            onClick={() => this.props.dispatch(actions.comments.toggleOnePrivacy())}
+          />
+        </Flex>
+      </Sidebar>
+    );
   }
 
   renderComments() {
-    return this.props.comments.data.map(({ id, is_private, value }, index) => (
+    const { comments } = this.props;
+
+    return comments.list.map(({ id, is_private, value }, index) => (
       <Comment
         isMe={true}
         isPrivate={is_private}
@@ -437,260 +660,25 @@ export class AdminAnwsersEditPage extends React.Component {
   }
 
   render() {
-    const { answers, comments, legalReferences } = this.props;
-    const { isFirstLoad, prevalue, isSidebarHidden, value } = this.state;
-
-    if (isFirstLoad) {
-      return <AdminMainLayout isLoading />;
-    }
-
-    const isLoading = answers.isLoading || comments.isLoading || legalReferences.isLoading;
-
-    const {
-      agreement,
-      generic_reference,
-      is_published,
-      question,
-      references,
-      state,
-    } = answers.data;
-    const stateSelectValue = ANSWER_STATE_OPTIONS.find(({ value }) => value === state);
-
-    const agreementReferences = references.filter(
-      ({ category }) => category === LEGAL_REFERENCE_CATEGORY.AGREEMENT,
-    );
-    const laborCodeReferences = references.filter(
-      ({ category }) => category === LEGAL_REFERENCE_CATEGORY.LABOR_CODE,
-    );
-    const otherReferences = references.filter(({ category }) => category === null);
-    const $otherReferences = this.renderReferences(null, true);
-
     return (
       <AdminMainLayout isScrollable={false}>
         <Container>
           <Content flexDirection="column">
-            <Flex alignItems="baseline" justifyContent="space-between">
-              <Flex alignItems="baseline">
-                {this.isGeneric ? <Idcc /> : <Idcc code={agreement.idcc} name={agreement.name} />}
-                <Question>{`${question.index}) ${question.value}`}</Question>
-              </Flex>
-
-              <Flex alignItems="center">
-                {isSidebarHidden && (
-                  <StateSelect
-                    isDisabled={isLoading}
-                    onChange={this.updateAnswerState.bind(this)}
-                    options={ANSWER_STATE_OPTIONS}
-                    value={stateSelectValue}
-                  >
-                    {STATES.map(state => (
-                      <option key={state} value={state}>
-                        {capitalize(ANSWER_STATE_LABEL[state])}
-                      </option>
-                    ))}
-                  </StateSelect>
-                )}
-
-                <Button color="info" icon="comments" onClick={this.toggleSidebar.bind(this)}>
-                  {comments.data.length}
-                </Button>
-              </Flex>
-            </Flex>
+            {this.renderTop()}
+            <Hr />
+            {this.renderHead()}
             <Hr />
 
-            {state !== ANSWER_STATE.VALIDATED && (
-              <Flex flexDirection="column" width={1}>
-                <Flex>
-                  <Flex flexDirection="column" style={{ minHeight: "19rem" }} width={1}>
-                    <Subtitle isFirst>Réponse proposée</Subtitle>
-                    <AnswerProposal
-                      defaultValue={prevalue}
-                      disabled
-                      headersOffset={2}
-                      isSingleView
-                    />
-                  </Flex>
-
-                  <Flex flexDirection="column" style={{ minHeight: "19rem" }} width={1}>
-                    <Subtitle isFirst>
-                      {this.isGeneric ? "Réponse générique" : "Réponse corrigée"}
-                    </Subtitle>
-                    <AnswerCorrection
-                      defaultValue={value}
-                      headersOffset={2}
-                      isSingleView
-                      onChange={this.updateAnswerValue.bind(this)}
-                      singleViewDefault="editor"
-                    />
-                  </Flex>
-                </Flex>
-                <Hr />
-
-                <Subtitle isFirst>Références juridiques</Subtitle>
-                <Flex flexDirection="column">
-                  <Strong isFirst>Convention collective :</Strong>
-                  <LegalReferences
-                    category={LEGAL_REFERENCE_CATEGORY.AGREEMENT}
-                    data={
-                      legalReferences.category === LEGAL_REFERENCE_CATEGORY.AGREEMENT
-                        ? legalReferences.data
-                        : []
-                    }
-                    isEditable
-                    isLoading={answers.isLoading}
-                    onAdd={data => this.addReference(LEGAL_REFERENCE_CATEGORY.AGREEMENT, data)}
-                    onChange={this.updateReference.bind(this)}
-                    onInput={query =>
-                      this.loadLegalReferences(LEGAL_REFERENCE_CATEGORY.AGREEMENT, query)
-                    }
-                    onRemove={this.removeReference.bind(this)}
-                    references={agreementReferences}
-                  />
-                </Flex>
-                <Flex flexDirection="column">
-                  <Strong>Code du travail :</Strong>
-                  <LegalReferences
-                    category={LEGAL_REFERENCE_CATEGORY.LABOR_CODE}
-                    data={
-                      legalReferences.category === LEGAL_REFERENCE_CATEGORY.LABOR_CODE
-                        ? legalReferences.data
-                        : []
-                    }
-                    isLoading={answers.isLoading}
-                    onAdd={data => this.addReference(LEGAL_REFERENCE_CATEGORY.LABOR_CODE, data)}
-                    onInput={query =>
-                      this.loadLegalReferences(LEGAL_REFERENCE_CATEGORY.LABOR_CODE, query)
-                    }
-                    onRemove={this.removeReference.bind(this)}
-                    references={laborCodeReferences}
-                  />
-                </Flex>
-                <Form onSubmit={this.submitReference.bind(this)}>
-                  <Strong>Autres :</Strong>
-                  <Input
-                    disabled={answers.isLoading}
-                    key={this.state.otherReferenceValueInputKey}
-                    placeholder="Référence (ex: Décret n°82-447 du 28 mai 1982…)"
-                    ref={node => (this.$otherReferenceValueInput = node)}
-                  />
-                  <Input
-                    disabled={answers.isLoading}
-                    key={this.state.otherReferenceUrlInputKey}
-                    placeholder="URL (ex: https://www.legifrance.gouv.fr/…)"
-                    ref={node => (this.$otherReferenceUrlInput = node)}
-                    style={{ marginTop: "0.5rem" }}
-                  />
-                  <FormHiddenSubmit type="submit" />
-                  <LegalReferences
-                    category={null}
-                    isEditable
-                    isLoading={answers.isLoading}
-                    onAdd={data => this.addReference(LEGAL_REFERENCE_CATEGORY.AGREEMENT, data)}
-                    onChange={this.updateReference.bind(this)}
-                    onRemove={this.removeReference.bind(this)}
-                    references={otherReferences}
-                  />
-                </Form>
-                <Hr />
-
-                <Subtitle isFirst>Renvoi</Subtitle>
-                <Radio
-                  disabled={state === ANSWER_STATE.VALIDATED}
-                  onChange={this.updateGenericReference.bind(this)}
-                  options={[
-                    {
-                      isSelected: generic_reference === null,
-                      label: "Aucun renvoi.",
-                      value: null,
-                    },
-                    {
-                      isSelected: generic_reference === "labor_code",
-                      label: "Renvoyée au texte Code du Travail.",
-                      value: "labor_code",
-                    },
-                    {
-                      isSelected: generic_reference === "national_agreement",
-                      label: "Renvoyée au texte de la CCN.",
-                      value: "national_agreement",
-                    },
-                  ]}
-                />
-              </Flex>
-            )}
-
-            {state === ANSWER_STATE.VALIDATED && (
-              <Flex flexDirection="column" width={1}>
-                <Subtitle isFirst>Réponse validée</Subtitle>
-                <AnswerCorrection defaultValue={value} disabled headersOffset={2} isSingleView />
-
-                <Subtitle>Références juridiques</Subtitle>
-                {laborCodeReferences.length !== 0 && (
-                  <>
-                    <Strong isFirst>Code du travail</Strong>
-                    <LegalReferences
-                      category={LEGAL_REFERENCE_CATEGORY.LABOR_CODE}
-                      isReadOnly
-                      references={laborCodeReferences}
-                    />
-                  </>
-                )}
-                {agreementReferences.length !== 0 && (
-                  <>
-                    <Strong isFirst>Convention collective</Strong>
-                    <LegalReferences
-                      category={LEGAL_REFERENCE_CATEGORY.AGREEMENT}
-                      isReadOnly
-                      references={agreementReferences}
-                    />
-                  </>
-                )}
-                {$otherReferences !== undefined && (
-                  <>
-                    <Strong isFirst>Autres</Strong>
-                    {$otherReferences}
-                  </>
-                )}
-                <Hr />
-
-                <Subtitle isFirst>Renvoi</Subtitle>
-                {
-                  {
-                    labor_code: "Renvoyée au texte Code du Travail.",
-                    national_agreement: "Renvoyée au texte de la CCN.",
-                    null: "Aucun renvoi.",
-                  }[String(generic_reference)]
-                }
-                <Hr />
-
-                <Subtitle isFirst>Publication</Subtitle>
-                <Flex>
-                  <Checkbox isChecked={is_published} onClick={this.toggleIsPublished.bind(this)} />
-                  Publiée sur le site du code du travail numérique.
-                </Flex>
-              </Flex>
-            )}
-
+            {this.renderEditor()}
             <Hr />
+
+            {this.renderReferences()}
+
+            {this.renderGenericReference()}
+            {this.renderPublication()}
           </Content>
-          <Sidebar flexDirection="column" isHidden={isSidebarHidden} justifyContent="space-between">
-            <Subtitle isFirst>Commentaires et validation</Subtitle>
-            <Comments flexDirection="column" ref={node => (this.$commentsContainer = node)}>
-              {this.renderComments()}
-            </Comments>
-            <CommentEditor
-              disabled={comments.currentIsLoading}
-              isPrivate={comments.currentIsPrivate}
-              key={comments.currentKey}
-              onKeyPress={this.handleCommentField.bind(this)}
-              placeholder={T.ADMIN_ANSWERS_COMMENT_PLACEHOLDER}
-              ref={node => (this.$commentTextarea = node)}
-              rows={10}
-            />
-            <CommentEditorIcon
-              icon={comments.currentIsPrivate ? "lock" : "unlock"}
-              onClick={() => this.props.dispatch(actions.comments.toggleOnePrivacy())}
-            />
-          </Sidebar>
+
+          {this.renderSidebar()}
         </Container>
       </AdminMainLayout>
     );

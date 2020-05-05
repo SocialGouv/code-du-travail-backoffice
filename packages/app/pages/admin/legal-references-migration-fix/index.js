@@ -97,7 +97,8 @@ class LegalReferencesMigrationIndex extends React.Component {
       const { data: answerReferences } = await request
         .eq("answer_id", answer.id)
         .eq("category", LEGAL_REFERENCE_CATEGORY.AGREEMENT)
-        .orderBy("id")
+        .orderBy("dila_id", true)
+        .orderBy("id", true)
         .get("/answers_references");
 
       const answerOldReferences = OLD_ANSWERS_REFERENCES.filter(
@@ -181,12 +182,11 @@ class LegalReferencesMigrationIndex extends React.Component {
             category={LEGAL_REFERENCE_CATEGORY.AGREEMENT}
             isReadOnly
             references={oldReferences}
+            style={{ marginTop: "2rem" }}
           />
           <LegalReferences
             category={LEGAL_REFERENCE_CATEGORY.AGREEMENT}
-            isEditable
             isLoading={isLoading}
-            isReadOnly
             noContent
             onChange={this.updateReference.bind(this)}
             references={references}
@@ -212,6 +212,7 @@ class LegalReferencesMigrationIndex extends React.Component {
           <div>
             {AGREEMENT_SELECT_OPTIONS.length !== 0 ? (
               <Select
+                instanceId="agreementFilter"
                 onChange={this.selectAgreement.bind(this)}
                 options={AGREEMENT_SELECT_OPTIONS}
               />
