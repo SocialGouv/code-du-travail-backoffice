@@ -27,10 +27,16 @@ export default class LoginBlockForm extends React.PureComponent {
   }
 
   async check() {
-    const data = await api.post("/rpc/login", {
-      email: this.$email.value,
-      password: this.$password.value,
-    });
+    const data = await api.post(
+      "/rpc/login",
+      {
+        email: this.$email.value,
+        password: this.$password.value,
+      },
+      {
+        Authorization: undefined,
+      },
+    );
     const token = data[0].token;
 
     // Store JSON Web Token in a cookie:

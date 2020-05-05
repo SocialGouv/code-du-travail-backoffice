@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import PropTypes from "prop-types";
 import React from "react";
 import { Flex } from "rebass";
 
@@ -104,6 +105,13 @@ const Comment = ({ isMe = false, isPrivate, onRemove, value }) => {
       <LeftBubble isPrivate={isPrivate}>{value}</LeftBubble>
     </Container>
   );
+};
+
+Comment.propTypes = {
+  isMe: PropTypes.bool,
+  isPrivate: PropTypes.bool.isRequired,
+  onRemove: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 export default Comment;

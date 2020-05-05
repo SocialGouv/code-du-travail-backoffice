@@ -1,5 +1,6 @@
 import moment from "moment-timezone";
 import Router from "next/router";
+import PropTypes from "prop-types";
 import React from "react";
 import { Flex } from "rebass";
 
@@ -14,13 +15,13 @@ import { Confirmation, Container, Head } from "./styles";
 
 const PAGE_SIZE = 10;
 
-export default class AdminIndex extends React.Component {
+class AdminIndex extends React.Component {
   constructor(props) {
     super(props);
     const {
       columns,
       i18nIsFeminine = false,
-      i18nSubject = "MISSING_SUBJECT",
+      i18nSubject,
       noDelete = false,
       noEdit = false,
       noTimestamps = false,
@@ -228,3 +229,17 @@ export default class AdminIndex extends React.Component {
     );
   }
 }
+
+AdminIndex.propTypes = {
+  apiPath: PropTypes.string.isRequired,
+  apiSelectors: PropTypes.arrayOf(PropTypes.string),
+  columns: PropTypes.array.isRequired,
+  i18nIsFeminine: PropTypes.bool,
+  i18nSubject: PropTypes.string.isRequired,
+  noCreate: PropTypes.bool,
+  noDelete: PropTypes.bool,
+  noEdit: PropTypes.bool,
+  noTimestamps: PropTypes.bool,
+};
+
+export default AdminIndex;

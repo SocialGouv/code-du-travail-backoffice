@@ -68,7 +68,7 @@ const Answer = ({ data, isChecked, onCheck, onClick }) => {
           <UpdatedAt>{`Modifié ${customMoment(updated_at)
             .tz("Europe/Paris")
             .calendar()}`}</UpdatedAt>
-          <IsPublished disabled={!is_published}>Publiée</IsPublished>
+          <IsPublished isDisabled={!is_published}>Publiée</IsPublished>
         </Flex>
       </Top>
       <Flex>

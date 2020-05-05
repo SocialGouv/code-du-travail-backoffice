@@ -16,7 +16,7 @@ export default async function getMe(ctx) {
   if (typeof token !== "string") return ANOMNYMOUS_RESPONSE;
 
   try {
-    const data = await api.post("/rpc/login_check", { token }, true);
+    const data = await api.post("/rpc/login_check", { token }, { Authorization: "" });
 
     const isAuthenticated = data[0].valid;
 

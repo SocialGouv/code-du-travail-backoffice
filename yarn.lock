@@ -8224,7 +8224,7 @@ jest-serializer@^25.5.0:
   dependencies:
     graceful-fs "^4.2.4"
 
-jest-snapshot@^25.1.0, jest-snapshot@^25.5.1:
+jest-snapshot@^25.5.1:
   version "25.5.1"
   resolved "https://registry.yarnpkg.com/jest-snapshot/-/jest-snapshot-25.5.1.tgz#1a2a576491f9961eb8d00c2e5fd479bc28e5ff7f"
   integrity sha512-C02JE1TUe64p2v1auUJ2ze5vcuv32tkv9PyhEb318e8XOKF7MOyXdJ7kdjbvrp3ChPLU2usI7Rjxs97Dj5P0uQ==
@@ -12576,16 +12576,6 @@ snapdragon@^0.8.1:
     source-map "^0.5.6"
     source-map-resolve "^0.5.0"
     use "^3.1.0"
-
-snapshot-diff@0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/snapshot-diff/-/snapshot-diff-0.7.0.tgz#a9e93e848a90c9d3e6ffe645dfb89350e041f15e"
-  integrity sha512-KzFWZ02eu2BLAloZ4FlaMitUy7kw49Av8CGy50nZrl9mjqMAiibpYWgJppHDQwVcbPqt5HrdegDzF2J8Cmc+yg==
-  dependencies:
-    jest-diff "^25.1.0"
-    jest-snapshot "^25.1.0"
-    pretty-format "^25.1.0"
-    strip-ansi "^6.0.0"
 
 socks-proxy-agent@^4.0.0:
   version "4.0.2"

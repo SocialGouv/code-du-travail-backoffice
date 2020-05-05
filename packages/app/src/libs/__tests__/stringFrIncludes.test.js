@@ -1,6 +1,6 @@
 import stringFrIncludes from "../stringFrIncludes";
 
-describe("lib/stringFrIncludes()", () => {
+describe("libs/stringFrIncludes()", () => {
   const text = `
     Ah ! non ! c’est un peu court, jeune homme !
     On pouvait dire… Oh ! Dieu ! … bien des choses en somme…

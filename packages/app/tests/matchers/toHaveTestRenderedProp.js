@@ -1,26 +1,45 @@
+// @ts-check
+
 expect.extend({
   /**
-   * @param {import("react-test-renderer").ReactTestRendererJSON} received
-   * @param {string} propName
-   * @param {string} propValue
+   * @param {TestRendering} rendering
+   * @param {string} name
+   * @param {string} expected
    */
-  toHaveTestRenderedProp(received, propName, propValue) {
-    if (received === null || typeof received !== "object" || received.props === undefined) {
-      throw new Error(`Expected ${received} to be a valid ReactTestRendererJSON object`);
+  toHaveTestRenderedProp(rendering, name, expected) {
+    if (
+      rendering === null ||
+      typeof rendering !== "object" ||
+      rendering.props === undefined ||
+      rendering.props === null ||
+      typeof rendering.props !== "object"
+    ) {
+      throw new Error(`Expected ${rendering} to be a valid TestRendering object`);
     }
 
-    if (received.props === null || typeof received.props !== "object") {
-      throw new Error(`Expected ${received} to have valid props object`);
+    if (rendering.props === null || typeof rendering.props !== "object") {
+      throw new Error(`Expected ${rendering} to have valid props object`);
     }
 
-    return received.props[propName] === propValue
-      ? {
-          message: `Expected ${propName} prop to equal "${propValue}"`,
-          pass: true,
-        }
-      : {
-          message: `Expected ${propName} prop to equal "${propValue}"`,
-          pass: false,
-        };
+    const received = rendering.props[name];
+
+    if (received === expected) {
+      return {
+        message: () => "",
+        pass: true,
+      };
+    }
+
+    return {
+      message: () =>
+        [
+          "Expected: ",
+          typeof expected === "string" ? `"${expected}"`.green : String(expected).green,
+          "\n",
+          "Received: ",
+          typeof received === "string" ? `"${received}"`.red : String(received).red,
+        ].join(""),
+      pass: false,
+    };
   },
 });

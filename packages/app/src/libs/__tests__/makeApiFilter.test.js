@@ -1,6 +1,6 @@
 import makeApiFilter from "../makeApiFilter";
 
-describe("lib/makeApiFilter()", () => {
+describe("libs/makeApiFilter()", () => {
   it("should return the expected API filter URL", () => {
     const data = {
       aString: "string",

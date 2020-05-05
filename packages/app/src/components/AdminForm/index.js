@@ -1,4 +1,5 @@
 import Router from "next/router";
+import PropTypes from "prop-types";
 import * as R from "ramda";
 import React from "react";
 import { Flex } from "rebass";
@@ -11,12 +12,12 @@ import Select from "../../elements/Select";
 import Textarea from "../../elements/Textarea";
 import Title from "../../elements/Title";
 import AdminMainLayout from "../../layouts/AdminMain";
-import customAxios from "../../libs/customAxios";
+import api from "../../libs/api";
 import customPostgrester from "../../libs/customPostgrester";
 import T from "../../texts";
 import { Error, Form, Head, HelpText, LabelContainer } from "./styles";
 
-export default class AdminForm extends React.Component {
+class AdminForm extends React.Component {
   constructor(props) {
     super(props);
     const { fields } = props;
@@ -40,8 +41,6 @@ export default class AdminForm extends React.Component {
   }
 
   componentDidMount() {
-    this.axios = customAxios();
-
     this.setState({ isLoading: false });
   }
 
@@ -152,7 +151,7 @@ export default class AdminForm extends React.Component {
       if (this.props.id !== undefined && !isApiFunction) {
         // PostgREST exposed api table updates are done via PATCH requests:
         const uri = `${this.props.apiPath}?id=eq.${this.props.id}`;
-        await this.axios.patch(uri, data);
+        await api.patch(uri, data);
 
         if (fieldsWithCustomApiPath.length > 0) {
           const itemIdName = `${this.props.name.replace(/s$/, "")}_id`;
@@ -162,7 +161,7 @@ export default class AdminForm extends React.Component {
             // to first delete all the foreign collection for the current item,
             // then re-create all the foreign collection from the current data:
             const uri = `${field.apiPath}?${itemIdName}=eq.${this.props.id}`;
-            await this.axios.delete(uri);
+            await api.delete(uri);
 
             const { data: foreignData } = await this.api
               .orderBy("id", true)
@@ -177,13 +176,13 @@ export default class AdminForm extends React.Component {
               [itemIdName]: this.props.id,
             }));
 
-            await this.axios.post(field.apiPath, newForeignData);
+            await api.post(field.apiPath, newForeignData);
           }
         }
       } else {
         // PostgREST exposed api table insertons as well as exposed custom (rpc)
         // functions calls are done via POST requests:
-        const { headers } = await this.axios.post(this.props.apiPath, data);
+        const { headers } = await api.post(this.props.apiPath, data);
 
         if (fieldsWithCustomApiPath.length > 0) {
           // The PostgREST response includes a Location header describing where
@@ -205,7 +204,7 @@ export default class AdminForm extends React.Component {
               [itemIdName]: itemId,
             }));
 
-            await this.axios.post(field.apiPath, newForeignData);
+            await api.post(field.apiPath, newForeignData);
           }
         }
       }
@@ -335,13 +334,7 @@ export default class AdminForm extends React.Component {
   }
 
   render() {
-    const {
-      fields,
-      i18nIsFeminine = false,
-      i18nSubject = "MISSING_SUBJECT",
-      id,
-      indexPath,
-    } = this.props;
+    const { fields, i18nIsFeminine = false, i18nSubject, id, indexPath } = this.props;
     const { error, isLoading, isSubmitting } = this.state;
 
     if (isLoading) return <AdminMainLayout isLoading />;
@@ -394,3 +387,20 @@ export default class AdminForm extends React.Component {
     );
   }
 }
+
+AdminForm.propTypes = {
+  apiPath: PropTypes.string.isRequired,
+  defaultData: PropTypes.object,
+  fields: PropTypes.arrayOf(
+    PropTypes.exact({
+      name: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  i18nIsFeminine: PropTypes.bool,
+  i18nSubject: PropTypes.string.isRequired,
+  id: PropTypes.string,
+  indexPath: PropTypes.string.isRequired,
+  name: PropTypes.any,
+};
+
+export default AdminForm;

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import PropTypes from "prop-types";
 import React from "react";
 import reactOnClickOutside from "react-onclickoutside";
 import { connect } from "react-redux";
@@ -30,7 +31,9 @@ const Actions = styled(Flex)``;
 
 class _Modal extends React.PureComponent {
   handleClickOutside() {
-    this.props.dispatch(actions.modal.close());
+    const { dispatch } = this.props;
+
+    dispatch(actions.modal.close());
   }
 
   render() {
@@ -50,6 +53,11 @@ class _Modal extends React.PureComponent {
   }
 }
 
+_Modal.propTypes = {
+  dispatch: PropTypes.func,
+  message: PropTypes.string.isRequired,
+};
+
 const Modal = reactOnClickOutside(_Modal);
 
 const ModalWrapper = ({ isVisible, ...props }) => {
@@ -60,6 +68,10 @@ const ModalWrapper = ({ isVisible, ...props }) => {
       <Modal {...props} />
     </Wrapper>
   );
+};
+
+ModalWrapper.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
 };
 
 export default connect(({ modal: { isVisible, message } }) => ({

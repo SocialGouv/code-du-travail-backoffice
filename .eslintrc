@@ -1,69 +1,52 @@
 {
   "root": true,
   "extends": ["@socialgouv/eslint-config-strict", "prettier"],
-  "plugins": ["sort-requires", "prettier"],
+  "plugins": ["prettier", "sort-requires"],
   "env": {
     "browser": false,
     "node": true
   },
   "rules": {
     "no-console": ["error", { "allow": ["info", "error", "warn"] }],
+    "jest/no-disabled-tests": "error",
     "prettier/prettier": "error",
     "sort-requires/sort-requires": "error"
   },
   "overrides": [
     {
-      "files": ["packages/app/pages/**/*.js", "packages/app/src/**/*.js"],
-      "extends": ["@socialgouv/eslint-config-react-strict", "prettier"],
-      "env": {
-        "browser": true,
-        "node": true
-      },
-      "rules": {
-        "jest/no-disabled-tests": "off",
-        "react/jsx-sort-props": "error",
-        "react/prop-types": "off"
-      }
-    },
-    {
-      "files": [
-        "packages/app/src/components/Answer/**/*.js",
-        "packages/app/src/components/LegalReferences/**/*.js",
-        "packages/app/src/elements/**/*.js",
-        "packages/app/src/templates/**/*.js"
-      ],
-      "extends": ["@socialgouv/eslint-config-react-strict", "prettier"],
-      "env": {
-        "browser": true,
-        "node": true
-      },
-      "rules": {
-        "jest/no-disabled-tests": "error",
-        "react/jsx-sort-props": "error",
-        "react/prop-types": "error"
-      }
-    },
-    {
-      "files": ["jest.setup.js", "*.test.js"],
-      "env": {
-        "jest": true
-      }
-    },
-    {
       "files": ["features/**/*.js"],
-      "extends": ["plugin:chai-expect/recommended"],
-      "plugins": ["chai-expect"],
-      "env": {
-        "browser": true,
-        "node": true
-      },
+      "extends": ["@socialgouv/eslint-config-strict", "prettier", "plugin:chai-expect/recommended"],
+      "plugins": ["prettier", "chai-expect", "sort-requires"],
       "rules": {
         "jest/no-standalone-expect": "off",
         "jest/valid-expect": "off"
       }
     },
     {
-      "files": ["packages/app/src/**/*.test.js"],
+      "files": ["packages/api/src/**/*.js"]
+    },
+    {
+      "files": ["packages/app/pages/**/*.js", "packages/app/src/**/*.js"],
+      "extends": ["@socialgouv/eslint-config-react-strict", "prettier"],
+      "env": {
+        "browser": true
+      },
+      "rules": {
+        "react/jsx-sort-props": "error",
+        "react/prop-types": "error"
+      }
+    },
+    {
+      "files": ["packages/app/pages/**/*.js", "packages/app/src/blocks/**/*.js"],
+      "extends": ["@socialgouv/eslint-config-react-strict", "prettier"],
+      "rules": {
+        "react/prop-types": "off"
+      }
+    },
+    {
+      "files": ["packages/api/src/**/*.test.js", "packages/app/src/**/*.test.js"],
+      "extends": ["@socialgouv/eslint-config-react-strict", "prettier"],
+      "plugins": ["prettier", "sort-requires"],
       "env": {
         "jest": true
       },

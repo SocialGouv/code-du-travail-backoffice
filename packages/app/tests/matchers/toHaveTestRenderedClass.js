@@ -1,25 +1,31 @@
+// @ts-check
+
 expect.extend({
   /**
-   * @param {*} received
-   * @param {string} className
+   * @param {TestRendering} received
+   * @param {string} expected
    */
-  toHaveTestRenderedClass(received, className) {
-    if (received === null || typeof received !== "object" || received.props === undefined) {
-      throw new Error(`Expected ${received} to be a valid ReactTestRendererJSON object`);
+  toHaveTestRenderedClass(rendering, expected) {
+    if (rendering === null || typeof rendering !== "object" || rendering.props === undefined) {
+      throw new Error(`Expected ${rendering} to be a valid TestRendering object`);
     }
 
-    if (typeof received.props.className !== "string") {
-      throw new Error(`Expected ${received} to be have a {string} className property`);
+    if (typeof rendering.props.className !== "string") {
+      throw new Error(`Expected ${rendering} to be have a {string} className property`);
     }
 
-    return received.props.className.split(" ").includes(className)
-      ? {
-          message: `Expected ${received} className property not to include ${className}`,
-          pass: true,
-        }
-      : {
-          message: `Expected ${received} className property to include ${className}`,
-          pass: false,
-        };
+    const received = rendering.props.className;
+
+    if (received.split(/ +/).includes(expected)) {
+      return {
+        message: () => "",
+        pass: true,
+      };
+    }
+
+    return {
+      message: () => `Expected "${received}" {className} to include "${expected}"`,
+      pass: false,
+    };
   },
 });

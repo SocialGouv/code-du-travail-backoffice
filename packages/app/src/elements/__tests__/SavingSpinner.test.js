@@ -26,8 +26,8 @@ describe("elements/<SavingSpinner />", () => {
     expect($spinner).toHaveStyleRule("border-color", "red transparent transparent transparent");
   });
 
-  it(`should pass with {size} = "32"`, () => {
-    const $savingSpinner = testRender(<SavingSpinner size="32" />);
+  it(`should pass with {size} = 32`, () => {
+    const $savingSpinner = testRender(<SavingSpinner size={32} />);
     const $spinner = $savingSpinner.children[3];
 
     expect($savingSpinner).toHaveStyleRule("height", "32px");
