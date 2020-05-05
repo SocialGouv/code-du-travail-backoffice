@@ -7,6 +7,7 @@ help make it even better than it is today!
   - [Prerequisites](#prerequisites)
   - [Get Started](#get-started)
   - [Test](#test)
+  - [Scripts](#scripts)
   - [Recommended IDE Settings](#recommended-ide-settings)
   - [VS Code](#vs-code)
   - [Known Issues](#known-issues)
@@ -70,6 +71,30 @@ The website should now be available at: http://localhost:3100.
 - Unit Tests: `yarn test:unit`
 - Unit Tests (watch): `yarn test:watch`
 - E2E Tests: `yarn test:e2e`
+
+to update Unite Tests snapshots, you can run `yarn test:update`.
+
+### Scripts
+
+This repository comes with multiple useful npm scripts (run via `yarn <script>`):
+
+- `data:generate`: Generate (update) DILA-related data (Labor Code & Agreements).
+- `db:backup`: Generate a database dump.
+- `db:migrate` Migrate database schema.
+- `db:migrate:make`: Create a new database migration file.
+- `db:restore`: Restore a database dump.
+- `db:seed`: Seed the database via a mix of dummy and real production data.
+- `db:snapshot:restore`: Restore the dev database dump.
+- `db:snapshot:update`: Update the dev database dump file.
+- `dev`: Start a full development instance (including Docker images).
+- `dev:docker`: Start dev-related Docker images (with a dev config).
+- `dev:packages`: Sun the packages instance in dev (watch + live-reload) mode.
+- `setup`: Setup (or refresh) a ready-to-use dev environment.
+- `setup:env`: Reset the dev environment variables (via the `.env` file).
+- `setup:full`: Setup (or refresh) a ready-to-use dev environment **with** a new seed.<br>
+  _This also updates the dev/test database snapshot._
+- `start`: Start a full production instance (without Docker images).
+- `start:prod`: Run the production build & run script.
 
 ### Recommended IDE Settings
 

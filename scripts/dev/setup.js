@@ -2,6 +2,7 @@ require("colors");
 const fs = require("fs");
 const knex = require("knex");
 const shell = require("shelljs");
+const { argv } = require("yargs");
 
 const { DEV_DB_PORT, NODE_ENV, POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_USER } = process.env;
 
@@ -53,7 +54,14 @@ async function waitForDb() {
     shell.echo(`Waiting for db to be up and ready…`.blue);
     await waitForDb();
     run(`yarn db:migrate`);
-    run(`yarn db:snapshot:restore`);
+
+    if (argv.full) {
+      run(`yarn db:seed`);
+      run(`yarn db:snapshot:update`);
+    } else {
+      run(`yarn db:snapshot:restore`);
+    }
+
     run(`yarn dev:docker`);
     run(`docker-compose stop`);
     shell.exit(0);
