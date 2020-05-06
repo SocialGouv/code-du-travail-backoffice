@@ -13,7 +13,7 @@ import Idcc from "../../../src/elements/Idcc";
 import Select from "../../../src/elements/Select";
 import Title from "../../../src/elements/Title";
 import AdminMainLayout from "../../../src/layouts/AdminMain";
-import customAxios from "../../../src/libs/customAxios";
+import api from "../../../src/libs/api";
 import customPostgrester from "../../../src/libs/customPostgrester";
 
 const Container = styled.div`
@@ -138,7 +138,7 @@ class LegalReferencesMigrationIndex extends React.Component {
 
   async isReferenced({ idcc }) {
     try {
-      const { data } = await customAxios().get(
+      const data = await api.get(
         `/legal-references?idcc=${idcc}&category=${LEGAL_REFERENCE_CATEGORY.AGREEMENT}&query=1`,
       );
 
@@ -150,7 +150,7 @@ class LegalReferencesMigrationIndex extends React.Component {
 
   async findReferences(category, query, idcc) {
     try {
-      const { data } = await customAxios().get(
+      const data = await api.get(
         `/legal-references?idcc=${idcc}&category=${category}&query=${query}`,
       );
 

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import PropTypes from "prop-types";
 import { omit } from "ramda";
 import React from "react";
 import { Flex } from "rebass";
@@ -25,7 +26,7 @@ const TextButtonIcon = styled.img`
  *
  * @see https://quilljs.com/docs/delta/
  */
-export default class Editor extends React.Component {
+class Editor extends React.Component {
   // Quill can't be tested sicnce it's not React-aware.
   // It will be tested via e2e tests.
   /* istanbul ignore next */
@@ -153,3 +154,10 @@ export default class Editor extends React.Component {
     );
   }
 }
+
+Editor.propTypes = {
+  defaultValue: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
+export default Editor;

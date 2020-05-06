@@ -12,7 +12,7 @@ import Idcc from "../../src/elements/Idcc";
 import Subtitle from "../../src/elements/Subtitle";
 import Title from "../../src/elements/Title";
 import Main from "../../src/layouts/Main";
-import customAxios from "../../src/libs/customAxios";
+import api from "../../src/libs/api";
 
 const Container = styled(Main)`
   overflow-y: auto;
@@ -127,8 +127,6 @@ class AnswersViewPage extends React.Component {
   }
 
   async componentDidMount() {
-    this.axios = customAxios();
-
     this.load();
     await this.loadReferences();
   }
@@ -144,7 +142,7 @@ class AnswersViewPage extends React.Component {
       const referencesSelect = `select=*`;
       const referencesWhere = `answer_id=eq.${this.props.id}`;
       const referencesUri = `/answers_references?${referencesSelect}&${referencesWhere}`;
-      const { data: references } = await this.axios.get(referencesUri);
+      const references = await api.get(referencesUri);
 
       this.setState({
         isLoading: false,

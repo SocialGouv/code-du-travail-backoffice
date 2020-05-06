@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { Flex } from "rebass";
 
@@ -29,6 +30,13 @@ const AdminMainLayout = ({
       {hasBareContent ? children : <Content isScrollable={isScrollable}>{children}</Content>}
     </Main>
   );
+};
+
+AdminMainLayout.propTypes = {
+  children: PropTypes.element.isRequired,
+  hasBareContent: PropTypes.bool,
+  isLoading: PropTypes.bool,
+  isScrollable: PropTypes.bool,
 };
 
 export default AdminMainLayout;

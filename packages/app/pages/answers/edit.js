@@ -13,7 +13,7 @@ import AnswerEditionReferencesBlock from "../../src/blocks/AnswerEditionReferenc
 import { ANSWER_STATE } from "../../src/constants";
 import SavingSpinner from "../../src/elements/SavingSpinner";
 import Main from "../../src/layouts/Main";
-import customAxios from "../../src/libs/customAxios";
+import api from "../../src/libs/api";
 import getCurrentUser from "../../src/libs/getCurrentUser";
 import makeApiFilter from "../../src/libs/makeApiFilter";
 
@@ -59,11 +59,10 @@ class AnswersEditPage extends React.Component {
     const { id } = this.props;
     const me = getCurrentUser();
 
-    this.axios = customAxios();
     this.load();
 
     try {
-      const { data: references } = await this.axios.get(`/answers_references?answer_id=eq.${id}`);
+      const references = await api.get(`/answers_references?answer_id=eq.${id}`);
 
       this.setState({
         isLoading: false,
@@ -126,7 +125,7 @@ class AnswersEditPage extends React.Component {
         user_id: this.state.me.id,
       };
 
-      await this.axios.patch(uri, data);
+      await api.patch(uri, data);
       this.newPrevalue = value;
     } catch (err) {
       console.warn(err);
@@ -150,8 +149,8 @@ class AnswersEditPage extends React.Component {
         ...reference,
       };
 
-      await this.axios.patch(answersUri, answersData);
-      await this.axios.post(answersReferencesUri, answersReferencesData);
+      await api.patch(answersUri, answersData);
+      await api.post(answersReferencesUri, answersReferencesData);
     } catch (err) {
       console.warn(err);
     }
@@ -171,7 +170,7 @@ class AnswersEditPage extends React.Component {
         value: _value,
       });
 
-      await this.axios.delete(uri);
+      await api.delete(uri);
     } catch (err) {
       console.warn(err);
     }
@@ -257,7 +256,7 @@ class AnswersEditPage extends React.Component {
         <Content>
           {this.state.hasSavingSpinner && (
             <ContentInfo alignItems="center" justifyContent="space-between">
-              <SavingSpinner color="var(--color-shadow)" size="26" />
+              <SavingSpinner color="var(--color-shadow)" size={26} />
               Sauvegarde en cours…
             </ContentInfo>
           )}

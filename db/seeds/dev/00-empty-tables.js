@@ -1,10 +1,5 @@
-const axios = require("axios");
 const ora = require("ora");
 const postgrester = require("postgrester");
-
-global.axios = axios.create({
-  baseURL: "https://contributions-api.codedutravail.fabrique.social.gouv.fr",
-});
 
 global.postgresterClient = postgrester.create({
   axiosConfig: {

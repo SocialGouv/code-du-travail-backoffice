@@ -1,7 +1,7 @@
 exports.seed = async knex => {
   global.spinner.start(`Generating agreements...`);
 
-  const { data: agreements } = await global.axios.get("/agreements");
+  const { data: agreements } = await global.postgresterClient.get("/agreements");
 
   await knex("api.agreements").insert(agreements);
 

@@ -2,7 +2,7 @@ import zxcvbn from "zxcvbn";
 
 import generatePassword from "../generatePassword";
 
-describe("lib/generatePassword()", () => {
+describe("libs/generatePassword()", () => {
   it("should generate a very unguessable 16 characters password", () => {
     const password = generatePassword(16);
 

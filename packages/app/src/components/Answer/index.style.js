@@ -27,7 +27,7 @@ export const IsPublished = styled.span`
   background-color: var(--color-blue-sapphire);
   color: white;
   font-size: 0.625rem;
-  opacity: ${({ disabled }) => (disabled ? 0.1 : 1)};
+  opacity: ${({ isDisabled }) => (isDisabled ? 0.1 : 1)};
   margin-bottom: 0.125rem;
   padding: 0.125rem 0.25rem;
 `;

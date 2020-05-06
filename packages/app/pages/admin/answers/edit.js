@@ -22,7 +22,6 @@ import Subtitle from "../../../src/elements/Subtitle";
 import Textarea from "../../../src/elements/Textarea";
 import AdminMainLayout from "../../../src/layouts/AdminMain";
 import api from "../../../src/libs/api";
-import customAxios from "../../../src/libs/customAxios";
 import makeApiFilter from "../../../src/libs/makeApiFilter";
 import T from "../../../src/texts";
 
@@ -145,8 +144,6 @@ export class AdminAnwsersEditPage extends React.Component {
   }
 
   componentDidMount() {
-    this.axios = customAxios();
-
     const { dispatch, id: answerId } = this.props;
 
     dispatch(actions.answers.loadOne(answerId));
@@ -201,7 +198,7 @@ export class AdminAnwsersEditPage extends React.Component {
         data.state = C.ANSWER_STATE.UNDER_REVIEW;
       }
 
-      await this.axios.patch(uri, data);
+      await api.patch(uri, data);
     } catch (err) {
       console.warn(err);
     }
@@ -240,8 +237,8 @@ export class AdminAnwsersEditPage extends React.Component {
         ...reference,
       };
 
-      await this.axios.patch(answersUri, answersData);
-      await this.axios.post(answersReferencesUri, answersReferencesData);
+      await api.patch(answersUri, answersData);
+      await api.post(answersReferencesUri, answersReferencesData);
     } catch (err) {
       console.warn(err);
     }
@@ -253,7 +250,7 @@ export class AdminAnwsersEditPage extends React.Component {
     try {
       const uri = makeApiFilter("/answers_references", { id });
 
-      await this.axios.delete(uri);
+      await api.delete(uri);
     } catch (err) {
       console.warn(err);
     }

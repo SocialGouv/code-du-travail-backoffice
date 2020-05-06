@@ -4,7 +4,7 @@ import { put } from "redux-saga/effects";
 
 import { legalReferences } from "../../actions";
 import { LEGAL_REFERENCE_CATEGORY } from "../../constants";
-import customAxios from "../../libs/customAxios";
+import api from "../../libs/api";
 import toast from "../../libs/toast";
 
 export default function* load({ meta: { category, idcc, query } }) {
@@ -15,8 +15,8 @@ export default function* load({ meta: { category, idcc, query } }) {
       return;
     }
 
-    /** @type {import("axios").AxiosResponse<LegalReference.Article[]>} */
-    const { data } = yield customAxios().get(
+    /** @type {LegalReference.Article[]} */
+    const data = yield api.get(
       `/legal-references?category=${category}&idcc=${idcc}&query=${query}`,
     );
 

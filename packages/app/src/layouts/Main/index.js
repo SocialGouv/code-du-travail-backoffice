@@ -4,6 +4,7 @@ import "react-table/react-table.css";
 import "react-toastify/dist/ReactToastify.css";
 
 import Head from "next/head";
+import PropTypes from "prop-types";
 import React from "react";
 
 import Modal from "../../components/Modal";
@@ -32,5 +33,10 @@ const MainLayout = ({ isHorizontal = false, isLoading = false, ...props }) => (
     )}
   </div>
 );
+
+MainLayout.propTypes = {
+  isHorizontal: PropTypes.bool,
+  isLoading: PropTypes.bool,
+};
 
 export default MainLayout;

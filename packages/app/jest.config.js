@@ -1,6 +1,8 @@
 const pack = require("./package");
 
 module.exports = {
+  bail: 1,
+  clearMocks: true,
   displayName: pack.name,
   moduleNameMapper: {
     "\\.(jpg|jpeg|png|gif|eot|svg|ttf|woff|woff2)$":

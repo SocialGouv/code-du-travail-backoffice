@@ -16,16 +16,14 @@ function augmentNode(node) {
     return node.map(augmentNode);
   }
 
+  node.innerText = null;
   if (node.children.length !== 0) {
     const maybeStringChild = node.children.find(child => typeof child === "string");
 
-    node.text = maybeStringChild !== undefined ? maybeStringChild : null;
-  } else {
-    node.text = null;
+    if (maybeStringChild !== undefined) {
+      node.innerText = maybeStringChild;
+    }
   }
-
-  node.innerText =
-    node.children.length !== 0 && node.children.filter(child => typeof child !== "string");
 
   node.findByType = findByType.bind(node);
   node.children = node.children.map(augmentNode);

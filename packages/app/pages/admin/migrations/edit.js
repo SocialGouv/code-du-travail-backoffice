@@ -2,7 +2,7 @@ import React from "react";
 
 import AdminForm from "../../../src/components/AdminForm";
 import AdminMainLayout from "../../../src/layouts/AdminMain";
-import customAxios from "../../../src/libs/customAxios";
+import api from "../../../src/libs/api";
 
 const FIELDS = [
   {
@@ -22,12 +22,10 @@ export default class AdminQuestionsEditPage extends React.Component {
   }
 
   async componentDidMount() {
-    const axios = customAxios();
-
     try {
       const uri = `/administrator_migrations?id=eq.${this.props.id}`;
 
-      const { data: migrations } = await axios.get(uri);
+      const migrations = await api.get(uri);
 
       this.setState({
         data: migrations[0],

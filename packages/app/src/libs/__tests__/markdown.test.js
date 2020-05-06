@@ -2,7 +2,7 @@ import prettier from "prettier";
 
 import markdown from "../markdown";
 
-describe("lib/Markdown", () => {
+describe("libs/Markdown", () => {
   it("should return an instance of Markdown", () => {
     expect(markdown.constructor.name).toBe("Markdown");
   });
