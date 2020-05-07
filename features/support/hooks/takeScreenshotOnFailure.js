@@ -1,13 +1,31 @@
+// @ts-check
+
 const boxen = require("boxen");
 const imgur = require("imgur");
 const { Status } = require("cucumber");
 
 imgur.setAPIUrl("https://api.imgur.com/3/");
 
-module.exports = async (testCase, world) => {
+/**
+ * @param {import("cucumber").HookScenarioResult} testCase
+ * @param {import("cucumber").World} world
+ */
+async function takeScreenshotOnFailure(testCase, world) {
   const { pickle, result } = testCase;
 
-  if (result.status !== Status.FAILED) return;
+  if (result.status !== Status.FAILED || result.exception === undefined) return;
+
+  if (result.exception === undefined) {
+    console.error("Error: The {exception} is undefined (`result`) object.");
+
+    return;
+  }
+
+  if (world.page === undefined) {
+    console.error("Error: The {page} is undefined (`world`) object.");
+
+    return;
+  }
 
   try {
     // Get the screenshot image as a Base64 string:
@@ -38,4 +56,6 @@ module.exports = async (testCase, world) => {
       console.error(`Output:\n${JSON.stringify(err.response.data, null, 2)}`);
     }
   }
-};
+}
+
+module.exports = takeScreenshotOnFailure;
