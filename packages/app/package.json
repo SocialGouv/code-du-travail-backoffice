@@ -7,7 +7,7 @@
   "scripts": {
     "build": "next build",
     "build:docker": "node --max-old-space-size=1024 ./node_modules/.bin/next build",
-    "dev": "nodemon --exec \"node -r dotenv/config ./server dotenv_config_path=../../.env\" --watch ./server",
+    "dev": "nodemon --exec \"node --inspect -r dotenv/config ./server dotenv_config_path=../../.env\" --watch ./server",
     "start": "node ./server"
   },
   "dependencies": {

@@ -232,7 +232,7 @@ export class AdminAnswersIndexPage extends React.Component {
               <Input
                 defaultValue={answers.filters.query}
                 icon="search"
-                onChange={this.setQueryFilter}
+                onInput={this.setQueryFilter}
                 ref={node => (this.$queryFilter = node)}
               />
               <Select
