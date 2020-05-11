@@ -1,29 +1,37 @@
 import React from "react";
+import { create } from "react-test-renderer";
 
 import LoadingSpinner from "../LoadingSpinner";
 
 describe("elements/<LoadingSpinner />", () => {
   it(`should pass`, () => {
-    const $loadingSpinner = testRender(<LoadingSpinner size="8rem" />);
-    const $spinner = $loadingSpinner.children[0];
-    const $spinnerNext = $loadingSpinner.children[1];
+    const $loadingSpinner = create(<LoadingSpinner size="8rem" />);
 
-    expect($loadingSpinner).toMatchSnapshot();
+    expect($loadingSpinner).toHaveTestRenderedProperty(
+      "color",
+      "var(--color-text-blue)",
+      "spinner",
+    );
+    expect($loadingSpinner).toHaveTestRenderedStyleRule(
+      "border",
+      "4px solid var(--color-text-blue)",
+      {},
+      "spinner",
+    );
 
-    expect($spinner).toHaveTestRenderedProp("color", "var(--color-text-blue)");
-    expect($spinnerNext).toHaveTestRenderedProp("color", "var(--color-text-blue)");
-
-    expect($spinner).toHaveStyleRule("border", "4px solid var(--color-text-blue)");
+    expect($loadingSpinner).toHaveTestRenderedProperty(
+      "color",
+      "var(--color-text-blue)",
+      "spinner-next",
+    );
   });
 
   it(`should pass with {color} = "red"`, () => {
-    const $loadingSpinner = testRender(<LoadingSpinner color="red" />);
-    const $spinner = $loadingSpinner.children[0];
-    const $spinnerNext = $loadingSpinner.children[1];
+    const $loadingSpinner = create(<LoadingSpinner color="red" />);
 
-    expect($spinner).toHaveTestRenderedProp("color", "red");
-    expect($spinnerNext).toHaveTestRenderedProp("color", "red");
+    expect($loadingSpinner).toHaveTestRenderedProperty("color", "red", "spinner");
+    expect($loadingSpinner).toHaveTestRenderedStyleRule("border", "4px solid red", {}, "spinner");
 
-    expect($spinner).toHaveStyleRule("border", "4px solid red");
+    expect($loadingSpinner).toHaveTestRenderedProperty("color", "red", "spinner-next");
   });
 });

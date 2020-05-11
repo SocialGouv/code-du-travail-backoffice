@@ -1,11 +1,12 @@
 import React from "react";
+import { create } from "react-test-renderer";
 
 import Hr from "../Hr";
 
 describe("elements/<Hr />", () => {
   it(`should pass`, () => {
-    const $hr = testRender(<Hr />);
+    const $hr = create(<Hr />);
 
-    expect($hr).toMatchSnapshot();
+    expect($hr).toHaveTestRenderedType("hr");
   });
 });

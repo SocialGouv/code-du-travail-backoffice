@@ -14,7 +14,7 @@ const LEGAL_REFERENCE_CATEGORY_PLACEHOLDER = {
 
 export function renderReferences({ references, ...globalProps }) {
   if (references.length === 0 && globalProps.isReadOnly) {
-    return <Info>Aucune référence.</Info>;
+    return <Info data-testid="info">Aucune référence.</Info>;
   }
 
   return references.map((props, index) => (
@@ -42,7 +42,7 @@ function LegalReferences({
   if (category === null) {
     return (
       <Container {...props}>
-        <Flex flexDirection="column">
+        <Flex data-testid="list" flexDirection="column">
           {renderReferences({ isReadOnly, onChange, onRemove, references })}
         </Flex>
       </Container>
@@ -56,6 +56,7 @@ function LegalReferences({
       {!isReadOnly && (
         <ReactTagAutocomplete
           autofocus={false}
+          data-testid="input-autocomplete"
           handleAddition={onAdd}
           handleDelete={() => undefined}
           handleInputChange={onInput}

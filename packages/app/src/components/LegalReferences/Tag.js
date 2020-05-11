@@ -3,10 +3,11 @@ import React from "react";
 
 import * as C from "../../constants";
 import Button from "../../elements/Button";
+import Icon from "../../elements/Icon";
 import LegalReferenceProps from "../../props/LegalReference";
 import getLabelAndContent from "./getLabelAndContent";
 import { ButtonsContainer, Container, Label, Tooltip } from "./Tag.style";
-import TagEditor from "./TagEditor";
+import TagEditorWithClickOutside from "./TagEditor";
 
 const BASE_URL = {
   agreement: "https://beta.legifrance.gouv.fr/conv_coll/id/",
@@ -25,6 +26,7 @@ class Tag extends React.PureComponent {
       content: null,
       isEditing: false,
       isLoading: true,
+      isObsolete: false,
       label: null,
     };
 
@@ -41,13 +43,24 @@ class Tag extends React.PureComponent {
   async loadLabelAndContent() {
     const { dila_id, value } = this.props;
 
-    const [label, content] = await getLabelAndContent(value, dila_id);
+    try {
+      const [label, content] = await getLabelAndContent(value, dila_id);
 
-    this.setState({
-      content,
-      isLoading: false,
-      label,
-    });
+      this.setState({
+        content,
+        isLoading: false,
+        label,
+      });
+    } catch (err) {
+      if (err.code === 404) {
+        this.setState({
+          isLoading: false,
+          isObsolete: true,
+        });
+
+        return;
+      }
+    }
   }
 
   edit() {
@@ -91,22 +104,64 @@ class Tag extends React.PureComponent {
     window.open(legifranceUri, "_blank");
   }
 
+  renderLabel() {
+    const { dila_id, value } = this.props;
+    const { isObsolete, label } = this.state;
+
+    if (isObsolete) {
+      return (
+        <Label data-testid="label">
+          {isObsolete && <Icon color="red" icon="exclamation-circle" withMarginRight />}
+          {value.length !== 0 ? value : dila_id}
+        </Label>
+      );
+    }
+
+    return <Label data-testid="label">{label}</Label>;
+  }
+
   renderButtons() {
     const { category, dila_id, id, isReadOnly, onRemove, url } = this.props;
+    const { isObsolete } = this.state;
 
     const parts = [];
 
     if (dila_id !== null || url !== null) {
-      parts.push(<Button icon="link" isSmall isTransparent key="1" onClick={this.open} />);
+      parts.push(
+        <Button
+          data-testid="button-open"
+          icon="link"
+          isSmall
+          isTransparent
+          key="button-open"
+          onClick={this.open}
+        />,
+      );
     }
 
-    if (!isReadOnly && category !== C.LEGAL_REFERENCE_CATEGORY.LABOR_CODE) {
-      parts.push(<Button icon="pen" isSmall isTransparent key="2" onClick={this.edit} />);
+    if (!isReadOnly && category !== C.LEGAL_REFERENCE_CATEGORY.LABOR_CODE && !isObsolete) {
+      parts.push(
+        <Button
+          data-testid="button-edit"
+          icon="pen"
+          isSmall
+          isTransparent
+          key="button-edit"
+          onClick={this.edit}
+        />,
+      );
     }
 
     if (!isReadOnly) {
       parts.push(
-        <Button icon="trash" isSmall isTransparent key="3" onClick={() => onRemove(id)} />,
+        <Button
+          data-testid="button-remove"
+          icon="trash"
+          isSmall
+          isTransparent
+          key="button-remove"
+          onClick={() => onRemove(id)}
+        />,
       );
     }
 
@@ -114,24 +169,29 @@ class Tag extends React.PureComponent {
   }
 
   render() {
-    const { category, id, noContent, url } = this.props;
-    const { content, isEditing, isLoading, label } = this.state;
+    const { isLoading } = this.state;
 
     if (isLoading) {
       return <Container alignItems="center">…</Container>;
     }
 
-    const maybeUrl = category === null ? url : undefined;
+    const { id, noContent, url } = this.props;
+    const { content, isEditing, label } = this.state;
+    const hasContent = content !== null && content.length !== 0;
 
     if (isEditing) {
       return (
         <Container isEditing>
-          <TagEditor onCancel={this.unedit} onSubmit={this.update} url={maybeUrl} value={label} />
+          <TagEditorWithClickOutside
+            data-testid="tag-editor"
+            onCancel={this.unedit}
+            onSubmit={this.update}
+            url={url}
+            value={label}
+          />
         </Container>
       );
     }
-
-    const hasContent = content !== null && content.length !== 0;
 
     return (
       <Container
@@ -141,11 +201,12 @@ class Tag extends React.PureComponent {
         isLegacy={this.isLegacy}
         justifyContent="space-between"
       >
-        <Label>{label}</Label>
+        {this.renderLabel()}
         {this.renderButtons()}
         {!noContent && hasContent && (
           <Tooltip
             clickable={true}
+            data-testid="tooltip"
             delayHide={250}
             effect="solid"
             id={id}

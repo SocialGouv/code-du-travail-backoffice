@@ -21,8 +21,9 @@ const knexClient = knex({
 /**
  * @param {import("http").ClientRequest} proxyReq
  * @param {import("http").IncomingMessage} req
+ * @param {import("http").ServerResponse} res
  */
-async function logAction(proxyReq, req) {
+async function logAction(proxyReq, req, res) {
   try {
     const { headers, method, url: path } = req;
 
@@ -99,7 +100,7 @@ async function logAction(proxyReq, req) {
       await knexClient("public.logs").insert([log]);
     }
   } catch (err) {
-    answerWithError("hooks/logAction()", err);
+    answerWithError("hooks/logAction()", err, res);
   }
 }
 

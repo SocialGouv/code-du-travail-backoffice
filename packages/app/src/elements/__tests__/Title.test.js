@@ -1,4 +1,5 @@
 import React from "react";
+import { create } from "react-test-renderer";
 
 import Title from "../Title";
 
@@ -6,10 +7,8 @@ describe("elements/<Title />", () => {
   const TEXT = "A Title";
 
   it(`should pass`, () => {
-    const $title = testRender(<Title>{TEXT}</Title>);
+    const $title = create(<Title>{TEXT}</Title>);
 
-    expect($title).toMatchSnapshot();
-
-    expect($title).toHaveStyleRule("margin", "1rem 0");
+    expect($title).toHaveTestRenderedStyleRule("margin", "1rem 0");
   });
 });

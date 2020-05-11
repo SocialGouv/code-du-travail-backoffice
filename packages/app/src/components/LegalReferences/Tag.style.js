@@ -3,20 +3,20 @@ import ReactTooltip from "react-tooltip";
 import { Flex } from "rebass";
 
 export const Container = styled(Flex)`
-  background-color: ${({ isEditing, isLegacy }) =>
-    isEditing ? "transparent" : isLegacy ? "var(--color-text-red)" : "var(--color-alice-blue)"};
+  background-color: ${p =>
+    p.isEditing ? "transparent" : p.isLegacy ? "var(--color-text-red)" : "var(--color-alice-blue)"};
   border: solid 1px var(--color-border);
-  cursor: ${({ isEditing }) => (isEditing ? "auto" : "help")};
+  cursor: ${p => (p.isEditing ? "auto" : "help")};
   font-size: 0.875rem;
   margin: 0.5rem 0.5rem 0 0;
   min-width: 34rem;
   max-width: 34rem;
-  padding: 0.25rem 0.5rem 0.275rem;
+  padding: ${p => (p.isEditing ? "0" : "0.25rem 0.5rem 0.275rem")};
   user-select: none;
 
   :hover {
-    background-color: ${({ isEditing, isLegacy }) =>
-      isEditing ? "white" : isLegacy ? "var(--color-text-red)" : "var(--color-periwinkle)"};
+    background-color: ${p =>
+      p.isEditing ? "white" : p.isLegacy ? "var(--color-text-red)" : "var(--color-periwinkle)"};
   }
 `;
 

@@ -26,7 +26,7 @@
     "test:e2e": "cucumber-js",
     "test:lint": "eslint .",
     "test:unit": "jest",
-    "test:type": "tsc -p ./packages/api/tsconfig.json && tsc -p ./packages/app/tsconfig.json",
+    "test:type": "tsc",
     "test:update": "yarn test:unit --updateSnapshot",
     "test:watch": "yarn test:unit --watch"
   },

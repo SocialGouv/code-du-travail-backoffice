@@ -1,3 +1,5 @@
+// @ts-check
+
 const log = require("@inspired-beings/log");
 
 const { COMMON_HEADERS } = require("../constants");
@@ -5,9 +7,10 @@ const { COMMON_HEADERS } = require("../constants");
 /**
  * @param {string} path
  * @param {*} error
- * @param {import("http").ServerResponse=} res
+ * @param {import("http").ServerResponse} res
+ * @param {Api.HTTP_STATUS_CODE=} code
  */
-function answerWithError(path, error, res) {
+function answerWithError(path, error, res, code) {
   const bodyJson = {
     /** @type {string[]} */
     errors: [],
@@ -28,12 +31,18 @@ function answerWithError(path, error, res) {
       break;
   }
 
+  if (bodyJson.errors.length === 1) {
+    bodyJson.message = bodyJson.errors[0];
+  }
+
   if (res !== undefined) {
-    res.writeHead(400, COMMON_HEADERS);
+    res.writeHead(code !== undefined ? code : 400, COMMON_HEADERS);
     res.end(JSON.stringify(bodyJson));
   }
 
-  bodyJson.errors.map(error => log.err(`[api] [${path}] Error: %s`, error));
+  if (code === undefined || code === 400 || code >= 500) {
+    bodyJson.errors.map(error => log.err(`[api] [${path}] Error: %s`, error));
+  }
 }
 
 module.exports = answerWithError;

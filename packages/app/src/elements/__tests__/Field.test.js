@@ -1,20 +1,31 @@
 import React from "react";
+import { create } from "react-test-renderer";
 
 import Field from "../Field";
 
 describe("elements/<Field />", () => {
-  it(`should pass`, () => {
-    const $field = testRender(<Field />);
+  const PROPS = {
+    children: "A text",
+  };
 
-    expect($field).toMatchSnapshot();
+  it(`should pass`, () => {
+    const props = {
+      ...PROPS,
+    };
+
+    const $field = create(<Field {...props} />);
+
+    expect($field).toHaveTestRenderedTextContent(props.children);
   });
 
   it(`should pass with {error}`, () => {
-    const $field = testRender(<Field error="An Error" />);
-    const $error = $field.findByType("div");
+    const props = {
+      ...PROPS,
+      error: "An error",
+    };
 
-    expect($field).toMatchSnapshot();
+    const $field = create(<Field {...props} />);
 
-    expect($error).not.toBeUndefined();
+    expect($field).toHaveTestRenderedTextContent(props.error, "error");
   });
 });

@@ -2,7 +2,7 @@ import * as KaliData from "@socialgouv/kali-data";
 
 export as namespace LegalReference;
 
-interface Article {
+type Article = {
   /** DILA container ID */
   agreementId: string | null;
   /** DILA CID */
@@ -20,4 +20,11 @@ interface Article {
   subtitle: string | null;
   title: string | null;
   type: "article";
-}
+};
+
+type ArticleIndex = {
+  /** Agreement DILA ID */
+  agreementId: string;
+  /** Article DILA ID */
+  id: string;
+};

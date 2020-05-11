@@ -1,204 +1,144 @@
 import React from "react";
+import { create } from "react-test-renderer";
 
 import Answer from "..";
+import runTestRenderedProperty from "../../../../tests/utils/runTestRenderedProperty";
 
 describe("components/<Answer />", () => {
-  const DATA = {
-    agreement_id: null,
-    agreement_idcc: null,
-    agreement_name: null,
-    created_at: "1970-01-01T00:00:00.000000+00:00",
-    generic_reference: null,
-    id: "00000000-0000-4000-8000-000000000001",
-    is_published: false,
-    parent_id: null,
-    prevalue: "A prevalue",
-    question_id: "00000000-0000-4000-8000-000000000001",
-    question_index: 1,
-    question_value: "A question",
-    state: "todo",
-    updated_at: "1970-01-01T00:00:00.000000+00:00",
-    value: "A value",
+  const PROPS = {
+    data: {
+      agreement_id: null,
+      agreement_idcc: null,
+      agreement_name: null,
+      created_at: "1970-01-01T00:00:00.000000+00:00",
+      generic_reference: null,
+      id: "00000000-0000-4000-8000-000000000001",
+      is_published: false,
+      parent_id: null,
+      prevalue: "A prevalue",
+      question_id: "00000000-0000-4000-8000-000000000001",
+      question_index: 1,
+      question_value: "A question",
+      state: "todo",
+      updated_at: "1970-01-01T00:00:00.000000+00:00",
+      value: "A value",
+    },
+    isChecked: false,
+    onCheck: jest.fn(),
+    onClick: jest.fn(),
   };
-  const ON_CHECK = jest.fn();
-  const ON_CLICK = jest.fn();
 
-  it(`should pass with a todo generic answer`, () => {
-    const data = {
-      ...DATA,
+  it(`should pass with a todo answer`, () => {
+    const props = {
+      ...PROPS,
     };
 
-    const $answer = testRender(
-      <Answer data={data} isChecked={false} onCheck={ON_CHECK} onClick={ON_CLICK} />,
-    );
-    const $top = $answer.children[0];
-    const $topState = $top.children[0];
-    const $checkbox = $answer.children[1].children[0];
-    const $content = $answer.children[1].children[1];
-    const $contentIdcc = $content.children[0].children[0];
-    const $contentIdccTootip = $contentIdcc.children[1];
+    const $answer = create(<Answer {...props} />);
 
-    expect($top).toHaveTestRenderedChildrenTimes(1);
+    expect($answer).toHaveTestRenderedTextContent(`à rédiger`, "state");
 
-    expect($topState).toHaveTestRenderedText(`à rédiger`);
+    expect($answer).toHaveTestRenderedProperty("isChecked", false, "checkbox");
 
-    expect($checkbox).toHaveTestRenderedProp("role", "checkbox");
-    $checkbox.props.onClick();
-    expect(ON_CHECK).toHaveBeenCalledTimes(1);
-    expect(ON_CHECK).toHaveBeenCalledWith(data.id);
+    runTestRenderedProperty($answer, "onClick", "checkbox");
 
-    expect($content).toHaveTestRenderedChildrenTimes(1);
-    $content.props.onClick();
-    expect(ON_CLICK).toHaveBeenCalledTimes(1);
-    expect(ON_CLICK).toHaveBeenCalledWith(data.id);
+    expect(props.onCheck).toHaveBeenNthCalledWith(1, props.data.id);
 
-    expect($contentIdcc).toHaveTestRenderedText(`CDT`);
-    expect($contentIdccTootip).toHaveTestRenderedText(`Code du travail`);
+    runTestRenderedProperty($answer, "onClick", "content");
+
+    expect(props.onClick).toHaveBeenNthCalledWith(1, props.data.id);
   });
 
-  it(`should pass with a checked todo generic answer`, () => {
-    const data = {
-      ...DATA,
+  it(`should pass with a checked todo answer`, () => {
+    const props = {
+      ...PROPS,
+      isChecked: true,
     };
 
-    const $answer = testRender(
-      <Answer data={data} isChecked onCheck={ON_CHECK} onClick={ON_CLICK} />,
-    );
-    const $checkbox = $answer.children[1].children[0];
+    const $answer = create(<Answer {...props} />);
 
-    expect($checkbox).toHaveTestRenderedProp("role", "checkbox");
-    $checkbox.props.onClick();
-    expect(ON_CHECK).toHaveBeenCalledTimes(1);
-    expect(ON_CHECK).toHaveBeenCalledWith(data.id);
+    expect($answer).toHaveTestRenderedProperty("isChecked", true, "checkbox");
   });
 
   it(`should pass with a draft generic answer`, () => {
-    const data = {
-      ...DATA,
-      state: "draft",
+    const props = {
+      ...PROPS,
+      data: {
+        ...PROPS.data,
+        state: "draft",
+      },
     };
 
-    const $answer = testRender(
-      <Answer data={data} isChecked={false} onCheck={ON_CHECK} onClick={ON_CLICK} />,
-    );
-    const $top = $answer.children[0];
-    const $topState = $top.children[0];
-    const $topIsPublished = $top.children[1].children[1];
-    const $checkbox = $answer.children[1].children[0];
-    const $content = $answer.children[1].children[1];
-    const $contentIdcc = $content.children[0].children[0];
-    const $contentIdccTootip = $contentIdcc.children[1];
-    const $contentExtract = $content.children[1];
+    const $answer = create(<Answer {...props} />);
 
-    expect($top).toHaveTestRenderedChildrenTimes(2);
+    expect($answer).toHaveTestRenderedTextContent(`en cours de rédaction`, "state");
 
-    expect($topState).toHaveTestRenderedText(`en cours de rédaction`);
+    expect($answer).toHaveTestRenderedStyleRule("opacity", "0.1", {}, "is-published");
 
-    expect($topIsPublished).toHaveStyleRule("opacity", "0.1");
+    expect($answer).toHaveTestRenderedProperty("isChecked", false, "checkbox");
 
-    expect($checkbox).toHaveTestRenderedProp("role", "checkbox");
-    $checkbox.props.onClick();
-    expect(ON_CHECK).toHaveBeenCalledTimes(1);
-    expect(ON_CHECK).toHaveBeenCalledWith(DATA.id);
+    expect($answer).toHaveTestRenderedTextContent(props.data.prevalue, "extract");
 
-    expect($content).toHaveTestRenderedChildrenTimes(2);
-    $content.props.onClick();
-    expect(ON_CLICK).toHaveBeenCalledTimes(1);
-    expect(ON_CLICK).toHaveBeenCalledWith(DATA.id);
+    runTestRenderedProperty($answer, "onClick", "checkbox");
 
-    expect($contentIdcc).toHaveTestRenderedText(`CDT`);
-    expect($contentIdccTootip).toHaveTestRenderedText(`Code du travail`);
+    expect(props.onCheck).toHaveBeenNthCalledWith(1, props.data.id);
 
-    expect($contentExtract).toHaveTestRenderedText(data.prevalue);
+    runTestRenderedProperty($answer, "onClick", "content");
+
+    expect(props.onClick).toHaveBeenNthCalledWith(1, props.data.id);
   });
 
-  it(`should pass with a validated generic answer`, () => {
-    const data = {
-      ...DATA,
-      state: "validated",
+  it(`should pass with a published validated answer`, () => {
+    const props = {
+      ...PROPS,
+      data: {
+        ...PROPS.data,
+        is_published: true,
+        state: "validated",
+      },
     };
 
-    const $answer = testRender(
-      <Answer data={data} isChecked={false} onCheck={ON_CHECK} onClick={ON_CLICK} />,
-    );
-    const $top = $answer.children[0];
-    const $topState = $top.children[0];
-    const $content = $answer.children[1].children[1];
-    const $contentExtract = $content.children[1];
+    const $answer = create(<Answer {...props} />);
 
-    expect($topState).toHaveTestRenderedText(`validée`);
+    expect($answer).toHaveTestRenderedTextContent(`validée`, "state");
 
-    expect($contentExtract).toHaveTestRenderedText(data.value);
-    expect($contentExtract).toHaveStyleRule("color", "var(--color-text-gray)");
+    expect($answer).toHaveTestRenderedStyleRule("opacity", "1", {}, "is-published");
+
+    expect($answer).toHaveTestRenderedTextContent(props.data.value, "extract");
+    expect($answer).toHaveTestRenderedStyleRule("color", "var(--color-text-gray)", {}, "extract");
   });
 
-  it(`should pass with a validated answer`, () => {
-    const data = {
-      ...DATA,
-      agreement_id: "00000000-0000-4000-8000-000000000001",
-      agreement_idcc: "1234",
-      agreement_name: "An agreement",
-      state: "validated",
+  it(`should pass with a Labor Code forwarded answer`, () => {
+    const props = {
+      ...PROPS,
+      data: {
+        ...PROPS.data,
+        generic_reference: "labor_code",
+        state: "validated",
+      },
     };
 
-    const $answer = testRender(
-      <Answer data={data} isChecked={false} onCheck={ON_CHECK} onClick={ON_CLICK} />,
-    );
-    const $content = $answer.children[1].children[1];
-    const $contentIdcc = $content.children[0].children[0];
-    const $contentIdccTootip = $contentIdcc.children[1];
+    const $answer = create(<Answer {...props} />);
 
-    expect($contentIdcc).toHaveTestRenderedText(data.agreement_idcc);
-    expect($contentIdccTootip).toHaveTestRenderedText(data.agreement_name);
+    expect($answer).toHaveTestRenderedTextContent(`Renvoyé au Code du travail.`, "extract");
+    expect($answer).toHaveTestRenderedStyleRule("color", "var(--color-text-red)", {}, "extract");
   });
 
-  it(`should pass with a published validated generic answer`, () => {
-    const data = {
-      ...DATA,
-      is_published: true,
-      state: "validated",
+  it(`should pass with a National Agreement forwarded answer`, () => {
+    const props = {
+      ...PROPS,
+      data: {
+        ...PROPS.data,
+        generic_reference: "national_agreement",
+        state: "validated",
+      },
     };
 
-    const $answer = testRender(
-      <Answer data={data} isChecked={false} onCheck={ON_CHECK} onClick={ON_CLICK} />,
+    const $answer = create(<Answer {...props} />);
+
+    expect($answer).toHaveTestRenderedTextContent(
+      `Renvoyé à la convention collective nationale.`,
+      "extract",
     );
-    const $top = $answer.children[0];
-    const $topIsPublished = $top.children[1].children[1];
-
-    expect($topIsPublished).toHaveStyleRule("opacity", "1");
-  });
-
-  it(`should pass with a labor-code-forwarded validated generic answer`, () => {
-    const data = {
-      ...DATA,
-      generic_reference: "labor_code",
-      state: "validated",
-    };
-
-    const $answer = testRender(
-      <Answer data={data} isChecked={false} onCheck={ON_CHECK} onClick={ON_CLICK} />,
-    );
-    const $content = $answer.children[1].children[1];
-    const $contentExtract = $content.children[1];
-
-    expect($contentExtract).toHaveTestRenderedText("Renvoyé au Code du travail.");
-    expect($contentExtract).toHaveStyleRule("color", "var(--color-text-red)");
-  });
-
-  it(`should pass with a national-agreement-forwarded validated generic answer`, () => {
-    const data = {
-      ...DATA,
-      generic_reference: "national_agreement",
-      state: "validated",
-    };
-
-    const $answer = testRender(
-      <Answer data={data} isChecked={false} onCheck={ON_CHECK} onClick={ON_CLICK} />,
-    );
-    const $content = $answer.children[1].children[1];
-    const $contentExtract = $content.children[1];
-
-    expect($contentExtract).toHaveTestRenderedText("Renvoyé à la convention collective nationale.");
-    expect($contentExtract).toHaveStyleRule("color", "var(--color-text-red)");
+    expect($answer).toHaveTestRenderedStyleRule("color", "var(--color-text-red)", {}, "extract");
   });
 });

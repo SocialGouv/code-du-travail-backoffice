@@ -22,6 +22,15 @@ class LegalReference {
 
       const body = getArticleById(id);
 
+      if (body === null) {
+        answerWithError(
+          "controllers/LegalReference#get()",
+          `Could not find any matching legal reference with {id}="${id}".`,
+          res,
+          404,
+        );
+      }
+
       res.writeHead(200, COMMON_HEADERS);
       res.end(JSON.stringify(body));
     } catch (err) {

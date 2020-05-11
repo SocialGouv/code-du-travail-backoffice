@@ -1,0 +1,328 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`elements/<MarkdownEditor /> should pass 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .emotion-0 {
+  border: solid 1px var(--color-border) !important;
+  -webkit-box-flex: unset;
+  -webkit-flex-grow: unset;
+  -ms-flex-positive: unset;
+  flex-grow: unset;
+  min-height: 20rem;
+}
+
+.emotion-0 .editor {
+  color: var(--color-black-leather-jacket);
+}
+
+.emotion-0 .editor-menu-container button {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0 .editor-status {
+  min-height: 1.5rem;
+}
+
+.emotion-0 .preview {
+  background-color: white;
+  line-height: 1.4;
+  padding-top: 0 !important;
+}
+
+.emotion-0 .preview a {
+  color: #0053b3;
+}
+
+.emotion-0 .preview a:after {
+  content: "";
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-left: 5px;
+  background: url("/static/assets/icons/external-link.svg") 100% 50% / 15px no-repeat;
+}
+
+.emotion-0 .preview a:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-0 .preview h2,
+.emotion-0 .preview h3,
+.emotion-0 .preview h4,
+.emotion-0 .preview h5,
+.emotion-0 .preview h6 {
+  color: #006ab2;
+}
+
+.emotion-0 .preview h2 {
+  font-size: 1.875rem;
+}
+
+.emotion-0 .preview h3 {
+  font-size: 1.625rem;
+}
+
+.emotion-0 .preview h4 {
+  font-size: 1.375rem;
+}
+
+.emotion-0 .preview h5 {
+  font-size: 1.125rem;
+}
+
+.emotion-0 .preview h6 {
+  font-size: 1rem;
+}
+
+.emotion-0 .preview p {
+  color: #434956;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+.emotion-0 .preview ul {
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 20px;
+}
+
+.emotion-0 .preview ul li {
+  display: list-item;
+}
+
+.emotion-0 .preview ul ul {
+  list-style-type: circle;
+}
+
+<body>
+    <div>
+      <div
+        class="container emotion-0 emotion-1"
+      >
+        <div
+          class="editor-container"
+        >
+          <div
+            class="editor-menu-container"
+          >
+            <div
+              class="editor-menu-left"
+            />
+            <div
+              class="editor-menu-right"
+            />
+          </div>
+          <textarea
+            class="editor "
+            id="0"
+            spellcheck="true"
+          />
+          <div
+            class="editor-status "
+          />
+        </div>
+        <div
+          class="preview"
+        />
+      </div>
+    </div>
+  </body>,
+  "container": .emotion-0 {
+  border: solid 1px var(--color-border) !important;
+  -webkit-box-flex: unset;
+  -webkit-flex-grow: unset;
+  -ms-flex-positive: unset;
+  flex-grow: unset;
+  min-height: 20rem;
+}
+
+.emotion-0 .editor {
+  color: var(--color-black-leather-jacket);
+}
+
+.emotion-0 .editor-menu-container button {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.emotion-0 .editor-status {
+  min-height: 1.5rem;
+}
+
+.emotion-0 .preview {
+  background-color: white;
+  line-height: 1.4;
+  padding-top: 0 !important;
+}
+
+.emotion-0 .preview a {
+  color: #0053b3;
+}
+
+.emotion-0 .preview a:after {
+  content: "";
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-left: 5px;
+  background: url("/static/assets/icons/external-link.svg") 100% 50% / 15px no-repeat;
+}
+
+.emotion-0 .preview a:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-0 .preview h2,
+.emotion-0 .preview h3,
+.emotion-0 .preview h4,
+.emotion-0 .preview h5,
+.emotion-0 .preview h6 {
+  color: #006ab2;
+}
+
+.emotion-0 .preview h2 {
+  font-size: 1.875rem;
+}
+
+.emotion-0 .preview h3 {
+  font-size: 1.625rem;
+}
+
+.emotion-0 .preview h4 {
+  font-size: 1.375rem;
+}
+
+.emotion-0 .preview h5 {
+  font-size: 1.125rem;
+}
+
+.emotion-0 .preview h6 {
+  font-size: 1rem;
+}
+
+.emotion-0 .preview p {
+  color: #434956;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+.emotion-0 .preview ul {
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 20px;
+}
+
+.emotion-0 .preview ul li {
+  display: list-item;
+}
+
+.emotion-0 .preview ul ul {
+  list-style-type: circle;
+}
+
+<div>
+    <div
+      class="container emotion-0 emotion-1"
+    >
+      <div
+        class="editor-container"
+      >
+        <div
+          class="editor-menu-container"
+        >
+          <div
+            class="editor-menu-left"
+          />
+          <div
+            class="editor-menu-right"
+          />
+        </div>
+        <textarea
+          class="editor "
+          id="0"
+          spellcheck="true"
+        />
+        <div
+          class="editor-status "
+        />
+      </div>
+      <div
+        class="preview"
+      />
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

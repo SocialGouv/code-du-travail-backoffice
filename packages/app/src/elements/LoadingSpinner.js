@@ -42,8 +42,8 @@ const SpinnerNext = styled(Spinner)`
 const LoadingSpinner = ({ color = "var(--color-text-blue)", ...props }) => {
   return (
     <Container {...props}>
-      <Spinner color={color} />
-      <SpinnerNext color={color} />
+      <Spinner color={color} data-testid="spinner" />
+      <SpinnerNext color={color} data-testid="spinner-next" />
     </Container>
   );
 };

@@ -51,7 +51,7 @@ const Container = styled.div`
 const Idcc = ({ code, name, ...props }) => (
   <Container {...props}>
     {code === null ? "CDT" : code}
-    <div>{name === null ? "Code du travail" : name}</div>
+    <div data-testid="tooltip">{name === null ? "Code du travail" : name}</div>
   </Container>
 );
 

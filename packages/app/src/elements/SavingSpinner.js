@@ -45,10 +45,10 @@ const ThirdSpinner = styled(Spinner)`
 const SavingSpinner = ({ color = "white", size = 64, ...props }) => {
   return (
     <Container size={size} {...props}>
-      <FirstSpinner color={color} size={size} />
-      <SecondSpinner color={color} size={size} />
-      <ThirdSpinner color={color} size={size} />
-      <Spinner color={color} size={size} />
+      <FirstSpinner color={color} data-testid="first-spinner" size={size} />
+      <SecondSpinner color={color} data-testid="second-spinner" size={size} />
+      <ThirdSpinner color={color} data-testid="third-spinner" size={size} />
+      <Spinner color={color} data-testid="spinner" size={size} />
     </Container>
   );
 };
