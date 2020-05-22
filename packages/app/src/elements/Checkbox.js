@@ -3,7 +3,7 @@ import React from "react";
 
 import Button from "./Button";
 
-const Checkbox = ({ isChecked = false, ...props }) => (
+const Checkbox = ({ isChecked, ...props }) => (
   <Button icon={isChecked ? "check-square" : "square"} isTransparent role="checkbox" {...props} />
 );
 

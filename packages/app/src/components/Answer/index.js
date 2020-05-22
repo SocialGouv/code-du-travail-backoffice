@@ -40,19 +40,20 @@ const Answer = ({ data, isChecked, onCheck, onClick }) => {
     return (
       <Container flexDirection="column">
         <Top justifyContent="space-between">
-          <State>{ANSWER_STATE_LABEL[state]}</State>
+          <State data-testid="state">{ANSWER_STATE_LABEL[state]}</State>
         </Top>
         <Flex>
           <Checkbox
+            data-testid="checkbox"
             isChecked={isChecked}
             onClick={() => onCheck(id)}
             withMarginLeft
             withMarginRight
           />
-          <Content flexDirection="column" onClick={() => onClick(id)}>
+          <Content data-testid="content" flexDirection="column" onClick={() => onClick(id)}>
             <Flex alignItems="baseline">
-              <Idcc code={agreement_idcc} name={agreement_name} />
-              <Question>{`${question_index}) ${question_value}`}</Question>
+              <Idcc code={agreement_idcc} data-testid="idcc" name={agreement_name} />
+              <Question data-testid="question">{`${question_index}) ${question_value}`}</Question>
             </Flex>
           </Content>
         </Flex>
@@ -63,32 +64,39 @@ const Answer = ({ data, isChecked, onCheck, onClick }) => {
   return (
     <Container flexDirection="column">
       <Top justifyContent="space-between">
-        <State>{ANSWER_STATE_LABEL[state]}</State>
+        <State data-testid="state">{ANSWER_STATE_LABEL[state]}</State>
         <Flex alignItems="center">
-          <UpdatedAt>{`Modifié ${customMoment(updated_at)
+          <UpdatedAt data-testid="updated-at">{`Modifié ${customMoment(updated_at)
             .tz("Europe/Paris")
             .calendar()}`}</UpdatedAt>
-          <IsPublished isDisabled={!is_published}>Publiée</IsPublished>
+          <IsPublished data-testid="is-published" isDisabled={!is_published}>
+            Publiée
+          </IsPublished>
         </Flex>
       </Top>
       <Flex>
         <Checkbox
+          data-testid="checkbox"
           isChecked={isChecked}
           onClick={() => onCheck(id)}
           withMarginLeft
           withMarginRight
         />
-        <Content flexDirection="column" onClick={() => onClick(id)}>
+        <Content data-testid="content" flexDirection="column" onClick={() => onClick(id)}>
           <Flex alignItems="baseline">
-            <Idcc code={agreement_idcc} name={agreement_name} />
-            <Question>{`${question_index}) ${question_value}`}</Question>
+            <Idcc code={agreement_idcc} data-testid="idcc" name={agreement_name} />
+            <Question data-testid="question">{`${question_index}) ${question_value}`}</Question>
           </Flex>
-          {generic_reference === null && <Extract>{excerpt(value)}</Extract>}
+          {generic_reference === null && <Extract data-testid="extract">{excerpt(value)}</Extract>}
           {generic_reference === "labor_code" && (
-            <Extract isGeneric>Renvoyé au Code du travail.</Extract>
+            <Extract data-testid="extract" isGeneric>
+              Renvoyé au Code du travail.
+            </Extract>
           )}
           {generic_reference === "national_agreement" && (
-            <Extract isGeneric>Renvoyé à la convention collective nationale.</Extract>
+            <Extract data-testid="extract" isGeneric>
+              Renvoyé à la convention collective nationale.
+            </Extract>
           )}
         </Content>
       </Flex>

@@ -1,31 +1,46 @@
 import React from "react";
+import { create } from "react-test-renderer";
 
 import Idcc from "../Idcc";
 
 describe("elements/<Idcc />", () => {
+  const PROPS = {
+    code: `A code`,
+    name: `An agreement`,
+  };
+
   it(`should pass`, () => {
-    const $idcc = testRender(<Idcc code="A Code" name="An Agreement" />);
-    const $tooltip = $idcc.findByType("div");
+    const props = {
+      ...PROPS,
+    };
 
-    expect($idcc).toMatchSnapshot();
+    const $idcc = create(<Idcc {...props} />);
 
-    expect($idcc.innerText).toStrictEqual("A Code");
-    expect($tooltip.innerText).toStrictEqual("An Agreement");
+    expect($idcc).toHaveTestRenderedTextContent(props.code);
+    expect($idcc).toHaveTestRenderedTextContent(props.name, "tooltip");
   });
 
   it(`should pass with {code} = null`, () => {
-    const $idcc = testRender(<Idcc code={null} name="An Agreement" />);
-    const $tooltip = $idcc.findByType("div");
+    const props = {
+      ...PROPS,
+      code: null,
+    };
 
-    expect($idcc.innerText).toStrictEqual("CDT");
-    expect($tooltip.innerText).toStrictEqual("An Agreement");
+    const $idcc = create(<Idcc {...props} />);
+
+    expect($idcc).toHaveTestRenderedTextContent(`CDT`);
+    expect($idcc).toHaveTestRenderedTextContent(props.name, "tooltip");
   });
 
   it(`should pass with {name} = null`, () => {
-    const $idcc = testRender(<Idcc code="A Code" name={null} />);
-    const $tooltip = $idcc.findByType("div");
+    const props = {
+      ...PROPS,
+      name: null,
+    };
 
-    expect($idcc.innerText).toStrictEqual("A Code");
-    expect($tooltip.innerText).toStrictEqual("Code du travail");
+    const $idcc = create(<Idcc {...props} />);
+
+    expect($idcc).toHaveTestRenderedTextContent(props.code);
+    expect($idcc).toHaveTestRenderedTextContent(`Code du travail`, "tooltip");
   });
 });

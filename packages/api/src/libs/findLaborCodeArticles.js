@@ -1,6 +1,7 @@
 // @ts-check
 
-const FuseJs = require("fuse.js");
+/** @type {typeof Fuse.default} */
+const FuseJs = /** @type {*} */ (require("fuse.js"));
 
 const LaborCode = require("../services/LaborCode");
 
@@ -17,7 +18,7 @@ const LaborCode = require("../services/LaborCode");
 function findLaborCodeArticles(query) {
   const allArticles = LaborCode.getArticles();
 
-  /** @type {Fuse.IFuseOptions<LegalReference.Article>} */
+  /** @type {Fuse.default.IFuseOptions<LegalReference.Article>} */
   const fuseJsOptions = {
     distance: 0,
     includeScore: true,
@@ -27,7 +28,7 @@ function findLaborCodeArticles(query) {
 
   const fuseJs = new FuseJs(allArticles, fuseJsOptions);
   const foundArticles =
-    /** @type {Fuse.FuseResult<LegalReference.Article>[]} */
+    /** @type {Fuse.default.FuseResult<LegalReference.Article>[]} */
     (fuseJs.search(query));
 
   const foundArticlesWithScore = foundArticles

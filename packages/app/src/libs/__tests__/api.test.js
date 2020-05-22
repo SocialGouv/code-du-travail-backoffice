@@ -37,10 +37,8 @@ describe("libs/Api", () => {
 
       const received = await api.get("/a-path");
 
-      expect(jsCookie.get).toHaveBeenCalledTimes(1);
-      expect(jsCookie.get).toHaveBeenCalledWith("jwt");
-      expect(isomorphicUnfetch).toHaveBeenCalledTimes(1);
-      expect(isomorphicUnfetch).toHaveBeenCalledWith("https://api.uri.docker/a-path", {
+      expect(jsCookie.get).toHaveBeenNthCalledWith(1, "jwt");
+      expect(isomorphicUnfetch).toHaveBeenNthCalledWith(1, "https://api.uri.docker/a-path", {
         headers: {
           Authorization: "Bearer aJwtToken",
           "Content-Type": "application/json",
@@ -62,10 +60,8 @@ describe("libs/Api", () => {
 
       const received = await api.get("/a-path");
 
-      expect(jsCookie.get).toHaveBeenCalledTimes(1);
-      expect(jsCookie.get).toHaveBeenCalledWith("jwt");
-      expect(isomorphicUnfetch).toHaveBeenCalledTimes(1);
-      expect(isomorphicUnfetch).toHaveBeenCalledWith("https://api.uri/a-path", {
+      expect(jsCookie.get).toHaveBeenNthCalledWith(1, "jwt");
+      expect(isomorphicUnfetch).toHaveBeenNthCalledWith(1, "https://api.uri/a-path", {
         headers: {
           Authorization: "Bearer aJwtToken",
           "Content-Type": "application/json",
@@ -87,10 +83,8 @@ describe("libs/Api", () => {
 
       const received = await api.get("/a-path");
 
-      expect(jsCookie.get).toHaveBeenCalledTimes(1);
-      expect(jsCookie.get).toHaveBeenCalledWith("jwt");
-      expect(isomorphicUnfetch).toHaveBeenCalledTimes(1);
-      expect(isomorphicUnfetch).toHaveBeenCalledWith("https://api.uri.docker/a-path", {
+      expect(jsCookie.get).toHaveBeenNthCalledWith(1, "jwt");
+      expect(isomorphicUnfetch).toHaveBeenNthCalledWith(1, "https://api.uri.docker/a-path", {
         headers: {
           "Content-Type": "application/json",
         },
@@ -111,10 +105,8 @@ describe("libs/Api", () => {
 
       const received = await api.get("/a-path");
 
-      expect(jsCookie.get).toHaveBeenCalledTimes(1);
-      expect(jsCookie.get).toHaveBeenCalledWith("jwt");
-      expect(isomorphicUnfetch).toHaveBeenCalledTimes(1);
-      expect(isomorphicUnfetch).toHaveBeenCalledWith("https://api.uri/a-path", {
+      expect(jsCookie.get).toHaveBeenNthCalledWith(1, "jwt");
+      expect(isomorphicUnfetch).toHaveBeenNthCalledWith(1, "https://api.uri/a-path", {
         headers: {
           "Content-Type": "application/json",
         },
@@ -136,10 +128,8 @@ describe("libs/Api", () => {
 
       const received = await api.get("/a-path");
 
-      expect(jsCookie.get).toHaveBeenCalledTimes(1);
-      expect(jsCookie.get).toHaveBeenCalledWith("jwt");
-      expect(isomorphicUnfetch).toHaveBeenCalledTimes(1);
-      expect(isomorphicUnfetch).toHaveBeenCalledWith("https://api.uri/a-path", {
+      expect(jsCookie.get).toHaveBeenNthCalledWith(1, "jwt");
+      expect(isomorphicUnfetch).toHaveBeenNthCalledWith(1, "https://api.uri/a-path", {
         headers: {
           Authorization: "Bearer aJwtToken",
           "Content-Type": "application/json",
@@ -161,10 +151,8 @@ describe("libs/Api", () => {
 
       await expect(api.get("/a-path")).rejects.toThrowError(`An error`);
 
-      expect(jsCookie.get).toHaveBeenCalledTimes(1);
-      expect(jsCookie.get).toHaveBeenCalledWith("jwt");
-      expect(isomorphicUnfetch).toHaveBeenCalledTimes(1);
-      expect(isomorphicUnfetch).toHaveBeenCalledWith("https://api.uri/a-path", {
+      expect(jsCookie.get).toHaveBeenNthCalledWith(1, "jwt");
+      expect(isomorphicUnfetch).toHaveBeenNthCalledWith(1, "https://api.uri/a-path", {
         headers: {
           Authorization: "Bearer aJwtToken",
           "Content-Type": "application/json",
@@ -187,10 +175,8 @@ describe("libs/Api", () => {
         `The server answered with an unknown error (no message).`,
       );
 
-      expect(jsCookie.get).toHaveBeenCalledTimes(1);
-      expect(jsCookie.get).toHaveBeenCalledWith("jwt");
-      expect(isomorphicUnfetch).toHaveBeenCalledTimes(1);
-      expect(isomorphicUnfetch).toHaveBeenCalledWith("https://api.uri/a-path", {
+      expect(jsCookie.get).toHaveBeenNthCalledWith(1, "jwt");
+      expect(isomorphicUnfetch).toHaveBeenNthCalledWith(1, "https://api.uri/a-path", {
         headers: {
           Authorization: "Bearer aJwtToken",
           "Content-Type": "application/json",
@@ -213,10 +199,8 @@ describe("libs/Api", () => {
         `The server answered with an unknown error (no message).`,
       );
 
-      expect(jsCookie.get).toHaveBeenCalledTimes(1);
-      expect(jsCookie.get).toHaveBeenCalledWith("jwt");
-      expect(isomorphicUnfetch).toHaveBeenCalledTimes(1);
-      expect(isomorphicUnfetch).toHaveBeenCalledWith("https://api.uri/a-path", {
+      expect(jsCookie.get).toHaveBeenNthCalledWith(1, "jwt");
+      expect(isomorphicUnfetch).toHaveBeenNthCalledWith(1, "https://api.uri/a-path", {
         headers: {
           Authorization: "Bearer aJwtToken",
           "Content-Type": "application/json",
@@ -234,10 +218,8 @@ describe("libs/Api", () => {
 
       await api.post("/a-path", { some: "data" });
 
-      expect(jsCookie.get).toHaveBeenCalledTimes(1);
-      expect(jsCookie.get).toHaveBeenCalledWith("jwt");
-      expect(isomorphicUnfetch).toHaveBeenCalledTimes(1);
-      expect(isomorphicUnfetch).toHaveBeenCalledWith("https://api.uri.docker/a-path", {
+      expect(jsCookie.get).toHaveBeenNthCalledWith(1, "jwt");
+      expect(isomorphicUnfetch).toHaveBeenNthCalledWith(1, "https://api.uri.docker/a-path", {
         body: `{"some":"data"}`,
         headers: {
           Authorization: "Bearer aJwtToken",
@@ -254,10 +236,8 @@ describe("libs/Api", () => {
 
       await api.post("/a-path", { some: "data" });
 
-      expect(jsCookie.get).toHaveBeenCalledTimes(1);
-      expect(jsCookie.get).toHaveBeenCalledWith("jwt");
-      expect(isomorphicUnfetch).toHaveBeenCalledTimes(1);
-      expect(isomorphicUnfetch).toHaveBeenCalledWith("https://api.uri/a-path", {
+      expect(jsCookie.get).toHaveBeenNthCalledWith(1, "jwt");
+      expect(isomorphicUnfetch).toHaveBeenNthCalledWith(1, "https://api.uri/a-path", {
         body: `{"some":"data"}`,
         headers: {
           Authorization: "Bearer aJwtToken",
@@ -276,10 +256,8 @@ describe("libs/Api", () => {
 
       await api.patch("/a-path", { some: "data" });
 
-      expect(jsCookie.get).toHaveBeenCalledTimes(1);
-      expect(jsCookie.get).toHaveBeenCalledWith("jwt");
-      expect(isomorphicUnfetch).toHaveBeenCalledTimes(1);
-      expect(isomorphicUnfetch).toHaveBeenCalledWith("https://api.uri.docker/a-path", {
+      expect(jsCookie.get).toHaveBeenNthCalledWith(1, "jwt");
+      expect(isomorphicUnfetch).toHaveBeenNthCalledWith(1, "https://api.uri.docker/a-path", {
         body: `{"some":"data"}`,
         headers: {
           Authorization: "Bearer aJwtToken",
@@ -296,10 +274,8 @@ describe("libs/Api", () => {
 
       await api.patch("/a-path", { some: "data" });
 
-      expect(jsCookie.get).toHaveBeenCalledTimes(1);
-      expect(jsCookie.get).toHaveBeenCalledWith("jwt");
-      expect(isomorphicUnfetch).toHaveBeenCalledTimes(1);
-      expect(isomorphicUnfetch).toHaveBeenCalledWith("https://api.uri/a-path", {
+      expect(jsCookie.get).toHaveBeenNthCalledWith(1, "jwt");
+      expect(isomorphicUnfetch).toHaveBeenNthCalledWith(1, "https://api.uri/a-path", {
         body: `{"some":"data"}`,
         headers: {
           Authorization: "Bearer aJwtToken",
@@ -318,10 +294,8 @@ describe("libs/Api", () => {
 
       await api.delete("/a-path");
 
-      expect(jsCookie.get).toHaveBeenCalledTimes(1);
-      expect(jsCookie.get).toHaveBeenCalledWith("jwt");
-      expect(isomorphicUnfetch).toHaveBeenCalledTimes(1);
-      expect(isomorphicUnfetch).toHaveBeenCalledWith("https://api.uri.docker/a-path", {
+      expect(jsCookie.get).toHaveBeenNthCalledWith(1, "jwt");
+      expect(isomorphicUnfetch).toHaveBeenNthCalledWith(1, "https://api.uri.docker/a-path", {
         headers: {
           Authorization: "Bearer aJwtToken",
           "Content-Type": "application/json",
@@ -337,10 +311,8 @@ describe("libs/Api", () => {
 
       await api.delete("/a-path");
 
-      expect(jsCookie.get).toHaveBeenCalledTimes(1);
-      expect(jsCookie.get).toHaveBeenCalledWith("jwt");
-      expect(isomorphicUnfetch).toHaveBeenCalledTimes(1);
-      expect(isomorphicUnfetch).toHaveBeenCalledWith("https://api.uri/a-path", {
+      expect(jsCookie.get).toHaveBeenNthCalledWith(1, "jwt");
+      expect(isomorphicUnfetch).toHaveBeenNthCalledWith(1, "https://api.uri/a-path", {
         headers: {
           Authorization: "Bearer aJwtToken",
           "Content-Type": "application/json",

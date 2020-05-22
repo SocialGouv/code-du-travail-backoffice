@@ -9,7 +9,7 @@
     "start": "node ./src"
   },
   "dependencies": {
-    "@inspired-beings/log": "1.2.0",
+    "@inspired-beings/log": "2.0.0",
     "@socialgouv/kali-data": "1.43.0",
     "fuse.js": "6.0.0",
     "html-to-text": "5.1.1",
@@ -20,6 +20,7 @@
     "pg": "8.2.1"
   },
   "devDependencies": {
+    "@types/http-proxy": "1.17.4",
     "@types/node": "13.13.5",
     "cross-env": "7.0.2",
     "dotenv": "8.2.0",

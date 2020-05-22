@@ -1,6 +1,7 @@
 // @ts-check
 
-const FuseJs = require("fuse.js");
+/** @type {typeof Fuse.default} */
+const FuseJs = /** @type {*} */ (require("fuse.js"));
 
 const Agreement = require("../services/Agreement");
 
@@ -29,13 +30,13 @@ function findAgreementArticles(idcc, query) {
     cleanQuery = cleanQuery.replace(/'(\d{1,2}$)/, " '» 'Article $1$");
   }
 
-  /** @type {Fuse.IFuseOptions<LegalReference.Article>} */
+  /** @type {Fuse.default.IFuseOptions<LegalReference.Article>} */
   const fuseJsOptions = {
-    caseSensitive: false,
     distance: 999,
     findAllMatches: false,
     includeMatches: false,
     includeScore: true,
+    isCaseSensitive: false,
     keys: ["fullText"],
     minMatchCharLength: 1,
     shouldSort: true,
@@ -45,7 +46,7 @@ function findAgreementArticles(idcc, query) {
 
   const fuseJs = new FuseJs(allArticles, fuseJsOptions);
   const foundArticles =
-    /** @type {Fuse.FuseResult<LegalReference.Article>[]} */
+    /** @type {Fuse.default.FuseResult<LegalReference.Article>[]} */
     (fuseJs.search(cleanQuery));
 
   const foundArticlesWithScore = foundArticles

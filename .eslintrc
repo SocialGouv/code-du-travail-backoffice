@@ -49,11 +49,6 @@
       "plugins": ["prettier", "sort-requires"],
       "env": {
         "jest": true
-      },
-      "globals": {
-        "testClick": false,
-        "testRender": false,
-        "waitFor": false
       }
     }
   ]

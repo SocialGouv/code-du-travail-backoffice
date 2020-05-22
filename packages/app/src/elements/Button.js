@@ -72,7 +72,7 @@ const Button = ({
       withMarginRight={withMarginRight}
       {...props}
     >
-      {icon !== undefined && <Icon color={foregroundColor} icon={icon} />}
+      {icon !== undefined && <Icon color={foregroundColor} data-testid="icon" icon={icon} />}
       {children}
     </Container>
   );

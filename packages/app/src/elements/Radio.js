@@ -24,8 +24,9 @@ const Radio = ({ onChange, options, ...props }) => (
         <Bullet
           aria-checked={String(isSelected)}
           aria-hidden="false"
+          data-testid={`bullet-${index + 1}`}
           icon={`${isSelected ? "dot-" : ""}circle`}
-          onClick={!isSelected ? () => onChange(value) : undefined}
+          onClick={() => (!isSelected ? onChange(value) : undefined)}
           role="radio"
           selected={isSelected}
           tabIndex={index === 0 ? "0" : "-1"}

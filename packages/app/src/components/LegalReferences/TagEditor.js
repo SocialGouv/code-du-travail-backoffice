@@ -2,51 +2,40 @@ import PropTypes from "prop-types";
 import React from "react";
 import reactOnClickOutside from "react-onclickoutside";
 
-import { Container, UrlEditor, ValueEditor } from "./TagEditor.style";
+import { validateMandatoryNullableString } from "../../props/validators";
+import { Form, UrlEditor, ValueEditor } from "./TagEditor.style";
 
-class _Tag extends React.PureComponent {
+export class TagEditor extends React.PureComponent {
   constructor(props) {
     super(props);
     const { url } = props;
 
-    this.hasUrl = url !== undefined;
+    this.hasUrl = url !== null;
 
     this.cancel = this.cancel.bind(this);
-    this.onDocumentKeyUp = this.onDocumentKeyUp.bind(this);
-    this.onKeyPress = this.onKeyPress.bind(this);
+    this.maybeCancel = this.maybeCancel.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
   componentDidMount() {
-    document.addEventListener("keyup", this.onDocumentKeyUp);
+    document.addEventListener("keydown", this.maybeCancel);
 
-    this.$value.el.current.addEventListener("keypress", this.onKeyPress);
-    if (this.hasUrl) {
-      this.$url.el.current.addEventListener("keypress", this.onKeyPress);
-    }
-
-    this.$value.el.current.focus();
+    this.$value.focus();
   }
 
   componentWillUnmount() {
-    document.removeEventListener("keyup", this.onDocumentKeyUp);
+    document.removeEventListener("keydown", this.maybeCancel);
   }
 
-  handleClickOutside = function () {
-    this.cancel();
-  };
-
-  onDocumentKeyUp(event) {
-    if (event.key !== "Escape") return;
-    event.preventDefault();
-
+  handleClickOutside() {
     this.cancel();
   }
 
-  onKeyPress(event) {
-    if (event.key !== "Enter") return;
+  maybeCancel(event) {
+    if (event.key !== "Escape" || event.repeat) return;
     event.preventDefault();
 
-    this.submit();
+    this.cancel();
   }
 
   cancel() {
@@ -55,10 +44,12 @@ class _Tag extends React.PureComponent {
     onCancel();
   }
 
-  submit() {
+  submit(event) {
+    event.preventDefault();
+
     const { onSubmit } = this.props;
-    const value = this.$value.lastHtml;
-    const url = this.hasUrl ? this.$url.lastHtml : null;
+    const value = this.$value.value;
+    const url = this.hasUrl ? this.$url.value : null;
 
     onSubmit(value, url);
   }
@@ -67,21 +58,36 @@ class _Tag extends React.PureComponent {
     const { url, value } = this.props;
 
     return (
-      <Container>
-        <ValueEditor html={value} ref={$node => (this.$value = $node)} />
-        {this.hasUrl && <UrlEditor html={url} ref={$node => (this.$url = $node)} />}
-      </Container>
+      <Form data-testid="form" onSubmit={this.submit}>
+        <ValueEditor
+          data-testid="input-value"
+          defaultValue={value}
+          placeholder="Titre"
+          ref={$node => (this.$value = $node)}
+        />
+        {this.hasUrl && (
+          <UrlEditor
+            data-testid="input-url"
+            defaultValue={url}
+            placeholder="URL"
+            ref={$node => (this.$url = $node)}
+          />
+        )}
+        <input hidden type="submit" />
+      </Form>
     );
   }
 }
 
-_Tag.propTypes = {
+TagEditor.propTypes = {
   onCancel: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  url: PropTypes.string,
+  url: validateMandatoryNullableString,
   value: PropTypes.string.isRequired,
 };
 
-const Tag = reactOnClickOutside(_Tag);
+const TagEditorWithClickOutside = reactOnClickOutside(TagEditor);
 
-export default Tag;
+TagEditorWithClickOutside.displayName = "TagEditor";
+
+export default TagEditorWithClickOutside;

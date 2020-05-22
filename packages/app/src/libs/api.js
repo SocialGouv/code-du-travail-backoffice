@@ -57,6 +57,7 @@ class Api {
     const data = await this.parseResponseData(response);
 
     if (!response.ok) {
+      data.code = response.status;
       if (data.message === undefined) {
         data.message = "The server answered with an unknown error (no message).";
       }

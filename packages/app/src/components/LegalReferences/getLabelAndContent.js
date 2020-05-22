@@ -28,9 +28,9 @@ function getContentTitle(title, index) {
  * Generate a legal reference tag label and content.
  *
  * @param {string} value
- * @param {string | null} dila_id
+ * @param {?string} dila_id
  *
- * @returns {Promise<[string, string | null]>}
+ * @returns {Promise<[string, ?string]>}
  */
 export default async function getLabelAndContent(value, dila_id) {
   if (dila_id === null) return [value, null];

@@ -1,3 +1,6 @@
+// @ts-check
+/// <reference types="@socialgouv/code-du-travail-backoffice__typings" />
+
 const fs = require("fs");
 const path = require("path");
 
@@ -20,6 +23,7 @@ function flattenChildren(tree, articleOrSection) {
   return [...tree, articleOrSection, ...articleOrSection.children.reduce(flattenChildren, [])];
 }
 
+/** @type {LegalReference.ArticleIndex[]} */
 const articlesIndex = AGREEMENTS_INDEX.reduce((prev, { id: agreementId }) => {
   const agreement = require(`@socialgouv/kali-data/data/${agreementId}.json`);
   const flatArticles = agreement.children.reduce(flattenChildren, []);

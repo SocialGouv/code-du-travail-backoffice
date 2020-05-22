@@ -1,12 +1,20 @@
-import { render } from "@testing-library/react";
 import React from "react";
+import { create } from "react-test-renderer";
 
 import Textarea from "../Textarea";
 
 describe("elements/<Textarea />", () => {
-  it("should match snapshot", () => {
-    const { container } = render(<Textarea />);
+  const PROPS = {
+    children: "A text",
+  };
 
-    expect(container).toMatchSnapshot();
+  it(`should pass`, () => {
+    const props = {
+      ...PROPS,
+    };
+
+    const $title = create(<Textarea {...props} />);
+
+    expect($title).toHaveTestRenderedTextContent(props.children);
   });
 });

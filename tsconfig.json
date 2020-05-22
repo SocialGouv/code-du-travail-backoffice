@@ -1,12 +1,16 @@
 {
   "compilerOptions": {
     "allowJs": true,
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
+    "jsx": "react",
+    "moduleResolution": "Node",
     "noEmit": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
-    "typeRoots": ["./node_modules/@types", "./packages/typings"]
+    "target": "ES6",
+    "typeRoots": ["node_modules/@types", "packages/typings"]
   },
-  "exclude": ["node_modules"]
+  "include": ["packages/api/src/**/*.js", "packages/app/src/**/*.js", "packages/typings/*.d.ts"]
 }

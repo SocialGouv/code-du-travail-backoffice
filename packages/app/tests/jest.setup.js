@@ -15,14 +15,13 @@ import { matchers } from "jest-emotion";
 expect.extend(matchers);
 
 // Custom matchers:
-import "./matchers/toHaveTestRenderedChildrenTimes";
-import "./matchers/toHaveTestRenderedClass";
-import "./matchers/toHaveTestRenderedProp";
-import "./matchers/toHaveTestRenderedText";
+import "./matchers/toHaveTestRenderedChild";
+import "./matchers/toHaveTestRenderedChildLength";
+import "./matchers/toHaveTestRenderedClassName";
+import "./matchers/toHaveTestRenderedProperty";
+import "./matchers/toHaveTestRenderedStyleRule";
+import "./matchers/toHaveTestRenderedTextContent";
+import "./matchers/toHaveTestRenderedType";
 
 // Mock "next/router"
-import "./mocks/nextRouter";
-// Globalize testRender() helper
-import "./globals/testRender";
-// Globalize waitFor() helper
-import "./globals/waitFor";
+// import "./mocks/nextRouter";

@@ -1,6 +1,6 @@
 import "./globals";
-import "./tests";
 
+import Api from "./Api";
 import Agreement from "./Agreement";
 import Answer from "./Answer";
 import FullAnswer from "./FullAnswer";

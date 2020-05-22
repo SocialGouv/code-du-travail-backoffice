@@ -6,7 +6,6 @@ import React from "react";
 import Icon from "./Icon";
 
 const InputWithIconWrapper = styled.div`
-  /* margin-top: -1.375rem; */
   position: relative;
 `;
 
@@ -26,7 +25,6 @@ const StyledInput = styled.input`
 
   ::placeholder {
     color: var(--color-placeholder);
-    /* color: rgb(128, 128, 128); */
   }
 
   :focus {
@@ -53,8 +51,15 @@ const Input = React.forwardRef(({ disabled = false, icon, hasError = false, ...p
   return (
     <div className={className} style={style}>
       <InputWithIconWrapper>
-        <InputIcon icon={icon} />
-        <StyledInput disabled={disabled} hasError={hasError} hasIcon ref={ref} {...inputProps} />
+        <InputIcon data-testid="icon" icon={icon} />
+        <StyledInput
+          data-testid="input"
+          disabled={disabled}
+          hasError={hasError}
+          hasIcon
+          ref={ref}
+          {...inputProps}
+        />
       </InputWithIconWrapper>
     </div>
   );

@@ -26,7 +26,7 @@ declare module "@socialgouv/kali-data" {
     | "VIGUEUR_ETEN"
     | "VIGUEUR_NON_ETEN";
 
-  interface IndexAgreement {
+  type IndexAgreement = {
     active?: boolean;
     /** Publication ISO date */
     date_publi?: string;
@@ -42,41 +42,41 @@ declare module "@socialgouv/kali-data" {
     texte_de_base?: string;
     title: string;
     url?: string;
-  }
+  };
 
-  interface Agreement {
+  type Agreement = {
     type: "section";
     data: AgreementData;
     children: AgreementSection[];
-  }
+  };
 
-  interface AgreementData {
+  type AgreementData = {
     num: number;
     title: string;
     id: string;
     shortTitle: string;
     categorisation: string[];
-  }
+  };
 
-  interface AgreementSection {
+  type AgreementSection = {
     type: "section";
     data: AgreementSectionData;
     children: (AgreementArticle & AgreementSection)[];
-  }
+  };
 
-  interface AgreementSectionData {
+  type AgreementSectionData = {
     intOrdre: number;
     title: string;
     id: string;
     etat: State;
-  }
+  };
 
-  interface AgreementArticle {
+  type AgreementArticle = {
     type: "article";
     data: AgreementArticleData;
-  }
+  };
 
-  interface AgreementArticleData {
+  type AgreementArticleData = {
     cid: string;
     intOrdre: number;
     id: string;
@@ -88,9 +88,9 @@ declare module "@socialgouv/kali-data" {
     surtitre?: string;
     historique?: string;
     lstLienModification: AgreementArticleDataLinkUpdate[];
-  }
+  };
 
-  interface AgreementArticleDataLinkUpdate {
+  type AgreementArticleDataLinkUpdate = {
     textCid: string;
     textTitle: string;
     linkType:
@@ -118,7 +118,7 @@ declare module "@socialgouv/kali-data" {
     dateSignaTexte: string | null;
     /** ??? date (YYYY-MM-DD) */
     dateDebutCible: string | null;
-  }
+  };
 
-  type AgreementArticleOrSection = AgreementArticle & AgreementSection;
+  type AgreementArticleOrSection = AgreementArticle | AgreementSection;
 }

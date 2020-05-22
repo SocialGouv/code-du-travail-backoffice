@@ -1,11 +1,22 @@
-/// <reference types="React" />
+/// <reference types="jest" />
 
-declare interface TestRendering {
-  children: TestRendering[] | null;
-  findByType: (type: string) => TestRendering;
-  innerText: string | null;
-  props: { [propName: string]: any };
-  type: string;
+import { StyleRuleOptions } from "jest-emotion";
+
+declare global {
+  declare namespace jest {
+    interface Matchers<R, T> {
+      toHaveTestRenderedChild(testId: string): R;
+      toHaveTestRenderedChildLength(expected: number, testId: string): R;
+      toHaveTestRenderedClassName(expected: string, testId?: string): R;
+      toHaveTestRenderedProperty(propertyName: string, expected: unknown, testId?: string): R;
+      toHaveTestRenderedStyleRule(
+        propertyName: string,
+        expected: string | number,
+        options: StyleRuleOptions,
+        testId?: string,
+      ): R;
+      toHaveTestRenderedType(expected: string, testId?: string): R;
+      toHaveTestRenderedTextContent(expected: string, testId?: string): R;
+    }
+  }
 }
-
-declare function testRender(component: React.Component): TestRendering;

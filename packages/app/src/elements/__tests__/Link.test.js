@@ -1,13 +1,12 @@
 import React from "react";
+import { create } from "react-test-renderer";
 
 import Link from "../Link";
 
 describe("elements/<Link />", () => {
-  const TEXT = "A Link";
-
   it(`should pass`, () => {
-    const $link = testRender(<Link>{TEXT}</Link>);
+    const $link = create(<Link />);
 
-    expect($link).toMatchSnapshot();
+    expect($link).toHaveTestRenderedType("button");
   });
 });

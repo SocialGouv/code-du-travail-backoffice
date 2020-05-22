@@ -17,7 +17,7 @@ const Error = styled(Text)`
 const Field = ({ children, error = null, ...props }) => (
   <Container {...props}>
     {children}
-    {error !== null && <Error>{error}</Error>}
+    {error !== null && <Error data-testid="error">{error}</Error>}
   </Container>
 );
 

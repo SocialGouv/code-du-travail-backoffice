@@ -19,15 +19,21 @@ function normalizeMainArticles([normalizedArticles, lastSectionTitle], articleOr
   const { type } = articleOrSection;
 
   if (type === "section") {
-    const { title } = articleOrSection.data;
+    const kaliSection =
+      /** @type {import("@socialgouv/kali-data").AgreementSection} */
+      (articleOrSection);
+    const { title } = kaliSection.data;
 
     const sectionTitle = title.trim();
 
     return [normalizedArticles, sectionTitle];
   }
 
-  const { cid, etat, id, num, surtitre } = articleOrSection.data;
-  const content = convertHtmlToPlainText(articleOrSection.data.content);
+  const kaliArticle =
+    /** @type {import("@socialgouv/kali-data").AgreementArticle} */
+    (articleOrSection);
+  const { cid, etat, id, num, surtitre } = kaliArticle.data;
+  const content = convertHtmlToPlainText(kaliArticle.data.content);
   const index = num !== null ? num : null;
   const title = lastSectionTitle !== undefined ? lastSectionTitle : null;
   const state = etat;
@@ -65,26 +71,27 @@ function normalizeAdditionalSectionArticles(articleOrSection, path) {
   const { type } = articleOrSection;
 
   if (type === "section") {
+    const kaliSection =
+      /** @type {import("@socialgouv/kali-data").AgreementSection} */
+      (articleOrSection);
     const {
       children,
       data: { title },
-    } = /** @type {AgreementSection} */ articleOrSection;
+    } = kaliSection;
 
     path.push(title);
 
     return children.reduce(
-      (prev, articleOrSection) => [
-        ...prev,
-        ...normalizeAdditionalSectionArticles(articleOrSection, path),
-      ],
+      (prev, kaliSection) => [...prev, ...normalizeAdditionalSectionArticles(kaliSection, path)],
       [],
     );
   }
 
-  const { data } = /** @type {AgreementArticle} */ articleOrSection;
-
-  const { cid, etat, id, num, surtitre } = data;
-  const content = convertHtmlToPlainText(data.content);
+  const kaliArticle =
+    /** @type {import("@socialgouv/kali-data").AgreementArticle} */
+    (articleOrSection);
+  const { cid, etat, id, num, surtitre } = kaliArticle.data;
+  const content = convertHtmlToPlainText(kaliArticle.data.content);
   const index = num !== null ? num : null;
   const title = path.join(" » ");
   const state = etat;
@@ -142,11 +149,12 @@ function flattenAdditionalArticles(normalizedArticles, section) {
  * @param {import("@socialgouv/kali-data").AgreementArticle[]} tree
  * @param {import("@socialgouv/kali-data").AgreementArticleOrSection} articleOrSection
  *
- * @returns {import("@socialgouv/kali-data").AgreementArticle[]}
+ * @returns {import("@socialgouv/kali-data").AgreementArticleOrSection[]}
  *
  * @see https://github.com/syntax-tree/unist
  */
 function flattenMainArticles(tree, articleOrSection) {
+  const { type } = articleOrSection;
   const { id } = articleOrSection.data;
 
   // Skip duplicates:
@@ -154,14 +162,23 @@ function flattenMainArticles(tree, articleOrSection) {
     return tree;
   }
 
-  if (articleOrSection.children === undefined) {
-    return [...tree, articleOrSection];
+  if (type === "article") {
+    const kaliArticle =
+      /** @type {import("@socialgouv/kali-data").AgreementArticle} */
+      (articleOrSection);
+
+    return [...tree, kaliArticle];
   }
 
-  const section = { ...articleOrSection };
-  delete section.children;
+  const kaliSection =
+    /** @type {import("@socialgouv/kali-data").AgreementSection} */
+    (articleOrSection);
+  const sectionWithoutChildren =
+    /** @type {import("@socialgouv/kali-data").AgreementSection} */
+    ({ ...kaliSection });
+  delete sectionWithoutChildren.children;
 
-  return [...tree, section, ...articleOrSection.children.reduce(flattenMainArticles, [])];
+  return [...tree, sectionWithoutChildren, ...kaliSection.children.reduce(flattenMainArticles, [])];
 }
 
 /**

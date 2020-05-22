@@ -7,7 +7,7 @@ import Head from "next/head";
 import PropTypes from "prop-types";
 import React from "react";
 
-import Modal from "../../components/Modal";
+import ModaWithWrapper from "../../components/Modal";
 import LoadingSpinner from "../../elements/LoadingSpinner";
 import Header from "../Header";
 import globalStyles from "./globalStyles";
@@ -22,7 +22,7 @@ const MainLayout = ({ isHorizontal = false, isLoading = false, ...props }) => (
       {globalStyles}
     </style>
     <style jsx>{styles}</style>
-    <Modal />
+    <ModaWithWrapper />
     <Header />
     {isLoading ? (
       <div className="Content Content--loading" {...props}>
