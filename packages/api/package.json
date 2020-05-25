@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@inspired-beings/log": "2.0.0",
-    "@socialgouv/kali-data": "1.43.0",
+    "@socialgouv/kali-data": "1.49.0",
     "fuse.js": "6.0.0",
     "html-to-text": "5.1.1",
     "http-proxy": "1.18.1",
