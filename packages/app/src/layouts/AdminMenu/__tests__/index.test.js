@@ -5,11 +5,11 @@ jest.mock("next/router");
 
 import Router from "next/router";
 
-import runTestRenderedProperty from "../../../../tests/utils/runTestRenderedProperty";
 jest.mock("../../../cache");
 jest.mock("../../../helpers/isNode");
 
 import AdminMenu from "..";
+import runTestRenderedProperty from "../../../../tests/utils/runTestRenderedProperty";
 import cache from "../../../cache";
 import isNode from "../../../helpers/isNode";
 

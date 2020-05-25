@@ -7,13 +7,8 @@ import AdminMenu from "../AdminMenu";
 import Main from "../Main";
 import { Content } from "./styles";
 
-const AdminMainLayout = ({
-  children,
-  hasBareContent = false,
-  isLoading = false,
-  isScrollable = true,
-}) => {
-  if (isLoading) {
+const AdminMain = ({ children, hasBareContent = false, isLoading = false, noScroll = false }) => {
+  if (isLoading || children === undefined) {
     return (
       <Main isHorizontal>
         <AdminMenu />
@@ -27,16 +22,22 @@ const AdminMainLayout = ({
   return (
     <Main isHorizontal>
       <AdminMenu />
-      {hasBareContent ? children : <Content isScrollable={isScrollable}>{children}</Content>}
+      {hasBareContent ? (
+        children
+      ) : (
+        <Content data-testid="content" noScroll={noScroll}>
+          {children}
+        </Content>
+      )}
     </Main>
   );
 };
 
-AdminMainLayout.propTypes = {
-  children: PropTypes.element.isRequired,
+AdminMain.propTypes = {
+  children: PropTypes.element,
   hasBareContent: PropTypes.bool,
   isLoading: PropTypes.bool,
-  isScrollable: PropTypes.bool,
+  noScroll: PropTypes.bool,
 };
 
-export default AdminMainLayout;
+export default AdminMain;
