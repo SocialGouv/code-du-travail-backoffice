@@ -112,11 +112,9 @@ exports.seed = async knex => {
   global.spinner.start(`Generating answers...`);
 
   const questions = await knex("api.questions").orderBy("index");
-  const allAgreements = await knex("api.agreements").orderBy("idcc");
-  const activeAgreementIds = (await knex("api.locations_agreements")).map(
-    ({ agreement_id }) => agreement_id,
-  );
-  const agreements = allAgreements.filter(({ id }) => activeAgreementIds.includes(id));
+  const agreements = await knex("api.agreements").orderBy("idcc");
+
+  const { data: publicAnswers } = await global.postgresterClient.get("/public_answers");
 
   for (const question of questions) {
     const genericAnswer = {
@@ -136,13 +134,13 @@ exports.seed = async knex => {
     for (const agreement of agreements) {
       global.spinner.text = `Generating answers: [${agreement.idcc}] ${question.index}) ${question.value}`;
 
-      const { data: foundAnswers } = await global.postgresterClient
-        .eq("question_id", question.id)
-        .eq("agreement_id", agreement.id)
-        .get("/public_answers");
+      const maybeAnswer = publicAnswers.find(
+        ({ agreement_id, question_id }) =>
+          agreement_id === agreement.id && question_id === question.id,
+      );
 
-      if (foundAnswers.length !== 0) {
-        const answer = foundAnswers[0];
+      if (maybeAnswer !== undefined) {
+        const answer = maybeAnswer;
         answers.push({
           ...answer,
           state: "validated",

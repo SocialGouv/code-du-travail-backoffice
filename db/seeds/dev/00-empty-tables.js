@@ -7,9 +7,7 @@ global.postgresterClient = postgrester.create({
   },
 });
 
-global.spinner = ora({
-  discardStdin: false,
-});
+global.spinner = ora();
 
 exports.seed = async knex => {
   global.spinner.start(`Emptying tables...`);
@@ -22,15 +20,6 @@ exports.seed = async knex => {
   await knex("api.answers").del();
   global.spinner.start(`Emptying tables: api.questions`);
   await knex("api.questions").del();
-
-  global.spinner.start(`Emptying tables: api.definitions`);
-  await knex("api.logs").del();
-  global.spinner.start(`Emptying tables: api.requests`);
-  await knex("api.logs").del();
-  global.spinner.start(`Emptying tables: api.themes`);
-  await knex("api.logs").del();
-  global.spinner.start(`Emptying tables: api.references`);
-  await knex("api.logs").del();
 
   global.spinner.start(`Emptying tables: api.logs`);
   await knex("api.logs").del();

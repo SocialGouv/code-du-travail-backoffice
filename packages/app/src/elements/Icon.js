@@ -3,9 +3,12 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import * as Icons from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
+import { omit } from "ramda";
 import React from "react";
 
-const StyledIcon = styled(FontAwesomeIcon)`
+const StyledIcon = styled(p => (
+  <FontAwesomeIcon {...omit(["withMarginLeft", "withMarginRight"], p)} />
+))`
   cursor: ${({ role }) => (role === "button" ? "pointer" : "default")};
   margin-left: ${p => (p.withMarginLeft ? "0.5rem" : 0)};
   margin-right: ${p => (p.withMarginRight ? "0.5rem" : 0)};

@@ -6,7 +6,7 @@ declare global {
   declare namespace jest {
     interface Matchers<R, T> {
       toHaveTestRenderedChild(testId: string): R;
-      toHaveTestRenderedChildLength(expected: number, testId: string): R;
+      toHaveTestRenderedChildLength(expected: number, testId?: string): R;
       toHaveTestRenderedClassName(expected: string, testId?: string): R;
       toHaveTestRenderedProperty(propertyName: string, expected: unknown, testId?: string): R;
       toHaveTestRenderedStyleRule(
