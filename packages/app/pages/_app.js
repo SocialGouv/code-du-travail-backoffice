@@ -1,13 +1,11 @@
 import withReduxSaga from "next-redux-saga";
-import withRedux from "next-redux-wrapper";
 import App from "next/app";
 import React from "react";
-import { Provider } from "react-redux";
 
 import Login from "../src/blocks/Login";
 import cache from "../src/cache";
 import getMe from "../src/libs/getMe";
-import createStore from "../src/store";
+import { wrapper } from "../src/store";
 
 // https://github.com/zeit/next.js/blob/canary/examples/with-redux-saga/pages/_app.js
 class MainApp extends App {
@@ -35,21 +33,17 @@ class MainApp extends App {
 
   render() {
     const me = cache.get("me");
-    const { Component, pageProps, store } = this.props;
+    const { Component, pageProps } = this.props;
     const { statusCode } = pageProps;
 
     const hasError = statusCode !== undefined && statusCode >= 400;
 
-    return (
-      <Provider store={store}>
-        {hasError || me.isAuthenticated ? (
-          <Component {...pageProps} />
-        ) : (
-          <Login onLoggedIn={this.login.bind(this)} />
-        )}
-      </Provider>
-    );
+    if (hasError || me.isAuthenticated) {
+      return <Component {...pageProps} />;
+    }
+
+    return <Login onLoggedIn={this.login.bind(this)} />;
   }
 }
 
-export default withRedux(createStore)(withReduxSaga(MainApp));
+export default wrapper.withRedux(withReduxSaga(MainApp));

@@ -1,3 +1,4 @@
+import { createWrapper } from "next-redux-wrapper";
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
@@ -15,7 +16,7 @@ const bindMiddleware = middleware => {
   return applyMiddleware(...middleware);
 };
 
-export default initialState => {
+const initialStore = initialState => {
   const sagaMiddleware = createSagaMiddleware();
   const store = createStore(
     combineReducers(reducers),
@@ -27,3 +28,5 @@ export default initialState => {
 
   return store;
 };
+
+export const wrapper = createWrapper(initialStore);

@@ -28,7 +28,7 @@
     "next": "9.4.2",
     "next-cookies": "2.0.3",
     "next-redux-saga": "4.1.2",
-    "next-redux-wrapper": "5.0.0",
+    "next-redux-wrapper": "6.0.0",
     "numeral": "2.0.6",
     "password-generator": "2.2.3",
     "pg": "8.2.1",
