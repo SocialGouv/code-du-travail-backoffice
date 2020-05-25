@@ -658,7 +658,7 @@ export class AdminAnwsersEditPage extends React.Component {
 
   render() {
     return (
-      <AdminMainLayout isScrollable={false}>
+      <AdminMainLayout noScroll>
         <Container>
           <Content flexDirection="column">
             {this.renderTop()}

@@ -22,6 +22,7 @@ export default class Header extends React.PureComponent {
         <Brand
           alignItems="center"
           aria-label="Bouton de retour au tableau de bord"
+          data-testid="brand"
           onClick={() => this.goToHome()}
           onKeyUp={() => this.goToHome()}
           role="button"

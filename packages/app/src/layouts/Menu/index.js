@@ -37,6 +37,7 @@ export default class Menu extends React.PureComponent {
             <DropdownText>{me.data.name}</DropdownText>
             <DropdownMenu>
               <DropdownLink
+                data-testid="admin-logout"
                 onClick={() => this.logOut()}
                 onKeyPress={() => this.logOut()}
                 role="link"
@@ -57,6 +58,7 @@ export default class Menu extends React.PureComponent {
           <DropdownText>Liste des réponses</DropdownText>
           <DropdownMenu>
             <DropdownLink
+              data-testid="contrib-answers-todo"
               onClick={() => this.goToAnswers(ANSWER_STATE.TO_DO)}
               onKeyPress={() => this.goToAnswers(ANSWER_STATE.TO_DO)}
               role="link"
@@ -65,6 +67,7 @@ export default class Menu extends React.PureComponent {
               {T.ANSWERS_INDEX_TITLE(ANSWER_STATE.TO_DO)}
             </DropdownLink>
             <DropdownLink
+              data-testid="contrib-answers-draft"
               onClick={() => this.goToAnswers(ANSWER_STATE.DRAFT)}
               onKeyPress={() => this.goToAnswers(ANSWER_STATE.DRAFT)}
               role="link"
@@ -73,6 +76,7 @@ export default class Menu extends React.PureComponent {
               {T.ANSWERS_INDEX_TITLE(ANSWER_STATE.DRAFT)}
             </DropdownLink>
             <DropdownLink
+              data-testid="contrib-answers-under-review"
               onClick={() => this.goToAnswers(ANSWER_STATE.UNDER_REVIEW)}
               onKeyPress={() => this.goToAnswers(ANSWER_STATE.UNDER_REVIEW)}
               role="link"
@@ -81,6 +85,7 @@ export default class Menu extends React.PureComponent {
               {T.ANSWERS_INDEX_TITLE(ANSWER_STATE.UNDER_REVIEW)}
             </DropdownLink>
             <DropdownLink
+              data-testid="contrib-answers-validated"
               onClick={() => this.goToAnswers(ANSWER_STATE.VALIDATED)}
               onKeyPress={() => this.goToAnswers(ANSWER_STATE.VALIDATED)}
               role="link"
@@ -95,6 +100,7 @@ export default class Menu extends React.PureComponent {
           <DropdownText>Aide</DropdownText>
           <DropdownMenu>
             <DropdownLink
+              data-testid="contrib-guide"
               onClick={() => this.openGuide("/code-du-travail-numerique/")}
               onKeyPress={() => this.openGuide("/code-du-travail-numerique/")}
               role="link"
@@ -105,6 +111,7 @@ export default class Menu extends React.PureComponent {
             </DropdownLink>
 
             <DropdownLink
+              data-testid="contrib-charter"
               onClick={() => Router.push("/charter")}
               onKeyPress={() => Router.push("/charter")}
               role="link"
@@ -115,6 +122,7 @@ export default class Menu extends React.PureComponent {
             </DropdownLink>
 
             <DropdownLink
+              data-testid="contrib-proposal"
               onClick={() =>
                 this.openDoc("Proposition-de-reponse-types-CC-metallurgie-locales.docx")
               }
@@ -129,6 +137,7 @@ export default class Menu extends React.PureComponent {
             </DropdownLink>
 
             <DropdownLink
+              data-testid="contrib-reformulation"
               onClick={() => this.openDoc("Reformulation-des-intitules-de-question.xlsx")}
               onKeyPress={() => this.openDoc("Reformulation-des-intitules-de-question.xlsx")}
               role="link"
@@ -139,6 +148,7 @@ export default class Menu extends React.PureComponent {
             </DropdownLink>
 
             <DropdownLink
+              data-testid="contrib-feedback"
               onClick={() =>
                 this.openDoc("Premiers-retours-sur-la-validation-des-contributions.docx")
               }
@@ -158,6 +168,7 @@ export default class Menu extends React.PureComponent {
           <DropdownText>{me.data.name}</DropdownText>
           <DropdownMenu>
             <DropdownLink
+              data-testid="contrib-logout"
               onClick={() => this.logOut()}
               onKeyPress={() => this.logOut()}
               role="link"
