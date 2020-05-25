@@ -8,12 +8,16 @@ expect.extend({
   /**
    * @param {import("react-test-renderer").ReactTestRenderer} reactTestRenderer
    * @param {number} expected
-   * @param {string} testId Targetted children `data-testid`.
+   * @param {string=} testId Targetted children `data-testid`.
    *
    * @returns {jest.CustomMatcherResult}
    */
   toHaveTestRenderedChildLength(reactTestRenderer, expected, testId) {
-    if (typeof testId !== "string") {
+    if (typeof expected !== "number") {
+      throw new Error(`Error: <expected> must be a number.`);
+    }
+
+    if (testId !== undefined && typeof testId !== "string") {
       throw new Error(`Error: <testid> must be a string.`);
     }
 
