@@ -14,7 +14,7 @@ export default function* load({ meta: { pageIndex, query } }) {
     }
 
     if (query.length > 0) {
-      request.or.ilike("url", query);
+      request.ilike("url", query);
     }
 
     const { data: list, pagesLength } = yield request.get("/logs", true);
@@ -26,7 +26,7 @@ export default function* load({ meta: { pageIndex, query } }) {
         pagesLength,
       }),
     );
-  } catch (err) {
+  } catch (err) /* istanbul ignore next */ {
     if (err.response !== undefined && err.response.status === 416) {
       const pageIndex = Math.floor(Number(err.response.headers["content-range"].substr(2)) / 10);
 

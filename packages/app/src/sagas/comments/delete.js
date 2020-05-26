@@ -12,7 +12,7 @@ export default function* _delete({ meta: { answerId, ids } }) {
 
     yield request.delete(API_PATH);
     yield put(comments.load(answerId));
-  } catch (err) {
+  } catch (err) /* istanbul ignore next */ {
     toast.error(err.message);
     yield put(comments.deleteFailure({ message: null }));
   }

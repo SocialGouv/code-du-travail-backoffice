@@ -13,7 +13,7 @@ export default function* removeReferences({ meta: { ids }, next }) {
     yield request.delete(API_PATH);
 
     next();
-  } catch (err) {
+  } catch (err) /* istanbul ignore next */ {
     toast.error(err.message);
     yield put(answers.removeReferencesFailure({ message: null }));
   }

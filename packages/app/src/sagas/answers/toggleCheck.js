@@ -14,7 +14,7 @@ export default function* toggleCheck({ meta: { ids } }) {
       payload: { checked: newChecked },
       type: actionTypes.ANSWERS_TOGGLE_CHECK_SUCESS,
     });
-  } catch (err) {
+  } catch (err) /* istanbul ignore next */ {
     toast.error(err.message);
     yield put(answers.toggleCheckFailure({ message: null }));
   }

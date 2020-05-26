@@ -4,7 +4,7 @@ import React from "react";
 import { put, select } from "redux-saga/effects";
 
 import * as actions from "../../actions";
-import { ANSWER_STATE, ANSWER_STATES, USER_ROLE } from "../../constants";
+import { ANSWER_STATES, USER_ROLE } from "../../constants";
 import shortenAgreementName from "../../helpers/shortenAgreementName";
 import customPostgrester from "../../libs/customPostgrester";
 import getCurrentUser from "../../libs/getCurrentUser";
@@ -13,7 +13,7 @@ import { getAnswersFilters } from "../../selectors";
 
 export default function* load({ meta: { pagesIndex } }) {
   try {
-    const { agreements: userAgreements, id: userId, role: userRole } = getCurrentUser();
+    const { agreements: userAgreementIds, role: userRole } = getCurrentUser();
     const filters = yield select(getAnswersFilters);
     const request = customPostgrester();
 
@@ -24,17 +24,23 @@ export default function* load({ meta: { pagesIndex } }) {
         filters.states.length > 0 ? filters.states.map(({ value }) => value) : ANSWER_STATES;
       request.in("state", states);
 
-      if (userRole === USER_ROLE.CONTRIBUTOR) {
-        request.in("agreement_id", userAgreements, true);
+      if (filters.agreements.length > 0) {
+        const selectedAgreementIds = filters.agreements.map(({ value }) => value);
+        const allowedSelectedAgreementIds =
+          userRole === USER_ROLE.ADMINISTRATOR
+            ? selectedAgreementIds
+            : selectedAgreementIds.filter(id => userAgreementIds.includes(id));
 
-        if (!states.includes(ANSWER_STATE.TO_DO)) {
-          request.eq("user_id", userId);
-        }
+        request.in("agreement_id", allowedSelectedAgreementIds, true);
+      } else if (userRole === USER_ROLE.CONTRIBUTOR) {
+        request.in("agreement_id", userAgreementIds, true);
       }
 
-      if (filters.agreements.length > 0) {
-        const agreementIds = filters.agreements.map(({ value }) => value);
-        request.in("agreement_id", agreementIds, true);
+      if (userRole === USER_ROLE.ADMINISTRATOR) {
+        if (filters.agreements.length > 0) {
+          const agreementIds = filters.agreements.map(({ value }) => value);
+          request.in("agreement_id", agreementIds, true);
+        }
       }
 
       if (filters.questions.length > 0) {
@@ -87,7 +93,7 @@ export default function* load({ meta: { pagesIndex } }) {
         pagesLength,
       }),
     );
-  } catch (err) {
+  } catch (err) /* istanbul ignore next */ {
     if (err.response !== undefined && err.response.status === 416) {
       toast.error(
         <span>

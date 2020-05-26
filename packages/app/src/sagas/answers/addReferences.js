@@ -11,7 +11,7 @@ export default function* addReferences({ meta: { data }, next }) {
     yield customPostgrester().post(API_PATH, data);
 
     next();
-  } catch (err) {
+  } catch (err) /* istanbul ignore next */ {
     toast.error(err.message);
     yield put(answers.addReferencesFailure({ message: null }));
   }
