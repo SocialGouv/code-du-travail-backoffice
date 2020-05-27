@@ -22,7 +22,7 @@ export default function* createOne({ meta: { answerId, isPrivate, value } }) {
     yield request.post(API_PATH, data);
     yield put({ type: actionTypes.COMMENT_CREATE_ONE_SUCCESS });
     yield put(comments.load(answerId));
-  } catch (err) {
+  } catch (err) /* istanbul ignore next */ {
     toast.error(err.message);
     yield put(comments.addOneFailure({ message: null }));
   }

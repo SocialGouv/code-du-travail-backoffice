@@ -1,7 +1,7 @@
 import { put, takeLatest } from "redux-saga/effects";
 
-import { actionTypes } from "../actions";
-import toast from "../libs/toast";
+import { actionTypes } from "../../actions";
+import toast from "../../libs/toast";
 
 let ACTION = resetAction();
 
@@ -18,7 +18,7 @@ function open({ meta: { action } }) {
 function* submit() {
   try {
     yield put(ACTION());
-  } catch (err) {
+  } catch (err) /* istanbul ignore next */ {
     toast.error(err.message);
   }
 

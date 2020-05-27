@@ -28,7 +28,7 @@ export default function* setFilter({ meta: { filters } }) {
     });
 
     yield put(answers.load(0));
-  } catch (err) {
+  } catch (err) /* istanbul ignore next */ {
     toast.error(err.message);
     yield put(answers.setFiltersFailure({ message: null }));
   }

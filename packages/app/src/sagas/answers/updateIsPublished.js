@@ -22,7 +22,7 @@ export default function* updateIsPublished({ meta: { ids, is, next } }) {
     );
 
     next();
-  } catch (err) {
+  } catch (err) /* istanbul ignore next */ {
     toast.error(err.message);
     yield put(answers.updateIsPublishedFailure({ message: null }));
   }

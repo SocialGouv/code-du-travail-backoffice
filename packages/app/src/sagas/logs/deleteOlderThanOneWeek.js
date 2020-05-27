@@ -24,7 +24,7 @@ export default function* deleteOlderThanOneWeek() {
     yield deleteRequest.post(API_DELETE_PATH);
     toast.success(`${customNumeral(data.length).format("0,0")} logs ont été purgés.`);
     yield put(logs.load({ pageIndex: -1 }));
-  } catch (err) {
+  } catch (err) /* istanbul ignore next */ {
     toast.error(err.message);
     yield put(logs.deleteOlderThanOneWeekFailure({ message: null }));
   }

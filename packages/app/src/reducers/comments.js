@@ -1,6 +1,6 @@
 import { actionTypes } from "../actions/index";
 
-const initialState = {
+export const initialState = {
   answerId: null,
   currentIsLoading: false,
   currentIsPrivate: false,

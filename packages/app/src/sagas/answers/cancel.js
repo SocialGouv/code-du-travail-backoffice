@@ -31,7 +31,7 @@ export default function* cancel({ meta: { ids, next } }) {
     );
 
     next();
-  } catch (err) {
+  } catch (err) /* istanbul ignore next */ {
     toast.error(err.message);
     yield put(answers.cancelFailure({ message: null }));
   }

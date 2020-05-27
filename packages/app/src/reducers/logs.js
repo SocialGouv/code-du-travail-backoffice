@@ -1,6 +1,6 @@
 import { actionTypes } from "../actions/index";
 
-const initialState = {
+export const initialState = {
   checked: [],
   error: null,
   isLoading: true,

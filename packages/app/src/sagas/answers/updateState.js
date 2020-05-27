@@ -49,7 +49,7 @@ export default function* updateState({ meta: { ids, next, state } }) {
     );
 
     next();
-  } catch (err) {
+  } catch (err) /* istanbul ignore next */ {
     toast.error(err.message);
     yield put(answers.updateStateFailure({ message: null }));
   }

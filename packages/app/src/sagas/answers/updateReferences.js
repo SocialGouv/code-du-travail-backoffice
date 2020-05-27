@@ -14,7 +14,7 @@ export default function* updateReferences({ meta: { data }, next }) {
     });
 
     next();
-  } catch (err) {
+  } catch (err) /* istanbul ignore next */ {
     toast.error(err.message);
     yield put(answers.updateReferencesFailure({ message: null }));
   }

@@ -10,7 +10,7 @@ import toast from "../../libs/toast";
 export default function* load({ meta: { category, idcc, query } }) {
   try {
     if (query.length === 0) {
-      yield put(legalReferences.loadSuccess({ data: [], query }));
+      yield put(legalReferences.loadSuccess({ category, list: [] }));
 
       return;
     }
@@ -29,7 +29,7 @@ export default function* load({ meta: { category, idcc, query } }) {
     }));
 
     yield put(legalReferences.loadSuccess({ category, list }));
-  } catch (err) {
+  } catch (err) /* istanbul ignore next */ {
     toast.error(err.message);
     yield put(legalReferences.loadFailure({ message: null }));
   }

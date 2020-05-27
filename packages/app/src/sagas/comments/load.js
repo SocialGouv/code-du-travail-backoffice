@@ -13,7 +13,7 @@ export default function* load({ meta: { answerId } }) {
     const { data: list } = yield request.get(API_PATH);
 
     yield put(comments.loadSuccess({ list }));
-  } catch (err) {
+  } catch (err) /* istanbul ignore next */ {
     toast.error(err.message);
     yield put(comments.loadFailure({ message: null }));
   }

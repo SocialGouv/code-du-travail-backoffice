@@ -38,7 +38,7 @@ export default function* updateGenericReference({ meta: { genericReference, ids,
     );
 
     next();
-  } catch (err) {
+  } catch (err) /* istanbul ignore next */ {
     toast.error(err.message);
     yield put(answers.updateGenericReferenceFailure({ message: null }));
   }

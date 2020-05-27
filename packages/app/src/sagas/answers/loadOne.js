@@ -33,7 +33,7 @@ export default function* loadOne({ meta: { id } }) {
     answer.references = references;
 
     yield put(answers.loadOneSuccess(answer));
-  } catch (err) {
+  } catch (err) /* istanbul ignore next */ {
     toast.error(err.message);
     yield put(answers.loadOneFailure({ message: null }));
   }
