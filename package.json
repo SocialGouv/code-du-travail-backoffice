@@ -39,10 +39,10 @@
     "shelljs": "0.8.4"
   },
   "devDependencies": {
-    "@socialgouv/eslint-config-react-strict": "0.22.1",
-    "@socialgouv/eslint-config-strict": "0.22.1",
-    "@socialgouv/kali-data": "1.49.0",
-    "@testing-library/jest-dom": "5.8.0",
+    "@socialgouv/eslint-config-react-strict": "0.25.0",
+    "@socialgouv/eslint-config-strict": "0.25.0",
+    "@socialgouv/kali-data": "1.55.0",
+    "@testing-library/jest-dom": "5.9.0",
     "@types/cucumber": "6.0.1",
     "@types/jest": "25.2.3",
     "boxen": "4.2.0",
@@ -60,12 +60,12 @@
     "ora": "4.0.4",
     "postgrester": "1.4.0",
     "prettier": "2.0.5",
-    "puppeteer": "3.1.0",
+    "puppeteer": "3.2.0",
     "typescript": "3.9.3",
     "yargs": "15.3.1"
   },
   "resolutions": {
-    "@babel/preset-react": "^7.9.4"
+    "@babel/preset-react": "^7.10.1"
   },
   "workspaces": [
     "packages/*"
