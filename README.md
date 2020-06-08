@@ -1,7 +1,8 @@
 # CDTN Back-office
 
-[![Travis CI Status][img-travis]][link-travis]
-[![Coveralls Code Coverage][img-codecov]][link-codecov]
+[![licence Apache 2.0][img-license]][link-license]
+[![Travis CI Status][img-build]][link-build]
+[![Coveralls Code Coverage][img-coverage]][link-coverage]
 
 Data administration portal for the official [Code du travail numérique][link-cdtn] (French Labor
 Code and Agreements).
@@ -10,18 +11,14 @@ Code and Agreements).
 
 Please check the [contributing documentation][link-contributing].
 
-### License
-
-[![licence Apache 2.0][img-license]][link-license]
-
 ---
 
-[img-codecov]: https://img.shields.io/codecov/c/github/SocialGouv/code-du-travail-backoffice?style=flat-square
-[img-license]: https://img.shields.io/github/license/SocialGouv/code-du-travail-backoffice?style=for-the-badge
-[img-travis]: https://img.shields.io/travis/SocialGouv/code-du-travail-backoffice/dev.svg?style=flat-square
+[img-build]: https://badgen.net/travis/SocialGouv/code-du-travail-backoffice?style=flat-square
+[img-coverage]: https://badgen.net/codecov/c/github/SocialGouv/code-du-travail-backoffice?style=flat-square
+[img-license]: https://badgen.net/github/license/SocialGouv/code-du-travail-backoffice?style=for-the-badge
 
+[link-build]: https://travis-ci.com/SocialGouv/code-du-travail-backoffice
 [link-cdtn]: https://code.travail.gouv.fr/
-[link-codecov]: https://codecov.io/gh/SocialGouv/code-du-travail-backoffice
+[link-coverage]: https://codecov.io/gh/SocialGouv/code-du-travail-backoffice
 [link-contributing]: https://github.com/SocialGouv/code-du-travail-backoffice/blob/master/CONTRIBUTING.md
 [link-license]: https://github.com/SocialGouv/code-du-travail-backoffice/blob/master/LICENSE
-[link-travis]: https://travis-ci.com/SocialGouv/code-du-travail-backoffice
