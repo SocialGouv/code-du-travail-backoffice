@@ -23,6 +23,7 @@ export const Container = styled(Flex)`
 export const Label = styled.div`
   color: var(--color-japenese-indigo);
   font-weight: 600;
+  user-select: text;
 `;
 
 export const ButtonsContainer = styled.div`
