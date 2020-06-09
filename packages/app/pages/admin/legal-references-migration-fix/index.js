@@ -187,7 +187,6 @@ class LegalReferencesMigrationIndex extends React.Component {
           <LegalReferences
             category={LEGAL_REFERENCE_CATEGORY.AGREEMENT}
             isLoading={isLoading}
-            noContent
             onChange={this.updateReference.bind(this)}
             references={references}
           />
