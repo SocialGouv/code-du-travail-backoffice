@@ -1,11 +1,11 @@
 import React from "react";
 import { create } from "react-test-renderer";
 
-jest.mock("../../AdminMenu");
+jest.mock("../../AdminMenu", () => jest.fn(() => "AdminMenu"));
 jest.mock("../../Main");
 
 import AdminMain from "..";
-import AdminMenu from "../../AdminMenu";
+import AdminMenuWithROuter from "../../AdminMenu";
 import Main from "../../Main";
 
 describe("layouts/<AdminMain />", () => {
@@ -23,7 +23,7 @@ describe("layouts/<AdminMain />", () => {
     it(`should render as expected`, () => {
       create(<AdminMain {...PROPS} />);
 
-      expect(AdminMenu).toHaveBeenCalledTimes(1);
+      expect(AdminMenuWithROuter).toHaveBeenCalledTimes(1);
       expect(Main).toHaveBeenCalledTimes(1);
     });
 
@@ -40,7 +40,7 @@ describe("layouts/<AdminMain />", () => {
     it(`should render as expected`, () => {
       create(<AdminMain {...PROPS} />);
 
-      expect(AdminMenu).toHaveBeenCalledTimes(1);
+      expect(AdminMenuWithROuter).toHaveBeenCalledTimes(1);
       expect(Main).toHaveBeenCalledTimes(1);
     });
 
@@ -57,7 +57,7 @@ describe("layouts/<AdminMain />", () => {
     it(`should render as expected`, () => {
       const $adminMain = create(<AdminMain {...PROPS} />);
 
-      expect(AdminMenu).toHaveBeenCalledTimes(1);
+      expect(AdminMenuWithROuter).toHaveBeenCalledTimes(1);
       expect(Main).toHaveBeenCalledTimes(1);
       expect($adminMain).toHaveTestRenderedProperty("noScroll", false, "content");
       expect($adminMain).toHaveTestRenderedStyleRule("overflow-y", "scroll", {}, "content");

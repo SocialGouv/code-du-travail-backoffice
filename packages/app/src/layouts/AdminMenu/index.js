@@ -1,27 +1,44 @@
-import Router from "next/router";
+import Router, { withRouter } from "next/router";
+import PropTypes from "prop-types";
 import React from "react";
 
 import cache from "../../cache";
 import { USER_ROLE } from "../../constants";
-import isNode from "../../helpers/isNode";
-import styles, { Link, Subtitle } from "./styles";
+import { Container, Link, Subtitle } from "./index.style";
 
-export default class AdminMenu extends React.PureComponent {
-  goTo(resource) {
-    Router.push(`/admin${resource}`);
+export class AdminMenu extends React.PureComponent {
+  goTo(path) {
+    Router.push(`/admin${path}`);
   }
 
-  isActive(resource) {
-    if (isNode()) {
+  isActive(path) {
+    const { router } = this.props;
+
+    // For tests purpose:
+    /* istanbul ignore next */
+    if (router === undefined) {
       return false;
     }
 
-    if (resource.length === 0) {
-      return Router.pathname === `/admin` || /^\/admin[^/]+$/.test(Router.pathname);
+    if (path === "") {
+      return router.pathname === `/admin` || /^\/admin[^/]+$/.test(router.pathname);
     }
 
+    return router.pathname === `/admin${path}` || router.pathname.startsWith(`/admin${path}/`);
+  }
+
+  renderLink(path, text, dataTestId) {
     return (
-      Router.pathname === `/admin${resource}` || Router.pathname.startsWith(`/admin${resource}/`)
+      <Link
+        data-testid={dataTestId}
+        isActive={this.isActive(path)}
+        onClick={() => this.goTo(path)}
+        onKeyPress={() => this.goTo(path)}
+        role="link"
+        tabIndex="0"
+      >
+        {text}
+      </Link>
     );
   }
 
@@ -29,151 +46,50 @@ export default class AdminMenu extends React.PureComponent {
     const me = cache.get("me");
 
     if (me === null) {
-      return (
-        <div className="Container">
-          <style jsx>{styles}</style>
-        </div>
-      );
+      return <Container />;
     }
 
     const isRegionalAdmin = me.role === USER_ROLE.REGIONAL_ADMINISTRATOR;
 
     if (isRegionalAdmin) {
       return (
-        <div className="Container">
-          <style jsx>{styles}</style>
-          <Link
-            data-testid="regional-admin-dashboard"
-            isActive={this.isActive("")}
-            onClick={() => this.goTo("")}
-            onKeyPress={() => this.goTo("")}
-            role="link"
-            tabIndex="0"
-          >
-            Tableau de bord
-          </Link>
-        </div>
+        <Container>{this.renderLink("", "Tableau de bord", "regional-admin-dashboard")}</Container>
       );
     }
 
     return (
-      <div className="Container">
-        <style jsx>{styles}</style>
-        <Link
-          data-testid="admin-dashboard"
-          isActive={this.isActive("")}
-          onClick={() => this.goTo("")}
-          onKeyPress={() => this.goTo("")}
-          role="link"
-          tabIndex="0"
-        >
-          Tableau de bord
-        </Link>
-        <Link
-          data-testid="admin-agreements"
-          isActive={this.isActive("/agreements")}
-          onClick={() => this.goTo("/agreements")}
-          onKeyPress={() => this.goTo("/agreements")}
-          role="link"
-          tabIndex="0"
-        >
-          Conventions
-        </Link>
-        <Link
-          data-testid="admin-questions"
-          isActive={this.isActive("/questions")}
-          onClick={() => this.goTo("/questions")}
-          onKeyPress={() => this.goTo("/questions")}
-          role="link"
-          tabIndex="0"
-        >
-          Questions
-        </Link>
-        <Link
-          data-testid="admin-answers"
-          isActive={this.isActive("/answers")}
-          onClick={() => this.goTo("/answers")}
-          onKeyPress={() => this.goTo("/answers")}
-          role="link"
-          tabIndex="0"
-        >
-          Réponses
-        </Link>
-        <Link
-          data-testid="admin-generic-answers"
-          isActive={this.isActive("/generic-answers")}
-          onClick={() => this.goTo("/generic-answers")}
-          onKeyPress={() => this.goTo("/generic-answers")}
-          role="link"
-          tabIndex="0"
-        >
-          Réponses génériques
-        </Link>
-        <Link
-          data-testid="admin-locations"
-          isActive={this.isActive("/locations")}
-          onClick={() => this.goTo("/locations")}
-          onKeyPress={() => this.goTo("/locations")}
-          role="link"
-          tabIndex="0"
-        >
-          Unités
-        </Link>
-        <Link
-          data-testid="admin-users"
-          isActive={this.isActive("/users")}
-          onClick={() => this.goTo("/users")}
-          onKeyPress={() => this.goTo("/users")}
-          role="link"
-          tabIndex="0"
-        >
-          Utilisateurs
-        </Link>
+      <Container>
+        {this.renderLink("", "Tableau de bord", "admin-dashboard")}
+        {this.renderLink("/agreements", "Conventions", "admin-agreements")}
+        {this.renderLink("/questions", "Questions", "admin-questions")}
+        {this.renderLink("/answers-references", "Références légales", "admin-answers-references")}
+        {this.renderLink("/answers", "Réponses", "admin-answers")}
+        {this.renderLink("/generic-answers", "Réponses génériques", "admin-generic-answers")}
+        {this.renderLink("/locations", "Unités", "admin-locations")}
+        {this.renderLink("/users", "Utilisateurs", "admin-users")}
 
         <Subtitle>Scripts</Subtitle>
-        <Link
-          data-testid="admin-legal-references-migration"
-          isActive={this.isActive("/legal-references-migration")}
-          onClick={() => this.goTo("/legal-references-migration")}
-          onKeyPress={() => this.goTo("/legal-references-migration")}
-          role="link"
-          tabIndex="0"
-        >
-          Migrer les références
-        </Link>
-        <Link
-          data-testid="admin-legal-references-migration-fix"
-          isActive={this.isActive("/legal-references-migration-fix")}
-          onClick={() => this.goTo("/legal-references-migration-fix")}
-          onKeyPress={() => this.goTo("/legal-references-migration-fix")}
-          role="link"
-          tabIndex="0"
-        >
-          Différences (26/02/2020)
-        </Link>
+        {this.renderLink(
+          "/legal-references-migration",
+          "Migrer les références",
+          "admin-legal-references-migration",
+        )}
+        {this.renderLink(
+          "/legal-references-migration-fix",
+          "Différences (26/02/2020)",
+          "admin-legal-references-migration-fix",
+        )}
 
         <Subtitle>Maintenance</Subtitle>
-        <Link
-          data-testid="admin-logs"
-          isActive={this.isActive("/logs")}
-          onClick={() => this.goTo("/logs")}
-          onKeyPress={() => this.goTo("/logs")}
-          role="link"
-          tabIndex="0"
-        >
-          Logs
-        </Link>
-        <Link
-          data-testid="admin-migrations"
-          isActive={this.isActive("/migrations")}
-          onClick={() => this.goTo("/migrations")}
-          onKeyPress={() => this.goTo("/migrations")}
-          role="link"
-          tabIndex="0"
-        >
-          Migrations
-        </Link>
-      </div>
+        {this.renderLink("/logs", "Logs", "admin-logs")}
+        {this.renderLink("/migrations", "Migrations", "admin-migrations")}
+      </Container>
     );
   }
 }
+
+AdminMenu.propTypes = {
+  router: PropTypes.any,
+};
+
+export default withRouter(AdminMenu);

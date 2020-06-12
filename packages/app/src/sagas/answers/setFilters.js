@@ -1,7 +1,7 @@
 import jsCookie from "js-cookie";
 import { put, select } from "redux-saga/effects";
 
-import { actionTypes, answers } from "../../actions";
+import * as actions from "../../actions";
 import { SESSION } from "../../constants";
 import toast from "../../libs/toast";
 import { getAnswersFilters } from "../../selectors";
@@ -24,12 +24,12 @@ export default function* setFilter({ meta: { filters } }) {
 
     yield put({
       payload: { filters: nextFilters },
-      type: actionTypes.ANSWERS_SET_FILTERS_SUCCESS,
+      type: actions.actionTypes.ANSWERS_SET_FILTERS_SUCCESS,
     });
 
-    yield put(answers.load(0));
+    yield put(actions.answers.load(0));
   } catch (err) /* istanbul ignore next */ {
     toast.error(err.message);
-    yield put(answers.setFiltersFailure({ message: null }));
+    yield put(actions.answers.setFiltersFailure({ message: null }));
   }
 }

@@ -19,6 +19,8 @@
     "@zeit/next-css": "1.0.1",
     "babel-plugin-emotion": "10.0.33",
     "colors": "1.4.0",
+    "emotion": "10.0.27",
+    "emotion-server": "10.0.27",
     "isomorphic-unfetch": "3.0.0",
     "js-cookie": "2.2.1",
     "koa": "2.12.1",

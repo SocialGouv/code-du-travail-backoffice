@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
+import PropTypes from "prop-types";
 import React from "react";
-
-import { validateMandatoryNullableString } from "../props/validators";
 
 const Container = styled.div`
   background-color: var(--color-label-background);
@@ -33,7 +32,7 @@ const Container = styled.div`
     padding: 0.35rem 0.6rem 0.4rem;
     position: absolute;
     text-align: left;
-    bottom: 2rem;
+    top: 2rem;
     width: 22rem;
     white-space: normal;
     z-index: 2;
@@ -50,14 +49,14 @@ const Container = styled.div`
 
 const Idcc = ({ code, name, ...props }) => (
   <Container {...props}>
-    {code === null ? "CDT" : code}
-    <div data-testid="tooltip">{name === null ? "Code du travail" : name}</div>
+    {code ?? "CDT"}
+    <div data-testid="tooltip">{name ?? "Code du travail"}</div>
   </Container>
 );
 
 Idcc.propTypes = {
-  code: validateMandatoryNullableString,
-  name: validateMandatoryNullableString,
+  code: PropTypes.string,
+  name: PropTypes.string,
 };
 
 export default Idcc;

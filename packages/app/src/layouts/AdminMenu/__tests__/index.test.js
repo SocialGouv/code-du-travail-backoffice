@@ -8,12 +8,18 @@ import Router from "next/router";
 jest.mock("../../../cache");
 jest.mock("../../../helpers/isNode");
 
-import AdminMenu from "..";
+import { AdminMenu } from "..";
 import runTestRenderedProperty from "../../../../tests/utils/runTestRenderedProperty";
 import cache from "../../../cache";
 import isNode from "../../../helpers/isNode";
 
 describe("layouts/<AdminMenu />", () => {
+  const PROPS = {
+    router: {
+      pathname: "/",
+    },
+  };
+
   beforeAll(() => {
     isNode.mockReturnValue(false);
   });
@@ -21,7 +27,7 @@ describe("layouts/<AdminMenu />", () => {
   describe("when the user is not authenticated", () => {
     it(`should render as expected`, () => {
       cache.get.mockReturnValueOnce(null);
-      const $adminMenu = create(<AdminMenu />);
+      const $adminMenu = create(<AdminMenu {...PROPS} />);
 
       expect($adminMenu).toHaveTestRenderedChildLength(0);
     });
@@ -33,8 +39,8 @@ describe("layouts/<AdminMenu />", () => {
     });
 
     it(`should render as expected`, () => {
-      Router.pathname = "/admin";
-      const $adminMenu = create(<AdminMenu />);
+      PROPS.router.pathname = "/admin";
+      const $adminMenu = create(<AdminMenu {...PROPS} />);
 
       expect($adminMenu).toHaveTestRenderedChildLength(1);
       expect($adminMenu).toHaveTestRenderedChild("regional-admin-dashboard");
@@ -54,7 +60,7 @@ describe("layouts/<AdminMenu />", () => {
     });
 
     it(`should behave as expected`, () => {
-      const $adminMenu = create(<AdminMenu />);
+      const $adminMenu = create(<AdminMenu {...PROPS} />);
 
       runTestRenderedProperty($adminMenu, "onClick", "regional-admin-dashboard");
       runTestRenderedProperty($adminMenu, "onKeyPress", "regional-admin-dashboard");
@@ -71,12 +77,13 @@ describe("layouts/<AdminMenu />", () => {
     });
 
     it(`should render as expected`, () => {
-      const $adminMenu = create(<AdminMenu />);
+      const $adminMenu = create(<AdminMenu {...PROPS} />);
 
-      expect($adminMenu).toHaveTestRenderedChildLength(13);
+      expect($adminMenu).toHaveTestRenderedChildLength(14);
       expect($adminMenu).toHaveTestRenderedChild("admin-dashboard");
       expect($adminMenu).toHaveTestRenderedChild("admin-agreements");
       expect($adminMenu).toHaveTestRenderedChild("admin-questions");
+      expect($adminMenu).toHaveTestRenderedChild("admin-answers-references");
       expect($adminMenu).toHaveTestRenderedChild("admin-answers");
       expect($adminMenu).toHaveTestRenderedChild("admin-generic-answers");
       expect($adminMenu).toHaveTestRenderedChild("admin-locations");
@@ -89,11 +96,11 @@ describe("layouts/<AdminMenu />", () => {
 
     describe(`when path is "/admin"`, () => {
       beforeAll(() => {
-        Router.pathname = "/admin";
+        PROPS.router.pathname = "/admin";
       });
 
       it(`should render as expected`, () => {
-        const $adminMenu = create(<AdminMenu />);
+        const $adminMenu = create(<AdminMenu {...PROPS} />);
 
         expect($adminMenu).toHaveTestRenderedProperty("isActive", true, "admin-dashboard");
         expect($adminMenu).toHaveTestRenderedProperty("isActive", false, "admin-answers");
@@ -126,11 +133,11 @@ describe("layouts/<AdminMenu />", () => {
 
     describe(`when path is "/admin/answers"`, () => {
       beforeAll(() => {
-        Router.pathname = "/admin/answers";
+        PROPS.router.pathname = "/admin/answers";
       });
 
       it(`should render as expected`, () => {
-        const $adminMenu = create(<AdminMenu />);
+        const $adminMenu = create(<AdminMenu {...PROPS} />);
 
         expect($adminMenu).toHaveTestRenderedProperty("isActive", false, "admin-dashboard");
         expect($adminMenu).toHaveTestRenderedProperty("isActive", true, "admin-answers");
@@ -142,7 +149,7 @@ describe("layouts/<AdminMenu />", () => {
         });
 
         it(`should render as expected`, () => {
-          Router.pathname = "/admin/answers";
+          PROPS.router.pathname = "/admin/answers";
           const $adminMenu = create(<AdminMenu />);
 
           expect($adminMenu).toHaveTestRenderedProperty("isActive", false, "admin-dashboard");
@@ -152,7 +159,7 @@ describe("layouts/<AdminMenu />", () => {
     });
 
     it(`should behave as expected`, () => {
-      const $adminMenu = create(<AdminMenu />);
+      const $adminMenu = create(<AdminMenu {...PROPS} />);
 
       runTestRenderedProperty($adminMenu, "onClick", "admin-dashboard");
       runTestRenderedProperty($adminMenu, "onKeyPress", "admin-dashboard");
@@ -160,6 +167,8 @@ describe("layouts/<AdminMenu />", () => {
       runTestRenderedProperty($adminMenu, "onKeyPress", "admin-agreements");
       runTestRenderedProperty($adminMenu, "onClick", "admin-questions");
       runTestRenderedProperty($adminMenu, "onKeyPress", "admin-questions");
+      runTestRenderedProperty($adminMenu, "onClick", "admin-answers-references");
+      runTestRenderedProperty($adminMenu, "onKeyPress", "admin-answers-references");
       runTestRenderedProperty($adminMenu, "onClick", "admin-answers");
       runTestRenderedProperty($adminMenu, "onKeyPress", "admin-answers");
       runTestRenderedProperty($adminMenu, "onClick", "admin-generic-answers");
@@ -177,29 +186,31 @@ describe("layouts/<AdminMenu />", () => {
       runTestRenderedProperty($adminMenu, "onClick", "admin-migrations");
       runTestRenderedProperty($adminMenu, "onKeyPress", "admin-migrations");
 
-      expect(Router.push).toHaveBeenCalledTimes(22);
+      expect(Router.push).toHaveBeenCalledTimes(24);
       expect(Router.push).toHaveBeenNthCalledWith(1, "/admin");
       expect(Router.push).toHaveBeenNthCalledWith(2, "/admin");
       expect(Router.push).toHaveBeenNthCalledWith(3, "/admin/agreements");
       expect(Router.push).toHaveBeenNthCalledWith(4, "/admin/agreements");
       expect(Router.push).toHaveBeenNthCalledWith(5, "/admin/questions");
       expect(Router.push).toHaveBeenNthCalledWith(6, "/admin/questions");
-      expect(Router.push).toHaveBeenNthCalledWith(7, "/admin/answers");
-      expect(Router.push).toHaveBeenNthCalledWith(8, "/admin/answers");
-      expect(Router.push).toHaveBeenNthCalledWith(9, "/admin/generic-answers");
-      expect(Router.push).toHaveBeenNthCalledWith(10, "/admin/generic-answers");
-      expect(Router.push).toHaveBeenNthCalledWith(11, "/admin/locations");
-      expect(Router.push).toHaveBeenNthCalledWith(12, "/admin/locations");
-      expect(Router.push).toHaveBeenNthCalledWith(13, "/admin/users");
-      expect(Router.push).toHaveBeenNthCalledWith(14, "/admin/users");
-      expect(Router.push).toHaveBeenNthCalledWith(15, "/admin/legal-references-migration");
-      expect(Router.push).toHaveBeenNthCalledWith(16, "/admin/legal-references-migration");
-      expect(Router.push).toHaveBeenNthCalledWith(17, "/admin/legal-references-migration-fix");
-      expect(Router.push).toHaveBeenNthCalledWith(18, "/admin/legal-references-migration-fix");
-      expect(Router.push).toHaveBeenNthCalledWith(19, "/admin/logs");
-      expect(Router.push).toHaveBeenNthCalledWith(20, "/admin/logs");
-      expect(Router.push).toHaveBeenNthCalledWith(21, "/admin/migrations");
-      expect(Router.push).toHaveBeenNthCalledWith(22, "/admin/migrations");
+      expect(Router.push).toHaveBeenNthCalledWith(7, "/admin/answers-references");
+      expect(Router.push).toHaveBeenNthCalledWith(8, "/admin/answers-references");
+      expect(Router.push).toHaveBeenNthCalledWith(9, "/admin/answers");
+      expect(Router.push).toHaveBeenNthCalledWith(10, "/admin/answers");
+      expect(Router.push).toHaveBeenNthCalledWith(11, "/admin/generic-answers");
+      expect(Router.push).toHaveBeenNthCalledWith(12, "/admin/generic-answers");
+      expect(Router.push).toHaveBeenNthCalledWith(13, "/admin/locations");
+      expect(Router.push).toHaveBeenNthCalledWith(14, "/admin/locations");
+      expect(Router.push).toHaveBeenNthCalledWith(15, "/admin/users");
+      expect(Router.push).toHaveBeenNthCalledWith(16, "/admin/users");
+      expect(Router.push).toHaveBeenNthCalledWith(17, "/admin/legal-references-migration");
+      expect(Router.push).toHaveBeenNthCalledWith(18, "/admin/legal-references-migration");
+      expect(Router.push).toHaveBeenNthCalledWith(19, "/admin/legal-references-migration-fix");
+      expect(Router.push).toHaveBeenNthCalledWith(20, "/admin/legal-references-migration-fix");
+      expect(Router.push).toHaveBeenNthCalledWith(21, "/admin/logs");
+      expect(Router.push).toHaveBeenNthCalledWith(22, "/admin/logs");
+      expect(Router.push).toHaveBeenNthCalledWith(23, "/admin/migrations");
+      expect(Router.push).toHaveBeenNthCalledWith(24, "/admin/migrations");
     });
   });
 });

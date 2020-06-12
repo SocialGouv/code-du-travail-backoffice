@@ -1,17 +1,14 @@
 import styled from "@emotion/styled";
-import css from "styled-jsx/css";
 
 import _Subtitle from "../../elements/Subtitle";
 
-export default css`
-  .Container {
-    background-color: var(--color-dark-slate-gray);
-    display: flex;
-    flex-direction: column;
-    min-width: 13rem;
-    overflow-y: auto;
-    width: 13rem;
-  }
+export const Container = styled.div`
+  background-color: var(--color-dark-slate-gray);
+  display: flex;
+  flex-direction: column;
+  min-width: 13rem;
+  overflow-y: auto;
+  width: 13rem;
 `;
 
 export const Subtitle = styled(_Subtitle)`

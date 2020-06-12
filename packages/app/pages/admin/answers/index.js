@@ -55,8 +55,6 @@ export class AdminAnswersIndexPage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.$list = null;
-
     this.setPageIndex = this.setPageIndex.bind(this);
     this.setQueryFilter = debounce(this.setQueryFilter, 250).bind(this);
   }
@@ -164,7 +162,7 @@ export class AdminAnswersIndexPage extends React.Component {
     }
 
     return (
-      <List flexDirection="column" ref={node => (this.$list = node)}>
+      <List flexDirection="column">
         {list.map(answer => (
           <Answer
             data={answer}

@@ -1,4 +1,5 @@
-import withReduxSaga from "next-redux-saga";
+import { CacheProvider } from "@emotion/core";
+import * as emotion from "emotion";
 import App from "next/app";
 import React from "react";
 
@@ -39,11 +40,15 @@ class MainApp extends App {
     const hasError = statusCode !== undefined && statusCode >= 400;
 
     if (hasError || me.isAuthenticated) {
-      return <Component {...pageProps} />;
+      return (
+        <CacheProvider value={emotion.cache}>
+          <Component {...pageProps} />
+        </CacheProvider>
+      );
     }
 
     return <Login onLoggedIn={this.login.bind(this)} />;
   }
 }
 
-export default wrapper.withRedux(withReduxSaga(MainApp));
+export default wrapper.withRedux(MainApp);
