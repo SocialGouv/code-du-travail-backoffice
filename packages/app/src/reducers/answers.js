@@ -83,7 +83,7 @@ export default (state = initialState, { payload, type }) => {
         error: null,
         isLoading: false,
         length: payload.length,
-        list: payload.pagesIndex > 0 ? [...state.list, ...payload.list] : payload.list,
+        list: payload.list,
         pagesIndex: payload.pagesIndex,
         pagesLength: payload.pagesLength,
       };

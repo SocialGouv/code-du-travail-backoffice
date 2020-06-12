@@ -7,6 +7,7 @@ import { Flex } from "rebass";
 
 import * as actions from "../../../src/actions";
 import Answer from "../../../src/components/Answer";
+import Pagination from "../../../src/components/Pagination";
 import * as C from "../../../src/constants";
 import Button from "../../../src/elements/Button";
 import Checkbox from "../../../src/elements/Checkbox";
@@ -27,9 +28,6 @@ const List = styled(Flex)`
   padding-right: 1rem;
   min-height: 0;
   overflow-y: auto;
-`;
-const ListSpinner = styled(Flex)`
-  margin-top: 1rem;
 `;
 
 const FiltersContainer = styled(Flex)`
@@ -57,11 +55,9 @@ export class AdminAnswersIndexPage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.isListeningListScroll = false;
-
     this.$list = null;
 
-    this.onListScroll = this.onListScroll.bind(this);
+    this.setPageIndex = this.setPageIndex.bind(this);
     this.setQueryFilter = debounce(this.setQueryFilter, 250).bind(this);
   }
 
@@ -73,28 +69,8 @@ export class AdminAnswersIndexPage extends React.Component {
     this.props.dispatch(
       actions.answers.setFilters({
         isGeneric,
-        pageLength: 53,
       }),
     );
-  }
-
-  componentDidUpdate() {
-    const { answers } = this.props;
-
-    if (this.$list === null || answers.isLoading || this.isListeningListScroll) return;
-
-    this.$list.addEventListener("scroll", this.onListScroll);
-    this.isListeningListScroll = true;
-  }
-
-  onListScroll() {
-    const { answers, dispatch } = this.props;
-    if (answers.isLoading || answers.pagesIndex >= answers.pagesLength - 1) return;
-
-    const scrollTopLimit = this.$list.scrollHeight - this.$list.clientHeight - 1600;
-    if (this.$list.scrollTop > scrollTopLimit) {
-      dispatch(actions.answers.load(answers.pagesIndex + 1));
-    }
   }
 
   getCheckableAnswerIds() {
@@ -106,6 +82,13 @@ export class AdminAnswersIndexPage extends React.Component {
   setAgreeementsFilter(selected) {
     const agreements = selected !== null ? selected : [];
     this.props.dispatch(actions.answers.setFilter("agreements", agreements));
+  }
+
+  setPageIndex(pageIndex) {
+    const { answers, dispatch } = this.props;
+    if (answers.isLoading) return;
+
+    dispatch(actions.answers.load(pageIndex));
   }
 
   setQuestionsFilter(selected) {
@@ -191,11 +174,6 @@ export class AdminAnswersIndexPage extends React.Component {
             onClick={this.editAnswer.bind(this)}
           />
         ))}
-        {isLoading && (
-          <ListSpinner alignItems="center" justifyContent="center">
-            <LoadingSpinner />
-          </ListSpinner>
-        )}
       </List>
     );
   }
@@ -291,6 +269,12 @@ export class AdminAnswersIndexPage extends React.Component {
           </ActionsContainer>
 
           {this.renderAnswersList()}
+
+          <Pagination
+            onChange={this.setPageIndex}
+            pagesIndex={answers.pagesIndex}
+            pagesLength={answers.pagesLength}
+          />
         </Container>
       </AdminMainLayout>
     );
