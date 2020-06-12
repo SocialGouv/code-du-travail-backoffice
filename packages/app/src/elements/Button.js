@@ -10,7 +10,6 @@ const Container = styled(_Button)`
   border-radius: 0.125rem;
   color: ${p => p.foregroundColor};
   cursor: ${p => (p.disabled ? "not-allowed" : "pointer")};
-  font-size: 0.9375rem;
   font-weight: 600;
   line-height: ${p => (p.hasText ? 1.5 : 0)};
   margin-left: ${p => (p.withMarginLeft ? "1rem" : 0)};
@@ -26,10 +25,8 @@ const Container = styled(_Button)`
 
   svg {
     cursor: ${p => (p.disabled ? "not-allowed" : "pointer")};
-    height: 1rem;
     margin-right: ${p => (p.hasText ? "0.25rem" : 0)};
     padding-top: ${p => (p.hasText ? "0.125rem" : 0)};
-    /* width: 1rem; */
   }
 `;
 
