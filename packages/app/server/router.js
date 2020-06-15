@@ -1,14 +1,12 @@
 /* eslint-disable require-atomic-updates */
 
-const Router = require("koa-router");
+const Router = require("@koa/router");
 
 const router = new Router();
 
-function withoutAuth(nextApp, route) {
-  const handle = nextApp.getRequestHandler();
-
+function withoutAuth(requestHandler, route) {
   router.get(route, async ctx => {
-    await handle(ctx.req, ctx.res);
+    await requestHandler(ctx.req, ctx.res);
 
     ctx.respond = false;
   });
@@ -55,14 +53,8 @@ function withErrorAndAuth(nextApp, route, callback) {
   });
 }
 
-module.exports = function (nextApp) {
-  const handle = nextApp.getRequestHandler();
-
+module.exports = function (nextApp, requestHandler) {
   router.redirect("/login", "/");
-
-  router.get("/api/ccn/:ccn.json", async ctx => {
-    ctx.body = require(`@socialgouv/kali-data/data/${ctx.params.ccn}.json`);
-  });
 
   withErrorAndAuth(nextApp, "/answers/edit/:id", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/answers/edit", { ...ctx.params });
@@ -163,13 +155,13 @@ module.exports = function (nextApp) {
     });
   });
 
-  withoutAuth(nextApp, "/_next/*");
-  withoutAuth(nextApp, "/favicon.ico");
-  withoutAuth(nextApp, "/internal/*");
-  withoutAuth(nextApp, "/static/*");
+  withoutAuth(requestHandler, "/_next/(.*)");
+  withoutAuth(requestHandler, "/favicon.ico");
+  withoutAuth(requestHandler, "/internal/(.*)");
+  withoutAuth(requestHandler, "/static/(.*)");
 
-  withErrorAndAuth(nextApp, "*", async ctx => {
-    await handle(ctx.req, ctx.res);
+  withErrorAndAuth(nextApp, "(.*)", async ctx => {
+    await requestHandler(ctx.req, ctx.res);
   });
 
   return router.routes();

@@ -5,7 +5,7 @@ const isInternetExplorer = require("./middlewares/isInternetExplorer");
 const withAuthentication = require("./middlewares/withAuthentication");
 const withPostgres = require("./middlewares/withPostgres");
 
-const routes = require("./routes");
+const router = require("./router");
 
 const NODE_ENV = process.env.NODE_ENV !== undefined ? process.env.NODE_ENV : "development";
 const { APP_PORT } = process.env;
@@ -16,6 +16,7 @@ async function start() {
   await nextApp.prepare();
 
   const koaApp = new Koa();
+  const requestHandler = nextApp.getRequestHandler();
 
   // Show a page advising the user to use Chrome if the current browser is IE:
   koaApp.use(isInternetExplorer);
@@ -27,7 +28,7 @@ async function start() {
   koaApp.use(withAuthentication);
 
   // Attach routes:
-  koaApp.use(routes(nextApp));
+  koaApp.use(router(nextApp, requestHandler));
 
   koaApp.listen(APP_PORT, err => {
     if (err) throw err;
