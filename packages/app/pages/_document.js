@@ -1,10 +1,24 @@
+import { extractCritical } from "emotion-server";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps };
+    const styles = extractCritical(initialProps.html);
+
+    return {
+      ...initialProps,
+      styles: (
+        <>
+          {initialProps.styles}
+          <style
+            dangerouslySetInnerHTML={{ __html: styles.css }}
+            data-emotion-css={styles.ids.join(" ")}
+          />
+        </>
+      ),
+    };
   }
 
   render() {
