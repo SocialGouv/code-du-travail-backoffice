@@ -393,7 +393,20 @@ AdminForm.propTypes = {
   defaultData: PropTypes.object,
   fields: PropTypes.arrayOf(
     PropTypes.exact({
+      button: PropTypes.exact({
+        icon: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+      }),
+      helpText: PropTypes.string,
+      label: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
+      options: PropTypes.arrayOf(
+        PropTypes.exact({
+          label: PropTypes.string.isRequired,
+          value: PropTypes.any.isRequired,
+        }),
+      ),
+      type: PropTypes.oneOf(["input", "markdown", "select", "tags", "text"]).isRequired,
     }),
   ).isRequired,
   i18nIsFeminine: PropTypes.bool,
