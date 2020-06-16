@@ -70,11 +70,6 @@ export class AdminMenu extends React.PureComponent {
 
         <Subtitle>Scripts</Subtitle>
         {this.renderLink(
-          "/legal-references-migration",
-          "Migrer les références",
-          "admin-legal-references-migration",
-        )}
-        {this.renderLink(
           "/legal-references-migration-fix",
           "Différences (26/02/2020)",
           "admin-legal-references-migration-fix",
