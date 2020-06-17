@@ -36,32 +36,6 @@ export default function* load({ meta: { pagesIndex } }) {
       ) {
         request.is("dila_id", null);
       }
-
-      if (
-        states.includes(C.ANSWER_REFERENCE_STATE.IS_MIGRATED) &&
-        !states.includes(C.ANSWER_REFERENCE_STATE.NOT_IS_MIGRATED)
-      ) {
-        request.not.ilike("value", "IARTI");
-      }
-      if (
-        states.includes(C.ANSWER_REFERENCE_STATE.NOT_IS_MIGRATED) &&
-        !states.includes(C.ANSWER_REFERENCE_STATE.IS_MIGRATED)
-      ) {
-        request.ilike("value", "IARTI");
-      }
-
-      if (
-        states.includes(C.ANSWER_REFERENCE_STATE.IS_SKIPPED) &&
-        !states.includes(C.ANSWER_REFERENCE_STATE.NOT_IS_SKIPPED)
-      ) {
-        request.is("is_skipped", true);
-      }
-      if (
-        states.includes(C.ANSWER_REFERENCE_STATE.NOT_IS_SKIPPED) &&
-        !states.includes(C.ANSWER_REFERENCE_STATE.IS_SKIPPED)
-      ) {
-        request.is("is_skipped", false);
-      }
     }
 
     if (filters.query.length > 0) {

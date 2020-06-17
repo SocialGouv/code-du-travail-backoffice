@@ -9,14 +9,10 @@
     "start": "node ./src"
   },
   "dependencies": {
-    "@inspired-beings/log": "2.0.0",
-    "@socialgouv/kali-data": "1.73.0",
-    "fuse.js": "6.2.1",
-    "html-to-text": "5.1.1",
     "http-proxy": "1.18.1",
     "jsonwebtoken": "8.5.1",
     "knex": "0.21.1",
-    "node-cache": "5.1.1",
+    "npmlog": "4.1.2",
     "pg": "8.2.1"
   },
   "devDependencies": {

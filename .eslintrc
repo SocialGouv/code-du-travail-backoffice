@@ -8,6 +8,10 @@
   },
   "rules": {
     "no-console": ["error", { "allow": ["info", "error", "warn"] }],
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "*", "next": "return" }
+    ],
     "jest/no-disabled-tests": "error",
     "prettier/prettier": "error",
     "sort-requires/sort-requires": "error"

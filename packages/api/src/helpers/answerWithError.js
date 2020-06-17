@@ -1,7 +1,8 @@
 // @ts-check
 
-const log = require("@inspired-beings/log");
+const log = require("npmlog");
 
+log.enableColor();
 const { COMMON_HEADERS } = require("../constants");
 
 /**
@@ -41,7 +42,7 @@ function answerWithError(path, error, res, code) {
   }
 
   if (code === undefined || code === 400 || code >= 500) {
-    bodyJson.errors.map(error => log.err(`[api] [${path}] Error: %s`, error));
+    bodyJson.errors.map(error => log.err(`[api] [${path}]`, "Error: %s", error));
   }
 }
 

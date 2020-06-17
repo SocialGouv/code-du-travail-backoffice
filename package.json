@@ -5,7 +5,6 @@
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
-    "data:generate": "node ./scripts/data/generateLaborCodeArticles.js && node ./scripts/data/generateIndex.js",
     "db:backup": "node -r dotenv/config ./scripts/db/backup.js",
     "db:migrate": "knex migrate:latest",
     "db:migrate:make": "node ./scripts/db/generateMigration.js",
@@ -41,7 +40,6 @@
   "devDependencies": {
     "@socialgouv/eslint-config-react-strict": "0.33.0",
     "@socialgouv/eslint-config-strict": "0.33.0",
-    "@socialgouv/kali-data": "1.73.0",
     "@testing-library/jest-dom": "5.10.1",
     "@types/cucumber": "6.0.1",
     "@types/jest": "26.0.0",
