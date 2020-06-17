@@ -3,7 +3,7 @@ import React from "react";
 import { Flex } from "rebass";
 
 import LoadingSpinner from "../../elements/LoadingSpinner";
-import AdminMenu from "../AdminMenu";
+import AdminMenuWithRouter from "../AdminMenu";
 import Main from "../Main";
 import { Content } from "./styles";
 
@@ -11,7 +11,7 @@ const AdminMain = ({ children, hasBareContent = false, isLoading = false, noScro
   if (isLoading || children === undefined) {
     return (
       <Main isHorizontal>
-        <AdminMenu />
+        <AdminMenuWithRouter />
         <Flex alignItems="center" flexGrow="1" justifyContent="center">
           <LoadingSpinner color="#666666" />
         </Flex>
@@ -21,7 +21,7 @@ const AdminMain = ({ children, hasBareContent = false, isLoading = false, noScro
 
   return (
     <Main isHorizontal>
-      <AdminMenu />
+      <AdminMenuWithRouter />
       {hasBareContent ? (
         children
       ) : (
