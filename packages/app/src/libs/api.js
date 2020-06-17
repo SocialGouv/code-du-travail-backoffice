@@ -17,7 +17,19 @@ class ApiError extends Error {
   }
 }
 
-class Api {
+export class Api {
+  /**
+   * @param {string=} apiUri
+   */
+  constructor(apiUri) {
+    /** @type {string} */
+    this.apiUri =
+      apiUri ??
+      (isNode() && process.env.NODE_ENV === "production"
+        ? process.env.API_URI_DOCKER
+        : process.env.API_URI);
+  }
+
   /**
    * @private
    *
@@ -29,10 +41,6 @@ class Api {
    * @returns {Promise<*>}
    */
   async fetch(method, path, body, headers) {
-    const apiUri =
-      isNode() && process.env.NODE_ENV === "production"
-        ? process.env.API_URI_DOCKER
-        : process.env.API_URI;
     const maybeJwt = jsCookie.get("jwt");
 
     /** @type {RequestInit} */
@@ -52,7 +60,7 @@ class Api {
     }
     options.headers = { ...options.headers, ...headers };
 
-    const response = await isomorphicUnfetch(`${apiUri}${path}`, options);
+    const response = await isomorphicUnfetch(`${this.apiUri}${path}`, options);
 
     const data = await this.parseResponseData(response);
 
