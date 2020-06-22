@@ -44,22 +44,27 @@ function getContentTitle(title, index) {
 }
 
 /**
- * Generate a legal reference tag label and content.
+ * Generate a content, a label and an ID from the last udpated DILA data.
  *
- * @param {string} value
- * @param {?string} dila_id
+ * @param {{ dila_cid: ?string, dila_id: ?string, value: string }} dila_id
  *
- * @returns {Promise<[string, ?string]>}
+ * @returns {Promise<{content: ?string, id: ?string, label: string}>}
  */
-export default async function getLabelAndContent(value, dila_id) {
-  if (dila_id === null) {
-    return [value, null];
+export default async function getUpdatedData({ dila_cid, dila_id, value }) {
+  const fullData = {
+    content: null,
+    id: null,
+    label: value,
+  };
+
+  if (dila_cid === null) {
+    return fullData;
   }
 
-  if (dila_id.startsWith("KALIARTI")) {
-    const { data, sections } = await dilaApi.get(`/article/${dila_id}`);
+  if (dila_cid.startsWith("KALIARTI")) {
+    const { data, sections } = await dilaApi.get(`/article/${dila_cid}`);
 
-    const { content: rawContent, index } = data;
+    const { id, content: rawContent, index } = data;
     const title = sections.map(({ data: { title } }) => title).join(" » ");
     const labelChunks = [];
     if (value.trim().length === 0) {
@@ -72,10 +77,14 @@ export default async function getLabelAndContent(value, dila_id) {
     const label = labelChunks.join(" ");
     const content = `${getContentTitle(title, index)}${cleanHtml(rawContent)}`;
 
-    return [label, content];
+    return {
+      content,
+      id,
+      label,
+    };
   }
 
-  const { content: rawContent, index, title } = await api.get(`/legal-references/${dila_id}`);
+  const { id, content: rawContent, index, title } = await api.get(`/legal-references/${dila_id}`);
 
   const labelChunks = [];
   if (value.trim().length === 0) {
@@ -88,5 +97,9 @@ export default async function getLabelAndContent(value, dila_id) {
   const label = labelChunks.join(" ");
   const content = `${getContentTitle(title, index)}${rawContent}`;
 
-  return [label, content];
+  return {
+    content,
+    id,
+    label,
+  };
 }

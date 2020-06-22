@@ -1,3 +1,3 @@
 import { Api } from "./api";
 
-export default new Api("https://gitlab-dev2-cdtn-api.dev2.fabrique.social.gouv.fr");
+export default new Api("https://cdtn-api.fabrique.social.gouv.fr");

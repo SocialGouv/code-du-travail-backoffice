@@ -5,10 +5,10 @@ import waait from "waait";
 
 import runTestRenderedProperty from "../../../../tests/utils/runTestRenderedProperty";
 
-jest.mock("../getLabelAndContent");
+jest.mock("../getUpdatedData");
 jest.mock("../TagEditor");
 
-import getLabelAndContent from "../getLabelAndContent";
+import getUpdatedData from "../getUpdatedData";
 import Tag from "../Tag";
 import TagEditorWithClickOutside from "../TagEditor";
 
@@ -40,7 +40,7 @@ describe("components/LegalReferences/<Tag />", () => {
     };
 
     // Mounting:
-    getLabelAndContent.mockResolvedValueOnce(["A value", null]);
+    getUpdatedData.mockResolvedValueOnce({ content: null, label: "A value" });
     const $tag = create(<Tag {...props} />);
 
     expect($tag).toHaveTestRenderedTextContent("…");
@@ -49,7 +49,7 @@ describe("components/LegalReferences/<Tag />", () => {
     expect($tag).toHaveTestRenderedStyleRule("background-color", "var(--color-periwinkle)", {
       target: ":hover",
     });
-    expect(getLabelAndContent).toHaveBeenCalledTimes(1);
+    expect(getUpdatedData).toHaveBeenCalledTimes(1);
 
     // Mounted:
     await waait();
@@ -105,10 +105,10 @@ describe("components/LegalReferences/<Tag />", () => {
     };
 
     // Mounting:
-    getLabelAndContent.mockResolvedValueOnce(["Another value", "Some content"]);
+    getUpdatedData.mockResolvedValueOnce({ content: "Some content", label: "Another value" });
     const $tag = create(<Tag {...props} />);
 
-    expect(getLabelAndContent).toHaveBeenCalledTimes(1);
+    expect(getUpdatedData).toHaveBeenCalledTimes(1);
 
     // Mounted:
     await waait();
@@ -158,7 +158,7 @@ describe("components/LegalReferences/<Tag />", () => {
       dila_id: "KALIARTI000000000002",
     };
 
-    getLabelAndContent.mockResolvedValueOnce(["Another value", "Some content"]);
+    getUpdatedData.mockResolvedValueOnce({ content: "Some content", label: "Another value" });
     const $tag = create(<Tag {...props} />);
     await waait();
 
@@ -177,61 +177,12 @@ describe("components/LegalReferences/<Tag />", () => {
       isReadOnly: true,
     };
 
-    getLabelAndContent.mockResolvedValueOnce(["A value", null]);
+    getUpdatedData.mockResolvedValueOnce({ content: null, label: "A value" });
     const $tag = create(<Tag {...props} />);
     await waait();
 
     expect($tag).not.toHaveTestRenderedChild("button-edit");
     expect($tag).not.toHaveTestRenderedChild("button-remove");
-  });
-
-  it("should render as expected with an obsolete linked agreement reference", async () => {
-    const props = {
-      ...PROPS,
-      category: "agreement",
-      dila_cid: "KALIARTI000000000001",
-      dila_container_id: "KALICONT000000000001",
-      dila_id: "KALIARTI000000000002",
-    };
-
-    // Mounting:
-    const error = new Error();
-    error.code = 404;
-    getLabelAndContent.mockRejectedValueOnce(error);
-    const $tag = create(<Tag {...props} />);
-
-    expect(getLabelAndContent).toHaveBeenCalledTimes(1);
-
-    // Mounted:
-    await waait();
-
-    expect($tag).toHaveTestRenderedTextContent(props.value, "label");
-    expect($tag).not.toHaveTestRenderedChild("button-edit");
-  });
-
-  it("should render as expected with an obsolete legacy linked agreement reference", async () => {
-    const props = {
-      ...PROPS,
-      category: "agreement",
-      dila_cid: "KALIARTI000000000001",
-      dila_container_id: "KALICONT000000000001",
-      dila_id: "KALIARTI000000000002",
-      value: "",
-    };
-
-    // Mounting:
-    const error = new Error();
-    error.code = 404;
-    getLabelAndContent.mockRejectedValueOnce(error);
-    const $tag = create(<Tag {...props} />);
-
-    expect(getLabelAndContent).toHaveBeenCalledTimes(1);
-
-    // Mounted:
-    await waait();
-
-    expect($tag).toHaveTestRenderedTextContent(props.dila_id, "label");
-    expect($tag).not.toHaveTestRenderedChild("button-edit");
   });
 
   it("should render as expected with a legacy agreement reference", async () => {
@@ -241,10 +192,10 @@ describe("components/LegalReferences/<Tag />", () => {
     };
 
     // Mounting:
-    getLabelAndContent.mockResolvedValueOnce(["Another value", "Some content"]);
+    getUpdatedData.mockResolvedValueOnce({ content: "Some content", label: "Another value" });
     const $tag = create(<Tag {...props} />);
 
-    expect(getLabelAndContent).toHaveBeenCalledTimes(1);
+    expect(getUpdatedData).toHaveBeenCalledTimes(1);
 
     // Mounted:
     await waait();
@@ -267,10 +218,10 @@ describe("components/LegalReferences/<Tag />", () => {
     // Mounting:
     const error = new Error();
     error.code = 400;
-    getLabelAndContent.mockRejectedValueOnce(error);
+    getUpdatedData.mockRejectedValueOnce(error);
     const $tag = create(<Tag {...props} />);
 
-    expect(getLabelAndContent).toHaveBeenCalledTimes(1);
+    expect(getUpdatedData).toHaveBeenCalledTimes(1);
 
     // Mounted:
     await waait();

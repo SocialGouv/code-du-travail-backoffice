@@ -5,7 +5,7 @@ import * as C from "../../constants";
 import Button from "../../elements/Button";
 import Icon from "../../elements/Icon";
 import LegalReferenceProps from "../../props/LegalReference";
-import getLabelAndContent from "./getLabelAndContent";
+import getUpdatedData from "./getUpdatedData";
 import { ButtonsContainer, Container, Label, Tooltip } from "./Tag.style";
 import TagEditorWithClickOutside from "./TagEditor";
 
@@ -37,18 +37,19 @@ class Tag extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.loadLabelAndContent();
+    this.loadUpdatedData();
   }
 
-  async loadLabelAndContent() {
-    const { dila_id, value } = this.props;
+  async loadUpdatedData() {
+    const { dila_cid, dila_id, value } = this.props;
 
     try {
-      const [label, content] = await getLabelAndContent(value, dila_id);
+      const { content, id, label } = await getUpdatedData({ dila_cid, dila_id, value });
 
       this.setState({
         content,
         isLoading: false,
+        isObsolete: id !== dila_id,
         label,
       });
     } catch (err) {
@@ -105,24 +106,18 @@ class Tag extends React.PureComponent {
   }
 
   renderLabel() {
-    const { dila_id, value } = this.props;
     const { isObsolete, label } = this.state;
 
-    if (isObsolete) {
-      return (
-        <Label data-testid="label">
-          {isObsolete && <Icon color="red" icon="exclamation-circle" withMarginRight />}
-          {value.length !== 0 ? value : dila_id}
-        </Label>
-      );
-    }
-
-    return <Label data-testid="label">{label}</Label>;
+    return (
+      <Label data-testid="label">
+        {isObsolete && <Icon color="red" icon="exclamation-circle" withMarginRight />}
+        {label}
+      </Label>
+    );
   }
 
   renderButtons() {
     const { category, dila_id, id, isReadOnly, onRemove, url } = this.props;
-    const { isObsolete } = this.state;
 
     const parts = [];
 
@@ -139,7 +134,7 @@ class Tag extends React.PureComponent {
       );
     }
 
-    if (!isReadOnly && category !== C.LEGAL_REFERENCE_CATEGORY.LABOR_CODE && !isObsolete) {
+    if (!isReadOnly && category !== C.LEGAL_REFERENCE_CATEGORY.LABOR_CODE) {
       parts.push(
         <Button
           data-testid="button-edit"
