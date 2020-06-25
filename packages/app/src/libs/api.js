@@ -21,7 +21,7 @@ class ApiError extends Error {
  * @property {?string} customApiUri
  */
 export class Api {
-  constructor(customApiUri) {
+  constructor(customApiUri = null) {
     this.customApiUri = customApiUri;
   }
 
@@ -37,7 +37,9 @@ export class Api {
    */
   async fetch(method, path, body, headers) {
     const apiUri =
-      this.customApiUri ?? (isNode() && process.env.NODE_ENV === "production")
+      this.customApiUri !== null
+        ? this.customApiUri
+        : isNode() && process.env.NODE_ENV === "production"
         ? process.env.API_URI_DOCKER
         : process.env.API_URI;
     const maybeJwt = jsCookie.get("jwt");
