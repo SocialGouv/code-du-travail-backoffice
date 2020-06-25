@@ -4,8 +4,8 @@ import React from "react";
 import * as C from "../../constants";
 import Button from "../../elements/Button";
 import Icon from "../../elements/Icon";
+import dilaApi from "../../libs/dilaApi";
 import LegalReferenceProps from "../../props/LegalReference";
-import getLabelAndContent from "./getLabelAndContent";
 import { ButtonsContainer, Container, Label, Tooltip } from "./Tag.style";
 import TagEditorWithClickOutside from "./TagEditor";
 
@@ -23,11 +23,10 @@ class Tag extends React.PureComponent {
     this.$input = null;
 
     this.state = {
-      content: null,
+      content: "",
       isEditing: false,
       isLoading: true,
       isObsolete: false,
-      label: null,
     };
 
     this.edit = this.edit.bind(this);
@@ -37,29 +36,28 @@ class Tag extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.loadLabelAndContent();
+    this.loadUpdatedData();
   }
 
-  async loadLabelAndContent() {
-    const { dila_id, value } = this.props;
+  async loadUpdatedData() {
+    const { category, dila_cid, dila_id } = this.props;
+    if (dila_id === null) {
+      this.setState({ isLoading: false });
+
+      return;
+    }
 
     try {
-      const [label, content] = await getLabelAndContent(value, dila_id);
+      const path = category === C.LEGAL_REFERENCE_CATEGORY.AGREEMENT ? "/agreement" : "/code";
+      const { content, id } = await dilaApi.get(`${path}/article/${dila_cid}`);
 
       this.setState({
         content,
         isLoading: false,
-        label,
+        isObsolete: id !== dila_id,
       });
     } catch (err) {
-      if (err.code === 404) {
-        this.setState({
-          isLoading: false,
-          isObsolete: true,
-        });
-
-        return;
-      }
+      this.setState({ isLoading: false });
     }
   }
 
@@ -105,24 +103,19 @@ class Tag extends React.PureComponent {
   }
 
   renderLabel() {
-    const { dila_id, value } = this.props;
-    const { isObsolete, label } = this.state;
+    const { value } = this.props;
+    const { isObsolete } = this.state;
 
-    if (isObsolete) {
-      return (
-        <Label data-testid="label">
-          {isObsolete && <Icon color="red" icon="exclamation-circle" withMarginRight />}
-          {value.length !== 0 ? value : dila_id}
-        </Label>
-      );
-    }
-
-    return <Label data-testid="label">{label}</Label>;
+    return (
+      <Label data-testid="label">
+        {isObsolete && <Icon color="red" icon="exclamation-circle" withMarginRight />}
+        {value}
+      </Label>
+    );
   }
 
   renderButtons() {
     const { category, dila_id, id, isReadOnly, onRemove, url } = this.props;
-    const { isObsolete } = this.state;
 
     const parts = [];
 
@@ -139,7 +132,7 @@ class Tag extends React.PureComponent {
       );
     }
 
-    if (!isReadOnly && category !== C.LEGAL_REFERENCE_CATEGORY.LABOR_CODE && !isObsolete) {
+    if (!isReadOnly && category !== C.LEGAL_REFERENCE_CATEGORY.LABOR_CODE) {
       parts.push(
         <Button
           data-testid="button-edit"
@@ -175,9 +168,9 @@ class Tag extends React.PureComponent {
       return <Container alignItems="center">…</Container>;
     }
 
-    const { id, noContent, url } = this.props;
-    const { content, isEditing, label } = this.state;
-    const hasContent = content !== null && content.length !== 0;
+    const { id, noContent, url, value } = this.props;
+    const { content, isEditing } = this.state;
+    const hasContent = content.length !== 0;
 
     if (isEditing) {
       return (
@@ -187,7 +180,7 @@ class Tag extends React.PureComponent {
             onCancel={this.unedit}
             onSubmit={this.update}
             url={url}
-            value={label}
+            value={value}
           />
         </Container>
       );

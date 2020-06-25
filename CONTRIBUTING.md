@@ -78,7 +78,6 @@ to update Unite Tests snapshots, you can run `yarn test:update`.
 
 This repository comes with multiple useful npm scripts (run via `yarn <script>`):
 
-- `data:generate`: Generate (update) DILA-related data (Labor Code & Agreements).
 - `db:backup`: Generate a database dump.
 - `db:migrate` Migrate database schema.
 - `db:migrate:make`: Create a new database migration file.
@@ -104,7 +103,6 @@ This repository comes with multiple useful npm scripts (run via `yarn <script>`)
 
 ```json
 {
-  "coverage-gutters.coverageReportFileName": "packages/contrib/coverage/**/index.html",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnPaste": false,
   "editor.formatOnSave": true,

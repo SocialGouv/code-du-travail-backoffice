@@ -1,14 +1,12 @@
 import React from "react";
-import { create } from "react-test-renderer";
-
-jest.mock("react-tag-autocomplete");
-
 import ReactTagAutocomplete from "react-tag-autocomplete";
-
-jest.mock("../Tag");
+import { create } from "react-test-renderer";
 
 import LegalReferences from "..";
 import Tag from "../Tag";
+
+jest.mock("react-tag-autocomplete");
+jest.mock("../Tag");
 
 describe("components/LegalReferences/<LegalReferences />", () => {
   const PROPS = {

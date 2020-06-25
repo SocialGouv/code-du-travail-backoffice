@@ -1,13 +1,12 @@
-jest.mock("isomorphic-unfetch");
-jest.mock("js-cookie");
-
 import isomorphicUnfetch from "isomorphic-unfetch";
 import jsCookie from "js-cookie";
 
-jest.mock("../../helpers/isNode");
-
 import isNode from "../../helpers/isNode";
 import api from "../api";
+
+jest.mock("isomorphic-unfetch");
+jest.mock("js-cookie");
+jest.mock("../../helpers/isNode");
 
 const PROCESS_ENV = process.env;
 

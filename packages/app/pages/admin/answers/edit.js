@@ -335,22 +335,19 @@ export class AdminAnwsersEditPage extends React.Component {
     dispatch(actions.legalReferences.load(category, query));
   }
 
-  async addReference(category, { id: dilaId }) {
-    const { dispatch, id: answerId } = this.props;
+  async addReference(category, legalReference) {
+    const { dispatch, id: answer_id } = this.props;
 
-    const uri = `/legal-references/${dilaId}`;
-    const { agreementId, cid } = await api.get(uri);
-
-    const data = {
-      answer_id: answerId,
+    const answerReference = {
+      answer_id,
       category,
-      dila_cid: cid,
-      dila_container_id: agreementId,
-      dila_id: dilaId,
-      value: "",
+      dila_cid: legalReference.cid,
+      dila_container_id: legalReference.containerId,
+      dila_id: legalReference.id,
+      value: legalReference.name,
     };
 
-    dispatch(actions.answers.addReferences([data], this.load.bind(this)));
+    dispatch(actions.answers.addReferences([answerReference], this.load.bind(this)));
   }
 
   updateReference(data) {

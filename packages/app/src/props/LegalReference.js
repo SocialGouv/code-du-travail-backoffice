@@ -11,7 +11,6 @@ export default {
   dila_container_id: PropTypes.string,
   dila_id: PropTypes.string,
   id: PropTypes.string.isRequired,
-  is_skipped: PropTypes.bool,
   updated_at: PropTypes.string,
   url: PropTypes.string,
   value: PropTypes.string.isRequired,

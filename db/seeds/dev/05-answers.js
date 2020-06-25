@@ -150,7 +150,10 @@ exports.seed = async knex => {
           .eq("answer_id", answer.id)
           .get("/answers_references");
 
-        answersReferences = answersReferences.concat(foundAnswerReferences);
+        answersReferences = answersReferences
+          .concat(foundAnswerReferences)
+          // eslint-disable-next-line no-unused-vars
+          .map(({ is_skipped, ...answerReference }) => answerReference);
 
         continue;
       }

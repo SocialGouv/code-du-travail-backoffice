@@ -24,7 +24,6 @@ declare namespace Answer {
         dila_container_id: string;
         dila_id: string;
         id: string;
-        is_skipped: boolean;
         updated_at: string;
         url: null;
         value: string;
@@ -37,7 +36,6 @@ declare namespace Answer {
         dila_container_id: null;
         dila_id: null;
         id: string;
-        is_skipped: boolean;
         updated_at: string;
         url: string | null;
         value: string;

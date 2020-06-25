@@ -68,13 +68,6 @@ export class AdminMenu extends React.PureComponent {
         {this.renderLink("/locations", "Unités", "admin-locations")}
         {this.renderLink("/users", "Utilisateurs", "admin-users")}
 
-        <Subtitle>Scripts</Subtitle>
-        {this.renderLink(
-          "/legal-references-migration-fix",
-          "Différences (26/02/2020)",
-          "admin-legal-references-migration-fix",
-        )}
-
         <Subtitle>Maintenance</Subtitle>
         {this.renderLink("/logs", "Logs", "admin-logs")}
         {this.renderLink("/migrations", "Migrations", "admin-migrations")}

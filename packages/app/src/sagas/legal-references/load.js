@@ -3,32 +3,45 @@
 import { put } from "redux-saga/effects";
 
 import { legalReferences } from "../../actions";
-import { LEGAL_REFERENCE_CATEGORY } from "../../constants";
-import api from "../../libs/api";
+import * as C from "../../constants";
+import dilaApi from "../../libs/dilaApi";
 import toast from "../../libs/toast";
 
 export default function* load({ meta: { category, idcc, query } }) {
   try {
+    /** @type {{ category: string, list: Array<{ id: string, name: string }> }} */
+    const response = {
+      category,
+      list: [],
+    };
+
     if (query.length === 0) {
-      yield put(legalReferences.loadSuccess({ category, list: [] }));
+      yield put(legalReferences.loadSuccess(response));
 
       return;
     }
 
-    /** @type {LegalReference.Article[]} */
-    const data = yield api.get(
-      `/legal-references?category=${category}&idcc=${idcc}&query=${query}`,
-    );
+    if (category === C.LEGAL_REFERENCE_CATEGORY.AGREEMENT) {
+      const path = `/agreement/articles?agreementIdOrIdcc=${idcc}&query=${query}`;
+      /** @type {DilaApi.Article[]} */
+      const articles = yield dilaApi.get(path);
 
-    const list = data.map(({ id, index, title }) => ({
-      id,
-      name:
-        category === LEGAL_REFERENCE_CATEGORY.AGREEMENT
-          ? `${index !== null ? `[Article ${index}] ` : ""}${title}`
-          : index,
-    }));
+      response.list = articles.map(article => ({
+        ...article,
+        name: `${article.index.length > 0 ? `[Article ${article.index}] ` : ""}${article.path}`,
+      }));
+    } else {
+      const path = `/code/articles?codeId=LEGITEXT000006072050&query=${query}`;
+      /** @type {DilaApi.Article[]} */
+      const articles = yield dilaApi.get(path);
 
-    yield put(legalReferences.loadSuccess({ category, list }));
+      response.list = articles.map(article => ({
+        ...article,
+        name: article.index,
+      }));
+    }
+
+    yield put(legalReferences.loadSuccess(response));
   } catch (err) /* istanbul ignore next */ {
     toast.error(err.message);
     yield put(legalReferences.loadFailure({ message: null }));
