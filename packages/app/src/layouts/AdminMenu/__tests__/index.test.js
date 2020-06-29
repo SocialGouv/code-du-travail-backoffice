@@ -79,8 +79,9 @@ describe("layouts/<AdminMenu />", () => {
     it(`should render as expected`, () => {
       const $adminMenu = create(<AdminMenu {...PROPS} />);
 
-      expect($adminMenu).toHaveTestRenderedChildLength(11);
+      expect($adminMenu).toHaveTestRenderedChildLength(12);
       expect($adminMenu).toHaveTestRenderedChild("admin-dashboard");
+      expect($adminMenu).toHaveTestRenderedChild("admin-tracker");
       expect($adminMenu).toHaveTestRenderedChild("admin-agreements");
       expect($adminMenu).toHaveTestRenderedChild("admin-questions");
       expect($adminMenu).toHaveTestRenderedChild("admin-answers-references");

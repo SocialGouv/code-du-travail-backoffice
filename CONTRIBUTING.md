@@ -6,6 +6,7 @@ help make it even better than it is today!
 - [Contribute](#contribute)
   - [Prerequisites](#prerequisites)
   - [Get Started](#get-started)
+  - [Standalone](#standalone)
   - [Test](#test)
   - [Scripts](#scripts)
   - [Recommended IDE Settings](#recommended-ide-settings)
@@ -62,6 +63,18 @@ The website should now be available at: http://localhost:3100.
     Mot de passe: `Azerty123`
   - Email: `marin@sea.com`<br>
     Mot de passe: `Azerty123`
+
+### Standalone
+
+Standalone dev also runs [**ctdn-api**](https://github.com/SocialGouv/cdtn-api) locally:
+
+First, uncomment `CDTN_API_URL=http://localhost:3300` in `.env` file.
+
+Then run:
+
+```sh
+yarn dev:standalone
+```
 
 ### Test
 

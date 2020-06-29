@@ -142,7 +142,6 @@ export default class AdminIndexPage extends React.Component {
       isCalculating: true,
       isLoading: true,
       isPercentage: true,
-      locationsStats: [],
     };
   }
 
@@ -168,11 +167,11 @@ export default class AdminIndexPage extends React.Component {
     return locations;
   }
 
-  async fetchAnswersForAgreements(agreementIds) {
+  async fetchAnswersForAgreement(agreementId) {
     const { data: answers } = await this.postgrest
       .select("*")
       .select("agreement(*)")
-      .in("agreement_id", agreementIds)
+      .eq("agreement_id", agreementId)
       .get("/answers");
 
     return answers;
@@ -190,66 +189,19 @@ export default class AdminIndexPage extends React.Component {
         totals: [0, 0, 0, 0, 0, 0, 0],
       }));
 
-    const locationsStats = locations.map(location => ({
-      agreementIds: location.agreements.map(({ id }) => id),
-      agreements: location.agreements,
-      locationId: location.id,
-      locationName: location.name,
-    }));
-
     this.setState({
       agreementsStats,
       isLoading: false,
-      locationsStats,
     });
   }
 
   async updateStats() {
-    const { agreementsStats, locationsStats } = this.state;
+    const { agreementsStats } = this.state;
 
-    const nextAgreementsStats = agreementsStats.map(agreementsStatsEntry => ({
-      ...agreementsStatsEntry,
-      totals: [0, 0, 0, 0, 0, 0, 0],
-    }));
-
-    const nextlocationsStats = await Promise.all(
-      locationsStats.map(async locationsStatsEntry => {
-        const { agreementIds } = locationsStatsEntry;
-        const answers = await this.fetchAnswersForAgreements(agreementIds);
-
-        answers.forEach(({ agreement_id, is_published, state }) => {
-          const agreementsStatsIndex = nextAgreementsStats.findIndex(
-            ({ id }) => id === agreement_id,
-          );
-
-          switch (state) {
-            case ANSWER_STATE.TO_DO:
-              nextAgreementsStats[agreementsStatsIndex].totals[0] += 1;
-              break;
-
-            case ANSWER_STATE.DRAFT:
-              nextAgreementsStats[agreementsStatsIndex].totals[1] += 1;
-              break;
-
-            case ANSWER_STATE.PENDING_REVIEW:
-              nextAgreementsStats[agreementsStatsIndex].totals[2] += 1;
-              break;
-
-            case ANSWER_STATE.UNDER_REVIEW:
-              nextAgreementsStats[agreementsStatsIndex].totals[3] += 1;
-              break;
-
-            case ANSWER_STATE.VALIDATED:
-              nextAgreementsStats[agreementsStatsIndex].totals[4] += 1;
-              break;
-          }
-
-          if (is_published) {
-            nextAgreementsStats[agreementsStatsIndex].totals[5] += 1;
-          }
-
-          nextAgreementsStats[agreementsStatsIndex].totals[6] += 1;
-        });
+    const nextAgreementsStats = await Promise.all(
+      agreementsStats.map(async agreementStatsEntry => {
+        const { id: agreementId } = agreementStatsEntry;
+        const answers = await this.fetchAnswersForAgreement(agreementId);
 
         const totals = answers.reduce(
           (totals, { is_published, state }) => {
@@ -287,13 +239,13 @@ export default class AdminIndexPage extends React.Component {
         );
 
         return {
-          ...locationsStatsEntry,
+          ...agreementStatsEntry,
           totals,
         };
       }),
     );
 
-    const nextGlobalStats = nextlocationsStats.reduce(
+    const nextGlobalStats = nextAgreementsStats.reduce(
       (globalTotals, { totals }) => [
         globalTotals[0] + totals[0],
         globalTotals[1] + totals[1],
@@ -310,7 +262,6 @@ export default class AdminIndexPage extends React.Component {
       agreementsStats: nextAgreementsStats,
       globalStats: nextGlobalStats,
       isCalculating: false,
-      locationsStats: nextlocationsStats,
     });
 
     this.timeout = setTimeout(this.updateStats.bind(this), REFRESH_DELAY);
@@ -344,14 +295,14 @@ export default class AdminIndexPage extends React.Component {
     };
   }
 
-  getGlobalStats() {
+  renderGlobalStats() {
     const { globalStats, isCalculating, isPercentage } = this.state;
     const data = [this.generateDataRow("Total", globalStats, isCalculating)];
 
     return <StatsTable data={data} isPercentage={isPercentage} sortable={false} />;
   }
 
-  getAgreementsStats(isNational = false) {
+  renderAgreementsStats(isNational = false) {
     const { agreementsStats, isCalculating, isPercentage } = this.state;
     const data = agreementsStats
       .filter(agreement => agreement.isNational === isNational)
@@ -380,13 +331,13 @@ export default class AdminIndexPage extends React.Component {
           </Flex>
 
           <Subtitle isFirst>Global</Subtitle>
-          {isLoading ? <p>Calcul en cours…</p> : this.getGlobalStats()}
+          {isLoading ? <p>Calcul en cours…</p> : this.renderGlobalStats()}
 
           <Subtitle>Par convention collective</Subtitle>
           <ContentTitle isFirst>Conventions nationales</ContentTitle>
-          {isLoading ? <p>Calcul en cours…</p> : this.getAgreementsStats(true)}
+          {isLoading ? <p>Calcul en cours…</p> : this.renderAgreementsStats(true)}
           <ContentTitle>Conventions locales</ContentTitle>
-          {isLoading ? <p>Calcul en cours…</p> : this.getAgreementsStats()}
+          {isLoading ? <p>Calcul en cours…</p> : this.renderAgreementsStats()}
         </Container>
       </AdminMainLayout>
     );

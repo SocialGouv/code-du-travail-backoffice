@@ -1,8 +1,8 @@
 # CDTN Back-office
 
-[![licence Apache 2.0][img-license]][link-license]
-[![Travis CI Status][img-build]][link-build]
-[![Coveralls Code Coverage][img-coverage]][link-coverage]
+[![License][img-license]][link-license]
+[![Build Status][img-build]][link-build]
+[![Code Coverage][img-coverage]][link-coverage]
 
 Data administration portal for the official [Code du travail numérique][link-cdtn] (French Labor
 Code and Agreements).

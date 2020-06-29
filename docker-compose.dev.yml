@@ -8,3 +8,26 @@ services:
   postgrest:
     ports:
       - ${DEV_POSTGREST_PORT}:3000
+
+  cdtn_api:
+    image: igabriele/cdtn-api:latest
+    restart: always
+    environment:
+      PORT: 3300
+      REDIS_URL: redis://redis:6379
+    ports:
+      - 3300:3300
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:6
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-data:/data
+
+volumes:
+  postgre-data:
+  redis-data:

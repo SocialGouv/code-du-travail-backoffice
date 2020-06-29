@@ -46,6 +46,8 @@ export default {
   ADMIN_COMMON_FORM_NEW_TITLE: (_S, _F) => `${capitalize(nouveau$(_S, _F))} ${_S}`,
   ADMIN_COMMON_INDEX_TITLE: _S => `Liste des ${pluralize(_S)}`,
 
+  ADMIN_TRACKER_INFO_NO_DATA: `Aucune référence n'a été trouvée dans les réponses liées à cette convention.`,
+
   ANSWERS_INDEX_HELP_TO_DO: `Sélectionnez une question et commencez à rédiger la réponse pour vous l'attribuer :`,
   ANSWERS_INDEX_INFO_NO_DATA: state => `Il n'y a aucune réponse ${ANSWER_STATE_LABEL[state]}.`,
   ANSWERS_INDEX_INFO_NO_SEARCH_RESULT: `Cette recherche n'a retournée aucun résultat.`,
