@@ -28,7 +28,7 @@ const StyledInput = styled.input`
   }
 
   :focus {
-    box-shadow: 0 0 0 1px var(--color-text-blue) !important;
+    box-shadow: 0 0 0 1px var(${p => (p.hasError ? "--color-text-red" : "--color-text-blue")}) !important;
   }
 `;
 const InputIcon = styled(Icon)`

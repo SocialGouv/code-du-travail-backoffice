@@ -133,6 +133,7 @@ export class AdminAnwsersEditPage extends React.Component {
       isSidebarHidden: true,
       otherReferenceUrlInputKey: 0,
       otherReferenceValueInputKey: 2,
+      selectedAgreementIdcc: null,
     };
 
     this.isGeneric = Boolean(props.isGeneric);
@@ -161,6 +162,7 @@ export class AdminAnwsersEditPage extends React.Component {
 
       this.setState({
         isFirstLoad: false,
+        selectedAgreementIdcc: answers.data.agreement.idcc,
       });
     }
 
@@ -321,13 +323,12 @@ export class AdminAnwsersEditPage extends React.Component {
   }
 
   loadLegalReferences(category, query) {
-    const { answers, dispatch, legalReferences } = this.props;
+    const { dispatch, legalReferences } = this.props;
+    const { selectedAgreementIdcc } = this.state;
     if (legalReferences.isLoading) return;
 
     if (category === C.LEGAL_REFERENCE_CATEGORY.AGREEMENT) {
-      const { agreement } = answers.data;
-
-      dispatch(actions.legalReferences.load(category, query, agreement.idcc));
+      dispatch(actions.legalReferences.load(category, query, selectedAgreementIdcc));
 
       return;
     }
@@ -464,32 +465,38 @@ export class AdminAnwsersEditPage extends React.Component {
 
   renderReferences() {
     const { answers, legalReferences } = this.props;
-
+    const { selectedAgreementIdcc } = this.state;
     const isReadOnly = answers.isLoading || answers.data.state === C.ANSWER_STATE.VALIDATED;
 
     return (
       <div>
         <Subtitle isFirst>Références juridiques</Subtitle>
+        {!this.isGeneric && (
+          <Flex flexDirection="column">
+            <Strong isFirst>Convention collective :</Strong>
+            <LegalReferences
+              category={C.LEGAL_REFERENCE_CATEGORY.AGREEMENT}
+              data={
+                legalReferences.category === C.LEGAL_REFERENCE_CATEGORY.AGREEMENT
+                  ? legalReferences.list
+                  : []
+              }
+              idcc={selectedAgreementIdcc}
+              isLoading={answers.isLoading}
+              isReadOnly={isReadOnly}
+              onAdd={data => this.addReference(C.LEGAL_REFERENCE_CATEGORY.AGREEMENT, data)}
+              onChange={this.updateReference.bind(this)}
+              onIdccChange={selectedAgreementIdcc => this.setState({ selectedAgreementIdcc })}
+              onInput={query =>
+                this.loadLegalReferences(C.LEGAL_REFERENCE_CATEGORY.AGREEMENT, query)
+              }
+              onRemove={this.removeReference.bind(this)}
+              references={this.getReferences(C.LEGAL_REFERENCE_CATEGORY.AGREEMENT)}
+            />
+          </Flex>
+        )}
         <Flex flexDirection="column">
-          <Strong isFirst>Convention collective :</Strong>
-          <LegalReferences
-            category={C.LEGAL_REFERENCE_CATEGORY.AGREEMENT}
-            data={
-              legalReferences.category === C.LEGAL_REFERENCE_CATEGORY.AGREEMENT
-                ? legalReferences.list
-                : []
-            }
-            isLoading={answers.isLoading}
-            isReadOnly={isReadOnly}
-            onAdd={data => this.addReference(C.LEGAL_REFERENCE_CATEGORY.AGREEMENT, data)}
-            onChange={this.updateReference.bind(this)}
-            onInput={query => this.loadLegalReferences(C.LEGAL_REFERENCE_CATEGORY.AGREEMENT, query)}
-            onRemove={this.removeReference.bind(this)}
-            references={this.getReferences(C.LEGAL_REFERENCE_CATEGORY.AGREEMENT)}
-          />
-        </Flex>
-        <Flex flexDirection="column">
-          <Strong>Code du travail :</Strong>
+          <Strong isFirst={this.isGeneric}>Code du travail :</Strong>
           <LegalReferences
             category={C.LEGAL_REFERENCE_CATEGORY.LABOR_CODE}
             data={
