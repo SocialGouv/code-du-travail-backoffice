@@ -168,7 +168,7 @@ class Tag extends React.PureComponent {
       return <Container alignItems="center">…</Container>;
     }
 
-    const { id, noContent, url, value } = this.props;
+    const { id, url, value } = this.props;
     const { content, isEditing } = this.state;
     const hasContent = content.length !== 0;
 
@@ -196,14 +196,14 @@ class Tag extends React.PureComponent {
       >
         {this.renderLabel()}
         {this.renderButtons()}
-        {!noContent && hasContent && (
+        {hasContent && (
           <Tooltip
-            clickable={true}
+            clickable
             data-testid="tooltip"
             delayHide={250}
             effect="solid"
             id={id}
-            place="right"
+            place="bottom"
             type="light"
           />
         )}
@@ -215,7 +215,6 @@ class Tag extends React.PureComponent {
 Tag.propTypes = {
   ...LegalReferenceProps,
   isReadOnly: PropTypes.bool,
-  noContent: PropTypes.bool,
   onChange: PropTypes.func,
   onRemove: PropTypes.func,
 };

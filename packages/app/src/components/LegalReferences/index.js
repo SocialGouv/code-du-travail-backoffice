@@ -1,16 +1,11 @@
 import PropTypes from "prop-types";
 import React from "react";
-import ReactTagAutocomplete from "react-tag-autocomplete";
 import { Flex } from "rebass";
 
 import LegalReferenceProps from "../../props/LegalReference";
 import { Container, Info } from "./index.style";
+import Selector from "./Selector";
 import Tag from "./Tag";
-
-const LEGAL_REFERENCE_CATEGORY_PLACEHOLDER = {
-  agreement: "12, 36.3, 05.07.6…",
-  labor_code: "D1234, L1234, R1234…",
-};
 
 export function renderReferences({ references, ...globalProps }) {
   if (references.length === 0 && globalProps.isReadOnly) {
@@ -24,15 +19,16 @@ export function renderReferences({ references, ...globalProps }) {
 
 function LegalReferences({
   category,
-  data = [],
+  data,
+  idcc,
   isLoading = false,
   isReadOnly = false,
-  noContent = false,
-  onAdd = () => undefined,
-  onChange = () => undefined,
-  onInput = () => undefined,
-  onRemove = () => undefined,
-  references = [],
+  onAdd,
+  onChange,
+  onIdccChange,
+  onInput,
+  onRemove,
+  references,
   ...props
 }) {
   if (isLoading) {
@@ -49,33 +45,20 @@ function LegalReferences({
     );
   }
 
-  const placeholder = LEGAL_REFERENCE_CATEGORY_PLACEHOLDER[category];
-
   return (
     <Container {...props}>
       {!isReadOnly && (
-        <ReactTagAutocomplete
-          autofocus={false}
-          data-testid="input-autocomplete"
-          handleAddition={onAdd}
-          handleDelete={() => undefined}
-          handleInputChange={onInput}
-          handleValidate={() => true}
-          maxSuggestionsLength={10}
-          minQueryLength={1}
-          placeholder={placeholder}
-          suggestions={data}
-          suggestionsFilter={() => true}
+        <Selector
+          category={category}
+          data={data}
+          idcc={idcc}
+          onAdd={onAdd}
+          onIdccChange={onIdccChange}
+          onInput={onInput}
         />
       )}
-      <Flex flexDirection="column">
-        {renderReferences({
-          isReadOnly,
-          noContent,
-          onChange,
-          onRemove,
-          references,
-        })}
+      <Flex data-testid="list" flexDirection="column">
+        {renderReferences({ isReadOnly, onChange, onRemove, references })}
       </Flex>
     </Container>
   );
@@ -84,11 +67,12 @@ function LegalReferences({
 LegalReferences.propTypes = {
   category: LegalReferenceProps.category,
   data: PropTypes.array,
+  idcc: PropTypes.string,
   isLoading: PropTypes.bool,
   isReadOnly: PropTypes.bool,
-  noContent: PropTypes.bool,
   onAdd: PropTypes.func,
   onChange: PropTypes.func,
+  onIdccChange: PropTypes.func,
   onInput: PropTypes.func,
   onRemove: PropTypes.func,
   references: PropTypes.arrayOf(PropTypes.exact(LegalReferenceProps)),
