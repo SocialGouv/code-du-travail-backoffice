@@ -54,15 +54,14 @@ class Selector extends React.PureComponent {
           />
         )}
         <ReactTagAutocomplete
-          autofocus={false}
           data-testid="input-autocomplete"
-          handleAddition={onAdd}
-          handleDelete={() => undefined}
-          handleInputChange={onInput}
-          handleValidate={() => true}
           maxSuggestionsLength={10}
           minQueryLength={1}
-          placeholder={placeholder}
+          onAddition={onAdd}
+          onDelete={() => undefined}
+          onInput={onInput}
+          onValidate={() => true}
+          placeholderText={placeholder}
           suggestions={data}
           suggestionsFilter={() => true}
         />

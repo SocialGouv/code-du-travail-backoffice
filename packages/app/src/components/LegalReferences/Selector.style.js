@@ -9,11 +9,7 @@ export const Container = styled(Flex)`
     position: relative;
   }
 
-  .react-tags__selected > button {
-    border: solid 1px var(--color-border);
-  }
-
-  .react-tags__search-input > input {
+  .react-tags__search-input {
     -webkit-appearance: none;
     border: solid 1px var(--color-border);
     color: inherit;
@@ -34,25 +30,29 @@ export const Container = styled(Flex)`
     }
   }
 
-  .react-tags__suggestions > ul {
-    list-style: none;
-    padding: 0;
+  .react-tags__suggestions {
     position: absolute;
-    z-index: 2;
 
-    li {
-      background-color: var(--color-alice-blue);
-      border: solid 1px var(--color-border);
-      border-top: 0;
-      cursor: pointer;
-      padding: 0.25rem 0.5rem;
+    > ul {
+      list-style: none;
+      padding: 0;
+      /* position: absolute; */
+      z-index: 2;
 
-      &:hover {
-        background-color: var(--color-periwinkle);
-      }
+      > li {
+        background-color: var(--color-alice-blue);
+        border: solid 1px var(--color-border);
+        border-top: 0;
+        cursor: pointer;
+        padding: 0.25rem 0.5rem;
 
-      &.is-active {
-        background-color: var(--color-cadet-grey);
+        &:hover {
+          background-color: var(--color-periwinkle);
+        }
+
+        &.is-active {
+          background-color: var(--color-cadet-grey);
+        }
       }
     }
   }
