@@ -12,12 +12,12 @@ variables:
   NOTIFY_DISABLED: 1
 
 Install:
-  rules:
-    - when: never
+  script:
+    - echo "skip"
 
 Build:
   script:
-    - echo "yo"
+    - echo "skip"
 
 Lint:
   rules:
