@@ -7,6 +7,6 @@ const sha = process.env.CI_COMMIT_SHORT_SHA;
 
 // create database autodevops_[sha] and user_[sha]
 export default {
-  name: "create-db-job",
+  name: `create-db-job-${process.env.CI_COMMIT_SHORT_SHA}`,
   ...getDevDatabaseParameters({ suffix: sha }),
 };
