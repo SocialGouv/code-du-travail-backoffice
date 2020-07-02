@@ -54,17 +54,15 @@ addToEnvFrom({
   data: [secretSource, configMapSource],
 });
 
-if (process.env.ENABLE_AZURE_POSTGRES) {
-  const azureSecretSource = new EnvFromSource({
-    secretRef: {
-      name: `azure-pg-user-${process.env.CI_COMMIT_SHORT_SHA}`,
-    },
-  });
-  addToEnvFrom({
-    deployment,
-    data: [azureSecretSource],
-  });
-}
+const azureSecretSource = new EnvFromSource({
+  secretRef: {
+    name: `azure-pg-user-${process.env.CI_COMMIT_SHORT_SHA}`,
+  },
+});
+addToEnvFrom({
+  deployment,
+  data: [azureSecretSource],
+});
 
 //
 

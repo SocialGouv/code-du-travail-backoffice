@@ -9,15 +9,13 @@ ok(process.env.CI_COMMIT_SHORT_SHA, "Expect CI_COMMIT_SHORT_SHA to be defined");
 
 const defaultExport = [];
 
-if (process.env.ENABLE_AZURE_POSTGRES) {
-  // use azure-pg-admin-user secret to create DB
-  const { createDbJob: job } = createDb(env.component("create-db"));
+// use azure-pg-admin-user secret to create DB
+const { createDbJob: job } = createDb(env.component("create-db"));
 
-  // creates azure-pg-user secret
-  const { createSecret: secret } = createSecret(env.component("pg-secret"));
+// creates azure-pg-user secret
+const { createSecret: secret } = createSecret(env.component("pg-secret"));
 
-  defaultExport.push(secret);
-  defaultExport.push(job);
-}
+defaultExport.push(secret);
+defaultExport.push(job);
 
 export default defaultExport;

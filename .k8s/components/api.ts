@@ -13,6 +13,8 @@ ok(process.env.CI_COMMIT_SHORT_SHA, "Expect CI_COMMIT_SHORT_SHA to be defined");
 const params = env.component("api");
 const { deployment, ingress, service } = create(params);
 
+//addEnvRessources(deployment, "api");
+
 const secret = new SealedSecret({
   ...loadYaml(env, "api-env.sealed-secret.yaml"),
   metadata: {
@@ -54,17 +56,15 @@ addToEnvFrom({
   data: [secretSource, configMapSource],
 });
 
-if (process.env.ENABLE_AZURE_POSTGRES) {
-  const azureSecretSource = new EnvFromSource({
-    secretRef: {
-      name: `azure-pg-user-${process.env.CI_COMMIT_SHORT_SHA}`,
-    },
-  });
-  addToEnvFrom({
-    deployment,
-    data: [azureSecretSource],
-  });
-}
+const azureSecretSource = new EnvFromSource({
+  secretRef: {
+    name: `azure-pg-user-${process.env.CI_COMMIT_SHORT_SHA}`,
+  },
+});
+addToEnvFrom({
+  deployment,
+  data: [azureSecretSource],
+});
 
 //
 
