@@ -16,8 +16,8 @@ Install:
     - when: never
 
 Build:
-  rules:
-    - when: never
+  script:
+    - echo "yo"
 
 Lint:
   rules:
