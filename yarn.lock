@@ -11721,10 +11721,10 @@ react-table@6.11.5:
     classnames "^2.2.5"
     react-is "^16.8.1"
 
-react-tag-autocomplete@5.13.1:
-  version "5.13.1"
-  resolved "https://registry.yarnpkg.com/react-tag-autocomplete/-/react-tag-autocomplete-5.13.1.tgz#9d3376cbbf66ce8901a62355ca35fd68a58abfc8"
-  integrity sha512-ECcQnizAxw8VnEDUfCKuA2ZDQ0Fyxds3kVtE4NVAhJvBYOMMgkRNAM3UwyEXAQ0h7nnCwmIA+czJiwso07Mrqw==
+react-tag-autocomplete@6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/react-tag-autocomplete/-/react-tag-autocomplete-6.0.0.tgz#a9a9366308a1dc0cc0ecbed9a2c1dbe45d14d06b"
+  integrity sha512-CJ8hp9JQG+Fzcid0zRpmeJIKQn4Nkx8xnUXJXqGz47T77W5QPLQL/szhwDA1C24CjDYVmoZuBg5tcXdw64Aizw==
 
 react-test-renderer@16.13.1:
   version "16.13.1"

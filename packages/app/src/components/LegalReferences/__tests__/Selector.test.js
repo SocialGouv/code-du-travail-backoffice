@@ -17,7 +17,7 @@ describe("components/LegalReferences/LegalReferences/<Selector />", () => {
   const $REACT_TAG_AUTOCOMPLETE = {};
 
   beforeAll(() => {
-    console.warn = jest.fn();
+    console.error = jest.fn();
   });
 
   describe("should render as expected", () => {
@@ -38,21 +38,22 @@ describe("components/LegalReferences/LegalReferences/<Selector />", () => {
             addOnBlur: false,
             allowBackspace: true,
             allowNew: false,
-            autofocus: false,
             autoresize: true,
-            clearInputOnDelete: true,
+            classNames: expect.any(Object),
             "data-testid": "input-autocomplete",
-            delimiterChars: [],
             delimiters: [],
-            handleAddition: expect.any(Function),
-            handleDelete: expect.any(Function),
-            handleInputChange: expect.any(Function),
-            handleValidate: expect.any(Function),
+            id: expect.any(String),
             inputAttributes: {},
             maxSuggestionsLength: 10,
             minQueryLength: 1,
             noSuggestionsText: null,
-            placeholder: "12, 36.3, 05.07.6…",
+            onAddition: expect.any(Function),
+            onDelete: expect.any(Function),
+            onInput: expect.any(Function),
+            onValidate: expect.any(Function),
+            placeholderText: "12, 36.3, 05.07.6…",
+            removeButtonText: expect.any(String),
+            suggestionComponent: null,
             suggestions: [],
             suggestionsFilter: expect.any(Function),
             tagComponent: null,
@@ -93,21 +94,22 @@ describe("components/LegalReferences/LegalReferences/<Selector />", () => {
             addOnBlur: false,
             allowBackspace: true,
             allowNew: false,
-            autofocus: false,
             autoresize: true,
-            clearInputOnDelete: true,
+            classNames: expect.any(Object),
             "data-testid": "input-autocomplete",
-            delimiterChars: [],
             delimiters: [],
-            handleAddition: expect.any(Function),
-            handleDelete: expect.any(Function),
-            handleInputChange: expect.any(Function),
-            handleValidate: expect.any(Function),
+            id: expect.any(String),
             inputAttributes: {},
             maxSuggestionsLength: 10,
             minQueryLength: 1,
             noSuggestionsText: null,
-            placeholder: "D1234, L1234, R1234…",
+            onAddition: expect.any(Function),
+            onDelete: expect.any(Function),
+            onInput: expect.any(Function),
+            onValidate: expect.any(Function),
+            placeholderText: "D1234, L1234, R1234…",
+            removeButtonText: expect.any(String),
+            suggestionComponent: null,
             suggestions: [],
             suggestionsFilter: expect.any(Function),
             tagComponent: null,
@@ -132,11 +134,11 @@ describe("components/LegalReferences/LegalReferences/<Selector />", () => {
       create(<Selector {...props} />);
 
       expect(ReactTagAutocomplete).toHaveBeenCalledTimes(1);
-      expect($REACT_TAG_AUTOCOMPLETE.props.handleDelete()).toBeUndefined();
-      expect($REACT_TAG_AUTOCOMPLETE.props.handleValidate()).toStrictEqual(true);
+      expect($REACT_TAG_AUTOCOMPLETE.props.onDelete()).toBeUndefined();
+      expect($REACT_TAG_AUTOCOMPLETE.props.onValidate()).toStrictEqual(true);
       expect($REACT_TAG_AUTOCOMPLETE.props.suggestionsFilter()).toStrictEqual(true);
 
-      $REACT_TAG_AUTOCOMPLETE.props.handleAddition();
+      $REACT_TAG_AUTOCOMPLETE.props.onAddition();
 
       expect(props.onAdd).toHaveBeenCalledTimes(1);
     });
@@ -153,11 +155,11 @@ describe("components/LegalReferences/LegalReferences/<Selector />", () => {
       create(<Selector {...props} />);
 
       expect(ReactTagAutocomplete).toHaveBeenCalledTimes(1);
-      expect($REACT_TAG_AUTOCOMPLETE.props.handleDelete()).toBeUndefined();
-      expect($REACT_TAG_AUTOCOMPLETE.props.handleValidate()).toStrictEqual(true);
+      expect($REACT_TAG_AUTOCOMPLETE.props.onDelete()).toBeUndefined();
+      expect($REACT_TAG_AUTOCOMPLETE.props.onValidate()).toStrictEqual(true);
       expect($REACT_TAG_AUTOCOMPLETE.props.suggestionsFilter()).toStrictEqual(true);
 
-      $REACT_TAG_AUTOCOMPLETE.props.handleAddition();
+      $REACT_TAG_AUTOCOMPLETE.props.onAddition();
 
       expect(props.onAdd).toHaveBeenCalledTimes(1);
     });
