@@ -47,10 +47,3 @@ Register api:
     CONTEXT: ./packages/api
     DOCKERFILE_PATH: Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE/api
-
-Register hasura:
-  extends: .register-image
-  variables:
-    CONTEXT: ./hasura
-    DOCKERFILE_PATH: Dockerfile
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura

@@ -5,8 +5,8 @@ export default {
   name: "postgrest",
   subdomain: `postgrest-${process.env.CI_PROJECT_NAME as string}`,
   image: {
-    name: process.env.CI_REGISTRY_IMAGE + "/postgrest",
-    tag: process.env.CI_COMMIT_TAG ? process.env.CI_COMMIT_TAG.slice(1) : process.env.CI_COMMIT_SHA,
+    name: "postgrest/postgrest",
+    tag: "v6.0.2",
   },
   ingress: {
     secretName: process.env.PRODUCTION ? "postgrest-crt" : "wildcard-crt",
