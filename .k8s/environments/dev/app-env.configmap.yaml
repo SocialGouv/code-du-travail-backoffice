@@ -3,8 +3,9 @@ apiVersion: v1
 metadata:
   name: app-env
 data:
-  NODE_ENV: "production"
-  GRAPHQL_ENDPOINT: "http://hasura/v1/graphql"
-  ACCOUNT_MAIL_SENDER: "contact@fabrique.social.gouv.fr"
-  FRONTEND_PORT: "3000"
-  PRODUCTION: "false"
+  NODE_ENV: production
+  API_DOMAIN: api
+  API_PORT_PUBLIC: 80
+  API_SCHEME: http
+  API_URI_DOCKER: http://api
+  APP_PORT: 80

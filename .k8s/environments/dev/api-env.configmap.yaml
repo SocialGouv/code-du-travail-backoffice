@@ -1,10 +1,8 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: app-env
+  name: api-env
 data:
-  NODE_ENV: "production"
-  GRAPHQL_ENDPOINT: "http://hasura/v1/graphql"
-  ACCOUNT_MAIL_SENDER: "contact@fabrique.social.gouv.fr"
-  FRONTEND_PORT: "3000"
-  PRODUCTION: "false"
+  NODE_ENV: production
+  API_PORT: 80
+  POSTGREST_URI: http://postgrest:3000
