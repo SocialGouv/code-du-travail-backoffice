@@ -27,6 +27,10 @@ Test:
   rules:
     - when: never
 
+Register image:
+  rules:
+    - when: never
+
 .register-image:
   extends: .autodevops_register_image
   dependencies: []
