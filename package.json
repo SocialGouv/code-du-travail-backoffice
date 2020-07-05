@@ -48,7 +48,7 @@
     "cpy-cli": "3.1.1",
     "cucumber": "6.0.5",
     "dumdum": "1.0.0-alpha.5",
-    "eslint": "7.3.1",
+    "eslint": "7.4.0",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-chai-expect": "2.1.0",
     "eslint-plugin-prettier": "3.1.4",
@@ -59,11 +59,11 @@
     "postgrester": "1.4.0",
     "prettier": "2.0.5",
     "puppeteer": "5.0.0",
-    "typescript": "3.9.5",
-    "yargs": "15.3.1"
+    "typescript": "3.9.6",
+    "yargs": "15.4.0"
   },
   "resolutions": {
-    "@babel/preset-react": "^7.10.1"
+    "@babel/preset-react": "^7.10.4"
   },
   "workspaces": [
     "packages/*"
