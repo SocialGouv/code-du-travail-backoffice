@@ -4,11 +4,11 @@ import { create } from "react-test-renderer";
 import waait from "waait";
 
 import runTestRenderedProperty from "../../../../tests/utils/runTestRenderedProperty";
-import dilaApi from "../../../libs/dilaApi";
+import cdtnApi from "../../../libs/cdtnApi";
 import Tag from "../Tag";
 import TagEditorWithClickOutside from "../TagEditor";
 
-jest.mock("../../../libs/dilaApi");
+jest.mock("../../../libs/cdtnApi");
 jest.mock("../TagEditor");
 
 describe("components/LegalReferences/<Tag />", () => {
@@ -42,13 +42,13 @@ describe("components/LegalReferences/<Tag />", () => {
     };
 
     // Mounting:
-    dilaApi.get.mockResolvedValueOnce({ content: "Some content", id: "KALIARTI000000000002" });
+    cdtnApi.get.mockResolvedValueOnce({ content: "Some content", id: "KALIARTI000000000002" });
     const $tag = create(<Tag {...props} />);
 
     // Mounted:
     await waait();
 
-    expect(dilaApi.get).toHaveBeenCalledTimes(1);
+    expect(cdtnApi.get).toHaveBeenCalledTimes(1);
     expect($tag).toHaveTestRenderedProperty("data-tip", "Some content");
     expect($tag).toHaveTestRenderedTextContent("A value", "label");
 
@@ -95,7 +95,7 @@ describe("components/LegalReferences/<Tag />", () => {
     };
 
     // Mounting:
-    dilaApi.get.mockResolvedValueOnce({ content: "Some content", label: "Another value" });
+    cdtnApi.get.mockResolvedValueOnce({ content: "Some content", label: "Another value" });
     const $tag = create(<Tag {...props} />);
 
     // Mounted:
@@ -117,7 +117,7 @@ describe("components/LegalReferences/<Tag />", () => {
     };
 
     // Mounting:
-    dilaApi.get.mockResolvedValueOnce({ content: null, label: "A value" });
+    cdtnApi.get.mockResolvedValueOnce({ content: null, label: "A value" });
     const $tag = create(<Tag {...props} />);
 
     // Mounted:
@@ -135,7 +135,7 @@ describe("components/LegalReferences/<Tag />", () => {
 
     const $tag = create(<Tag {...props} />);
 
-    expect(dilaApi.get).not.toHaveBeenCalled();
+    expect(cdtnApi.get).not.toHaveBeenCalled();
     expect($tag).toHaveTestRenderedStyleRule("background-color", "var(--color-text-red)");
     expect($tag).toHaveTestRenderedStyleRule("background-color", "var(--color-text-red)", {
       target: ":hover",
@@ -151,7 +151,7 @@ describe("components/LegalReferences/<Tag />", () => {
     // Mounted:
     const $tag = create(<Tag {...props} />);
 
-    expect(dilaApi.get).not.toHaveBeenCalled();
+    expect(cdtnApi.get).not.toHaveBeenCalled();
     expect($tag).toHaveTestRenderedTextContent("A value", "label");
     expect($tag).toHaveTestRenderedStyleRule("background-color", "var(--color-alice-blue)");
     expect($tag).toHaveTestRenderedStyleRule("cursor", "help");

@@ -8,9 +8,9 @@ import _Table from "../../../src/elements/Table";
 import Title from "../../../src/elements/Title";
 import shortenAgreementName from "../../../src/helpers/shortenAgreementName";
 import AdminMainLayout from "../../../src/layouts/AdminMain";
+import cdtnApi from "../../../src/libs/cdtnApi";
 import numeral from "../../../src/libs/customNumeral";
 import customPostgrester from "../../../src/libs/customPostgrester";
-import dilaApi from "../../../src/libs/dilaApi";
 
 const Container = styled(Flex)`
   margin: 0 1rem 1rem;
@@ -138,7 +138,7 @@ class AdminTrackerPage extends React.Component {
     for (const localAgreementAnswerReference of localAgreementAnswersReferences) {
       try {
         const { dila_id } = localAgreementAnswerReference;
-        await dilaApi.get(`/agreement/articles?articleIdsOrCids=${dila_id}`);
+        await cdtnApi.get(`/agreement/articles?articleIdsOrCids=${dila_id}`);
       } catch (err) {
         obsoleteAgreementAnswersReference.push(localAgreementAnswerReference);
       }
@@ -147,7 +147,7 @@ class AdminTrackerPage extends React.Component {
     for (const localCodeAnswerReference of localCodeAnswersReferences) {
       try {
         const { dila_id } = localCodeAnswerReference;
-        await dilaApi.get(`/code/articles?articleIdsOrCids=${dila_id}`);
+        await cdtnApi.get(`/code/articles?articleIdsOrCids=${dila_id}`);
       } catch (err) {
         obsoleteAgreementAnswersReference.push(localCodeAnswerReference);
       }

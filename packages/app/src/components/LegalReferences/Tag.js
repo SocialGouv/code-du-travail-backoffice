@@ -4,7 +4,7 @@ import React from "react";
 import * as C from "../../constants";
 import Button from "../../elements/Button";
 import Icon from "../../elements/Icon";
-import dilaApi from "../../libs/dilaApi";
+import cdtnApi from "../../libs/cdtnApi";
 import LegalReferenceProps from "../../props/LegalReference";
 import { ButtonsContainer, Container, Label, Tooltip } from "./Tag.style";
 import TagEditorWithClickOutside from "./TagEditor";
@@ -49,7 +49,7 @@ class Tag extends React.PureComponent {
 
     try {
       const path = category === C.LEGAL_REFERENCE_CATEGORY.AGREEMENT ? "/agreement" : "/code";
-      const { content, id } = await dilaApi.get(`${path}/article/${dila_cid}`);
+      const { content, id } = await cdtnApi.get(`${path}/article/${dila_cid}`);
 
       this.setState({
         content,
