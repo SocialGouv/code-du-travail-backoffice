@@ -1,13 +1,13 @@
 import { runSaga } from "redux-saga";
 
-import dilaApi from "../../../libs/dilaApi";
+import cdtnApi from "../../../libs/cdtnApi";
 import { initialState } from "../../../reducers/legal-references";
 import load from "../load";
 
-jest.mock("../../../libs/dilaApi");
+jest.mock("../../../libs/cdtnApi");
 
 describe(`sagas/legal-references/load()`, () => {
-  /** @type {DilaApi.Article[]}  */
+  /** @type {cdtnApi.Article[]}  */
   const AGREEMENT_DATA = [
     {
       cid: "KALIARTI123456789012",
@@ -45,7 +45,7 @@ describe(`sagas/legal-references/load()`, () => {
   describe(`with query="A Query"`, () => {
     describe(`should behave as expected`, () => {
       it(`with category="agreement"`, async () => {
-        dilaApi.get.mockResolvedValueOnce(AGREEMENT_DATA);
+        cdtnApi.get.mockResolvedValueOnce(AGREEMENT_DATA);
 
         await runSaga(
           {
@@ -56,8 +56,8 @@ describe(`sagas/legal-references/load()`, () => {
           { meta: { category: "agreement", idcc: "1234", query: "A Query" } },
         ).toPromise();
 
-        expect(dilaApi.get).toHaveBeenCalledTimes(1);
-        expect(dilaApi.get).toHaveBeenCalledWith(
+        expect(cdtnApi.get).toHaveBeenCalledTimes(1);
+        expect(cdtnApi.get).toHaveBeenCalledWith(
           "/agreement/articles?agreementIdOrIdcc=1234&query=A Query",
         );
 
@@ -69,7 +69,7 @@ describe(`sagas/legal-references/load()`, () => {
       });
 
       it(`with category="labor_code"`, async () => {
-        dilaApi.get.mockResolvedValueOnce(CODE_DATA);
+        cdtnApi.get.mockResolvedValueOnce(CODE_DATA);
 
         await runSaga(
           {
@@ -80,8 +80,8 @@ describe(`sagas/legal-references/load()`, () => {
           { meta: { category: "labor_code", query: "A Query" } },
         ).toPromise();
 
-        expect(dilaApi.get).toHaveBeenCalledTimes(1);
-        expect(dilaApi.get).toHaveBeenCalledWith(
+        expect(cdtnApi.get).toHaveBeenCalledTimes(1);
+        expect(cdtnApi.get).toHaveBeenCalledWith(
           "/code/articles?codeId=LEGITEXT000006072050&query=A Query",
         );
 
@@ -106,7 +106,7 @@ describe(`sagas/legal-references/load()`, () => {
           { meta: { category: "agreement", idcc: "1234", query: "" } },
         ).toPromise();
 
-        expect(dilaApi.get).not.toHaveBeenCalled();
+        expect(cdtnApi.get).not.toHaveBeenCalled();
 
         expect(DISPATCHED).toHaveLength(1);
         expect(DISPATCHED[0]).toEqual({

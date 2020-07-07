@@ -10,8 +10,8 @@ import LoadingSpinner from "../../../src/elements/LoadingSpinner";
 import Title from "../../../src/elements/Title";
 import shortenAgreementName from "../../../src/helpers/shortenAgreementName";
 import AdminMainLayout from "../../../src/layouts/AdminMain";
+import cdtnApi from "../../../src/libs/cdtnApi";
 import customPostgrester from "../../../src/libs/customPostgrester";
-import dilaApi from "../../../src/libs/dilaApi";
 import T from "../../../src/texts";
 
 const Container = styled(Flex)`
@@ -96,7 +96,7 @@ class AdminTrackerAgreementIdPage extends React.Component {
     for (const localAgreementAnswerReference of localAgreementAnswersReferences) {
       try {
         const { dila_id } = localAgreementAnswerReference;
-        await dilaApi.get(`/agreement/articles?articleIdsOrCids=${dila_id}`);
+        await cdtnApi.get(`/agreement/articles?articleIdsOrCids=${dila_id}`);
       } catch (err) {
         obsoleteAgreementAnswersReference.push(localAgreementAnswerReference);
       }

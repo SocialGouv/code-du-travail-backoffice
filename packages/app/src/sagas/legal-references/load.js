@@ -4,7 +4,7 @@ import { put } from "redux-saga/effects";
 
 import { legalReferences } from "../../actions";
 import * as C from "../../constants";
-import dilaApi from "../../libs/dilaApi";
+import cdtnApi from "../../libs/cdtnApi";
 import toast from "../../libs/toast";
 
 export default function* load({ meta: { category, idcc, query } }) {
@@ -23,8 +23,8 @@ export default function* load({ meta: { category, idcc, query } }) {
 
     if (category === C.LEGAL_REFERENCE_CATEGORY.AGREEMENT) {
       const path = `/agreement/articles?agreementIdOrIdcc=${idcc}&query=${query}`;
-      /** @type {DilaApi.Article[]} */
-      const articles = yield dilaApi.get(path);
+      /** @type {cdtnApi.Article[]} */
+      const articles = yield cdtnApi.get(path);
 
       response.list = articles.map(article => ({
         ...article,
@@ -32,8 +32,8 @@ export default function* load({ meta: { category, idcc, query } }) {
       }));
     } else {
       const path = `/code/articles?codeId=LEGITEXT000006072050&query=${query}`;
-      /** @type {DilaApi.Article[]} */
-      const articles = yield dilaApi.get(path);
+      /** @type {cdtnApi.Article[]} */
+      const articles = yield cdtnApi.get(path);
 
       response.list = articles.map(article => ({
         ...article,
