@@ -162,7 +162,7 @@ export class AdminAnwsersEditPage extends React.Component {
 
       this.setState({
         isFirstLoad: false,
-        selectedAgreementIdcc: answers.data.agreement.idcc,
+        selectedAgreementIdcc: !this.isGeneric ? answers.data.agreement.idcc : null,
       });
     }
 

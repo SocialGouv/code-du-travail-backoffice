@@ -120,6 +120,12 @@ module.exports = function (nextApp, requestHandler) {
     });
   });
 
+  withErrorAndAuth(nextApp, "/admin/tracker/:id", async ctx => {
+    await nextApp.render(ctx.req, ctx.res, "/admin/tracker/agreement", {
+      ...ctx.params,
+    });
+  });
+
   withErrorAndAuth(nextApp, "/admin/users/new", async ctx => {
     await nextApp.render(ctx.req, ctx.res, "/admin/users/new", {});
   });

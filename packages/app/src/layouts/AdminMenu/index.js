@@ -60,15 +60,16 @@ export class AdminMenu extends React.PureComponent {
     return (
       <Container>
         {this.renderLink("", "Tableau de bord", "admin-dashboard")}
+        {this.renderLink("/tracker", "Tableau de veille", "admin-tracker")}
         {this.renderLink("/agreements", "Conventions", "admin-agreements")}
         {this.renderLink("/questions", "Questions", "admin-questions")}
-        {this.renderLink("/answers-references", "Références légales", "admin-answers-references")}
         {this.renderLink("/answers", "Réponses", "admin-answers")}
         {this.renderLink("/generic-answers", "Réponses génériques", "admin-generic-answers")}
         {this.renderLink("/locations", "Unités", "admin-locations")}
         {this.renderLink("/users", "Utilisateurs", "admin-users")}
 
         <Subtitle>Maintenance</Subtitle>
+        {this.renderLink("/answers-references", "Références légales", "admin-answers-references")}
         {this.renderLink("/logs", "Logs", "admin-logs")}
         {this.renderLink("/migrations", "Migrations", "admin-migrations")}
       </Container>

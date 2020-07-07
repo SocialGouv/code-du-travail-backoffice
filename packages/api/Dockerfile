@@ -1,6 +1,6 @@
 # API Image
 
-FROM node:12.16.1-alpine
+FROM node:14.5.0-alpine
 
 ARG API_PORT
 ARG DB_URI

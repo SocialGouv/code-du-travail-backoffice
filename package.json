@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
+    "api:cache": "node -r dotenv/config -r esm ./scripts/dev/updateApiCache.js",
     "db:backup": "node -r dotenv/config ./scripts/db/backup.js",
     "db:migrate": "knex migrate:latest",
     "db:migrate:make": "node ./scripts/db/generateMigration.js",
@@ -13,7 +14,9 @@
     "db:snapshot:restore": "node -r dotenv/config ./scripts/db/restore.js --dev",
     "db:snapshot:update": "node -r dotenv/config ./scripts/db/backup.js --dev",
     "dev": "yarn dev:docker && yarn dev:packages",
+    "dev:standalone": "yarn dev:docker:standalone && yarn dev:packages",
     "dev:docker": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d postgrest",
+    "dev:docker:standalone": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d cdtn_api postgrest",
     "dev:packages": "lerna run --parallel --scope \"@socialgouv/code-du-travail-backoffice__api\" --scope \"@socialgouv/code-du-travail-backoffice__app\" dev",
     "preinstall": "node ./scripts/ci/removeWorkspaces.js && node ./scripts/ci/deleteYarnLock.js",
     "setup": "yarn setup:env && node -r dotenv/config ./scripts/dev/setup.js",
@@ -32,8 +35,10 @@
   "dependencies": {
     "colors": "1.4.0",
     "dotenv": "8.2.0",
+    "esm": "3.2.25",
     "knex": "0.21.1",
     "lerna": "3.22.1",
+    "npmlog": "4.1.2",
     "pg": "8.2.1",
     "shelljs": "0.8.4"
   },
@@ -43,6 +48,7 @@
     "@testing-library/jest-dom": "5.11.0",
     "@types/cucumber": "6.0.1",
     "@types/jest": "26.0.3",
+    "axios": "0.19.2",
     "boxen": "4.2.0",
     "chai": "4.2.0",
     "cpy-cli": "3.1.1",

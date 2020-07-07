@@ -27,7 +27,6 @@ services:
       - db
 
   api:
-    restart: always
     build:
       context: ./packages/api
       args:
@@ -35,13 +34,13 @@ services:
         DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
         NODE_ENV: ${NODE_ENV}
         POSTGREST_URI: http://postgrest:3000
+    restart: always
     ports:
       - ${API_PORT}:${API_PORT}
     depends_on:
       - postgrest
 
   app:
-    restart: always
     build:
       context: ./packages/app
       args:
@@ -49,9 +48,11 @@ services:
         API_PORT_PUBLIC: ${API_PORT_PUBLIC}
         API_SCHEME: ${API_SCHEME}
         API_URI_DOCKER: http://api:${API_PORT}
+        CDTN_API_URL: ${CDTN_API_URL}
         DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
         NODE_ENV: ${NODE_ENV}
         APP_PORT: ${APP_PORT}
+    restart: always
     ports:
       - ${APP_PORT}:${APP_PORT}
     depends_on:

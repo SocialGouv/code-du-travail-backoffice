@@ -57,7 +57,10 @@ class Tag extends React.PureComponent {
         isObsolete: id !== dila_id,
       });
     } catch (err) {
-      this.setState({ isLoading: false });
+      this.setState({
+        isLoading: false,
+        isObsolete: true,
+      });
     }
   }
 
