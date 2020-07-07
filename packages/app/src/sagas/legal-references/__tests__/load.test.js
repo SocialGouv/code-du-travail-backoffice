@@ -7,7 +7,7 @@ import load from "../load";
 jest.mock("../../../libs/cdtnApi");
 
 describe(`sagas/legal-references/load()`, () => {
-  /** @type {cdtnApi.Article[]}  */
+  /** @type {DilaApi.Article[]}  */
   const AGREEMENT_DATA = [
     {
       cid: "KALIARTI123456789012",
