@@ -23,7 +23,7 @@ export default function* load({ meta: { category, idcc, query } }) {
 
     if (category === C.LEGAL_REFERENCE_CATEGORY.AGREEMENT) {
       const path = `/agreement/articles?agreementIdOrIdcc=${idcc}&query=${query}`;
-      /** @type {cdtnApi.Article[]} */
+      /** @type {DilaApi.Article[]} */
       const articles = yield cdtnApi.get(path);
 
       response.list = articles.map(article => ({
@@ -32,7 +32,7 @@ export default function* load({ meta: { category, idcc, query } }) {
       }));
     } else {
       const path = `/code/articles?codeId=LEGITEXT000006072050&query=${query}`;
-      /** @type {cdtnApi.Article[]} */
+      /** @type {DilaApi.Article[]} */
       const articles = yield cdtnApi.get(path);
 
       response.list = articles.map(article => ({

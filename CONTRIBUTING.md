@@ -68,7 +68,7 @@ The website should now be available at: http://localhost:3100.
 
 Standalone dev also runs [**ctdn-api**](https://github.com/SocialGouv/cdtn-api) locally:
 
-First, uncomment `CDTN_API_URL=http://localhost:3300` in `.env` file.
+First, change `CDTN_API_URL` value to `http://localhost:3300` in `.env` file.
 
 Then run:
 
