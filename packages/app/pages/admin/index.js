@@ -198,52 +198,51 @@ export default class AdminIndexPage extends React.Component {
   async updateStats() {
     const { agreementsStats } = this.state;
 
-    const nextAgreementsStats = await Promise.all(
-      agreementsStats.map(async agreementStatsEntry => {
-        const { id: agreementId } = agreementStatsEntry;
-        const answers = await this.fetchAnswersForAgreement(agreementId);
+    const nextAgreementsStats = [];
+    for (const agreementStatsEntry of agreementsStats) {
+      const { id: agreementId } = agreementStatsEntry;
+      const answers = await this.fetchAnswersForAgreement(agreementId);
 
-        const totals = answers.reduce(
-          (totals, { is_published, state }) => {
-            switch (state) {
-              case ANSWER_STATE.TO_DO:
-                totals[0] += 1;
-                break;
+      const totals = answers.reduce(
+        (totals, { is_published, state }) => {
+          switch (state) {
+            case ANSWER_STATE.TO_DO:
+              totals[0] += 1;
+              break;
 
-              case ANSWER_STATE.DRAFT:
-                totals[1] += 1;
-                break;
+            case ANSWER_STATE.DRAFT:
+              totals[1] += 1;
+              break;
 
-              case ANSWER_STATE.PENDING_REVIEW:
-                totals[2] += 1;
-                break;
+            case ANSWER_STATE.PENDING_REVIEW:
+              totals[2] += 1;
+              break;
 
-              case ANSWER_STATE.UNDER_REVIEW:
-                totals[3] += 1;
-                break;
+            case ANSWER_STATE.UNDER_REVIEW:
+              totals[3] += 1;
+              break;
 
-              case ANSWER_STATE.VALIDATED:
-                totals[4] += 1;
-                break;
-            }
+            case ANSWER_STATE.VALIDATED:
+              totals[4] += 1;
+              break;
+          }
 
-            if (is_published) {
-              totals[5] += 1;
-            }
+          if (is_published) {
+            totals[5] += 1;
+          }
 
-            totals[6] += 1;
+          totals[6] += 1;
 
-            return totals;
-          },
-          [0, 0, 0, 0, 0, 0, 0],
-        );
+          return totals;
+        },
+        [0, 0, 0, 0, 0, 0, 0],
+      );
 
-        return {
-          ...agreementStatsEntry,
-          totals,
-        };
-      }),
-    );
+      nextAgreementsStats.push({
+        ...agreementStatsEntry,
+        totals,
+      });
+    }
 
     const nextGlobalStats = nextAgreementsStats.reduce(
       (globalTotals, { totals }) => [
