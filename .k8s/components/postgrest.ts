@@ -1,10 +1,15 @@
+import { ok } from "assert";
 import env from "@kosko/env";
+import { Deployment } from "kubernetes-models/apps/v1/Deployment";
 
 import { create } from "@socialgouv/kosko-charts/components/app";
+import { addPostgresUserSecret } from "@socialgouv/kosko-charts/utils/addPostgresUserSecret";
+import { addWaitForPostgres } from "@socialgouv/kosko-charts/utils/addWaitForPostgres";
 
-const manifests = create("api", {
+const manifests = create("postgrest", {
   env,
   config: {
+    ingress: false,
     image: "postgrest/postgrest:v6.0.2",
     containerPort: 3000,
   },
@@ -38,8 +43,13 @@ const manifests = create("api", {
   },
 });
 
-// todo: add pgsecret
-// PGRST_DB_URI;
-// PGRST_JWT_SECRET;
+const deployment = manifests.find(
+  (manifest): manifest is Deployment => manifest.kind === "Deployment",
+);
+ok(deployment);
+addPostgresUserSecret(deployment);
+addWaitForPostgres(deployment);
+
+// todo: add PGRST_JWT_SECRET;
 
 export default manifests;

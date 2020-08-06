@@ -1,6 +1,10 @@
+import { ok } from "assert";
 import env from "@kosko/env";
+import { Deployment } from "kubernetes-models/apps/v1/Deployment";
 
 import { create } from "@socialgouv/kosko-charts/components/app";
+import { addPostgresUserSecret } from "@socialgouv/kosko-charts/utils/addPostgresUserSecret";
+import { addWaitForPostgres } from "@socialgouv/kosko-charts/utils/addWaitForPostgres";
 
 const manifests = create("app", {
   env,
@@ -30,7 +34,11 @@ const manifests = create("app", {
   },
 });
 
-// todo: add pgsecret
-// DB_URI;
+const deployment = manifests.find(
+  (manifest): manifest is Deployment => manifest.kind === "Deployment",
+);
+ok(deployment);
+addPostgresUserSecret(deployment);
+addWaitForPostgres(deployment);
 
 export default manifests;
