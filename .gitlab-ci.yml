@@ -51,3 +51,10 @@ Register api:
     CONTEXT: ./packages/api
     DOCKERFILE_PATH: Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE/api
+
+Register master:
+  extends: .register-image
+  variables:
+    CONTEXT: .
+    DOCKERFILE_PATH: Dockerfile
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/master
