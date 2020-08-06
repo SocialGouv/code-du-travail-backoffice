@@ -9,7 +9,8 @@ import { addWaitForPostgres } from "@socialgouv/kosko-charts/utils/addWaitForPos
 const manifests = create("app", {
   env,
   config: {
-    image: "registry.gitlab.factory.social.gouv.fr/socialgouv/code-du-travail-backoffice/app",
+    image:
+      "registry.gitlab.factory.social.gouv.fr/socialgouv/code-du-travail-backoffice/app:04f04a7421bc25ac22bfda631902358a12e58f3c",
     containerPort: 3000,
   },
   deployment: {

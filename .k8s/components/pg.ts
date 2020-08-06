@@ -8,7 +8,7 @@ import gitlab from "@socialgouv/kosko-charts/environments/gitlab";
 import { create } from "@socialgouv/kosko-charts/components/azure-pg";
 
 export default () => {
-  if (env.env === "dev") {
+  if (env.env === "dev" || env.env === "local") {
     return create({
       env,
     });
