@@ -1,0 +1,7 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: postgrest-configmap
+data:
+  PGRST_DB_ANON_ROLE: anonymous
+  PGRST_DB_SCHEMA: api
