@@ -1,69 +1,36 @@
-import { ok } from "assert";
-import { create } from "@socialgouv/kosko-charts/components/app";
-import { metadataFromParams } from "@socialgouv/kosko-charts/components/app/metadata";
 import env from "@kosko/env";
-import { addToEnvFrom } from "@socialgouv/kosko-charts/utils/addToEnvFrom";
-import { ConfigMap } from "kubernetes-models/v1/ConfigMap";
-import { EnvFromSource } from "kubernetes-models/v1/EnvFromSource";
-import { SealedSecret } from "@kubernetes-models/sealed-secrets/bitnami.com/v1alpha1/SealedSecret";
-import { loadYaml } from "../getEnvironmentComponent";
 
-ok(process.env.CI_COMMIT_SHORT_SHA, "Expect CI_COMMIT_SHORT_SHA to be defined");
+import { create } from "@socialgouv/kosko-charts/components/app";
 
-const params = env.component("app");
-const { deployment, ingress, service } = create(params);
-
-const secret = new SealedSecret({
-  ...loadYaml(env, "app-env.sealed-secret.yaml"),
-  metadata: {
-    ...metadataFromParams(params),
-    name: `app-env`,
-    annotations: {
-      "sealedsecrets.bitnami.com/cluster-wide": "true",
+const manifests = create("app", {
+  env,
+  config: {
+    image: "registry.gitlab.factory.social.gouv.fr/socialgouv/code-du-travail-backoffice/app",
+    containerPort: 3000,
+  },
+  deployment: {
+    container: {
+      livenessProbe: {
+        periodSeconds: 20,
+      },
+      readinessProbe: {
+        periodSeconds: 20,
+      },
+      resources: {
+        requests: {
+          cpu: "100m",
+          memory: "256Mi",
+        },
+        limits: {
+          cpu: "500m",
+          memory: "512Mi",
+        },
+      },
     },
   },
 });
 
-const configMap = new ConfigMap({
-  ...loadYaml(env, "app-env.configmap.yaml"),
-  metadata: {
-    ...metadataFromParams(params),
-    name: `app-env`,
-  },
-  data: {
-    FRONTEND_HOST: ingress.spec!.rules![0].host!,
-  },
-});
+// todo: add pgsecret
+// DB_URI;
 
-//
-
-const secretSource = new EnvFromSource({
-  secretRef: {
-    name: `app-env`,
-  },
-});
-
-const configMapSource = new EnvFromSource({
-  configMapRef: {
-    name: `app-env`,
-  },
-});
-
-addToEnvFrom({
-  deployment,
-  data: [secretSource, configMapSource],
-});
-
-const azureSecretSource = new EnvFromSource({
-  secretRef: {
-    name: `azure-pg-user-${process.env.CI_COMMIT_SHORT_SHA}`,
-  },
-});
-addToEnvFrom({
-  deployment,
-  data: [azureSecretSource],
-});
-
-//
-
-export default [secret, configMap, deployment, ingress, service];
+export default manifests;

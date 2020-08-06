@@ -1,71 +1,45 @@
-import { ok } from "assert";
-import { create } from "@socialgouv/kosko-charts/components/app";
-import { metadataFromParams } from "@socialgouv/kosko-charts/components/app/metadata";
 import env from "@kosko/env";
-import { addToEnvFrom } from "@socialgouv/kosko-charts/utils/addToEnvFrom";
-import { ConfigMap } from "kubernetes-models/v1/ConfigMap";
-import { EnvFromSource } from "kubernetes-models/v1/EnvFromSource";
-import { SealedSecret } from "@kubernetes-models/sealed-secrets/bitnami.com/v1alpha1/SealedSecret";
-import { loadYaml } from "../getEnvironmentComponent";
 
-ok(process.env.CI_COMMIT_SHORT_SHA, "Expect CI_COMMIT_SHORT_SHA to be defined");
+import { create } from "@socialgouv/kosko-charts/components/app";
 
-const params = env.component("api");
-const { deployment, ingress, service } = create(params);
-
-//addEnvRessources(deployment, "api");
-
-const secret = new SealedSecret({
-  ...loadYaml(env, "api-env.sealed-secret.yaml"),
-  metadata: {
-    ...metadataFromParams(params),
-    name: `api-env`,
-    annotations: {
-      "sealedsecrets.bitnami.com/cluster-wide": "true",
+const manifests = create("api", {
+  env,
+  config: {
+    image:
+      "registry.gitlab.factory.social.gouv.fr/socialgouv/code-du-travail-backoffice/api:04f04a7421bc25ac22bfda631902358a12e58f3c",
+    containerPort: 80,
+  },
+  deployment: {
+    container: {
+      livenessProbe: {
+        httpGet: {
+          path: "/",
+          port: 80,
+        },
+        periodSeconds: 20,
+      },
+      readinessProbe: {
+        httpGet: {
+          path: "/",
+          port: 80,
+        },
+        periodSeconds: 20,
+      },
+      resources: {
+        requests: {
+          cpu: "100m",
+          memory: "64Mi",
+        },
+        limits: {
+          cpu: "500m",
+          memory: "256Mi",
+        },
+      },
     },
   },
 });
 
-const configMap = new ConfigMap({
-  ...loadYaml(env, "api-env.configmap.yaml"),
-  metadata: {
-    ...metadataFromParams(params),
-    name: `api-env`,
-  },
-  data: {
-    FRONTEND_HOST: ingress.spec!.rules![0].host!,
-  },
-});
+// todo: add pgsecret
+// DB_URI;
 
-//
-
-const secretSource = new EnvFromSource({
-  secretRef: {
-    name: `api-env`,
-  },
-});
-
-const configMapSource = new EnvFromSource({
-  configMapRef: {
-    name: `api-env`,
-  },
-});
-
-addToEnvFrom({
-  deployment,
-  data: [secretSource, configMapSource],
-});
-
-const azureSecretSource = new EnvFromSource({
-  secretRef: {
-    name: `azure-pg-user-${process.env.CI_COMMIT_SHORT_SHA}`,
-  },
-});
-addToEnvFrom({
-  deployment,
-  data: [azureSecretSource],
-});
-
-//
-
-export default [secret, configMap, deployment, ingress, service];
+export default manifests;
