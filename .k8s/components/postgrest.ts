@@ -43,7 +43,7 @@ const manifests = create("postgrest", {
 
 const secretName = process.env.PRODUCTION
   ? `azure-pg-user`
-  : `azure-pg-user-${process.env.CI_COMMIT_SHA}`;
+  : `azure-pg-user-${process.env.CI_COMMIT_SHORT_SHA}`;
 
 type MakeCommandParams = { name: string; image: string; secretName: string; command: string[] };
 
