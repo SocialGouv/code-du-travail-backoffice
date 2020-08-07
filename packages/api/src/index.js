@@ -17,6 +17,12 @@ const proxy = httpProxy.createProxyServer().on("proxyReq", logAction);
 
 http
   .createServer((req, res) => {
+    // k8s probe
+    if (req.url === "/healthz" && req.method === "GET") {
+      res.end("Hello, world");
+
+      return;
+    }
     try {
       proxy.web(req, res, { target: POSTGREST_URI });
     } catch (err) {

@@ -16,18 +16,14 @@ const manifests = create("postgrest", {
   deployment: {
     container: {
       livenessProbe: {
-        httpGet: {
-          path: "/",
-          port: 3000,
+        exec: {
+          command: ["cat", "/etc/hosts"],
         },
-        periodSeconds: 20,
       },
       readinessProbe: {
-        httpGet: {
-          path: "/",
-          port: 3000,
+        exec: {
+          command: ["cat", "/etc/hosts"],
         },
-        periodSeconds: 20,
       },
       resources: {
         requests: {
@@ -46,7 +42,18 @@ const manifests = create("postgrest", {
 const deployment = manifests.find(
   (manifest): manifest is Deployment => manifest.kind === "Deployment",
 );
+
+// delete http probes
 ok(deployment);
+ok(deployment.spec);
+ok(deployment.spec.template);
+ok(deployment.spec.template.spec);
+ok(deployment.spec.template.spec.containers[0]);
+ok(deployment.spec.template.spec.containers[0].livenessProbe);
+ok(deployment.spec.template.spec.containers[0].readinessProbe);
+deployment.spec.template.spec.containers[0].livenessProbe.httpGet;
+deployment.spec.template.spec.containers[0].readinessProbe.httpGet;
+
 addPostgresUserSecret(deployment);
 addWaitForPostgres(deployment);
 
