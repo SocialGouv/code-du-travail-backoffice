@@ -1,10 +1,12 @@
 import { ok } from "assert";
 import env from "@kosko/env";
 import { Deployment } from "kubernetes-models/apps/v1/Deployment";
+import { IIoK8sApiCoreV1Container } from "kubernetes-models/_definitions/IoK8sApiCoreV1Container";
 
 import { create } from "@socialgouv/kosko-charts/components/app";
 import { addPostgresUserSecret } from "@socialgouv/kosko-charts/utils/addPostgresUserSecret";
 import { addWaitForPostgres } from "@socialgouv/kosko-charts/utils/addWaitForPostgres";
+import { addInitContainer } from "@socialgouv/kosko-charts/utils/addInitContainer";
 
 const manifests = create("postgrest", {
   env,
@@ -39,6 +41,52 @@ const manifests = create("postgrest", {
   },
 });
 
+const secretName = process.env.PRODUCTION
+  ? `azure-pg-user`
+  : `azure-pg-user-${process.env.CI_COMMIT_SHA}`;
+
+type MakeCommandParams = { name: string; image: string; secretName: string; command: string[] };
+
+const makeCommand = ({ name, image, secretName, command }: MakeCommandParams) => ({
+  name,
+  image,
+  imagePullPolicy: "Always",
+  resources: {
+    requests: {
+      cpu: "5m",
+      memory: "16Mi",
+    },
+    limits: {
+      cpu: "200m",
+      memory: "128Mi",
+    },
+  },
+  envFrom: [
+    {
+      secretRef: {
+        name: secretName,
+      },
+    },
+  ],
+  command,
+});
+
+const makeMigration = (): IIoK8sApiCoreV1Container =>
+  makeCommand({
+    name: "db-migration",
+    image: `${process.env.CI_REGISTRY_IMAGE}/master:${process.env.CI_COMMIT_SHA}`,
+    secretName,
+    command: ["yarn", "knex", "migrate:latest"],
+  });
+
+const makeSeed = (): IIoK8sApiCoreV1Container =>
+  makeCommand({
+    name: "db-seed",
+    image: `${process.env.CI_REGISTRY_IMAGE}/master:${process.env.CI_COMMIT_SHA}`,
+    secretName,
+    command: ["yarn", "knex", "seed:run"],
+  });
+
 const deployment = manifests.find(
   (manifest): manifest is Deployment => manifest.kind === "Deployment",
 );
@@ -56,6 +104,8 @@ delete deployment.spec.template.spec.containers[0].readinessProbe.httpGet;
 
 addPostgresUserSecret(deployment);
 addWaitForPostgres(deployment);
+addInitContainer(deployment, makeMigration());
+addInitContainer(deployment, makeSeed());
 
 // todo: add PGRST_JWT_SECRET;
 
