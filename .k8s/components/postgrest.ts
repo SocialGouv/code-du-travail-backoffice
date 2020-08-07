@@ -51,8 +51,8 @@ ok(deployment.spec.template.spec);
 ok(deployment.spec.template.spec.containers[0]);
 ok(deployment.spec.template.spec.containers[0].livenessProbe);
 ok(deployment.spec.template.spec.containers[0].readinessProbe);
-deployment.spec.template.spec.containers[0].livenessProbe.httpGet;
-deployment.spec.template.spec.containers[0].readinessProbe.httpGet;
+delete deployment.spec.template.spec.containers[0].livenessProbe.httpGet;
+delete deployment.spec.template.spec.containers[0].readinessProbe.httpGet;
 
 addPostgresUserSecret(deployment);
 addWaitForPostgres(deployment);
