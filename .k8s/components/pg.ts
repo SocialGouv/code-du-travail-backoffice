@@ -11,6 +11,9 @@ export default () => {
   if (env.env === "dev" || env.env === "local") {
     return create({
       env,
+      config: {
+        pgHost: "cdtncontribdevserver.postgres.database.azure.com",
+      },
     });
   }
 
