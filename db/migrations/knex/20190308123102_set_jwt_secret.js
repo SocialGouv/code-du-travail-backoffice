@@ -5,6 +5,7 @@
 const { PGRST_JWT_SECRET, POSTGRES_DB } = process.env;
 
 exports.up = async knex => {
+  console.log(knex);
   await knex.raw(`
     ALTER DATABASE ${POSTGRES_DB}
       SET "app.jwt_secret" TO '${PGRST_JWT_SECRET}';

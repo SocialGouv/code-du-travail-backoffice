@@ -45,9 +45,14 @@ const secretName = process.env.PRODUCTION
   ? `azure-pg-user`
   : `azure-pg-user-${process.env.CI_COMMIT_SHORT_SHA}`;
 
-type MakeCommandParams = { name: string; image: string; secretName: string; command: string[] };
+type MakeCommandParams = {
+  name: string;
+  image: string;
 
-const makeCommand = ({ name, image, secretName, command }: MakeCommandParams) => ({
+  command: string[];
+};
+
+const makeCommand = ({ name, image, command }: MakeCommandParams) => ({
   name,
   image,
   imagePullPolicy: "Always",
@@ -68,6 +73,11 @@ const makeCommand = ({ name, image, secretName, command }: MakeCommandParams) =>
       },
     },
   ],
+  env: [
+    // todo: dev only !
+    { name: "PGRST_JWT_SECRET", value: process.env.CI_COMMIT_SHORT_SHA },
+    { name: "POSTGRES_DB", value: `autodevops_${process.env.CI_COMMIT_SHORT_SHA}` },
+  ],
   command,
 });
 
@@ -75,7 +85,6 @@ const makeMigration = (): IIoK8sApiCoreV1Container =>
   makeCommand({
     name: "db-migration",
     image: `${process.env.CI_REGISTRY_IMAGE}/master:${process.env.CI_COMMIT_SHA}`,
-    secretName,
     command: ["yarn", "knex", "migrate:latest"],
   });
 
@@ -83,7 +92,6 @@ const makeSeed = (): IIoK8sApiCoreV1Container =>
   makeCommand({
     name: "db-seed",
     image: `${process.env.CI_REGISTRY_IMAGE}/master:${process.env.CI_COMMIT_SHA}`,
-    secretName,
     command: ["yarn", "knex", "seed:run"],
   });
 
@@ -102,11 +110,10 @@ ok(deployment.spec.template.spec.containers[0].readinessProbe);
 delete deployment.spec.template.spec.containers[0].livenessProbe.httpGet;
 delete deployment.spec.template.spec.containers[0].readinessProbe.httpGet;
 
+// Db secrets + init
 addPostgresUserSecret(deployment);
 addWaitForPostgres(deployment);
 addInitContainer(deployment, makeMigration());
 addInitContainer(deployment, makeSeed());
-
-// todo: add PGRST_JWT_SECRET;
 
 export default manifests;
