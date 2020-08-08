@@ -113,7 +113,7 @@ delete deployment.spec.template.spec.containers[0].readinessProbe.httpGet;
 // Db secrets + init
 addPostgresUserSecret(deployment);
 addWaitForPostgres(deployment);
-addInitContainer(deployment, makeMigration());
-addInitContainer(deployment, makeSeed());
+//addInitContainer(deployment, makeMigration());
+//addInitContainer(deployment, makeSeed());
 
 export default manifests;
