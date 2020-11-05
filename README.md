@@ -1,4 +1,4 @@
-# CDTN Back-office
+# CDTN contributions Back-office
 
 [![License][img-license]][link-license]
 [![Build Status][img-build]][link-build]
