@@ -47,14 +47,14 @@ const secretName = process.env.PRODUCTION
 
 type MakeCommandParams = {
   name: string;
-  image: string;
-
   command: string[];
 };
 
-const makeCommand = ({ name, image, command }: MakeCommandParams) => ({
+const masterImage = `${process.env.CI_REGISTRY_IMAGE}/master:${process.env.CI_COMMIT_SHA}`;
+
+const makeCommand = ({ name, command }: MakeCommandParams) => ({
   name,
-  image,
+  image: masterImage,
   imagePullPolicy: "Always",
   resources: {
     requests: {
@@ -62,7 +62,7 @@ const makeCommand = ({ name, image, command }: MakeCommandParams) => ({
       memory: "16Mi",
     },
     limits: {
-      cpu: "200m",
+      cpu: "500m",
       memory: "128Mi",
     },
   },
@@ -84,14 +84,12 @@ const makeCommand = ({ name, image, command }: MakeCommandParams) => ({
 const makeMigration = (): IIoK8sApiCoreV1Container =>
   makeCommand({
     name: "db-migration",
-    image: `${process.env.CI_REGISTRY_IMAGE}/master:${process.env.CI_COMMIT_SHA}`,
     command: ["yarn", "knex", "migrate:latest"],
   });
 
 const makeSeed = (): IIoK8sApiCoreV1Container =>
   makeCommand({
     name: "db-seed",
-    image: `${process.env.CI_REGISTRY_IMAGE}/master:${process.env.CI_COMMIT_SHA}`,
     command: ["yarn", "knex", "seed:run"],
   });
 
