@@ -1,6 +1,6 @@
 -------------------------------------- UP --------------------------------------
 
-CREATE EXTENSION "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE api.agreements(
   id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
