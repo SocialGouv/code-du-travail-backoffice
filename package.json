@@ -36,12 +36,14 @@
   "dependencies": {
     "colors": "1.4.0",
     "dotenv": "8.2.0",
+    "dumdum": "1.0.0-alpha.5",
     "esm": "3.2.25",
     "knex": "0.21.2",
     "lerna": "3.22.1",
     "npmlog": "4.1.2",
     "ora": "^5.1.0",
     "pg": "8.3.0",
+    "postgrester": "1.4.0",
     "shelljs": "0.8.4"
   },
   "devDependencies": {
@@ -55,7 +57,6 @@
     "chai": "4.2.0",
     "cpy-cli": "3.1.1",
     "cucumber": "6.0.5",
-    "dumdum": "1.0.0-alpha.5",
     "eslint": "7.6.0",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-chai-expect": "2.2.0",
@@ -63,7 +64,6 @@
     "eslint-plugin-sort-requires": "2.1.0",
     "imgur": "0.3.1",
     "jest": "26.2.2",
-    "postgrester": "1.4.0",
     "prettier": "2.0.5",
     "puppeteer": "5.2.1",
     "typescript": "3.9.7",
