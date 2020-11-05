@@ -1,6 +1,15 @@
 -------------------------------------- UP --------------------------------------
 
-CREATE ROLE regional_administrator NOINHERIT;
+DO
+$do$
+BEGIN
+   IF NOT EXISTS (
+      SELECT FROM pg_catalog.pg_roles
+      WHERE  rolname = 'regional_administrator') THEN
+      CREATE ROLE regional_administrator NOINHERIT;
+   END IF;
+END
+$do$;
 
 GRANT USAGE ON SCHEMA api, auth, public TO regional_administrator;
 
@@ -31,4 +40,4 @@ REVOKE SELECT ON api.locations FROM regional_administrator;
 REVOKE SELECT ON api.agreements FROM regional_administrator;
 
 REVOKE USAGE ON SCHEMA api, auth, public FROM regional_administrator;
-DROP ROLE regional_administrator;
+#DROP ROLE regional_administrator;
