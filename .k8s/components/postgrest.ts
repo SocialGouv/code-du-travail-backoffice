@@ -64,20 +64,21 @@ const defaultCommandSpecs = {
       memory: "128Mi",
     },
   },
-  envFrom: [
-    {
-      secretRef: {
-        name: secretName,
-      },
-    },
-  ],
 };
 
+// run as admin
 const makePsqlCommand = ({ name, command }: MakeCommandParams) => ({
   name,
   image: "postgres:10",
   command,
   ...defaultCommandSpecs,
+  envFrom: [
+    {
+      secretRef: {
+        name: "azure-pg-admin-user",
+      },
+    },
+  ],
 });
 
 const makeYarnCommand = ({ name, command }: MakeCommandParams) => ({
@@ -90,25 +91,34 @@ const makeYarnCommand = ({ name, command }: MakeCommandParams) => ({
     { name: "POSTGRES_DB", value: `autodevops_${process.env.CI_COMMIT_SHORT_SHA}` },
   ],
   command,
+  envFrom: [
+    {
+      secretRef: {
+        name: secretName,
+      },
+    },
+  ],
 });
-
-const makeMigration = (): IIoK8sApiCoreV1Container =>
-  makeYarnCommand({
-    name: "db-migration",
-    command: ["yarn", "knex", "migrate:latest"],
-  });
 
 const makePrepare = (): IIoK8sApiCoreV1Container =>
   makePsqlCommand({
     name: "db-prepare",
     command: [
       "psql",
+      "--dbname",
+      `autodevops_${process.env.CI_COMMIT_SHORT_SHA}`,
       "-c",
       `
 ALTER USER user_${process.env.CI_COMMIT_SHORT_SHA} with CREATEROLE;
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 GRANT anonymous TO user_${process.env.CI_COMMIT_SHORT_SHA};`,
     ],
+  });
+
+const makeMigration = (): IIoK8sApiCoreV1Container =>
+  makeYarnCommand({
+    name: "db-migration",
+    command: ["yarn", "knex", "migrate:latest"],
   });
 
 const makeSeed = (): IIoK8sApiCoreV1Container =>
