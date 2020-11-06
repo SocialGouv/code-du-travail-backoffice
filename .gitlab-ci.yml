@@ -42,13 +42,11 @@ Register app:
     CONTEXT: ./packages/app
     DOCKERFILE_PATH: Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
-    API_DOMAIN: api-gitlab-dev2-cdtn-contrib.dev2.fabrique.social.gouv.fr
-    API_PORT_PUBLIC: "443"
-    API_SCHEME: https
-    API_URI_DOCKER: http://api:80
-    CDTN_API_URL: https://cdtn-api.fabrique.social.gouv.fr
-    NODE_ENV: production
-    APP_PORT: "3000"
+    DOCKER_BUILD_ARGS: >-
+      --build-arg API_DOMAIN=api-gitlab-dev2-cdtn-contrib.dev2.fabrique.social.gouv.fr --build-arg
+      API_PORT_PUBLIC="443" --build-arg API_SCHEME=https --build-arg API_URI_DOCKER=http://api:80
+      --build-arg CDTN_API_URL=https://cdtn-api.fabrique.social.gouv.fr --build-arg
+      NODE_ENV=production --build-arg APP_PORT="3000"
 
 Register api:
   extends: .register-image
