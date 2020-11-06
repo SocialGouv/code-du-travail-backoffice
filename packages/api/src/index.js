@@ -15,6 +15,8 @@ if (NODE_ENV === "development") {
 
 const proxy = httpProxy.createProxyServer().on("proxyReq", logAction);
 
+log.info("[api] [index.js]", "Proxify %s.", POSTGREST_URI);
+
 http
   .createServer((req, res) => {
     // k8s probe
