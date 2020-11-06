@@ -52,9 +52,7 @@ type MakeCommandParams = {
 
 const masterImage = `${process.env.CI_REGISTRY_IMAGE}/master:${process.env.CI_COMMIT_SHA}`;
 
-const makeCommand = ({ name, command }: MakeCommandParams) => ({
-  name,
-  image: masterImage,
+const defaultCommandSpecs = {
   imagePullPolicy: "Always",
   resources: {
     requests: {
@@ -73,6 +71,19 @@ const makeCommand = ({ name, command }: MakeCommandParams) => ({
       },
     },
   ],
+};
+
+const makePsqlCommand = ({ name, command }: MakeCommandParams) => ({
+  name,
+  image: "postgres:10",
+  command,
+  ...defaultCommandSpecs,
+});
+
+const makeYarnCommand = ({ name, command }: MakeCommandParams) => ({
+  name,
+  image: masterImage,
+  ...defaultCommandSpecs,
   env: [
     // todo: dev only !
     { name: "PGRST_JWT_SECRET", value: process.env.CI_COMMIT_SHORT_SHA },
@@ -82,13 +93,25 @@ const makeCommand = ({ name, command }: MakeCommandParams) => ({
 });
 
 const makeMigration = (): IIoK8sApiCoreV1Container =>
-  makeCommand({
+  makeYarnCommand({
     name: "db-migration",
     command: ["yarn", "knex", "migrate:latest"],
   });
 
+const makePrepare = (): IIoK8sApiCoreV1Container =>
+  makePsqlCommand({
+    name: "additional-sql",
+    command: [
+      "psql",
+      `
+ALTER USER user_${process.env.CI_COMMIT_SHORT_SHA} with CREATEROLE;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+GRANT anonymous TO user_${process.env.CI_COMMIT_SHORT_SHA};`,
+    ],
+  });
+
 const makeSeed = (): IIoK8sApiCoreV1Container =>
-  makeCommand({
+  makeYarnCommand({
     name: "db-seed",
     command: ["yarn", "knex", "seed:run"],
   });
@@ -111,6 +134,7 @@ delete deployment.spec.template.spec.containers[0].readinessProbe.httpGet;
 // Db secrets + init
 addPostgresUserSecret(deployment);
 addWaitForPostgres(deployment);
+addInitContainer(deployment, makePrepare());
 addInitContainer(deployment, makeMigration());
 addInitContainer(deployment, makeSeed());
 
