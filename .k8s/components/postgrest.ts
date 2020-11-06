@@ -100,9 +100,10 @@ const makeMigration = (): IIoK8sApiCoreV1Container =>
 
 const makePrepare = (): IIoK8sApiCoreV1Container =>
   makePsqlCommand({
-    name: "additional-sql",
+    name: "db-prepare",
     command: [
       "psql",
+      "-c",
       `
 ALTER USER user_${process.env.CI_COMMIT_SHORT_SHA} with CREATEROLE;
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
