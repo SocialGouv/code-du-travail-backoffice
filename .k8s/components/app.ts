@@ -40,6 +40,6 @@ const deployment = manifests.find(
 ok(deployment);
 addPostgresUserSecret(deployment);
 addWaitForPostgres(deployment);
-addWaitForService(deployment, "api");
+addWaitForService(deployment, "postgrest");
 
 export default manifests;

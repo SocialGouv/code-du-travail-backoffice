@@ -3,10 +3,7 @@ apiVersion: v1
 metadata:
   name: app-configmap
 data:
-  # API_DOMAIN: api # provided by the CI
-  # API_PORT_PUBLIC: "80"
-  # API_SCHEME: http
-  API_URI_DOCKER: http://api:80
   CDTN_API_URL: https://cdtn-api.fabrique.social.gouv.fr
   NODE_ENV: production
+  POSTGREST_URI: http://postgrest
   APP_PORT: "3000"
