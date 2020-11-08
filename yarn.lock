@@ -2506,22 +2506,22 @@
     eslint-plugin-simple-import-sort "^5.0.3"
     eslint-plugin-sort-keys-fix "^1.1.1"
 
-"@socialgouv/kali-data@1.84.0":
-  version "1.84.0"
-  resolved "https://registry.yarnpkg.com/@socialgouv/kali-data/-/kali-data-1.84.0.tgz#e6c7fb2f1cba9664ea31768dba0b1aff41a5e130"
-  integrity sha512-mTH/7ZfgX81XIiQ3XEn1lkBlF4rUHIEzwZgLlMgm5z5Y24TG/8Sk2LrLXa56aPXOqy9zOmWEeGQ3y+7eKRMsWQ==
+"@socialgouv/kali-data@2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@socialgouv/kali-data/-/kali-data-2.1.0.tgz#1c23376aa31e078d9c1f879d74857e5e2771ff1d"
+  integrity sha512-1mbnxrEv1amAELAiJOjh3/d2dwRhl+rg0PAs6gLHqm3ipa9MEex2DW0a9JWjHwNi0LHiiouX3nuf5hYtyAVDrA==
   dependencies:
     unist-util-find "1.0.1"
     unist-util-flat-filter "1.0.0"
     unist-util-parents "1.0.3"
 
-"@socialgouv/legi-data@1.23.0":
-  version "1.23.0"
-  resolved "https://registry.yarnpkg.com/@socialgouv/legi-data/-/legi-data-1.23.0.tgz#b0f82f4e1ca63882838f9bb940220e6b7b5d942b"
-  integrity sha512-sqHp+3XKzM5uoc5BXW6t5sIuwz+RRHWG7apRAVEbnOiSNMMAdAa4TDUvGQE/TtJG9cluLa0168Sloo9nT9nyog==
+"@socialgouv/legi-data@2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@socialgouv/legi-data/-/legi-data-2.0.1.tgz#0d5d397554501b3955de3cedc82a4ae4b7b6f66c"
+  integrity sha512-f3KdPDNVAsO0T/H2CZntMOaG3IfMJu8/pbPI5ehVyYFdfvxP7m5Foa9OEhar8WTywLONKP9owkICnpcciKOrjg==
   dependencies:
-    unist-util-find "1.0.1"
-    unist-util-parents "1.0.3"
+    unist-util-find "^1.0.1"
+    unist-util-parents "^1.0.3"
 
 "@styled-system/background@^5.1.2":
   version "5.1.2"
@@ -14009,7 +14009,7 @@ unist-util-find-after@^3.0.0:
   dependencies:
     unist-util-is "^4.0.0"
 
-unist-util-find@1.0.1:
+unist-util-find@1.0.1, unist-util-find@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/unist-util-find/-/unist-util-find-1.0.1.tgz#1062bbb6928c7a97c6adc89b53745d4c46c222a2"
   integrity sha1-EGK7tpKMepfGrcibU3RdTEbCIqI=
@@ -14040,7 +14040,7 @@ unist-util-is@^4.0.0:
   resolved "https://registry.yarnpkg.com/unist-util-is/-/unist-util-is-4.0.3.tgz#e8b44db55fc20c43752b3346c116344d45d7c91d"
   integrity sha512-bTofCFVx0iQM8Jqb1TBDVRIQW03YkD3p66JOd/aCWuqzlLyUtx1ZAGw/u+Zw+SttKvSVcvTiKYbfrtLoLefykw==
 
-unist-util-parents@1.0.3:
+unist-util-parents@1.0.3, unist-util-parents@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/unist-util-parents/-/unist-util-parents-1.0.3.tgz#9730446164303c40c01bcbe03221d11bc9189a4d"
   integrity sha512-GA82HBLgPxR+qkOzbti/jxzmkMBDu8iS/mw58iCwLpCl9JpLyGxkVr7nsFpAX956qIsa5yKNKM5SeGS8yCY8Lw==
