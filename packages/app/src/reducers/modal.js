@@ -5,7 +5,7 @@ const initialState = {
   message: "",
 };
 
-export default (state = initialState, { payload, type }) => {
+const ModalReducer = (state = initialState, { payload, type }) => {
   switch (type) {
     case actionTypes.MODAL_OPEN:
       return {
@@ -24,3 +24,5 @@ export default (state = initialState, { payload, type }) => {
       return state;
   }
 };
+
+export default ModalReducer;

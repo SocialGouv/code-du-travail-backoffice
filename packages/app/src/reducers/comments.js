@@ -11,7 +11,7 @@ export const initialState = {
   list: [],
 };
 
-export default (state = initialState, { payload, type }) => {
+const CommentsReducer = (state = initialState, { payload, type }) => {
   switch (type) {
     /* ONE COMMENT ――――――――――――――――――――― */
 
@@ -73,3 +73,5 @@ export default (state = initialState, { payload, type }) => {
       return state;
   }
 };
+
+export default CommentsReducer;

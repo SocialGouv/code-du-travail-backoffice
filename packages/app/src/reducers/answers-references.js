@@ -17,7 +17,7 @@ export const initialState = {
   pagesLength: 0,
 };
 
-export default (state = initialState, { payload, type }) => {
+const AnswersReferencesReducer = (state = initialState, { payload, type }) => {
   switch (type) {
     /* MULTIPLE ANSWERS REFERENCES ――――― */
 
@@ -62,3 +62,5 @@ export default (state = initialState, { payload, type }) => {
       return state;
   }
 };
+
+export default AnswersReferencesReducer;

@@ -1,1 +1,3 @@
-export default () => null;
+const IndexPage = () => null;
+
+export default IndexPage;

@@ -10,7 +10,7 @@ export const initialState = {
   query: "",
 };
 
-export default (state = initialState, { payload, type }) => {
+const LogsReducer = (state = initialState, { payload, type }) => {
   switch (type) {
     /* MULTIPLE LOGS ―――――――――――――――――――― */
 
@@ -45,3 +45,5 @@ export default (state = initialState, { payload, type }) => {
       return state;
   }
 };
+
+export default LogsReducer;
