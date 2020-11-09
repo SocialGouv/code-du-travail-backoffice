@@ -65,8 +65,8 @@
     "unified": "9.1.0"
   },
   "devDependencies": {
-    "@socialgouv/kali-data": "1.84.0",
-    "@socialgouv/legi-data": "1.23.0",
+    "@socialgouv/kali-data": "2.1.0",
+    "@socialgouv/legi-data": "2.0.1",
     "@testing-library/jest-dom": "5.11.2",
     "@testing-library/react": "11.0.2",
     "@types/ramda": "0.27.14",
