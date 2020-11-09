@@ -17,7 +17,7 @@
     "@fortawesome/fontawesome-svg-core": "1.2.30",
     "@fortawesome/free-solid-svg-icons": "5.14.0",
     "@fortawesome/react-fontawesome": "0.1.11",
-    "@koa/router": "9.3.1",
+    "@koa/router": "10.0.0",
     "@zeit/next-css": "1.0.1",
     "babel-plugin-emotion": "10.0.33",
     "colors": "1.4.0",
