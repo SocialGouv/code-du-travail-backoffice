@@ -19,7 +19,7 @@ export const initialState = {
   pagesLength: 0,
 };
 
-export default (state = initialState, { payload, type }) => {
+const AnswersReducer = (state = initialState, { payload, type }) => {
   switch (type) {
     /* ONE ANSWER ―――――――――――――――――――――― */
     case actionTypes.ANSWER_LOAD_ONE:
@@ -105,3 +105,5 @@ export default (state = initialState, { payload, type }) => {
       return state;
   }
 };
+
+export default AnswersReducer;

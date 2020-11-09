@@ -3,7 +3,7 @@ import postgrester from "postgrester";
 
 let postgrestClient;
 
-export default function () {
+export default function customPostgrester() {
   if (postgrestClient === undefined) {
     postgrestClient = postgrester.create({
       axiosConfig: {

@@ -9,7 +9,7 @@ export const initialState = {
   query: "",
 };
 
-export default (state = initialState, { payload, type }) => {
+const LegalReferencesReducer = (state = initialState, { payload, type }) => {
   switch (type) {
     /* MULTIPLE LEGAL REFERENCES ―――――――― */
 
@@ -42,3 +42,5 @@ export default (state = initialState, { payload, type }) => {
       return state;
   }
 };
+
+export default LegalReferencesReducer;

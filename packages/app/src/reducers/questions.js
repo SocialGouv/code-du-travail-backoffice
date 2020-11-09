@@ -11,7 +11,7 @@ export const initialState = {
   query: "",
 };
 
-export default (state = initialState, { payload, type }) => {
+const QuestionsReducer = (state = initialState, { payload, type }) => {
   switch (type) {
     /* MULTIPLE QUESTIONS ――――――――――――――― */
 
@@ -44,3 +44,5 @@ export default (state = initialState, { payload, type }) => {
       return state;
   }
 };
+
+export default QuestionsReducer;

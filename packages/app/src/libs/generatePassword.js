@@ -1,4 +1,4 @@
-import generatePassword from "password-generator";
+import passwordGenerator from "password-generator";
 
 // const NUMERALS = "1234567890";
 const NUMERALS_DISTINGUISHABLE = "3456789";
@@ -14,7 +14,7 @@ const SYMBOLS = "!'#$%&\"()*+,-./:;<=>?@[\\]^_`{|}~";
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues
  * @see https://github.com/bermi/password-generator#password-generator
  */
-export default function (length) {
+export default function generatePassword(length) {
   const pattern = [
     NUMERALS_DISTINGUISHABLE,
     LOWER_ALPHA_DISTINGUISHABLE,
@@ -24,5 +24,5 @@ export default function (length) {
     .join("")
     .replace(/\W/, "\\$1");
 
-  return generatePassword(length, false, new RegExp(`[${pattern}]`));
+  return passwordGenerator(length, false, new RegExp(`[${pattern}]`));
 }
