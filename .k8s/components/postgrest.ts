@@ -4,8 +4,6 @@ import { Deployment } from "kubernetes-models/apps/v1/Deployment";
 import { IIoK8sApiCoreV1Container } from "kubernetes-models/_definitions/IoK8sApiCoreV1Container";
 
 import { create } from "@socialgouv/kosko-charts/components/app";
-import { addPostgresUserSecret } from "@socialgouv/kosko-charts/utils/addPostgresUserSecret";
-import { addWaitForPostgres } from "@socialgouv/kosko-charts/utils/addWaitForPostgres";
 import { addInitContainer } from "@socialgouv/kosko-charts/utils/addInitContainer";
 
 const manifests = create("postgrest", {
@@ -14,17 +12,18 @@ const manifests = create("postgrest", {
     ingress: false,
     image: "postgrest/postgrest:v6.0.2",
     containerPort: 3000,
+    withPostgres: true,
   },
   deployment: {
     container: {
       livenessProbe: {
         exec: {
-          command: ["cat", "/etc/hosts"],
+          command: ["cat", "/etc/hosts"], //todo
         },
       },
       readinessProbe: {
         exec: {
-          command: ["cat", "/etc/hosts"],
+          command: ["cat", "/etc/hosts"], //todo
         },
       },
       resources: {
@@ -66,21 +65,6 @@ const defaultCommandSpecs = {
   },
 };
 
-// run as admin
-const makePsqlCommand = ({ name, command }: MakeCommandParams) => ({
-  name,
-  image: "postgres:10",
-  command,
-  ...defaultCommandSpecs,
-  envFrom: [
-    {
-      secretRef: {
-        name: "azure-pg-admin-user",
-      },
-    },
-  ],
-});
-
 const makeYarnCommand = ({ name, command }: MakeCommandParams) => ({
   name,
   image: masterImage,
@@ -99,21 +83,6 @@ const makeYarnCommand = ({ name, command }: MakeCommandParams) => ({
     },
   ],
 });
-
-const makePrepare = (): IIoK8sApiCoreV1Container =>
-  makePsqlCommand({
-    name: "db-prepare",
-    command: [
-      "psql",
-      "--dbname",
-      `autodevops_${process.env.CI_COMMIT_SHORT_SHA}`,
-      "-c",
-      `
-ALTER USER user_${process.env.CI_COMMIT_SHORT_SHA} with CREATEROLE;
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-GRANT anonymous TO user_${process.env.CI_COMMIT_SHORT_SHA};`,
-    ],
-  });
 
 const makeMigration = (): IIoK8sApiCoreV1Container =>
   makeYarnCommand({
@@ -143,9 +112,6 @@ delete deployment.spec.template.spec.containers[0].livenessProbe.httpGet;
 delete deployment.spec.template.spec.containers[0].readinessProbe.httpGet;
 
 // Db secrets + init
-addPostgresUserSecret(deployment);
-addWaitForPostgres(deployment);
-addInitContainer(deployment, makePrepare());
 addInitContainer(deployment, makeMigration());
 addInitContainer(deployment, makeSeed());
 

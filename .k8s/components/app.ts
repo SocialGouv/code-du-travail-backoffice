@@ -3,14 +3,13 @@ import env from "@kosko/env";
 import { Deployment } from "kubernetes-models/apps/v1/Deployment";
 
 import { create } from "@socialgouv/kosko-charts/components/app";
-import { addPostgresUserSecret } from "@socialgouv/kosko-charts/utils/addPostgresUserSecret";
-import { addWaitForPostgres } from "@socialgouv/kosko-charts/utils/addWaitForPostgres";
 import { addWaitForService } from "@socialgouv/kosko-charts/utils/addWaitForService";
 
 const manifests = create("app", {
   env,
   config: {
     containerPort: 3000,
+    withPostgres: true,
   },
   deployment: {
     container: {
@@ -38,8 +37,6 @@ const deployment = manifests.find(
   (manifest): manifest is Deployment => manifest.kind === "Deployment",
 );
 ok(deployment);
-addPostgresUserSecret(deployment);
-addWaitForPostgres(deployment);
 addWaitForService(deployment, "postgrest");
 
 export default manifests;

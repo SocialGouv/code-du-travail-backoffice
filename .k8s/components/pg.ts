@@ -11,6 +11,13 @@ export default () => {
   if (env.env === "dev" || env.env === "local") {
     return create({
       env,
+      config: {
+        prepareScript: `
+ALTER USER user_${process.env.CI_COMMIT_SHORT_SHA} with CREATEROLE;
+CREATE EXTENSION "uuid-ossp";
+GRANT anonymous TO user_${process.env.CI_COMMIT_SHORT_SHA};
+      `,
+      },
     });
   }
 
