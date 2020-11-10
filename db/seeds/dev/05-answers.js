@@ -112,7 +112,7 @@ exports.seed = async knex => {
   global.spinner.start(`Generating answers...`);
 
   const questions = await knex("api.questions").orderBy("index");
-  const agreements = await knex("api.agreements").orderBy("idcc");
+  const agreements = await knex("api.agreements").orderBy("idcc").limit(10);
 
   const { data: publicAnswers } = await global.postgresterClient.get("/public_answers");
 
