@@ -9,7 +9,14 @@ const manifests = create("app", {
   env,
   config: {
     containerPort: 3000,
-    withPostgres: true,
+    withPostgres: {
+      prepare: `
+        ALTER USER user_${process.env.CI_COMMIT_SHORT_SHA} with CREATEROLE;
+        GRANT user_${process.env.CI_COMMIT_SHORT_SHA} to cdtncontribadmin;
+        ALTER DATABASE autodevops_${process.env.CI_COMMIT_SHORT_SHA} OWNER TO user_${process.env.CI_COMMIT_SHORT_SHA};
+        GRANT anonymous TO user_${process.env.CI_COMMIT_SHORT_SHA};
+        `,
+    },
   },
   deployment: {
     container: {

@@ -158,15 +158,9 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-4.0.0.tgz#2ff674e9611b45b528896d820d3d7a812de2f0e4"
   integrity sha512-FyD2meJpDPjyNQejSjvnhpgI/azsQkA4lGbuu5BQZfjvJ9cbRZXzeWL2HceCekW4lixO9JPesIIQkSoLjeJHNQ==
 
-"@socialgouv/kosko-charts@3.2.2":
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/@socialgouv/kosko-charts/-/kosko-charts-3.2.2.tgz#180593b92629efa3e77ba6377c5d1ad166b981ac"
-  integrity sha512-P/zfNWHwHDC1LNRqveM8CgrclheP2S9pkonY19fexO7YrZUMhQXPakqQcCSYkocxCD6dX+Z7osNkqbfC4OmwTg==
-  dependencies:
-    "@kubernetes-models/sealed-secrets" "^1.0.1"
-    "@sindresorhus/is" "^4.0.0"
-    fp-ts "^2.8.5"
-    io-ts "2.2.7"
+"@socialgouv/kosko-charts@link:../../../kosko-charts":
+  version "0.0.0"
+  uid ""
 
 "@types/color-name@^1.1.1":
   version "1.1.1"
