@@ -14,7 +14,7 @@ CREATE FUNCTION
     _result login_check_result;
   BEGIN
     SELECT * INTO _result
-    FROM public.verify(token, current_setting('app.jwt_secret'));
+    FROM public.verify(token, current_setting('app.settings.jwt_secret'));
 
     RETURN _result;
   END
