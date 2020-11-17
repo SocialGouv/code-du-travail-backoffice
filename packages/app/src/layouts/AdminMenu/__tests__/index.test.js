@@ -79,18 +79,20 @@ describe("layouts/<AdminMenu />", () => {
     it(`should render as expected`, () => {
       const $adminMenu = create(<AdminMenu {...PROPS} />);
 
-      expect($adminMenu).toHaveTestRenderedChildLength(12);
+      expect($adminMenu).toHaveTestRenderedChildLength(13);
       expect($adminMenu).toHaveTestRenderedChild("admin-dashboard");
       expect($adminMenu).toHaveTestRenderedChild("admin-tracker");
       expect($adminMenu).toHaveTestRenderedChild("admin-agreements");
       expect($adminMenu).toHaveTestRenderedChild("admin-questions");
-      expect($adminMenu).toHaveTestRenderedChild("admin-answers-references");
       expect($adminMenu).toHaveTestRenderedChild("admin-answers");
       expect($adminMenu).toHaveTestRenderedChild("admin-generic-answers");
       expect($adminMenu).toHaveTestRenderedChild("admin-locations");
       expect($adminMenu).toHaveTestRenderedChild("admin-users");
+
       expect($adminMenu).toHaveTestRenderedChild("admin-logs");
       expect($adminMenu).toHaveTestRenderedChild("admin-migrations");
+      expect($adminMenu).toHaveTestRenderedChild("admin-answers-references");
+      expect($adminMenu).toHaveTestRenderedChild("admin-legacy-tracker");
     });
 
     describe(`when path is "/admin"`, () => {
@@ -166,8 +168,6 @@ describe("layouts/<AdminMenu />", () => {
       runTestRenderedProperty($adminMenu, "onKeyPress", "admin-agreements");
       runTestRenderedProperty($adminMenu, "onClick", "admin-questions");
       runTestRenderedProperty($adminMenu, "onKeyPress", "admin-questions");
-      runTestRenderedProperty($adminMenu, "onClick", "admin-answers-references");
-      runTestRenderedProperty($adminMenu, "onKeyPress", "admin-answers-references");
       runTestRenderedProperty($adminMenu, "onClick", "admin-answers");
       runTestRenderedProperty($adminMenu, "onKeyPress", "admin-answers");
       runTestRenderedProperty($adminMenu, "onClick", "admin-generic-answers");
@@ -176,32 +176,40 @@ describe("layouts/<AdminMenu />", () => {
       runTestRenderedProperty($adminMenu, "onKeyPress", "admin-locations");
       runTestRenderedProperty($adminMenu, "onClick", "admin-users");
       runTestRenderedProperty($adminMenu, "onKeyPress", "admin-users");
+
       runTestRenderedProperty($adminMenu, "onClick", "admin-logs");
       runTestRenderedProperty($adminMenu, "onKeyPress", "admin-logs");
       runTestRenderedProperty($adminMenu, "onClick", "admin-migrations");
       runTestRenderedProperty($adminMenu, "onKeyPress", "admin-migrations");
+      runTestRenderedProperty($adminMenu, "onClick", "admin-answers-references");
+      runTestRenderedProperty($adminMenu, "onKeyPress", "admin-answers-references");
+      runTestRenderedProperty($adminMenu, "onClick", "admin-legacy-tracker");
+      runTestRenderedProperty($adminMenu, "onKeyPress", "admin-legacy-tracker");
 
-      expect(Router.push).toHaveBeenCalledTimes(20);
+      expect(Router.push).toHaveBeenCalledTimes(22);
       expect(Router.push).toHaveBeenNthCalledWith(1, "/admin");
       expect(Router.push).toHaveBeenNthCalledWith(2, "/admin");
       expect(Router.push).toHaveBeenNthCalledWith(3, "/admin/agreements");
       expect(Router.push).toHaveBeenNthCalledWith(4, "/admin/agreements");
       expect(Router.push).toHaveBeenNthCalledWith(5, "/admin/questions");
       expect(Router.push).toHaveBeenNthCalledWith(6, "/admin/questions");
-      expect(Router.push).toHaveBeenNthCalledWith(7, "/admin/answers-references");
-      expect(Router.push).toHaveBeenNthCalledWith(8, "/admin/answers-references");
-      expect(Router.push).toHaveBeenNthCalledWith(9, "/admin/answers");
-      expect(Router.push).toHaveBeenNthCalledWith(10, "/admin/answers");
-      expect(Router.push).toHaveBeenNthCalledWith(11, "/admin/generic-answers");
-      expect(Router.push).toHaveBeenNthCalledWith(12, "/admin/generic-answers");
-      expect(Router.push).toHaveBeenNthCalledWith(13, "/admin/locations");
-      expect(Router.push).toHaveBeenNthCalledWith(14, "/admin/locations");
-      expect(Router.push).toHaveBeenNthCalledWith(15, "/admin/users");
-      expect(Router.push).toHaveBeenNthCalledWith(16, "/admin/users");
-      expect(Router.push).toHaveBeenNthCalledWith(17, "/admin/logs");
-      expect(Router.push).toHaveBeenNthCalledWith(18, "/admin/logs");
-      expect(Router.push).toHaveBeenNthCalledWith(19, "/admin/migrations");
-      expect(Router.push).toHaveBeenNthCalledWith(20, "/admin/migrations");
+      expect(Router.push).toHaveBeenNthCalledWith(7, "/admin/answers");
+      expect(Router.push).toHaveBeenNthCalledWith(8, "/admin/answers");
+      expect(Router.push).toHaveBeenNthCalledWith(9, "/admin/generic-answers");
+      expect(Router.push).toHaveBeenNthCalledWith(10, "/admin/generic-answers");
+      expect(Router.push).toHaveBeenNthCalledWith(11, "/admin/locations");
+      expect(Router.push).toHaveBeenNthCalledWith(12, "/admin/locations");
+      expect(Router.push).toHaveBeenNthCalledWith(13, "/admin/users");
+      expect(Router.push).toHaveBeenNthCalledWith(14, "/admin/users");
+
+      expect(Router.push).toHaveBeenNthCalledWith(15, "/admin/logs");
+      expect(Router.push).toHaveBeenNthCalledWith(16, "/admin/logs");
+      expect(Router.push).toHaveBeenNthCalledWith(17, "/admin/migrations");
+      expect(Router.push).toHaveBeenNthCalledWith(18, "/admin/migrations");
+      expect(Router.push).toHaveBeenNthCalledWith(19, "/admin/answers-references");
+      expect(Router.push).toHaveBeenNthCalledWith(20, "/admin/answers-references");
+      expect(Router.push).toHaveBeenNthCalledWith(21, "/admin/legacy-tracker");
+      expect(Router.push).toHaveBeenNthCalledWith(22, "/admin/legacy-tracker");
     });
   });
 });

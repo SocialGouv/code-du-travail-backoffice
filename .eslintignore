@@ -2,4 +2,4 @@
 coverage/
 node_modules/
 
-# /src/libs/generatePassword.js
+/db/

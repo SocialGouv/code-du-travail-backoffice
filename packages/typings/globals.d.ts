@@ -1,6 +1,6 @@
 /// <reference types="jest" />
 
-import { StyleRuleOptions } from "jest-emotion";
+import { StyleRuleOptions } from "@emotion/jest";
 
 declare global {
   declare namespace jest {

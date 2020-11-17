@@ -5,7 +5,7 @@
  *
  * @param {import("react-test-renderer").ReactTestRenderer} reactTestRenderer
  * @param {string} propertyName
- * @param {string=} testId
+ * @param {string} testId
  * @param {?[]} params
  *
  * @returns {void}

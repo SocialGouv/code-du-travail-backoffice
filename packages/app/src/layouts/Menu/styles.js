@@ -34,7 +34,7 @@ export const DropdownMenu = styled.div`
   display: none;
   flex-direction: column;
   left: auto;
-  margin-top: 2.5rem;
+  margin-top: 4rem;
   position: absolute;
   right: 0;
   z-index: 1;

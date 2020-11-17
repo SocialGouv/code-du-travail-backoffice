@@ -1,229 +1,182 @@
 import styled from "@emotion/styled";
+import debounce from "lodash.debounce";
 import React from "react";
+import ReactDiffViewer from "react-diff-viewer";
+import { connect } from "react-redux";
 import { Flex } from "rebass";
 
-import * as C from "../../../src/constants";
+import * as actions from "../../../src/actions";
+import Tree from "../../../src/components/Tree";
+import Button from "../../../src/elements/Button";
+import Icon from "../../../src/elements/Icon";
 import LoadingSpinner from "../../../src/elements/LoadingSpinner";
-import _Table from "../../../src/elements/Table";
+import MarkdownEditor from "../../../src/elements/MarkdownEditor";
 import Title from "../../../src/elements/Title";
-import shortenAgreementName from "../../../src/helpers/shortenAgreementName";
 import AdminMainLayout from "../../../src/layouts/AdminMain";
-import cdtnApi from "../../../src/libs/cdtnApi";
-import numeral from "../../../src/libs/customNumeral";
-import customPostgrester from "../../../src/libs/customPostgrester";
+import api from "../../../src/libs/api";
 
 const Container = styled(Flex)`
   margin: 0 1rem 1rem;
 `;
 
-const Table = styled(_Table)`
-  display: fles;
-  flex-grow: 1;
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
-  overflow-y: auto;
+const TreeContainer = styled(Flex)`
+  max-width: 20rem;
+  min-width: 20rem;
+`;
 
-  .rt-tr > .rt-th,
-  .rt-tr > .rt-td {
-    :first-of-type {
-      width: 50% !important;
-    }
-    :not(:first-of-type) {
-      width: 50% !important;
-    }
-  }
+const Editor = styled(MarkdownEditor)`
+  max-height: 100%;
+  min-height: 100%;
 
-  .rt-tr > .rt-td {
-    :first-of-type {
-      cursor: pointer;
-    }
-    :not(:first-of-type) {
-      text-align: right;
-    }
+  .editor {
+    border: 0 !important;
   }
 `;
 
-// TODO Clean these columns.
-/* eslint-disable react/display-name */
-const DASHBOARD_TABLE_COLUMNS = [
-  {
-    Cell: ({ row, value }) => {
-      return (
-        <span
-          onClick={() => window.open(`/admin/tracker/${row._original.id}`)}
-          onKeyPress={() => window.open(`/admin/tracker/${row._original.id}`)}
-          role="link"
-          tabIndex="0"
-          title={value}
-        >
-          {value}
-        </span>
-      );
-    },
-    Header: "Convention",
-    accessor: "name",
-  },
-  {
-    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
-    Header: "Nombre de références obsolètes",
-    accessor: "total",
-  },
-];
-/* eslint-enable react/display-name */
-
-class AdminTrackerPage extends React.Component {
+export class AdminTrackerIndexPage extends React.Component {
   constructor(props) {
     super(props);
 
+    this.selectAnswer = this.selectAnswer.bind(this);
+    this.updateAnswerValue = debounce(this._updateAnswerValue.bind(this), 500).bind(this);
+
     this.state = {
-      answersReferencesStats: [],
-      isLoading: true,
-      selectedAgreementOption: null,
+      selectedReferenceDiff: null,
     };
   }
 
-  async componentDidMount() {
-    this.postgrest = customPostgrester();
-
-    await this.initializeStats();
-    await this.updateStats();
+  componentDidMount() {
+    this.props.dispatch(actions.answers.toggleIsLoading());
+    this.props.dispatch(actions.alerts.load());
   }
 
-  async initializeStats() {
-    const { data: locations } = await this.postgrest
-      .select("*")
-      .select("agreements(id,idcc,name,parent_id)")
-      .get("/locations");
+  selectAnswer({ key }) {
+    this.props.dispatch(actions.alerts.selectOne(key));
+  }
 
-    const answersReferencesStats = locations
-      .reduce((prev, { agreements }) => [...prev, ...agreements], [])
-      .filter(({ parent_id }) => parent_id === null)
-      .map(({ id, idcc, name }) => ({
-        id,
-        name: `[${idcc}] ${shortenAgreementName(name)}`,
-        total: -1,
-      }));
-
-    this.setState({
-      answersReferencesStats: [
-        {
-          id: null,
-          name: `[Code du travail] Réponses génériques`,
-          total: -1,
+  async _updateAnswerValue({ source }) {
+    try {
+      const {
+        answers: {
+          data: { id },
         },
-        ...answersReferencesStats,
-      ],
-      isLoading: false,
-    });
+      } = this.props;
+      const value = source.trim();
+      const uri = `/answers?id=eq.${id}`;
+      const data = { value };
+
+      await api.patch(uri, data);
+    } catch (err) {
+      console.warn(err);
+    }
   }
 
-  async fetchAnswersForAgreement(agreementId) {
-    const { data: answers } = await this.postgrest.eq("agreement_id", agreementId).get("/answers");
-
-    return answers;
+  openAnswerInNewTab(id) {
+    window.open(`/admin/answers/${id}`, "_blank");
   }
 
-  async findObsoleteAnswersReferences(answersReferences) {
-    // TODO Remove `dila_cid !== null` check once all the references are cleaned.
-    const localAgreementAnswersReferences = answersReferences.filter(
-      ({ category, dila_cid }) =>
-        category === C.ANSWER_REFERENCE_CATEGORY.AGREEMENT && dila_cid !== null,
+  processAnswer() {
+    this.props.dispatch(actions.alerts.processOne());
+  }
+
+  renderDiff() {
+    const {
+      alerts: {
+        // diff: { etat, texts },
+        diff: { texts },
+      },
+    } = this.props;
+
+    return (
+      <ReactDiffViewer newValue={texts[0].current} oldValue={texts[0].previous} splitView={true} />
     );
-    const localCodeAnswersReferences = answersReferences.filter(
-      ({ category, dila_cid }) =>
-        category === C.ANSWER_REFERENCE_CATEGORY.LABOR_CODE && dila_cid !== null,
-    );
-
-    const obsoleteAgreementAnswersReference = [];
-    for (const localAgreementAnswerReference of localAgreementAnswersReferences) {
-      try {
-        const { dila_id } = localAgreementAnswerReference;
-        await cdtnApi.get(`/agreement/articles?articleIdsOrCids=${dila_id}`);
-      } catch (err) {
-        obsoleteAgreementAnswersReference.push(localAgreementAnswerReference);
-      }
-    }
-    const obsoleteCodeAnswersReference = [];
-    for (const localCodeAnswerReference of localCodeAnswersReferences) {
-      try {
-        const { dila_id } = localCodeAnswerReference;
-        await cdtnApi.get(`/code/articles?articleIdsOrCids=${dila_id}`);
-      } catch (err) {
-        obsoleteAgreementAnswersReference.push(localCodeAnswerReference);
-      }
-    }
-
-    return [...obsoleteAgreementAnswersReference, ...obsoleteCodeAnswersReference];
   }
 
-  async updateStats() {
-    const { answersReferencesStats } = this.state;
-
-    const { length } = answersReferencesStats;
-    let index = -1;
-    while (++index < length) {
-      const { answersReferencesStats } = this.state;
-      const nextAnswersReferencesStats = [...answersReferencesStats];
-      const { id: agreementId } = answersReferencesStats[index];
-
-      const { data: answers } =
-        agreementId !== null
-          ? await this.postgrest.eq("agreement_id", agreementId).get("/answers")
-          : await this.postgrest.is("agreement_id", null).get("/answers");
-
-      const answerIds = answers.map(({ id }) => id);
-      const { data: answersReferences } = await this.postgrest
-        .in("answer_id", answerIds)
-        .get("/answers_references");
-
-      const obsoleteAnswersReferences = await this.findObsoleteAnswersReferences(answersReferences);
-
-      nextAnswersReferencesStats[index].total = obsoleteAnswersReferences.length;
-
-      this.setState({
-        answersReferencesStats: nextAnswersReferencesStats,
-      });
-    }
-  }
-
-  renderDashboard() {
-    const { answersReferencesStats, isLoading } = this.state;
+  renderTree() {
+    const { alerts } = this.props;
+    const { isLoading, selectedKey, tree } = alerts;
 
     if (isLoading) {
       return (
-        <Flex alignItems="center" justifyContent="center">
+        <TreeContainer alignItems="center" flexGrow="1" justifyContent="center">
+          <LoadingSpinner />
+        </TreeContainer>
+      );
+    }
+
+    return (
+      <TreeContainer flexDirection="column" flexGrow="1">
+        <Title>Tableau de veille</Title>
+        <Tree data={tree} onChange={this.selectAnswer} selectedKey={selectedKey} />
+      </TreeContainer>
+    );
+  }
+
+  renderEditor() {
+    const {
+      alerts: { isLoading: alertsIsLoading },
+      answers: { data: answersData, isLoading: answersIsLoading },
+    } = this.props;
+
+    if (alertsIsLoading || answersIsLoading) {
+      return (
+        <Flex alignItems="center" flexGrow="1" justifyContent="center">
           <LoadingSpinner />
         </Flex>
       );
     }
 
+    if (answersData === null) {
+      return (
+        <p style={{ marginLeft: "1rem", marginTop: "4rem" }}>
+          <Icon icon="arrow-left" style={{ marginRight: "0.5rem" }} />
+          Sélectionnez une réponse parmi les alertes pour la traiter.
+        </p>
+      );
+    }
+
+    const { id, value } = answersData;
+
     return (
-      <Table
-        columns={DASHBOARD_TABLE_COLUMNS}
-        data={answersReferencesStats}
-        defaultSorted={[{ desc: true, id: "total" }]}
-        filterable={false}
-        multiSort={false}
-        pageSize={answersReferencesStats.length}
-        resizable={false}
-        showPagination={false}
-      />
+      <Flex flexDirection="column" flexGrow="1">
+        <Flex style={{ maxHeight: "calc(50% - 1.5rem)", minHeight: "calc(50% - 1.5rem)" }}>
+          {this.renderDiff()}
+        </Flex>
+        <Flex style={{ maxHeight: "calc(50% - 1.5rem)", minHeight: "calc(50% - 1.5rem)" }}>
+          <Editor defaultValue={value} isSingleView onChange={this.updateAnswerValue} />
+        </Flex>
+        <Flex
+          justifyContent="flex-end"
+          style={{ marginTop: "1rem", maxHeight: "2rem", minHeight: "2rem" }}
+        >
+          <Button
+            color="secondary"
+            icon="external-link-alt"
+            onClick={() => this.openAnswerInNewTab(id)}
+            withMarginRight
+          >
+            OUVRIR
+          </Button>
+          <Button onClick={() => this.processAnswer(id)}>TRAITER</Button>
+        </Flex>
+      </Flex>
     );
   }
 
   render() {
     return (
-      <AdminMainLayout hasBareContent>
-        <Container flexDirection="column" flexGrow="1">
-          <Flex alignItems="center" justifyContent="space-between">
-            <Title>Tableau de veille</Title>
-          </Flex>
-
-          {this.renderDashboard()}
+      <AdminMainLayout noScroll>
+        <Container flexGrow="1">
+          {this.renderTree()}
+          {this.renderEditor()}
         </Container>
       </AdminMainLayout>
     );
   }
 }
 
-export default AdminTrackerPage;
+export default connect(({ alerts, answers, legalReferences }) => ({
+  alerts,
+  answers,
+  legalReferences,
+}))(AdminTrackerIndexPage);

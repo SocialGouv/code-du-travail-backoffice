@@ -130,6 +130,10 @@ export const toggleCheckFailure = error => ({
   type: actionTypes.ANSWERS_TOGGLE_CHECK_FAILURE,
 });
 
+export const toggleIsLoading = () => ({
+  type: actionTypes.ANSWERS_TOGGLE_IS_LOADING,
+});
+
 export const updateGenericReference = (ids, genericReference, next) => ({
   meta: {
     genericReference,

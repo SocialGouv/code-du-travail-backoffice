@@ -30,7 +30,7 @@ function getRandomLog() {
 exports.seed = async knex => {
   global.spinner.start(`Generating logs...`);
 
-  const logs = Array.from({ length: 1000 }, getRandomLog);
+  const logs = Array.from({ length: 100 }, getRandomLog);
 
   await knex("public.logs").insert(logs);
 
