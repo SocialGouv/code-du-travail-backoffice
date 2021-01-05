@@ -1,6 +1,6 @@
 -------------------------------------- UP --------------------------------------
 
-CREATE EXTENSION pgcrypto;
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 -- JWT START
 -- https://github.com/michelp/pgjwt/blob/master/pgjwt--0.1.0.sql

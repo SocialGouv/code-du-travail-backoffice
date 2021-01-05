@@ -1,0 +1,53 @@
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /autodevops.yml
+    ref: v17.3.0
+
+variables:
+  AUTO_DEVOPS_RELEASE_AUTO: "🔖"
+  AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
+  TEST_DISABLED: 1
+  CODE_QUALITY_DISABLED: 1
+
+Install:
+  script:
+    - echo "skip"
+
+Build:
+  script:
+    - echo "skip"
+
+Lint:
+  rules:
+    - when: never
+
+Test:
+  rules:
+    - when: never
+
+Register image:
+  rules:
+    - when: never
+
+.register-image:
+  extends: .autodevops_register_image
+  dependencies: []
+  needs: []
+  environment:
+    name: ${CI_COMMIT_REF_NAME}-dev2
+
+Register app:
+  extends: .register-image
+  variables:
+    CONTEXT: ./packages/app
+    DOCKERFILE_PATH: Dockerfile
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+    DOCKER_BUILD_ARGS: >-
+      --build-arg CDTN_API_URL=https://cdtn-api.fabrique.social.gouv.fr
+
+Register master:
+  extends: .register-image
+  variables:
+    CONTEXT: .
+    DOCKERFILE_PATH: Dockerfile
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/master
