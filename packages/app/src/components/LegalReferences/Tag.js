@@ -4,6 +4,7 @@ import React from "react";
 import * as C from "../../constants";
 import Button from "../../elements/Button";
 import Icon from "../../elements/Icon";
+import SavingSpinner from "../../elements/SavingSpinner";
 import cdtnApi from "../../libs/cdtnApi";
 import LegalReferenceProps from "../../props/LegalReference";
 import { ButtonsContainer, Container, Label, Tooltip } from "./Tag.style";
@@ -168,7 +169,11 @@ class Tag extends React.PureComponent {
     const { isLoading } = this.state;
 
     if (isLoading) {
-      return <Container alignItems="center">…</Container>;
+      return (
+        <Container alignItems="center" justifyContent="center">
+          <SavingSpinner color="var(--color-eerie-black)" size={16} />
+        </Container>
+      );
     }
 
     const { id, url, value } = this.props;

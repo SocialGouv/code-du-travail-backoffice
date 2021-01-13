@@ -177,7 +177,7 @@ class AdminIndex extends React.Component {
     if (isLoading) return <AdminMainLayout isLoading />;
 
     return (
-      <AdminMainLayout>
+      <AdminMainLayout noScroll>
         <Container flexDirection="column">
           <Head alignItems="center" justifyContent="space-between">
             <Title>{T.ADMIN_COMMON_INDEX_TITLE(i18nSubject)}</Title>

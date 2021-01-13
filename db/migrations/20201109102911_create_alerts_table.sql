@@ -13,7 +13,6 @@ CREATE TABLE api.alerts (
 );
 
 GRANT SELECT, INSERT ON api.alerts TO anonymous;
-GRANT SELECT, INSERT, UPDATE, DELETE ON auth.users TO administrator;
 
 ------------------------------------- DOWN -------------------------------------
 

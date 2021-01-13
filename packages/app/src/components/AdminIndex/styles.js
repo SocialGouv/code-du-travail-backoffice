@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { Flex } from "rebass";
 
 export const Container = styled(Flex)`
+  flex-grow: 1;
   margin: 0 1rem 1rem;
 `;
 

@@ -11,7 +11,7 @@ import "mutationobserver-shim";
 // Jest "emotion" extension
 // https://github.com/emotion-js/emotion/tree/master/packages/jest-emotion#custom-matchers
 // import expect from "expect";
-import { matchers } from "jest-emotion";
+import { matchers } from "@emotion/jest";
 expect.extend(matchers);
 
 // Custom matchers:

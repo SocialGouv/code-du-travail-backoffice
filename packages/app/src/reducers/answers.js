@@ -22,6 +22,7 @@ export const initialState = {
 const AnswersReducer = (state = initialState, { payload, type }) => {
   switch (type) {
     /* ONE ANSWER ―――――――――――――――――――――― */
+
     case actionTypes.ANSWER_LOAD_ONE:
       return {
         ...state,
@@ -99,6 +100,12 @@ const AnswersReducer = (state = initialState, { payload, type }) => {
       return {
         ...state,
         checked: payload.checked,
+      };
+
+    case actionTypes.ANSWERS_TOGGLE_IS_LOADING:
+      return {
+        ...state,
+        isLoading: !state.isLoading,
       };
 
     default:

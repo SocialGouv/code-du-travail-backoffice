@@ -146,6 +146,7 @@ export default class AdminIndexPage extends React.Component {
   }
 
   async componentDidMount() {
+    this.isUmounted = false;
     this.postgrest = customPostgrester();
 
     await this.initializeStats();
@@ -153,7 +154,11 @@ export default class AdminIndexPage extends React.Component {
   }
 
   componentWillUnmount() {
-    if (this.timeout === undefined) return;
+    this.isUmounted = true;
+
+    if (this.timeout === undefined) {
+      return;
+    }
 
     clearTimeout(this.timeout);
   }
@@ -200,6 +205,10 @@ export default class AdminIndexPage extends React.Component {
 
     const nextAgreementsStats = [];
     for (const agreementStatsEntry of agreementsStats) {
+      if (this.isUmounted) {
+        break;
+      }
+
       const { id: agreementId } = agreementStatsEntry;
       const answers = await this.fetchAnswersForAgreement(agreementId);
 
@@ -256,6 +265,10 @@ export default class AdminIndexPage extends React.Component {
       ],
       [0, 0, 0, 0, 0, 0, 0],
     );
+
+    if (this.isUmounted) {
+      return;
+    }
 
     this.setState({
       agreementsStats: nextAgreementsStats,

@@ -77,7 +77,7 @@ describe("components/LegalReferences/LegalReferences/<Selector />", () => {
       });
     });
 
-    describe("with an labor code category", () => {
+    describe("with a labor code category", () => {
       it("with empty data", () => {
         const props = {
           ...PROPS,
@@ -112,6 +112,7 @@ describe("components/LegalReferences/LegalReferences/<Selector />", () => {
             suggestionComponent: null,
             suggestions: [],
             suggestionsFilter: expect.any(Function),
+            suggestionsTransform: null,
             tagComponent: null,
             tags: [],
           },

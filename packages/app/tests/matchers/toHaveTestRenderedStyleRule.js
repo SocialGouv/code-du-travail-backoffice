@@ -1,6 +1,6 @@
 // @ts-check
 
-import * as jestEmotion from "jest-emotion";
+import * as jestEmotion from "@emotion/jest";
 
 import findByTestId from "../helpers/findByTestId";
 
@@ -9,7 +9,7 @@ expect.extend({
    * @param {import("react-test-renderer").ReactTestRenderer} reactTestRenderer
    * @param {string} propertyName Property name.
    * @param {string | number} expected Expected property value.
-   * @param {import("jest-emotion").StyleRuleOptions=} options Expected property value.
+   * @param {import("@emotion/jest").StyleRuleOptions=} options Expected property value.
    * @param {string=} testId Targetted children `data-testid`.
    *
    * @returns {jest.CustomMatcherResult}

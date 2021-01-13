@@ -9,8 +9,10 @@ export const Container = styled(Flex)`
   cursor: ${p => (p.isEditing ? "auto" : "help")};
   font-size: 0.875rem;
   margin: 0.5rem 0.5rem 0 0;
-  min-width: 34rem;
-  max-width: 34rem;
+  max-height: 2rem;
+  max-width: 100%;
+  min-height: 2rem;
+  min-width: 100%;
   padding: ${p => (p.isEditing ? "0" : "0.25rem 0.5rem 0.275rem")};
   user-select: none;
 

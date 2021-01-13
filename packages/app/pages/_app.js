@@ -1,5 +1,3 @@
-import { CacheProvider } from "@emotion/core";
-import * as emotion from "emotion";
 import App from "next/app";
 import React from "react";
 
@@ -40,11 +38,7 @@ class MainApp extends App {
     const hasError = statusCode !== undefined && statusCode >= 400;
 
     if (hasError || me.isAuthenticated) {
-      return (
-        <CacheProvider value={emotion.cache}>
-          <Component {...pageProps} />
-        </CacheProvider>
-      );
+      return <Component {...pageProps} />;
     }
 
     return <Login onLoggedIn={this.login.bind(this)} />;
