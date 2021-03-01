@@ -1,6 +1,6 @@
 # Application Image
 
-FROM node:14.15.5-alpine
+FROM node:14.16.0-alpine
 
 ARG API_DOMAIN
 ARG API_PORT_PUBLIC

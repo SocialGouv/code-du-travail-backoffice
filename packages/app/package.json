@@ -51,7 +51,7 @@
     "react-table": "6.11.5",
     "react-tag-autocomplete": "6.1.0",
     "react-toastify": "7.0.3",
-    "react-tooltip": "4.2.14",
+    "react-tooltip": "4.2.15",
     "rebass": "4.0.7",
     "redux": "4.0.5",
     "redux-devtools-extension": "2.13.8",
@@ -64,7 +64,7 @@
     "remark-rehype": "8.0.0",
     "remark-stringify": "9.0.1",
     "ua-parser-js": "0.7.24",
-    "unified": "9.2.0",
+    "unified": "9.2.1",
     "unist-util-find": "1.0.2",
     "unist-util-parents": "1.0.3",
     "unist-util-remove": "2.0.1"
@@ -72,7 +72,7 @@
   "devDependencies": {
     "@emotion/jest": "11.2.0",
     "@socialgouv/kali-data": "2.55.0",
-    "@socialgouv/legi-data": "2.29.0",
+    "@socialgouv/legi-data": "2.32.0",
     "@testing-library/jest-dom": "5.11.9",
     "@testing-library/react": "11.2.5",
     "@types/hast": "2.3.1",
