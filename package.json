@@ -36,7 +36,7 @@
     "colors": "1.4.0",
     "dotenv": "8.2.0",
     "esm": "3.2.25",
-    "knex": "0.21.18",
+    "knex": "0.95.1",
     "lerna": "3.22.1",
     "npmlog": "4.1.2",
     "pg": "8.5.1",
@@ -50,7 +50,7 @@
     "@types/jest": "26.0.20",
     "axios": "0.21.1",
     "boxen": "5.0.0",
-    "chai": "4.3.0",
+    "chai": "4.3.3",
     "cpy-cli": "3.1.1",
     "cucumber": "6.0.5",
     "dumdum": "1.0.0-alpha.5",
@@ -65,7 +65,7 @@
     "postgrester": "1.5.0",
     "prettier": "2.2.1",
     "puppeteer": "8.0.0",
-    "typescript": "4.2.2",
+    "typescript": "4.2.3",
     "yargs": "16.2.0"
   },
   "resolutions": {
