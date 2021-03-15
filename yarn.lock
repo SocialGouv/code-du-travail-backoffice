@@ -6279,16 +6279,14 @@ ignore@^5.1.4:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.1.8.tgz#f150a8b50a34289b33e22f5889abd4d8016f0e57"
   integrity sha512-BMpfD7PpiETpBl/A6S498BaIJ6Y/ABT93ETbby2fP00v4EbvPBXWEoaR1UBPKs3iR53pJY7EtZk5KACI57i1Uw==
 
-imgur@0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/imgur/-/imgur-0.3.2.tgz#57cac44533cac35f47fddf2840603d3dc1112a3d"
-  integrity sha512-v5GxgH9r/xgF3Oj48qyxDKztdSGPM/4TOvusw8/CIWbtSHKQcjmgf2u6DyJh5/DX+KdXnt/q5HkW2ZKDj8yJEg==
+imgur@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/imgur/-/imgur-1.0.0.tgz#420a498f3b1ff5476cadc14862d71175be07a238"
+  integrity sha512-myGZU2Fb+xUroetJq31Ld+OTmUJyjLcV/23ek9Ec7cAD8eZ98H/OId1Qe59XHS4hZ9JfahreHEaD4Txgnz2CJw==
   dependencies:
     commander "^2.3.0"
     form-data "^4.0.0"
-    glob "^7.1.2"
     got "^11.8.1"
-    q "^1.0.1"
 
 import-cwd@^2.0.0:
   version "2.1.0"
@@ -9834,7 +9832,7 @@ puppeteer@8.0.0:
     unbzip2-stream "^1.3.3"
     ws "^7.2.3"
 
-q@^1.0.1, q@^1.5.1:
+q@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
