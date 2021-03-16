@@ -11,6 +11,7 @@ import Button from "../../../src/elements/Button";
 import Icon from "../../../src/elements/Icon";
 import LoadingSpinner from "../../../src/elements/LoadingSpinner";
 import MarkdownEditor from "../../../src/elements/MarkdownEditor";
+import Subtitle from "../../../src/elements/Subtitle";
 import Title from "../../../src/elements/Title";
 import AdminMainLayout from "../../../src/layouts/AdminMain";
 import api from "../../../src/libs/api";
@@ -82,13 +83,23 @@ export class AdminTrackerIndexPage extends React.Component {
   renderDiff() {
     const {
       alerts: {
-        // diff: { etat, texts },
-        diff: { texts },
+        diff: { etat, texts },
       },
     } = this.props;
 
     return (
-      <ReactDiffViewer newValue={texts[0].current} oldValue={texts[0].previous} splitView={true} />
+      <Flex flexDirection="column">
+        <Subtitle isFirst>
+          État : {etat.previous} ► {etat.current}
+        </Subtitle>
+        {texts.length !== 0 && (
+          <ReactDiffViewer
+            newValue={texts[0].current}
+            oldValue={texts[0].previous}
+            splitView={true}
+          />
+        )}
+      </Flex>
     );
   }
 
