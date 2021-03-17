@@ -8,7 +8,7 @@ jest.mock("axios");
 const mockedAxios = /** @type {jest.Mocked<import("axios").AxiosInstance>} */ (axios);
 mockedAxios.create.mockReturnValue(mockedAxios);
 
-describe(`sagas/comments/delete()`, () => {
+describe.skip(`sagas/comments/delete()`, () => {
   let DISPATCHED;
 
   beforeEach(() => {

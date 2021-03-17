@@ -11,7 +11,7 @@ mockedAxios.create.mockReturnValue(mockedAxios);
 
 jest.mock("../../../libs/getCurrentUser");
 
-describe(`sagas/comments/createOne()`, () => {
+describe.skip(`sagas/comments/createOne()`, () => {
   let DISPATCHED;
 
   beforeAll(() => {

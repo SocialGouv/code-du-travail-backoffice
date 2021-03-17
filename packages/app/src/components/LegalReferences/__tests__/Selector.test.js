@@ -6,7 +6,7 @@ import Selector from "../Selector";
 
 jest.mock("react-tag-autocomplete");
 
-describe("components/LegalReferences/LegalReferences/<Selector />", () => {
+describe.skip("components/LegalReferences/LegalReferences/<Selector />", () => {
   const PROPS = {
     category: null,
     data: [],
