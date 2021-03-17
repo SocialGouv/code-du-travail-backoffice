@@ -11,9 +11,16 @@ jobs:
       - checkout
       - node/install:
           install-yarn: true
-      - run: node --version
-      - run: yarn --frozen-lockfile --ignore-scripts
-      - run: yarn test
+      - run:
+          name: Print Node Version
+          command: node --version
+      - run:
+          name: Install Dependencies
+          command: yarn --frozen-lockfile --ignore-scripts
+      - run:
+          name: Run Unit Tests
+          command: yarn test
+          no_output_timeout: 30m
       - run:
           name: Update Code Coverage
           command: npx codecov
