@@ -9,9 +9,18 @@ jobs:
       - image: "cimg/base:stable"
     steps:
       - checkout
+      - node/install:
+          install-yarn: true
+      - run: node --version
       - run: yarn --frozen-lockfile --ignore-scripts
       - run: yarn test
       - run:
           name: Update Code Coverage
           command: npx codecov
           when: on_success
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - unit-test
