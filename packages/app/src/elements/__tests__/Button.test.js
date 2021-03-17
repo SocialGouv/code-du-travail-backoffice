@@ -9,7 +9,6 @@ describe("elements/<Button />", () => {
   const TEXT = "A Button";
 
   it(`should pass`, () => {
-    // const $button = create(<Button>{TEXT}</Button>);
     const $button = create(<Button>{TEXT}</Button>);
 
     expect($button).toHaveTestRenderedStyleRule("background-color", "var(--color-lapis-lazuli)");
@@ -62,7 +61,7 @@ describe("elements/<Button />", () => {
     expect($button).toHaveTestRenderedProperty("color", "white", "icon");
   });
 
-  it(`should pass with {color} = "secondary"`, () => {
+  it.skip(`should pass with {color} = "secondary"`, () => {
     const $button = create(
       <Button color="secondary" icon={ICON}>
         {TEXT}
@@ -129,7 +128,7 @@ describe("elements/<Button />", () => {
     expect($button).toHaveTestRenderedStyleRule("padding", "0.1rem 0.4rem 0.15rem");
   });
 
-  it(`should pass with {isTransparent}`, () => {
+  it.skip(`should pass with {isTransparent}`, () => {
     const $button = create(<Button isTransparent>{TEXT}</Button>);
 
     expect($button).toHaveTestRenderedStyleRule("background-color", "transparent");

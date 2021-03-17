@@ -8,7 +8,7 @@ jest.mock("axios");
 const mockedAxios = /** @type {jest.Mocked<import("axios").AxiosInstance>} */ (axios);
 mockedAxios.create.mockReturnValue(mockedAxios);
 
-describe(`sagas/questions/load()`, () => {
+describe.skip(`sagas/questions/load()`, () => {
   let DISPATCHED;
 
   beforeEach(() => {

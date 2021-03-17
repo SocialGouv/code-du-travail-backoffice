@@ -13,7 +13,7 @@ mockedAxios.create.mockReturnValue(mockedAxios);
 jest.mock("../../../libs/getCurrentUser");
 jest.mock("../../../selectors");
 
-describe(`sagas/answers/load()`, () => {
+describe.skip(`sagas/answers/load()`, () => {
   const DATA = {
     answers: [
       { agreement_name: "An Agreement", id: "00000000-0000-4000-8000-000000000001" },

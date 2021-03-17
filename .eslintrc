@@ -12,7 +12,7 @@
       "error",
       { "blankLine": "always", "prev": "*", "next": "return" }
     ],
-    "jest/no-disabled-tests": "error",
+    "jest/no-disabled-tests": "warn",
     "prettier/prettier": "error",
     "sort-requires/sort-requires": "error"
   },
