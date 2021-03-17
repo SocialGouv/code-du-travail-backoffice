@@ -5,11 +5,10 @@ declare namespace Answer {
     created_at: string;
     generic_reference: "labor_code" | "national_agreement" | null;
     id: string;
-    is_published: boolean;
     parent_id: string | null;
     prevalue: string;
     question_id: string;
-    state: "draft" | "pending_review" | "todo" | "under_review" | "validated";
+    state: "draft" | "pending_review" | "published" | "todo" | "under_review" | "validated";
     updated_at: string;
     user_id: string;
     value: string;

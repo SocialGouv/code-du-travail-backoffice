@@ -95,13 +95,23 @@ function getRandomAnswer(diceBalance, question_id, agreement_id) {
         value: dumdum.text([260, 620]),
       };
 
+    case dice < diceBalance[4]:
+      return {
+        agreement_id,
+        prevalue: dumdum.text([260, 620]),
+        question_id,
+        state: "validated",
+        user_id: "00000000-0000-4000-8000-000000000402",
+        value: dumdum.text([260, 620]),
+      };
+
     default:
       return {
         agreement_id,
         is_published: Math.random() < 0.75,
         prevalue: dumdum.text([260, 620]),
         question_id,
-        state: "validated",
+        state: "published",
         user_id: "00000000-0000-4000-8000-000000000402",
         value: dumdum.text([260, 620]),
       };
@@ -129,7 +139,13 @@ exports.seed = async knex => {
 
     const answers = [];
     let answersReferences = [];
-    const diceBalance = [Math.random(), Math.random(), Math.random(), Math.random()].sort();
+    const diceBalance = [
+      Math.random(),
+      Math.random(),
+      Math.random(),
+      Math.random(),
+      Math.random(),
+    ].sort();
 
     for (const agreement of agreements) {
       global.spinner.text = `Generating answers: [${agreement.idcc}] ${question.index}) ${question.value}`;

@@ -20,16 +20,6 @@ export const State = styled.span`
 
 export const UpdatedAt = styled.span`
   color: var(--color-blue-sapphire);
-  margin-right: 1rem;
-`;
-
-export const IsPublished = styled.span`
-  background-color: var(--color-blue-sapphire);
-  color: white;
-  font-size: 0.625rem;
-  opacity: ${({ isDisabled }) => (isDisabled ? 0.1 : 1)};
-  margin-bottom: 0.125rem;
-  padding: 0.125rem 0.25rem;
 `;
 
 export const Content = styled(Flex)`

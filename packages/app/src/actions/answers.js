@@ -150,22 +150,6 @@ export const updateGenericReferenceFailure = error => ({
   type: actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE_FAILURE,
 });
 
-export const updateIsPublished = (ids, is, next) => ({
-  meta: {
-    ids,
-    is,
-    next,
-  },
-  type: actionTypes.ANSWERS_UPDATE_IS_PUBLISHED_REFERENCE,
-});
-export const updateIsPublishedFailure = error => ({
-  error: true,
-  payload: {
-    message: error.message,
-  },
-  type: actionTypes.ANSWERS_UPDATE_IS_PUBLISHED_REFERENCE_FAILURE,
-});
-
 export const updateReferences = (data, next) => ({
   meta: {
     data,

@@ -51,11 +51,6 @@ const COLUMNS = [
     Header: "Publiées",
     accessor: "published",
   },
-  {
-    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0,0")),
-    Header: "Total",
-    accessor: "total",
-  },
 ];
 const PERCENTAGE_COLUMNS = [
   { ...COLUMNS[0] },
@@ -82,11 +77,6 @@ const PERCENTAGE_COLUMNS = [
   {
     ...COLUMNS[6],
     Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%")),
-  },
-  {
-    ...COLUMNS[7],
-    Cell: ({ value }) => (value === -1 ? "…" : numeral(value).format("0.00%")),
-    sortable: false,
   },
 ];
 /* eslint-enable react/display-name */
@@ -213,7 +203,7 @@ export default class AdminIndexPage extends React.Component {
       const answers = await this.fetchAnswersForAgreement(agreementId);
 
       const totals = answers.reduce(
-        (totals, { is_published, state }) => {
+        (totals, { state }) => {
           switch (state) {
             case ANSWER_STATE.TO_DO:
               totals[0] += 1;
@@ -234,10 +224,10 @@ export default class AdminIndexPage extends React.Component {
             case ANSWER_STATE.VALIDATED:
               totals[4] += 1;
               break;
-          }
 
-          if (is_published) {
-            totals[5] += 1;
+            case ANSWER_STATE.PUBLISHED:
+              totals[5] += 1;
+              break;
           }
 
           totals[6] += 1;
@@ -289,7 +279,6 @@ export default class AdminIndexPage extends React.Component {
         pendingReview: -1,
         published: -1,
         todo: -1,
-        total: -1,
         underReview: -1,
         validated: -1,
       };
@@ -301,7 +290,6 @@ export default class AdminIndexPage extends React.Component {
       pendingReview: isPercentage ? stats[2] / stats[6] : stats[2],
       published: isPercentage ? stats[5] / stats[6] : stats[5],
       todo: isPercentage ? stats[0] / stats[6] : stats[0],
-      total: isPercentage ? 1 : stats[6],
       underReview: isPercentage ? stats[3] / stats[6] : stats[3],
       validated: isPercentage ? stats[4] / stats[6] : stats[4],
     };

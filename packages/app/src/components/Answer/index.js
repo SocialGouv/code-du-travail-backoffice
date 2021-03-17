@@ -8,16 +8,7 @@ import Idcc from "../../elements/Idcc";
 import excerpt from "../../helpers/excerpt";
 import customMoment from "../../libs/customMoment";
 import FullAnswerProps from "../../props/FullAnswer";
-import {
-  Container,
-  Content,
-  Extract,
-  IsPublished,
-  Question,
-  State,
-  Top,
-  UpdatedAt,
-} from "./index.style";
+import { Container, Content, Extract, Question, State, Top, UpdatedAt } from "./index.style";
 
 const Answer = ({ data, isChecked, onCheck, onClick }) => {
   const {
@@ -25,7 +16,6 @@ const Answer = ({ data, isChecked, onCheck, onClick }) => {
     agreement_name,
     generic_reference,
     id,
-    is_published,
     question_index,
     question_value,
     state,
@@ -65,14 +55,9 @@ const Answer = ({ data, isChecked, onCheck, onClick }) => {
     <Container flexDirection="column">
       <Top justifyContent="space-between">
         <State data-testid="state">{ANSWER_STATE_LABEL[state]}</State>
-        <Flex alignItems="center">
-          <UpdatedAt data-testid="updated-at">{`Modifié ${customMoment(updated_at)
-            .tz("Europe/Paris")
-            .calendar()}`}</UpdatedAt>
-          <IsPublished data-testid="is-published" isDisabled={!is_published}>
-            Publiée
-          </IsPublished>
-        </Flex>
+        <UpdatedAt data-testid="updated-at">{`Modifiée ${customMoment(updated_at)
+          .tz("Europe/Paris")
+          .calendar()}`}</UpdatedAt>
       </Top>
       <Flex>
         <Checkbox

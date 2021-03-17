@@ -9,7 +9,6 @@ import Comment from "../../../src/components/Comment";
 import LegalReferences from "../../../src/components/LegalReferences";
 import * as C from "../../../src/constants";
 import Button from "../../../src/elements/Button";
-import Checkbox from "../../../src/elements/Checkbox";
 import Hr from "../../../src/elements/Hr";
 import Icon from "../../../src/elements/Icon";
 import Idcc from "../../../src/elements/Idcc";
@@ -290,14 +289,6 @@ export class AdminAnwsersEditPage extends React.Component {
     this.setState({ isSidebarHidden: !this.state.isSidebarHidden });
   }
 
-  toggleIsPublished() {
-    const { id, is_published } = this.props.answers.data;
-
-    this.props.dispatch(
-      actions.answers.updateIsPublished([id], !is_published, this.load.bind(this)),
-    );
-  }
-
   handleCommentField(event) {
     if (event.which !== 13) return;
 
@@ -433,7 +424,7 @@ export class AdminAnwsersEditPage extends React.Component {
       );
     }
 
-    if (answers.data.state === C.ANSWER_STATE.VALIDATED) {
+    if ([C.ANSWER_STATE.VALIDATED, C.ANSWER_STATE.PUBLISHED].includes(answers.data.state)) {
       return (
         <Flex flexDirection="column" width={1}>
           <Subtitle isFirst>Réponse validée</Subtitle>
@@ -466,7 +457,9 @@ export class AdminAnwsersEditPage extends React.Component {
   renderReferences() {
     const { answers, legalReferences } = this.props;
     const { selectedAgreementIdcc } = this.state;
-    const isReadOnly = answers.isLoading || answers.data.state === C.ANSWER_STATE.VALIDATED;
+    const isReadOnly =
+      answers.isLoading ||
+      [C.ANSWER_STATE.VALIDATED, C.ANSWER_STATE.PUBLISHED].includes(answers.data.state);
 
     return (
       <div>
@@ -557,7 +550,10 @@ export class AdminAnwsersEditPage extends React.Component {
     const { data, isLoading } = answers;
     const { state, generic_reference } = data;
 
-    if (state === C.ANSWER_STATE.VALIDATED && generic_reference === null) {
+    if (
+      [C.ANSWER_STATE.VALIDATED, C.ANSWER_STATE.PUBLISHED].includes(state) &&
+      generic_reference === null
+    ) {
       return null;
     }
 
@@ -565,7 +561,7 @@ export class AdminAnwsersEditPage extends React.Component {
       <div>
         <Hr />
         <Subtitle isFirst>Renvoi</Subtitle>
-        {state !== C.ANSWER_STATE.VALIDATED && (
+        {![C.ANSWER_STATE.VALIDATED, C.ANSWER_STATE.PUBLISHED].includes(state) && (
           <Radio
             disabled={isLoading}
             onChange={this.updateGenericReference.bind(this)}
@@ -588,30 +584,6 @@ export class AdminAnwsersEditPage extends React.Component {
             ]}
           />
         )}
-      </div>
-    );
-  }
-
-  renderPublication() {
-    const { answers } = this.props;
-    const { isFirstLoad } = this.state;
-
-    if (isFirstLoad || answers.data.state !== C.ANSWER_STATE.VALIDATED) {
-      return null;
-    }
-
-    return (
-      <div>
-        <Hr />
-        <Subtitle isFirst>Publication</Subtitle>
-        <Flex>
-          <Checkbox
-            isChecked={answers.data.is_published}
-            onClick={this.toggleIsPublished.bind(this)}
-            withMarginRight
-          />
-          Publiée sur le site du code du travail numérique.
-        </Flex>
       </div>
     );
   }
@@ -676,7 +648,6 @@ export class AdminAnwsersEditPage extends React.Component {
             {this.renderReferences()}
 
             {this.renderGenericReference()}
-            {this.renderPublication()}
           </Content>
 
           {this.renderSidebar()}
