@@ -20,6 +20,8 @@ class Markdown {
       .use(rehypeParse)
       .use(rehypeRemark)
       .use(remarkStringify, {
+        bullet: "-",
+        emphasis: "_",
         gfm: true,
         listItemIndent: "1",
         rule: "-",
@@ -27,7 +29,7 @@ class Markdown {
       })
       .processSync(htmlSource)
       .contents.trim()
-      .replace(/ {2}$/gm, "<br>")
+      .replace(/\\$/gm, "<br>")
       .replace(/^( *-.*)\n{2,}( *-)/gm, "$1\n$2")
       .replace(/^( *-.*)\n{2,}( *-)/gm, "$1\n$2")
       .replace(/^( *\d+\..*)\n{2,}( *\d+\.)/gm, "$1\n$2")
