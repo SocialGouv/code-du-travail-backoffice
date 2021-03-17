@@ -13,7 +13,7 @@ Please check the [contributing documentation][link-contributing].
 
 ---
 
-[img-build]: https://badgen.net/circleci/github/SocialGouv/code-du-travail-backoffice?style=flat-square
+[img-build]: https://badgen.net/circleci/github/SocialGouv/code-du-travail-backoffice/master?style=flat-square
 [img-coverage]: https://badgen.net/codecov/c/github/SocialGouv/code-du-travail-backoffice?style=flat-square
 [img-license]: https://badgen.net/github/license/SocialGouv/code-du-travail-backoffice?style=for-the-badge
 
