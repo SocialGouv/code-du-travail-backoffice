@@ -13,11 +13,11 @@ Please check the [contributing documentation][link-contributing].
 
 ---
 
-[img-build]: https://badgen.net/travis/SocialGouv/code-du-travail-backoffice?style=flat-square
+[img-build]: https://badgen.net/circleci/github/SocialGouv/code-du-travail-backoffice?style=flat-square
 [img-coverage]: https://badgen.net/codecov/c/github/SocialGouv/code-du-travail-backoffice?style=flat-square
 [img-license]: https://badgen.net/github/license/SocialGouv/code-du-travail-backoffice?style=for-the-badge
 
-[link-build]: https://travis-ci.com/SocialGouv/code-du-travail-backoffice
+[link-build]: https://app.circleci.com/pipelines/github/SocialGouv/code-du-travail-backoffice
 [link-cdtn]: https://code.travail.gouv.fr/
 [link-coverage]: https://codecov.io/gh/SocialGouv/code-du-travail-backoffice
 [link-contributing]: https://github.com/SocialGouv/code-du-travail-backoffice/blob/master/CONTRIBUTING.md
