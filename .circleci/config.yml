@@ -1,0 +1,17 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.2.0
+
+jobs:
+  unit-test:
+    docker:
+      - image: "cimg/base:stable"
+    steps:
+      - checkout
+      - run: yarn --frozen-lockfile --ignore-scripts
+      - run: yarn test
+      - run:
+          name: Update Code Coverage
+          command: npx codecov
+          when: on_success
