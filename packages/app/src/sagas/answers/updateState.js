@@ -14,7 +14,6 @@ export default function* updateState({ meta: { ids, next, state } }) {
       case ANSWER_STATE.TO_DO:
         data = {
           generic_reference: null,
-          is_published: false,
           prevalue: "",
           state,
           user_id: null,
@@ -27,7 +26,6 @@ export default function* updateState({ meta: { ids, next, state } }) {
       case ANSWER_STATE.PENDING_REVIEW:
       case ANSWER_STATE.UNDER_REVIEW:
         data = {
-          is_published: false,
           state,
         };
         break;

@@ -108,7 +108,6 @@ function getRandomAnswer(diceBalance, question_id, agreement_id) {
     default:
       return {
         agreement_id,
-        is_published: Math.random() < 0.75,
         prevalue: dumdum.text([260, 620]),
         question_id,
         state: "published",
