@@ -13,6 +13,7 @@ export const ANSWER_STATE = {
   PENDING_REVIEW: "pending_review",
   UNDER_REVIEW: "under_review",
   VALIDATED: "validated",
+  PUBLISHED: "published",
 };
 export const ANSWER_STATE_LABEL = {
   todo: "à rédiger",
@@ -20,6 +21,7 @@ export const ANSWER_STATE_LABEL = {
   pending_review: "en attente de validation",
   under_review: "en cours de validation",
   validated: "validée",
+  published: "publiée",
 };
 export const ANSWER_STATES = Object.values(ANSWER_STATE);
 export const ANSWER_STATE_OPTIONS = ANSWER_STATES.map((state, index) => ({

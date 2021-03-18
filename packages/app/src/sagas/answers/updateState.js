@@ -32,6 +32,7 @@ export default function* updateState({ meta: { ids, next, state } }) {
         };
         break;
 
+      case ANSWER_STATE.PUBLISHED:
       case ANSWER_STATE.VALIDATED:
         data = { state };
         break;

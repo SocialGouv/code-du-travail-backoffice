@@ -13,7 +13,6 @@ describe("components/<Answer />", () => {
       created_at: "1970-01-01T00:00:00.000000+00:00",
       generic_reference: null,
       id: "00000000-0000-4000-8000-000000000001",
-      is_published: false,
       parent_id: null,
       prevalue: "A prevalue",
       question_id: "00000000-0000-4000-8000-000000000001",
@@ -72,8 +71,6 @@ describe("components/<Answer />", () => {
 
     expect($answer).toHaveTestRenderedTextContent(`en cours de rédaction`, "state");
 
-    expect($answer).toHaveTestRenderedStyleRule("opacity", "0.1", {}, "is-published");
-
     expect($answer).toHaveTestRenderedProperty("isChecked", false, "checkbox");
 
     expect($answer).toHaveTestRenderedTextContent(props.data.prevalue, "extract");
@@ -92,7 +89,6 @@ describe("components/<Answer />", () => {
       ...PROPS,
       data: {
         ...PROPS.data,
-        is_published: true,
         state: "validated",
       },
     };
@@ -100,8 +96,6 @@ describe("components/<Answer />", () => {
     const $answer = create(<Answer {...props} />);
 
     expect($answer).toHaveTestRenderedTextContent(`validée`, "state");
-
-    expect($answer).toHaveTestRenderedStyleRule("opacity", "1", {}, "is-published");
 
     expect($answer).toHaveTestRenderedTextContent(props.data.value, "extract");
     expect($answer).toHaveTestRenderedStyleRule("color", "var(--color-text-gray)", {}, "extract");

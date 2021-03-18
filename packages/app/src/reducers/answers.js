@@ -52,7 +52,6 @@ const AnswersReducer = (state = initialState, { payload, type }) => {
     case actionTypes.ANSWERS_SET_FILTER:
     case actionTypes.ANSWERS_SET_FILTERS:
     case actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE:
-    case actionTypes.ANSWERS_UPDATE_IS_PUBLISHED:
     case actionTypes.ANSWERS_UPDATE_REFERENCES:
     case actionTypes.ANSWERS_UPDATE_STATE:
       return {
@@ -68,7 +67,6 @@ const AnswersReducer = (state = initialState, { payload, type }) => {
     case actionTypes.ANSWERS_SET_FILTERS_FAILURE:
     case actionTypes.ANSWERS_TOGGLE_CHECK_FAILURE:
     case actionTypes.ANSWERS_UPDATE_GENERIC_REFERENCE_FAILURE:
-    case actionTypes.ANSWERS_UPDATE_IS_PUBLISHED_REFERENCE_FAILURE:
     case actionTypes.ANSWERS_UPDATE_REFERENCES_FAILURE:
     case actionTypes.ANSWERS_UPDATE_STATE_FAILURE:
       return {

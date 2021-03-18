@@ -10,7 +10,6 @@ export default {
   created_at: PropTypes.string.isRequired,
   generic_reference: validateMandatoryNullableOneOf(C.ANSWER_GENERIC_REFERENCES),
   id: PropTypes.string.isRequired,
-  is_published: PropTypes.bool.isRequired,
   parent_id: validateMandatoryNullableString,
   prevalue: PropTypes.string.isRequired,
   question_id: PropTypes.string.isRequired,
