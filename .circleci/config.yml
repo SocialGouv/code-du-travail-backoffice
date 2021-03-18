@@ -18,9 +18,15 @@ jobs:
           name: Install Dependencies
           command: yarn --frozen-lockfile --ignore-scripts
       - run:
+          name: Lint Code
+          command: yarn test:lint
+      - run:
+          name: Check Types
+          command: yarn test:type
+      - run:
           name: Run Unit Tests
-          command: yarn test
-          no_output_timeout: 30m
+          command: yarn test:unit --runInBand
+          no_output_timeout: 1h
       - run:
           name: Update Code Coverage
           command: npx codecov
