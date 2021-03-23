@@ -11,8 +11,8 @@ import { ButtonsContainer, Container, Label, Tooltip } from "./Tag.style";
 import TagEditorWithClickOutside from "./TagEditor";
 
 const BASE_URL = {
-  agreement: "https://beta.legifrance.gouv.fr/conv_coll/id/",
-  labor_code: "https://beta.legifrance.gouv.fr/codes/article_lc/",
+  agreement: "https://www.legifrance.gouv.fr/conv_coll/id/",
+  labor_code: "https://www.legifrance.gouv.fr/codes/article_lc/",
 };
 
 class Tag extends React.PureComponent {

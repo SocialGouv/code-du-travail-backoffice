@@ -57,7 +57,7 @@ describe("components/LegalReferences/<Tag />", () => {
 
     expect(global.window.open).toHaveBeenNthCalledWith(
       1,
-      "https://beta.legifrance.gouv.fr/conv_coll/id/KALIARTI000000000002/?idConteneur=KALICONT000000000001",
+      "https://www.legifrance.gouv.fr/conv_coll/id/KALIARTI000000000002/?idConteneur=KALICONT000000000001",
       "_blank",
     );
 
@@ -105,7 +105,7 @@ describe("components/LegalReferences/<Tag />", () => {
 
     expect(global.window.open).toHaveBeenNthCalledWith(
       1,
-      "https://beta.legifrance.gouv.fr/conv_coll/id/KALIARTI000000000002",
+      "https://www.legifrance.gouv.fr/conv_coll/id/KALIARTI000000000002",
       "_blank",
     );
   });
