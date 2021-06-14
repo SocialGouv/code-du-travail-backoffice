@@ -78,7 +78,7 @@
     "@types/hast": "2.3.1",
     "@types/ramda": "0.27.34",
     "@types/react-test-renderer": "17.0.0",
-    "dotenv": "8.2.0",
+    "dotenv": "10.0.0",
     "identity-obj-proxy": "3.0.0",
     "mutationobserver-shim": "0.3.7",
     "nodemon": "2.0.7",
