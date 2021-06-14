@@ -32,7 +32,7 @@
     "next": "10.0.5",
     "next-cookies": "2.0.3",
     "next-redux-saga": "4.1.2",
-    "next-redux-wrapper": "6.0.2",
+    "next-redux-wrapper": "7.0.1",
     "numeral": "2.0.6",
     "password-generator": "2.3.2",
     "pg": "8.5.1",
