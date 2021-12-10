@@ -10,7 +10,6 @@
     "db:migrate": "knex migrate:latest",
     "db:migrate:make": "node ./scripts/db/generateMigration.js",
     "db:restore": "node -r dotenv/config ./scripts/db/restore.js",
-    "db:seed": "knex seed:run",
     "db:snapshot:restore": "node -r dotenv/config ./scripts/db/restoreSnapshot.js",
     "db:snapshot:update": "node -r dotenv/config ./scripts/db/updateSnapshot.js",
     "dev": "yarn dev:docker && yarn dev:packages",

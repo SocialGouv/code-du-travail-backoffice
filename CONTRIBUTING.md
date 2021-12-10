@@ -93,7 +93,6 @@ This repository comes with multiple useful npm scripts (run via `yarn <script>`)
 - `db:migrate` Migrate database schema.
 - `db:migrate:make`: Create a new database migration file.
 - `db:restore`: Restore a database dump.
-- `db:seed`: Seed the database via a mix of dummy and real production data.
 - `db:snapshot:restore`: Restore the dev database dump.
 - `db:snapshot:update`: Update the dev database dump file.
 - `dev`: Start a full development instance (including Docker images).

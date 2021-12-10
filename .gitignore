@@ -148,7 +148,3 @@ Temporary Items
 # Docker shared backups volume:
 /backups/*
 !/backups/README.md
-
-# Prevent any script to be pushed whithin the production database seeds:
-/db/seeds/prod/*
-!/db/seeds/prod/.gitkeep
