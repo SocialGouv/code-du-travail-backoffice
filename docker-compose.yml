@@ -1,7 +1,8 @@
-version: "3"
+version: "3.9"
 
 services:
   db:
+    container_name: cdtn_backoffice_db
     image: postgres:12-alpine
     restart: always
     environment:
@@ -16,6 +17,7 @@ services:
 
   # https://postgrest.org/en/stable/install.html#containerized-postgrest-and-db-with-docker-compose
   postgrest:
+    container_name: cdtn_backoffice_postgrest
     image: postgrest/postgrest:v6.0.2
     restart: always
     environment:
@@ -27,6 +29,7 @@ services:
       - db
 
   api:
+    container_name: cdtn_backoffice_api
     build:
       context: ./packages/api
       args:
@@ -41,6 +44,7 @@ services:
       - postgrest
 
   app:
+    container_name: cdtn_backoffice_app
     build:
       context: ./packages/app
       args:
@@ -59,6 +63,7 @@ services:
       - api
 
   master:
+    container_name: cdtn_backoffice_master
     # Keep the container up:
     # https://stackoverflow.com/a/55953120/2736233
     tty: true

@@ -1,13 +1,12 @@
 require("colors");
+const dayjs = require("dayjs");
+const path = require("path");
 const shell = require("shelljs");
 
-const { POSTGRES_DB, POSTGRES_USER } = process.env;
+const { NODE_ENV, POSTGRES_USER } = process.env;
 
-const NOW = process.argv[2] === "--dev" ? "snapshot" : new Date().toISOString().replace(/:/g, "-");
-
-const BACKUPS_DIRECTORY = process.argv[2] === "--dev" ? "./db" : "./backups";
-const DB_SERVICE_NAME = "db";
-const MAIN_DB_FILENAME = `${NOW}_${POSTGRES_DB}.dump`;
+const DOCKER_COMPOSE_SERVICE_NAME = "db";
+const DOCKER_CONTAINER_NAME = "cdtn_backoffice_db";
 
 if (!shell.which("docker")) {
   shell.echo("[script/db/backup] Error: Sorry, this script requires docker.".red);
@@ -29,15 +28,26 @@ function run(command) {
 }
 
 try {
+  const backupFileName = dayjs().format("YYYY_MM_DD");
+  const backupPath = path.join(__dirname, `../../backups/${backupFileName}.sql`);
+  const isProduction = NODE_ENV === "production";
+
+  if (isProduction) {
+    run(`docker-compose up -d ${DOCKER_COMPOSE_SERVICE_NAME}`);
+  } else {
+    run(
+      `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d ${DOCKER_COMPOSE_SERVICE_NAME}`,
+    );
+  }
+  // https://stackoverflow.com/a/63011266/2736233
   run(
-    `docker-compose exec -T ${DB_SERVICE_NAME} pg_dump -cC -Fc --if-exists -f /${MAIN_DB_FILENAME} -U ${POSTGRES_USER} ${POSTGRES_DB}`,
+    `timeout 90s bash -c "until docker exec ${DOCKER_CONTAINER_NAME} pg_isready ; do sleep 1 ; done"`,
   );
-  const output = run(`docker-compose ps -q ${DB_SERVICE_NAME}`);
-  const dockerDbContainerId = output.stdout.trim();
-  run(`docker cp ${dockerDbContainerId}:/${MAIN_DB_FILENAME} ${BACKUPS_DIRECTORY}`);
-  run(`docker-compose exec -T ${DB_SERVICE_NAME} rm /${MAIN_DB_FILENAME}`);
+
+  run(`docker exec -t ${DOCKER_CONTAINER_NAME} pg_dumpall -c -U ${POSTGRES_USER} > ${backupPath}`);
 } catch (err) {
-  shell.echo(`[script/db/backup] Error: ${err.message}`.red);
+  shell.echo(`[script/db/backup] Error: ${err}`.red);
+  console.error(err);
 
   shell.exit(1);
 }
