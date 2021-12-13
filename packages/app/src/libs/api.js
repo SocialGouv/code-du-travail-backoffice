@@ -63,11 +63,7 @@ export class Api {
 
     const response = await isomorphicUnfetch(`${apiUri}${path}`, options);
 
-    console.log(response);
-
     const data = await this.parseResponseData(response);
-
-    console.log(data);
 
     if (!response.ok) {
       data.code = response.status;

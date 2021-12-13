@@ -1,25 +1,24 @@
-import jsCookie from "js-cookie";
-import axios from "axios";
+import customPostgrester from "../libs/customPostgrester";
 
-export type ApiFetchType = 'GET' | 'POST' | 'PUT' | 'DELETE';
+export type ApiFetchType = "GET" | "POST" | "PUT" | "DELETE";
 
-export function apiFetch(method: ApiFetchType, path: string, data?: Record<string, any>): Promise<any> {
+export function apiFetch(
+  method: ApiFetchType,
+  path: string,
+  data?: Record<string, any>,
+): Promise<any> {
   return new Promise((resolve, reject) => {
-    axios({
+    customPostgrester()({
       method,
-      url: process.env.API_URI+path,
+      url: process.env.API_URI + path,
       data,
-      headers: {
-        "Authorization": `Bearer ${jsCookie.get("jwt")}`,
+    }).then(
+      result => {
+        resolve(result);
       },
-    })
-      .then(
-        result => {
-          resolve(result);
-        },
-        error => {
-          reject(error);
-        },
-      );
+      error => {
+        reject(error);
+      },
+    );
   });
 }

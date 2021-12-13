@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import React from "react";
+import { addAgreement } from "../../../src/api";
 
 import AdminForm from "../../../src/components/AdminForm";
 import AdminMain from "../../../src/layouts/AdminMain";
 import customPostgrester from "../../../src/libs/customPostgrester";
-import getCurrentUser from "../../../src/libs/getCurrentUser";
 import toast from "../../../src/libs/toast";
 import { apiFetch, getHeaderId } from "../../../src/utils";
 
@@ -45,35 +45,7 @@ export default function AdminNew(props: any): JSX.Element {
 
   const onSubmit = async data => {
     try {
-      const { headers } = await apiFetch("POST", "/agreements", {
-        idcc: data.idcc,
-        name: data.name,
-        parent_id: data.parent_id,
-      });
-
-      const agreementId = getHeaderId(headers.location);
-
-      const { data: questions } = await apiFetch("GET", "/questions");
-
-      const promises = [];
-
-      questions.forEach(question => {
-        promises.push(
-          apiFetch("POST", "/answers", {
-            agreement_id: agreementId,
-            question_id: question.id,
-            state: "draft",
-            user_id: null,
-            parent_id: null,
-            prevalue: "",
-            generic_reference: null,
-            value: "",
-          }),
-        );
-      });
-
-      await Promise.all(promises);
-
+      await addAgreement(data.name, data.idcc, data.parent_id);
       back();
     } catch (e) {
       toast.error(e.message);
