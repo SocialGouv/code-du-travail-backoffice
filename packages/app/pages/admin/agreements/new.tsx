@@ -55,8 +55,6 @@ export default function AdminNew(props: any): JSX.Element {
 
       const { data: questions } = await apiFetch("GET", "/questions");
 
-      const me = getCurrentUser();
-
       const promises = [];
 
       questions.forEach(question => {
@@ -65,7 +63,7 @@ export default function AdminNew(props: any): JSX.Element {
             agreement_id: agreementId,
             question_id: question.id,
             state: "draft",
-            user_id: me.id,
+            user_id: null,
             parent_id: null,
             prevalue: "",
             generic_reference: null,

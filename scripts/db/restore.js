@@ -1,27 +1,28 @@
 require("colors");
+const path = require("path");
 const shell = require("shelljs");
 
-const { POSTGRES_DB, POSTGRES_USER } = process.env;
+const { NODE_ENV, POSTGRES_DB, POSTGRES_USER } = process.env;
 
 if (process.argv[2] === undefined) {
-  shell.echo(`[script/db/restore] Error: You must give the dumps timestamp in non-dev mode.`.red);
+  shell.echo(
+    `[script/db/restore.js] Error: You must give the dump file name (YYYY_MM_DD) in non-dev mode.`
+      .red,
+  );
 
   shell.exit(1);
 }
 
-const LABEL = process.argv[2] === "--dev" ? "snapshot" : process.argv[2];
-
-const BACKUPS_DIRECTORY = process.argv[2] === "--dev" ? "./db" : "./backups";
-const DB_SERVICE_NAME = "db";
-const MAIN_DB_FILENAME = `${LABEL}_${POSTGRES_DB}.dump`;
+const DOCKER_COMPOSE_SERVICE_NAME = "db";
+const DOCKER_CONTAINER_NAME = "cdtn_backoffice_db";
 
 if (!shell.which("docker")) {
-  shell.echo("[script/db/restore] Error: Sorry, this script requires docker.".red);
+  shell.echo("[script/db/restore.js] Error: Sorry, this script requires docker.".red);
 
   shell.exit(1);
 }
 if (!shell.which("docker-compose")) {
-  shell.echo("[script/db/restore] Error: Sorry, this script requires docker-compose.".red);
+  shell.echo("[script/db/restore.js] Error: Sorry, this script requires docker-compose.".red);
 
   shell.exit(1);
 }
@@ -35,19 +36,32 @@ function run(command) {
 }
 
 try {
-  const output = run(`docker-compose ps -q ${DB_SERVICE_NAME}`);
-  const dockerDbContainerId = output.stdout.trim();
-  run(`docker cp ${BACKUPS_DIRECTORY}/${MAIN_DB_FILENAME} ${dockerDbContainerId}:/ `);
+  const backupFileName = process.argv[2];
+  const backupPath = path.join(__dirname, `../../backups/${backupFileName}.sql`);
+  const isProduction = NODE_ENV === "production";
 
-  const start = `docker-compose exec -T ${DB_SERVICE_NAME} pg_restore -ae --disable-triggers -d ${POSTGRES_DB} -j 8 -U ${POSTGRES_USER}`;
-  const end = `/${MAIN_DB_FILENAME}`;
-  run(`${start} -N public ${end}`);
-  run(`${start} -n public -t users_agreements ${end}`);
+  run(`docker-compose down -v`);
+  if (isProduction) {
+    run(`docker-compose up -d ${DOCKER_COMPOSE_SERVICE_NAME}`);
+  } else {
+    run(
+      `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d ${DOCKER_COMPOSE_SERVICE_NAME}`,
+    );
+  }
+  // https://stackoverflow.com/a/63011266/2736233
+  run(
+    `timeout 90s bash -c "until docker exec ${DOCKER_CONTAINER_NAME} pg_isready ; do sleep 5 ; done"`,
+  );
 
-  run(`docker-compose exec -T ${DB_SERVICE_NAME} rm /${MAIN_DB_FILENAME}`);
-  shell.exit(0);
+  run(
+    `cat ${backupPath} | docker exec -i ${DOCKER_CONTAINER_NAME} psql -d ${POSTGRES_DB} -U ${POSTGRES_USER}`,
+  );
+
+  shell.echo(`[script/db/restore.js] The database has now been restored.`.green);
+  run(`docker-compose ps`);
 } catch (err) {
-  shell.echo(`[script/db/restore] Error: ${err.message}`.red);
+  shell.echo(`[script/db/restore.js] Error: ${err}`.red);
+  console.error(err);
 
   shell.exit(1);
 }

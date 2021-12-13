@@ -1,10 +1,9 @@
 require("colors");
 const fs = require("fs");
-const knex = require("knex");
 const shell = require("shelljs");
-const { argv } = require("yargs");
 
-const { DEV_DB_PORT, NODE_ENV, POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_USER } = process.env;
+const { NODE_ENV } = process.env;
+const DOCKER_CONTAINER_NAME = "cdtn_backoffice_db";
 
 if (NODE_ENV === "production") {
   shell.echo(
@@ -24,25 +23,10 @@ if (!shell.which("docker-compose")) {
   shell.exit(1);
 }
 
-const DB_URI = `postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${DEV_DB_PORT}/${POSTGRES_DB}`;
-
-const knexClient = knex({
-  client: "pg",
-  connection: DB_URI,
-});
-
 function run(command) {
   shell.echo(`Running: \`${command}\`…`.blue);
   const output = shell.exec(command);
   if (output.code !== 0) shell.exit(1);
-}
-
-async function waitForDb() {
-  try {
-    await knexClient.raw("SELECT 1 + 1 AS result;");
-  } catch {
-    await waitForDb();
-  }
 }
 
 (async () => {
@@ -52,15 +36,11 @@ async function waitForDb() {
     run(`docker-compose down --remove-orphans -v`);
     run(`docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d db`);
     shell.echo(`Waiting for db to be up and ready…`.blue);
-    await waitForDb();
-    run(`yarn db:migrate`);
-
-    if (argv.full) {
-      run(`yarn db:seed`);
-      run(`yarn db:snapshot:update`);
-    } else {
-      run(`yarn db:snapshot:restore`);
-    }
+    // https://stackoverflow.com/a/63011266/2736233
+    run(
+      `timeout 90s bash -c "until docker exec ${DOCKER_CONTAINER_NAME} pg_isready ; do sleep 5 ; done"`,
+    );
+    run(`yarn db:snapshot:restore`);
 
     run(`yarn dev:docker`);
     run(`docker-compose stop`);

@@ -15,6 +15,11 @@ help make it even better than it is today!
     - [Known Issues](#known-issues)
       - [Docker Compose](#docker-compose)
       - [Jest Watch](#jest-watch)
+  - [Common Tasks](#common-tasks)
+    - [Database backup in production](#database-backup-in-production)
+    - [Database restore in production](#database-restore-in-production)
+    - [Database snapshot update in development](#database-snapshot-update-in-development)
+    - [Database snapshot restore in development](#database-snapshot-restore-in-development)
   - [Naming Guidelines](#naming-guidelines)
     - [API-related methods](#api-related-methods)
     - [React methods](#react-methods)
@@ -47,22 +52,15 @@ yarn setup
 yarn dev
 ```
 
-The website should now be available at: http://localhost:3100.
+The website should now be available at: <http://localhost:3100>.
 
 5 sample users have been generated during setup:
 
 - Administrator:
-  - Email: `doris@sea.com`<br>
-    Mot de passe: `Azerty123`
-- Regional Administrator:
-  - Email: `deb@sea.com`<br>
+  - Email: `doris@sea.com`  
     Mot de passe: `Azerty123`
 - Contributors:
-  - Email: `nemo@sea.com`<br>
-    Mot de passe: `Azerty123`
-  - Email: `astrid@sea.com`<br>
-    Mot de passe: `Azerty123`
-  - Email: `marin@sea.com`<br>
+  - Email: `nemo@sea.com`  
     Mot de passe: `Azerty123`
 
 ### Standalone
@@ -96,7 +94,6 @@ This repository comes with multiple useful npm scripts (run via `yarn <script>`)
 - `db:migrate` Migrate database schema.
 - `db:migrate:make`: Create a new database migration file.
 - `db:restore`: Restore a database dump.
-- `db:seed`: Seed the database via a mix of dummy and real production data.
 - `db:snapshot:restore`: Restore the dev database dump.
 - `db:snapshot:update`: Update the dev database dump file.
 - `dev`: Start a full development instance (including Docker images).
@@ -104,8 +101,6 @@ This repository comes with multiple useful npm scripts (run via `yarn <script>`)
 - `dev:packages`: Sun the packages instance in dev (watch + live-reload) mode.
 - `setup`: Setup (or refresh) a ready-to-use dev environment.
 - `setup:env`: Reset the dev environment variables (via the `.env` file).
-- `setup:full`: Setup (or refresh) a ready-to-use dev environment **with** a new seed.<br>
-  _This also updates the dev/test database snapshot._
 - `start`: Start a full production instance (without Docker images).
 - `start:prod`: Run the production build & run script.
 
@@ -117,28 +112,20 @@ This repository comes with multiple useful npm scripts (run via `yarn <script>`)
 
 ```json
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnPaste": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.formatOnSave": true,
-  "editor.rulers": [100],
-  "eslint.enable": true
-}
-```
-
-`extensions.json`
-
-```json
-{
-  "recommendations": [
-    "alexkrechik.cucumberautocomplete",
-    "dbaeumer.vscode-eslint",
-    "editorconfig.editorconfig",
-    "esbenp.prettier-vscode",
-    "jpoissonnier.vscode-styled-components",
-    "mikestead.dotenv",
-    "ms-azuretools.vscode-docker",
-    "ryanluker.vscode-coverage-gutters"
-  ]
+  "eslint.codeActionsOnSave.mode": "all",
+  "eslint.format.enable": true,
+  "eslint.packageManager": "yarn",
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
 ```
 
@@ -161,6 +148,56 @@ solution][link-issue-2] is to increase the number of file system watchers:
 
 ```bash
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+```
+
+---
+
+## Common Tasks
+
+### Database backup in production
+
+```sh
+yarn db:backup
+```
+
+will dump your Docker database generating a local `./backups/YYYY_MM_DD.sql` PosgreSQL dump file.
+
+### Database restore in production
+
+Supposing you have, for example, a `./backups/2021_12_10.sql` PosgreSQL dump file:
+
+```sh
+yarn db:restore 2021_12_10
+```
+
+will automatically restore this backup into your Docker database.
+
+### Database snapshot update in development
+
+To fasten CI and dev setup with real production PostgreSQL data, we use snapshots that are in fact
+PostgreSQL dump files (taken from production backups) in which we inject a fake administrator and
+contributor generated in order to use them locally (without the need to import the production
+`PGRST_JWT_SECRET` environment variable which would pose a security threat).
+
+First run a db:backup in production and download this file locally in `./backups`, then run:
+
+```sh
+yarn db:snapshot:update YYYY_MM_DD
+```
+
+This command will update `./db/snapshot.sql` with anonymzed users data and real password replaced by
+fake ones. This file should be included in your git commits since this file must be shared between
+developers and is also used for CI tests.
+
+### Database snapshot restore in development
+
+See the explanations above to understand the purpose of a database snapshot.
+
+You shouldn't have to run this command alone since it's already run when you run a `yarn setup` but
+in some case you can manually run it via:
+
+```sh
+yarn db:snapshot:restore
 ```
 
 ---
@@ -212,8 +249,8 @@ interface {
 
 ### React variables
 
-- All the variables referencing a component must start with **$**
-  (i.e.: `<Button ref={node => this.$button = node}>`).
+- All the variables referencing a component must start with **$** (i.e.:
+  `<Button ref={node => this.$button = node}>`).
 
 ---
 
@@ -221,7 +258,7 @@ interface {
 
 Each commit message consists of a **type**, a **scope** and a **subject**:
 
-```
+```text
 <type>(<scope>): <subject>
 ```
 
@@ -281,6 +318,8 @@ The subject contains a succinct description of the change:
 
 [link-cdtb-commits]: https://github.com/SocialGouv/code-du-travail-backoffice/commits/master
 [link-cdtn]: https://code.travail.gouv.fr
-[link-docker-no-sudo]: https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user
-[link-issue-1]: https://github.com/docker/docker-credential-helpers/issues/103#issuecomment-421822269
+[link-docker-no-sudo]:
+  https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user
+[link-issue-1]:
+  https://github.com/docker/docker-credential-helpers/issues/103#issuecomment-421822269
 [link-issue-2]: https://github.com/facebook/jest/issues/3254#issuecomment-297214395
