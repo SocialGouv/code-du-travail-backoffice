@@ -100,6 +100,12 @@ class AdminForm extends React.Component {
    */
   async submit(event) {
     event.preventDefault();
+    const { onSubmit } = this.props;
+    if (onSubmit) {
+      onSubmit(this.state);
+
+      return;
+    }
     if (this.state.isSubmitting) return;
     this.setState({ error: null, isSubmitting: true });
     const { apiPath } = this.props;
@@ -414,6 +420,7 @@ AdminForm.propTypes = {
   id: PropTypes.string,
   indexPath: PropTypes.string.isRequired,
   name: PropTypes.any,
+  onSubmit: PropTypes.func,
 };
 
 export default AdminForm;
