@@ -3,32 +3,33 @@
 We would love for you to contribute to the backoffice of [Code du travail numérique][link-cdtn] and
 help make it even better than it is today!
 
-- [Contribute](#contribute)
-  - [Prerequisites](#prerequisites)
-  - [Get Started](#get-started)
-  - [Standalone](#standalone)
-  - [Test](#test)
-  - [Scripts](#scripts)
-  - [Recommended IDE Settings](#recommended-ide-settings)
-  - [VS Code](#vs-code)
-  - [Known Issues](#known-issues)
-    - [Docker Compose](#docker-compose)
-    - [Jest Watch](#jest-watch)
-- [Common Tasks](#common-tasks)
-  - [Database backup in production](#database-backup-in-production)
-  - [Database restore in production](#database-restore-in-production)
-  - [Database snapshot update in development](#database-snapshot-update-in-development)
-  - [Database snapshot restore in development](#database-snapshot-restore-in-development)
-- [Naming Guidelines](#naming-guidelines)
-  - [API-related methods](#api-related-methods)
-  - [React methods](#react-methods)
-  - [Redux states](#redux-states)
-  - [React variables](#react-variables)
-- [Commit Message Guidelines](#commit-message-guidelines)
-  - [Revert](#revert)
-  - [Type](#type)
-  - [Scope](#scope)
-  - [Subject](#subject)
+- [Contributing](#contributing)
+  - [Contribute](#contribute)
+    - [Prerequisites](#prerequisites)
+    - [Get Started](#get-started)
+    - [Standalone](#standalone)
+    - [Test](#test)
+    - [Scripts](#scripts)
+    - [Recommended IDE Settings](#recommended-ide-settings)
+    - [VS Code](#vs-code)
+    - [Known Issues](#known-issues)
+      - [Docker Compose](#docker-compose)
+      - [Jest Watch](#jest-watch)
+  - [Common Tasks](#common-tasks)
+    - [Database backup in production](#database-backup-in-production)
+    - [Database restore in production](#database-restore-in-production)
+    - [Database snapshot update in development](#database-snapshot-update-in-development)
+    - [Database snapshot restore in development](#database-snapshot-restore-in-development)
+  - [Naming Guidelines](#naming-guidelines)
+    - [API-related methods](#api-related-methods)
+    - [React methods](#react-methods)
+    - [Redux states](#redux-states)
+    - [React variables](#react-variables)
+  - [Commit Message Guidelines](#commit-message-guidelines)
+    - [Revert](#revert)
+    - [Type](#type)
+    - [Scope](#scope)
+    - [Subject](#subject)
 
 ## Contribute
 
@@ -248,8 +249,8 @@ interface {
 
 ### React variables
 
-- All the variables referencing a component must start with **$**
-  (i.e.: `<Button ref={node => this.$button = node}>`).
+- All the variables referencing a component must start with **$** (i.e.:
+  `<Button ref={node => this.$button = node}>`).
 
 ---
 
@@ -317,6 +318,8 @@ The subject contains a succinct description of the change:
 
 [link-cdtb-commits]: https://github.com/SocialGouv/code-du-travail-backoffice/commits/master
 [link-cdtn]: https://code.travail.gouv.fr
-[link-docker-no-sudo]: https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user
-[link-issue-1]: https://github.com/docker/docker-credential-helpers/issues/103#issuecomment-421822269
+[link-docker-no-sudo]:
+  https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user
+[link-issue-1]:
+  https://github.com/docker/docker-credential-helpers/issues/103#issuecomment-421822269
 [link-issue-2]: https://github.com/facebook/jest/issues/3254#issuecomment-297214395
