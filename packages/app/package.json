@@ -74,7 +74,7 @@
     "@socialgouv/kali-data": "2.30.0",
     "@socialgouv/legi-data": "2.24.0",
     "@testing-library/jest-dom": "5.11.8",
-    "@testing-library/react": "11.2.3",
+    "@testing-library/react": "12.1.2",
     "@types/hast": "2.3.1",
     "@types/ramda": "0.27.34",
     "@types/react-test-renderer": "17.0.0",
