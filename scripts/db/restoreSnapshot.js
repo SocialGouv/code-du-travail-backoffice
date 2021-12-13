@@ -4,15 +4,6 @@ const shell = require("shelljs");
 
 const { POSTGRES_DB, POSTGRES_USER } = process.env;
 
-if (process.argv[2] === undefined) {
-  shell.echo(
-    `[script/db/restore.js] Error: You must give the dump file name (YYYY_MM_DD) in non-dev mode.`
-      .red,
-  );
-
-  shell.exit(1);
-}
-
 const DOCKER_COMPOSE_SERVICE_NAME = "db";
 const DOCKER_CONTAINER_NAME = "cdtn_backoffice_db";
 
