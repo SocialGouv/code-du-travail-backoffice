@@ -6,7 +6,6 @@ import AdminForm from "../../../src/components/AdminForm";
 import AdminMain from "../../../src/layouts/AdminMain";
 import customPostgrester from "../../../src/libs/customPostgrester";
 import toast from "../../../src/libs/toast";
-import { apiFetch, getHeaderId } from "../../../src/utils";
 
 export default function AdminNew(props: any): JSX.Element {
   const [isLoading, setIsLoading] = React.useState(true);
