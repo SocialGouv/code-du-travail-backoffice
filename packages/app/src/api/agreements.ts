@@ -1,6 +1,10 @@
 import { apiFetch, getHeaderId } from "../utils";
 
-export const addAgreement = async (name: string, idcc: string, parent_id?: string) => {
+export const addAgreement = async (
+  name: string,
+  idcc: string,
+  parent_id?: string,
+): Promise<any> => {
   const { headers } = await apiFetch("POST", "/agreements", {
     idcc,
     name,
