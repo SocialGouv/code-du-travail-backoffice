@@ -12741,13 +12741,6 @@ unist-util-parents@1.0.3, unist-util-parents@^1.0.3:
   dependencies:
     es6-weak-map "^2.0.0"
 
-unist-util-parents@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/unist-util-parents/-/unist-util-parents-2.0.0.tgz#20654ee81c36a436c9bead2c12f62671a49a6431"
-  integrity sha512-7rRuxPJcGVo/XxelPusWMkcbVZol7BDEaBq3hqck0kQIykU2cZsLcOX//dxbqPhMA4eWYC+QK9rVS9HnTY53FQ==
-  dependencies:
-    "@types/unist" "^2.0.0"
-
 unist-util-position@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/unist-util-position/-/unist-util-position-3.1.0.tgz#1c42ee6301f8d52f47d14f62bbdb796571fa2d47"
