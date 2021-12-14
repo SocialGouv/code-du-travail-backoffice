@@ -7,6 +7,7 @@ help make it even better than it is today!
   - [Contribute](#contribute)
     - [Prerequisites](#prerequisites)
     - [Get Started](#get-started)
+      - [To run on arm architecture](#to-run-on-arm-architecture)
     - [Standalone](#standalone)
     - [Test](#test)
     - [Scripts](#scripts)
@@ -62,6 +63,24 @@ The website should now be available at: <http://localhost:3100>.
 - Contributors:
   - Email: `nemo@sea.com`  
     Mot de passe: `Azerty123`
+
+#### To run on arm architecture
+
+You have to change `docker-compose.yml` by replacing `postgrest` service by the following one:
+
+```yml
+postgrest:
+  container_name: cdtn_backoffice_postgrest
+  image: hughjfchen/hughjfchen:postgrest-aarch64-6.0.2
+  restart: always
+  environment:
+    PGRST_DB_ANON_ROLE: ${PGRST_DB_ANON_ROLE}
+    PGRST_DB_SCHEMA: ${PGRST_DB_SCHEMA}
+    PGRST_DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+    PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
+  depends_on:
+    - db
+```
 
 ### Standalone
 
