@@ -6,7 +6,7 @@ import { Container, Head } from "../../../src/components/AdminIndex/styles";
 import Button from "../../../src/elements/Button";
 import Table from "../../../src/elements/Table";
 import Title from "../../../src/elements/Title";
-import capitalize from "../../../src/helpers/capitalize";
+// import capitalize from "../../../src/helpers/capitalize";
 import humanizeLogAction from "../../../src/helpers/humanizeLogAction";
 import AdminMainLayout from "../../../src/layouts/AdminMain";
 import moment from "../../../src/libs/customMoment";
@@ -14,16 +14,16 @@ import moment from "../../../src/libs/customMoment";
 // TODO Clean these columns.
 /* eslint-disable react/display-name */
 const COLUMNS = [
-  {
-    Cell: ({ value }) => (value !== null ? value.name : "N/A"),
-    Header: "Nom",
-    accessor: "user",
-  },
-  {
-    Cell: ({ value }) => (value !== null ? capitalize(value.role) : "N/A"),
-    Header: "Role",
-    accessor: "user",
-  },
+  // {
+  //   Cell: ({ value }) => (value !== null ? value.name : "N/A"),
+  //   Header: "Nom",
+  //   accessor: "user",
+  // },
+  // {
+  //   Cell: ({ value }) => (value !== null ? capitalize(value.role) : "N/A"),
+  //   Header: "Role",
+  //   accessor: "user",
+  // },
   {
     Header: "IP",
     accessor: "ip",

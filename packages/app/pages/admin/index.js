@@ -165,7 +165,6 @@ export default class AdminIndexPage extends React.Component {
   async fetchAnswersForAgreement(agreementId) {
     const { data: answers } = await this.postgrest
       .select("*")
-      .select("agreement(*)")
       .eq("agreement_id", agreementId)
       .get("/answers");
 

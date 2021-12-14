@@ -1,11 +1,11 @@
 import jsCookie from "js-cookie";
-import postgrester from "postgrester";
+import { create } from "postgrester";
 
 let postgrestClient;
 
 export default function customPostgrester() {
   if (postgrestClient === undefined) {
-    postgrestClient = postgrester.create({
+    postgrestClient = create({
       axiosConfig: {
         baseURL: process.env.API_URI,
         headers: {

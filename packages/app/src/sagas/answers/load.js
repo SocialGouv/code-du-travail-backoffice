@@ -76,6 +76,7 @@ export default function* load({ meta: { pagesIndex } }) {
 
     /** @type {FullAnswer.WithReferences[]} */
     const answersWithReferences = answers
+      .filter(answer => (!filters.isGeneric ? answer.agreement_id !== null : true))
       .map(answer => ({
         ...answer,
         references: answersReferences.filter(({ answer_id }) => answer_id === answer.id),
