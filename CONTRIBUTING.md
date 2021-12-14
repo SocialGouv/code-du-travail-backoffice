@@ -16,6 +16,7 @@ help make it even better than it is today!
       - [Docker Compose](#docker-compose)
       - [Jest Watch](#jest-watch)
   - [Common Tasks](#common-tasks)
+    - [To run on arm architecture](#to-run-on-arm-architecture)
     - [Database backup in production](#database-backup-in-production)
     - [Database restore in production](#database-restore-in-production)
     - [Database snapshot update in development](#database-snapshot-update-in-development)
@@ -153,6 +154,45 @@ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo s
 ---
 
 ## Common Tasks
+
+### To run on arm architecture
+
+Firstly, you have to run `cdtn-api` by launching those following commands:
+
+```sh
+yarn
+docker-compose up redis -d
+yarn cache:update
+yarn dev
+```
+
+Then, you have to replace in `docker-compose.yml` the `postgrest` service by the following one:
+
+```yml
+postgrest:
+  container_name: cdtn_backoffice_postgrest
+  image: hughjfchen/hughjfchen:postgrest-aarch64-6.0.2
+  restart: always
+  environment:
+    PGRST_DB_ANON_ROLE: ${PGRST_DB_ANON_ROLE}
+    PGRST_DB_SCHEMA: ${PGRST_DB_SCHEMA}
+    PGRST_DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+    PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
+  depends_on:
+    - db
+```
+
+Finally, you can run these commands:
+
+```sh
+yarn
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up db -d
+yarn db:snapshot:restore
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up postgrest -d
+yarn dev
+```
+
+Done!
 
 ### Database backup in production
 

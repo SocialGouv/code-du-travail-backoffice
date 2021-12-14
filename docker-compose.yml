@@ -18,8 +18,7 @@ services:
   # https://postgrest.org/en/stable/install.html#containerized-postgrest-and-db-with-docker-compose
   postgrest:
     container_name: cdtn_backoffice_postgrest
-    image: postgrest/postgrest:v6.0.2
-    # image: hughjfchen/hughjfchen:postgrest-aarch64-6.0.2 # for aarch64
+    image: hughjfchen/hughjfchen:postgrest-aarch64-6.0.2
     restart: always
     environment:
       PGRST_DB_ANON_ROLE: ${PGRST_DB_ANON_ROLE}
@@ -28,7 +27,6 @@ services:
       PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
     depends_on:
       - db
-
   api:
     container_name: cdtn_backoffice_api
     build:

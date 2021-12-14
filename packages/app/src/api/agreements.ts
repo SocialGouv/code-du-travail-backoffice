@@ -1,5 +1,25 @@
 import { apiFetch, getHeaderId } from "../utils";
 
+import { useEffect, useRef, useState, useCallback } from "react";
+
+/**
+ * Provides the functionality of React.useState() with the only difference that
+ * it sets a state only if its parent component is still mounted, aka "safe setState".
+ */
+export default function useSafeState(initialState) {
+  const mountedRef = useRef(false);
+  const [state, setState] = useState<any>(initialState);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => (mountedRef.current = false);
+  }, []);
+
+  const safeSetState = useCallback((...args) => mountedRef.current && setState(...args), []);
+
+  return [state, safeSetState];
+}
+
 export const addAgreement = async (
   name: string,
   idcc: string,
