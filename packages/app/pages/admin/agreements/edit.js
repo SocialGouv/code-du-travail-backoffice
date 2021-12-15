@@ -1,12 +1,20 @@
 import withAdminEdit from "../../../src/templates/withAdminEdit";
-import { FIELDS } from "./new";
 
 const componentDidMount = async (api, id) => {
   const { data: agreements } = await api.eq("id", id).get("/agreements");
   const { data: allAgreements } = await api.get("/agreements");
 
   const fields = [
-    ...FIELDS,
+    {
+      label: "Nom",
+      name: "name",
+      type: "input",
+    },
+    {
+      label: "IDCC",
+      name: "idcc",
+      type: "input",
+    },
     {
       label: "Convention parente",
       name: "parent_id",

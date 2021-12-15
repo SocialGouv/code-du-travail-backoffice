@@ -3,32 +3,34 @@
 We would love for you to contribute to the backoffice of [Code du travail numérique][link-cdtn] and
 help make it even better than it is today!
 
-- [Contribute](#contribute)
-  - [Prerequisites](#prerequisites)
-  - [Get Started](#get-started)
-  - [Standalone](#standalone)
-  - [Test](#test)
-  - [Scripts](#scripts)
-  - [Recommended IDE Settings](#recommended-ide-settings)
-  - [VS Code](#vs-code)
-  - [Known Issues](#known-issues)
-    - [Docker Compose](#docker-compose)
-    - [Jest Watch](#jest-watch)
-- [Common Tasks](#common-tasks)
-  - [Database backup in production](#database-backup-in-production)
-  - [Database restore in production](#database-restore-in-production)
-  - [Database snapshot update in development](#database-snapshot-update-in-development)
-  - [Database snapshot restore in development](#database-snapshot-restore-in-development)
-- [Naming Guidelines](#naming-guidelines)
-  - [API-related methods](#api-related-methods)
-  - [React methods](#react-methods)
-  - [Redux states](#redux-states)
-  - [React variables](#react-variables)
-- [Commit Message Guidelines](#commit-message-guidelines)
-  - [Revert](#revert)
-  - [Type](#type)
-  - [Scope](#scope)
-  - [Subject](#subject)
+- [Contributing](#contributing)
+  - [Contribute](#contribute)
+    - [Prerequisites](#prerequisites)
+    - [Get Started](#get-started)
+      - [To run on arm architecture](#to-run-on-arm-architecture)
+    - [Standalone](#standalone)
+    - [Test](#test)
+    - [Scripts](#scripts)
+    - [Recommended IDE Settings](#recommended-ide-settings)
+    - [VS Code](#vs-code)
+    - [Known Issues](#known-issues)
+      - [Docker Compose](#docker-compose)
+      - [Jest Watch](#jest-watch)
+  - [Common Tasks](#common-tasks)
+    - [Database backup in production](#database-backup-in-production)
+    - [Database restore in production](#database-restore-in-production)
+    - [Database snapshot update in development](#database-snapshot-update-in-development)
+    - [Database snapshot restore in development](#database-snapshot-restore-in-development)
+  - [Naming Guidelines](#naming-guidelines)
+    - [API-related methods](#api-related-methods)
+    - [React methods](#react-methods)
+    - [Redux states](#redux-states)
+    - [React variables](#react-variables)
+  - [Commit Message Guidelines](#commit-message-guidelines)
+    - [Revert](#revert)
+    - [Type](#type)
+    - [Scope](#scope)
+    - [Subject](#subject)
 
 ## Contribute
 
@@ -61,6 +63,24 @@ The website should now be available at: <http://localhost:3100>.
 - Contributors:
   - Email: `nemo@sea.com`  
     Mot de passe: `Azerty123`
+
+#### To run on arm architecture
+
+You have to change `docker-compose.yml` by replacing `postgrest` service by the following one:
+
+```yml
+postgrest:
+  container_name: cdtn_backoffice_postgrest
+  image: hughjfchen/hughjfchen:postgrest-aarch64-6.0.2
+  restart: always
+  environment:
+    PGRST_DB_ANON_ROLE: ${PGRST_DB_ANON_ROLE}
+    PGRST_DB_SCHEMA: ${PGRST_DB_SCHEMA}
+    PGRST_DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+    PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
+  depends_on:
+    - db
+```
 
 ### Standalone
 
@@ -248,8 +268,8 @@ interface {
 
 ### React variables
 
-- All the variables referencing a component must start with **$**
-  (i.e.: `<Button ref={node => this.$button = node}>`).
+- All the variables referencing a component must start with **$** (i.e.:
+  `<Button ref={node => this.$button = node}>`).
 
 ---
 
@@ -317,6 +337,8 @@ The subject contains a succinct description of the change:
 
 [link-cdtb-commits]: https://github.com/SocialGouv/code-du-travail-backoffice/commits/master
 [link-cdtn]: https://code.travail.gouv.fr
-[link-docker-no-sudo]: https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user
-[link-issue-1]: https://github.com/docker/docker-credential-helpers/issues/103#issuecomment-421822269
+[link-docker-no-sudo]:
+  https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user
+[link-issue-1]:
+  https://github.com/docker/docker-credential-helpers/issues/103#issuecomment-421822269
 [link-issue-2]: https://github.com/facebook/jest/issues/3254#issuecomment-297214395
