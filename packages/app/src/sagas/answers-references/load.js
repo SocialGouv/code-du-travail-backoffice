@@ -43,23 +43,25 @@ export default function* load({ meta: { pagesIndex } }) {
     }
 
     /** @type {{ data: Answer.Reference[]; pagesLength: number; totalLength: number; }} */
-    const { data: answersReferences, pagesLength, totalLength } = yield request.get(
-      "/answers_references",
-      true,
-    );
+    // eslint-disable-next-line prettier/prettier
+    const {
+      data: answersReferences,
+      pagesLength,
+      totalLength,
+    } = yield request.get("/answers_references", true);
 
     const answerIds = answersReferences.map(({ answer_id }) => answer_id);
 
     const { data: answers } = yield customPostgrester()
       .select("id")
-      .select("agreement(idcc,name)")
-      .select("question(index, value)")
+      .select("agreement:agreements!answers_agreement_id_fkey(idcc,name)")
+      .select("question:questions!answers_question_id_fkey(index, value)")
       .in("id", answerIds)
       .not.is("agreement_id", null)
       .get("/answers");
     const { data: genericAnswers } = yield customPostgrester()
       .select("id")
-      .select("question(index, value)")
+      .select("question:questions!answers_question_id_fkey(index, value)")
       .in("id", answerIds)
       .is("agreement_id", null)
       .get("/answers");

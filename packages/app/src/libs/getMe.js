@@ -18,16 +18,16 @@ export default async function getMe(ctx) {
   try {
     const data = await api.post("/rpc/login_check", { token }, { Authorization: "" });
 
-    const isAuthenticated = data[0].valid;
+    const isAuthenticated = data.valid;
 
     if (!isAuthenticated) return ANOMNYMOUS_RESPONSE;
 
     const isAdmin = [USER_ROLE.ADMINISTRATOR, USER_ROLE.REGIONAL_ADMINISTRATOR].includes(
-      data[0].payload.role,
+      data.payload.role,
     );
 
     return {
-      data: isAuthenticated ? data[0].payload : null,
+      data: isAuthenticated ? data.payload : null,
       isAdmin,
       isAuthenticated,
       token,

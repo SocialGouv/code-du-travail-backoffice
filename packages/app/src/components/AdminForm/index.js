@@ -393,14 +393,23 @@ AdminForm.propTypes = {
   defaultData: PropTypes.object,
   fields: PropTypes.arrayOf(
     PropTypes.exact({
+      apiPath: PropTypes.string,
       button: PropTypes.exact({
+        handler: PropTypes.func.isRequired,
         icon: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
       }),
       helpText: PropTypes.string,
+      inputType: PropTypes.string,
       label: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       options: PropTypes.arrayOf(
+        PropTypes.exact({
+          label: PropTypes.string.isRequired,
+          value: PropTypes.any.isRequired,
+        }),
+      ),
+      tags: PropTypes.arrayOf(
         PropTypes.exact({
           label: PropTypes.string.isRequired,
           value: PropTypes.any.isRequired,

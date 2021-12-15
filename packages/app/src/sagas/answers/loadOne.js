@@ -9,8 +9,8 @@ export default function* loadOne({ meta: { id } }) {
   try {
     const answersRequest = customPostgrester()
       .select("*")
-      .select("agreement(idcc,name)")
-      .select("question(index,value)")
+      .select("agreement:agreements!answers_agreement_id_fkey(idcc,name)")
+      .select("question:questions!answers_question_id_fkey(index,value)")
       .eq("id", id);
 
     const { data } = yield answersRequest.get("/answers");
@@ -21,6 +21,8 @@ export default function* loadOne({ meta: { id } }) {
         ...data[0].agreement,
         name: shortenAgreementName(data[0].agreement.name),
       };
+    } else {
+      answer.agreement = {};
     }
 
     const answerReferencesRequest = customPostgrester()

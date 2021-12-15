@@ -20,6 +20,8 @@ export default function* load({ meta: { pagesIndex } }) {
     request.select("*").page(pagesIndex, filters.pageLength);
 
     if (!filters.isGeneric) {
+      request.not.is("agreement_id", null);
+
       const states =
         filters.states.length > 0 ? filters.states.map(({ value }) => value) : ANSWER_STATES;
       request.in("state", states);
