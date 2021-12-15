@@ -20,6 +20,8 @@ export default function* load({ meta: { pagesIndex } }) {
     request.select("*").page(pagesIndex, filters.pageLength);
 
     if (!filters.isGeneric) {
+      request.not.is("agreement_id", null);
+
       const states =
         filters.states.length > 0 ? filters.states.map(({ value }) => value) : ANSWER_STATES;
       request.in("state", states);
@@ -76,7 +78,6 @@ export default function* load({ meta: { pagesIndex } }) {
 
     /** @type {FullAnswer.WithReferences[]} */
     const answersWithReferences = answers
-      .filter(answer => (!filters.isGeneric ? answer.agreement_id !== null : true))
       .map(answer => ({
         ...answer,
         references: answersReferences.filter(({ answer_id }) => answer_id === answer.id),
