@@ -5,11 +5,11 @@ export const addAgreement = async (
   idcc: string,
   parent_id?: string,
 ): Promise<any> => {
-  const { headers } = await apiFetch("POST", "/agreements", {
-    idcc,
-    name,
-    parent_id,
-  });
+  const { headers } = await apiFetch(
+    "POST",
+    "/agreements",
+    parent_id ? { name, idcc, parent_id } : { name, idcc },
+  );
 
   const agreementId = getHeaderId(headers.location);
 
