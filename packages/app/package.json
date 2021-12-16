@@ -64,6 +64,7 @@
     "remark-parse": "9.0.0",
     "remark-rehype": "8.0.0",
     "remark-stringify": "9.0.1",
+    "sharp": "^0.29.3",
     "ua-parser-js": "0.7.24",
     "unified": "9.2.0",
     "unist-util-find": "1.0.2",

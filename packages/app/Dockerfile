@@ -1,7 +1,9 @@
-# Application Image
+# Builder
+FROM node:16.13.1-alpine as dist
 
-FROM node:16.13.1-alpine
+WORKDIR /
 
+# Add build-arg from github actions
 ARG API_DOMAIN
 ARG API_PORT_PUBLIC
 ARG API_SCHEME
@@ -19,14 +21,21 @@ ENV DB_URI=$DB_URI
 ENV NODE_ENV=$NODE_ENV
 ENV APP_PORT=$APP_PORT
 
-WORKDIR /app
+COPY . ./
 
-COPY . .
+# Install packages
+RUN yarn 
 
-RUN yarn install
-
+# Build
 RUN yarn build
 
-RUN yarn --production
+# Runner
+FROM node:16.13.1-alpine
 
-ENTRYPOINT ["yarn", "start"]
+WORKDIR /app
+
+COPY --from=dist . /app/
+
+COPY . /app
+
+CMD [ "yarn", "start"]
