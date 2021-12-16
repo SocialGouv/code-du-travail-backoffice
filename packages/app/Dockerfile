@@ -23,7 +23,8 @@ WORKDIR /app
 
 COPY . .
 
-RUN yarn --frozen-lockfile --prefer-offline
+RUN yarn install
+
 RUN yarn build
 
 RUN yarn --production
