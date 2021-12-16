@@ -23,7 +23,9 @@ WORKDIR /app
 
 COPY . .
 
-RUN yarn --production --pure-lockfile
+RUN yarn --frozen-lockfile --prefer-offline
 RUN yarn build
+
+RUN yarn --production
 
 ENTRYPOINT ["yarn", "start"]
