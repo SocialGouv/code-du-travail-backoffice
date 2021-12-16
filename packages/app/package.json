@@ -5,10 +5,10 @@
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
-    "build": "yarn clean && next build",
+    "build": "next build",
     "build:docker": "node --max-old-space-size=1024 ./node_modules/.bin/next build",
     "clean": "rimraf ./.next",
-    "dev": "yarn clean && nodemon --exec \"node --inspect -r dotenv/config ./server dotenv_config_path=../../.env\" --watch ./server",
+    "dev": "nodemon --exec \"node --inspect -r dotenv/config ./server dotenv_config_path=../../.env\" --watch ./server",
     "start": "node ./server"
   },
   "dependencies": {
