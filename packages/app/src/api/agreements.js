@@ -1,14 +1,10 @@
 import { apiFetch, getHeaderId } from "../utils";
 
-export const addAgreement = async (
-  name: string,
-  idcc: string,
-  parent_id?: string,
-): Promise<any> => {
+export const addAgreement = async (name, idcc, parent_id) => {
   const { headers } = await apiFetch(
     "POST",
     "/agreements",
-    parent_id ? { name, idcc, parent_id } : { name, idcc },
+    parent_id ? { idcc, name, parent_id } : { idcc, name },
   );
 
   const agreementId = getHeaderId(headers.location);
@@ -19,12 +15,12 @@ export const addAgreement = async (
     questions.map(question =>
       apiFetch("POST", "/answers", {
         agreement_id: agreementId,
+        generic_reference: null,
+        parent_id: null,
+        prevalue: "",
         question_id: question.id,
         state: "draft",
         user_id: null,
-        parent_id: null,
-        prevalue: "",
-        generic_reference: null,
         value: "",
       }),
     ),

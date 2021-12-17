@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { addAgreement } from "../../../src/api";
 
+import { addAgreement } from "../../../src/api";
 import AdminForm from "../../../src/components/AdminForm";
 import AdminMain from "../../../src/layouts/AdminMain";
 import customPostgrester from "../../../src/libs/customPostgrester";
