@@ -1,7 +1,6 @@
-# Builder
-FROM node:16.13.1-alpine as dist
+FROM node:16.13.1-alpine
 
-WORKDIR /
+WORKDIR /app
 
 # Add build-arg from github actions
 ARG API_DOMAIN
@@ -21,7 +20,7 @@ ENV DB_URI=$DB_URI
 ENV NODE_ENV=$NODE_ENV
 ENV APP_PORT=$APP_PORT
 
-COPY . ./
+COPY . .
 
 # Install packages
 RUN yarn 
@@ -29,13 +28,7 @@ RUN yarn
 # Build
 RUN yarn build
 
-# Runner
-FROM node:16.13.1-alpine
-
-WORKDIR /app
-
-COPY --from=dist . /app/
-
-COPY . /app
+# FIXME: This is a workaround for running the app in a container
+RUN yarn add --dev typescript @types/node
 
 CMD [ "yarn", "start"]
