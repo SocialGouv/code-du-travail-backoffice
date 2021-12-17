@@ -28,4 +28,7 @@ RUN yarn
 # Build
 RUN yarn build
 
+# FIXME: This is a workaround for running the app in a container
+RUN yarn add --dev typescript @types/node
+
 CMD [ "yarn", "start"]
