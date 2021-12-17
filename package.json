@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "api:cache": "node -r dotenv/config -r esm ./scripts/dev/updateApiCache.js",
+    "build:app": "yarn workspace @socialgouv/code-du-travail-backoffice__app build",
     "db:backup": "node -r dotenv/config ./scripts/db/backup.js",
     "db:migrate": "knex migrate:latest",
     "db:migrate:make": "node ./scripts/db/generateMigration.js",
