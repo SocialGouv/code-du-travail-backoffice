@@ -28,9 +28,6 @@ jobs:
           command: yarn test:unit --runInBand
           no_output_timeout: 1h
       - run:
-          name: Build
-          command: yarn build:app
-      - run:
           name: Update Code Coverage
           command: npx codecov
           when: on_success

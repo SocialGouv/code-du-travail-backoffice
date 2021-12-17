@@ -1,7 +1,5 @@
 FROM node:16.13.1-alpine
 
-WORKDIR /app
-
 # Add build-arg from github actions
 ARG API_DOMAIN
 ARG API_PORT_PUBLIC
@@ -20,15 +18,11 @@ ENV DB_URI=$DB_URI
 ENV NODE_ENV=$NODE_ENV
 ENV APP_PORT=$APP_PORT
 
+WORKDIR /app
+
 COPY . .
 
-# Install packages
-RUN yarn 
-
-# Build
+RUN yarn --production --pure-lockfile
 RUN yarn build
 
-# FIXME: This is a workaround for running the app in a container
-RUN yarn add --dev typescript @types/node
-
-CMD [ "yarn", "start"]
+ENTRYPOINT ["yarn", "start"]

@@ -1,4 +1,4 @@
-export function getHeaderId(location: string): string {
+export function getHeaderId(location) {
   try {
     return location.split("?id=eq.")[1];
   } catch {

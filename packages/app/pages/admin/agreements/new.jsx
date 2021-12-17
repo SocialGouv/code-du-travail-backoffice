@@ -7,7 +7,7 @@ import AdminMain from "../../../src/layouts/AdminMain";
 import customPostgrester from "../../../src/libs/customPostgrester";
 import toast from "../../../src/libs/toast";
 
-export default function AdminNew(props: any): JSX.Element {
+export default function AdminNew() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [fields, setFields] = React.useState([]);
   const { back } = useRouter();
