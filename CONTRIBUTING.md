@@ -13,6 +13,7 @@ help make it even better than it is today!
     - [Scripts](#scripts)
     - [Recommended IDE Settings](#recommended-ide-settings)
     - [VS Code](#vs-code)
+  - [Push to production](#push-to-production)
     - [Known Issues](#known-issues)
       - [Docker Compose](#docker-compose)
       - [Jest Watch](#jest-watch)
@@ -146,6 +147,14 @@ This repository comes with multiple useful npm scripts (run via `yarn <script>`)
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
+```
+
+## Push to production
+
+```sh
+git remote add live ssh://factory@IP_SERVER/home/factory/code-du-travail-backoffice.git # Add remote url to git
+git remote -v # List remotes url
+git push live master # Push master to live remote branch
 ```
 
 ### Known Issues
