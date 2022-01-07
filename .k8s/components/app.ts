@@ -4,13 +4,13 @@ import { Deployment } from "kubernetes-models/apps/v1/Deployment";
 
 import { create } from "@socialgouv/kosko-charts/components/app";
 import { addWaitForService } from "@socialgouv/kosko-charts/utils/addWaitForService";
-import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImagePath";
+import { getGithubRegistryImagePath } from "@socialgouv/kosko-charts/utils/getGithubRegistryImagePath";
 
 const getManifests = async () => {
   const manifests = await create("app", {
     env,
     config: {
-      image: getHarborImagePath({ name: "cdtn-backoffice/app", project: "cdtn" }),
+      image: getGithubRegistryImagePath({ name: "cdtn-backoffice/app", project: "cdtn" }),
       containerPort: 3000,
       // withPostgres: {
       //   prepare: `

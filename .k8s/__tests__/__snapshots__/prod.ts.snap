@@ -44,7 +44,7 @@ spec:
         team: cdtn-backoffice
     spec:
       containers:
-        - image: harbor.fabrique.social.gouv.fr/cdtn/cdtn-backoffice/app:1.2.3
+        - image: ghcr.io/socialgouv/cdtn/cdtn-backoffice/app:1.2.3
           livenessProbe:
             failureThreshold: 6
             httpGet:

@@ -69,7 +69,8 @@ spec:
         cert: wildcard
     spec:
       containers:
-        - image: harbor.fabrique.social.gouv.fr/cdtn/cdtn-backoffice/app:1.2.3
+        - image: >-
+            ghcr.io/socialgouv/cdtn/cdtn-backoffice/app:preprod-0123456789abcdefghijklmnopqrstuvwxyz0123
           livenessProbe:
             failureThreshold: 6
             httpGet:
