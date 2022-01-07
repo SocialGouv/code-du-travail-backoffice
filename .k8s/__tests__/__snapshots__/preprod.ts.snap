@@ -1,0 +1,232 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`kosko generate --preprod 1`] = `
+"---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    socialgouv/creator: autodevops
+    field.cattle.io/creatorId: gitlab
+    field.cattle.io/projectId: c-f8qps:p-46tj7
+    git/branch: refs/tags/v1.2.3
+    git/remote: socialgouv/code-du-travail-backoffice
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/code-du-travail-backoffice
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    azure-pg-admin-user: code-du-travail-backoffice
+    application: code-du-travail-backoffice
+    component: code-du-travail-backoffice
+    owner: code-du-travail-backoffice
+    team: code-du-travail-backoffice
+    cert: wildcard
+  name: code-du-travail-backoffice-preprod
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/code-du-travail-backoffice
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app: app
+    application: code-du-travail-backoffice
+    component: code-du-travail-backoffice
+    owner: code-du-travail-backoffice
+    team: code-du-travail-backoffice
+    cert: wildcard
+  name: app
+  namespace: code-du-travail-backoffice-preprod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      annotations:
+        kapp.k14s.io/disable-default-ownership-label-rules: ''
+        kapp.k14s.io/disable-default-label-scoping-rules: ''
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/code-du-travail-backoffice
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
+      labels:
+        app: app
+        application: code-du-travail-backoffice
+        component: code-du-travail-backoffice
+        owner: code-du-travail-backoffice
+        team: code-du-travail-backoffice
+        cert: wildcard
+    spec:
+      containers:
+        - image: harbor.fabrique.social.gouv.fr/cdtn/cdtn-backoffice/app:1.2.3
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 20
+            timeoutSeconds: 5
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 20
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 5
+      initContainers:
+        - name: wait-for-postgrest
+          image: bash:4
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 5m
+              memory: 16Mi
+            limits:
+              cpu: 20m
+              memory: 32Mi
+          command:
+            - sh
+            - '-c'
+            - >-
+              until nslookup postgrest.$(cat
+              /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local;
+              do echo en attente de postgrest; sleep 2; done
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: app
+    application: code-du-travail-backoffice
+    component: code-du-travail-backoffice
+    owner: code-du-travail-backoffice
+    team: code-du-travail-backoffice
+    cert: wildcard
+  name: app
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/code-du-travail-backoffice
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  namespace: code-du-travail-backoffice-preprod
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    app: app
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/code-du-travail-backoffice
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app: app
+    application: code-du-travail-backoffice
+    component: code-du-travail-backoffice
+    owner: code-du-travail-backoffice
+    team: code-du-travail-backoffice
+    cert: wildcard
+  name: app
+  namespace: code-du-travail-backoffice-preprod
+spec:
+  rules:
+    - host: code-du-travail-backoffice-preprod.dev2.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: app
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - code-du-travail-backoffice-preprod.dev2.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  annotations:
+    sealedsecrets.bitnami.com/cluster-wide: 'true'
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/code-du-travail-backoffice
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  name: azure-pg-user
+  labels:
+    application: code-du-travail-backoffice
+    component: code-du-travail-backoffice
+    owner: code-du-travail-backoffice
+    team: code-du-travail-backoffice
+    cert: wildcard
+  namespace: code-du-travail-backoffice-preprod
+spec:
+  encryptedData: null
+  template:
+    metadata:
+      annotations:
+        sealedsecrets.bitnami.com/cluster-wide: 'true'
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/code-du-travail-backoffice
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
+      name: azure-pg-user
+      labels:
+        application: code-du-travail-backoffice
+        component: code-du-travail-backoffice
+        owner: code-du-travail-backoffice
+        team: code-du-travail-backoffice
+        cert: wildcard
+    type: Opaque
+---
+"
+`;

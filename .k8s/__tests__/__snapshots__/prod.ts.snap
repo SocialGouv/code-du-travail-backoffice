@@ -1,0 +1,203 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`kosko generate --prod 1`] = `
+"---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/cdtn-backoffice
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app: app
+    application: cdtn-backoffice
+    component: cdtn-backoffice
+    owner: cdtn-backoffice
+    team: cdtn-backoffice
+  name: app
+  namespace: cdtn-backoffice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      annotations:
+        kapp.k14s.io/disable-default-ownership-label-rules: ''
+        kapp.k14s.io/disable-default-label-scoping-rules: ''
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/cdtn-backoffice
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
+      labels:
+        app: app
+        application: cdtn-backoffice
+        component: cdtn-backoffice
+        owner: cdtn-backoffice
+        team: cdtn-backoffice
+    spec:
+      containers:
+        - image: harbor.fabrique.social.gouv.fr/cdtn/cdtn-backoffice/app:1.2.3
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 20
+            timeoutSeconds: 5
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 20
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 5
+      initContainers:
+        - name: wait-for-postgrest
+          image: bash:4
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 5m
+              memory: 16Mi
+            limits:
+              cpu: 20m
+              memory: 32Mi
+          command:
+            - sh
+            - '-c'
+            - >-
+              until nslookup postgrest.$(cat
+              /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local;
+              do echo en attente de postgrest; sleep 2; done
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: app
+    application: cdtn-backoffice
+    component: cdtn-backoffice
+    owner: cdtn-backoffice
+    team: cdtn-backoffice
+  name: app
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/cdtn-backoffice
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  namespace: cdtn-backoffice
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    app: app
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: 'true'
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/cdtn-backoffice
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    app: app
+    application: cdtn-backoffice
+    component: cdtn-backoffice
+    owner: cdtn-backoffice
+    team: cdtn-backoffice
+  name: app
+  namespace: cdtn-backoffice
+spec:
+  rules:
+    - host: beta-cdtn-contrib.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: app
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - beta-cdtn-contrib.fabrique.social.gouv.fr
+      secretName: app-crt
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: azure-pg-user
+  annotations:
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/tags/v1.2.3
+    app.github.com/repo: socialgouv/cdtn-backoffice
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  labels:
+    application: cdtn-backoffice
+    component: cdtn-backoffice
+    owner: cdtn-backoffice
+    team: cdtn-backoffice
+  namespace: cdtn-backoffice
+spec:
+  encryptedData: null
+  template:
+    metadata:
+      name: azure-pg-user
+      annotations:
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/tags/v1.2.3
+        app.github.com/repo: socialgouv/cdtn-backoffice
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
+      labels:
+        application: cdtn-backoffice
+        component: cdtn-backoffice
+        owner: cdtn-backoffice
+        team: cdtn-backoffice
+    type: Opaque
+---
+"
+`;

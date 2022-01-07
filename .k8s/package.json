@@ -1,27 +1,42 @@
 {
+  "babel": {
+    "plugins": [
+      [
+        "@babel/plugin-transform-modules-commonjs"
+      ]
+    ]
+  },
+  "dependencies": {
+    "@kosko/env": "^2.0.1",
+    "@kubernetes-models/sealed-secrets": "^2.0.2",
+    "@socialgouv/kosko-charts": "^9.8.11",
+    "@types/node": "^14.17.11",
+    "kosko": "^1.1.5",
+    "kubernetes-models": "^2.0.2",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.3.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/plugin-transform-modules-commonjs": "^7.14.5",
+    "@types/jest": "^27.0.1",
+    "dotenv": "^10.0.0",
+    "jest": "^27.0.6",
+    "lint-staged": "^11.0.1",
+    "prettier": "^2.3.2"
+  },
   "license": "Apache-2.0",
   "scripts": {
     "generate": "kosko generate",
-    "generate:dev": "kosko generate  --env dev",
-    "generate:prod": "kosko generate  --env prod",
-    "gitlab": "DOTENV_CONFIG_PATH=./environments/.gitlab-ci.env kosko generate --require dotenv/config",
-    "gitlab:dev": "yarn --silent gitlab --env dev",
-    "gitlab:preprod": "yarn --silent gitlab --env preprod",
-    "gitlab:prod": "yarn --silent gitlab --env prod",
-    "xxx": "DOTENV_CONFIG_PATH=./environments/.gitlab-ci.env npx ts-node --require dotenv/config ./main.js"
+    "lint": "prettier __tests__ components environments",
+    "lint:fix": "yarn lint --write",
+    "precommit": "lint-staged",
+    "prepush": "yarn test",
+    "test": "jest"
   },
-  "dependencies": {
-    "@kosko/env": "^0.5.2",
-    "@socialgouv/kosko-charts": "link:../../../kosko-charts",
-    "kubernetes-models": "^0.8.1",
-    "toml": "^3.0.0"
-  },
-  "devDependencies": {
-    "@kubernetes-models/sealed-secrets": "^0.1.4",
-    "@types/node": "^14.0.27",
-    "dotenv": "^8.2.0",
-    "kosko": "^0.9.2",
-    "ts-node": "^8.10.2",
-    "typescript": "^3.9.7"
+  "lint-staged": {
+    "{__tests__,components,environments,utils}/**/*.{js,ts,yml,yaml}": [
+      "prettier --write"
+    ]
   }
 }
