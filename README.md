@@ -1,4 +1,4 @@
-# CDTN Back-office
+# CDTN contributions Back-office
 
 [![License][img-license]][link-license]
 [![Build Status][img-build]][link-build]
@@ -22,3 +22,5 @@ Please check the [contributing documentation][link-contributing].
 [link-coverage]: https://codecov.io/gh/SocialGouv/code-du-travail-backoffice
 [link-contributing]: https://github.com/SocialGouv/code-du-travail-backoffice/blob/master/CONTRIBUTING.md
 [link-license]: https://github.com/SocialGouv/code-du-travail-backoffice/blob/master/LICENSE
+
+

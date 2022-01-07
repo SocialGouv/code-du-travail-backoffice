@@ -1,6 +1,7 @@
 const { API_DOMAIN, API_PORT_PUBLIC, API_SCHEME, API_URI_DOCKER, CDTN_API_URL } = process.env;
 
 const API_URI = `${API_SCHEME}://${API_DOMAIN}:${API_PORT_PUBLIC}`;
+const withCss = require("@zeit/next-css");
 
 module.exports = {
   // https://nextjs.org/docs#build-time-configuration

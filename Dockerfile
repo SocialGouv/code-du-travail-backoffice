@@ -1,7 +1,17 @@
 # Master Image
 
-FROM igabriele/knex-pg:12.0.7.0
+FROM node:14.7.0-alpine
+
+WORKDIR /app
 
 COPY ./db/migrations ./db/migrations
+COPY ./db/seeds ./db/seeds
 COPY ./scripts/db/getMigrationQuery.js ./scripts/db/getMigrationQuery.js
-COPY ./knexfile.js ./knexfile.js
+COPY ./knexfile.js .
+COPY package.json .
+COPY yarn.lock .
+
+RUN yarn --production --pure-lockfile --ignore-scripts
+
+USER node
+

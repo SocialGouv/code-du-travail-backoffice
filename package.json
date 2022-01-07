@@ -18,6 +18,7 @@
     "dev:docker": "docker-compose down && docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d postgrest",
     "dev:docker:standalone": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d cdtn_api postgrest",
     "dev:packages": "lerna run --parallel --scope \"@socialgouv/code-du-travail-backoffice__api\" --scope \"@socialgouv/code-du-travail-backoffice__app\" dev",
+    "k8s": "yarn --silent --cwd .k8s",
     "preinstall": "node ./scripts/ci/removeWorkspaces.js && node ./scripts/ci/deleteYarnLock.js",
     "setup": "yarn setup:env && node -r dotenv/config ./scripts/dev/setup.js",
     "setup:env": "cpy --rename=\".env\" ./.env.example .",

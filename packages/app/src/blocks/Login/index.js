@@ -14,11 +14,7 @@ const LoginBlock = ({ onLoggedIn }) => (
       <Title>Bienvenue sur l’outil de contribution au Code du travail numérique</Title>
       <Text>
         {`Un outil simple pour composer et éditer vos contributions au `}
-        <a
-          href="https://codedutravail.num.social.gouv.fr/"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
+        <a href="https://code.travail.gouv.fr/" rel="noopener noreferrer" target="_blank">
           Code du travail numérique
         </a>
         .
