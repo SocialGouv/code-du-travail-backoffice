@@ -40,7 +40,7 @@
     "lerna": "3.22.1",
     "npmlog": "4.1.2",
     "pg": "8.5.1",
-    "shelljs": "0.8.4"
+    "shelljs": "0.8.5"
   },
   "devDependencies": {
     "@socialgouv/eslint-config-react-strict": "0.35.0",
