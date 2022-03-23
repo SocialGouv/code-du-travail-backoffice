@@ -1,6 +1,6 @@
 name: Code quality
 
-on: [pull_request, push]
+on: [pull_request]
 
 concurrency:
   cancel-in-progress: true
@@ -87,3 +87,4 @@ jobs:
         uses: hadolint/hadolint-action@v1.6.0
         with:
           recursive: true
+          failure-threshold: error
