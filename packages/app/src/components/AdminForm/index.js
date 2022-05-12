@@ -228,7 +228,7 @@ class AdminForm extends React.Component {
           isSubmitting: false,
         });
       } else {
-        this.setState({ isSubmitting: false });
+        this.setState({ error: `Erreur: ${err}`, isSubmitting: false });
         if (err !== undefined) console.warn(err);
       }
     }
@@ -289,7 +289,7 @@ class AdminForm extends React.Component {
             defaultValue={this.defaultData[field.name]}
             id={field.name}
             name={field.name}
-            onChange={this.updateFormData}
+            onChange={event => this.updateFormDataViaValue(field.name, event.target.value)}
             rows="10"
           />
         );
@@ -362,11 +362,12 @@ class AdminForm extends React.Component {
           <Field>
             <LabelContainer />
             <div>
-              <Error>{error}</Error>
+              <Error>{error || this.props.error}</Error>
+              {this.props.isSubmitting && <p>Création en cours...</p>}
               <Flex>
                 <Button
                   color="secondary"
-                  isDisabled={isSubmitting}
+                  isDisabled={this.props.isSubmitting || isSubmitting}
                   onClick={() => Router.push(`/admin${indexPath}`)}
                   title={T.ADMIN_COMMON_BUTTON_CANCEL_FORM_TITLE(i18nSubject)}
                   type="button"
@@ -375,7 +376,7 @@ class AdminForm extends React.Component {
                   Annuler
                 </Button>
                 <Button
-                  isDisabled={isSubmitting}
+                  isDisabled={this.props.isSubmitting || isSubmitting}
                   title={
                     isEdition
                       ? T.ADMIN_COMMON_BUTTON_UPDATE_TITLE(i18nSubject, i18nIsFeminine, i18nName)
@@ -397,6 +398,7 @@ class AdminForm extends React.Component {
 AdminForm.propTypes = {
   apiPath: PropTypes.string.isRequired,
   defaultData: PropTypes.object,
+  error: PropTypes.string,
   fields: PropTypes.arrayOf(
     PropTypes.exact({
       button: PropTypes.exact({
@@ -404,6 +406,20 @@ AdminForm.propTypes = {
         title: PropTypes.string.isRequired,
       }),
       helpText: PropTypes.string,
+      inputType: PropTypes.oneOf([
+        "button",
+        "checkbox",
+        "color",
+        "date",
+        "datetime-local",
+        "email",
+        "file",
+        "hidden",
+        "image",
+        "month",
+        "number",
+        "password",
+      ]),
       label: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       options: PropTypes.arrayOf(
@@ -419,6 +435,7 @@ AdminForm.propTypes = {
   i18nSubject: PropTypes.string.isRequired,
   id: PropTypes.string,
   indexPath: PropTypes.string.isRequired,
+  isSubmitting: PropTypes.bool,
   name: PropTypes.any,
   onSubmit: PropTypes.func,
 };
