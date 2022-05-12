@@ -1,5 +1,18 @@
 import withAdminEdit from "../../../src/templates/withAdminEdit";
-import { FIELDS } from "./new";
+
+const FIELDS = [
+  {
+    inputType: "number",
+    label: "Index",
+    name: "index",
+    type: "input",
+  },
+  {
+    label: "Intitulé",
+    name: "value",
+    type: "text",
+  },
+];
 
 const componentDidMount = async (api, id) => {
   const { data: questions } = await api.eq("id", id).get("/questions");
