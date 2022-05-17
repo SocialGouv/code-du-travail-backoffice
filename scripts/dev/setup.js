@@ -34,7 +34,7 @@ function run(command) {
     fs.appendFileSync(".env", "\nNODE_ENV=development\n");
     run(`lerna link`);
     run(`docker-compose down --remove-orphans -v`);
-    run(`docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d db`);
+    run(`docker-compose -f docker-compose.yml up -d db`);
     shell.echo(`Waiting for db to be up and ready…`.blue);
     // https://stackoverflow.com/a/63011266/2736233
     run(

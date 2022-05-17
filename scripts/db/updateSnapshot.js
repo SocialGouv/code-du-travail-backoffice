@@ -4,8 +4,8 @@ const knex = require("knex");
 const path = require("path");
 const shell = require("shelljs");
 
-const { DEV_DB_PORT, POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_USER } = process.env;
-const DATABASE_URL = `postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${DEV_DB_PORT}/${POSTGRES_DB}`;
+const { POSTGRES_PORT, POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_USER } = process.env;
+const DATABASE_URL = `postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${POSTGRES_PORT}/${POSTGRES_DB}`;
 const DOCKER_COMPOSE_SERVICE_NAME = "db";
 const DOCKER_CONTAINER_NAME = "cdtn_backoffice_db";
 
@@ -30,9 +30,7 @@ function run(command) {
     const backupPath = path.join(__dirname, `../../backups/${process.argv[2]}.sql`);
 
     run(`docker-compose down -v`);
-    run(
-      `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d ${DOCKER_COMPOSE_SERVICE_NAME}`,
-    );
+    run(`docker-compose -f docker-compose.yml up -d ${DOCKER_COMPOSE_SERVICE_NAME}`);
     // https://stackoverflow.com/a/63011266/2736233
     run(
       `timeout 90s bash -c "until docker exec ${DOCKER_CONTAINER_NAME} pg_isready ; do sleep 5 ; done"`,

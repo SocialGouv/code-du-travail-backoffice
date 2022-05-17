@@ -5,12 +5,10 @@ services:
     container_name: cdtn_backoffice_db
     image: postgres:12-alpine
     restart: always
-    environment:
-      # The JWT secret is used whithin the api.login() function:
-      PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    env_file:
+      - .env
+    ports:
+      - 3300:5432
     volumes:
       - postgre-data:/var/lib/postgresql/data
       - ./backups:/backups
@@ -18,14 +16,13 @@ services:
   # https://postgrest.org/en/stable/install.html#containerized-postgrest-and-db-with-docker-compose
   postgrest:
     container_name: cdtn_backoffice_postgrest
-    image: postgrest/postgrest:v6.0.2
-    # image: hughjfchen/hughjfchen:postgrest-aarch64-6.0.2 # for arm64
+    # image: postgrest/postgrest:v6.0.2
+    image: hughjfchen/hughjfchen:postgrest-aarch64-6.0.2 # for arm64
     restart: always
+    env_file:
+      - .env
     environment:
-      PGRST_DB_ANON_ROLE: ${PGRST_DB_ANON_ROLE}
-      PGRST_DB_SCHEMA: ${PGRST_DB_SCHEMA}
       PGRST_DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
-      PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
     depends_on:
       - db
 
@@ -33,14 +30,13 @@ services:
     container_name: cdtn_backoffice_api
     build:
       context: ./packages/api
-      args:
-        API_PORT: ${API_PORT}
-        DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
-        NODE_ENV: ${NODE_ENV}
-        POSTGREST_URI: http://postgrest:3000
     restart: always
     ports:
       - ${API_PORT}:${API_PORT}
+    env_file:
+      - .env
+    environment:
+      DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
     depends_on:
       - postgrest
 
@@ -48,18 +44,15 @@ services:
     container_name: cdtn_backoffice_app
     build:
       context: ./packages/app
-      args:
-        API_DOMAIN: ${API_DOMAIN}
-        API_PORT_PUBLIC: ${API_PORT_PUBLIC}
-        API_SCHEME: ${API_SCHEME}
-        API_URI_DOCKER: http://api:${API_PORT}
-        CDTN_API_URL: ${CDTN_API_URL}
-        DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
-        NODE_ENV: ${NODE_ENV}
-        APP_PORT: ${APP_PORT}
     restart: always
     ports:
       - ${APP_PORT}:${APP_PORT}
+    env_file:
+      - .env
+    environment:
+      API_URI_DOCKER: http://api:${API_PORT}
+      API_URI: http://localhost:${API_PORT}
+      DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
     depends_on:
       - api
 

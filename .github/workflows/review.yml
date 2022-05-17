@@ -1,0 +1,32 @@
+name: Review
+
+on:
+  push:
+    branches-ignore:
+      - master
+    tags-ignore:
+      - v*
+
+concurrency:
+  cancel-in-progress: true
+  group: review-${{ github.ref }}
+
+jobs:
+  register:
+    name: Register images
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - images: "cdtn-contrib-api"
+            path: "./packages/api"
+          - images: "cdtn-contrib-app"
+            path: "./packages/app"
+    steps:
+      - name: Register docker images
+        uses: SocialGouv/actions/autodevops-build-register@v1
+        with:
+          imagePackage: ${{ matrix.images }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          dockerfile: "${{ matrix.path }}/Dockerfile"
