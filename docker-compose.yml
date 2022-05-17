@@ -16,8 +16,8 @@ services:
   # https://postgrest.org/en/stable/install.html#containerized-postgrest-and-db-with-docker-compose
   postgrest:
     container_name: cdtn_backoffice_postgrest
-    # image: postgrest/postgrest:v6.0.2
-    image: hughjfchen/hughjfchen:postgrest-aarch64-6.0.2 # for arm64
+    image: postgrest/postgrest:v6.0.2
+    # image: hughjfchen/hughjfchen:postgrest-aarch64-6.0.2 # for arm64
     restart: always
     env_file:
       - .env

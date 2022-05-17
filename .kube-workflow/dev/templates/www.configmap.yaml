@@ -1,0 +1,10 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: www
+data:
+  APP_PORT: 80
+  CDTN_API_URL: "https://cdtn-api.fabrique.social.gouv.fr"
+  API_URI_DOCKER: ""
+  API_URI: ""
+  NODE_ENV: "production"
