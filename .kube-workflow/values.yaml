@@ -1,0 +1,33 @@
+app-api:
+  probesPath: /healthz
+  imagePackage: cdtn-contrib-api
+  envFrom:
+    - configMapRef:
+        name: api
+    - secretRef:
+        name: api
+  resources:
+    limits:
+      cpu: "1000m"
+      memory: "560Mi"
+    requests:
+      cpu: "5m"
+      memory: "128Mi"
+
+app-www:
+  probesPath: /
+  imagePackage: cdtn-contrib-app
+  envFrom:
+    - configMapRef:
+        name: www
+    - secretRef:
+        name: www
+
+postgrest:
+  imagePackage: postgrest/postgrest:v6.0.2
+  containerPort: 3000
+  envFrom:
+    - configMapRef:
+        name: postgrest
+    - secretRef:
+        name: postgrest

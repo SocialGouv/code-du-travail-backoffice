@@ -35,9 +35,7 @@ try {
   if (isProduction) {
     run(`docker-compose up -d ${DOCKER_COMPOSE_SERVICE_NAME}`);
   } else {
-    run(
-      `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d ${DOCKER_COMPOSE_SERVICE_NAME}`,
-    );
+    run(`docker-compose -f docker-compose.yml up -d ${DOCKER_COMPOSE_SERVICE_NAME}`);
   }
   // https://stackoverflow.com/a/63011266/2736233
   run(

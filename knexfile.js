@@ -1,11 +1,4 @@
-let { DB_URI } = process.env;
-if (DB_URI === undefined) {
-  const dotenv = require("dotenv");
-  dotenv.config();
-  const { DEV_DB_PORT, POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_USER } = process.env;
-
-  DB_URI = `postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${DEV_DB_PORT}/${POSTGRES_DB}`;
-}
+const { DB_URI } = process.env;
 
 module.exports = {
   development: {

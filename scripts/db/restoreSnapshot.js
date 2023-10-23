@@ -30,9 +30,7 @@ try {
   const backupPath = path.join(__dirname, "../../db/snapshot.sql");
 
   run(`docker-compose down -v`);
-  run(
-    `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d ${DOCKER_COMPOSE_SERVICE_NAME}`,
-  );
+  run(`docker-compose -f docker-compose.yml up -d ${DOCKER_COMPOSE_SERVICE_NAME}`);
   // https://stackoverflow.com/a/63011266/2736233
   run(
     `timeout 90s bash -c "until docker exec ${DOCKER_CONTAINER_NAME} pg_isready ; do sleep 5 ; done"`,

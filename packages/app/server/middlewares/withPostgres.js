@@ -2,11 +2,7 @@ const { Client: PostgresClient } = require("pg");
 
 const reportError = require("../libs/reportError");
 
-const { DEV_DB_PORT, NODE_ENV, POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_USER } = process.env;
-let { DB_URI } = process.env;
-if (NODE_ENV !== "production") {
-  DB_URI = `postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${DEV_DB_PORT}/${POSTGRES_DB}`;
-}
+const { DB_URI } = process.env;
 
 let postgresClient;
 let postgresClientIsConnected = false;
